@@ -4,7 +4,13 @@ import { useState, useEffect } from 'react';
 import { getTotalAppsCount, getAllApps } from '@/lib/getApps';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import MainChat from './components/MainChat';
+import dynamic from 'next/dynamic';
+
+// MainChat을 클라이언트에서만 로드 (SSR 비활성화)
+const MainChat = dynamic(() => import('./components/MainChat'), {
+  ssr: false,
+  loading: () => null
+});
 
 export default function Home() {
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -89,11 +95,9 @@ export default function Home() {
   const otherApps = allApps.filter(app => !favorites.includes(app.id));
   
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors" suppressHydrationWarning>
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       {/* 비온타키 채팅 */}
-      <div suppressHydrationWarning>
-        <MainChat />
-      </div>
+      <MainChat />
 
       {/* Apps Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">

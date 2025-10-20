@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Navigation } from "./components/Navigation";
 import GoogleAnalytics from "./components/GoogleAnalytics";
@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   other: {
     "google-adsense-account": "ca-pub-4564769502264231",
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 // Google Analytics ID

@@ -105,12 +105,31 @@ CREATE POLICY "Anyone can read messages"
 
 CREATE POLICY "Anyone can insert messages"
   ON chat_messages FOR INSERT WITH CHECK (true);
+
+-- ========================================
+-- 🕐 24시간 지난 채팅 메시지 자동 삭제 함수
+-- ========================================
+CREATE OR REPLACE FUNCTION delete_old_chat_messages()
+RETURNS void AS $$
+BEGIN
+  DELETE FROM chat_messages
+  WHERE created_at < NOW() - INTERVAL '24 hours';
+END;
+$$ LANGUAGE plpgsql;
+
+-- 함수 실행 권한 설정
+ALTER FUNCTION delete_old_chat_messages() OWNER TO postgres;
 ```
 
 **✅ 완료 후:**
 - localhost:3000 새로고침
 - 비온타키 채팅 테스트
 - 문의하기 폼 테스트
+
+**🕐 채팅 메시지 자동 삭제:**
+- 24시간 지난 메시지는 자동으로 삭제됨
+- 사용자가 채팅 접속할 때마다 자동 정리
+- 데이터베이스 용량 절약 ✅
 
 ---
 
