@@ -1,0 +1,85 @@
+{
+  "title": "커서 AI 프롬프트 단어장",
+  "description": "애매한 요청을 정확한 엔지니어드 지시로 변환",
+  "tabs": {
+    "glossary": "프롬프트 목록",
+    "admin": "관리자",
+    "export": "내보내기"
+  },
+  "level": {
+    "beginner": "초급",
+    "intermediate": "중급",
+    "advanced": "고급"
+  },
+  "category": {
+    "react": "React",
+    "nextjs": "Next.js",
+    "typescript": "TypeScript",
+    "testing": "테스팅",
+    "devops": "DevOps",
+    "security": "보안",
+    "performance": "성능",
+    "a11y": "접근성",
+    "i18n": "국제화",
+    "prompting": "프롬프팅",
+    "architecture": "아키텍처",
+    "database": "데이터베이스",
+    "api": "API",
+    "uiux": "UI/UX",
+    "docs": "문서",
+    "analytics": "분석",
+    "ads": "광고",
+    "deploy": "배포",
+    "observability": "관찰성"
+  },
+  "button": {
+    "copy": "복사",
+    "copied": "복사됨!",
+    "export": "내보내기",
+    "import": "가져오기",
+    "create": "생성",
+    "edit": "수정",
+    "delete": "삭제",
+    "save": "저장",
+    "cancel": "취소"
+  },
+  "filter": {
+    "all": "전체",
+    "search": "검색...",
+    "level": "난이도",
+    "category": "카테고리"
+  },
+  "form": {
+    "slug": "슬러그",
+    "level": "난이도",
+    "category": "카테고리",
+    "antiKr": "안티패턴 (한글)",
+    "antiEn": "안티패턴 (영문)",
+    "recKr": "권장패턴 (한글)",
+    "recEn": "권장패턴 (영문)",
+    "snippetPrefix": "스니펫 프리픽스",
+    "placeholders": "플레이스홀더",
+    "prereqKr": "전제조건 (한글)",
+    "prereqEn": "전제조건 (영문)",
+    "acceptKr": "수락기준 (한글)",
+    "acceptEn": "수락기준 (영문)",
+    "exampleKr": "예시 (한글)",
+    "exampleEn": "예시 (영문)",
+    "linksPrefixes": "관련 스니펫"
+  },
+  "message": {
+    "noData": "데이터가 없습니다",
+    "loading": "로딩 중...",
+    "saved": "저장되었습니다",
+    "deleted": "삭제되었습니다",
+    "error": "오류가 발생했습니다"
+  }
+}
+
+
+
+
+
+
+
+

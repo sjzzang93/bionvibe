@@ -20,6 +20,7 @@ export interface App {
   url: string;
   image?: string;
   createdAt: string;
+  hidden?: boolean;
 }
 
 export interface CategoryWithApps extends Category {
@@ -31,15 +32,23 @@ export function getAllCategories(): Category[] {
   return categoriesData.categories.sort((a, b) => a.order - b.order);
 }
 
-// 모든 앱 가져오기
-export function getAllApps(): App[] {
-  return appsData.apps;
+// 모든 앱 가져오기 (숨김 앱 제외)
+export function getAllApps(includeHidden: boolean = false): App[] {
+  if (includeHidden) {
+    return appsData.apps;
+  }
+  return appsData.apps.filter(app => !app.hidden);
 }
 
-// 카테고리별로 앱 그룹화
-export function getCategoriesWithApps(): CategoryWithApps[] {
+// 숨김 앱만 가져오기
+export function getHiddenApps(): App[] {
+  return appsData.apps.filter(app => app.hidden === true);
+}
+
+// 카테고리별로 앱 그룹화 (숨김 앱 제외)
+export function getCategoriesWithApps(includeHidden: boolean = false): CategoryWithApps[] {
   const categories = getAllCategories();
-  const apps = getAllApps();
+  const apps = getAllApps(includeHidden);
   
   return categories.map(category => ({
     ...category,
@@ -47,9 +56,9 @@ export function getCategoriesWithApps(): CategoryWithApps[] {
   }));
 }
 
-// 특정 카테고리의 앱만 가져오기
-export function getAppsByCategory(categoryId: string): App[] {
-  const apps = getAllApps();
+// 특정 카테고리의 앱만 가져오기 (숨김 앱 제외)
+export function getAppsByCategory(categoryId: string, includeHidden: boolean = false): App[] {
+  const apps = getAllApps(includeHidden);
   return apps.filter(app => app.categoryId === categoryId);
 }
 
@@ -74,4 +83,3 @@ export function getTotalAppsCount(): number {
 export function getAppCountByCategory(categoryId: string): number {
   return getAppsByCategory(categoryId).length;
 }
-

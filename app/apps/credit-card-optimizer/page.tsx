@@ -129,9 +129,6 @@ export default function CreditCardOptimizerPage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'rgb(217, 217, 217)' }}>
       <div className="container mx-auto px-4 py-8 text-black placeholder-gray-500">
-        {/* 상단 배너 */}
-        <div className="mb-6" dangerouslySetInnerHTML={{ __html: topBannerHtml }} />
-
         {/* 메인 카드 */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">
           <header className="text-center mb-8 text-black placeholder-gray-500">
@@ -370,9 +367,6 @@ export default function CreditCardOptimizerPage() {
             </div>
           )}
         </div>
-
-        {/* 하단 배너 */}
-        <div className="mt-6" dangerouslySetInnerHTML={{ __html: bottomBannerHtml }} />
       </div>
     </main>
   );

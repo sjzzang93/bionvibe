@@ -76,8 +76,6 @@ export default function CarMaintenancePage() {
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'rgb(217, 217, 217)' }}>
       <div className="container mx-auto px-4 py-8 max-w-4xl text-black placeholder-gray-500">
-        <div className="mb-6" dangerouslySetInnerHTML={{ __html: topBannerHtml }} />
-
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">
           <header className="text-center mb-8 text-black placeholder-gray-500">
             <div className="text-5xl md:text-6xl mb-4 text-black placeholder-gray-500">🚗</div>
@@ -259,8 +257,6 @@ export default function CarMaintenancePage() {
             </div>
           )}
         </div>
-
-        <div className="mt-6" dangerouslySetInnerHTML={{ __html: bottomBannerHtml }} />
       </div>
     </main>
   );

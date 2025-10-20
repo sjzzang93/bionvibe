@@ -316,7 +316,7 @@ export default function PastLifeJob() {
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
           <div className="mb-4 text-black placeholder-gray-500">
             <iframe
-              src=""
+              src={null}
               width="100%"
               height="75"
               frameBorder="0"
@@ -403,7 +403,7 @@ export default function PastLifeJob() {
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
           <div className="mb-4 text-black placeholder-gray-500">
             <iframe
-              src=""
+              src={null}
               width="100%"
               height="75"
               frameBorder="0"
@@ -581,7 +581,7 @@ export default function PastLifeJob() {
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
           <div className="mb-4 text-black placeholder-gray-500">
             <iframe
-              src=""
+              src={null}
               width="100%"
               height="75"
               frameBorder="0"

@@ -307,16 +307,15 @@ export default function VitaminCheck() {
                 setResult(null);
                 setSelections({});
               }}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+              className="w-full px-6 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              다시 진단하기
+              🔄 다시 진단하기
             </button>
           </section>
 
           <footer className="mt-6 space-y-3 pb-8 text-black placeholder-gray-500">
-            
             <p className="text-xs text-gray-500 text-center px-4 text-black placeholder-gray-500">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+              ⚠️ 이 진단은 참고용이며, 정확한 진단은 의료기관에서 받으세요.
             </p>
           </footer>
         </div>
@@ -348,15 +347,15 @@ export default function VitaminCheck() {
                       key={symptom.id}
                       className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
                         (selections[key] || []).includes(symptom.id)
-                          ? 'bg-green-100 border-2 border-green-500'
-                          : 'bg-white border border-gray-300 hover:border-green-300'
+                          ? 'bg-green-100 border-2 border-green-500 shadow-md'
+                          : 'bg-white border border-gray-300 hover:border-green-300 hover:shadow-sm'
                       }`}
                     >
                       <input
                         type="checkbox"
                         checked={(selections[key] || []).includes(symptom.id)}
                         onChange={() => toggleSymptom(key, symptom.id)}
-                        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+                        className="w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-2 focus:ring-green-500"
                       />
                       <span className="flex-1 text-gray-700 text-black placeholder-gray-500">{symptom.text}</span>
                     </label>
@@ -379,16 +378,22 @@ export default function VitaminCheck() {
           <button
             onClick={analyze}
             disabled={Object.values(selections).every(arr => arr.length === 0)}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+            className={`w-full px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
+              Object.values(selections).every(arr => arr.length === 0)
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95'
+            }`}
           >
-            결과 확인하기
+            {Object.values(selections).every(arr => arr.length === 0) 
+              ? '증상을 선택해주세요' 
+              : `결과 확인하기 (${Object.values(selections).reduce((sum, arr) => sum + arr.length, 0)}개 선택됨)`
+            }
           </button>
         </section>
 
         <footer className="mt-6 space-y-3 pb-8 text-black placeholder-gray-500">
-          
           <p className="text-xs text-gray-500 text-center px-4 text-black placeholder-gray-500">
-            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+            ⚠️ 이 진단은 참고용이며, 정확한 진단은 의료기관에서 받으세요.
           </p>
         </footer>
       </div>

@@ -1,12 +1,94 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { getTotalAppsCount, getAllApps } from '@/lib/getApps';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const router = useRouter();
   const totalApps = getTotalAppsCount();
   const allApps = getAllApps();
+
+  // localStorage에서 즐겨찾기 불러오기 (유효한 앱만 필터링)
+  useEffect(() => {
+    const saved = localStorage.getItem('favorite-apps');
+    if (saved) {
+      const savedFavorites = JSON.parse(saved);
+      // 실제 존재하는 앱 ID만 필터링
+      const validFavorites = savedFavorites.filter((id: string) => 
+        allApps.some(app => app.id === id)
+      );
+      setFavorites(validFavorites);
+      // 유효한 앱만 다시 저장
+      if (validFavorites.length !== savedFavorites.length) {
+        localStorage.setItem('favorite-apps', JSON.stringify(validFavorites));
+      }
+    }
+  }, []);
+
+  // 스크롤 위치 복원 (뒤로가기 시)
+  useEffect(() => {
+    const savedScrollPos = sessionStorage.getItem('homeScrollPosition');
+    if (savedScrollPos) {
+      // DOM이 완전히 로드된 후 스크롤 복원
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScrollPos, 10));
+        sessionStorage.removeItem('homeScrollPosition');
+      }, 100);
+    }
+  }, []);
+
+  // 스크롤 위치 저장 (페이지 떠날 때)
+  useEffect(() => {
+    const saveScrollPosition = () => {
+      sessionStorage.setItem('homeScrollPosition', window.scrollY.toString());
+    };
+
+    // 페이지 떠나기 전에 스크롤 위치 저장
+    window.addEventListener('beforeunload', saveScrollPosition);
+    
+    // 라우트 변경 시에도 저장 (Next.js Link 클릭 시)
+    const handleRouteChange = () => {
+      saveScrollPosition();
+    };
+
+    // 모든 링크에 클릭 이벤트 추가
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      if (link && link.href) {
+        handleRouteChange();
+      }
+    });
+
+    return () => {
+      window.removeEventListener('beforeunload', saveScrollPosition);
+    };
+  }, []);
+
+  // 즐겨찾기 토글
+  const toggleFavorite = (appId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setFavorites(prev => {
+      const newFavorites = prev.includes(appId)
+        ? prev.filter(id => id !== appId)
+        : [...prev, appId];
+      
+      localStorage.setItem('favorite-apps', JSON.stringify(newFavorites));
+      return newFavorites;
+    });
+  };
+
+  // 즐겨찾기 앱과 나머지 앱 분리
+  const favoriteApps = allApps.filter(app => favorites.includes(app.id));
+  const otherApps = allApps.filter(app => !favorites.includes(app.id));
   
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" suppressHydrationWarning>
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -33,35 +115,109 @@ export default function Home() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-              {allApps.map((app) => (
-                <Link
-                  key={app.id}
-                  href={app.url}
-                  className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-red-200"
-                >
-                  {/* App Image */}
-                  {app.image && (
-                    <div className="relative h-32 overflow-hidden">
-                      <img
-                        src={app.image}
-                        alt={app.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    </div>
-                  )}
-
-                  {/* App Info */}
-                  <div className="p-4 flex flex-col items-center text-center">
-                    {/* App Name */}
-                    <h4 className="text-sm font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
-                      {app.name}
-                    </h4>
+            <>
+              {/* 주로 쓰는 앱 섹션 */}
+              {favoriteApps.length > 0 && (
+                <div className="mb-12">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">
+                      ❤️ 주로 쓰는 앱
+                    </h3>
+                    <span className="text-sm text-gray-500 font-medium">
+                      {favoriteApps.length}개
+                    </span>
                   </div>
-                </Link>
-              ))}
-            </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {favoriteApps.map((app) => (
+                      <Link
+                        key={app.id}
+                        href={app.url}
+                        className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border-2 border-red-200 hover:border-red-400"
+                      >
+                      {/* 하트 버튼 */}
+                      <button
+                        onClick={(e) => toggleFavorite(app.id, e)}
+                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
+                      >
+                        <span className="text-sm">❤️</span>
+                      </button>
+
+                        {/* App Image */}
+                        {app.image && app.image.trim() !== '' && (
+                          <div className="relative h-36 overflow-hidden" suppressHydrationWarning>
+                            <img
+                              src={app.image}
+                              alt={app.name}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                          </div>
+                        )}
+
+                        {/* App Info */}
+                        <div className="p-3 flex flex-col items-center text-center">
+                          <h4 className="text-sm font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
+                            {app.name}
+                          </h4>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 전체 앱 섹션 */}
+              <div>
+                {favoriteApps.length > 0 && (
+                  <div className="flex items-center gap-3 mb-6">
+                    <h3 className="text-2xl font-bold text-gray-700">
+                      📱 전체 앱
+                    </h3>
+                    <span className="text-sm text-gray-500 font-medium">
+                      {otherApps.length}개
+                    </span>
+                  </div>
+                )}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {otherApps.map((app) => (
+                    <Link
+                      key={app.id}
+                      href={app.url}
+                      className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-red-200"
+                    >
+                      {/* 하트 버튼 */}
+                      <button
+                        onClick={(e) => toggleFavorite(app.id, e)}
+                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
+                      >
+                        <span className="text-sm">🤍</span>
+                      </button>
+
+                      {/* App Image */}
+                      {app.image && app.image.trim() !== '' && (
+                        <div className="relative h-36 overflow-hidden" suppressHydrationWarning>
+                          <img
+                            src={app.image}
+                            alt={app.name}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        </div>
+                      )}
+
+                      {/* App Info */}
+                      <div className="p-3 flex flex-col items-center text-center">
+                        <h4 className="text-sm font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
+                          {app.name}
+                        </h4>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </>
           )}
         </div>
       </section>
@@ -83,3 +239,4 @@ export default function Home() {
     </div>
   );
 }
+
