@@ -44,6 +44,9 @@ const EXCLUDED_PATHS = [
   'scripts/sanitize-no-ads.ts',
   'scripts/guard-no-ads.test.ts',
   'scripts/migrate-app.ts', // 마이그레이션 스크립트 (광고 패턴 포함)
+  'scripts/cleanup-ads.ts', // 정화 스크립트 (광고 패턴 포함)
+  'scripts/remove-coupang-data.ts', // 쿠팡 제거 스크립트 (광고 패턴 포함)
+  'scripts/batch-migrate-all.ts', // 대량 마이그레이션 스크립트
   'docs/ads-audit.md',
 ];
 
