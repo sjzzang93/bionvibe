@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { Navigation } from "./components/Navigation";
+import GoogleAnalytics from "./components/GoogleAnalytics";
+import GoogleAdSense from "./components/GoogleAdSense";
 
 export const metadata: Metadata = {
   title: "BION - 일상을 특별하게",
@@ -11,18 +12,23 @@ export const metadata: Metadata = {
   },
 };
 
+// Google Analytics ID
+const GA_ID = 'G-DGQPGH00WH';
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
-      <body className="antialiased bg-gradient-to-br from-gray-50 via-white to-gray-50" suppressHydrationWarning>
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4564769502264231"
-          strategy="beforeInteractive"
-        />
+    <html lang="ko">
+      <body className="antialiased bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        {/* Google Analytics */}
+        <GoogleAnalytics gaId={GA_ID} />
+        
+        {/* Google AdSense */}
+        <GoogleAdSense publisherId="ca-pub-4564769502264231" />
+        
         <Navigation />
         {children}
       </body>

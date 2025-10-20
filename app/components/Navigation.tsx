@@ -101,7 +101,18 @@ export function Navigation() {
               BION
             </h1>
           </button>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
+            {/* 문의하기 버튼 */}
+            <button
+              onClick={() => router.push('/contact')}
+              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-500 dark:to-rose-500 hover:from-red-700 hover:to-rose-700 dark:hover:from-red-600 dark:hover:to-rose-600 text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span className="hidden sm:inline">문의하기</span>
+            </button>
+
             {/* 다크모드 토글 */}
             <button
               onClick={toggleDarkMode}
@@ -121,7 +132,7 @@ export function Navigation() {
               )}
             </button>
             
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+            <div className="hidden sm:flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
               <span className="relative inline-block w-2 h-2">
                 <span className="absolute inset-0 bg-amber-400 rounded-full animate-ping"></span>
                 <span className="relative inline-block w-2 h-2 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></span>

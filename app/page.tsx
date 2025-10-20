@@ -233,13 +233,17 @@ export default function Home() {
           </p>
           
           {/* Footer Links */}
-          <div className="flex justify-center gap-4 mb-4 text-sm">
+          <div className="flex justify-center gap-4 mb-4 text-sm flex-wrap">
             <Link href="/about" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
               About
             </Link>
             <span className="text-gray-300 dark:text-gray-700">|</span>
             <Link href="/privacy" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
               Privacy Policy
+            </Link>
+            <span className="text-gray-300 dark:text-gray-700">|</span>
+            <Link href="/terms" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+              Terms of Service
             </Link>
             <span className="text-gray-300 dark:text-gray-700">|</span>
             <Link href="/contact" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">

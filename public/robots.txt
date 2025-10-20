@@ -1,0 +1,12 @@
+# robots.txt for BION (bionvibe.com)
+
+User-agent: *
+Allow: /
+
+# Disallow admin/secret pages
+Disallow: /secret/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://bionvibe.com/sitemap.xml
+
