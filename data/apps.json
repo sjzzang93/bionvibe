@@ -1,0 +1,114 @@
+{
+  "apps": [
+    {
+      "id": "today-fortune",
+      "name": "오늘의 운세",
+      "slug": "today-fortune",
+      "icon": "🌟",
+      "description": "오늘 하루 어떨까?",
+      "categoryId": "fortune-fun",
+      "url": "/apps/today-fortune",
+      "image": "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "mbti-test",
+      "name": "MBTI 테스트",
+      "slug": "mbti-test",
+      "icon": "🎭",
+      "description": "나는 어떤 성격일까?",
+      "categoryId": "fortune-fun",
+      "url": "/apps/mbti-test",
+      "image": "https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "water-intake",
+      "name": "물 섭취량 계산기",
+      "slug": "water-intake",
+      "icon": "💧",
+      "description": "하루 물 섭취량 계산",
+      "categoryId": "health-life",
+      "url": "/apps/water-intake",
+      "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "calorie-calculator",
+      "name": "칼로리 계산기",
+      "slug": "calorie-calculator",
+      "icon": "🍎",
+      "description": "하루 권장 칼로리 계산",
+      "categoryId": "health-life",
+      "url": "/apps/calorie-calculator",
+      "image": "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "coffee-calculator",
+      "name": "커피 카페인 계산기",
+      "slug": "coffee-calculator",
+      "icon": "☕",
+      "description": "카페인 섭취량 분석",
+      "categoryId": "health-life",
+      "url": "/apps/coffee-calculator",
+      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "habit-tracker",
+      "name": "습관 트래커",
+      "slug": "habit-tracker",
+      "icon": "🎯",
+      "description": "21/66/100일 습관 만들기",
+      "categoryId": "learn-grow",
+      "url": "/apps/habit-tracker",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "crypto-calculator",
+      "name": "암호화폐 김프 계산기",
+      "slug": "crypto-calculator",
+      "icon": "💎",
+      "description": "실시간 김치 프리미엄 계산",
+      "categoryId": "money-utility",
+      "url": "/apps/crypto-calculator",
+      "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "parents-time",
+      "name": "부모님 시간 계산기",
+      "slug": "parents-time",
+      "icon": "💕",
+      "description": "부모님과 남은 시간 계산",
+      "categoryId": "family-love",
+      "url": "/apps/parents-time",
+      "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "flashcard",
+      "name": "영어 플래시카드",
+      "slug": "flashcard",
+      "icon": "📚",
+      "description": "레벨별 영어 단어 암기",
+      "categoryId": "learn-grow",
+      "url": "/apps/flashcard",
+      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&q=80",
+      "createdAt": "2025-01-20"
+    },
+    {
+      "id": "phone-usage-analyzer",
+      "name": "스마트폰 사용 분석",
+      "slug": "phone-usage-analyzer",
+      "icon": "📱",
+      "description": "스마트폰 중독도 분석",
+      "categoryId": "learn-grow",
+      "url": "/apps/phone-usage-analyzer",
+      "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80",
+      "createdAt": "2025-01-20"
+    }
+  ]
+}
