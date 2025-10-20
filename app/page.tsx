@@ -231,6 +231,22 @@ export default function Home() {
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
             Kim Seu Jun at BION
           </p>
+          
+          {/* Footer Links */}
+          <div className="flex justify-center gap-4 mb-4 text-sm">
+            <Link href="/about" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+              About
+            </Link>
+            <span className="text-gray-300 dark:text-gray-700">|</span>
+            <Link href="/privacy" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-gray-300 dark:text-gray-700">|</span>
+            <Link href="/contact" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+              Contact
+            </Link>
+          </div>
+          
           <p className="text-xs text-gray-400 dark:text-gray-500">
             BION · 2025
           </p>
