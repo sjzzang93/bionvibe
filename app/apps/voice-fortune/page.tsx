@@ -184,16 +184,7 @@ export default function VoiceFortune() {
         backgroundAttachment: 'fixed'
       }}>
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <div className="mb-4">
-            <iframe
-              src={null}
-              width="100%"
-              height="75"
-              frameBorder="0"
-              scrolling="no"
-              
-            />
-          </div>
+          {/* 상단 배너 제거됨 */}
 
           <section className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl p-6 border-2 border-blue-500/50">
             <header className="text-center mb-6">
@@ -300,16 +291,7 @@ export default function VoiceFortune() {
       backgroundAttachment: 'fixed'
     }}>
       <div className="mx-auto max-w-[600px] px-4 py-6">
-        <div className="mb-4">
-          <iframe
-            src={null}
-            width="100%"
-            height="75"
-            frameBorder="0"
-            scrolling="no"
-            
-          />
-        </div>
+        {/* 상단 배너 제거됨 */}
 
         <section className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl p-6 border-2 border-blue-500/50">
           <header className="text-center mb-6">

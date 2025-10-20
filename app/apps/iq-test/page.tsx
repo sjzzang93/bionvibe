@@ -236,17 +236,7 @@ export default function IQTest() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
         <div className="mx-auto max-w-[520px] px-4 py-6">
-          {/* 상단 배너 */}
-          <div className="mb-4">
-            <iframe
-              src={null}
-              width="100%"
-              height="75"
-              frameBorder="0"
-              scrolling="no"
-              
-            />
-          </div>
+          {/* 상단 배너 제거됨 */}
 
           {/* 결과 카드 */}
           <section className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-purple-200">
@@ -311,22 +301,7 @@ export default function IQTest() {
               🔄 다시 테스트하기
             </button>
 
-            {/* 쿠팡 상품 추천 */}
-            <div className="mt-6 bg-gradient-to-r from-purple-50 to-purple-50 rounded-2xl p-6 border border-purple-200">
-              <h3 className="text-lg font-semibold text-black mb-3 text-center">
-                🧠 두뇌 발달에 도움되는 상품 추천
-              </h3>
-              <a
-                href="https://"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-white rounded-xl p-4 border border-purple-200 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="font-semibold text-black mb-1">📚 두뇌 개발 도서 & 퍼즐</div>
-                <div className="text-sm text-gray-600 mb-2">논리력, 사고력을 키우는 다양한 상품</div>
-                <div className="text-xs text-black">👉 지금 바로 확인하기</div>
-              </a>
-            </div>
+            {/* 추천 섹션 제거됨 */}
           </section>
 
           {/* 하단 배너 */}
@@ -346,17 +321,7 @@ export default function IQTest() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       <div className="mx-auto max-w-[520px] px-4 py-6">
-        {/* 상단 배너 */}
-        <div className="mb-4">
-          <iframe
-            src={null}
-            width="100%"
-            height="75"
-            frameBorder="0"
-            scrolling="no"
-            
-          />
-        </div>
+        {/* 상단 배너 제거됨 */}
 
         {/* 문제 카드 */}
         <section className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-purple-200">
@@ -405,13 +370,7 @@ export default function IQTest() {
           </div>
         </section>
 
-        {/* 하단 배너 */}
-        <footer className="mt-6 space-y-3 pb-8">
-          
-          <p className="text-xs text-gray-500 text-center px-4">
-            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-          </p>
-        </footer>
+        {/* 하단 배너 제거됨 */}
       </div>
     </main>
   );

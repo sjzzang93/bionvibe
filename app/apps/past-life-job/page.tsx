@@ -314,14 +314,7 @@ export default function PastLifeJob() {
         backgroundAttachment: 'fixed'
       }}>
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          <div className="mb-4 text-black placeholder-gray-500">
-            <iframe
-              src={null}
-              width="100%"
-              height="75"
-              frameBorder="0"
-              scrolling="no"/>
-          </div>
+          {/* 상단 배너 제거됨 */}
 
           <section className="bg-white rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
@@ -401,14 +394,7 @@ export default function PastLifeJob() {
         backgroundAttachment: 'fixed'
       }}>
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          <div className="mb-4 text-black placeholder-gray-500">
-            <iframe
-              src={null}
-              width="100%"
-              height="75"
-              frameBorder="0"
-              scrolling="no"/>
-          </div>
+          {/* 상단 배너 제거됨 */}
 
           <section className="bg-white rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
@@ -579,14 +565,7 @@ export default function PastLifeJob() {
         backgroundAttachment: 'fixed'
       }}>
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          <div className="mb-4 text-black placeholder-gray-500">
-            <iframe
-              src={null}
-              width="100%"
-              height="75"
-              frameBorder="0"
-              scrolling="no"/>
-          </div>
+          {/* 상단 배너 제거됨 */}
 
           <section className="bg-white rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">

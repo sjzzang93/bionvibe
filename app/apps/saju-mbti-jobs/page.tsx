@@ -193,17 +193,7 @@ export default function SajuMBTIJobs() {
         backgroundAttachment: 'fixed'
       }}>
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          {/* 상단 배너 */}
-          <div className="mb-4 text-black placeholder-gray-500">
-            <iframe
-              src={null}
-              width="100%"
-              height="75"
-              frameBorder="0"
-              scrolling="no"
-              
-            />
-          </div>
+          {/* 상단 배너 제거됨 */}
 
           {/* 결과 카드 */}
           <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-2xl p-6 border-4 border-amber-300 text-black placeholder-gray-500">
@@ -511,17 +501,7 @@ export default function SajuMBTIJobs() {
       backgroundAttachment: 'fixed'
     }}>
       <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-        {/* 상단 배너 */}
-        <div className="mb-4 text-black placeholder-gray-500">
-          <iframe
-            src={null}
-            width="100%"
-            height="75"
-            frameBorder="0"
-            scrolling="no"
-            
-          />
-        </div>
+        {/* 상단 배너 제거됨 */}
 
         {/* 메인 카드 */}
         <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-2xl p-8 border-4 border-amber-300 text-black placeholder-gray-500">
