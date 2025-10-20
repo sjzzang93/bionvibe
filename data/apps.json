@@ -120,6 +120,116 @@
       "url": "/apps/air-quality",
       "image": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80",
       "createdAt": "2025-01-20"
+    },
+    {
+      "id": "typing-speed-test",
+      "name": "타이핑 속도 테스트",
+      "slug": "typing-speed-test",
+      "icon": "⌨️",
+      "description": "타자 속도 측정 및 연습",
+      "categoryId": "learn-grow",
+      "url": "/apps/typing-speed-test",
+      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "reflex-test",
+      "name": "반사신경 테스트",
+      "slug": "reflex-test",
+      "icon": "⚡",
+      "description": "반응속도 테스트",
+      "categoryId": "learn-grow",
+      "url": "/apps/reflex-test",
+      "image": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "eye-test",
+      "name": "시력 테스트",
+      "slug": "eye-test",
+      "icon": "👁️",
+      "description": "시력 건강 체크",
+      "categoryId": "health-life",
+      "url": "/apps/eye-test",
+      "image": "https://images.unsplash.com/photo-1574169208507-84376144848b?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "quote-generator",
+      "name": "명언 생성기",
+      "slug": "quote-generator",
+      "icon": "💭",
+      "description": "매일 새로운 명언",
+      "categoryId": "fortune-fun",
+      "url": "/apps/quote-generator",
+      "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "dday-counter",
+      "name": "디데이 카운터",
+      "slug": "dday-counter",
+      "icon": "📅",
+      "description": "중요한 날 카운트다운",
+      "categoryId": "money-utility",
+      "url": "/apps/dday-counter",
+      "image": "https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "focus-timer",
+      "name": "집중 타이머",
+      "slug": "focus-timer",
+      "icon": "⏰",
+      "description": "뽀모도로 집중 타이머",
+      "categoryId": "learn-grow",
+      "url": "/apps/focus-timer",
+      "image": "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "sleep-analyzer",
+      "name": "수면 분석기",
+      "slug": "sleep-analyzer",
+      "icon": "😴",
+      "description": "수면 패턴 분석",
+      "categoryId": "health-life",
+      "url": "/apps/sleep-analyzer",
+      "image": "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "vitamin-check",
+      "name": "비타민 체크",
+      "slug": "vitamin-check",
+      "icon": "💊",
+      "description": "필요한 영양소 진단",
+      "categoryId": "health-life",
+      "url": "/apps/vitamin-check",
+      "image": "https://images.unsplash.com/photo-1550572017-edd951aa8f72?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "salary-divider",
+      "name": "월급 쪼개기",
+      "slug": "salary-divider",
+      "icon": "💰",
+      "description": "월급 예산 계획",
+      "categoryId": "money-utility",
+      "url": "/apps/salary-divider",
+      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=400&q=80",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "income-tax-calculator",
+      "name": "소득세 계산기",
+      "slug": "income-tax-calculator",
+      "icon": "🧾",
+      "description": "소득세 자동 계산",
+      "categoryId": "money-utility",
+      "url": "/apps/income-tax-calculator",
+      "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&q=80",
+      "createdAt": "2025-10-20"
     }
   ]
 }
