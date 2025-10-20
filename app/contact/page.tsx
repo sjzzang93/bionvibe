@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { supabase } from '@/lib/supabase';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -10,15 +12,59 @@ export default function ContactPage() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 실제 서버 전송 로직은 나중에 추가
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
+    setSending(true);
+    setError('');
+
+    try {
+      // 1. Supabase에 저장 (먼저 DB에 저장)
+      const { error: dbError } = await supabase
+        .from('contacts')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          status: 'pending'
+        });
+
+      if (dbError) {
+        console.error('DB 저장 실패:', dbError);
+        // DB 저장 실패해도 이메일은 계속 시도
+      }
+
+      // 2. EmailJS로 이메일 전송
+      try {
+        await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID',
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
+          {
+            from_name: formData.name,
+            from_email: formData.email,
+            message: formData.message,
+            to_email: 'wa8106@naver.com'
+          },
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+        );
+      } catch (emailError) {
+        console.error('이메일 전송 실패:', emailError);
+        // 이메일 실패해도 DB에는 저장됨
+      }
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({ name: '', email: '', message: '' });
+      }, 3000);
+    } catch (err) {
+      console.error('문의 전송 실패:', err);
+      setError('메시지 전송에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -43,6 +89,12 @@ export default function ContactPage() {
               아래 양식을 통해 연락해주세요. 
               최대한 빠르게 답변드리겠습니다!
             </p>
+
+            {error && (
+              <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 dark:border-red-600 rounded-xl p-4 mb-4 text-center">
+                <p className="text-red-600 dark:text-red-400">{error}</p>
+              </div>
+            )}
 
             {submitted ? (
               <div className="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 dark:border-green-600 rounded-xl p-8 text-center">
@@ -103,9 +155,10 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 dark:from-red-500 dark:to-rose-500 dark:hover:from-red-600 dark:hover:to-rose-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+                  disabled={sending}
+                  className="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 dark:from-red-500 dark:to-rose-500 dark:hover:from-red-600 dark:hover:to-rose-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
-                  메시지 보내기
+                  {sending ? '전송 중...' : '메시지 보내기'}
                 </button>
               </form>
             )}

@@ -143,6 +143,12 @@ export default function SecretPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link
+              href="/secret/contacts"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-green-500/50 transition-all"
+            >
+              📧 문의 관리
+            </Link>
+            <Link
               href="/secret/analytics"
               className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-blue-500/50 transition-all"
             >
@@ -154,9 +160,6 @@ export default function SecretPage() {
             >
               🖼️ 이미지 관리
             </Link>
-            <div className="bg-white/10 text-white/30 px-6 py-4 rounded-xl font-bold text-center cursor-not-allowed">
-              🔜 더 많은 도구
-            </div>
           </div>
         </div>
 

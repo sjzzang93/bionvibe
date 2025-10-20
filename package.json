@@ -11,6 +11,8 @@
     "guard:no-ads": "vitest run scripts/guard-no-ads.test.ts"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.76.0",
     "@vercel/blob": "^2.0.0",
     "autoprefixer": "^10.4.21",
     "critters": "^0.0.23",

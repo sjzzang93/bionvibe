@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { getTotalAppsCount, getAllApps } from '@/lib/getApps';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import MainChat from './components/MainChat';
 
 export default function Home() {
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -89,17 +90,10 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors" suppressHydrationWarning>
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-red-600 via-rose-600 to-pink-600 dark:from-red-400 dark:via-rose-400 dark:to-pink-400 bg-clip-text text-transparent">
-            일상을 특별하게
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            기술이 아닌 사람을 위한 공간
-          </p>
-        </div>
-      </section>
+      {/* 비온타키 채팅 */}
+      <div suppressHydrationWarning>
+        <MainChat />
+      </div>
 
       {/* Apps Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">

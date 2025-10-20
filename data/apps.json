@@ -79,7 +79,7 @@
     },
     {
       "id": "parents-time",
-      "name": "부모님 시간 계산기",
+      "name": "부모님과 추억 쌓을 시간",
       "slug": "parents-time",
       "icon": "💕",
       "description": "부모님과 남은 시간 계산",
@@ -483,6 +483,17 @@
       "categoryId": "fortune-fun",
       "url": "/apps/saju-mbti-jobs",
       "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "lotto-generator",
+      "name": "로또 번호 추첨기",
+      "slug": "lotto-generator",
+      "icon": "🎰",
+      "description": "행운의 번호 생성",
+      "categoryId": "fortune-fun",
+      "url": "/apps/lotto-generator",
+      "image": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20"
     }
   ]

@@ -35,11 +35,13 @@ export default function ReflexTest() {
 
     timeoutRef.current = setTimeout(() => {
       setTestMode('click');
-      setStartTime(Date.now());
+      setStartTime(performance.now());
     }, waitTime);
   };
 
-  const handleClick = () => {
+  const handleClick = (e: React.PointerEvent | React.TouchEvent) => {
+    e.preventDefault(); // 기본 동작 방지로 딜레이 제거
+    
     if (testMode === 'wait') {
       // 너무 일찍 클릭
       setTooEarly(true);
@@ -50,10 +52,10 @@ export default function ReflexTest() {
         } else {
           setTestMode('result');
         }
-      }, 1500);
+      }, 1000);
     } else if (testMode === 'click') {
-      // 반응 시간 측정
-      const reactionTime = Date.now() - startTime;
+      // 반응 시간 측정 (performance.now()로 더 정확)
+      const reactionTime = Math.round(performance.now() - startTime);
       const newTimes = [...reactionTimes, reactionTime];
       setReactionTimes(newTimes);
 
@@ -61,7 +63,7 @@ export default function ReflexTest() {
         setCurrentRound(currentRound + 1);
         setTimeout(() => {
           prepareRound();
-        }, 500);
+        }, 300);
       } else {
         setTestMode('result');
       }
@@ -79,11 +81,12 @@ export default function ReflexTest() {
   };
 
   const getGrade = (avgTime: number) => {
-    if (avgTime < 200) return { grade: 'S', color: 'purple', text: '초인적 반응속도!' };
-    if (avgTime < 250) return { grade: 'A+', color: 'blue', text: '프로게이머 수준!' };
-    if (avgTime < 300) return { grade: 'A', color: 'green', text: '매우 빠른 반응!' };
-    if (avgTime < 350) return { grade: 'B', color: 'yellow', text: '평균 이상' };
-    if (avgTime < 400) return { grade: 'C', color: 'orange', text: '평균 수준' };
+    if (avgTime < 180) return { grade: 'S+', color: 'purple', text: '신의 경지! 🔥' };
+    if (avgTime < 220) return { grade: 'S', color: 'blue', text: '초인적 반응속도!' };
+    if (avgTime < 270) return { grade: 'A+', color: 'green', text: '프로게이머 수준!' };
+    if (avgTime < 320) return { grade: 'A', color: 'cyan', text: '매우 빠른 반응!' };
+    if (avgTime < 370) return { grade: 'B', color: 'yellow', text: '평균 이상' };
+    if (avgTime < 420) return { grade: 'C', color: 'orange', text: '평균 수준' };
     return { grade: 'D', color: 'red', text: '연습이 필요해요' };
   };
 
@@ -109,6 +112,7 @@ export default function ReflexTest() {
               gradeInfo.color === 'purple' ? 'bg-purple-50 border-purple-400' :
               gradeInfo.color === 'blue' ? 'bg-blue-50 border-blue-400' :
               gradeInfo.color === 'green' ? 'bg-green-50 border-green-400' :
+              gradeInfo.color === 'cyan' ? 'bg-cyan-50 border-cyan-400' :
               gradeInfo.color === 'yellow' ? 'bg-yellow-50 border-yellow-400' :
               gradeInfo.color === 'orange' ? 'bg-orange-50 border-orange-400' :
               'bg-red-50 border-red-400'
@@ -117,6 +121,7 @@ export default function ReflexTest() {
                 background: gradeInfo.color === 'purple' ? 'linear-gradient(135deg, #a855f7, #9333ea)' :
                            gradeInfo.color === 'blue' ? 'linear-gradient(135deg, #3b82f6, #2563eb)' :
                            gradeInfo.color === 'green' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                           gradeInfo.color === 'cyan' ? 'linear-gradient(135deg, #06b6d4, #0891b2)' :
                            gradeInfo.color === 'yellow' ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
                            gradeInfo.color === 'orange' ? 'linear-gradient(135deg, #f97316, #ea580c)' :
                            'linear-gradient(135deg, #ef4444, #dc2626)',
@@ -175,26 +180,32 @@ export default function ReflexTest() {
               <div className="space-y-2 text-sm">
                 <div className="bg-white rounded p-3">
                   <div className="flex justify-between">
+                    <span>세계 최고 기록</span>
+                    <span className="font-bold text-black">120-180ms</span>
+                  </div>
+                </div>
+                <div className="bg-white rounded p-3">
+                  <div className="flex justify-between">
                     <span>프로 게이머</span>
-                    <span className="font-bold text-black">150-200ms</span>
+                    <span className="font-bold text-black">180-250ms</span>
                   </div>
                 </div>
                 <div className="bg-white rounded p-3">
                   <div className="flex justify-between">
                     <span>운동선수</span>
-                    <span className="font-bold text-black">200-250ms</span>
+                    <span className="font-bold text-black">250-300ms</span>
                   </div>
                 </div>
                 <div className="bg-white rounded p-3">
                   <div className="flex justify-between">
                     <span>일반 성인 평균</span>
-                    <span className="font-bold text-black">250-350ms</span>
+                    <span className="font-bold text-black">300-400ms</span>
                   </div>
                 </div>
                 <div className="bg-white rounded p-3">
                   <div className="flex justify-between">
                     <span>고령자 평균</span>
-                    <span className="font-bold text-black">400-500ms</span>
+                    <span className="font-bold text-black">450-550ms</span>
                   </div>
                 </div>
               </div>
@@ -269,10 +280,12 @@ export default function ReflexTest() {
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
               <h3 className="font-bold text-black mb-2">📊 반응속도 기준</h3>
               <div className="text-sm text-black space-y-1">
-                <div>• 150ms 이하: 초인</div>
-                <div>• 150-250ms: 프로게이머/운동선수</div>
-                <div>• 250-350ms: 평균</div>
-                <div>• 350ms 이상: 연습 필요</div>
+                <div>• 180ms 이하: 신의 경지 (S+)</div>
+                <div>• 180-220ms: 초인 (S)</div>
+                <div>• 220-270ms: 프로게이머 (A+)</div>
+                <div>• 270-320ms: 매우 빠름 (A)</div>
+                <div>• 320-370ms: 평균 이상 (B)</div>
+                <div>• 370ms 이상: 연습 필요</div>
               </div>
             </div>
 
@@ -295,8 +308,10 @@ export default function ReflexTest() {
           </section>
         ) : testMode === 'ready' || testMode === 'wait' ? (
           <section 
-            onClick={handleClick}
-            className="bg-red-600 rounded-2xl shadow-xl p-12 cursor-pointer min-h-[500px] flex flex-col items-center justify-center"
+            onPointerDown={handleClick}
+            onTouchStart={handleClick}
+            className="bg-red-600 rounded-2xl shadow-xl p-12 cursor-pointer min-h-[500px] flex flex-col items-center justify-center touch-none select-none"
+            style={{ touchAction: 'none' }}
           >
             <div className="text-center">
               <h2 className="text-white text-4xl font-bold mb-4">
@@ -312,8 +327,10 @@ export default function ReflexTest() {
           </section>
         ) : (
           <section 
-            onClick={handleClick}
-            className="bg-green-600 rounded-2xl shadow-xl p-12 cursor-pointer min-h-[500px] flex flex-col items-center justify-center"
+            onPointerDown={handleClick}
+            onTouchStart={handleClick}
+            className="bg-green-600 rounded-2xl shadow-xl p-12 cursor-pointer min-h-[500px] flex flex-col items-center justify-center touch-none select-none"
+            style={{ touchAction: 'none' }}
           >
             <div className="text-center">
               <h2 className="text-white text-5xl font-bold mb-6 animate-pulse">
