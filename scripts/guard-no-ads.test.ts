@@ -43,6 +43,7 @@ const EXCLUDED_PATHS = [
   'coverage',
   'scripts/sanitize-no-ads.ts',
   'scripts/guard-no-ads.test.ts',
+  'scripts/migrate-app.ts', // 마이그레이션 스크립트 (광고 패턴 포함)
   'docs/ads-audit.md',
 ];
 

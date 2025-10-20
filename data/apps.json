@@ -109,6 +109,17 @@
       "url": "/apps/phone-usage-analyzer",
       "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&q=80",
       "createdAt": "2025-01-20"
+    },
+    {
+      "id": "air-quality",
+      "name": "공기질 측정기",
+      "slug": "air-quality",
+      "icon": "🌫️",
+      "description": "실시간 미세먼지 측정",
+      "categoryId": "health-life",
+      "url": "/apps/air-quality",
+      "image": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&q=80",
+      "createdAt": "2025-01-20"
     }
   ]
 }
