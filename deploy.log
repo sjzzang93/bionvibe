@@ -1,0 +1,166 @@
+[AutoDeploy] Attempt 1 Mon Oct 20 17:13:25 KST 2025
+Vercel CLI 48.4.1
+WARN! Build not running on Vercel. System environment variables will not be available.
+WARNING: You should not upload the `.next` directory.
+Installing dependencies...
+
+up to date in 712ms
+
+182 packages are looking for funding
+  run `npm fund` for details
+Detected Next.js version: 15.1.3
+Running "npm run build"
+
+> bionvibe2@0.1.0 prebuild
+> npm run sanitize:no-ads && npm run guard:no-ads
+
+
+> bionvibe2@0.1.0 sanitize:no-ads
+> ts-node --transpile-only scripts/sanitize-no-ads.ts
+
+🔍 광고 키워드 스캔 시작...
+
+✅ 광고 관련 키워드가 발견되지 않았습니다!
+
+
+> bionvibe2@0.1.0 guard:no-ads
+> vitest run scripts/guard-no-ads.test.ts
+
+
+ RUN  v1.6.1 /Users/fire/Desktop/bionvibe2
+
+ ✓ scripts/guard-no-ads.test.ts  (3 tests) 167ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  17:13:29
+   Duration  1.02s (transform 185ms, setup 0ms, collect 84ms, tests 167ms, environment 0ms, prepare 185ms)
+
+
+> bionvibe2@0.1.0 build
+> next build
+
+   ▲ Next.js 15.1.3
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+
+./app/apps/games-puzzle/page.tsx
+144:9  Warning: The 'initialPuzzles' array makes the dependencies of useCallback Hook (at line 179) change on every render. Move it inside the useCallback callback. Alternatively, wrap the initialization of 'initialPuzzles' in its own useMemo() Hook.  react-hooks/exhaustive-deps
+
+./app/apps/lifestyle-face-fortune/page.tsx
+167:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/CategoryCard.tsx
+19:9  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/page.tsx
+29:6  Warning: React Hook useEffect has a missing dependency: 'allApps'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+148:29  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+200:27  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/secret/image-manager/page.tsx
+162:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+185:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+269:19  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/secret/page.tsx
+107:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+   Collecting page data ...
+   Generating static pages (0/52) ...
+   Generating static pages (13/52) 
+   Generating static pages (26/52) 
+   Generating static pages (39/52) 
+ ✓ Generating static pages (52/52)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                               Size     First Load JS
+┌ ○ /                                     5.46 kB         114 kB
+├ ○ /_not-found                           983 B           106 kB
+├ ƒ /api/update-images                    143 B           105 kB
+├ ƒ /api/upload-image                     143 B           105 kB
+├ ○ /apps/air-quality                     2.73 kB         108 kB
+├ ○ /apps/analysis-handwriting            1.94 kB         107 kB
+├ ○ /apps/arcade-mini-games               2.82 kB         108 kB
+├ ○ /apps/calorie-calculator              2.38 kB         111 kB
+├ ○ /apps/car-maintenance                 2.27 kB         108 kB
+├ ○ /apps/coffee-calculator               4.82 kB         114 kB
+├ ○ /apps/color-psychology                2.83 kB         108 kB
+├ ○ /apps/compound-calculator             2.93 kB         108 kB
+├ ○ /apps/credit-card-optimizer           2.66 kB         108 kB
+├ ○ /apps/crypto-calculator               3.38 kB         112 kB
+├ ○ /apps/dday-counter                    2.6 kB          108 kB
+├ ○ /apps/dream-interpreter               2.89 kB         108 kB
+├ ○ /apps/eye-test                        4.17 kB         109 kB
+├ ○ /apps/face-shape                      4.18 kB         110 kB
+├ ○ /apps/finance-emergency-fund          1.8 kB          107 kB
+├ ○ /apps/finance-loan-refinance          2.29 kB         108 kB
+├ ○ /apps/flashcard                       2.15 kB         111 kB
+├ ○ /apps/focus-timer                     3.24 kB         109 kB
+├ ○ /apps/games-multiplication            1.75 kB         107 kB
+├ ○ /apps/games-puzzle                    3.15 kB         108 kB
+├ ○ /apps/habit-tracker                   3.97 kB         113 kB
+├ ○ /apps/income-tax-calculator           1.25 kB         107 kB
+├ ○ /apps/iq-test                         2.86 kB         108 kB
+├ ○ /apps/lifestyle-face-fortune          20.5 kB         126 kB
+├ ○ /apps/mbti-test                       4.4 kB          113 kB
+├ ○ /apps/meat-calculator                 3.85 kB         109 kB
+├ ○ /apps/parents-time                    3.35 kB         112 kB
+├ ○ /apps/past-life-job                   5.16 kB         110 kB
+├ ○ /apps/phone-usage-analyzer            4.83 kB         114 kB
+├ ○ /apps/quote-generator                 4.16 kB         109 kB
+├ ○ /apps/reflex-test                     3.11 kB         108 kB
+├ ○ /apps/saju-mbti-jobs                  9.45 kB         115 kB
+├ ○ /apps/salary-divider                  3.29 kB         109 kB
+├ ○ /apps/sleep-analyzer                  5.76 kB         111 kB
+├ ○ /apps/study-cursor-prompts            9.48 kB         115 kB
+├ ○ /apps/today-fortune                   2.67 kB         112 kB
+├ ○ /apps/travel-packing-list             1.87 kB         107 kB
+├ ○ /apps/typing-speed-test               1.7 kB          107 kB
+├ ○ /apps/utility-electricity-calculator  3.32 kB         109 kB
+├ ○ /apps/vitamin-check                   5.04 kB         110 kB
+├ ○ /apps/voice-age                       4.03 kB         109 kB
+├ ○ /apps/voice-fortune                   3.94 kB         109 kB
+├ ○ /apps/water-intake                    2 kB            111 kB
+├ ○ /apps/weather-outfit                  3.93 kB         109 kB
+├ ○ /secret                               5.23 kB         114 kB
+└ ○ /secret/image-manager                 2.67 kB         112 kB
++ First Load JS shared by all             105 kB
+  ├ chunks/1517-88eb28355001d405.js       50.5 kB
+  ├ chunks/4bd1b696-f96c6977651c46a9.js   52.9 kB
+  └ other shared chunks (total)           1.92 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+Traced Next.js server files in: 149.908ms
+Created all serverless functions in: 120.494ms
+Collected static files (public/, static/, .next/static): 7.487ms
+Build Completed in .vercel/output [18s]
+Vercel CLI 48.4.1
+Retrieving project…
+Deploying kshs-projects-75c1b9ce/bionvibe2
+Uploading [--------------------] (0.0B/2.3MB)
+Uploading [=====---------------] (584.6KB/2.3MB)
+Uploading [==========----------] (1.1MB/2.3MB)
+Uploading [===============-----] (1.7MB/2.3MB)
+Uploading [====================] (2.3MB/2.3MB)
+Inspect: https://vercel.com/kshs-projects-75c1b9ce/bionvibe2/4AQkxMri1YSwRypMAFynwwh2K4wz [5s]
+Production: https://bionvibe2-2p6m6u5ry-kshs-projects-75c1b9ce.vercel.app [5s]
+https://bionvibe2-2p6m6u5ry-kshs-projects-75c1b9ce.vercel.appQueued
+Building
+2025-10-20T08:21:55.820Z  Running build in Portland, USA (West) – pdx1
+2025-10-20T08:21:55.820Z  Build machine configuration: 4 cores, 8 GB
+2025-10-20T08:21:55.848Z  Retrieving list of deployment files...
+2025-10-20T08:21:56.099Z  Previous build caches not available
+2025-10-20T08:21:56.334Z  Downloading 1179 deployment files...
+2025-10-20T08:22:15.118Z  Using prebuilt build artifacts from .vercel/output
+2025-10-20T08:22:15.119Z  Learn more: https://vercel.link/build-output-api
+2025-10-20T08:22:15.218Z  Deploying outputs...
+2025-10-20T08:26:30.309Z  An unexpected error happened when running this build. We have been notified of the problem. If you have any questions, please contact Vercel Support https://vercel.com/help
+[AutoDeploy] Success prebuilt on attempt 1

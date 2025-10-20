@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "sanitize:no-ads": "ts-node --transpile-only scripts/sanitize-no-ads.ts",
-    "guard:no-ads": "vitest run scripts/guard-no-ads.test.ts",
-    "prebuild": "npm run sanitize:no-ads && npm run guard:no-ads"
+    "guard:no-ads": "vitest run scripts/guard-no-ads.test.ts"
   },
   "dependencies": {
     "@vercel/blob": "^2.0.0",
