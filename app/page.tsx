@@ -88,14 +88,14 @@ export default function Home() {
   const otherApps = allApps.filter(app => !favorites.includes(app.id));
   
   return (
-    <div className="min-h-screen" suppressHydrationWarning>
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors" suppressHydrationWarning>
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-red-600 via-rose-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl sm:text-6xl font-bold mb-6 bg-gradient-to-r from-red-600 via-rose-600 to-pink-600 dark:from-red-400 dark:via-rose-400 dark:to-pink-400 bg-clip-text text-transparent">
             일상을 특별하게
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
             기술이 아닌 사람을 위한 공간
           </p>
         </div>
@@ -107,10 +107,10 @@ export default function Home() {
           {totalApps === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl mb-6">🎨</div>
-              <h3 className="text-2xl font-bold text-gray-700 mb-4">
+              <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-4">
                 차근차근 만들어가는 중입니다
               </h3>
-              <p className="text-gray-500">
+              <p className="text-gray-500 dark:text-gray-400">
                 곧 멋진 웹앱들로 채워질 예정입니다
               </p>
             </div>
@@ -120,10 +120,10 @@ export default function Home() {
               {favoriteApps.length > 0 && (
                 <div className="mb-12">
                   <div className="flex items-center gap-3 mb-6">
-                    <h3 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">
+                    <h3 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
                       ❤️ 주로 쓰는 앱
                     </h3>
-                    <span className="text-sm text-gray-500 font-medium">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
                       {favoriteApps.length}개
                     </span>
                   </div>
@@ -132,12 +132,12 @@ export default function Home() {
                       <Link
                         key={app.id}
                         href={app.url}
-                        className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border-2 border-red-200 hover:border-red-400"
+                        className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border-2 border-red-200 dark:border-red-800 hover:border-red-400 dark:hover:border-red-600"
                       >
                       {/* 하트 버튼 */}
                       <button
                         onClick={(e) => toggleFavorite(app.id, e)}
-                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
+                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
                       >
                         <span className="text-sm">❤️</span>
                       </button>
@@ -157,7 +157,7 @@ export default function Home() {
 
                         {/* App Info */}
                         <div className="p-3 flex flex-col items-center text-center">
-                          <h4 className="text-sm font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
+                          <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
                             {app.name}
                           </h4>
                         </div>
@@ -171,10 +171,10 @@ export default function Home() {
               <div>
                 {favoriteApps.length > 0 && (
                   <div className="flex items-center gap-3 mb-6">
-                    <h3 className="text-2xl font-bold text-gray-700">
+                    <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-200">
                       📱 전체 앱
                     </h3>
-                    <span className="text-sm text-gray-500 font-medium">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
                       {otherApps.length}개
                     </span>
                   </div>
@@ -184,12 +184,12 @@ export default function Home() {
                     <Link
                       key={app.id}
                       href={app.url}
-                      className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-red-200"
+                      className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-600"
                     >
                       {/* 하트 버튼 */}
                       <button
                         onClick={(e) => toggleFavorite(app.id, e)}
-                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
+                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
                       >
                         <span className="text-sm">🤍</span>
                       </button>
@@ -209,7 +209,7 @@ export default function Home() {
 
                       {/* App Info */}
                       <div className="p-3 flex flex-col items-center text-center">
-                        <h4 className="text-sm font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
                           {app.name}
                         </h4>
                       </div>
@@ -223,15 +223,15 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-white to-gray-50 border-t border-gray-200 py-12 px-4">
+      <footer className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 border-t border-gray-200 dark:border-gray-800 py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-base text-gray-600 mb-2 font-medium">
+          <p className="text-base text-gray-600 dark:text-gray-300 mb-2 font-medium">
             Creating light for everyday life
           </p>
-          <p className="text-sm text-gray-500 mb-3">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
             Kim Seu Jun at BION
           </p>
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-400 dark:text-gray-500">
             BION · 2025
           </p>
         </div>
