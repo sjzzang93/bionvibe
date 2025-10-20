@@ -17,10 +17,8 @@ export default function RootLayout({
     <html lang="ko" suppressHydrationWarning>
       <body className="antialiased bg-gradient-to-br from-gray-50 via-white to-gray-50" suppressHydrationWarning>
         <Script
-          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4564769502264231"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
         <Navigation />
         {children}
