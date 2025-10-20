@@ -418,8 +418,8 @@ export default function ParentsTimeCalculator() {
                 {/* 감성 메시지 */}
                 <div className="text-center mb-6 bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-200">
                   <p className="text-lg text-black font-medium italic">
-                    "시간은 돌이킬 수 없어요.<br />
-                    오늘 만나세요. 💕"
+                    &ldquo;시간은 돌이킬 수 없어요.<br />
+                    오늘 만나세요. 💕&rdquo;
                   </p>
                 </div>
               </div>
