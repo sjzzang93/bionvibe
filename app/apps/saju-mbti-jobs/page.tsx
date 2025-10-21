@@ -218,7 +218,7 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
             <span>강점</span>
           </h3>
           <ul className="space-y-2">
-            {combo.strength.map((item, idx) => (
+            {combo.strength.map((item: string, idx: number) => (
               <li key={idx} className="flex items-start gap-2 text-gray-700">
                 <span className="text-green-600 font-bold">•</span>
                 <span>{item}</span>
@@ -233,7 +233,7 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
             <span>약점 (개선 포인트)</span>
           </h3>
           <ul className="space-y-2">
-            {combo.weakness.map((item, idx) => (
+            {combo.weakness.map((item: string, idx: number) => (
               <li key={idx} className="flex items-start gap-2 text-gray-700">
                 <span className="text-orange-600 font-bold">•</span>
                 <span>{item}</span>
@@ -337,7 +337,7 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
         <div className="mt-4 pt-4 border-t border-amber-300">
           <h4 className="text-lg font-bold mb-3 text-gray-800">💼 추천 직업 (참고용)</h4>
           <div className="flex flex-wrap gap-2">
-            {combo.jobs.map((job, idx) => (
+            {combo.jobs.map((job: string, idx: number) => (
               <span key={idx} className="px-3 py-1 bg-white rounded-full text-sm font-medium text-gray-700 border border-amber-300">
                 {job}
               </span>
@@ -559,7 +559,7 @@ export default function SajuMBTIJobs() {
                   <div className="bg-purple-50 rounded-lg p-3">
                     <p className="font-bold text-purple-700 mb-2">✨ 핵심 강점</p>
                     <div className="flex flex-wrap gap-2">
-                      {result.mbtiDetail.traits.map((trait, i) => (
+                      {result.mbtiDetail.traits.map((trait: string, i: number) => (
                         <span key={i} className="bg-white text-purple-700 px-3 py-1 rounded-full text-xs font-semibold border border-purple-300 text-black placeholder-gray-500">
                           {trait}
                         </span>
@@ -626,7 +626,7 @@ export default function SajuMBTIJobs() {
                 (사주 오행 + MBTI 성향 + 십성 특성 종합 분석)
               </div>
               <div className="space-y-3 text-black placeholder-gray-500">
-                {result.recommendedJobs.map((job, i) => (
+                {result.recommendedJobs.map((job: any, i: number) => (
                   <div key={i} className="bg-white rounded-xl p-4 border-2 border-green-200 hover:shadow-lg transition-all text-black placeholder-gray-500">
                     <div className="flex items-start gap-3">
                       <span className="bg-gradient-to-r from-green-500 to-teal-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 text-black placeholder-gray-500">
@@ -654,7 +654,7 @@ export default function SajuMBTIJobs() {
                   <span className="font-bold text-black text-black placeholder-gray-500">특성:</span> {result.tenGodsCareer.trait}
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2 text-black placeholder-gray-500">
-                  {result.tenGodsCareer.careers.map((career, i) => (
+                  {result.tenGodsCareer.careers.map((career: string, i: number) => (
                     <span key={i} className="bg-blue-100 text-black px-2 py-1 rounded-full text-xs font-semibold text-black placeholder-gray-500">
                       {career}
                     </span>

@@ -612,7 +612,7 @@ export default function GiftFinderPage() {
 
             {/* 추천 목록 */}
             <div className="grid md:grid-cols-2 gap-4">
-              {suggestions.map((gift, index) => (
+              {suggestions.map((gift: GiftSuggestion, index: number) => (
                 <div
                   key={index}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border-2 border-transparent hover:border-purple-300 dark:hover:border-purple-600"

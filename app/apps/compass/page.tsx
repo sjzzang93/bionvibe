@@ -113,7 +113,7 @@ export default function CompassPage() {
           {/* 외부 원 - 고정 */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 border-8 border-gray-700 shadow-2xl">
             {/* 360도 각도 표시 */}
-            {angleMarkers.map((angle) => (
+            {angleMarkers.map((angle: number) => (
               <div
                 key={angle}
                 className="absolute top-1/2 left-1/2 origin-bottom"
