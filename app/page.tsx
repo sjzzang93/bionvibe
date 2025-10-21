@@ -14,6 +14,7 @@ const MainChat = dynamic(() => import('./components/MainChat'), {
 
 export default function Home() {
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const totalApps = getTotalAppsCount();
   const allApps = getAllApps();
@@ -25,25 +26,38 @@ export default function Home() {
     return acc;
   }, {} as Record<string, string>);
 
+  // 클라이언트 마운트 확인
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // localStorage에서 즐겨찾기 불러오기 (유효한 앱만 필터링)
   useEffect(() => {
+    if (!mounted) return;
+    
     const saved = localStorage.getItem('favorite-apps');
     if (saved) {
-      const savedFavorites = JSON.parse(saved);
-      // 실제 존재하는 앱 ID만 필터링
-      const validFavorites = savedFavorites.filter((id: string) => 
-        allApps.some(app => app.id === id)
-      );
-      setFavorites(validFavorites);
-      // 유효한 앱만 다시 저장
-      if (validFavorites.length !== savedFavorites.length) {
-        localStorage.setItem('favorite-apps', JSON.stringify(validFavorites));
+      try {
+        const savedFavorites = JSON.parse(saved);
+        // 실제 존재하는 앱 ID만 필터링
+        const validFavorites = savedFavorites.filter((id: string) => 
+          allApps.some(app => app.id === id)
+        );
+        setFavorites(validFavorites);
+        // 유효한 앱만 다시 저장
+        if (validFavorites.length !== savedFavorites.length) {
+          localStorage.setItem('favorite-apps', JSON.stringify(validFavorites));
+        }
+      } catch (e) {
+        console.error('Failed to load favorites:', e);
       }
     }
-  }, []);
+  }, [mounted]);
 
   // 스크롤 위치 복원 (뒤로가기 시)
   useEffect(() => {
+    if (!mounted) return;
+    
     const savedScrollPos = sessionStorage.getItem('homeScrollPosition');
     if (savedScrollPos) {
       // DOM이 완전히 로드된 후 스크롤 복원
@@ -52,10 +66,12 @@ export default function Home() {
         sessionStorage.removeItem('homeScrollPosition');
       }, 100);
     }
-  }, []);
+  }, [mounted]);
 
   // 스크롤 위치 저장 (페이지 떠날 때)
   useEffect(() => {
+    if (!mounted) return;
+    
     const saveScrollPosition = () => {
       sessionStorage.setItem('homeScrollPosition', window.scrollY.toString());
     };
@@ -80,7 +96,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('beforeunload', saveScrollPosition);
     };
-  }, []);
+  }, [mounted]);
 
   // 즐겨찾기 토글
   const toggleFavorite = (appId: string, e: React.MouseEvent) => {
