@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 
 interface ChatMessage {
   id: number;
@@ -11,6 +11,7 @@ interface ChatMessage {
 }
 
 export default function BionChat() {
+  const supabase = useSupabase();
   const [isOpen, setIsOpen] = useState(false);
   const [nickname, setNickname] = useState('');
   const [isNicknameSet, setIsNicknameSet] = useState(false);

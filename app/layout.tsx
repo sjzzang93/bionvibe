@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navigation } from "./components/Navigation";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import GoogleAdSense from "./components/GoogleAdSense";
+import { SupabaseProvider } from "@/lib/supabase-provider";
 
 export const metadata: Metadata = {
   title: {
@@ -93,8 +94,10 @@ export default function RootLayout({
         {/* Google AdSense */}
         <GoogleAdSense publisherId="ca-pub-4564769502264231" />
         
-        <Navigation />
-        {children}
+        <SupabaseProvider>
+          <Navigation />
+          {children}
+        </SupabaseProvider>
       </body>
     </html>
   );

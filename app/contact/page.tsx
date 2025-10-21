@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { supabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 
 export default function ContactPage() {
+  const supabase = useSupabase();
   const [formData, setFormData] = useState({
     name: '',
     email: '',

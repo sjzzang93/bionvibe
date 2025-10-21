@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 
 interface Message {
@@ -12,6 +12,7 @@ interface Message {
 }
 
 export default function MainChat() {
+  const supabase = useSupabase();
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState('');
   const [nickname, setNickname] = useState('');

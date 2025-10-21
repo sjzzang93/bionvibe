@@ -2,9 +2,21 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { supabase, type Contact } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
+
+export interface Contact {
+  id?: number;
+  name: string;
+  email: string;
+  message: string;
+  status: 'pending' | 'answered' | 'closed';
+  created_at?: string;
+  answered_at?: string;
+  admin_reply?: string;
+}
 
 export default function ContactsManagement() {
+  const supabase = useSupabase();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'pending' | 'answered' | 'closed'>('all');
