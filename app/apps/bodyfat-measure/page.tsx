@@ -12,22 +12,43 @@ export default function BodyFatMeasure() {
   const [age, setAge] = useState(30);
   const [height, setHeight] = useState(170);
   const [weight, setWeight] = useState(70);
-  const [neck, setNeck] = useState(35);
+  const [unit, setUnit] = useState<'cm' | 'inch'>('cm');
   const [waist, setWaist] = useState(80);
   const [hip, setHip] = useState(95);
   const [result, setResult] = useState<any>(null);
+
+  // 인치를 cm로 변환
+  const toCm = (value: number) => {
+    return unit === 'inch' ? value * 2.54 : value;
+  };
+
+  // cm를 인치로 변환
+  const toInch = (value: number) => {
+    return value / 2.54;
+  };
+
+  // 표시용 값 (현재 선택된 단위)
+  const getDisplayValue = (cmValue: number) => {
+    return unit === 'inch' ? toInch(cmValue).toFixed(1) : cmValue;
+  };
 
   const calculate = () => {
     // BMI 계산
     const heightM = height / 100;
     const bmi = weight / (heightM * heightM);
 
-    // 미 해군 방식 체지방률 계산
+    // 단위 변환 (인치면 cm로)
+    const waistCm = toCm(waist);
+    const hipCm = toCm(hip);
+
+    // 미 해군 방식 체지방률 계산 (목둘레 제외, 간소화된 공식)
     let bodyFat = 0;
     if (gender === 'male') {
-      bodyFat = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(height)) - 450;
+      // 남성: 키, 허리만 사용
+      bodyFat = 86.010 * Math.log10(waistCm) - 70.041 * Math.log10(height) + 36.76;
     } else {
-      bodyFat = 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(height)) - 450;
+      // 여성: 키, 허리, 엉덩이 사용
+      bodyFat = 163.205 * Math.log10(waistCm + hipCm) - 97.684 * Math.log10(height) - 78.387;
     }
 
     // 체지방 평가
@@ -80,7 +101,7 @@ export default function BodyFatMeasure() {
               <div className="space-y-6">
                 <div>
                   <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">👤 성별</label>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 gap-3">
                     {['male', 'female'].map((g) => (
                       <button
                         key={g}
@@ -111,7 +132,7 @@ export default function BodyFatMeasure() {
                   />
                 </div>
 
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+                <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block">📏 키: {height}cm</label>
                     <input
@@ -136,40 +157,66 @@ export default function BodyFatMeasure() {
                   </div>
                 </div>
 
-                <div className="bg-blue-500/20 rounded-xl p-2 sm:p-3 md:p-4 border border-blue-400/30">
-                  <h4 className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2">📐 둘레 측정</h4>
+                <div className="bg-blue-500/20 rounded-xl p-4 border border-blue-400/30">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-white font-bold">📐 둘레 측정</h4>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setUnit('cm')}
+                        className={`px-4 py-2 rounded-lg font-bold transition-all ${
+                          unit === 'cm'
+                            ? 'bg-white text-blue-600'
+                            : 'bg-white/20 text-white hover:bg-white/30'
+                        }`}
+                      >
+                        cm
+                      </button>
+                      <button
+                        onClick={() => setUnit('inch')}
+                        className={`px-4 py-2 rounded-lg font-bold transition-all ${
+                          unit === 'inch'
+                            ? 'bg-white text-blue-600'
+                            : 'bg-white/20 text-white hover:bg-white/30'
+                        }`}
+                      >
+                        inch
+                      </button>
+                    </div>
+                  </div>
+                  
                   <div className="space-y-4">
                     <div>
-                      <label className="text-white/90 mb-2 block">목 둘레: {neck}cm</label>
+                      <label className="text-white/90 mb-2 block">
+                        허리 둘레: {getDisplayValue(waist)}{unit}
+                      </label>
                       <input
                         type="range"
-                        min="25"
-                        max="50"
-                        value={neck}
-                        onChange={(e) => setNeck(Number(e.target.value))}
-                        className="w-full"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-white/90 mb-2 block">허리 둘레: {waist}cm</label>
-                      <input
-                        type="range"
-                        min="50"
-                        max="150"
-                        value={waist}
-                        onChange={(e) => setWaist(Number(e.target.value))}
+                        min={unit === 'cm' ? 50 : 20}
+                        max={unit === 'cm' ? 150 : 60}
+                        step={unit === 'cm' ? 1 : 0.1}
+                        value={unit === 'cm' ? waist : toInch(waist)}
+                        onChange={(e) => {
+                          const val = Number(e.target.value);
+                          setWaist(unit === 'cm' ? val : val * 2.54);
+                        }}
                         className="w-full"
                       />
                     </div>
                     {gender === 'female' && (
                       <div>
-                        <label className="text-white/90 mb-2 block">엉덩이 둘레: {hip}cm</label>
+                        <label className="text-white/90 mb-2 block">
+                          엉덩이 둘레: {getDisplayValue(hip)}{unit}
+                        </label>
                         <input
                           type="range"
-                          min="70"
-                          max="150"
-                          value={hip}
-                          onChange={(e) => setHip(Number(e.target.value))}
+                          min={unit === 'cm' ? 70 : 28}
+                          max={unit === 'cm' ? 150 : 60}
+                          step={unit === 'cm' ? 1 : 0.1}
+                          value={unit === 'cm' ? hip : toInch(hip)}
+                          onChange={(e) => {
+                            const val = Number(e.target.value);
+                            setHip(unit === 'cm' ? val : val * 2.54);
+                          }}
                           className="w-full"
                         />
                       </div>
@@ -192,20 +239,20 @@ export default function BodyFatMeasure() {
                 <div className="text-8xl mb-6 animate-bounce-slow">📊</div>
                 <h3 className="text-3xl font-bold text-white mb-8">측정 결과</h3>
 
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-8">
-                  <div className="bg-white/20 rounded sm:rounded-lg md:rounded-2xl p-6">
+                <div className="grid grid-cols-2 gap-6 mb-8">
+                  <div className="bg-white/20 rounded-2xl p-6">
                     <div className="text-white/70 text-sm mb-2">체지방률</div>
                     <div className="text-5xl font-black text-orange-200 mb-2">{result.bodyFat}%</div>
                     <div className="text-white/90 font-bold">{result.bodyFatCategory}</div>
                   </div>
-                  <div className="bg-white/20 rounded sm:rounded-lg md:rounded-2xl p-6">
+                  <div className="bg-white/20 rounded-2xl p-6">
                     <div className="text-white/70 text-sm mb-2">BMI</div>
                     <div className="text-5xl font-black text-blue-200 mb-2">{result.bmi}</div>
                     <div className="text-white/90 font-bold">{result.bmiCategory}</div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/10 rounded-xl p-4">
                     <div className="text-white/70 text-sm">제지방량</div>
                     <div className="text-2xl font-bold text-green-200">{result.leanMass}kg</div>
@@ -260,4 +307,3 @@ export default function BodyFatMeasure() {
     </PremiumLayout>
   );
 }
-
