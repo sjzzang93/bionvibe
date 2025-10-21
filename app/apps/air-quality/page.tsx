@@ -157,7 +157,7 @@ export default function AirQuality() {
       <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-blue-900 dark:via-cyan-900 dark:to-teal-900 transition-colors">
         <div className="mx-auto max-w-[600px] px-4 py-6">
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 border border-cyan-200">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-cyan-200">
             <header className="text-center mb-6">
               <h1 className="text-3xl font-bold text-black mb-2">🌫️</h1>
               <h2 className="text-2xl font-bold text-gray-800">실시간 공기질 측정</h2>
@@ -174,14 +174,14 @@ export default function AirQuality() {
             </header>
 
             {/* 종합 등급 */}
-            <div className={`mb-6 p-6 rounded-xl text-center border-4 ${
+            <div className={`mb-6 p-1 sm:p-2.5 md:p-5 rounded-xl text-center border-4 ${
               gradeInfo.color === 'blue' ? 'bg-blue-50 border-blue-400' :
               gradeInfo.color === 'green' ? 'bg-green-50 border-green-400' :
               gradeInfo.color === 'yellow' ? 'bg-yellow-50 border-yellow-400' :
               gradeInfo.color === 'orange' ? 'bg-orange-50 border-orange-400' :
               'bg-red-50 border-red-400'
             }`}>
-              <div className="text-6xl mb-3">{gradeInfo.emoji}</div>
+              <div className="text-6xl mb-0.5 sm:mb-1.5 md:mb-2">{gradeInfo.emoji}</div>
               <div className="text-4xl font-bold mb-2" style={{
                 background: gradeInfo.color === 'green' ? 'linear-gradient(135deg, #10b981, #059669)' :
                            gradeInfo.color === 'blue' ? 'linear-gradient(135deg, #3b82f6, #2563eb)' :
@@ -205,8 +205,8 @@ export default function AirQuality() {
 
             {/* 상세 측정값 */}
             <div className="mb-6">
-              <h3 className="font-bold text-lg text-gray-800 mb-4">📊 상세 측정값</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-4">📊 상세 측정값</h3>
+              <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                 <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg p-4 border border-purple-200">
                   <div className="text-sm text-gray-600 mb-1">미세먼지 PM10</div>
                   <div className="text-2xl font-bold text-black">{data.pm10}</div>
@@ -247,7 +247,7 @@ export default function AirQuality() {
 
             {/* 건강 조언 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">💡 건강 조언</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">💡 건강 조언</h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li>• {gradeInfo.grade === '최고' || gradeInfo.grade === '좋음' ? '마스크 없이 활동 가능' : 'KF94 마스크 착용 권장'}</li>
                 <li>• {data.pm25 > 75 ? '실내 공기청정기 가동' : '창문을 열어 환기'}</li>
@@ -256,10 +256,10 @@ export default function AirQuality() {
               </ul>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-0 sm:gap-1.5 md:gap-3">
               <button
                 onClick={() => setData(null)}
-                className="flex-1 py-4 bg-gray-500 hover:bg-gray-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+                className="flex-1 py-4 bg-gray-500 hover:bg-gray-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
               >
                 뒤로
               </button>
@@ -268,7 +268,7 @@ export default function AirQuality() {
                   setData(null);
                   measureAirQuality();
                 }}
-                className="flex-[2] py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+                className="flex-[2] py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
               >
                 🔄 다시 측정하기
               </button>
@@ -293,7 +293,7 @@ export default function AirQuality() {
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
       <div className="mx-auto max-w-[600px] px-4 py-6">
 
-        <section className="bg-white rounded-2xl shadow-xl p-6 border border-cyan-200">
+        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-cyan-200">
           <header className="text-center mb-6">
             <h1 className="text-4xl font-bold text-black mb-2">🌫️</h1>
             <h2 className="text-2xl font-bold text-gray-800 mb-2">실시간 공기질 측정기</h2>
@@ -301,8 +301,8 @@ export default function AirQuality() {
           </header>
 
           <div className="mb-6 p-4 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-lg border border-cyan-300">
-            <h3 className="font-bold text-black mb-3">📍 측정 항목</h3>
-            <div className="grid grid-cols-2 gap-2 text-sm text-black">
+            <h3 className="font-bold text-black mb-0.5 sm:mb-1.5 md:mb-2">📍 측정 항목</h3>
+            <div className="grid grid-cols-3 gap-2 text-sm text-black">
               <div>✓ 미세먼지 (PM10)</div>
               <div>✓ 초미세먼지 (PM2.5)</div>
               <div>✓ 오존 (O₃)</div>
@@ -340,7 +340,7 @@ export default function AirQuality() {
             <>
               <button
                 onClick={measureAirQuality}
-                className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all mb-4"
+                className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all mb-4"
               >
                 📍 내 위치 공기질 측정
               </button>

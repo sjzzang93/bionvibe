@@ -185,14 +185,14 @@ export default function VoiceAge() {
             
           </div>
 
-          <section className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-red-900/30">
+          <section className="bg-gradient-to-br from-gray-800 to-gray-900 rounded sm:rounded-lg md:rounded-2xl shadow-2xl p-6 border-2 border-red-900/30">
             <header className="text-center mb-6">
               <h1 className="text-3xl font-bold text-black mb-2">🎙️</h1>
               <h2 className="text-2xl font-bold text-white">목소리 나이 분석 결과</h2>
             </header>
 
             {/* 목소리 나이 */}
-            <div className="mb-6 p-6 rounded-xl text-center bg-gradient-to-br from-red-950 to-black border-4 border-red-600">
+            <div className="mb-6 p-1 sm:p-2.5 md:p-5 rounded-xl text-center bg-gradient-to-br from-red-950 to-black border-4 border-red-600">
               <div className="text-6xl font-bold mb-2" style={{
                 background: 'linear-gradient(135deg, #ef4444, #dc2626)',
                 WebkitBackgroundClip: 'text',
@@ -206,8 +206,8 @@ export default function VoiceAge() {
 
             {/* 목소리 분석 */}
             <div className="mb-6">
-              <h3 className="font-bold text-lg text-white mb-3">🎵 음성 분석</h3>
-              <div className="grid grid-cols-3 gap-3">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-0.5 sm:mb-1.5 md:mb-2">🎵 음성 분석</h3>
+              <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                 <div className="bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg p-4 border border-red-600/50 text-center">
                   <div className="text-sm text-gray-400 mb-1">주파수</div>
                   <div className="text-2xl font-bold text-black">{result.pitch}</div>
@@ -230,20 +230,20 @@ export default function VoiceAge() {
 
             {/* 목소리 타입 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg border border-red-600/50">
-              <h3 className="font-bold text-lg text-white mb-2">🎤 목소리 타입</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-2">🎤 목소리 타입</h3>
               <div className="text-xl font-bold text-black mb-1">{result.voiceType}</div>
               <p className="text-gray-300">{result.voiceChar}</p>
             </div>
 
             {/* 건강도 */}
-            <div className={`mb-6 p-4 rounded-lg border-2 ${
+            <div className={`mb-6 p-2 md:p-4 rounded-lg border-2 ${
               result.healthScore >= 80 ? 'bg-gray-700 border-green-600/50' :
               result.healthScore >= 70 ? 'bg-gray-700 border-blue-600/50' :
               result.healthScore >= 60 ? 'bg-gray-700 border-yellow-600/50' :
               'bg-gray-700 border-red-600/50'
             }`}>
-              <h3 className="font-bold text-lg text-white mb-2">💪 목소리 건강도</h3>
-              <div className="flex items-center gap-4 mb-3">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-2">💪 목소리 건강도</h3>
+              <div className="flex items-center gap-4 mb-0.5 sm:mb-1.5 md:mb-2">
                 <div className="flex-1 bg-gray-200 rounded-full h-4">
                   <div 
                     className={`h-full rounded-full ${
@@ -275,7 +275,7 @@ export default function VoiceAge() {
 
             {/* 개선 팁 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg border border-red-600/50">
-              <h3 className="font-bold text-lg text-white mb-3">✨ 목소리 젊게 유지하는 법</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-0.5 sm:mb-1.5 md:mb-2">✨ 목소리 젊게 유지하는 법</h3>
               <div className="grid grid-cols-1 gap-2">
                 {result.improvementTips.map((tip: string, i: number) => (
                   <div key={i} className="bg-gray-800/50 rounded p-3 text-sm text-gray-300 border border-red-900/30">
@@ -287,7 +287,7 @@ export default function VoiceAge() {
 
             {/* 목소리 나이별 특징 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg border border-red-600/50">
-              <h3 className="font-bold text-lg text-white mb-3">📊 나이대별 목소리 특징</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-0.5 sm:mb-1.5 md:mb-2">📊 나이대별 목소리 특징</h3>
               <div className="space-y-2 text-sm">
                 <div className="bg-gray-800/50 rounded p-2 border border-red-900/30">
                   <span className="font-semibold text-black">10-20대:</span> <span className="text-gray-300">밝고 높은 음역, 활기참</span>
@@ -309,7 +309,7 @@ export default function VoiceAge() {
 
             <button
               onClick={() => setResult(null)}
-              className="w-full py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all border-2 border-red-500"
+              className="w-full py-4 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all border-2 border-red-500"
             >
               다시 측정하기
             </button>
@@ -330,7 +330,7 @@ export default function VoiceAge() {
             
           </div>
 
-          <section className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-red-900/30">
+          <section className="bg-gradient-to-br from-gray-800 to-gray-900 rounded sm:rounded-lg md:rounded-2xl shadow-2xl p-6 border-2 border-red-900/30">
             <div className="text-center py-12">
               <div className="inline-block animate-spin rounded-full h-20 w-20 border-4 border-red-600 border-t-transparent mb-6"></div>
               <h3 className="text-2xl font-bold text-black mb-2">음성 분석 중...</h3>
@@ -352,7 +352,7 @@ export default function VoiceAge() {
           
         </div>
 
-        <section className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-red-900/30">
+        <section className="bg-gradient-to-br from-gray-800 to-gray-900 rounded sm:rounded-lg md:rounded-2xl shadow-2xl p-6 border-2 border-red-900/30">
           <header className="text-center mb-6">
             <h1 className="text-4xl font-bold text-black mb-2">🎙️</h1>
             <h2 className="text-2xl font-bold text-white mb-2">내 목소리 나이 측정기</h2>
@@ -360,7 +360,7 @@ export default function VoiceAge() {
           </header>
 
           <div className="mb-6 p-4 bg-gradient-to-r from-gray-700 to-gray-800 rounded-lg border border-red-600/50">
-            <h3 className="font-bold text-white mb-3">📋 측정 방법</h3>
+            <h3 className="font-bold text-white mb-0.5 sm:mb-1.5 md:mb-2">📋 측정 방법</h3>
             <ol className="text-sm text-gray-300 space-y-2">
               <li>1. 조용한 곳에서 측정하세요</li>
               <li>2. 마이크 권한을 허용하세요</li>
@@ -391,7 +391,7 @@ export default function VoiceAge() {
           ) : (
             <div className="text-center">
               <div className="mb-4 inline-block">
-                <div className="animate-pulse bg-red-600 rounded-full h-20 w-20 mx-auto mb-3 flex items-center justify-center">
+                <div className="animate-pulse bg-red-600 rounded-full h-20 w-20 mx-auto mb-0.5 sm:mb-1.5 md:mb-2 flex items-center justify-center">
                   <div className="bg-gray-900 rounded-full h-16 w-16"></div>
                 </div>
               </div>

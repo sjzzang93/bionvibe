@@ -1,20 +1,25 @@
 "use client";
 
 import { useState } from 'react';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumHeader from '@/app/components/ui/PremiumHeader';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
-import AppFooter from "@/app/components/AppFooter";
 interface QuoteDatabase {
   [key: string]: {
     quotes: string[];
     color: string;
     gradient: string;
     icon: string;
+    label: string;
   };
 }
 
 const QUOTE_DB: QuoteDatabase = {
   motivation: {
     icon: '💪',
+    label: '동기부여',
     color: 'orange',
     gradient: 'from-orange-500 to-red-500',
     quotes: [
@@ -32,6 +37,7 @@ const QUOTE_DB: QuoteDatabase = {
   },
   success: {
     icon: '🏆',
+    label: '성공',
     color: 'yellow',
     gradient: 'from-yellow-500 to-amber-500',
     quotes: [
@@ -49,6 +55,7 @@ const QUOTE_DB: QuoteDatabase = {
   },
   wisdom: {
     icon: '🧠',
+    label: '지혜',
     color: 'purple',
     gradient: 'from-purple-500 to-indigo-500',
     quotes: [
@@ -66,8 +73,9 @@ const QUOTE_DB: QuoteDatabase = {
   },
   love: {
     icon: '❤️',
+    label: '사랑',
     color: 'pink',
-    gradient: 'from-blue-500 to-blue-500',
+    gradient: 'from-pink-500 to-rose-500',
     quotes: [
       '사랑은 인생의 꽃이요, 행복은 그 향기다. - 빅토르 위고',
       '사랑받고 싶다면 먼저 사랑하라. - 세네카',
@@ -83,6 +91,7 @@ const QUOTE_DB: QuoteDatabase = {
   },
   life: {
     icon: '🌟',
+    label: '인생',
     color: 'blue',
     gradient: 'from-blue-500 to-cyan-500',
     quotes: [
@@ -100,6 +109,7 @@ const QUOTE_DB: QuoteDatabase = {
   },
   happiness: {
     icon: '😊',
+    label: '행복',
     color: 'green',
     gradient: 'from-green-500 to-emerald-500',
     quotes: [
@@ -148,127 +158,147 @@ export default function QuoteGenerator() {
   const categoryData = QUOTE_DB[category];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50">
-      <div className="mx-auto max-w-[600px] px-4 py-6">
-        <div className="mb-4">
-          
-        </div>
+    <PremiumLayout theme="indigo">
+      <div className="py-8 px-2 sm:px-4 md:py-12">
+        <div className="max-w-3xl mx-auto">
+          <PremiumHeader 
+            icon="✨"
+            title="AI 명언 생성기"
+            subtitle="상황에 맞는 명언으로 하루를 시작하세요"
+            gradient="from-yellow-200 via-pink-200 to-indigo-200"
+          />
 
-        <section className="bg-white rounded-2xl shadow-xl p-6">
-          <header className="text-center mb-6">
-            <h1 className="text-4xl font-bold mb-2">✨</h1>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">AI 명언 생성기</h2>
-            <p className="text-gray-600">상황에 맞는 명언으로 하루를 시작하세요</p>
-          </header>
-
-          <div className="mb-6">
-            <h3 className="font-bold text-gray-800 mb-3">카테고리 선택</h3>
-            <div className="grid grid-cols-2 gap-3">
+          <PremiumCard className="mb-8" gradient>
+            <h3 className="text-2xl font-bold text-white mb-6">🎯 카테고리 선택</h3>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
               {Object.entries(QUOTE_DB).map(([key, data]) => (
                 <button
                   key={key}
                   onClick={() => { setCategory(key); setShowQuote(false); }}
-                  className={`p-4 rounded-xl font-semibold transition-all border-2 ${
+                  className={`p-5 rounded sm:rounded-lg md:rounded-2xl font-semibold transition-all border-2 ${
                     category === key
-                      ? `bg-gradient-to-r ${data.gradient} text-white shadow-lg border-transparent`
-                      : 'bg-gray-100 text-gray-700 border-gray-300'
+                      ? `bg-gradient-to-r ${data.gradient} text-white shadow-2xl border-white/50 scale-105`
+                      : 'bg-white/10 text-white border-white/20 hover:bg-white/20'
                   }`}
                 >
-                  <div className="text-2xl mb-1">{data.icon}</div>
-                  <div className="text-sm">
-                    {key === 'motivation' ? '동기부여' :
-                     key === 'success' ? '성공' :
-                     key === 'wisdom' ? '지혜' :
-                     key === 'love' ? '사랑' :
-                     key === 'life' ? '인생' :
-                     '행복'}
-                  </div>
+                  <div className="text-4xl mb-2">{data.icon}</div>
+                  <div className="text-sm">{data.label}</div>
                 </button>
               ))}
             </div>
-          </div>
+          </PremiumCard>
 
           {!showQuote ? (
-            <>
-              <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-                <h3 className="font-bold text-black mb-2">💡 명언의 힘</h3>
-                <ul className="text-sm text-black space-y-1">
-                  <li>• 긍정적인 마인드셋 형성</li>
-                  <li>• 동기부여와 영감 제공</li>
-                  <li>• 스트레스 해소 및 힐링</li>
-                  <li>• 새로운 관점과 통찰력</li>
+            <div className="space-y-6">
+              <PremiumCard>
+                <h3 className="font-bold text-white text-xl mb-4 flex items-center gap-2">
+                  <span>💡</span> 명언의 힘
+                </h3>
+                <ul className="space-y-2 text-white/80">
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-300">✓</span>
+                    긍정적인 마인드셋 형성
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-300">✓</span>
+                    동기부여와 영감 제공
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-300">✓</span>
+                    스트레스 해소 및 힐링
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-green-300">✓</span>
+                    새로운 관점과 통찰력
+                  </li>
                 </ul>
-              </div>
+              </PremiumCard>
 
-              <button
+              <PremiumButton
                 onClick={generateQuote}
-                className={`w-full py-4 bg-gradient-to-r ${categoryData.gradient} text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all`}
+                fullWidth
+                size="lg"
               >
                 {categoryData.icon} 명언 생성하기
-              </button>
-            </>
+              </PremiumButton>
+            </div>
           ) : (
-            <>
-              <div className={`mb-6 p-6 rounded-xl bg-gradient-to-br ${categoryData.gradient} text-white shadow-xl`}>
-                <div className="text-6xl text-center mb-4 opacity-90">{categoryData.icon}</div>
-                <blockquote className="text-lg font-medium text-center leading-relaxed">
+            <div className="space-y-6">
+              <PremiumCard className={`bg-gradient-to-br ${categoryData.gradient} text-center`}>
+                <div className="text-8xl mb-6 animate-float">{categoryData.icon}</div>
+                <blockquote className="text-2xl md:text-3xl font-medium text-white leading-relaxed px-4">
                   &ldquo;{quote}&rdquo;
                 </blockquote>
-              </div>
+              </PremiumCard>
 
-              <div className="grid grid-cols-3 gap-3 mb-6">
+              <div className="grid grid-cols-3 gap-2">
                 <button
                   onClick={generateQuote}
-                  className="py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+                  className="py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
                 >
-                  🔄 다시
+                  <div className="text-3xl mb-1">🔄</div>
+                  <div className="text-sm">다시</div>
                 </button>
                 <button
                   onClick={copyQuote}
-                  className="py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+                  className="py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
                 >
-                  📋 복사
+                  <div className="text-3xl mb-1">📋</div>
+                  <div className="text-sm">복사</div>
                 </button>
                 <button
                   onClick={shareQuote}
-                  className="py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+                  className="py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
                 >
-                  📤 공유
+                  <div className="text-3xl mb-1">📤</div>
+                  <div className="text-sm">공유</div>
                 </button>
               </div>
 
               <button
                 onClick={() => setShowQuote(false)}
-                className="w-full py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-all"
+                className="w-full py-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-xl transition-all border border-white/30"
               >
                 카테고리 변경
               </button>
-            </>
+            </div>
           )}
-        </section>
 
-        <div className="mt-6 bg-white rounded-2xl shadow-lg p-5">
-          <h3 className="font-bold text-gray-800 mb-3">📚 추천 활용법</h3>
-          <div className="space-y-3 text-sm text-gray-700">
-            <div className="p-3 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg">
-              <div className="font-semibold text-black mb-1">🌅 아침 루틴</div>
-              <div className="text-black">기상 후 동기부여/성공 명언으로 하루 시작</div>
+          <PremiumCard className="mt-8">
+            <h3 className="font-bold text-white text-xl mb-4">📚 추천 활용법</h3>
+            <div className="space-y-3">
+              <div className="p-4 bg-white/10 rounded-xl hover:bg-white/15 transition-colors">
+                <div className="font-semibold text-white mb-1 flex items-center gap-2">
+                  <span>🌅</span> 아침 루틴
+                </div>
+                <div className="text-white/70 text-sm">기상 후 동기부여/성공 명언으로 하루 시작</div>
+              </div>
+              <div className="p-4 bg-white/10 rounded-xl hover:bg-white/15 transition-colors">
+                <div className="font-semibold text-white mb-1 flex items-center gap-2">
+                  <span>💼</span> 업무 중
+                </div>
+                <div className="text-white/70 text-sm">지혜/인생 명언으로 집중력 회복</div>
+              </div>
+              <div className="p-4 bg-white/10 rounded-xl hover:bg-white/15 transition-colors">
+                <div className="font-semibold text-white mb-1 flex items-center gap-2">
+                  <span>🌙</span> 취침 전
+                </div>
+                <div className="text-white/70 text-sm">행복/사랑 명언으로 마음의 평화</div>
+              </div>
             </div>
-            <div className="p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg">
-              <div className="font-semibold text-black mb-1">💼 업무 중</div>
-              <div className="text-black">지혜/인생 명언으로 집중력 회복</div>
-            </div>
-            <div className="p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg">
-              <div className="font-semibold text-black mb-1">🌙 취침 전</div>
-              <div className="text-black">행복/사랑 명언으로 마음의 평화</div>
-            </div>
-          </div>
+          </PremiumCard>
         </div>
       </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
 
-    </main>
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+      `}</style>
+    </PremiumLayout>
   );
 }
-

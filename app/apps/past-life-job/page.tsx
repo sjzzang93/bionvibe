@@ -317,7 +317,7 @@ export default function PastLifeJob() {
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
           {/* 상단 배너 제거됨 */}
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
               <h1 className="text-4xl font-bold text-black mb-2 text-black placeholder-gray-500">⏳</h1>
               <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">나의 전생 직업 찾기</h2>
@@ -337,7 +337,7 @@ export default function PastLifeJob() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-4 text-black placeholder-gray-500">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">출생월</label>
                   <select
@@ -390,7 +390,7 @@ export default function PastLifeJob() {
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
           {/* 상단 배너 제거됨 */}
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
               <h1 className="text-3xl font-bold text-black mb-2 text-black placeholder-gray-500">🔮</h1>
               <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">성향 테스트</h2>
@@ -400,7 +400,7 @@ export default function PastLifeJob() {
             <div className="space-y-6 text-black placeholder-gray-500">
               {/* 질문 1 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3 text-black placeholder-gray-500">
+                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                   사람들과의 관계에서...
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
@@ -431,7 +431,7 @@ export default function PastLifeJob() {
 
               {/* 질문 2 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3 text-black placeholder-gray-500">
+                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                   문제를 해결할 때...
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
@@ -462,7 +462,7 @@ export default function PastLifeJob() {
 
               {/* 질문 3 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3 text-black placeholder-gray-500">
+                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                   새로운 것에 대해...
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
@@ -493,7 +493,7 @@ export default function PastLifeJob() {
 
               {/* 질문 4 */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3 text-black placeholder-gray-500">
+                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                   일할 때...
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
@@ -554,7 +554,7 @@ export default function PastLifeJob() {
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
           {/* 상단 배너 제거됨 */}
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
               <h1 className="text-3xl font-bold text-black mb-2 text-black placeholder-gray-500">✨</h1>
               <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">당신의 전생</h2>
@@ -563,7 +563,7 @@ export default function PastLifeJob() {
             {/* 전생 직업 */}
             <div className="mb-6 p-6 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-xl border-2 border-amber-400 text-center text-black placeholder-gray-500">
               <div className="text-sm text-black mb-2 text-black placeholder-gray-500">{result.era}</div>
-              <div className="text-3xl font-bold text-black mb-3 text-black placeholder-gray-500">{result.job.job}</div>
+              <div className="text-3xl font-bold text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">{result.job.job}</div>
               <div className="text-lg text-gray-700 mb-4 text-black placeholder-gray-500">{result.job.desc}</div>
               <div className="inline-block bg-amber-200 px-4 py-2 rounded-full text-black placeholder-gray-500">
                 <span className="font-semibold text-black text-black placeholder-gray-500">적합도: {result.job.finalScore}점</span>
@@ -572,14 +572,14 @@ export default function PastLifeJob() {
 
             {/* 전생 성격 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">🎭 전생의 성격</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">🎭 전생의 성격</h3>
               <p className="text-gray-700 mb-2 text-black placeholder-gray-500">{result.job.trait}</p>
               <p className="text-sm text-black text-black placeholder-gray-500">오행: <span className="font-bold text-black placeholder-gray-500">{result.job.element}</span></p>
             </div>
 
             {/* 전생 인연 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">🔗 전생과의 인연</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">🔗 전생과의 인연</h3>
               <div className="space-y-2 text-black placeholder-gray-500">
                 {result.connections.map((conn: string, i: number) => (
                   <div key={i} className="bg-white rounded p-3 text-sm text-gray-700 text-black placeholder-gray-500">
@@ -591,8 +591,8 @@ export default function PastLifeJob() {
 
             {/* 현생 적성 직업 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">💼 현생 적성 직업</h3>
-              <p className="text-sm text-black mb-3 text-black placeholder-gray-500">{result.job.karma}</p>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">💼 현생 적성 직업</h3>
+              <p className="text-sm text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">{result.job.karma}</p>
               <div className="flex flex-wrap gap-2 text-black placeholder-gray-500">
                 {result.presentCareer.map((career: string, i: number) => (
                   <span key={i} className="bg-green-100 text-black px-3 py-1 rounded-full text-sm font-semibold border border-green-300 text-black placeholder-gray-500">
@@ -604,7 +604,7 @@ export default function PastLifeJob() {
 
             {/* 행운 아이템 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg border border-yellow-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">🍀 행운 아이템</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">🍀 행운 아이템</h3>
               <p className="text-gray-700 text-black placeholder-gray-500">{result.luckyItem}</p>
               <p className="text-sm text-black mt-2 text-black placeholder-gray-500">
                 {result.job.element} 기운을 강화하는 아이템을 가까이 두세요

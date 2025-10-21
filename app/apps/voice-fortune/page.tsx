@@ -187,9 +187,9 @@ export default function VoiceFortune() {
         <div className="mx-auto max-w-[600px] px-4 py-6">
           {/* 상단 배너 제거됨 */}
 
-          <section className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl p-6 border-2 border-blue-500/50">
+          <section className="bg-gradient-to-br from-gray-900 to-black rounded sm:rounded-lg md:rounded-2xl shadow-2xl p-6 border-2 border-blue-500/50">
             <header className="text-center mb-6">
-              <div className="inline-block p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-3">
+              <div className="inline-block p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-0.5 sm:mb-1.5 md:mb-2">
                 <h1 className="text-3xl font-bold text-white">🎤</h1>
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">목소리 분석 결과</h2>
@@ -202,12 +202,12 @@ export default function VoiceFortune() {
             {/* 목소리 타입 */}
             <div className="mb-6 p-5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl border-2 border-blue-400 text-center">
               <div className="text-3xl font-bold text-white mb-2">{result.voiceType}</div>
-              <div className="text-lg font-semibold text-gray-900 mb-3">{result.element}</div>
+              <div className="text-lg font-semibold text-gray-900 mb-0.5 sm:mb-1.5 md:mb-2">{result.element}</div>
             </div>
 
             {/* 성격 분석 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg border border-blue-500/50">
-              <h3 className="font-bold text-lg text-white mb-3">🎭 성격 특성</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-0.5 sm:mb-1.5 md:mb-2">🎭 성격 특성</h3>
               <div className="flex flex-wrap gap-2">
                 {result.personality.map((trait, i) => (
                   <span key={i} className="bg-blue-600/50 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold border border-blue-500/50">
@@ -219,8 +219,8 @@ export default function VoiceFortune() {
 
             {/* 운세 점수 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg border border-blue-500/50">
-              <h3 className="font-bold text-lg text-white mb-4">🌟 운세 분석</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-4">🌟 운세 분석</h3>
+              <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                 <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-lg p-4 text-center border-2 border-red-400">
                   <div className="text-3xl font-bold text-white">{result.fortune.wealth}</div>
                   <div className="text-sm text-black mt-1">재물운</div>
@@ -242,13 +242,13 @@ export default function VoiceFortune() {
 
             {/* 행운 아이템 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg border border-blue-500/50">
-              <h3 className="font-bold text-lg text-white mb-3">🍀 행운 아이템</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gradient-to-br from-yellow-600 to-amber-600 rounded-lg p-3 text-center border border-yellow-500">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-0.5 sm:mb-1.5 md:mb-2">🍀 행운 아이템</h3>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="bg-gradient-to-br from-yellow-600 to-amber-600 rounded-lg p-2 sm:p-3 text-center border border-yellow-500">
                   <div className="text-sm text-black mb-1">행운의 색</div>
                   <div className="text-lg font-bold text-white">{result.luckyColor}</div>
                 </div>
-                <div className="bg-gradient-to-br from-yellow-600 to-amber-600 rounded-lg p-3 text-center border border-yellow-500">
+                <div className="bg-gradient-to-br from-yellow-600 to-amber-600 rounded-lg p-2 sm:p-3 text-center border border-yellow-500">
                   <div className="text-sm text-black mb-1">행운의 숫자</div>
                   <div className="text-lg font-bold text-white">{result.luckyNumber}</div>
                 </div>
@@ -257,7 +257,7 @@ export default function VoiceFortune() {
 
             {/* 조언 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg border border-blue-500/50">
-              <h3 className="font-bold text-lg text-white mb-3">💡 음성 운세 조언</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-white mb-0.5 sm:mb-1.5 md:mb-2">💡 음성 운세 조언</h3>
               <div className="space-y-2">
                 {result.advice.map((adv, i) => (
                   <div key={i} className="bg-gray-700/50 rounded p-3 text-sm text-gray-300 border border-blue-500/30">
@@ -269,7 +269,7 @@ export default function VoiceFortune() {
 
             <button
               onClick={restart}
-              className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all border-2 border-blue-400"
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all border-2 border-blue-400"
             >
               다시 분석하기
             </button>
@@ -287,9 +287,9 @@ export default function VoiceFortune() {
       <div className="mx-auto max-w-[600px] px-4 py-6">
         {/* 상단 배너 제거됨 */}
 
-        <section className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl p-6 border-2 border-blue-500/50">
+        <section className="bg-gradient-to-br from-gray-900 to-black rounded sm:rounded-lg md:rounded-2xl shadow-2xl p-6 border-2 border-blue-500/50">
           <header className="text-center mb-6">
-            <div className="inline-block p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-3">
+            <div className="inline-block p-3 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-0.5 sm:mb-1.5 md:mb-2">
               <h1 className="text-4xl font-bold text-white">🎤</h1>
             </div>
             <h2 className="text-2xl font-bold text-white mb-2">목소리 톤 운세 분석기</h2>
@@ -302,7 +302,7 @@ export default function VoiceFortune() {
 
           <div className="mb-6 p-4 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg border border-blue-500/50">
             <h3 className="font-bold text-white mb-2">🎵 분석 방법</h3>
-            <p className="text-sm text-gray-300 mb-3">
+            <p className="text-sm text-gray-300 mb-0.5 sm:mb-1.5 md:mb-2">
               "안녕하세요, 제 목소리를 분석해주세요"라고 5초간 말해주세요
             </p>
             <ul className="text-sm text-gray-300 space-y-1">
@@ -328,7 +328,7 @@ export default function VoiceFortune() {
               {!isRecording ? (
                 <button
                   onClick={startRecording}
-                  className="inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-red-500 to-blue-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
+                  className="inline-flex items-center gap-3 px-8 py-5 bg-gradient-to-r from-red-500 to-blue-500 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-xl shadow-lg hover:shadow-xl transition-all"
                 >
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clipRule="evenodd" />
@@ -338,7 +338,7 @@ export default function VoiceFortune() {
               ) : (
                 <div className="py-8">
                   <div className="inline-block">
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
                       <div className="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
                       <span className="text-xl font-bold text-black">녹음 중...</span>
                     </div>
@@ -367,7 +367,7 @@ export default function VoiceFortune() {
               </div>
               <button
                 onClick={analyzeVoice}
-                className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all border-2 border-blue-400"
+                className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all border-2 border-blue-400"
               >
                 목소리 분석하기
               </button>

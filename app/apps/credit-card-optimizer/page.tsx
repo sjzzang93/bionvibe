@@ -131,21 +131,21 @@ export default function CreditCardOptimizerPage() {
     <main className="min-h-screen bg-gray-200 dark:bg-gray-800 transition-colors">
       <div className="container mx-auto px-4 py-8 text-black placeholder-gray-500">
         {/* 메인 카드 */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">
+        <div className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">
           <header className="text-center mb-8 text-black placeholder-gray-500">
             <div className="text-5xl md:text-6xl mb-4 text-black placeholder-gray-500">💳</div>
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 text-black placeholder-gray-500">
+            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
               신용카드 최적 조합
             </h1>
-            <p className="text-sm md:text-base text-gray-600 text-black placeholder-gray-500">
+            <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 text-black placeholder-gray-500">
               소비 패턴별 혜택 시뮬레이션, 연회비 대비 분석
             </p>
           </header>
 
           {/* 소비 패턴 입력 */}
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl border-2 border-blue-300 mb-8 text-black placeholder-gray-500">
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-1 sm:p-2.5 md:p-5 rounded-xl border-2 border-blue-300 mb-8 text-black placeholder-gray-500">
             <h3 className="text-lg md:text-xl font-bold text-black mb-4 text-black placeholder-gray-500">💸 월 소비 패턴</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black placeholder-gray-500">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-black placeholder-gray-500">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2 text-black placeholder-gray-500">🛒 식료품/마트</label>
                 <input
@@ -230,9 +230,9 @@ export default function CreditCardOptimizerPage() {
           {result && (
             <div className="mt-8 space-y-6 text-black placeholder-gray-500">
               {/* 총 소비액 */}
-              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-xl border-2 border-green-300 text-center text-black placeholder-gray-500">
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-1 sm:p-2.5 md:p-5 rounded-xl border-2 border-green-300 text-center text-black placeholder-gray-500">
                 <p className="text-sm text-gray-600 mb-2 text-black placeholder-gray-500">월 총 소비액</p>
-                <p className="text-3xl md:text-4xl font-bold text-black text-black placeholder-gray-500">
+                <p className="text-base sm:text-2xl md:text-4xl font-bold text-black text-black placeholder-gray-500">
                   {result.totalSpending.toLocaleString()}원
                 </p>
                 <p className="text-sm text-gray-500 mt-2 text-black placeholder-gray-500">
@@ -241,7 +241,7 @@ export default function CreditCardOptimizerPage() {
               </div>
 
               {/* 최고 추천 카드 */}
-              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-2 border-yellow-400 text-black placeholder-gray-500">
+              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-1 sm:p-2.5 md:p-5 rounded-xl border-2 border-yellow-400 text-black placeholder-gray-500">
                 <div className="text-center mb-4 text-black placeholder-gray-500">
                   <p className="text-sm text-gray-600 mb-2 text-black placeholder-gray-500">🏆 최고 추천 카드</p>
                   <p className="text-xl md:text-2xl font-bold text-black text-black placeholder-gray-500">
@@ -250,7 +250,7 @@ export default function CreditCardOptimizerPage() {
                   <p className="text-sm text-gray-500 text-black placeholder-gray-500">{result.bestCard.description}</p>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 text-black placeholder-gray-500">
+                <div className="grid grid-cols-3 md:grid-cols-4 gap-3 mb-4 text-black placeholder-gray-500">
                   <div className="bg-white p-3 rounded-lg text-center text-black placeholder-gray-500">
                     <p className="text-xs text-gray-600 text-black placeholder-gray-500">연간 혜택</p>
                     <p className="text-lg font-bold text-black text-black placeholder-gray-500">
@@ -279,14 +279,14 @@ export default function CreditCardOptimizerPage() {
               </div>
 
               {/* 전체 카드 비교 */}
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-300 text-black placeholder-gray-500">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-1 sm:p-2.5 md:p-5 rounded-xl border-2 border-blue-300 text-black placeholder-gray-500">
                 <h3 className="text-lg md:text-xl font-bold text-black mb-4 text-center text-black placeholder-gray-500">
                   📊 전체 카드 비교
                 </h3>
                 
                 <div className="space-y-4 text-black placeholder-gray-500">
                   {result.results.map((card: any, index: number) => (
-                    <div key={index} className={`p-4 rounded-xl border-2 ${index === 0 ? 'bg-yellow-50 border-yellow-300' : 'bg-white border-gray-200'}`}>
+                    <div key={index} className={`p-2 md:p-4 rounded-xl border-2 ${index === 0 ? 'bg-yellow-50 border-yellow-300' : 'bg-white border-gray-200'}`}>
                       <div className="flex justify-between items-center mb-2 text-black placeholder-gray-500">
                         <div>
                           <p className="font-bold text-gray-800 text-black placeholder-gray-500">{card.name}</p>

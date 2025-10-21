@@ -239,11 +239,11 @@ export default function HandwritingAnalysisPage() {
         <h1 className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 dark:text-white mb-4">
           ✍️ 손글씨 성향 분석
         </h1>
-        <p className="text-center text-purple-900 dark:text-purple-100 mb-8 text-sm md:text-base">당신의 필체로 성격을 분석합니다</p>
+        <p className="text-center text-purple-900 dark:text-purple-100 mb-8 text-[10px] sm:text-xs md:text-sm">당신의 필체로 성격을 분석합니다</p>
 
-        <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-6">
+        <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 space-y-6">
           {/* 입력 방식 선택 */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
             <button
               onClick={() => {
                 setInputMethod('draw');
@@ -274,7 +274,7 @@ export default function HandwritingAnalysisPage() {
 
           {/* 캔버스 */}
           <div>
-            <p className="text-gray-900 dark:text-white font-bold mb-3 text-center text-sm md:text-base">
+            <p className="text-gray-900 dark:text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-center text-[10px] sm:text-xs md:text-sm">
               {inputMethod === 'draw' 
                 ? '아래 캔버스에 자유롭게 글씨를 써주세요'
                 : '손글씨 이미지를 업로드해주세요'}
@@ -297,7 +297,7 @@ export default function HandwritingAnalysisPage() {
               {inputMethod === 'upload' && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="text-gray-400 text-center">
-                    <div className="text-5xl mb-2">📷</div>
+                    <div className="text-base sm:text-2xl md:text-4xl mb-2">📷</div>
                     <p className="text-sm">이미지를 업로드하세요</p>
                   </div>
                 </div>
@@ -325,16 +325,16 @@ export default function HandwritingAnalysisPage() {
           )}
 
           {/* 버튼 */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
             <button
               onClick={clearCanvas}
-              className="bg-gray-200 dark:bg-white/20 text-gray-900 dark:text-white px-6 py-4 rounded-xl font-bold text-sm md:text-base hover:bg-gray-300 dark:hover:bg-white/30 transition-all"
+              className="bg-gray-200 dark:bg-white/20 text-gray-900 dark:text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:bg-gray-300 dark:hover:bg-white/30 transition-all"
             >
               🗑️ 지우기
             </button>
             <button
               onClick={analyze}
-              className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-sm md:text-base hover:shadow-lg transition-all"
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
             >
               🔍 분석하기
             </button>
@@ -344,8 +344,8 @@ export default function HandwritingAnalysisPage() {
             <div className="space-y-4 pt-4">
               {/* 종합 평가 */}
               <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-6 text-white text-center">
-                <div className="text-5xl mb-3">✨</div>
-                <h3 className="text-xl md:text-2xl font-bold mb-3">종합 평가</h3>
+                <div className="text-base sm:text-2xl md:text-4xl mb-0.5 sm:mb-1.5 md:mb-2">✨</div>
+                <h3 className="text-xl md:text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">종합 평가</h3>
                 <p className="text-base md:text-lg">{result.overall}</p>
               </div>
 
@@ -359,7 +359,7 @@ export default function HandwritingAnalysisPage() {
                     <div key={idx}>
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex-1">
-                          <span className="font-bold text-gray-800 dark:text-white text-sm md:text-base">{item.trait}</span>
+                          <span className="font-bold text-gray-800 dark:text-white text-[10px] sm:text-xs md:text-sm">{item.trait}</span>
                           <p className="text-xs md:text-sm text-gray-600 dark:text-gray-300 mt-1">{item.description}</p>
                         </div>
                         <span className="font-bold text-purple-600 dark:text-purple-400 text-lg ml-3">{item.score}%</span>
@@ -380,9 +380,9 @@ export default function HandwritingAnalysisPage() {
                 <h4 className="font-bold text-gray-800 dark:text-white mb-4 text-lg md:text-xl">📝 필적 특징</h4>
                 <ul className="space-y-3">
                   {result.characteristics.map((char: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-3">
+                    <li key={idx} className="flex items-start gap-0 sm:gap-1.5 md:gap-3">
                       <span className="text-purple-600 dark:text-purple-400 text-lg">✓</span>
-                      <span className="text-gray-700 dark:text-gray-300 text-sm md:text-base flex-1">{char}</span>
+                      <span className="text-gray-700 dark:text-gray-300 text-[10px] sm:text-xs md:text-sm flex-1">{char}</span>
                     </li>
                   ))}
                 </ul>
@@ -390,8 +390,8 @@ export default function HandwritingAnalysisPage() {
 
               {/* 개선 조언 */}
               <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl p-6 text-white">
-                <h4 className="font-bold mb-3 text-lg md:text-xl">💬 개선 팁</h4>
-                <ul className="space-y-2 text-sm md:text-base">
+                <h4 className="font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-lg md:text-xl">💬 개선 팁</h4>
+                <ul className="space-y-2 text-[10px] sm:text-xs md:text-sm">
                   {result.advice.map((tip: string, idx: number) => (
                     <li key={idx}>{tip}</li>
                   ))}

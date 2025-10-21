@@ -1,0 +1,7989 @@
+{
+  "warningLights": [
+    {
+      "id": "oil-pressure",
+      "name": "엔진 오일 압력 경고등",
+      "icon": "⚙️",
+      "symbol": "OIL",
+      "color": "빨강",
+      "category": "엔진",
+      "severity": {
+        "level": "긴급",
+        "urgency": "즉시 정차",
+        "dangerRating": 10
+      },
+      "meaning": {
+        "simple": "엔진 오일 압력 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 180000,
+          "max": 1125000,
+          "average": 450000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "battery-charge",
+      "name": "배터리 충전 경고등",
+      "icon": "🔋",
+      "symbol": "BATTERY",
+      "color": "빨강",
+      "category": "전기/충전",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 8
+      },
+      "meaning": {
+        "simple": "배터리 충전 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 112000,
+          "max": 700000,
+          "average": 280000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "brake-system",
+      "name": "브레이크 경고등",
+      "icon": "🛑⚠️",
+      "symbol": "BRAKE",
+      "color": "빨강",
+      "category": "브레이크",
+      "severity": {
+        "level": "긴급",
+        "urgency": "즉시 정차",
+        "dangerRating": 10
+      },
+      "meaning": {
+        "simple": "브레이크 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 36000,
+          "max": 225000,
+          "average": 90000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "engine-overheat",
+      "name": "냉각수 온도 경고등(과열)",
+      "icon": "🌡️",
+      "symbol": "TEMP",
+      "color": "빨강",
+      "category": "엔진 냉각",
+      "severity": {
+        "level": "긴급",
+        "urgency": "즉시 정차",
+        "dangerRating": 10
+      },
+      "meaning": {
+        "simple": "냉각수 온도 경고등(과열) 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 260000,
+          "max": 1625000,
+          "average": 650000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "power-steering",
+      "name": "파워 스티어링 경고등",
+      "icon": "🛞⚠️",
+      "symbol": "EPS",
+      "color": "빨강",
+      "category": "조향",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "파워 스티어링 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 152000,
+          "max": 950000,
+          "average": 380000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "airbag",
+      "name": "에어백(SRS) 경고등",
+      "icon": "💺",
+      "symbol": "AIRBAG",
+      "color": "빨강",
+      "category": "안전장치",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 8
+      },
+      "meaning": {
+        "simple": "에어백(SRS) 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 240000,
+          "max": 1500000,
+          "average": 600000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "abs",
+      "name": "ABS 경고등(심각)",
+      "icon": "🅰️🅱️",
+      "symbol": "ABS",
+      "color": "빨강",
+      "category": "브레이크",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "ABS 경고등(심각) 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 112000,
+          "max": 700000,
+          "average": 280000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "door-open",
+      "name": "도어 열림 경고등",
+      "icon": "🚪",
+      "symbol": "DOOR",
+      "color": "빨강",
+      "category": "차체/편의",
+      "severity": {
+        "level": "주의",
+        "urgency": "즉시 확인",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "도어 열림 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "seatbelt",
+      "name": "안전벨트 미착용 경고등",
+      "icon": "💺🪢",
+      "symbol": "SEAT BELT",
+      "color": "빨강",
+      "category": "안전장치",
+      "severity": {
+        "level": "중요",
+        "urgency": "즉시 착용",
+        "dangerRating": 9
+      },
+      "meaning": {
+        "simple": "안전벨트 미착용 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 8000,
+          "max": 50000,
+          "average": 20000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "engine-overheat2",
+      "name": "엔진 과열 경고등",
+      "icon": "🔥🌡️",
+      "symbol": "OVERHEAT",
+      "color": "빨강",
+      "category": "엔진 냉각",
+      "severity": {
+        "level": "긴급",
+        "urgency": "즉시 정차",
+        "dangerRating": 10
+      },
+      "meaning": {
+        "simple": "엔진 과열 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 260000,
+          "max": 1625000,
+          "average": 650000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "trunk-open",
+      "name": "트렁크 열림 경고등",
+      "icon": "🚗📦",
+      "symbol": "TRUNK",
+      "color": "빨강",
+      "category": "차체/편의",
+      "severity": {
+        "level": "주의",
+        "urgency": "즉시 확인",
+        "dangerRating": 3
+      },
+      "meaning": {
+        "simple": "트렁크 열림 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "coolant-level",
+      "name": "냉각수 부족 경고등",
+      "icon": "💧🌡️",
+      "symbol": "COOLANT",
+      "color": "빨강",
+      "category": "엔진 냉각",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 8
+      },
+      "meaning": {
+        "simple": "냉각수 부족 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 72000,
+          "max": 450000,
+          "average": 180000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "low-oil-level",
+      "name": "엔진 오일 부족 경고등",
+      "icon": "🛢️",
+      "symbol": "OIL LEVEL",
+      "color": "빨강",
+      "category": "엔진",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 8
+      },
+      "meaning": {
+        "simple": "엔진 오일 부족 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 48000,
+          "max": 300000,
+          "average": 120000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "transmission-temp",
+      "name": "변속기 과열 경고등",
+      "icon": "♨️",
+      "symbol": "TRANS HOT",
+      "color": "빨강",
+      "category": "변속기",
+      "severity": {
+        "level": "긴급",
+        "urgency": "즉시 정차",
+        "dangerRating": 9
+      },
+      "meaning": {
+        "simple": "변속기 과열 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "parking-brake-fault",
+      "name": "전자식 주차 브레이크 경고등",
+      "icon": "🅿️",
+      "symbol": "EPB",
+      "color": "빨강",
+      "category": "브레이크",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "전자식 주차 브레이크 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            200,
+            255
+          ],
+          "g": [
+            0,
+            80
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "check-engine",
+      "name": "엔진 체크 경고등",
+      "icon": "🔧",
+      "symbol": "CHECK ENGINE",
+      "color": "노랑",
+      "category": "엔진/배출",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "엔진 체크 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 140000,
+          "max": 875000,
+          "average": 350000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "tpms",
+      "name": "타이어 공기압 경고등(TPMS)",
+      "icon": "🛞❗",
+      "symbol": "TPMS",
+      "color": "노랑",
+      "category": "타이어",
+      "severity": {
+        "level": "주의",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 6
+      },
+      "meaning": {
+        "simple": "타이어 공기압 경고등(TPMS) 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 48000,
+          "max": 300000,
+          "average": 120000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "low-fuel",
+      "name": "연료 부족 경고등",
+      "icon": "⛽⚠️",
+      "symbol": "LOW FUEL",
+      "color": "노랑",
+      "category": "연료",
+      "severity": {
+        "level": "주의",
+        "urgency": "즉시 주유 권장",
+        "dangerRating": 5
+      },
+      "meaning": {
+        "simple": "연료 부족 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "washer-low",
+      "name": "워셔액 부족 경고등",
+      "icon": "💧🪟",
+      "symbol": "WASHER LOW",
+      "color": "노랑",
+      "category": "편의",
+      "severity": {
+        "level": "정보",
+        "urgency": "편한 시간에 보충",
+        "dangerRating": 2
+      },
+      "meaning": {
+        "simple": "워셔액 부족 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 4000,
+          "max": 25000,
+          "average": 10000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "dpf",
+      "name": "DPF(디젤 미립자 필터) 경고등",
+      "icon": "🟤",
+      "symbol": "DPF",
+      "color": "노랑",
+      "category": "배출/디젤",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "DPF(디젤 미립자 필터) 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "transmission",
+      "name": "변속기 경고등",
+      "icon": "⚙️",
+      "symbol": "TRANS",
+      "color": "노랑",
+      "category": "변속기",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "변속기 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "esc",
+      "name": "ESP/ESC 경고등",
+      "icon": "🚗💫",
+      "symbol": "ESC",
+      "color": "노랑",
+      "category": "주행안정",
+      "severity": {
+        "level": "주의",
+        "urgency": "상황에 따라 점검",
+        "dangerRating": 5
+      },
+      "meaning": {
+        "simple": "ESP/ESC 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 32000,
+          "max": 200000,
+          "average": 80000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "tow-mode",
+      "name": "견인 모드 경고등",
+      "icon": "🔗🚗",
+      "symbol": "TOW",
+      "color": "노랑",
+      "category": "구동/모드",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "견인 모드 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 24000,
+          "max": 150000,
+          "average": 60000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "cruise",
+      "name": "크루즈 컨트롤 경고등",
+      "icon": "🧭🚗",
+      "symbol": "CRUISE",
+      "color": "노랑",
+      "category": "편의",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "크루즈 컨트롤 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 32000,
+          "max": 200000,
+          "average": 80000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "ldw",
+      "name": "차선 이탈 경고등(LDW)",
+      "icon": "🛣️🧭",
+      "symbol": "LDW",
+      "color": "노랑",
+      "category": "ADAS",
+      "severity": {
+        "level": "주의",
+        "urgency": "빠른 점검/주의",
+        "dangerRating": 3
+      },
+      "meaning": {
+        "simple": "차선 이탈 경고등(LDW) 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 88000,
+          "max": 550000,
+          "average": 220000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "fcw",
+      "name": "앞차 추돌 경고등(FCW)",
+      "icon": "⚠️",
+      "symbol": "FCW",
+      "color": "노랑",
+      "category": "ADAS",
+      "severity": {
+        "level": "중요",
+        "urgency": "즉시 주의",
+        "dangerRating": 6
+      },
+      "meaning": {
+        "simple": "앞차 추돌 경고등(FCW) 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "tire-puncture",
+      "name": "타이어 펑크 경고등",
+      "icon": "🛞",
+      "symbol": "PUNCTURE",
+      "color": "노랑",
+      "category": "타이어",
+      "severity": {
+        "level": "중요",
+        "urgency": "즉시 정차/교체",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "타이어 펑크 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "4wd",
+      "name": "4WD 경고등",
+      "icon": "🛞🔼",
+      "symbol": "4WD",
+      "color": "노랑",
+      "category": "구동",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검 권장",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "4WD 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 280000,
+          "max": 1750000,
+          "average": 700000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "eco-mode",
+      "name": "에코 모드 표시등",
+      "icon": "🍃",
+      "symbol": "ECO",
+      "color": "노랑",
+      "category": "모드",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "에코 모드 표시등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "sport-mode",
+      "name": "스포츠 모드 표시등",
+      "icon": "🏎️",
+      "symbol": "SPORT",
+      "color": "노랑",
+      "category": "모드",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "스포츠 모드 표시등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "hdc",
+      "name": "언덕 내리막 제어(HDC)",
+      "icon": "⛰️",
+      "symbol": "HDC",
+      "color": "노랑",
+      "category": "구동 보조",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 2
+      },
+      "meaning": {
+        "simple": "언덕 내리막 제어(HDC) 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "slip",
+      "name": "슬립 경고등",
+      "icon": "🚗🌀",
+      "symbol": "SLIP",
+      "color": "노랑",
+      "category": "주행안정",
+      "severity": {
+        "level": "주의",
+        "urgency": "감속 필요",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "슬립 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 32000,
+          "max": 200000,
+          "average": 80000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "glow-plug",
+      "name": "예열 플러그(디젤) 경고등",
+      "icon": "⚡🌀",
+      "symbol": "GLOW",
+      "color": "노랑",
+      "category": "디젤",
+      "severity": {
+        "level": "주의",
+        "urgency": "예열 후 시동",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "예열 플러그(디젤) 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 88000,
+          "max": 550000,
+          "average": 220000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "oil-change",
+      "name": "오일 교환 필요 경고등",
+      "icon": "🧰",
+      "symbol": "SERVICE OIL",
+      "color": "노랑",
+      "category": "정비",
+      "severity": {
+        "level": "정보",
+        "urgency": "교환 시기",
+        "dangerRating": 2
+      },
+      "meaning": {
+        "simple": "오일 교환 필요 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "spark-plug",
+      "name": "점화 플러그 경고등",
+      "icon": "🔩",
+      "symbol": "SPARK",
+      "color": "노랑",
+      "category": "엔진",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검 권장",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "점화 플러그 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "headlight",
+      "name": "전조등 고장/광량 경고",
+      "icon": "💡",
+      "symbol": "HEADLIGHT",
+      "color": "노랑",
+      "category": "조명",
+      "severity": {
+        "level": "주의",
+        "urgency": "전구 교환",
+        "dangerRating": 3
+      },
+      "meaning": {
+        "simple": "전조등 고장/광량 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 32000,
+          "max": 200000,
+          "average": 80000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "fog-light",
+      "name": "안개등 표시",
+      "icon": "🌫️",
+      "symbol": "FOG",
+      "color": "노랑",
+      "category": "조명",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "안개등 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "parking-sensor",
+      "name": "주차 센서 경고",
+      "icon": "🅿️📡",
+      "symbol": "PARK SENSOR",
+      "color": "노랑",
+      "category": "주차보조",
+      "severity": {
+        "level": "주의",
+        "urgency": "센서 청소",
+        "dangerRating": 3
+      },
+      "meaning": {
+        "simple": "주차 센서 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 48000,
+          "max": 300000,
+          "average": 120000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "camera-blocked",
+      "name": "카메라 가림 경고",
+      "icon": "📷",
+      "symbol": "CAM BLOCK",
+      "color": "노랑",
+      "category": "ADAS",
+      "severity": {
+        "level": "주의",
+        "urgency": "청소 필요",
+        "dangerRating": 3
+      },
+      "meaning": {
+        "simple": "카메라 가림 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "radar-blocked",
+      "name": "레이다 가림 경고",
+      "icon": "📡",
+      "symbol": "RADAR BLOCK",
+      "color": "노랑",
+      "category": "ADAS",
+      "severity": {
+        "level": "주의",
+        "urgency": "청소 필요",
+        "dangerRating": 3
+      },
+      "meaning": {
+        "simple": "레이다 가림 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "acc",
+      "name": "어댑티브 크루즈(ACC) 경고",
+      "icon": "🎯",
+      "symbol": "ACC",
+      "color": "노랑",
+      "category": "ADAS",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검 필요",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "어댑티브 크루즈(ACC) 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "auto-park",
+      "name": "자동 주차 시스템 경고",
+      "icon": "🛠️🚗",
+      "symbol": "AUTO PARK",
+      "color": "노랑",
+      "category": "주차보조",
+      "severity": {
+        "level": "주의",
+        "urgency": "시스템 점검",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "자동 주차 시스템 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "hud",
+      "name": "헤드업 디스플레이 경고",
+      "icon": "🪟",
+      "symbol": "HUD",
+      "color": "노랑",
+      "category": "표시",
+      "severity": {
+        "level": "정보",
+        "urgency": "점검 필요",
+        "dangerRating": 2
+      },
+      "meaning": {
+        "simple": "헤드업 디스플레이 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "key-battery",
+      "name": "스마트 키 배터리 부족",
+      "icon": "🔑❓",
+      "symbol": "KEY LOW",
+      "color": "노랑",
+      "category": "편의",
+      "severity": {
+        "level": "주의",
+        "urgency": "교체 권장",
+        "dangerRating": 2
+      },
+      "meaning": {
+        "simple": "스마트 키 배터리 부족 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 24000,
+          "max": 150000,
+          "average": 60000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "start-stop",
+      "name": "엔진 자동정지(아이들링 스톱) 경고",
+      "icon": "⏱️",
+      "symbol": "A START/STOP",
+      "color": "노랑",
+      "category": "엔진",
+      "severity": {
+        "level": "주의",
+        "urgency": "배터리 점검",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "엔진 자동정지(아이들링 스톱) 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 8000,
+          "max": 50000,
+          "average": 20000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "emissions",
+      "name": "배기가스 경고",
+      "icon": "🟠",
+      "symbol": "EMISSIONS",
+      "color": "노랑",
+      "category": "배출",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검",
+        "dangerRating": 6
+      },
+      "meaning": {
+        "simple": "배기가스 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "o2-sensor",
+      "name": "산소센서 경고",
+      "icon": "🧪",
+      "symbol": "O2",
+      "color": "노랑",
+      "category": "엔진/배출",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "산소센서 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "misfire",
+      "name": "실화(미스파이어) 경고",
+      "icon": "⚡",
+      "symbol": "MISFIRE",
+      "color": "노랑",
+      "category": "엔진",
+      "severity": {
+        "level": "중요",
+        "urgency": "즉시 점검",
+        "dangerRating": 6
+      },
+      "meaning": {
+        "simple": "실화(미스파이어) 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "maf",
+      "name": "흡기량 센서(MAF) 경고",
+      "icon": "🌪️",
+      "symbol": "MAF",
+      "color": "노랑",
+      "category": "엔진",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "흡기량 센서(MAF) 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "map",
+      "name": "흡기압 센서(MAP) 경고",
+      "icon": "🗺️",
+      "symbol": "MAP",
+      "color": "노랑",
+      "category": "엔진",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "흡기압 센서(MAP) 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "throttle",
+      "name": "스로틀 바디 경고",
+      "icon": "🧲",
+      "symbol": "THROTTLE",
+      "color": "노랑",
+      "category": "엔진",
+      "severity": {
+        "level": "주의",
+        "urgency": "청소/재학습",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "스로틀 바디 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "egr",
+      "name": "EGR 경고",
+      "icon": "🔁",
+      "symbol": "EGR",
+      "color": "노랑",
+      "category": "배출",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검",
+        "dangerRating": 4
+      },
+      "meaning": {
+        "simple": "EGR 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "pcv",
+      "name": "PCV 밸브 경고",
+      "icon": "🪙",
+      "symbol": "PCV",
+      "color": "노랑",
+      "category": "엔진",
+      "severity": {
+        "level": "주의",
+        "urgency": "점검",
+        "dangerRating": 3
+      },
+      "meaning": {
+        "simple": "PCV 밸브 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "fuel-cap",
+      "name": "연료 주입구 캡 경고",
+      "icon": "🧴",
+      "symbol": "FUEL CAP",
+      "color": "노랑",
+      "category": "연료",
+      "severity": {
+        "level": "주의",
+        "urgency": "캡 잠금",
+        "dangerRating": 2
+      },
+      "meaning": {
+        "simple": "연료 주입구 캡 경고 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "turn-signal",
+      "name": "방향지시등",
+      "icon": "↔️",
+      "symbol": "TURN",
+      "color": "녹색",
+      "category": "표시",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "방향지시등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 24000,
+          "max": 150000,
+          "average": 60000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "high-beam",
+      "name": "전조등 상향등",
+      "icon": "💡🔦",
+      "symbol": "HIGH",
+      "color": "파랑",
+      "category": "조명",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "전조등 상향등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 32000,
+          "max": 200000,
+          "average": 80000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            90
+          ],
+          "g": [
+            0,
+            120
+          ],
+          "b": [
+            180,
+            255
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "fog-front",
+      "name": "앞 안개등 표시",
+      "icon": "🌫️🔦",
+      "symbol": "FOG FRONT",
+      "color": "녹색",
+      "category": "조명",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "앞 안개등 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 32000,
+          "max": 200000,
+          "average": 80000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "fog-rear",
+      "name": "뒤 안개등 표시",
+      "icon": "🌫️🔦",
+      "symbol": "FOG REAR",
+      "color": "노랑",
+      "category": "조명",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "뒤 안개등 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 32000,
+          "max": 200000,
+          "average": 80000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "position-light",
+      "name": "미등 표시",
+      "icon": "🔆",
+      "symbol": "POSITION",
+      "color": "녹색",
+      "category": "조명",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "미등 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 24000,
+          "max": 150000,
+          "average": 60000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "eco-indicator",
+      "name": "ECO 표시등",
+      "icon": "❄️ℹ️",
+      "symbol": "ECO",
+      "color": "녹색",
+      "category": "모드",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "ECO 표시등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "cruise-on",
+      "name": "크루즈 컨트롤 작동 표시",
+      "icon": "🧭",
+      "symbol": "CRUISE ON",
+      "color": "녹색",
+      "category": "편의",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "크루즈 컨트롤 작동 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "lane-keep",
+      "name": "차선 유지 보조 작동 표시",
+      "icon": "🛣️",
+      "symbol": "LKA",
+      "color": "녹색",
+      "category": "ADAS",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "차선 유지 보조 작동 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "auto-hold",
+      "name": "오토 홀드 작동 표시",
+      "icon": "🌧️🪟",
+      "symbol": "AUTO HOLD",
+      "color": "녹색",
+      "category": "제동보조",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "오토 홀드 작동 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 24000,
+          "max": 150000,
+          "average": 60000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "epb-on",
+      "name": "전자식 주차 브레이크 작동 표시",
+      "icon": "🅿️",
+      "symbol": "EPB ON",
+      "color": "흰색",
+      "category": "브레이크",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "전자식 주차 브레이크 작동 표시 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 40000,
+          "max": 250000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            220,
+            255
+          ],
+          "b": [
+            220,
+            255
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "hybrid-system",
+      "name": "하이브리드 시스템 경고등",
+      "icon": "♻️",
+      "symbol": "HYBRID",
+      "color": "노랑",
+      "category": "전동화",
+      "severity": {
+        "level": "중요",
+        "urgency": "빠른 점검 필요",
+        "dangerRating": 7
+      },
+      "meaning": {
+        "simple": "하이브리드 시스템 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "ev-mode",
+      "name": "EV 모드 표시등",
+      "icon": "🔌",
+      "symbol": "EV MODE",
+      "color": "녹색",
+      "category": "전동화",
+      "severity": {
+        "level": "정보",
+        "urgency": "정상 작동",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "EV 모드 표시등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "charging",
+      "name": "충전 중 표시등",
+      "icon": "🔌",
+      "symbol": "CHARGING",
+      "color": "녹색",
+      "category": "전동화",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "충전 중 표시등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "hv-battery",
+      "name": "고전압 배터리 경고등",
+      "icon": "🟧",
+      "symbol": "HV BATTERY",
+      "color": "노랑",
+      "category": "전동화",
+      "severity": {
+        "level": "긴급",
+        "urgency": "즉시 정차",
+        "dangerRating": 9
+      },
+      "meaning": {
+        "simple": "고전압 배터리 경고등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            220,
+            255
+          ],
+          "g": [
+            180,
+            240
+          ],
+          "b": [
+            0,
+            60
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    },
+    {
+      "id": "regen",
+      "name": "회생 제동 표시등",
+      "icon": "🌀",
+      "symbol": "REGEN",
+      "color": "녹색",
+      "category": "전동화",
+      "severity": {
+        "level": "정보",
+        "urgency": "상황 안내",
+        "dangerRating": 1
+      },
+      "meaning": {
+        "simple": "회생 제동 표시등 상태입니다.",
+        "detailed": "해당 시스템의 이상 또는 기능 활성 표시입니다. 지속 점등 시 점검을 권장합니다.",
+        "possibleCauses": [
+          "센서 오염/오류",
+          "전압 변동",
+          "배선 접촉 불량",
+          "작동 조건 미충족",
+          "부품 마모"
+        ]
+      },
+      "immediateAction": {
+        "whatToDo": [
+          "안전 운전",
+          "필요 시 기능 해제",
+          "가까운 정비소 점검"
+        ],
+        "doNot": [
+          "경고 무시 과속",
+          "임의 분해"
+        ],
+        "canDrive": true,
+        "maxDistance": "상황에 따라"
+      },
+      "ifIgnored": {
+        "shortTerm": "성능 저하",
+        "longTerm": "부품 마모 가속",
+        "worstCase": "안전 기능 상실",
+        "additionalDamage": [
+          "타이어/브레이크 마모",
+          "연비 저하"
+        ]
+      },
+      "repairInfo": {
+        "estimatedCost": {
+          "min": 0,
+          "max": 400000,
+          "average": 100000
+        },
+        "repairTime": "10분~2시간",
+        "whereToFix": [
+          "직접 해결 가능",
+          "정비소"
+        ],
+        "parts": [
+          "센서류",
+          "퓨즈",
+          "배선"
+        ]
+      },
+      "prevention": {
+        "regularMaintenance": [
+          "정기 세척",
+          "배터리 전압 관리"
+        ],
+        "checkInterval": "1만 km",
+        "tips": [
+          "센서부 고압수 피하기",
+          "소프트웨어 업데이트",
+          "타이어 공기압 유지"
+        ]
+      },
+      "relatedLights": [],
+      "commonMistakes": [
+        "표시등을 경고로 오해",
+        "색상 의미 혼동"
+      ],
+      "seasonalNote": null,
+      "visualFeatures": "원형/상징 아이콘, 야간 대비 우수",
+      "colorDetails": {
+        "rgbRange": {
+          "r": [
+            0,
+            80
+          ],
+          "g": [
+            180,
+            255
+          ],
+          "b": [
+            0,
+            80
+          ]
+        }
+      },
+      "commonLocations": [
+        "클러스터 중앙 상단"
+      ]
+    }
+  ],
+  "colorGuide": [
+    {
+      "color": "빨강",
+      "meaning": "긴급·즉시 조치",
+      "generalAction": "안전지대 정차·시동 OFF·견인",
+      "urgency": "최상",
+      "examples": [
+        "oil-pressure",
+        "engine-overheat",
+        "brake-system",
+        "hv-battery"
+      ]
+    },
+    {
+      "color": "노랑",
+      "meaning": "주의·점검 필요",
+      "generalAction": "속도 낮추고 근거리 점검",
+      "urgency": "높음",
+      "examples": [
+        "check-engine",
+        "tpms",
+        "dpf",
+        "esc"
+      ]
+    },
+    {
+      "color": "녹색",
+      "meaning": "정보·정상 작동",
+      "generalAction": "안내에 따름",
+      "urgency": "낮음",
+      "examples": [
+        "eco-indicator",
+        "cruise-on",
+        "lane-keep"
+      ]
+    },
+    {
+      "color": "파랑",
+      "meaning": "상향등 등 기능 활성",
+      "generalAction": "상황에 맞게 전환",
+      "urgency": "낮음",
+      "examples": [
+        "high-beam"
+      ]
+    },
+    {
+      "color": "흰색",
+      "meaning": "정보 표시",
+      "generalAction": "안내 확인",
+      "urgency": "낮음",
+      "examples": [
+        "epb-on"
+      ]
+    }
+  ],
+  "systemCategories": [
+    {
+      "category": "엔진 시스템",
+      "icon": "🧰",
+      "description": "엔진·흡기·점화 관련",
+      "warningLightIds": [
+        "check-engine",
+        "oil-pressure",
+        "low-oil-level",
+        "engine-overheat",
+        "maf",
+        "map",
+        "throttle",
+        "pcv",
+        "misfire",
+        "o2-sensor",
+        "emissions",
+        "start-stop"
+      ],
+      "maintenanceTip": "오일·필터 주기 교환"
+    },
+    {
+      "category": "연료/배출",
+      "icon": "⛽",
+      "description": "연료·배출 제어",
+      "warningLightIds": [
+        "low-fuel",
+        "fuel-cap",
+        "dpf",
+        "emissions",
+        "o2-sensor",
+        "egr"
+      ],
+      "maintenanceTip": "연료 품질·배출계 점검"
+    },
+    {
+      "category": "변속기",
+      "icon": "⚙️",
+      "description": "AT/MT/하이브리드 구동",
+      "warningLightIds": [
+        "transmission",
+        "transmission-temp",
+        "tow-mode"
+      ],
+      "maintenanceTip": "ATF 주기 점검"
+    },
+    {
+      "category": "브레이크/제동",
+      "icon": "🛑",
+      "description": "제동 관련",
+      "warningLightIds": [
+        "brake-system",
+        "abs",
+        "parking-brake-fault",
+        "auto-hold",
+        "epb-on"
+      ],
+      "maintenanceTip": "패드·액 점검"
+    },
+    {
+      "category": "조향/주행안정",
+      "icon": "🛞",
+      "description": "조향·안정장치",
+      "warningLightIds": [
+        "power-steering",
+        "esc",
+        "slip",
+        "tire-puncture",
+        "tpms"
+      ],
+      "maintenanceTip": "타이어 관리·얼라인먼트"
+    },
+    {
+      "category": "조명/표시",
+      "icon": "💡",
+      "description": "램프·표시",
+      "warningLightIds": [
+        "headlight",
+        "fog-front",
+        "fog-rear",
+        "position-light",
+        "high-beam",
+        "turn-signal",
+        "hud"
+      ],
+      "maintenanceTip": "전구·배선 점검"
+    },
+    {
+      "category": "차체/편의",
+      "icon": "🚗",
+      "description": "도어·편의 장치",
+      "warningLightIds": [
+        "door-open",
+        "trunk-open",
+        "key-battery",
+        "washer-low",
+        "parking-sensor"
+      ],
+      "maintenanceTip": "도어 래치·센서 청결"
+    },
+    {
+      "category": "전기/충전",
+      "icon": "🔋",
+      "description": "발전·저장",
+      "warningLightIds": [
+        "battery-charge",
+        "hv-battery",
+        "charging"
+      ],
+      "maintenanceTip": "단자 부식 관리"
+    },
+    {
+      "category": "전동화/하이브리드",
+      "icon": "♻️",
+      "description": "고전압/모터 시스템",
+      "warningLightIds": [
+        "hybrid-system",
+        "ev-mode",
+        "regen"
+      ],
+      "maintenanceTip": "냉각 채널 청결·SW 업데이트"
+    },
+    {
+      "category": "ADAS/주차보조",
+      "icon": "🛰️",
+      "description": "첨단 운전자 보조",
+      "warningLightIds": [
+        "ldw",
+        "lane-keep",
+        "fcw",
+        "acc",
+        "camera-blocked",
+        "radar-blocked",
+        "auto-park"
+      ],
+      "maintenanceTip": "센서부 청결·캘리브레이션"
+    }
+  ],
+  "emergencyGuide": [
+    {
+      "situation": "주행 중 빨간 경고등",
+      "symptoms": [
+        "출력 저하",
+        "연기/냄새",
+        "이상 소음",
+        "핸들 무거움"
+      ],
+      "immediateSteps": [
+        {
+          "step": 1,
+          "action": "감속·갓길 진입",
+          "reason": "2차 사고 예방"
+        },
+        {
+          "step": 2,
+          "action": "시동 OFF",
+          "reason": "손상 방지"
+        },
+        {
+          "step": 3,
+          "action": "삼각대 설치",
+          "reason": "가시성 확보"
+        },
+        {
+          "step": 4,
+          "action": "견인 요청",
+          "reason": "안전 확보"
+        }
+      ],
+      "whenToCall119": [
+        "연기·화재",
+        "고속도로 차로 정지"
+      ],
+      "whenToCallTow": [
+        "오일압/과열/브레이크 경고",
+        "HV 배터리 경고"
+      ]
+    },
+    {
+      "situation": "타이어 펑크/공기압 급락",
+      "symptoms": [
+        "쏠림",
+        "소음",
+        "떨림"
+      ],
+      "immediateSteps": [
+        {
+          "step": 1,
+          "action": "직진 유지·급제동 금지",
+          "reason": "스핀 방지"
+        },
+        {
+          "step": 2,
+          "action": "저속 갓길 이동",
+          "reason": "휠 보호"
+        },
+        {
+          "step": 3,
+          "action": "스페어 장착/킷 사용",
+          "reason": "임시 복구"
+        }
+      ],
+      "whenToCall119": [
+        "차로 정지 장시간"
+      ],
+      "whenToCallTow": [
+        "스페어 없음/사이드월 파손"
+      ]
+    },
+    {
+      "situation": "전기차 고전압 경고",
+      "symptoms": [
+        "출력 제한",
+        "경고음"
+      ],
+      "immediateSteps": [
+        {
+          "step": 1,
+          "action": "정차·시동 OFF",
+          "reason": "고전압 차단"
+        },
+        {
+          "step": 2,
+          "action": "접촉 금지",
+          "reason": "감전 위험"
+        },
+        {
+          "step": 3,
+          "action": "서비스 연락",
+          "reason": "전문 장비 필요"
+        }
+      ],
+      "whenToCall119": [
+        "연기/화재"
+      ],
+      "whenToCallTow": [
+        "경고 지속/구동 불가"
+      ]
+    },
+    {
+      "situation": "과열로 온도 상승",
+      "symptoms": [
+        "게이지 H",
+        "히터 찬 바람"
+      ],
+      "immediateSteps": [
+        {
+          "step": 1,
+          "action": "히터 최대·감속",
+          "reason": "열 배출"
+        },
+        {
+          "step": 2,
+          "action": "정차 냉각",
+          "reason": "헤드 변형 방지"
+        }
+      ],
+      "whenToCall119": [
+        "연기 다량"
+      ],
+      "whenToCallTow": [
+        "누수·재상승"
+      ]
+    },
+    {
+      "situation": "제동 경고·제동력 저하",
+      "symptoms": [
+        "페달 푹 꺼짐",
+        "제동거리 증가"
+      ],
+      "immediateSteps": [
+        {
+          "step": 1,
+          "action": "저단으로 감속",
+          "reason": "엔진브레이크 활용"
+        },
+        {
+          "step": 2,
+          "action": "비상등·갓길 정차",
+          "reason": "후방 경고"
+        }
+      ],
+      "whenToCall119": [
+        "정지 불가"
+      ],
+      "whenToCallTow": [
+        "액 누유",
+        "경고 지속"
+      ]
+    }
+  ],
+  "combinedWarnings": [
+    {
+      "lights": [
+        "oil-pressure",
+        "check-engine"
+      ],
+      "meaning": "윤활 문제와 엔진 제어 이상 동시",
+      "likelyCause": "오일압 저하·센서 보정",
+      "severity": "매우 높음",
+      "action": "정차·견인"
+    },
+    {
+      "lights": [
+        "engine-overheat",
+        "coolant-level"
+      ],
+      "meaning": "냉각수 부족으로 과열",
+      "likelyCause": "누수/캡 불량",
+      "severity": "매우 높음",
+      "action": "냉각 후 보충·점검"
+    },
+    {
+      "lights": [
+        "battery-charge",
+        "esc",
+        "abs"
+      ],
+      "meaning": "전압 저하로 다중 오류",
+      "likelyCause": "알터네이터 고장",
+      "severity": "높음",
+      "action": "전장 최소화 후 점검"
+    },
+    {
+      "lights": [
+        "tpms",
+        "tire-puncture"
+      ],
+      "meaning": "공기압 저하와 펑크 동시",
+      "likelyCause": "이물질",
+      "severity": "높음",
+      "action": "정차·교체"
+    },
+    {
+      "lights": [
+        "brake-system",
+        "abs"
+      ],
+      "meaning": "제동 성능 심각 저하",
+      "likelyCause": "액 부족/센서·모듈",
+      "severity": "매우 높음",
+      "action": "정차·견인"
+    },
+    {
+      "lights": [
+        "hybrid-system",
+        "hv-battery"
+      ],
+      "meaning": "전동화 파워트레인 중대 경고",
+      "likelyCause": "셀 불량/냉각",
+      "severity": "매우 높음",
+      "action": "정차·서비스 연락"
+    },
+    {
+      "lights": [
+        "camera-blocked",
+        "radar-blocked",
+        "fcw",
+        "acc"
+      ],
+      "meaning": "센서 가림으로 ADAS 제한",
+      "likelyCause": "눈/비/오염",
+      "severity": "중간",
+      "action": "센서 청소·재시동"
+    },
+    {
+      "lights": [
+        "esc",
+        "slip",
+        "acc"
+      ],
+      "meaning": "미끄럼 상태에서 ACC 제한",
+      "likelyCause": "악천후",
+      "severity": "중간",
+      "action": "수동 운전·감속"
+    },
+    {
+      "lights": [
+        "low-fuel",
+        "check-engine"
+      ],
+      "meaning": "연료 압·혼합 이상",
+      "likelyCause": "연료 부족",
+      "severity": "중간",
+      "action": "주유·점검"
+    },
+    {
+      "lights": [
+        "washer-low",
+        "camera-blocked"
+      ],
+      "meaning": "워셔액 부족으로 카메라 오염",
+      "likelyCause": "워셔액 소진",
+      "severity": "낮음",
+      "action": "보충·세척"
+    }
+  ],
+  "vehicleTypeNotes": [
+    {
+      "type": "전기차",
+      "specificLights": [
+        {
+          "name": "고전압 배터리 경고",
+          "icon": "🟧",
+          "meaning": "HV 배터리 이상",
+          "action": "정차·서비스 연락"
+        },
+        {
+          "name": "충전 이상",
+          "icon": "🔌",
+          "meaning": "충전 오류",
+          "action": "연결 재시도/다른 충전기"
+        }
+      ],
+      "uniqueConsiderations": [
+        "한파 시 주행거리 감소",
+        "배터리 예열·냉각 중요",
+        "침수 시 접근 금지"
+      ]
+    },
+    {
+      "type": "하이브리드",
+      "specificLights": [
+        {
+          "name": "하이브리드 시스템 경고",
+          "icon": "♻️",
+          "meaning": "HV 보호 모드",
+          "action": "출력 제한 주의·점검"
+        }
+      ],
+      "uniqueConsiderations": [
+        "엔진·모터 전환 진동 범위 확인",
+        "12V 보조배터리 주기 점검"
+      ]
+    },
+    {
+      "type": "디젤",
+      "specificLights": [
+        {
+          "name": "DPF 재생",
+          "icon": "🟤",
+          "meaning": "수동 재생 필요",
+          "action": "고속 주행 20~30분"
+        },
+        {
+          "name": "예열 플러그",
+          "icon": "✨",
+          "meaning": "저온 예열 필요",
+          "action": "소등 후 시동"
+        }
+      ],
+      "uniqueConsiderations": [
+        "장거리 비율 확보",
+        "동절기 연료 사용"
+      ]
+    },
+    {
+      "type": "가솔린",
+      "specificLights": [
+        {
+          "name": "실화 경고",
+          "icon": "⚡",
+          "meaning": "점화 불량",
+          "action": "부하 줄이고 점검"
+        }
+      ],
+      "uniqueConsiderations": [
+        "옥탄가 적정 사용",
+        "코일·플러그 점검"
+      ]
+    }
+  ],
+  "selfDiagnostics": [
+    {
+      "symptom": "가속 시 떨림",
+      "possibleLights": [
+        "check-engine",
+        "tpms",
+        "transmission"
+      ],
+      "checkList": [
+        "타이어 불균형",
+        "점화 플러그",
+        "미션 오일온도"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "공회전 불안정",
+      "possibleLights": [
+        "check-engine",
+        "maf",
+        "map",
+        "throttle"
+      ],
+      "checkList": [
+        "흡기 누설",
+        "스로틀 카본",
+        "PCV"
+      ],
+      "diyFix": "스로틀 간단 청소",
+      "professionalHelp": true
+    },
+    {
+      "symptom": "브레이크 소음",
+      "possibleLights": [
+        "brake-system",
+        "abs"
+      ],
+      "checkList": [
+        "패드 잔량",
+        "디스크 상태"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "핸들 한쪽 쏠림",
+      "possibleLights": [
+        "esc",
+        "tpms"
+      ],
+      "checkList": [
+        "공기압 좌우 차",
+        "얼라인먼트"
+      ],
+      "diyFix": null,
+      "professionalHelp": false
+    },
+    {
+      "symptom": "시동이 약함",
+      "possibleLights": [
+        "battery-charge",
+        "start-stop",
+        "key-battery"
+      ],
+      "checkList": [
+        "배터리 전압",
+        "단자 부식"
+      ],
+      "diyFix": "단자 청소",
+      "professionalHelp": false
+    },
+    {
+      "symptom": "히터가 차가움",
+      "possibleLights": [
+        "engine-overheat",
+        "coolant-level"
+      ],
+      "checkList": [
+        "냉각수 레벨",
+        "서모스탯"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "연비 급락",
+      "possibleLights": [
+        "check-engine",
+        "o2-sensor",
+        "tpms"
+      ],
+      "checkList": [
+        "공기압",
+        "산소센서",
+        "연료 품질"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "차량 높낮이 불균형",
+      "possibleLights": [
+        "esc"
+      ],
+      "checkList": [
+        "공기압",
+        "댐퍼 누유"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "시야 불량(와이퍼 자국)",
+      "possibleLights": [
+        "washer-low",
+        "camera-blocked"
+      ],
+      "checkList": [
+        "워셔액",
+        "노즐",
+        "블레이드"
+      ],
+      "diyFix": "워셔액 보충·블레이드 교체",
+      "professionalHelp": false
+    },
+    {
+      "symptom": "ADAS 경고음 잦음",
+      "possibleLights": [
+        "ldw",
+        "fcw",
+        "acc",
+        "camera-blocked",
+        "radar-blocked"
+      ],
+      "checkList": [
+        "카메라/레이다 청소",
+        "햇빛 각도"
+      ],
+      "diyFix": "센서부 청소",
+      "professionalHelp": false
+    },
+    {
+      "symptom": "변속 충격",
+      "possibleLights": [
+        "transmission",
+        "transmission-temp"
+      ],
+      "checkList": [
+        "ATF 레벨/상태",
+        "학습값"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "타는 냄새",
+      "possibleLights": [
+        "engine-overheat",
+        "hv-battery"
+      ],
+      "checkList": [
+        "벨트 미끄럼",
+        "오일 누유",
+        "배선 과열"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "브레이크 중 떨림",
+      "possibleLights": [
+        "brake-system"
+      ],
+      "checkList": [
+        "디스크 변형",
+        "허브 녹"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "램프 한쪽 꺼짐",
+      "possibleLights": [
+        "headlight"
+      ],
+      "checkList": [
+        "전구 수명",
+        "소켓"
+      ],
+      "diyFix": "전구 교체",
+      "professionalHelp": false
+    },
+    {
+      "symptom": "키 인식 불가",
+      "possibleLights": [
+        "key-battery"
+      ],
+      "checkList": [
+        "키 배터리",
+        "간섭"
+      ],
+      "diyFix": "키 배터리 교체",
+      "professionalHelp": false
+    },
+    {
+      "symptom": "전기차 저속 끊김",
+      "possibleLights": [
+        "hybrid-system",
+        "hv-battery",
+        "regen"
+      ],
+      "checkList": [
+        "SW 업데이트",
+        "배터리 예열"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "핸들 무거움",
+      "possibleLights": [
+        "power-steering"
+      ],
+      "checkList": [
+        "EPS 경고",
+        "유압 누유"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "침수 후 이상",
+      "possibleLights": [
+        "abs",
+        "esc",
+        "battery-charge"
+      ],
+      "checkList": [
+        "센서 커넥터",
+        "퓨즈 박스 수분"
+      ],
+      "diyFix": null,
+      "professionalHelp": true
+    },
+    {
+      "symptom": "주차 보조 작동 안됨",
+      "possibleLights": [
+        "parking-sensor",
+        "camera-blocked"
+      ],
+      "checkList": [
+        "센서 이물",
+        "배선"
+      ],
+      "diyFix": "세척",
+      "professionalHelp": false
+    },
+    {
+      "symptom": "언덕에서 뒤로 밀림",
+      "possibleLights": [
+        "auto-hold",
+        "epb-on"
+      ],
+      "checkList": [
+        "브레이크 패드",
+        "오토홀드 설정"
+      ],
+      "diyFix": null,
+      "professionalHelp": false
+    }
+  ],
+  "costSavingTips": [
+    {
+      "situation": "헤드라이트 광량 저하",
+      "expensiveSolution": "램프 어셈블리 교체",
+      "affordableAlternative": "전구 교체·폴리싱",
+      "whenNotToSave": "하우징 균열·누수"
+    },
+    {
+      "situation": "브레이크 소음",
+      "expensiveSolution": "디스크·캘리퍼 교체",
+      "affordableAlternative": "패드 교체·가이드 핀 그리스",
+      "whenNotToSave": "두께 기준치 미만/크랙"
+    },
+    {
+      "situation": "엔진 떨림",
+      "expensiveSolution": "인젝터 전량 교체",
+      "affordableAlternative": "플러그/코일부터 교체",
+      "whenNotToSave": "연료 누출·화재 위험"
+    },
+    {
+      "situation": "TPMS 경고",
+      "expensiveSolution": "센서 4개 교체",
+      "affordableAlternative": "배터리 양호 시 재활성화",
+      "whenNotToSave": "센서 수명 만료"
+    },
+    {
+      "situation": "ESC/ABS 경고",
+      "expensiveSolution": "모듈 교체",
+      "affordableAlternative": "휠속도 센서 교체",
+      "whenNotToSave": "모듈 결함 확정"
+    },
+    {
+      "situation": "배터리 방전 잦음",
+      "expensiveSolution": "전장 대수리",
+      "affordableAlternative": "단자·접지 정비/배터리 교체",
+      "whenNotToSave": "셀 불량·누액"
+    },
+    {
+      "situation": "냉각수 누수",
+      "expensiveSolution": "라디에이터 교체",
+      "affordableAlternative": "호스/캡부터 교체",
+      "whenNotToSave": "코어 균열"
+    },
+    {
+      "situation": "하체 소음",
+      "expensiveSolution": "부품 다량 교체",
+      "affordableAlternative": "부싱·링크부터",
+      "whenNotToSave": "핵심 안전부품 균열"
+    },
+    {
+      "situation": "EV 충전 오류",
+      "expensiveSolution": "충전장치 교체",
+      "affordableAlternative": "커넥터 클리닝",
+      "whenNotToSave": "아크 흔적·용융"
+    },
+    {
+      "situation": "에어컨 냉기 약함",
+      "expensiveSolution": "컴프레서 교체",
+      "affordableAlternative": "가스 누설 점검·충전",
+      "whenNotToSave": "컴프레서 잠김 소음"
+    }
+  ],
+  "faq": [
+    {
+      "question": "빨간등이 잠깐 켜졌다가 꺼졌어요.",
+      "answer": "로그가 남을 수 있어 스캔 진단을 권장합니다.",
+      "relatedLights": [
+        "oil-pressure",
+        "engine-overheat",
+        "brake-system"
+      ]
+    },
+    {
+      "question": "체크엔진 등이 켜졌는데 차는 멀쩡해요.",
+      "answer": "촉매 손상을 막기 위해 근거리 점검을 권합니다.",
+      "relatedLights": [
+        "check-engine"
+      ]
+    },
+    {
+      "question": "추울 때만 TPMS가 켜져요.",
+      "answer": "기온 하락으로 압력이 떨어진 것입니다. 보정하세요.",
+      "relatedLights": [
+        "tpms"
+      ]
+    },
+    {
+      "question": "워셔액 대신 물?",
+      "answer": "동결·세균 위험. 계절용 워셔액 사용 권장.",
+      "relatedLights": [
+        "washer-low"
+      ]
+    },
+    {
+      "question": "브레이크와 ABS가 같이 떠요.",
+      "answer": "액 부족/센서·모듈 문제 가능. 즉시 정차 점검.",
+      "relatedLights": [
+        "brake-system",
+        "abs"
+      ]
+    },
+    {
+      "question": "배터리 경고 시 시동?",
+      "answer": "전장품 최소화 후 안전지대로 이동. 잦은 OFF/ON 피하세요.",
+      "relatedLights": [
+        "battery-charge"
+      ]
+    },
+    {
+      "question": "에어백 경고 있어도 운전 가능?",
+      "answer": "가능하나 사고 시 전개 안 될 수 있어 위험. 당일 점검 권장.",
+      "relatedLights": [
+        "airbag"
+      ]
+    },
+    {
+      "question": "DPF 경고 자주?",
+      "answer": "고속도로 20~30분 주행으로 재생 유도. 반복 시 정비.",
+      "relatedLights": [
+        "dpf"
+      ]
+    },
+    {
+      "question": "과열 시 히터를 왜 켜나요?",
+      "answer": "히터 코어로 열을 방출해 온도 낮춤.",
+      "relatedLights": [
+        "engine-overheat"
+      ]
+    },
+    {
+      "question": "스마트키 배터리 수명은?",
+      "answer": "보통 2~3년. 반응 느리면 교체.",
+      "relatedLights": [
+        "key-battery"
+      ]
+    },
+    {
+      "question": "상향등 파랑 표시 상시?",
+      "answer": "상향등 켜짐. 필요 시 하향으로 전환.",
+      "relatedLights": [
+        "high-beam"
+      ]
+    },
+    {
+      "question": "EV 모드가 자주 꺼져요.",
+      "answer": "조건에 따라 자동 전환. 이상 없으면 정상.",
+      "relatedLights": [
+        "ev-mode",
+        "hybrid-system"
+      ]
+    },
+    {
+      "question": "엔진오일 보충만 하면 되나요?",
+      "answer": "누유/소모 원인 진단 필요.",
+      "relatedLights": [
+        "low-oil-level",
+        "oil-pressure"
+      ]
+    },
+    {
+      "question": "펑크 시 얼마나 주행?",
+      "answer": "즉시 정차 권장. 런플랫도 제한 있음.",
+      "relatedLights": [
+        "tire-puncture",
+        "tpms"
+      ]
+    },
+    {
+      "question": "에코모드가 답답해요.",
+      "answer": "연비 최적화로 반응 완만. 필요 시 해제.",
+      "relatedLights": [
+        "eco-mode"
+      ]
+    },
+    {
+      "question": "워셔액 경고 계속?",
+      "answer": "탱크 누수/센서 불량 가능. 점검 요망.",
+      "relatedLights": [
+        "washer-low"
+      ]
+    },
+    {
+      "question": "HUD 흐림",
+      "answer": "유리 코팅/편광·밝기 설정 확인.",
+      "relatedLights": [
+        "hud"
+      ]
+    },
+    {
+      "question": "카메라 가림 비에도 뜨나요?",
+      "answer": "우천·눈길에서 흔함. 렌즈 닦기.",
+      "relatedLights": [
+        "camera-blocked"
+      ]
+    },
+    {
+      "question": "주차브레이크 표시와 경고 구분?",
+      "answer": "작동 표시(흰/녹) vs 경고(빨강) 색으로 구분.",
+      "relatedLights": [
+        "parking-brake-fault",
+        "epb-on",
+        "auto-hold"
+      ]
+    },
+    {
+      "question": "HV 배터리 경고 후 주행?",
+      "answer": "제조사 보호 모드에 따라 다르며 보통 정차 권장.",
+      "relatedLights": [
+        "hv-battery"
+      ]
+    }
+  ],
+  "meta": {
+    "generatedAt": "2025-10-21T18:26:10.329279",
+    "currency": "KRW",
+    "year": 2025
+  }
+}

@@ -38,7 +38,7 @@ export default function EmergencyFundPage() {
         </h1>
         <p className="text-center text-green-100 mb-12">재정 안정을 위한 비상금 플랜</p>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 space-y-6">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8 space-y-6">
           <div>
             <label className="text-white font-bold mb-2 block">월 평균 생활비</label>
             <input

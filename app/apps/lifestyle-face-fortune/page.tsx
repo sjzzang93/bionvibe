@@ -11,10 +11,17 @@ export default function FaceFortune() {
   const [result, setResult] = useState<FaceAnalysis | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // 파일 타입 체크
+    if (!file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드 가능합니다.');
+      return;
+    }
 
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -23,7 +30,15 @@ export default function FaceFortune() {
         setImagePreview(event.target?.result as string);
         analyzeImage(img);
       };
+      img.onerror = () => {
+        alert('이미지를 불러올 수 없습니다. 다른 이미지를 선택해주세요.');
+        if (fileInputRef.current) fileInputRef.current.value = "";
+      };
       img.src = event.target?.result as string;
+    };
+    reader.onerror = () => {
+      alert('파일을 읽을 수 없습니다. 다시 시도해주세요.');
+      if (fileInputRef.current) fileInputRef.current.value = "";
     };
     reader.readAsDataURL(file);
   };
@@ -83,6 +98,7 @@ export default function FaceFortune() {
     setResult(null);
     setAnalyzing(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
+    if (cameraInputRef.current) cameraInputRef.current.value = "";
   };
 
   return (
@@ -96,7 +112,7 @@ export default function FaceFortune() {
       backgroundAttachment: 'fixed'
     }}>
       <div className="mx-auto max-w-[700px] px-4 py-6">
-        <section className="rounded-2xl shadow-2xl p-6 border-2" style={{
+        <section className="rounded sm:rounded-lg md:rounded-2xl shadow-2xl p-6 border-2" style={{
           background: 'linear-gradient(145deg, #2d1f14 0%, #1a1108 100%)',
           borderColor: 'rgba(139, 90, 43, 0.5)',
           boxShadow: '0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(139, 90, 43, 0.1)'
@@ -165,20 +181,39 @@ export default function FaceFortune() {
 
           {!imagePreview && !result && (
             <div className="mb-6">
-              <div className="border-2 border-dashed border-amber-500/50 rounded-xl p-8 text-center bg-gradient-to-br from-amber-950/30 to-yellow-950/30">
-                <div className="text-6xl mb-4">📸</div>
-                <p className="text-amber-100 mb-4 text-lg font-semibold">얼굴 사진을 업로드하세요</p>
-                <p className="text-amber-300 text-sm mb-6">정면 얼굴이 선명한 사진이 정확합니다</p>
-                <label className="inline-block bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-8 py-3 rounded-lg font-bold cursor-pointer hover:shadow-lg transition-all hover:from-amber-500 hover:to-yellow-500">
-                  📷 사진 선택
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                  />
-                </label>
+              <div className="border-2 border-dashed border-amber-500/50 rounded-xl p-6 md:p-8 text-center bg-gradient-to-br from-amber-950/30 to-yellow-950/30">
+                <div className="text-5xl md:text-6xl mb-4">📸</div>
+                <p className="text-amber-100 mb-0.5 sm:mb-1.5 md:mb-2 text-base md:text-lg font-semibold">얼굴 사진을 업로드하세요</p>
+                <p className="text-amber-300 text-xs md:text-sm mb-6">정면 얼굴이 선명한 사진이 정확합니다</p>
+                
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch">
+                  {/* 카메라로 촬영하기 */}
+                  <label className="flex-1 sm:flex-initial bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 text-base rounded-lg font-bold cursor-pointer hover:shadow-lg transition-all hover:from-blue-500 hover:to-cyan-500 active:scale-95 touch-manipulation flex items-center justify-center gap-2">
+                    📷 카메라로 촬영
+                    <input
+                      ref={cameraInputRef}
+                      type="file"
+                      accept="image/*"
+                      capture="environment"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                  
+                  {/* 갤러리에서 선택 */}
+                  <label className="flex-1 sm:flex-initial bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-8 py-4 text-base rounded-lg font-bold cursor-pointer hover:shadow-lg transition-all hover:from-amber-500 hover:to-yellow-500 active:scale-95 touch-manipulation flex items-center justify-center gap-2">
+                    🖼️ 갤러리에서 선택
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+                
+                <p className="text-amber-400 text-xs mt-4">💡 모바일: 카메라 촬영 또는 갤러리 선택 | PC: 파일 선택</p>
               </div>
             </div>
           )}
@@ -207,7 +242,7 @@ export default function FaceFortune() {
               </div>
 
               {/* 전체 운세 점수 */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-3 gap-2">
                 <div className="bg-gradient-to-r from-purple-900 to-indigo-900 rounded-xl p-4 text-center border border-purple-500/50">
                   <p className="text-purple-200 text-xs mb-1">종합 운세 점수</p>
                   <p className="text-white text-4xl font-bold">{result.overallScore}</p>
@@ -274,38 +309,38 @@ export default function FaceFortune() {
 
               {/* 성격 및 기질 */}
               <div className="bg-gradient-to-r from-purple-900 to-indigo-900 rounded-xl p-5 border border-purple-500/50">
-                <h3 className="text-purple-200 text-lg font-bold mb-3">🧠 성격 및 기질</h3>
+                <h3 className="text-purple-200 text-lg font-bold mb-0.5 sm:mb-1.5 md:mb-2">🧠 성격 및 기질</h3>
                 <p className="text-white text-sm leading-relaxed">{result.personality}</p>
               </div>
 
               {/* 세부 운세 (6대 운세) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-gradient-to-r from-blue-900 to-cyan-900 rounded-xl p-4 border border-blue-500/30">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <div className="bg-gradient-to-r from-blue-900 to-cyan-900 rounded-xl p-2 sm:p-3 md:p-4 border border-blue-500/30">
                   <h4 className="text-blue-300 font-bold mb-2 text-lg">💼 직업운 (事業)</h4>
                   <p className="text-white text-sm leading-relaxed">{result.career}</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-green-900 to-emerald-900 rounded-xl p-4 border border-green-500/30">
+                <div className="bg-gradient-to-r from-green-900 to-emerald-900 rounded-xl p-2 sm:p-3 md:p-4 border border-green-500/30">
                   <h4 className="text-green-300 font-bold mb-2 text-lg">💰 재물운 (財運)</h4>
                   <p className="text-white text-sm leading-relaxed">{result.wealth}</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-red-900 to-orange-900 rounded-xl p-4 border border-red-500/30">
+                <div className="bg-gradient-to-r from-red-900 to-orange-900 rounded-xl p-2 sm:p-3 md:p-4 border border-red-500/30">
                   <h4 className="text-red-300 font-bold mb-2 text-lg">🏥 건강운 (健康)</h4>
                   <p className="text-white text-sm leading-relaxed">{result.health}</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-pink-900 to-rose-900 rounded-xl p-4 border border-pink-500/30">
+                <div className="bg-gradient-to-r from-pink-900 to-rose-900 rounded-xl p-2 sm:p-3 md:p-4 border border-pink-500/30">
                   <h4 className="text-pink-300 font-bold mb-2 text-lg">❤️ 애정운 (戀愛)</h4>
                   <p className="text-white text-sm leading-relaxed">{result.love}</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-yellow-900 to-amber-900 rounded-xl p-4 border border-yellow-500/30">
+                <div className="bg-gradient-to-r from-yellow-900 to-amber-900 rounded-xl p-2 sm:p-3 md:p-4 border border-yellow-500/30">
                   <h4 className="text-yellow-300 font-bold mb-2 text-lg">👥 대인관계 (人緣)</h4>
                   <p className="text-white text-sm leading-relaxed">{result.relationships}</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-purple-900 to-fuchsia-900 rounded-xl p-4 border border-purple-500/30">
+                <div className="bg-gradient-to-r from-purple-900 to-fuchsia-900 rounded-xl p-2 sm:p-3 md:p-4 border border-purple-500/30">
                   <h4 className="text-purple-300 font-bold mb-2 text-lg">👨‍👩‍👧‍👦 가족운 (家庭)</h4>
                   <p className="text-white text-sm leading-relaxed">{result.family}</p>
                 </div>
@@ -315,35 +350,35 @@ export default function FaceFortune() {
               <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-5 border border-slate-600/50">
                 <h3 className="text-slate-200 text-lg font-bold mb-4 text-center">☯️ 오행(五行) 분석</h3>
                 <div className="bg-black/40 rounded-lg p-4 mb-4">
-                  <div className="flex items-center justify-center gap-2 mb-3">
+                  <div className="flex items-center justify-center gap-2 mb-0.5 sm:mb-1.5 md:mb-2">
                     <span className="text-2xl">{result.element === '목' ? '🌳' : result.element === '화' ? '🔥' : result.element === '토' ? '🏔️' : result.element === '금' ? '⚪' : '💧'}</span>
                     <span className="text-white font-bold text-xl">{result.element.toUpperCase()}({result.element})</span>
                   </div>
                   <p className="text-white leading-relaxed text-sm mb-2">{result.elementBalance}</p>
                 </div>
                 <div className="grid grid-cols-5 gap-2 text-xs text-center">
-                  <div className={`rounded-lg p-3 border ${result.element === '목' ? 'bg-green-700/60 border-green-400' : 'bg-green-900/40 border-green-600/30'}`}>
-                    <p className="text-green-300 font-bold text-lg mb-1">木</p>
+                  <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '목' ? 'bg-green-700/60 border-green-400' : 'bg-green-900/40 border-green-600/30'}`}>
+                    <p className="text-green-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">木</p>
                     <p className="text-green-200 text-[10px]">목</p>
                     <p className="text-gray-400 text-[9px] mt-1">성장</p>
                   </div>
-                  <div className={`rounded-lg p-3 border ${result.element === '화' ? 'bg-red-700/60 border-red-400' : 'bg-red-900/40 border-red-600/30'}`}>
-                    <p className="text-red-300 font-bold text-lg mb-1">火</p>
+                  <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '화' ? 'bg-red-700/60 border-red-400' : 'bg-red-900/40 border-red-600/30'}`}>
+                    <p className="text-red-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">火</p>
                     <p className="text-red-200 text-[10px]">화</p>
                     <p className="text-gray-400 text-[9px] mt-1">열정</p>
                   </div>
-                  <div className={`rounded-lg p-3 border ${result.element === '토' ? 'bg-yellow-700/60 border-yellow-400' : 'bg-yellow-900/40 border-yellow-600/30'}`}>
-                    <p className="text-yellow-300 font-bold text-lg mb-1">土</p>
+                  <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '토' ? 'bg-yellow-700/60 border-yellow-400' : 'bg-yellow-900/40 border-yellow-600/30'}`}>
+                    <p className="text-yellow-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">土</p>
                     <p className="text-yellow-200 text-[10px]">토</p>
                     <p className="text-gray-400 text-[9px] mt-1">안정</p>
                   </div>
-                  <div className={`rounded-lg p-3 border ${result.element === '금' ? 'bg-gray-600/60 border-gray-300' : 'bg-gray-700/40 border-gray-500/30'}`}>
-                    <p className="text-gray-300 font-bold text-lg mb-1">金</p>
+                  <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '금' ? 'bg-gray-600/60 border-gray-300' : 'bg-gray-700/40 border-gray-500/30'}`}>
+                    <p className="text-gray-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">金</p>
                     <p className="text-gray-200 text-[10px]">금</p>
                     <p className="text-gray-400 text-[9px] mt-1">권위</p>
                   </div>
-                  <div className={`rounded-lg p-3 border ${result.element === '수' ? 'bg-blue-700/60 border-blue-400' : 'bg-blue-900/40 border-blue-600/30'}`}>
-                    <p className="text-blue-300 font-bold text-lg mb-1">水</p>
+                  <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '수' ? 'bg-blue-700/60 border-blue-400' : 'bg-blue-900/40 border-blue-600/30'}`}>
+                    <p className="text-blue-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">水</p>
                     <p className="text-blue-200 text-[10px]">수</p>
                     <p className="text-gray-400 text-[9px] mt-1">지혜</p>
                   </div>
@@ -357,9 +392,9 @@ export default function FaceFortune() {
                   <p className="text-red-200 font-semibold mb-2">🚨 주의사항</p>
                   <p className="text-white text-sm leading-relaxed">{result.weakPoint}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
                   {result.補완방법.map((method, i) => (
-                    <div key={i} className="bg-black/30 rounded-lg p-3 border border-orange-400/30">
+                    <div key={i} className="bg-black/30 rounded-lg p-2 sm:p-3 border border-orange-400/30">
                       <p className="text-orange-200">✓ {method}</p>
                     </div>
                   ))}
@@ -369,11 +404,11 @@ export default function FaceFortune() {
               {/* 행운 아이템 */}
               <div className="bg-gradient-to-r from-amber-950/80 to-yellow-950/80 rounded-xl p-5 border border-amber-500/30">
                 <h4 className="text-amber-300 font-bold mb-4 text-center text-lg">🍀 행운 아이템</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                   {result.luckyItems.map((item, idx) => (
                     <div
                       key={idx}
-                      className="bg-black/40 rounded-lg p-3 text-center border border-amber-500/30"
+                      className="bg-black/40 rounded-lg p-2 sm:p-3 text-center border border-amber-500/30"
                     >
                       <span className="text-white font-semibold text-sm">✨ {item}</span>
                     </div>

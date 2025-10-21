@@ -1,222 +1,242 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumHeader from '@/app/components/ui/PremiumHeader';
+import PremiumButton from '@/app/components/ui/PremiumButton';
+import RelatedApps from '@/app/components/RelatedApps';
+import { CAR_WARNING_LIGHTS_DATA, getRiskStyle, type WarningLight } from '@/lib/car-warning-lights';
 
-import AppFooter from "@/app/components/AppFooter";
-export default function CarMaintenancePage() {
-  const [carAge, setCarAge] = useState('5');
-  const [mileage, setMileage] = useState('80000');
-  const [fuelType, setFuelType] = useState('gasoline');
-  const [monthlyMileage, setMonthlyMileage] = useState('1000');
-  const [result, setResult] = useState<any>(null);
+export default function CarWarningLightsPage() {
+  const [selectedLight, setSelectedLight] = useState<WarningLight | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
-  const calculate = () => {
-    const age = Number(carAge);
-    const km = Number(mileage);
-    const monthly = Number(monthlyMileage);
-    
-    // 2025년 기준 평균 비용
-    const insurance = age <= 3 ? 1200000 : age <= 7 ? 900000 : 700000; // 자동차 보험료
-    const tax = age <= 3 ? 400000 : age <= 10 ? 300000 : 200000; // 자동차세
-    
-    // 연료비 (휘발유 1600원/L, 경유 1400원/L, LPG 900원/L, 전기 300원/kWh)
-    const fuelEfficiency: Record<string, number> = {
-      gasoline: 12, // km/L
-      diesel: 15,
-      lpg: 10,
-      electric: 5, // km/kWh
-      hybrid: 18,
-    };
-    
-    const fuelPrice: Record<string, number> = {
-      gasoline: 1600,
-      diesel: 1400,
-      lpg: 900,
-      electric: 300,
-      hybrid: 1600,
-    };
-    
-    const yearlyKm = monthly * 12;
-    const fuelCost = (yearlyKm / fuelEfficiency[fuelType]) * fuelPrice[fuelType];
-    
-    // 정비/소모품 (주행거리 기반)
-    const maintenance = km < 50000 ? 300000 : 
-                       km < 100000 ? 600000 : 
-                       km < 150000 ? 900000 : 1200000;
-    
-    // 감가상각 (신차가 3000만원 기준)
-    const carPrice = 30000000;
-    const depreciation = carPrice * (age < 1 ? 0.2 : age < 3 ? 0.15 : age < 5 ? 0.1 : 0.08);
-    
-    // 주차비 (월 10만원 가정)
-    const parking = 1200000;
-    
-    // 기타 (세차, 통행료 등)
-    const etc = 600000;
-    
-    const totalYearly = insurance + tax + fuelCost + maintenance + parking + etc;
-    const totalMonthly = totalYearly / 12;
-    
-    // 10년 총 비용
-    const total10Years = totalYearly * 10 + (depreciation * 10);
-
-    setResult({
-      insurance,
-      tax,
-      fuelCost,
-      maintenance,
-      depreciation,
-      parking,
-      etc,
-      totalYearly,
-      totalMonthly,
-      total10Years,
-    });
+  // 경고등 상세 보기
+  const openLightDetail = (light: WarningLight) => {
+    setSelectedLight(light);
+    setShowModal(true);
+    // 모달 열릴 때 페이지 맨 위로 스크롤
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   return (
-    <main className="min-h-screen bg-gray-200 dark:bg-gray-800 transition-colors">
-      <div className="container mx-auto px-4 py-8 max-w-4xl text-black placeholder-gray-500">
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">
-          <header className="text-center mb-8 text-black placeholder-gray-500">
-            <div className="text-5xl md:text-6xl mb-4 text-black placeholder-gray-500">🚗</div>
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 text-black placeholder-gray-500">
-              자동차 유지비 계산기
-            </h1>
-            <p className="text-sm md:text-base text-gray-600 text-black placeholder-gray-500">
-              보험료, 유류비, 세금, 감가상각 연식별 분석
+    <PremiumLayout theme="blue">
+      <div className="py-8 px-2 sm:px-4 md:py-12" suppressHydrationWarning>
+        <div className="max-w-7xl mx-auto" suppressHydrationWarning>
+          <PremiumHeader 
+            icon="🚗"
+            title="차량 경고등 가이드"
+            subtitle="64개 경고등의 의미와 대처법을 한눈에"
+            gradient="from-blue-200 via-cyan-200 to-sky-200"
+          />
+
+          {/* 경고등 가이드 이미지 */}
+          <PremiumCard className="mb-8" gradient>
+            <h2 className="text-white font-bold text-xl md:text-2xl mb-4 text-center">
+              📊 차량 경고등 전체 가이드
+            </h2>
+            <div className="relative w-full overflow-hidden rounded-xl">
+              <Image 
+                src="/images/car-warning-lights/guide.jpeg" 
+                alt="차량 경고등 가이드"
+                width={1200}
+                height={800}
+                className="w-full h-auto"
+                priority
+              />
+            </div>
+            <p className="text-white/70 text-sm text-center mt-4">
+              위 이미지에서 경고등 번호를 확인하고 아래 리스트에서 선택하세요
             </p>
-          </header>
+          </PremiumCard>
 
-          <div className="space-y-5 mb-8 text-black placeholder-gray-500">
-            <div>
-              <label className="block text-sm md:text-base font-semibold text-gray-700 mb-2 text-black placeholder-gray-500">
-                📅 차량 연식 (년)
-              </label>
-              <input
-                type="number"
-                value={carAge}
-                onChange={(e) => setCarAge(e.target.value)}
-                className="w-full p-3 border-2 border-gray-300 rounded-lg text-black placeholder-gray-500"
-              />
+          {/* 경고등 목록 - 번호순 */}
+          <PremiumCard className="mb-8">
+            <h2 className="text-white text-xl md:text-2xl font-bold mb-6 text-center">
+              📋 전체 경고등 64개 (번호순)
+            </h2>
+            
+            <div className="space-y-2">
+              {CAR_WARNING_LIGHTS_DATA.warningLights.map((light) => {
+                  const style = getRiskStyle(light.risk);
+                  
+                  return (
+                    <div 
+                      key={light.num}
+                      className="flex items-center gap-3 md:gap-4 p-3 md:p-4 bg-white/5 hover:bg-white/10 rounded-lg cursor-pointer transition-all"
+                      onClick={() => openLightDetail(light)}
+                    >
+                      {/* 번호 */}
+                      <div className="flex-shrink-0 w-10 md:w-12">
+                        <span className={`inline-flex w-8 h-8 md:w-10 md:h-10 rounded-full items-center justify-center font-bold text-sm md:text-base ${style.bg} ${style.text}`}>
+                          {light.num}
+                        </span>
+                      </div>
+                      
+                      {/* 이름 */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-white font-bold text-sm md:text-base truncate">
+                          {light.name}
+                        </h3>
+                        <p className="text-white/60 text-xs md:text-sm truncate">
+                          {light.symptom}
+                        </p>
+                      </div>
+                      
+                      {/* 위험도 */}
+                      <div className="flex-shrink-0 hidden sm:block">
+                        <span className={`inline-block px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold ${style.badge} text-white`}>
+                          {style.icon} {light.risk}
+                        </span>
+                      </div>
+                      
+                      {/* 수리비용 */}
+                      <div className="hidden md:block flex-shrink-0 text-white/70 text-sm font-medium" suppressHydrationWarning>
+                        {light.estimatedCost.average.toLocaleString()}원
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
+          </PremiumCard>
 
-            <div>
-              <label className="block text-sm md:text-base font-semibold text-gray-700 mb-2 text-black placeholder-gray-500">
-                🛣️ 현재 주행거리 (km)
-              </label>
-              <input
-                type="number"
-                value={mileage}
-                onChange={(e) => setMileage(e.target.value)}
-                className="w-full p-3 border-2 border-gray-300 rounded-lg text-black placeholder-gray-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm md:text-base font-semibold text-gray-700 mb-2 text-black placeholder-gray-500">
-                ⛽ 연료 종류
-              </label>
-              <select
-                value={fuelType}
-                onChange={(e) => setFuelType(e.target.value)}
-                className="w-full p-3 border-2 border-gray-300 rounded-lg text-black"
-              >
-                <option value="gasoline">휘발유</option>
-                <option value="diesel">경유</option>
-                <option value="lpg">LPG</option>
-                <option value="electric">전기</option>
-                <option value="hybrid">하이브리드</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm md:text-base font-semibold text-gray-700 mb-2 text-black placeholder-gray-500">
-                📏 월 평균 주행거리 (km)
-              </label>
-              <input
-                type="number"
-                value={monthlyMileage}
-                onChange={(e) => setMonthlyMileage(e.target.value)}
-                className="w-full p-3 border-2 border-gray-300 rounded-lg text-black placeholder-gray-500"
-              />
-            </div>
+          {/* Related Apps */}
+          <div className="mt-12 animate-fadeIn">
+            <RelatedApps 
+              relatedAppIds={['compass', 'weather-outfit', 'air-quality', 'travel-packing-list']} 
+              currentAppId="car-maintenance" 
+            />
           </div>
+        </div>
+      </div>
 
-          <button
-            onClick={calculate}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl text-lg font-bold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg"
-          >
-            💡 계산하기
-          </button>
-
-          {result && (
-            <div className="mt-8 space-y-6 text-black placeholder-gray-500">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border-2 border-blue-300 text-black placeholder-gray-500">
-                <h3 className="text-xl md:text-2xl font-bold text-center mb-6 text-black placeholder-gray-500">
-                  💰 연간 유지비
-                </h3>
-
-                <div className="bg-white p-6 rounded-xl mb-4 text-center border-2 border-blue-200 text-black placeholder-gray-500">
-                  <p className="text-sm text-gray-600 mb-2 text-black placeholder-gray-500">연간 총 유지비</p>
-                  <p className="text-3xl md:text-4xl font-bold text-black text-black placeholder-gray-500">
-                    {result.totalYearly.toLocaleString()}원
-                  </p>
-                  <p className="text-lg text-gray-500 mt-2 text-black placeholder-gray-500">
-                    월 평균 {result.totalMonthly.toLocaleString()}원
-                  </p>
-                </div>
-
-                <div className="space-y-3 text-black placeholder-gray-500">
-                  <div className="flex justify-between p-3 bg-white rounded-lg text-black placeholder-gray-500">
-                    <span className="text-gray-600 text-black placeholder-gray-500">🛡️ 자동차 보험료</span>
-                    <span className="font-bold text-black placeholder-gray-500">{result.insurance.toLocaleString()}원</span>
+      {/* 상세 모달 */}
+      {showModal && selectedLight && (
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 overflow-y-auto p-4"
+          onClick={() => setShowModal(false)}
+          suppressHydrationWarning
+        >
+          <div className="min-h-screen flex items-start justify-center pt-8 pb-8">
+            <div 
+              className="bg-gradient-to-br from-blue-900/95 via-cyan-900/95 to-blue-900/95 rounded-3xl p-6 md:p-8 max-w-4xl w-full border-2 border-blue-400/30 shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+              suppressHydrationWarning
+            >
+              {/* 헤더 */}
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className={`inline-flex w-12 h-12 rounded-full items-center justify-center font-bold text-lg ${getRiskStyle(selectedLight.risk).bg} ${getRiskStyle(selectedLight.risk).text}`}>
+                      {selectedLight.num}
+                    </span>
+                    <h2 className="text-white font-bold text-2xl md:text-3xl">{selectedLight.name}</h2>
                   </div>
-                  <div className="flex justify-between p-3 bg-white rounded-lg text-black placeholder-gray-500">
-                    <span className="text-gray-600 text-black placeholder-gray-500">🏛️ 자동차세</span>
-                    <span className="font-bold text-black placeholder-gray-500">{result.tax.toLocaleString()}원</span>
-                  </div>
-                  <div className="flex justify-between p-3 bg-white rounded-lg text-black placeholder-gray-500">
-                    <span className="text-gray-600 text-black placeholder-gray-500">⛽ 연료비</span>
-                    <span className="font-bold text-black placeholder-gray-500">{result.fuelCost.toLocaleString()}원</span>
-                  </div>
-                  <div className="flex justify-between p-3 bg-white rounded-lg text-black placeholder-gray-500">
-                    <span className="text-gray-600 text-black placeholder-gray-500">🔧 정비/소모품</span>
-                    <span className="font-bold text-black placeholder-gray-500">{result.maintenance.toLocaleString()}원</span>
-                  </div>
-                  <div className="flex justify-between p-3 bg-white rounded-lg text-black placeholder-gray-500">
-                    <span className="text-gray-600 text-black placeholder-gray-500">🅿️ 주차비</span>
-                    <span className="font-bold text-black placeholder-gray-500">{result.parking.toLocaleString()}원</span>
-                  </div>
-                  <div className="flex justify-between p-3 bg-white rounded-lg text-black placeholder-gray-500">
-                    <span className="text-gray-600 text-black placeholder-gray-500">💸 기타 (세차/통행료)</span>
-                    <span className="font-bold text-black placeholder-gray-500">{result.etc.toLocaleString()}원</span>
-                  </div>
-                </div>
-
-                <div className="mt-6 p-4 bg-red-50 rounded-lg border border-red-200 text-black placeholder-gray-500">
-                  <div className="flex justify-between text-black placeholder-gray-500">
-                    <span className="font-bold text-gray-800 text-black placeholder-gray-500">📉 연간 감가상각</span>
-                    <span className="font-bold text-black text-black placeholder-gray-500">
-                      -{result.depreciation.toLocaleString()}원
+                  <div className="flex items-center gap-2">
+                    <span className={`${getRiskStyle(selectedLight.risk).badge} text-white px-4 py-2 rounded-full text-sm font-bold`}>
+                      {getRiskStyle(selectedLight.risk).icon} 위험도: {selectedLight.risk}
                     </span>
                   </div>
                 </div>
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="text-white hover:text-red-400 text-4xl font-bold transition-colors ml-4"
+                >
+                  ×
+                </button>
+              </div>
 
-                <div className="mt-4 p-5 bg-gradient-to-r from-purple-100 to-blue-100 rounded-xl border-2 border-purple-300 text-black placeholder-gray-500">
-                  <p className="text-center text-sm text-gray-600 mb-2 text-black placeholder-gray-500">10년 총 비용 (감가상각 포함)</p>
-                  <p className="text-center text-2xl md:text-3xl font-bold text-black text-black placeholder-gray-500">
-                    {result.total10Years.toLocaleString()}원
+              {/* 내용 */}
+              <div className="space-y-6">
+                {/* 증상 */}
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 border border-white/20">
+                  <h3 className="text-white font-bold text-xl mb-3 flex items-center gap-2">
+                    💡 증상 및 원인
+                  </h3>
+                  <p className="text-white/90 text-base leading-relaxed">{selectedLight.symptom}</p>
+                </div>
+
+                {/* 정비 정보 */}
+                <div className="bg-green-500/20 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 border border-green-400/30">
+                  <h3 className="text-white font-bold text-xl mb-4 flex items-center gap-2">
+                    🔧 정비 정보
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-green-300 font-bold mb-2">⏱️ 정비 주기:</p>
+                      <p className="text-white/80 text-base">{selectedLight.serviceInterval}</p>
+                    </div>
+                    <div suppressHydrationWarning>
+                      <p className="text-green-300 font-bold mb-2">💰 예상 비용:</p>
+                      <p className="text-green-300 text-lg md:text-xl font-bold" suppressHydrationWarning>
+                        평균 {selectedLight.estimatedCost.average.toLocaleString()}원
+                      </p>
+                      <p className="text-white/70 text-sm mt-1" suppressHydrationWarning>
+                        최소 {selectedLight.estimatedCost.min.toLocaleString()}원 ~ 최대 {selectedLight.estimatedCost.max.toLocaleString()}원
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 주의사항 */}
+                <div className={`${getRiskStyle(selectedLight.risk).badge}/20 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 border ${getRiskStyle(selectedLight.risk).badge}/30`}>
+                  <h3 className="text-white font-bold text-xl mb-3 flex items-center gap-2">
+                    {getRiskStyle(selectedLight.risk).icon} 위험도: {selectedLight.risk}
+                  </h3>
+                  <div className="space-y-2 text-white/80">
+                    {selectedLight.risk === '치명' && (
+                      <p className="text-red-300 font-bold">⚠️ 즉시 정차하고 전문 정비소에서 점검받으세요. 운행 시 차량 손상 및 안전사고 위험이 있습니다.</p>
+                    )}
+                    {selectedLight.risk === '높음' && (
+                      <p className="text-orange-300 font-bold">⚠️ 가능한 빠른 시일 내에 정비소를 방문하세요. 방치 시 큰 고장으로 이어질 수 있습니다.</p>
+                    )}
+                    {selectedLight.risk === '중간' && (
+                      <p className="text-yellow-300">⚡ 일주일 내로 점검을 권장합니다. 주행은 가능하나 주의가 필요합니다.</p>
+                    )}
+                    {selectedLight.risk === '낮음' && (
+                      <p className="text-blue-300">ℹ️ 정보성 경고입니다. 정기 점검 시 확인하면 됩니다.</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* 비용 안내 */}
+                <div className="bg-blue-500/10 backdrop-blur-sm rounded-xl p-4 border border-blue-400/20">
+                  <p className="text-white/60 text-xs md:text-sm text-center leading-relaxed">
+                    {CAR_WARNING_LIGHTS_DATA.note}
                   </p>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-      </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
 
-    </main>
+              {/* 닫기 버튼 */}
+              <div className="mt-6">
+                <PremiumButton
+                  onClick={() => setShowModal(false)}
+                  variant="primary"
+                  size="lg"
+                  fullWidth
+                >
+                  닫기
+                </PremiumButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+      `}</style>
+    </PremiumLayout>
   );
 }

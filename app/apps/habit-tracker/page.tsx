@@ -126,7 +126,7 @@ export default function HabitTrackerPage() {
   if (!currentUser) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50 dark:from-teal-500 dark:via-green-500 dark:to-emerald-600 flex items-center justify-center px-4 transition-colors">
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full border-2 border-white/30">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8 max-w-md w-full border-2 border-white/30">
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">🎯</div>
             <h1 className="text-4xl font-bold text-white mb-2">습관 트래커</h1>
@@ -316,7 +316,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
         {!showAddForm && (
           <button
             onClick={() => setShowAddForm(true)}
-            className="w-full bg-white/20 hover:bg-white/30 text-white font-bold py-4 rounded-2xl mb-6 flex items-center justify-center gap-2 transition-all"
+            className="w-full bg-white/20 hover:bg-white/30 text-white font-bold py-4 rounded sm:rounded-lg md:rounded-2xl mb-6 flex items-center justify-center gap-2 transition-all"
           >
             <span className="text-2xl">+</span>
             <span>새 습관 추가</span>
@@ -325,7 +325,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
 
         {/* 습관 추가 폼 */}
         {showAddForm && (
-          <div className="bg-white/20 backdrop-blur-lg rounded-2xl p-6 mb-6">
+          <div className="bg-white/20 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 mb-6">
             <h3 className="text-2xl font-bold text-white mb-4">새 습관 추가</h3>
 
             <div className="space-y-4">
@@ -343,12 +343,12 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
 
               <div>
                 <label className="text-white font-bold mb-2 block">목표 기간</label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                   {Object.entries(GOAL_INFO).map(([days, info]) => (
                     <button
                       key={days}
                       onClick={() => setSelectedGoal(Number(days) as 21 | 66 | 100)}
-                      className={`p-4 rounded-xl font-bold transition-all ${
+                      className={`p-2 md:p-4 rounded-xl font-bold transition-all ${
                         selectedGoal === Number(days)
                           ? `bg-gradient-to-r ${info.gradient} text-white`
                           : 'bg-white/10 text-white hover:bg-white/20'
@@ -400,7 +400,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
                 </div>
               )}
 
-              <div className="flex gap-3">
+              <div className="flex gap-0 sm:gap-1.5 md:gap-3">
                 <button
                   onClick={addHabit}
                   className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-all"
@@ -424,13 +424,13 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
 
         {/* 습관 목록 */}
         {habits.length === 0 ? (
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-12 text-center">
+          <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-12 text-center">
             <div className="text-6xl mb-4">📋</div>
             <p className="text-white text-xl">아직 등록된 습관이 없습니다</p>
             <p className="text-white/70 mt-2">위의 버튼을 눌러 새 습관을 추가하세요!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {habits.map((habit) => {
               const progress = getProgress(habit);
               const streak = getStreak(habit);
@@ -440,7 +440,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
               return (
                 <div
                   key={habit.id}
-                  className={`bg-white/10 backdrop-blur-lg rounded-2xl p-6 border-2 ${
+                  className={`bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 border-2 ${
                     isChecked ? 'border-green-400' : 'border-white/30'
                   }`}
                 >
@@ -487,7 +487,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
 
                   <button
                     onClick={() => toggleCheck(habit.id)}
-                    className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${
+                    className={`w-full py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all ${
                       isChecked
                         ? 'bg-green-500 hover:bg-green-600 text-white'
                         : 'bg-white hover:bg-gray-100 text-green-600'

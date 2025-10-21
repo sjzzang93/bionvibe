@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import AppFooter from '@/app/components/AppFooter';
-import dynamic from 'next/dynamic';
-
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
+import RelatedApps from '@/app/components/RelatedApps';
 
 interface DreamResult {
   keyword: string;
@@ -57,101 +58,165 @@ export default function DreamInterpreterPage() {
     }
 
     setResult(foundResult);
-    setTimeout(() => {
-      document.getElementById('result-section')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900 py-8 px-4 transition-colors">
-      {/* Hero */}
-      <div className="text-center mb-12">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-4">
-          💭 꿈해몽
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-purple-200 max-w-2xl mx-auto">
-          꿈에서 본 것을 입력하면<br />
-          전통 꿈해몽으로 의미를 해석해드립니다
-        </p>
-      </div>
+    <PremiumLayout theme="indigo">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 bg-clip-text text-transparent">
+            💭 꿈해몽
+          </h1>
+          <p className="text-xl text-white/80">전통 꿈해몽으로 꿈의 의미를 해석해드립니다</p>
+        </div>
 
-      {/* 입력 폼 */}
-      <div className="max-w-[640px] mx-auto bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-8 border border-gray-200 dark:border-white/10">
-        <fieldset>
-          <legend className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-            🌙 꿈 내용을 입력하세요
-          </legend>
+        {/* Input Card */}
+        <PremiumCard hover gradient className="mb-8 animate-slideUp">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">어떤 꿈을 꾸셨나요?</h2>
+          
           <textarea
             value={dreamText}
             onChange={(e) => setDreamText(e.target.value)}
-            placeholder="예: 오늘 꿈에 뱀이 나왔어요..."
+            placeholder="예: 호랑이가 나타났어요, 돈을 주웠어요..."
+            className="w-full px-6 py-4 rounded sm:rounded-lg md:rounded-2xl text-black text-lg border-2 border-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/30 transition-all resize-none"
             rows={6}
-            className="w-full px-4 py-3 border-2 border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-pink-500 text-black dark:text-white bg-white dark:bg-gray-800"
-            style={{ fontSize: '16px' }}
           />
-          <p className="text-sm text-gray-600 dark:text-purple-200 mt-2">
-            💡 키워드: 돈, 뱀, 호랑이, 물, 불, 꽃, 나무, 집, 차, 비행기 등
-          </p>
-        </fieldset>
 
-        <button
-          onClick={handleInterpret}
-          className="w-full mt-6 bg-gradient-to-r from-pink-500 to-purple-500 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all"
-          style={{ minHeight: '48px' }}
-        >
-          해몽하기
-        </button>
-      </div>
+          <div className="mt-6 text-center">
+            <PremiumButton
+              onClick={handleInterpret}
+              variant="primary"
+              size="lg"
+              icon="🔮"
+              fullWidth
+            >
+              꿈해몽 시작하기
+            </PremiumButton>
+          </div>
 
-      {/* 결과 */}
-      {result && (
-        <div id="result-section" className="max-w-[800px] mx-auto space-y-6">
-          <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-white/10">
-            <div className="text-center mb-6">
-              <div className="text-6xl mb-4">🔮</div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">해몽 결과</h2>
-              <div className="inline-block bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-bold">
-                {result.category}
-              </div>
+          {/* 인기 키워드 */}
+          <div className="mt-8">
+            <h3 className="text-white text-sm font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-center">💡 인기 키워드</h3>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {Object.keys(dreamDatabase).map((keyword) => (
+                <button
+                  key={keyword}
+                  onClick={() => setDreamText(keyword)}
+                  className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm border border-white/20 transition-all duration-300 hover:scale-110"
+                >
+                  {keyword}
+                </button>
+              ))}
             </div>
+          </div>
+        </PremiumCard>
 
-            <div className="space-y-6">
-              <div className="bg-purple-50 dark:bg-white/20 rounded-xl p-6 border border-purple-100 dark:border-white/10">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">💫 의미</h3>
-                <p className="text-gray-700 dark:text-purple-100 leading-relaxed">{result.meaning}</p>
+        {/* Result */}
+        {result && (
+          <div className="space-y-6 animate-fadeIn">
+            <PremiumCard hover gradient>
+              <div className="text-center mb-6">
+                <div className="text-6xl mb-4 animate-bounce-slow">🌙</div>
+                <h2 className="text-3xl font-bold text-white mb-2">
+                  "{result.keyword}" 꿈의 해석
+                </h2>
+                <span className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white rounded-full text-sm border border-white/20">
+                  {result.category}
+                </span>
               </div>
 
-              <div className="bg-yellow-50 dark:bg-white/20 rounded-xl p-6 border border-yellow-100 dark:border-white/10">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">🎰 행운의 숫자</h3>
-                <div className="flex flex-wrap gap-3 justify-center">
-                  {result.luckyNumber.map((num, index) => (
+              <div className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-white/10 mb-6">
+                <h3 className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
+                  <span className="text-xl">✨</span> 꿈의 의미
+                </h3>
+                <p className="text-white/90 text-lg leading-relaxed">{result.meaning}</p>
+              </div>
+
+              <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-yellow-400/30 mb-6">
+                <h3 className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
+                  <span className="text-xl">🎯</span> 조언
+                </h3>
+                <p className="text-white/90 leading-relaxed">{result.advice}</p>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-green-400/30">
+                <h3 className="text-white font-bold mb-4 flex items-center gap-2">
+                  <span className="text-xl">🍀</span> 행운의 번호
+                </h3>
+                <div className="grid grid-cols-3 md:grid-cols-6 gap-0 sm:gap-1.5 md:gap-3">
+                  {result.luckyNumber.map((num, idx) => (
                     <div
-                      key={index}
-                      className="w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg"
+                      key={idx}
+                      className="bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20 hover:scale-110 transition-all duration-300"
+                      style={{ animationDelay: `${idx * 0.1}s` }}
                     >
-                      {num}
+                      <div className="text-3xl font-bold text-white">{num}</div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-pink-50 dark:bg-white/20 rounded-xl p-6 border border-pink-100 dark:border-white/10">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">💡 조언</h3>
-                <p className="text-gray-700 dark:text-purple-100 leading-relaxed">{result.advice}</p>
+              <div className="mt-6 text-center">
+                <PremiumButton
+                  onClick={() => {
+                    setDreamText('');
+                    setResult(null);
+                  }}
+                  variant="secondary"
+                  size="md"
+                  icon="🔄"
+                >
+                  다른 꿈 해석하기
+                </PremiumButton>
               </div>
+            </PremiumCard>
+
+            {/* Related Apps */}
+            <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+              <RelatedApps 
+                relatedAppIds={['today-fortune', 'color-psychology', 'mbti-test', 'voice-fortune']} 
+                currentAppId="dream-interpreter" 
+              />
             </div>
           </div>
-        </div>
-      )}
-
-      {/* 하단 고지 */}
-      <div className="max-w-3xl mx-auto mt-16 text-center text-sm text-purple-200">
-        <p className="text-xs">꿈해몽은 재미와 참고용이며, 과학적 근거가 없습니다.</p>
-
-      {/* 제작자 서명 */}
-      <AppFooter />
+        )}
       </div>
-    </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .animate-bounce-slow {
+          animation: bounce-slow 2s ease-in-out infinite;
+        }
+      `}</style>
+    </PremiumLayout>
   );
 }
-

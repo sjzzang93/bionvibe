@@ -197,26 +197,26 @@ export default function PhoneUsageAnalyzerPage() {
               </p>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-6">
+            <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 space-y-6">
               {/* iPhone Screen Time 안내 */}
               <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl p-6 text-white">
                 <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                   📱 iPhone Screen Time 확인하기
                 </h2>
-                <ol className="space-y-3 text-sm md:text-base">
-                  <li className="flex gap-3">
+                <ol className="space-y-3 text-[10px] sm:text-xs md:text-sm">
+                  <li className="flex gap-0 sm:gap-1.5 md:gap-3">
                     <span className="font-bold text-yellow-300">1️⃣</span>
                     <span>iPhone <strong>설정</strong> 앱 열기</span>
                   </li>
-                  <li className="flex gap-3">
+                  <li className="flex gap-0 sm:gap-1.5 md:gap-3">
                     <span className="font-bold text-yellow-300">2️⃣</span>
                     <span><strong>스크린 타임</strong> 메뉴 선택</span>
                   </li>
-                  <li className="flex gap-3">
+                  <li className="flex gap-0 sm:gap-1.5 md:gap-3">
                     <span className="font-bold text-yellow-300">3️⃣</span>
                     <span><strong>모든 활동 보기</strong> 탭</span>
                   </li>
-                  <li className="flex gap-3">
+                  <li className="flex gap-0 sm:gap-1.5 md:gap-3">
                     <span className="font-bold text-yellow-300">4️⃣</span>
                     <span><strong>주</strong> 탭으로 전환하여 7일 데이터 확인</span>
                   </li>
@@ -240,7 +240,7 @@ export default function PhoneUsageAnalyzerPage() {
                       <label className="text-white font-bold mb-2 block">
                         {day.day}
                       </label>
-                      <div className="flex gap-3">
+                      <div className="flex gap-0 sm:gap-1.5 md:gap-3">
                         <div className="flex-1">
                           <input
                             type="number"
@@ -281,7 +281,7 @@ export default function PhoneUsageAnalyzerPage() {
                 <p className="text-white/80 text-sm mb-4">
                   더 정확한 분석을 위해 카테고리별 일평균 시간을 입력해주세요
                 </p>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-2">
                   <div>
                     <label className="text-white font-semibold mb-2 block text-sm">
                       SNS (인스타/페북)
@@ -372,7 +372,7 @@ export default function PhoneUsageAnalyzerPage() {
             </div>
 
             {/* 중독도 */}
-            <div className={`${result.levelColor} rounded-2xl p-8 text-white text-center shadow-2xl`}>
+            <div className={`${result.levelColor} rounded sm:rounded-lg md:rounded-2xl p-8 text-white text-center shadow-2xl`}>
               <div className="text-7xl mb-4">{result.emoji}</div>
               <div className="text-3xl font-black mb-2">
                 중독도: {result.level}
@@ -386,7 +386,7 @@ export default function PhoneUsageAnalyzerPage() {
             </div>
 
             {/* 7일 통계 */}
-            <div className="bg-white rounded-2xl p-6 md:p-8">
+            <div className="bg-white rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8">
               <h2 className="text-2xl font-bold text-gray-800 mb-6">📊 7일 통계</h2>
               
               <div className="space-y-4">
@@ -422,7 +422,7 @@ export default function PhoneUsageAnalyzerPage() {
               {/* 주중/주말 비교 */}
               <div className="mt-6 pt-6 border-t-2 border-gray-200">
                 <h3 className="font-bold text-gray-800 mb-4 text-lg">📈 트렌드 분석</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 gap-2">
                   <div className="bg-blue-50 rounded-xl p-4">
                     <div className="text-sm text-gray-600 mb-1">주중 평균</div>
                     <div className="text-2xl font-bold text-blue-600">
@@ -446,7 +446,7 @@ export default function PhoneUsageAnalyzerPage() {
 
             {/* 경고 지표 */}
             {result.warnings.length > 0 && (
-              <div className="bg-red-500 rounded-2xl p-6 md:p-8 text-white">
+              <div className="bg-red-500 rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 text-white">
                 <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                   ⚠️ 경고 지표
                 </h2>
@@ -462,14 +462,14 @@ export default function PhoneUsageAnalyzerPage() {
             )}
 
             {/* 맞춤 처방 */}
-            <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-6 md:p-8 text-white">
+            <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 text-white">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 💊 맞춤 처방
               </h2>
               <div className="space-y-4">
                 {result.prescriptions.map((prescription: string, idx: number) => (
                   <div key={idx} className="bg-white/20 rounded-xl p-4">
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-0 sm:gap-1.5 md:gap-3">
                       <span className="text-2xl font-bold">{idx + 1}</span>
                       <span className="text-lg flex-1">{prescription}</span>
                     </div>
@@ -479,13 +479,13 @@ export default function PhoneUsageAnalyzerPage() {
             </div>
 
             {/* 재분석 버튼 */}
-            <div className="flex gap-3">
+            <div className="flex gap-0 sm:gap-1.5 md:gap-3">
               <button
                 onClick={() => {
                   setShowResult(false);
                   setResult(null);
                 }}
-                className="flex-1 bg-white/20 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-white/30 transition-all"
+                className="flex-1 bg-white/20 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:bg-white/30 transition-all"
               >
                 ← 데이터 수정
               </button>
@@ -504,7 +504,7 @@ export default function PhoneUsageAnalyzerPage() {
                   setCategories({ sns: 0, video: 0, game: 0, messenger: 0 });
                   setResult(null);
                 }}
-                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all"
+                className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
               >
                 🔄 처음부터
               </button>

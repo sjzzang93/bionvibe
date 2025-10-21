@@ -82,12 +82,12 @@ export default function MultiplicationGamePage() {
           </h1>
           <p className="text-center text-purple-100 mb-12">재미있게 구구단을 마스터하세요!</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* 연습 모드 */}
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+            <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8">
               <h2 className="text-3xl font-bold text-white mb-4 text-center">📚 연습 모드</h2>
               <p className="text-white/80 text-center mb-6">원하는 단을 선택해서 연습하세요</p>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                 {[2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                   <button
                     key={num}
@@ -101,7 +101,7 @@ export default function MultiplicationGamePage() {
             </div>
 
             {/* 스피드 모드 */}
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+            <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8">
               <h2 className="text-3xl font-bold text-white mb-4 text-center">⚡ 스피드 모드</h2>
               <p className="text-white/80 text-center mb-6">60초 안에 최대한 많이 맞추세요!</p>
               <div className="flex flex-col items-center">
@@ -130,7 +130,7 @@ export default function MultiplicationGamePage() {
           ← 메뉴로
         </button>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8">
           {/* 헤더 */}
           <div className="flex justify-between items-center mb-8">
             <div className="text-white">
@@ -153,7 +153,7 @@ export default function MultiplicationGamePage() {
           {/* 문제 */}
           {(isPlaying || mode === 'practice') ? (
             <form onSubmit={handleSubmit}>
-              <div className="bg-white rounded-2xl p-12 mb-6">
+              <div className="bg-white rounded sm:rounded-lg md:rounded-2xl p-12 mb-6">
                 <div className="text-center text-6xl font-bold text-gray-800 mb-8">
                   {question.a} × {question.b} = ?
                 </div>

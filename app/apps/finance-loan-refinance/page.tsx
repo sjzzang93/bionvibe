@@ -77,57 +77,57 @@ export default function LoanRefinancePage() {
         <h1 className="text-4xl md:text-6xl font-extrabold text-center text-white mb-4">
           🏦 대출 갈아타기 분석
         </h1>
-        <p className="text-center text-purple-100 mb-8 text-sm md:text-base">금리 인하로 얼마나 절약할 수 있을까요?</p>
+        <p className="text-center text-purple-100 mb-8 text-[10px] sm:text-xs md:text-sm">금리 인하로 얼마나 절약할 수 있을까요?</p>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-4 md:space-y-6">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 space-y-4 md:space-y-6">
           <h2 className="text-xl md:text-2xl font-bold text-white mb-4">현재 대출 정보</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-2">
             <div>
-              <label className="text-white font-bold mb-2 block text-sm md:text-base">현재 대출액 (원)</label>
+              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">현재 대출액 (원)</label>
               <input
                 type="number"
                 value={currentLoan}
                 onChange={(e) => setCurrentLoan(e.target.value)}
                 placeholder="예: 100000000"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
                 style={{ fontSize: '16px', minHeight: '44px' }}
               />
             </div>
             <div>
-              <label className="text-white font-bold mb-2 block text-sm md:text-base">현재 금리 (%)</label>
+              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">현재 금리 (%)</label>
               <input
                 type="number"
                 step="0.01"
                 value={currentRate}
                 onChange={(e) => setCurrentRate(e.target.value)}
                 placeholder="예: 4.5"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
                 style={{ fontSize: '16px', minHeight: '44px' }}
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-2">
             <div>
-              <label className="text-white font-bold mb-2 block text-sm md:text-base">대출 기간 (개월)</label>
+              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">대출 기간 (개월)</label>
               <input
                 type="number"
                 value={currentMonths}
                 onChange={(e) => setCurrentMonths(e.target.value)}
                 placeholder="예: 360 (30년)"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
                 style={{ fontSize: '16px', minHeight: '44px' }}
               />
             </div>
             <div>
-              <label className="text-white font-bold mb-2 block text-sm md:text-base">경과 기간 (개월)</label>
+              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">경과 기간 (개월)</label>
               <input
                 type="number"
                 value={monthsPassed}
                 onChange={(e) => setMonthsPassed(e.target.value)}
                 placeholder="예: 60 (5년)"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
                 style={{ fontSize: '16px', minHeight: '44px' }}
               />
             </div>
@@ -136,21 +136,21 @@ export default function LoanRefinancePage() {
           <h2 className="text-xl md:text-2xl font-bold text-white mb-4 pt-4">새 대출 정보</h2>
 
           <div>
-            <label className="text-white font-bold mb-2 block text-sm md:text-base">새 금리 (%)</label>
+            <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">새 금리 (%)</label>
             <input
               type="number"
               step="0.01"
               value={newRate}
               onChange={(e) => setNewRate(e.target.value)}
               placeholder="예: 3.2"
-              className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+              className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
               style={{ fontSize: '16px', minHeight: '44px' }}
             />
           </div>
 
           <button
             onClick={handleAnalyze}
-            className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-lg md:text-xl hover:shadow-lg transition-all"
+            className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm md:text-xl hover:shadow-lg transition-all"
             style={{ minHeight: '48px' }}
           >
             분석하기
@@ -170,7 +170,7 @@ export default function LoanRefinancePage() {
                 <div className="text-2xl md:text-3xl font-bold mb-2">
                   {result.isRecommended ? '갈아타기 추천!' : '신중한 검토 필요'}
                 </div>
-                <div className="text-sm md:text-base">
+                <div className="text-[10px] sm:text-xs md:text-sm">
                   {result.isRecommended 
                     ? '금리 차이가 충분히 크므로 갈아타기를 권장합니다'
                     : '절감액이 크지 않거나 수수료를 고려하면 이득이 적습니다'
@@ -182,11 +182,11 @@ export default function LoanRefinancePage() {
               <div className="bg-white rounded-xl p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4">월 상환액 비교</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between text-sm md:text-base">
+                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                     <span className="text-gray-600">현재 월 상환액:</span>
                     <span className="font-bold text-red-600">₩{result.currentMonthly.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-sm md:text-base">
+                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                     <span className="text-gray-600">새 월 상환액:</span>
                     <span className="font-bold text-blue-600">₩{result.newMonthly.toLocaleString()}</span>
                   </div>
@@ -201,11 +201,11 @@ export default function LoanRefinancePage() {
               <div className="bg-white rounded-xl p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4">절감 효과</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between text-sm md:text-base">
+                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                     <span className="text-gray-600">총 절감액:</span>
                     <span className="font-bold text-blue-600">₩{result.totalSavings.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-sm md:text-base">
+                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                     <span className="text-gray-600">갈아타기 수수료 (예상):</span>
                     <span className="font-bold text-orange-600">-₩{result.refinanceFee.toLocaleString()}</span>
                   </div>
@@ -221,7 +221,7 @@ export default function LoanRefinancePage() {
               {/* 추가 정보 */}
               <div className="bg-white rounded-xl p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4">추가 정보</h3>
-                <div className="space-y-3 text-sm md:text-base">
+                <div className="space-y-3 text-[10px] sm:text-xs md:text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">남은 대출금:</span>
                     <span className="font-bold text-gray-800">₩{result.remainingBalance.toLocaleString()}</span>
@@ -239,7 +239,7 @@ export default function LoanRefinancePage() {
 
               {/* 조언 */}
               <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl p-4 md:p-6 text-white">
-                <h4 className="font-bold mb-3 text-base md:text-lg">💡 전문가 조언</h4>
+                <h4 className="font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-base md:text-lg">💡 전문가 조언</h4>
                 <ul className="space-y-2 text-xs md:text-sm list-disc list-inside">
                   <li>대출 갈아타기는 금리 차이가 최소 1% 이상일 때 권장됩니다</li>
                   <li>중도상환 수수료와 신규 대출 수수료를 확인하세요</li>

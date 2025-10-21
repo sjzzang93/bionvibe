@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import AppFooter from "@/app/components/AppFooter";
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
+import RelatedApps from '@/app/components/RelatedApps';
 import Link from 'next/link';
 
 interface Question {
@@ -283,113 +286,164 @@ export default function MBTI32() {
 
   if (showResult && result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 p-4 transition-colors">
-        <div className="max-w-4xl mx-auto">
+      <PremiumLayout theme="purple">
+        <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Back Button */}
-          <div className="mb-6">
-            <Link 
-              href="/"
-              className="inline-flex items-center gap-2 text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-200 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              <span>돌아가기</span>
-            </Link>
-          </div>
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-all duration-300 mb-8 group"
+          >
+            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>돌아가기</span>
+          </Link>
 
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+          {/* Header */}
+          <div className="text-center mb-12 animate-fadeIn">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 bg-clip-text text-transparent">
               🎭 MBTI 결과
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">당신의 성격 유형을 분석했습니다!</p>
+            <p className="text-xl text-white/80">당신의 성격 유형을 분석했습니다!</p>
           </div>
 
-          <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 dark:border-white/20 shadow-xl">
-            <div className="text-center mb-8">
-              <div className="text-6xl md:text-8xl font-bold text-purple-600 dark:text-yellow-300 mb-4">
+          {/* Result Card */}
+          <PremiumCard hover gradient className="mb-8 animate-slideUp">
+            <div className="text-center mb-10">
+              <div className="text-7xl md:text-9xl font-bold mb-6 animate-bounce-slow" style={{
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 60px rgba(102, 126, 234, 0.4)'
+              }}>
                 {result.type}
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">
                 {result.description}
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <div className="bg-purple-50 dark:bg-white/10 rounded-2xl p-6 border border-purple-100 dark:border-white/10">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                    🎯 주요 특성
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {result.characteristics.map((char, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-purple-200 dark:bg-purple-500/30 text-purple-900 dark:text-white rounded-full text-sm"
-                      >
-                        {char}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-green-50 dark:bg-white/10 rounded-2xl p-6 border border-green-100 dark:border-white/10">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                    💪 강점
-                  </h3>
-                  <ul className="space-y-2">
-                    {result.strengths.map((strength, index) => (
-                      <li key={index} className="text-gray-700 dark:text-gray-300 flex items-center">
-                        <span className="text-green-600 dark:text-green-400 mr-2">✓</span>
-                        {strength}
-                      </li>
-                    ))}
-                  </ul>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-8">
+              {/* 주요 특성 */}
+              <div className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <span className="text-2xl">🎯</span> 주요 특성
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {result.characteristics.map((char, index) => (
+                    <span
+                      key={index}
+                      className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white rounded-full text-sm border border-white/20 hover:scale-110 transition-transform duration-300"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      {char}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="bg-yellow-50 dark:bg-white/10 rounded-2xl p-6 border border-yellow-100 dark:border-white/10">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                    ⚠️ 주의점
-                  </h3>
-                  <ul className="space-y-2">
-                    {result.weaknesses.map((weakness, index) => (
-                      <li key={index} className="text-gray-700 dark:text-gray-300 flex items-center">
-                        <span className="text-yellow-600 dark:text-yellow-400 mr-2">!</span>
-                        {weakness}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {/* 추천 직업 */}
+              <div className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <span className="text-2xl">💼</span> 추천 직업
+                </h3>
+                <ul className="space-y-2">
+                  {result.careers.map((career, index) => (
+                    <li key={index} className="text-white/90 flex items-center group">
+                      <span className="text-blue-400 mr-3 group-hover:scale-125 transition-transform">💼</span>
+                      <span className="group-hover:translate-x-1 transition-transform">{career}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                <div className="bg-blue-50 dark:bg-white/10 rounded-2xl p-6 border border-blue-100 dark:border-white/10">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                    💼 추천 직업
-                  </h3>
-                  <ul className="space-y-2">
-                    {result.careers.map((career, index) => (
-                      <li key={index} className="text-gray-700 dark:text-gray-300 flex items-center">
-                        <span className="text-blue-600 dark:text-blue-400 mr-2">💼</span>
-                        {career}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {/* 강점 */}
+              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-green-400/30 hover:border-green-400/50 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <span className="text-2xl">💪</span> 강점
+                </h3>
+                <ul className="space-y-2">
+                  {result.strengths.map((strength, index) => (
+                    <li key={index} className="text-white/90 flex items-center group">
+                      <span className="text-green-400 mr-3 group-hover:scale-125 transition-transform">✓</span>
+                      <span className="group-hover:translate-x-1 transition-transform">{strength}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 주의점 */}
+              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-amber-400/30 hover:border-amber-400/50 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <span className="text-2xl">⚠️</span> 주의점
+                </h3>
+                <ul className="space-y-2">
+                  {result.weaknesses.map((weakness, index) => (
+                    <li key={index} className="text-white/90 flex items-center group">
+                      <span className="text-amber-400 mr-3 group-hover:scale-125 transition-transform">!</span>
+                      <span className="group-hover:translate-x-1 transition-transform">{weakness}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
-            <div className="text-center mt-8">
-              <button
+            <div className="text-center">
+              <PremiumButton
                 onClick={resetTest}
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-lg"
+                variant="primary"
+                size="lg"
+                icon="🔄"
               >
                 다시 테스트하기
-              </button>
+              </PremiumButton>
             </div>
+          </PremiumCard>
+
+          {/* Related Apps */}
+          <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+            <RelatedApps 
+              relatedAppIds={['today-fortune', 'color-psychology', 'saju-mbti-jobs', 'past-life-job']} 
+              currentAppId="mbti-test" 
+            />
           </div>
         </div>
-      </main>
+
+        <style jsx>{`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes slideUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+          
+          .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+          }
+          
+          .animate-slideUp {
+            animation: slideUp 0.8s ease-out forwards;
+          }
+
+          .animate-bounce-slow {
+            animation: bounce-slow 2s ease-in-out infinite;
+          }
+        `}</style>
+      </PremiumLayout>
     );
   }
 
@@ -397,73 +451,115 @@ export default function MBTI32() {
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 p-4 transition-colors">
-      <div className="max-w-4xl mx-auto">
+    <PremiumLayout theme="purple">
+      <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Back Button */}
-        <div className="mb-6">
-          <Link 
-            href="/"
-            className="inline-flex items-center gap-2 text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-200 transition-colors"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span>돌아가기</span>
-          </Link>
-        </div>
+        <Link 
+          href="/"
+          className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-all duration-300 mb-8 group"
+        >
+          <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>돌아가기</span>
+        </Link>
 
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 bg-clip-text text-transparent">
             🎭 MBTI 테스트
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">8문항으로 알아보는 나의 성격 유형</p>
+          <p className="text-xl text-white/80">8문항으로 알아보는 나의 성격 유형</p>
         </div>
 
-        <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 dark:border-white/20 shadow-xl">
-          {/* 진행률 표시 */}
-          <div className="mb-8">
-            <div className="flex justify-between text-gray-900 dark:text-white mb-2">
-              <span className="text-sm">문항 {currentQuestion + 1} / {questions.length}</span>
-              <span className="text-sm">{Math.round(progress)}%</span>
+        <PremiumCard hover gradient className="animate-slideUp">
+          {/* Progress Bar */}
+          <div className="mb-10">
+            <div className="flex justify-between text-white mb-0.5 sm:mb-1.5 md:mb-2">
+              <span className="text-sm font-medium">문항 {currentQuestion + 1} / {questions.length}</span>
+              <span className="text-sm font-medium">{Math.round(progress)}%</span>
             </div>
-            <div className="w-full bg-gray-200 dark:bg-white/20 rounded-full h-3">
+            <div className="relative w-full bg-white/10 rounded-full h-4 overflow-hidden backdrop-blur-sm border border-white/20">
               <div
-                className="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              ></div>
+                className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 transition-all duration-500 ease-out"
+                style={{ 
+                  width: `${progress}%`,
+                  boxShadow: '0 0 20px rgba(168, 85, 247, 0.5)'
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+              </div>
             </div>
           </div>
 
-          {/* 질문 */}
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
+          {/* Question */}
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold text-white leading-relaxed">
               {question.question}
             </h2>
           </div>
 
-          {/* 선택지 */}
+          {/* Options */}
           <div className="space-y-4">
             {question.options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswer(question.type, option.value)}
-                className="w-full p-4 md:p-6 bg-white dark:bg-white/10 hover:bg-purple-50 dark:hover:bg-white/20 text-gray-900 dark:text-white text-left rounded-2xl border border-gray-200 dark:border-white/20 hover:border-purple-300 dark:hover:border-white/40 transition-all duration-300 hover:scale-105 shadow-sm"
+                className="w-full group relative"
+                style={{ 
+                  animationDelay: `${index * 0.1}s`,
+                  animation: 'slideUp 0.5s ease-out forwards'
+                }}
               >
-                <div className="flex items-center">
-                  <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                    {String.fromCharCode(65 + index)}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded sm:rounded-lg md:rounded-2xl opacity-0 group-hover:opacity-100 blur transition-all duration-300"></div>
+                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded sm:rounded-lg md:rounded-2xl p-5 md:p-6 text-left hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 hover:-translate-y-1" style={{ transform: 'translateZ(0)' }}>
+                  <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-[10px] sm:text-xs md:text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      {String.fromCharCode(65 + index)}
+                    </div>
+                    <span className="text-white text-base md:text-lg flex-1 group-hover:translate-x-1 transition-transform duration-300">{option.text}</span>
                   </div>
-                  <span className="text-lg">{option.text}</span>
                 </div>
               </button>
             ))}
           </div>
-        </div>
+        </PremiumCard>
       </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
 
-    </main>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .animate-shimmer {
+          animation: shimmer 2s ease-in-out infinite;
+        }
+      `}</style>
+    </PremiumLayout>
   );
 }
-

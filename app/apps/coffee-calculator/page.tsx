@@ -235,14 +235,14 @@ export default function CoffeeCalculator() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-900 dark:via-orange-900 dark:to-yellow-900 transition-colors">
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-xl p-6 border-4 border-amber-800">
+          <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border-4 border-amber-800">
             <header className="text-center mb-6">
               <h1 className="text-3xl font-bold mb-2">☕</h1>
               <h2 className="text-2xl font-bold text-gray-800">카페인 섭취 분석</h2>
             </header>
 
             {/* 종합 현황 */}
-            <div className="mb-6 p-6 rounded-xl text-center border-4" style={{
+            <div className="mb-6 p-1 sm:p-2.5 md:p-5 rounded-xl text-center border-4" style={{
               backgroundColor: result.percentage <= 70 ? '#f0fdf4' : result.percentage <= 100 ? '#fffbeb' : '#fef2f2',
               borderColor: result.percentage <= 70 ? '#86efac' : result.percentage <= 100 ? '#fcd34d' : '#fca5a5'
             }}>
@@ -267,7 +267,7 @@ export default function CoffeeCalculator() {
 
             {/* 현재 활성 카페인 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">🔄 현재 체내 활성 카페인</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">🔄 현재 체내 활성 카페인</h3>
               <div className="text-center">
                 <div className="text-4xl font-bold mb-2">{result.activeCaffeine}mg</div>
                 <div className="text-sm text-gray-600">반감기 고려 현재 수준</div>
@@ -277,10 +277,10 @@ export default function CoffeeCalculator() {
             {/* 섭취 내역 */}
             {intakes.length > 0 && (
               <div className="mb-6">
-                <h3 className="font-bold text-lg text-gray-800 mb-3">📋 오늘의 섭취 내역</h3>
+                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">📋 오늘의 섭취 내역</h3>
                 <div className="space-y-2">
                   {intakes.map((intake, i) => (
-                    <div key={i} className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg p-3 border border-amber-200">
+                    <div key={i} className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg p-2 sm:p-3 border border-amber-200">
                       <div className="flex justify-between items-center">
                         <div>
                           <div className="font-semibold text-gray-800">{intake.item}</div>
@@ -300,7 +300,7 @@ export default function CoffeeCalculator() {
 
             {/* 24시간 카페인 그래프 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">📊 24시간 카페인 농도 변화</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">📊 24시간 카페인 농도 변화</h3>
               <div className="space-y-1 max-h-40 overflow-y-auto">
                 {result.effectTimeline.filter((_: any, i: number) => i % 2 === 0).map((item: any, i: number) => (
                   <div key={i} className="flex items-center gap-2 text-xs">
@@ -319,7 +319,7 @@ export default function CoffeeCalculator() {
 
             {/* 다음 섭취 가능 시간 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-2">⏰ 다음 커피 가능 시간</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">⏰ 다음 커피 가능 시간</h3>
               <div className="text-2xl font-bold text-center">{result.nextCoffeeTime}</div>
               <div className="text-sm text-gray-600 text-center mt-1">남은 권장량: {result.remainingQuota}mg</div>
               <div className="text-center mt-3 p-3 bg-white rounded-lg border-2 border-amber-300">
@@ -333,7 +333,7 @@ export default function CoffeeCalculator() {
 
             {/* 현재 섭취량 아메리카노 환산 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-2">📊 현재 섭취량</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">📊 현재 섭취량</h3>
               <div className="text-center p-3 bg-white rounded-lg">
                 <div className="text-sm text-gray-600 mb-1">아메리카노로 환산하면</div>
                 <div className="text-4xl font-bold text-orange-600">
@@ -346,7 +346,7 @@ export default function CoffeeCalculator() {
             {/* 부작용 경고 */}
             {result.sideEffects.length > 0 && (
               <div className="mb-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-300">
-                <h3 className="font-bold text-lg mb-3">⚠️ 주의사항</h3>
+                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm mb-0.5 sm:mb-1.5 md:mb-2">⚠️ 주의사항</h3>
                 <div className="space-y-2">
                   {result.sideEffects.map((effect: string, i: number) => (
                     <div key={i} className="bg-white rounded p-3 text-sm font-medium">
@@ -359,7 +359,7 @@ export default function CoffeeCalculator() {
 
             {/* 권장사항 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">💡 권장사항</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">💡 권장사항</h3>
               <div className="space-y-2">
                 {result.recommendations.map((rec: string, i: number) => (
                   <div key={i} className="bg-white rounded p-3 text-sm text-gray-700">
@@ -371,7 +371,7 @@ export default function CoffeeCalculator() {
 
             <button
               onClick={() => setResult(null)}
-              className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
             >
               다시 계산하기
             </button>
@@ -379,7 +379,7 @@ export default function CoffeeCalculator() {
 
           {/* 돌아가기 버튼 */}
           <div className="text-center mt-8">
-            <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg">
+            <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all duration-300 shadow-lg">
               메인으로 돌아가기
             </Link>
           </div>
@@ -391,7 +391,7 @@ export default function CoffeeCalculator() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
       <div className="mx-auto max-w-[600px] px-4 py-6">
-        <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-xl p-6 border-4 border-amber-800">
+        <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border-4 border-amber-800">
           <header className="text-center mb-6">
             <h1 className="text-4xl font-bold mb-2">☕</h1>
             <h2 className="text-2xl font-bold text-gray-800 mb-2">커피 하루 권장량 계산기</h2>
@@ -481,7 +481,7 @@ export default function CoffeeCalculator() {
 
             {/* 카페인 섭취 기록 */}
             <div className="border-t pt-5">
-              <div className="flex justify-between items-center mb-3">
+              <div className="flex justify-between items-center mb-0.5 sm:mb-1.5 md:mb-2">
                 <h3 className="font-bold text-gray-800">오늘 마신 음료</h3>
                 <button
                   onClick={() => setShowAddForm(!showAddForm)}
@@ -545,7 +545,7 @@ export default function CoffeeCalculator() {
                     </select>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">개수</label>
                       <input
@@ -591,7 +591,7 @@ export default function CoffeeCalculator() {
 
             <button
               onClick={calculate}
-              className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
             >
               카페인 섭취량 분석하기
             </button>
@@ -600,7 +600,7 @@ export default function CoffeeCalculator() {
 
         {/* 돌아가기 버튼 */}
         <div className="text-center mt-8">
-          <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg">
+          <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all duration-300 shadow-lg">
             메인으로 돌아가기
           </Link>
         </div>

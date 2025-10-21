@@ -39,8 +39,8 @@ export default function PackingListPage() {
         <p className="text-center text-teal-100 mb-8">완벽한 여행 준비를 위한 체크리스트</p>
 
         {/* 여행 정보 */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <div>
               <label className="text-white font-bold mb-2 block">여행 유형</label>
               <select
@@ -71,7 +71,7 @@ export default function PackingListPage() {
         </div>
 
         {/* 진행률 */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 mb-6">
           <div className="flex justify-between text-white mb-2">
             <span className="font-bold">준비 진행률</span>
             <span className="font-bold">{checkedItems.size}/{totalItems} ({Math.round(progress)}%)</span>
@@ -87,9 +87,9 @@ export default function PackingListPage() {
         {/* 체크리스트 */}
         <div className="space-y-4">
           {Object.entries(packingCategories).map(([category, items]) => (
-            <div key={category} className="bg-white/10 backdrop-blur-lg rounded-2xl p-6">
+            <div key={category} className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6">
               <h3 className="text-2xl font-bold text-white mb-4">{category}</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                 {items.map((item) => (
                   <label
                     key={item}
@@ -114,7 +114,7 @@ export default function PackingListPage() {
         </div>
 
         {progress === 100 && (
-          <div className="mt-8 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center py-6 rounded-2xl text-2xl font-bold">
+          <div className="mt-8 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center py-6 rounded sm:rounded-lg md:rounded-2xl text-2xl font-bold">
             🎉 모든 준비가 완료되었습니다! 즐거운 여행 되세요!
           </div>
         )}

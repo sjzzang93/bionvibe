@@ -82,7 +82,7 @@ function DetailedCombinationAnalysis({ element, mbti }: { element: string; mbti:
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <div className="text-5xl mb-3">{combo.combination}</div>
+        <div className="text-base sm:text-2xl md:text-4xl mb-0.5 sm:mb-1.5 md:mb-2">{combo.combination}</div>
         <p className="text-2xl font-bold text-amber-800">{combo.summary}</p>
         
         {/* 보기 모드 전환 버튼 */}
@@ -124,8 +124,8 @@ function SummaryView({ combo }: { combo: any }) {
   return (
     <div className="space-y-6">
       {/* 핵심 요약 */}
-      <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-6 border-2 border-purple-300">
-        <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-purple-300">
+        <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
           <span>💫</span>
           <span>당신은 이런 사람이에요</span>
         </h3>
@@ -133,9 +133,9 @@ function SummaryView({ combo }: { combo: any }) {
       </div>
 
       {/* 강점 & 약점 */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-6 border-2 border-green-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800">✨ 당신의 강점</h3>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-green-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800">✨ 당신의 강점</h3>
           <ul className="space-y-2">
             {combo.strength.slice(0, 3).map((item: string, idx: number) => (
               <li key={idx} className="flex items-start gap-2 text-gray-700">
@@ -146,8 +146,8 @@ function SummaryView({ combo }: { combo: any }) {
           </ul>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-100 to-red-100 rounded-2xl p-6 border-2 border-orange-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800">⚠️ 조심할 점</h3>
+        <div className="bg-gradient-to-br from-orange-100 to-red-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-orange-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800">⚠️ 조심할 점</h3>
           <ul className="space-y-2">
             {combo.weakness.slice(0, 3).map((item: string, idx: number) => (
               <li key={idx} className="flex items-start gap-2 text-gray-700">
@@ -160,21 +160,21 @@ function SummaryView({ combo }: { combo: any }) {
       </div>
 
       {/* 사랑 & 돈 */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl p-6 border-2 border-pink-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800">💖 연애할 때</h3>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        <div className="bg-gradient-to-br from-pink-100 to-rose-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-pink-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800">💖 연애할 때</h3>
           <p className="text-gray-700 leading-relaxed">{combo.love}</p>
         </div>
 
-        <div className="bg-gradient-to-br from-yellow-100 to-amber-100 rounded-2xl p-6 border-2 border-yellow-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800">💰 돈 관리</h3>
+        <div className="bg-gradient-to-br from-yellow-100 to-amber-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-yellow-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800">💰 돈 관리</h3>
           <p className="text-gray-700 leading-relaxed">{combo.money}</p>
         </div>
       </div>
 
       {/* 추천 직업 */}
-      <div className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl p-6 border-2 border-indigo-300">
-        <h3 className="text-xl font-bold mb-3 text-gray-800">💼 잘 맞는 일</h3>
+      <div className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-indigo-300">
+        <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800">💼 잘 맞는 일</h3>
         <div className="flex flex-wrap gap-2">
           {combo.jobs.slice(0, 4).map((job: string, idx: number) => (
             <span key={idx} className="px-4 py-2 bg-white rounded-full text-sm font-medium text-gray-700 border border-indigo-300">
@@ -193,8 +193,8 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
     <div className="space-y-6">
 
       {/* 성격 특성 */}
-      <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-6 border-2 border-purple-300">
-        <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-purple-300">
+        <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
           <span>🎭</span>
           <span>성격 특성</span>
         </h3>
@@ -202,8 +202,8 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
       </div>
 
       {/* 인지 스타일 */}
-      <div className="bg-gradient-to-r from-blue-100 to-cyan-100 rounded-2xl p-6 border-2 border-blue-300">
-        <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="bg-gradient-to-r from-blue-100 to-cyan-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-blue-300">
+        <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
           <span>🧠</span>
           <span>인지 스타일</span>
         </h3>
@@ -211,9 +211,9 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
       </div>
 
       {/* 강점 & 약점 */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-6 border-2 border-green-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-green-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>✨</span>
             <span>강점</span>
           </h3>
@@ -227,8 +227,8 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
           </ul>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-100 to-red-100 rounded-2xl p-6 border-2 border-orange-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-orange-100 to-red-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-orange-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>⚠️</span>
             <span>약점 (개선 포인트)</span>
           </h3>
@@ -244,17 +244,17 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
       </div>
 
       {/* 대인관계 & 연애 */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl p-6 border-2 border-blue-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-blue-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>👥</span>
             <span>대인관계</span>
           </h3>
           <p className="text-gray-700 leading-relaxed">{combo.interpersonal}</p>
         </div>
 
-        <div className="bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl p-6 border-2 border-pink-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-pink-100 to-rose-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-pink-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>💖</span>
             <span>연애/결혼</span>
           </h3>
@@ -263,17 +263,17 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
       </div>
 
       {/* 금전운 & 건강 */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-yellow-100 to-amber-100 rounded-2xl p-6 border-2 border-yellow-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        <div className="bg-gradient-to-br from-yellow-100 to-amber-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-yellow-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>💰</span>
             <span>금전운</span>
           </h3>
           <p className="text-gray-700 leading-relaxed">{combo.money}</p>
         </div>
 
-        <div className="bg-gradient-to-br from-teal-100 to-green-100 rounded-2xl p-6 border-2 border-teal-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-teal-100 to-green-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-teal-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>🏥</span>
             <span>건강 & 주의사항</span>
           </h3>
@@ -282,13 +282,13 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
       </div>
 
       {/* 오행 밸런스 */}
-      <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-2xl p-6 border-2 border-indigo-300">
+      <div className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-indigo-300">
         <h3 className="text-2xl font-bold mb-4 text-gray-800 flex items-center gap-2">
           <span>⚖️</span>
           <span>오행 밸런스 & 보완법</span>
         </h3>
         <p className="text-lg text-gray-700 mb-4">{combo.balance}</p>
-        <div className="grid md:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 mt-4">
           <div className="bg-white rounded-lg p-4 text-center border border-indigo-200">
             <div className="text-2xl mb-2">🎨</div>
             <div className="font-bold text-gray-800 mb-1">행운의 색상</div>
@@ -308,17 +308,17 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
       </div>
 
       {/* 업무 스타일 & 리더십 */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-gradient-to-br from-gray-100 to-slate-100 rounded-2xl p-6 border-2 border-gray-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+        <div className="bg-gradient-to-br from-gray-100 to-slate-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-gray-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>💼</span>
             <span>업무 스타일</span>
           </h3>
           <p className="text-gray-700 leading-relaxed">{combo.workStyle}</p>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-100 to-violet-100 rounded-2xl p-6 border-2 border-purple-300">
-          <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+        <div className="bg-gradient-to-br from-purple-100 to-violet-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-purple-300">
+          <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
             <span>👑</span>
             <span>리더십 스타일</span>
           </h3>
@@ -327,15 +327,15 @@ function DetailedView({ combo, element, mbti }: { combo: any; element: string; m
       </div>
 
       {/* 창의성 & 추천 직업 (서브) */}
-      <div className="bg-gradient-to-br from-amber-100 to-orange-100 rounded-2xl p-6 border-2 border-amber-300">
-        <h3 className="text-xl font-bold mb-3 text-gray-800 flex items-center gap-2">
+      <div className="bg-gradient-to-br from-amber-100 to-orange-100 rounded sm:rounded-lg md:rounded-2xl p-6 border-2 border-amber-300">
+        <h3 className="text-xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800 flex items-center gap-2">
           <span>🎨</span>
           <span>창의성 스타일</span>
         </h3>
         <p className="text-gray-700 leading-relaxed mb-4">{combo.creativity}</p>
         
         <div className="mt-4 pt-4 border-t border-amber-300">
-          <h4 className="text-lg font-bold mb-3 text-gray-800">💼 추천 직업 (참고용)</h4>
+          <h4 className="text-lg font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-gray-800">💼 추천 직업 (참고용)</h4>
           <div className="flex flex-wrap gap-2">
             {combo.jobs.map((job: string, idx: number) => (
               <span key={idx} className="px-3 py-1 bg-white rounded-full text-sm font-medium text-gray-700 border border-amber-300">
@@ -494,7 +494,7 @@ export default function SajuMBTIJobs() {
           <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-2xl p-6 border-4 border-amber-300 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
               <div className="text-6xl mb-4 text-black placeholder-gray-500">🔮</div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-3 text-black placeholder-gray-500">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                 사주 × MBTI 종합 분석
               </h1>
               <div className="flex items-center justify-center gap-2 text-xs md:text-sm flex-wrap text-black placeholder-gray-500">
@@ -506,11 +506,11 @@ export default function SajuMBTIJobs() {
             </header>
 
             {/* 사주 년주 - 디테일 강화 */}
-            <div className="mb-6 bg-gradient-to-r from-red-100 to-orange-100 rounded-2xl p-5 border-2 border-red-300 text-black placeholder-gray-500">
+            <div className="mb-6 bg-gradient-to-r from-red-100 to-orange-100 rounded sm:rounded-lg md:rounded-2xl p-5 border-2 border-red-300 text-black placeholder-gray-500">
               <h3 className="text-xl font-bold text-black mb-4 text-center text-black placeholder-gray-500">☯️ 사주팔자 년주 분석</h3>
               
               {/* 천간지지 */}
-              <div className="grid grid-cols-2 gap-3 mb-4 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3 mb-4 text-black placeholder-gray-500">
                 <div className="bg-white rounded-xl p-4 text-center border-2 border-red-200 text-black placeholder-gray-500">
                   <div className="text-xs text-gray-600 mb-2 font-bold text-black placeholder-gray-500">천간 (天干)</div>
                   <div className="text-3xl font-bold text-red-600 mb-2 text-black placeholder-gray-500">{result.yearPillar.stem.name}</div>
@@ -526,8 +526,8 @@ export default function SajuMBTIJobs() {
               </div>
 
               {/* 오행 분석 */}
-              <div className="bg-white rounded-xl p-4 border-2 border-red-200 text-black placeholder-gray-500">
-                <div className="text-center mb-3">
+              <div className="bg-white rounded-xl p-2 sm:p-3 md:p-4 border-2 border-red-200 text-black placeholder-gray-500">
+                <div className="text-center mb-0.5 sm:mb-1.5 md:mb-2">
                   <span className="text-2xl font-bold text-red-700 text-black placeholder-gray-500">
                     {result.element} ({result.element === '목' ? '木' : result.element === '화' ? '火' : result.element === '토' ? '土' : result.element === '금' ? '金' : '水'})
                   </span>
@@ -541,22 +541,22 @@ export default function SajuMBTIJobs() {
             </div>
 
             {/* MBTI 특성 - 디테일 강화 */}
-            <div className="mb-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-5 border-2 border-indigo-300 text-black placeholder-gray-500">
+            <div className="mb-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded sm:rounded-lg md:rounded-2xl p-5 border-2 border-indigo-300 text-black placeholder-gray-500">
               <h3 className="text-xl font-bold text-black mb-4 text-center text-black placeholder-gray-500">🧠 MBTI 심층 성격 분석</h3>
               
-              <div className="bg-white rounded-xl p-4 border-2 border-indigo-200 mb-4 text-black placeholder-gray-500">
-                <div className="text-center mb-3 text-black placeholder-gray-500">
+              <div className="bg-white rounded-xl p-2 sm:p-3 md:p-4 border-2 border-indigo-200 mb-4 text-black placeholder-gray-500">
+                <div className="text-center mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                   <span className="text-3xl font-bold text-indigo-600 text-black placeholder-gray-500">{mbti}</span>
                   <span className="text-lg text-gray-700 ml-3 text-black placeholder-gray-500">"{result.mbtiDetail.nickname}"</span>
                 </div>
                 
                 <div className="space-y-3 text-sm text-gray-700 text-black placeholder-gray-500">
-                  <div className="bg-indigo-50 rounded-lg p-3">
+                  <div className="bg-indigo-50 rounded-lg p-2 sm:p-3">
                     <p className="font-bold text-indigo-700 mb-1">💼 업무 스타일</p>
                     <p>{result.mbtiDetail.workStyle}</p>
                   </div>
                   
-                  <div className="bg-purple-50 rounded-lg p-3">
+                  <div className="bg-purple-50 rounded-lg p-2 sm:p-3">
                     <p className="font-bold text-purple-700 mb-2">✨ 핵심 강점</p>
                     <div className="flex flex-wrap gap-2">
                       {result.mbtiDetail.traits.map((trait: string, i: number) => (
@@ -567,7 +567,7 @@ export default function SajuMBTIJobs() {
                     </div>
                   </div>
 
-                  <div className="bg-blue-50 rounded-lg p-3">
+                  <div className="bg-blue-50 rounded-lg p-2 sm:p-3">
                     <p className="font-bold text-blue-700 mb-1">🎯 성격 유형별 특징</p>
                     <p>
                       {mbti[0] === 'E' ? '외향적으로 에너지를 외부에서 얻으며, ' : '내향적으로 혼자만의 시간에서 에너지를 충전하며, '}
@@ -582,9 +582,9 @@ export default function SajuMBTIJobs() {
 
             {/* 일주 특성 (있는 경우만) */}
             {result.dayPillarInfo && (
-              <div className="mb-6 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl p-5 border-2 border-yellow-300 text-black placeholder-gray-500">
-                <h3 className="text-lg font-bold text-black mb-3 text-black placeholder-gray-500">📅 일주 특성</h3>
-                <div className="bg-white rounded-xl p-4 border border-yellow-200 text-black placeholder-gray-500">
+              <div className="mb-6 bg-gradient-to-r from-yellow-50 to-amber-50 rounded sm:rounded-lg md:rounded-2xl p-5 border-2 border-yellow-300 text-black placeholder-gray-500">
+                <h3 className="text-lg font-bold text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">📅 일주 특성</h3>
+                <div className="bg-white rounded-xl p-2 sm:p-3 md:p-4 border border-yellow-200 text-black placeholder-gray-500">
                   <div className="text-sm text-gray-700 mb-2 text-black placeholder-gray-500">
                     <span className="font-bold text-black text-black placeholder-gray-500">특성:</span> {result.dayPillarInfo.trait}
                   </div>
@@ -596,10 +596,10 @@ export default function SajuMBTIJobs() {
             )}
 
             {/* 사주 + MBTI 종합 해석 */}
-            <div className="mb-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-5 border-2 border-yellow-300 text-black placeholder-gray-500">
+            <div className="mb-6 bg-gradient-to-br from-yellow-50 to-orange-50 rounded sm:rounded-lg md:rounded-2xl p-5 border-2 border-yellow-300 text-black placeholder-gray-500">
               <h3 className="text-xl font-bold text-black mb-4 text-center text-black placeholder-gray-500">🔮 사주 × MBTI 종합 해석</h3>
               
-              <div className="bg-white rounded-xl p-4 border-2 border-yellow-200 text-black placeholder-gray-500">
+              <div className="bg-white rounded-xl p-2 sm:p-3 md:p-4 border-2 border-yellow-200 text-black placeholder-gray-500">
                 <div className="text-sm text-gray-700 leading-relaxed space-y-3 text-black placeholder-gray-500">
                   <p className="bg-yellow-50 p-3 rounded-lg">
                     <span className="font-bold text-yellow-700">📌 당신의 운명적 특성:</span><br/>
@@ -620,20 +620,20 @@ export default function SajuMBTIJobs() {
             </div>
 
             {/* 추천 직업 TOP 3 */}
-            <div className="mb-6 bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-5 border-2 border-green-300 text-black placeholder-gray-500">
+            <div className="mb-6 bg-gradient-to-br from-green-50 to-teal-50 rounded sm:rounded-lg md:rounded-2xl p-5 border-2 border-green-300 text-black placeholder-gray-500">
               <h3 className="text-xl font-bold text-black mb-4 text-center text-black placeholder-gray-500">💼 운명에 맞는 추천 직업 TOP 3</h3>
               <div className="text-xs text-center text-gray-600 mb-4 text-black placeholder-gray-500">
                 (사주 오행 + MBTI 성향 + 십성 특성 종합 분석)
               </div>
               <div className="space-y-3 text-black placeholder-gray-500">
                 {result.recommendedJobs.map((job: any, i: number) => (
-                  <div key={i} className="bg-white rounded-xl p-4 border-2 border-green-200 hover:shadow-lg transition-all text-black placeholder-gray-500">
-                    <div className="flex items-start gap-3">
-                      <span className="bg-gradient-to-r from-green-500 to-teal-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 text-black placeholder-gray-500">
+                  <div key={i} className="bg-white rounded-xl p-2 sm:p-3 md:p-4 border-2 border-green-200 hover:shadow-lg transition-all text-black placeholder-gray-500">
+                    <div className="flex items-start gap-0 sm:gap-1.5 md:gap-3">
+                      <span className="bg-gradient-to-r from-green-500 to-teal-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-[10px] sm:text-xs md:text-sm flex-shrink-0 text-black placeholder-gray-500">
                         {i + 1}
                       </span>
                       <div className="flex-1">
-                        <h4 className="text-gray-800 font-bold text-lg mb-2">{job}</h4>
+                        <h4 className="text-gray-800 font-bold text-[10px] sm:text-xs md:text-sm mb-2">{job}</h4>
                         <p className="text-sm text-gray-600 leading-relaxed">
                           {i === 0 ? `${result.element} 오행의 특성과 ${mbti}의 ${result.mbtiDetail.workStyle} 성향이 완벽하게 조화를 이루는 직업입니다. 당신의 ${result.mbtiDetail.traits[0]} 성격이 이 분야에서 큰 강점으로 작용할 것입니다.` : 
                            i === 1 ? `${result.yearPillar.branch.animal} 띠의 특성인 ${result.yearPillar.branch.animal === '쥐' ? '빠른 적응력' : result.yearPillar.branch.animal === '소' ? '성실함' : result.yearPillar.branch.animal === '호랑이' ? '리더십' : result.yearPillar.branch.animal === '토끼' ? '친화력' : result.yearPillar.branch.animal === '용' ? '창의성' : result.yearPillar.branch.animal === '뱀' ? '전략적 사고' : result.yearPillar.branch.animal === '말' ? '사교성' : result.yearPillar.branch.animal === '양' ? '예술성' : result.yearPillar.branch.animal === '원숭이' ? '재치' : result.yearPillar.branch.animal === '닭' ? '계획성' : result.yearPillar.branch.animal === '개' ? '신뢰성' : '포용력'}과 ${mbti}의 ${result.mbtiDetail.traits[1]} 면이 시너지를 발휘하는 분야입니다.` :
@@ -647,9 +647,9 @@ export default function SajuMBTIJobs() {
             </div>
 
             {/* 십성 직업 경향 */}
-            <div className="mb-6 bg-gradient-to-r from-blue-50 to-blue-50 rounded-2xl p-5 border-2 border-blue-300 text-black placeholder-gray-500">
-              <h3 className="text-lg font-bold text-black mb-3 text-black placeholder-gray-500">⭐ 십성(十星) 직업 경향</h3>
-              <div className="bg-white rounded-xl p-4 border border-blue-200 text-black placeholder-gray-500">
+            <div className="mb-6 bg-gradient-to-r from-blue-50 to-blue-50 rounded sm:rounded-lg md:rounded-2xl p-5 border-2 border-blue-300 text-black placeholder-gray-500">
+              <h3 className="text-lg font-bold text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">⭐ 십성(十星) 직업 경향</h3>
+              <div className="bg-white rounded-xl p-2 sm:p-3 md:p-4 border border-blue-200 text-black placeholder-gray-500">
                 <div className="text-sm text-gray-700 mb-2 text-black placeholder-gray-500">
                   <span className="font-bold text-black text-black placeholder-gray-500">특성:</span> {result.tenGodsCareer.trait}
                 </div>
@@ -664,9 +664,9 @@ export default function SajuMBTIJobs() {
             </div>
 
             {/* 특수 신살 */}
-            <div className="mb-6 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-5 border-2 border-purple-300 text-black placeholder-gray-500">
-              <h3 className="text-lg font-bold text-black mb-3 text-black placeholder-gray-500">✨ 특수 신살 (화개살)</h3>
-              <div className="bg-white rounded-xl p-4 border border-purple-200 text-black placeholder-gray-500">
+            <div className="mb-6 bg-gradient-to-r from-purple-50 to-indigo-50 rounded sm:rounded-lg md:rounded-2xl p-5 border-2 border-purple-300 text-black placeholder-gray-500">
+              <h3 className="text-lg font-bold text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">✨ 특수 신살 (화개살)</h3>
+              <div className="bg-white rounded-xl p-2 sm:p-3 md:p-4 border border-purple-200 text-black placeholder-gray-500">
                 <div className="text-sm text-gray-700 mb-2 text-black placeholder-gray-500">
                   <span className="font-bold text-black text-black placeholder-gray-500">의미:</span> {result.specialStar.meaning}
                 </div>
@@ -690,7 +690,7 @@ export default function SajuMBTIJobs() {
 
             <button
               onClick={restart}
-              className="w-full mt-8 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all"
+              className="w-full mt-8 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded sm:rounded-lg md:rounded-2xl shadow-lg hover:shadow-xl transition-all"
             >
               🔮 다시 분석하기
             </button>
@@ -719,14 +719,14 @@ export default function SajuMBTIJobs() {
         <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl shadow-2xl p-8 border-4 border-amber-300 text-black placeholder-gray-500">
           <header className="text-center mb-8 text-black placeholder-gray-500">
             <div className="text-6xl mb-4 text-black placeholder-gray-500">☯️</div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-3 text-black placeholder-gray-500">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
               사주와 MBTI 조합
             </h1>
             <h2 className="text-xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">맞춤 직업 찾기</h2>
             <p className="text-sm text-gray-700 leading-relaxed text-black placeholder-gray-500">
               📚 전통 명리학 이론 기반 (명리요강·적천수·자평진전)
             </p>
-            <p className="text-sm font-bold text-amber-800 leading-relaxed mb-3 text-black placeholder-gray-500">
+            <p className="text-sm font-bold text-amber-800 leading-relaxed mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
               🎯 정확도 85~90% | 웬만한 철학관 10만원보다 정확
             </p>
             <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-3 border-2 border-purple-300 mt-4">
@@ -740,11 +740,11 @@ export default function SajuMBTIJobs() {
 
           <div className="space-y-4 text-black placeholder-gray-500">
             {/* 생년월일시 입력 */}
-            <div className="bg-white rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
+            <div className="bg-white rounded sm:rounded-lg md:rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
               <label className="block text-lg md:text-xl font-bold text-black mb-4 text-center">
                 🎂 생년월일시
               </label>
-              <div className="grid grid-cols-2 gap-3 mb-3 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                 <div>
                   <div className="text-sm text-gray-600 mb-2 text-center font-medium">년도</div>
                   <input
@@ -771,7 +771,7 @@ export default function SajuMBTIJobs() {
                   </select>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-3 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3 text-black placeholder-gray-500">
                 <div>
                   <div className="text-sm text-gray-600 mb-2 text-center font-medium">일</div>
                   <select
@@ -802,11 +802,11 @@ export default function SajuMBTIJobs() {
             </div>
 
             {/* 성별 선택 */}
-            <div className="bg-white rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
+            <div className="bg-white rounded sm:rounded-lg md:rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
               <label className="block text-lg md:text-xl font-bold text-black mb-4 text-center">
                 👤 성별
               </label>
-              <div className="grid grid-cols-2 gap-3 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3 text-black placeholder-gray-500">
                 <button
                   onClick={() => setGender("남")}
                   className={`min-h-[48px] py-4 rounded-xl font-bold text-base md:text-lg transition-all active:scale-95 ${
@@ -833,11 +833,11 @@ export default function SajuMBTIJobs() {
             </div>
 
             {/* 출산 방법 선택 */}
-            <div className="bg-white rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
+            <div className="bg-white rounded sm:rounded-lg md:rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
               <label className="block text-lg md:text-xl font-bold text-black mb-4 text-center">
                 🏥 출산 방법
               </label>
-              <div className="grid grid-cols-2 gap-3 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3 text-black placeholder-gray-500">
                 <button
                   onClick={() => setBirthType("자연분만")}
                   className={`min-h-[48px] py-4 rounded-xl font-bold text-base md:text-lg transition-all active:scale-95 ${
@@ -864,7 +864,7 @@ export default function SajuMBTIJobs() {
             </div>
 
             {/* MBTI 선택 */}
-            <div className="bg-white rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
+            <div className="bg-white rounded sm:rounded-lg md:rounded-2xl p-4 md:p-6 border-2 border-amber-200 text-black placeholder-gray-500">
               <label className="block text-lg md:text-xl font-bold text-black mb-4 text-center">
                 🧠 MBTI 유형
               </label>
@@ -873,7 +873,7 @@ export default function SajuMBTIJobs() {
                   <button
                     key={type}
                     onClick={() => setMbti(type)}
-                    className={`min-h-[44px] py-3 px-1 rounded-lg md:rounded-xl font-bold text-sm md:text-base transition-all active:scale-95 ${
+                    className={`min-h-[44px] py-3 px-1 rounded-lg md:rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all active:scale-95 ${
                       mbti === type
                         ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg scale-105'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -886,7 +886,7 @@ export default function SajuMBTIJobs() {
               </div>
               {mbti && (
                 <div className="mt-4 text-center text-black placeholder-gray-500">
-                  <span className="text-sm md:text-base text-black font-bold">
+                  <span className="text-[10px] sm:text-xs md:text-sm text-black font-bold">
                     ✓ {mbti} "{MBTI_DETAILS[mbti].nickname}" 선택됨
                   </span>
                 </div>
@@ -897,7 +897,7 @@ export default function SajuMBTIJobs() {
             <button
               onClick={handleAnalyze}
               disabled={!mbti || !gender || !birthType}
-              className={`w-full min-h-[56px] py-4 md:py-5 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-lg md:text-xl rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-300 ${
+              className={`w-full min-h-[56px] py-4 md:py-5 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm md:text-xl rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-300 ${
                 (!mbti || !gender || !birthType) ? 'opacity-50 cursor-not-allowed' : ''
               }`}
               style={{ touchAction: 'manipulation' }}
@@ -907,7 +907,7 @@ export default function SajuMBTIJobs() {
 
             {/* 안내 */}
             <div className="bg-gradient-to-r from-yellow-100 to-amber-100 rounded-xl p-4 md:p-5 border border-amber-300 text-black placeholder-gray-500">
-              <p className="text-sm md:text-base text-gray-700 text-center leading-relaxed font-medium">
+              <p className="text-[10px] sm:text-xs md:text-sm text-gray-700 text-center leading-relaxed font-medium">
                 💡 <span className="font-bold">정통 사주명리학</span>의 천간지지, 오행, 십성과<br />
                 <span className="font-bold">MBTI 심리학</span>을 융합하여<br className="hidden md:block" />
                 가장 적합한 직업을 추천해드립니다

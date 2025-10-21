@@ -20,10 +20,10 @@ export default function MiniArcadePage() {
             심심할 때 즐기는 간단한 게임들
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
             <button
               onClick={() => setCurrentGame('tictactoe')}
-              className="bg-gradient-to-br from-red-500 to-pink-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              className="bg-gradient-to-br from-red-500 to-pink-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
             >
               <div className="text-6xl mb-4">⭕❌</div>
               <h3 className="text-2xl font-bold text-white mb-2">틱택토</h3>
@@ -32,7 +32,7 @@ export default function MiniArcadePage() {
 
             <button
               onClick={() => setCurrentGame('memory')}
-              className="bg-gradient-to-br from-green-500 to-teal-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              className="bg-gradient-to-br from-green-500 to-teal-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
             >
               <div className="text-6xl mb-4">🃏</div>
               <h3 className="text-2xl font-bold text-white mb-2">기억력 게임</h3>
@@ -41,7 +41,7 @@ export default function MiniArcadePage() {
 
             <button
               onClick={() => setCurrentGame('snake')}
-              className="bg-gradient-to-br from-yellow-500 to-orange-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              className="bg-gradient-to-br from-yellow-500 to-orange-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
             >
               <div className="text-6xl mb-4">🐍</div>
               <h3 className="text-2xl font-bold text-white mb-2">스네이크</h3>
@@ -108,7 +108,7 @@ function TicTacToe({ onBack }: { onBack: () => void }) {
         ← 돌아가기
       </button>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
+      <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8 shadow-2xl">
         <h2 className="text-3xl font-bold text-white text-center mb-6">⭕❌ 틱택토</h2>
         
         {winner && (
@@ -139,7 +139,7 @@ function TicTacToe({ onBack }: { onBack: () => void }) {
 
         <button
           onClick={resetGame}
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all"
+          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
         >
           다시 시작
         </button>
@@ -188,7 +188,7 @@ function MemoryGame({ onBack }: { onBack: () => void }) {
         ← 돌아가기
       </button>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
+      <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8 shadow-2xl">
         <h2 className="text-3xl font-bold text-white text-center mb-4">🃏 기억력 게임</h2>
         <p className="text-center text-white/80 mb-6">시도 횟수: {moves}</p>
 
@@ -217,7 +217,7 @@ function MemoryGame({ onBack }: { onBack: () => void }) {
 
         <button
           onClick={resetGame}
-          className="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all"
+          className="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
         >
           다시 시작
         </button>
@@ -335,7 +335,7 @@ function SnakeGame({ onBack }: { onBack: () => void }) {
         ← 돌아가기
       </button>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 md:p-8 shadow-2xl">
+      <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-4 md:p-8 shadow-2xl">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">🐍 스네이크</h2>
         
         <div className="text-center mb-4">
@@ -378,7 +378,7 @@ function SnakeGame({ onBack }: { onBack: () => void }) {
         {!isPlaying ? (
           <button
             onClick={startGame}
-            className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all mb-4"
+            className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all mb-4"
             style={{ minHeight: '48px' }}
           >
             {gameOver ? `게임 오버! 다시 시작 (점수: ${score})` : '게임 시작'}

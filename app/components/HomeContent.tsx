@@ -138,7 +138,7 @@ export default function HomeContent() {
                     {favoriteApps.length}개
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-4">
                   {favoriteApps.map((app) => (
                     <Link
                       key={app.id}
@@ -152,7 +152,7 @@ export default function HomeContent() {
                       />
 
                       {app.image && app.image.trim() !== '' && (
-                        <div className="relative h-36 overflow-hidden">
+                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
                           <img
                             src={app.image}
                             alt={app.name}
@@ -163,8 +163,8 @@ export default function HomeContent() {
                         </div>
                       )}
 
-                      <div className="p-3 flex flex-col items-center text-center">
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
+                      <div className="p-2 sm:p-3 flex flex-col items-center text-center">
+                        <h4 className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
                           {app.name}
                         </h4>
                       </div>
@@ -185,7 +185,7 @@ export default function HomeContent() {
                     {category.apps.length}개
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-4">
                   {category.apps.map((app) => (
                     <Link
                       key={app.id}
@@ -199,7 +199,7 @@ export default function HomeContent() {
                       />
 
                       {app.image && app.image.trim() !== '' && (
-                        <div className="relative h-36 overflow-hidden">
+                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
                           <img
                             src={app.image}
                             alt={app.name}
@@ -210,8 +210,8 @@ export default function HomeContent() {
                         </div>
                       )}
 
-                      <div className="p-3 flex flex-col items-center text-center">
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
+                      <div className="p-2 sm:p-3 flex flex-col items-center text-center">
+                        <h4 className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
                           {app.name}
                         </h4>
                       </div>

@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from 'react';
-import AppFooter from "@/app/components/AppFooter";
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
+import RelatedApps from '@/app/components/RelatedApps';
 import Link from 'next/link';
 
 const COLORS = [
@@ -50,7 +53,6 @@ const COLORS = [
     mbti: ['ENFJ', 'INFJ', 'ESFJ'],
     detail: '타인의 감정을 잘 이해하고 배려합니다. 따뜻한 마음으로 주변 사람들을 돌보는 것을 좋아합니다.'
   },
-  
   // 노랑 계열
   { 
     name: '레몬 옐로우', 
@@ -85,7 +87,6 @@ const COLORS = [
     mbti: ['INFP', 'INFJ', 'ISFP'],
     detail: '평화롭고 조화로운 환경을 추구합니다. 갈등을 피하고 모두가 행복한 상태를 원합니다.'
   },
-
   // 초록 계열
   { 
     name: '에메랄드', 
@@ -131,7 +132,6 @@ const COLORS = [
     mbti: ['INTJ', 'ISTJ', 'INFJ'],
     detail: '전문성과 깊이를 중시합니다. 책임감이 강하고 신뢰할 수 있는 사람입니다.'
   },
-
   // 파랑 계열
   { 
     name: '하늘색', 
@@ -177,7 +177,6 @@ const COLORS = [
     mbti: ['ENFP', 'ENTP', 'INFP'],
     detail: '자유로운 영혼으로 창의적인 표현을 즐깁니다. 다양한 사람들과 소통하는 것을 좋아합니다.'
   },
-
   // 보라 계열
   { 
     name: '라벤더', 
@@ -212,7 +211,6 @@ const COLORS = [
     mbti: ['INTJ', 'ENTJ', 'INFJ'],
     detail: '독창적이고 독특한 관점을 가졌습니다. 자신만의 길을 개척하는 혁신가입니다.'
   },
-
   // 분홍 계열
   { 
     name: '파스텔 핑크', 
@@ -247,7 +245,6 @@ const COLORS = [
     mbti: ['INFJ', 'ISFJ', 'ENFJ'],
     detail: '세련되고 우아한 취향을 가졌습니다. 품질과 아름다움을 동시에 추구합니다.'
   },
-
   // 무채색
   { 
     name: '순백', 
@@ -304,7 +301,6 @@ const COLORS = [
     mbti: ['ENTJ', 'INTJ', 'ESTJ'],
     detail: '강력한 카리스마와 리더십을 가졌습니다. 독립적이고 결단력 있게 행동합니다.'
   },
-
   // 갈색 계열
   { 
     name: '베이지', 
@@ -318,17 +314,6 @@ const COLORS = [
     detail: '안정적이고 편안한 환경을 추구합니다. 실용적이고 믿을 수 있는 사람입니다.'
   },
   { 
-    name: '카키', 
-    hex: '#A16207', 
-    psychology: '실용성, 내구성, 신뢰', 
-    traits: ['실용적', '견고함', '책임감', '성실함'],
-    career: ['건축가', '토목기사', '부동산 투자', '농업 경영', '목수', '장인'], 
-    fortune: '재산운, 토지운, 탄탄한 기반', 
-    element: '토',
-    mbti: ['ISTJ', 'ESTJ', 'ISTP'],
-    detail: '실용적이고 견고한 것을 선호합니다. 오래 지속되는 가치를 만들어냅니다.'
-  },
-  { 
     name: '초콜릿', 
     hex: '#78350F', 
     psychology: '따뜻함, 안정감, 풍요로움', 
@@ -339,41 +324,6 @@ const COLORS = [
     mbti: ['ISFJ', 'ESFJ', 'ISFP'],
     detail: '따뜻하고 포근한 분위기를 만듭니다. 사람들에게 안정감과 편안함을 제공합니다.'
   },
-
-  // 특수 색상
-  { 
-    name: '와인', 
-    hex: '#881337', 
-    psychology: '성숙함, 깊이, 열정', 
-    traits: ['성숙함', '깊이', '열정적', '고급스러움'],
-    career: ['소믈리에', '미식 평론가', '갤러리 디렉터', '명품 바이어', '아트 컨설턴트'], 
-    fortune: '고급스러운 만남, 재물운, 품격', 
-    element: '화',
-    mbti: ['INTJ', 'INFJ', 'ENTJ'],
-    detail: '깊이있고 성숙한 사고를 합니다. 고급스럽고 세련된 것을 추구합니다.'
-  },
-  { 
-    name: '인디고', 
-    hex: '#4338CA', 
-    psychology: '직관, 영감, 통찰력', 
-    traits: ['직관적', '통찰력', '영적', '창의적'],
-    career: ['심리학자', '철학자', '작가', '예술가', '영적 지도자', '심리 상담사'], 
-    fortune: '직관운, 영감운, 정신적 성장', 
-    element: '수',
-    mbti: ['INFJ', 'INTJ', 'INFP'],
-    detail: '강한 직관력과 통찰력을 가졌습니다. 보이지 않는 것을 볼 수 있는 능력이 있습니다.'
-  },
-  { 
-    name: '피치', 
-    hex: '#FED7AA', 
-    psychology: '부드러움, 친근함, 따뜻함', 
-    traits: ['친근함', '다정함', '포근함', '사교적'],
-    career: ['유치원 교사', '요양 보호사', '베이커리 운영', '웨딩 플래너', '아동 상담사'], 
-    fortune: '인간관계운, 따뜻한 만남, 행복', 
-    element: '토',
-    mbti: ['ESFJ', 'ISFJ', 'ENFJ'],
-    detail: '친근하고 따뜻한 성격입니다. 사람들과의 관계에서 행복을 느낍니다.'
-  }
 ];
 
 // 5단계 질문
@@ -409,20 +359,6 @@ const QUESTIONS = [
     emoji: "🌟"
   }
 ];
-
-// 색상 조합별 심층 분석
-const COLOR_COMBINATIONS: Record<string, string> = {
-  'red-blue': '열정과 이성의 완벽한 균형. 감성과 논리를 모두 갖춘 리더형 인재입니다.',
-  'red-yellow': '열정과 창의성의 조합. 도전적이고 혁신적인 기업가 기질이 있습니다.',
-  'blue-green': '안정과 성장의 조화. 차분하면서도 발전을 추구하는 성장형 인재입니다.',
-  'purple-pink': '예술적 감성과 낭만의 결합. 섬세하고 창의적인 예술가 기질이 있습니다.',
-  'black-white': '양극단의 조화. 완벽주의적이고 명확한 판단력을 가진 전문가형입니다.',
-  'green-brown': '자연과 안정의 추구. 실용적이고 지속가능한 가치를 중시합니다.',
-  'yellow-orange': '밝은 에너지의 폭발. 긍정적이고 활발한 사교형 인재입니다.',
-  'red-purple': '열정과 신비의 만남. 카리스마 있고 독특한 매력을 가진 리더형입니다.',
-  'blue-purple': '지성과 감성의 조화. 논리적이면서도 창의적인 사고를 하는 천재형입니다.',
-  'pink-white': '순수한 사랑. 순수하고 깨끗한 마음을 가진 이상주의자입니다.'
-};
 
 export default function ColorPsychology() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -471,24 +407,6 @@ export default function ColorPsychology() {
       .slice(0, 3)
       .map(([mbti]) => mbti);
 
-    // 색상 조합 해석
-    const colorSimplified = colors.map(c => {
-      if (c.hex.includes('DC2626') || c.hex.includes('991B1B')) return 'red';
-      if (c.hex.includes('3B82F6') || c.hex.includes('1D4ED8')) return 'blue';
-      if (c.hex.includes('22C55E') || c.hex.includes('10B981')) return 'green';
-      if (c.hex.includes('A855F7') || c.hex.includes('7C3AED')) return 'purple';
-      if (c.hex.includes('EC4899') || c.hex.includes('FBCFE8')) return 'pink';
-      if (c.hex.includes('000000')) return 'black';
-      if (c.hex.includes('FFFFFF')) return 'white';
-      if (c.hex.includes('EAB308') || c.hex.includes('FDE047')) return 'yellow';
-      if (c.hex.includes('EA580C')) return 'orange';
-      if (c.hex.includes('78350F') || c.hex.includes('92400E')) return 'brown';
-      return 'other';
-    });
-    
-    const combinationKey = colorSimplified.slice(0, 2).sort().join('-');
-    const combinationAnalysis = COLOR_COMBINATIONS[combinationKey] || getInterpretation(colors);
-
     // 운세 통합
     const fortunes = colors.map(c => c.fortune);
 
@@ -499,25 +417,11 @@ export default function ColorPsychology() {
       dominantElement: dominantElement[0],
       elementStrength: dominantElement[1],
       selectedColors: colors,
-      interpretation: combinationAnalysis,
       mbti: topMBTI,
       fortunes,
       details: colors.map(c => c.detail),
       answers: selections
     });
-  };
-
-  const getInterpretation = (colors: typeof COLORS) => {
-    const warmColors = colors.filter(c => ['화'].includes(c.element)).length;
-    const coolColors = colors.filter(c => ['수', '목'].includes(c.element)).length;
-    
-    if (warmColors > coolColors) {
-      return '따뜻한 색상 위주 - 열정적이고 외향적인 성격입니다. 활동적이고 사교적입니다.';
-    } else if (coolColors > warmColors) {
-      return '차가운 색상 위주 - 차분하고 신중한 성격입니다. 논리적이고 분석적입니다.';
-    }
-    
-    return '다양한 색상 조합 - 균형잡힌 성격으로 다재다능합니다. 상황에 따라 유연하게 대처합니다.';
   };
 
   const getElementDescription = (element: string): string => {
@@ -540,136 +444,190 @@ export default function ColorPsychology() {
   // 결과 화면
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-purple-900 dark:via-pink-900 dark:to-blue-900">
-        <div className="mx-auto max-w-[800px] px-4 py-6">
-          <section className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-6">
-            <header className="text-center mb-6">
-              <h1 className="text-4xl font-bold mb-2">🎨</h1>
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">색상 심리 분석 결과</h2>
-            </header>
+      <PremiumLayout theme="pink">
+        <div className="mx-auto max-w-[900px] px-4 py-8">
+          {/* Back Button */}
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-all duration-300 mb-8 group"
+          >
+            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>돌아가기</span>
+          </Link>
 
-            {/* 질문별 선택 색상 */}
-            <div className="mb-8">
-              <h3 className="font-bold text-xl mb-4 text-gray-800 dark:text-gray-100">📝 당신의 선택</h3>
-              <div className="space-y-3">
-                {QUESTIONS.map((q, idx) => (
-                  <div key={q.id} className="bg-gray-50 dark:bg-gray-700 rounded-xl p-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl">{q.emoji}</span>
-                      <div className="flex-1">
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{q.question}</p>
-                        <p className="font-semibold text-gray-800 dark:text-gray-100">{result.answers[idx]?.name}</p>
-                      </div>
-                      <div 
-                        className="w-16 h-16 rounded-lg shadow-md" 
-                        style={{backgroundColor: result.answers[idx]?.hex}}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+          {/* Header */}
+          <div className="text-center mb-12 animate-fadeIn">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 bg-clip-text text-transparent">
+              🎨 색상 심리 분석
+            </h1>
+            <p className="text-xl text-white/80">당신의 마음 속 색채를 분석했습니다</p>
+          </div>
 
-            {/* 종합 해석 */}
-            <div className="mb-6 p-5 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/50 dark:to-pink-900/50 rounded-xl border-2 border-purple-200 dark:border-purple-700">
-              <h3 className="font-bold text-xl mb-3 text-gray-800 dark:text-gray-100">💡 종합 해석</h3>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
-                {result.interpretation}
-              </p>
-            </div>
-
-            {/* 성격 특성 */}
-            <div className="mb-6 p-5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/50 dark:to-cyan-900/50 rounded-xl">
-              <h3 className="font-bold text-xl mb-3 text-gray-800 dark:text-gray-100">🧠 성격 특성</h3>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {result.allTraits.map((trait: string, i: number) => (
-                  <span 
-                    key={i} 
-                    className="bg-blue-100 dark:bg-blue-800 px-4 py-2 rounded-full text-sm font-semibold text-gray-800 dark:text-gray-100"
-                  >
-                    {trait}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* MBTI 유형 */}
-            <div className="mb-6 p-5 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/50 dark:to-orange-900/50 rounded-xl">
-              <h3 className="font-bold text-xl mb-3 text-gray-800 dark:text-gray-100">🎯 예상 MBTI 유형</h3>
-              <div className="flex gap-3">
-                {result.mbti.map((type: string, i: number) => (
+          {/* 선택한 색상들 */}
+          <PremiumCard hover gradient className="mb-8 animate-slideUp">
+            <h3 className="text-2xl font-bold text-white mb-6 text-center">📝 당신의 선택</h3>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
+              {QUESTIONS.map((q, idx) => (
+                <div key={q.id} className="text-center">
+                  <div className="text-3xl mb-2">{q.emoji}</div>
                   <div 
-                    key={i} 
-                    className="flex-1 bg-yellow-100 dark:bg-yellow-800 px-4 py-3 rounded-lg text-center"
-                  >
-                    <div className="text-2xl font-bold text-gray-800 dark:text-gray-100">{type}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 오행 분석 */}
-            <div className="mb-6 p-5 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/50 dark:to-emerald-900/50 rounded-xl">
-              <h3 className="font-bold text-xl mb-3 text-gray-800 dark:text-gray-100">☯️ 오행 에너지 분석</h3>
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-                <div className="text-3xl font-bold text-center mb-2 text-gray-800 dark:text-gray-100">
-                  {result.dominantElement} ({result.elementStrength}/5)
+                    className="w-full h-24 rounded sm:rounded-lg md:rounded-2xl shadow-2xl mb-0.5 sm:mb-1.5 md:mb-2 border-2 border-white/20 hover:scale-110 transition-all duration-300"
+                    style={{
+                      backgroundColor: result.answers[idx]?.hex,
+                      boxShadow: `0 10px 30px ${result.answers[idx]?.hex}40`
+                    }}
+                  ></div>
+                  <p className="text-white font-bold text-sm">{result.answers[idx]?.name}</p>
+                  <p className="text-white/70 text-xs mt-1">{q.question}</p>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 text-center leading-relaxed">
+              ))}
+            </div>
+          </PremiumCard>
+
+          {/* 종합 분석 */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-8">
+            {/* 오행 에너지 */}
+            <PremiumCard hover gradient className="animate-slideUp" style={{ animationDelay: '0.1s' }}>
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <span className="text-2xl">☯️</span> 오행 에너지
+              </h3>
+              <div className="text-center">
+                <div className="text-6xl font-bold mb-2 bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
+                  {result.dominantElement}
+                </div>
+                <div className="text-white/80 text-sm mb-4">
+                  {result.elementStrength}/5 강도
+                </div>
+                <p className="text-white/90 text-sm leading-relaxed">
                   {getElementDescription(result.dominantElement)}
                 </p>
               </div>
-            </div>
+            </PremiumCard>
 
-            {/* 추천 직업 */}
-            <div className="mb-6 p-5 bg-gradient-to-r from-rose-50 to-pink-50 dark:from-rose-900/50 dark:to-pink-900/50 rounded-xl">
-              <h3 className="font-bold text-xl mb-3 text-gray-800 dark:text-gray-100">💼 추천 직업</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {result.careers.map((career: string, i: number) => (
+            {/* MBTI 유형 */}
+            <PremiumCard hover gradient className="animate-slideUp" style={{ animationDelay: '0.2s' }}>
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <span className="text-2xl">🎯</span> 예상 MBTI
+              </h3>
+              <div className="flex gap-3 justify-center">
+                {result.mbti.map((type: string, i: number) => (
                   <div 
                     key={i} 
-                    className="bg-rose-100 dark:bg-rose-800 px-4 py-3 rounded-lg text-center font-semibold text-gray-800 dark:text-gray-100"
+                    className="flex-1 bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-4 text-center border border-white/20 hover:scale-110 transition-all duration-300"
+                    style={{ animationDelay: `${i * 0.1}s` }}
                   >
-                    {career}
+                    <div className="text-3xl font-bold text-white">{type}</div>
                   </div>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
+          </div>
 
-            {/* 운세 */}
-            <div className="mb-6 p-5 bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/50 dark:to-yellow-900/50 rounded-xl">
-              <h3 className="font-bold text-xl mb-3 text-gray-800 dark:text-gray-100">🍀 운세</h3>
-              <div className="space-y-2">
-                {result.fortunes.map((fortune: string, i: number) => (
-                  <div 
-                    key={i} 
-                    className="bg-white dark:bg-gray-800 rounded-lg p-3 text-gray-700 dark:text-gray-300"
-                  >
-                    ✨ {fortune}
-                  </div>
-                ))}
-              </div>
+          {/* 성격 특성 */}
+          <PremiumCard hover gradient className="mb-8 animate-slideUp" style={{ animationDelay: '0.3s' }}>
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="text-2xl">🧠</span> 성격 특성
+            </h3>
+            <div className="flex flex-wrap gap-0 sm:gap-1.5 md:gap-3">
+              {result.allTraits.map((trait: string, i: number) => (
+                <span 
+                  key={i} 
+                  className="px-5 py-3 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-semibold border border-white/20 hover:bg-white/20 hover:scale-110 transition-all duration-300"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  {trait}
+                </span>
+              ))}
             </div>
+          </PremiumCard>
 
-            <button
+          {/* 추천 직업 */}
+          <PremiumCard hover gradient className="mb-8 animate-slideUp" style={{ animationDelay: '0.4s' }}>
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="text-2xl">💼</span> 추천 직업
+            </h3>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-0 sm:gap-1.5 md:gap-3">
+              {result.careers.map((career: string, i: number) => (
+                <div 
+                  key={i} 
+                  className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-xl p-4 text-center text-white font-semibold border border-white/20 hover:scale-105 transition-all duration-300"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  {career}
+                </div>
+              ))}
+            </div>
+          </PremiumCard>
+
+          {/* 운세 */}
+          <PremiumCard hover gradient className="mb-8 animate-slideUp" style={{ animationDelay: '0.5s' }}>
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="text-2xl">🍀</span> 운세
+            </h3>
+            <div className="space-y-3">
+              {result.fortunes.map((fortune: string, i: number) => (
+                <div 
+                  key={i} 
+                  className="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-white/90 border border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                >
+                  <span className="text-yellow-300 mr-2 group-hover:scale-125 inline-block transition-transform">✨</span>
+                  {fortune}
+                </div>
+              ))}
+            </div>
+          </PremiumCard>
+
+          {/* 다시 하기 버튼 */}
+          <div className="text-center mb-8">
+            <PremiumButton
               onClick={restart}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-lg rounded-lg shadow-lg transition-all"
+              variant="primary"
+              size="lg"
+              icon="🔄"
+              className="animate-fadeIn"
+              style={{ animationDelay: '0.6s' }}
             >
               다시 테스트하기
-            </button>
-          </section>
+            </PremiumButton>
+          </div>
 
-          {/* 돌아가기 버튼 */}
-          <div className="text-center pb-8">
-            <Link 
-              href="/" 
-              className="inline-block bg-gray-700 hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-500 text-white px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg"
-            >
-              메인으로 돌아가기
-            </Link>
+          {/* Related Apps */}
+          <div className="animate-fadeIn" style={{ animationDelay: '0.7s' }}>
+            <RelatedApps 
+              relatedAppIds={['mbti-test', 'today-fortune', 'dream-interpreter', 'voice-fortune']} 
+              currentAppId="color-psychology" 
+            />
           </div>
         </div>
-      </main>
+
+        <style jsx>{`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes slideUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+          }
+          
+          .animate-slideUp {
+            animation: slideUp 0.8s ease-out forwards;
+          }
+        `}</style>
+      </PremiumLayout>
     );
   }
 
@@ -678,88 +636,152 @@ export default function ColorPsychology() {
   const progress = ((currentStep + 1) / QUESTIONS.length) * 100;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-      <div className="mx-auto max-w-[900px] px-4 py-6">
-        {/* 진행도 */}
-        <div className="mb-6">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-semibold text-gray-700">
-              질문 {currentStep + 1} / {QUESTIONS.length}
-            </span>
-            <span className="text-sm font-semibold text-purple-600">
-              {Math.round(progress)}%
-            </span>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-            <div 
-              className="bg-gradient-to-r from-purple-600 to-blue-600 h-full rounded-full transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
+    <PremiumLayout theme="pink">
+      <div className="mx-auto max-w-[1000px] px-4 py-8">
+        {/* Back Button */}
+        <Link 
+          href="/"
+          className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-all duration-300 mb-8 group"
+        >
+          <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>돌아가기</span>
+        </Link>
+
+        {/* Header */}
+        <div className="text-center mb-12 animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 bg-clip-text text-transparent">
+            🎨 색채 심리 테스트
+          </h1>
+          <p className="text-xl text-white/80">색상으로 알아보는 나의 심리와 성격</p>
         </div>
 
-        <section className="bg-white rounded-2xl shadow-xl p-8">
-          <header className="text-center mb-8">
-            <div className="text-6xl mb-4 animate-bounce">{currentQuestion.emoji}</div>
-            <h2 className="text-3xl font-bold text-gray-800 mb-3">
+        <PremiumCard hover gradient className="animate-slideUp">
+          {/* Progress */}
+          <div className="mb-10">
+            <div className="flex justify-between text-white mb-0.5 sm:mb-1.5 md:mb-2">
+              <span className="text-sm font-medium">질문 {currentStep + 1} / {QUESTIONS.length}</span>
+              <span className="text-sm font-medium">{Math.round(progress)}%</span>
+            </div>
+            <div className="relative w-full bg-white/10 rounded-full h-4 overflow-hidden backdrop-blur-sm border border-white/20">
+              <div
+                className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 transition-all duration-500 ease-out"
+                style={{ 
+                  width: `${progress}%`,
+                  boxShadow: '0 0 20px rgba(236, 72, 153, 0.5)'
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Question */}
+          <div className="text-center mb-10">
+            <div className="text-7xl mb-6 animate-float">{currentQuestion.emoji}</div>
+            <h2 className="text-base sm:text-2xl md:text-4xl font-bold text-white mb-0.5 sm:mb-1.5 md:mb-2">
               {currentQuestion.question}
             </h2>
-            <p className="text-xl text-gray-600">{currentQuestion.subtext}</p>
-          </header>
+            <p className="text-xl text-white/80">{currentQuestion.subtext}</p>
+          </div>
 
-          <div className="mb-6">
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-              {COLORS.map((color) => (
-                <button
-                  key={color.name}
-                  onClick={() => selectColor(color)}
-                  className="group relative p-3 rounded-xl transition-all hover:scale-110 hover:shadow-2xl transform"
-                  style={{
-                    backgroundColor: color.hex,
-                    border: color.hex === '#FFFFFF' ? '2px solid #E5E7EB' : 'none'
-                  }}
-                >
-                  <div className="h-12"></div>
-                  <div 
-                    className="text-xs font-bold text-center mt-2 drop-shadow-lg"
+          {/* Color Grid */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+            {COLORS.map((color, idx) => (
+              <button
+                key={color.name}
+                onClick={() => selectColor(color)}
+                className="group relative rounded sm:rounded-lg md:rounded-2xl transition-all duration-300 hover:scale-110 hover:-translate-y-2"
+                style={{
+                  backgroundColor: color.hex,
+                  border: ['#FFFFFF', '#FFFBEB', '#FBCFE8', '#FEF3C7', '#FED7AA', '#D1D5DB'].includes(color.hex) 
+                    ? '2px solid rgba(255, 255, 255, 0.3)' 
+                    : 'none',
+                  boxShadow: `0 10px 30px ${color.hex}40`,
+                  animation: 'slideUp 0.5s ease-out forwards',
+                  animationDelay: `${idx * 0.03}s`,
+                  opacity: 0
+                }}
+              >
+                <div className="p-4 h-20 flex items-center justify-center relative z-10">
+                  <span 
+                    className="text-xs font-bold text-center drop-shadow-lg"
                     style={{
-                      color: ['#FFFFFF', '#FFFBEB', '#FBCFE8', '#FEF3C7', '#FED7AA'].includes(color.hex) 
+                      color: ['#FFFFFF', '#FFFBEB', '#FBCFE8', '#FEF3C7', '#FED7AA', '#D1D5DB'].includes(color.hex) 
                         ? '#374151' 
                         : '#FFFFFF'
                     }}
                   >
                     {color.name}
-                  </div>
-                </button>
-              ))}
-            </div>
+                  </span>
+                </div>
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded sm:rounded-lg md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" 
+                  style={{ backgroundColor: color.hex }}
+                ></div>
+              </button>
+            ))}
           </div>
 
           {currentStep > 0 && (
-            <div className="text-center mt-6">
-              <button
+            <div className="text-center mt-8">
+              <PremiumButton
                 onClick={() => setCurrentStep(currentStep - 1)}
-                className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-all"
+                variant="secondary"
+                size="md"
+                icon="←"
               >
-                ← 이전 질문
-              </button>
+                이전 질문
+              </PremiumButton>
             </div>
           )}
-        </section>
-
-        {/* 돌아가기 버튼 */}
-        <div className="text-center mt-8 pb-8">
-          <Link 
-            href="/" 
-            className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg"
-          >
-            메인으로 돌아가기
-          </Link>
-        </div>
+        </PremiumCard>
       </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
 
-    </main>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-shimmer {
+          animation: shimmer 2s ease-in-out infinite;
+        }
+      `}</style>
+    </PremiumLayout>
   );
 }

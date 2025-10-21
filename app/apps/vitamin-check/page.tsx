@@ -213,7 +213,7 @@ export default function VitaminCheck() {
             
           </div>
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
               <h1 className="text-3xl font-bold text-black mb-2 text-black placeholder-gray-500">💊</h1>
               <h2 className="text-2xl font-bold text-gray-800 text-black placeholder-gray-500">비타민 결핍 진단 결과</h2>
@@ -222,7 +222,7 @@ export default function VitaminCheck() {
 
             {result.deficiencies.length === 0 ? (
               <div className="mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-2 border-green-400 text-center text-black placeholder-gray-500">
-                <div className="text-4xl mb-3 text-black placeholder-gray-500">✅</div>
+                <div className="text-4xl mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">✅</div>
                 <div className="text-2xl font-bold text-black mb-2 text-black placeholder-gray-500">비타민 상태 양호!</div>
                 <p className="text-gray-700 text-black placeholder-gray-500">특별한 결핍 증상이 발견되지 않았습니다.</p>
                 <p className="text-sm text-gray-600 mt-2 text-black placeholder-gray-500">균형 잡힌 식단을 계속 유지하세요.</p>
@@ -235,7 +235,7 @@ export default function VitaminCheck() {
                     def.severity === '주의' ? 'bg-orange-50 border-orange-400' :
                     'bg-yellow-50 border-yellow-400'
                   }`}>
-                    <div className="flex justify-between items-start mb-3 text-black placeholder-gray-500">
+                    <div className="flex justify-between items-start mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                       <div>
                         <h3 className="text-xl font-bold text-gray-800 text-black placeholder-gray-500">{def.vitamin}</h3>
                         <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mt-2 ${
@@ -283,7 +283,7 @@ export default function VitaminCheck() {
 
             {/* 종합 조언 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">💡 종합 건강 조언</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">💡 종합 건강 조언</h3>
               <div className="space-y-2 text-sm text-gray-700 text-black placeholder-gray-500">
                 <div className="bg-white rounded p-3 text-black placeholder-gray-500">
                   • 균형 잡힌 식단: 다양한 색깔의 채소와 과일 섭취
@@ -308,7 +308,7 @@ export default function VitaminCheck() {
                 setResult(null);
                 setSelections({});
               }}
-              className="w-full px-6 py-4 rounded-xl font-bold text-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300"
+              className="w-full px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95 transition-all duration-300"
             >
               🔄 다시 진단하기
             </button>
@@ -331,7 +331,7 @@ export default function VitaminCheck() {
           
         </div>
 
-        <section className="bg-white rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
+        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
           <header className="text-center mb-6 text-black placeholder-gray-500">
             <h1 className="text-4xl font-bold text-black mb-2 text-black placeholder-gray-500">💊</h1>
             <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">비타민 부족 자가진단</h2>
@@ -341,7 +341,7 @@ export default function VitaminCheck() {
           <div className="space-y-6 mb-6 text-black placeholder-gray-500">
             {Object.entries(VITAMIN_SYMPTOMS).map(([key, data]) => (
               <div key={key} className="p-4 bg-gray-50 rounded-lg border border-gray-200 text-black placeholder-gray-500">
-                <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">{data.name}</h3>
+                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">{data.name}</h3>
                 <div className="space-y-2 text-black placeholder-gray-500">
                   {data.symptoms.map(symptom => (
                     <label
@@ -379,7 +379,7 @@ export default function VitaminCheck() {
           <button
             onClick={analyze}
             disabled={Object.values(selections).every(arr => arr.length === 0)}
-            className={`w-full px-6 py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
+            className={`w-full px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all duration-300 ${
               Object.values(selections).every(arr => arr.length === 0)
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95'

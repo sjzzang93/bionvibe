@@ -184,7 +184,7 @@ export default function WeatherOutfit() {
             
           </div>
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
               <h1 className="text-4xl mb-2 text-black placeholder-gray-500">{result.emoji}</h1>
               <h2 className="text-2xl font-bold text-gray-800 text-black placeholder-gray-500">오늘의 옷차림</h2>
@@ -196,12 +196,12 @@ export default function WeatherOutfit() {
             {/* 겉옷 */}
             {result.outfit.outer.length > 0 && (
               <div className="mb-5 text-black placeholder-gray-500">
-                <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center text-black placeholder-gray-500">
+                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
                   <span className="mr-2 text-black placeholder-gray-500">🧥</span> 겉옷
                 </h3>
-                <div className="grid grid-cols-2 gap-2 text-black placeholder-gray-500">
+                <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
                   {result.outfit.outer.map((item, i) => (
-                    <div key={i} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-3 border border-blue-200 text-center font-medium text-black text-black placeholder-gray-500">
+                    <div key={i} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-2 sm:p-3 border border-blue-200 text-center font-medium text-black text-black placeholder-gray-500">
                       {item}
                     </div>
                   ))}
@@ -211,12 +211,12 @@ export default function WeatherOutfit() {
 
             {/* 상의 */}
             <div className="mb-5 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center text-black placeholder-gray-500">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
                 <span className="mr-2 text-black placeholder-gray-500">👕</span> 상의
               </h3>
-              <div className="grid grid-cols-2 gap-2 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
                 {result.outfit.top.map((item, i) => (
-                  <div key={i} className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-3 border border-green-200 text-center font-medium text-black text-black placeholder-gray-500">
+                  <div key={i} className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-2 sm:p-3 border border-green-200 text-center font-medium text-black text-black placeholder-gray-500">
                     {item}
                   </div>
                 ))}
@@ -225,12 +225,12 @@ export default function WeatherOutfit() {
 
             {/* 하의 */}
             <div className="mb-5 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center text-black placeholder-gray-500">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
                 <span className="mr-2 text-black placeholder-gray-500">👖</span> 하의
               </h3>
-              <div className="grid grid-cols-2 gap-2 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
                 {result.outfit.bottom.map((item, i) => (
-                  <div key={i} className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg p-3 border border-purple-200 text-center font-medium text-black text-black placeholder-gray-500">
+                  <div key={i} className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg p-2 sm:p-3 border border-purple-200 text-center font-medium text-black text-black placeholder-gray-500">
                     {item}
                   </div>
                 ))}
@@ -239,12 +239,12 @@ export default function WeatherOutfit() {
 
             {/* 악세서리 */}
             <div className="mb-6 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 flex items-center text-black placeholder-gray-500">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
                 <span className="mr-2 text-black placeholder-gray-500">🎒</span> 필수 아이템
               </h3>
-              <div className="grid grid-cols-2 gap-2 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
                 {result.outfit.accessories.map((item, i) => (
-                  <div key={i} className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-lg p-3 border border-amber-200 text-center font-medium text-black text-black placeholder-gray-500">
+                  <div key={i} className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-lg p-2 sm:p-3 border border-amber-200 text-center font-medium text-black text-black placeholder-gray-500">
                     {item}
                   </div>
                 ))}
@@ -253,7 +253,7 @@ export default function WeatherOutfit() {
 
             {/* 스타일 팁 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">💡 스타일 팁</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">💡 스타일 팁</h3>
               <div className="space-y-2 text-black placeholder-gray-500">
                 {result.tips.map((tip, i) => (
                   <div key={i} className="bg-white rounded p-3 text-sm text-gray-700 text-black placeholder-gray-500">
@@ -289,7 +289,7 @@ export default function WeatherOutfit() {
           
         </div>
 
-        <section className="bg-white rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
+        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
           <header className="text-center mb-6 text-black placeholder-gray-500">
             <h1 className="text-4xl font-bold text-black mb-2 text-black placeholder-gray-500">🌡️</h1>
             <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">오늘의 옷차림 추천</h2>
@@ -323,7 +323,7 @@ export default function WeatherOutfit() {
               <div className="grid grid-cols-4 gap-2 text-black placeholder-gray-500">
                 <button
                   onClick={() => setWeather('sunny')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'sunny'
                       ? 'bg-yellow-500 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'
@@ -334,7 +334,7 @@ export default function WeatherOutfit() {
                 </button>
                 <button
                   onClick={() => setWeather('cloudy')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'cloudy'
                       ? 'bg-gray-500 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'
@@ -345,7 +345,7 @@ export default function WeatherOutfit() {
                 </button>
                 <button
                   onClick={() => setWeather('rainy')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'rainy'
                       ? 'bg-blue-500 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'
@@ -356,7 +356,7 @@ export default function WeatherOutfit() {
                 </button>
                 <button
                   onClick={() => setWeather('snowy')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'snowy'
                       ? 'bg-cyan-500 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'
@@ -373,7 +373,7 @@ export default function WeatherOutfit() {
               <div className="grid grid-cols-4 gap-2 text-black placeholder-gray-500">
                 <button
                   onClick={() => setSeason('spring')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'spring'
                       ? 'bg-blue-500 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'
@@ -384,7 +384,7 @@ export default function WeatherOutfit() {
                 </button>
                 <button
                   onClick={() => setSeason('summer')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'summer'
                       ? 'bg-orange-500 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'
@@ -395,7 +395,7 @@ export default function WeatherOutfit() {
                 </button>
                 <button
                   onClick={() => setSeason('fall')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'fall'
                       ? 'bg-amber-600 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'
@@ -406,7 +406,7 @@ export default function WeatherOutfit() {
                 </button>
                 <button
                   onClick={() => setSeason('winter')}
-                  className={`p-4 rounded-lg font-semibold transition-all ${
+                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'winter'
                       ? 'bg-blue-600 text-white shadow-lg'
                       : 'bg-gray-200 text-gray-600'

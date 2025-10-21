@@ -9,20 +9,12 @@
       "order": 1
     },
     {
-      "id": "game-brain",
-      "name": "게임 & 두뇌 놀이터",
-      "description": "Games & Brain Play",
-      "icon": "🎮",
-      "bgImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80",
-      "order": 2
-    },
-    {
       "id": "health-routine",
       "name": "건강 & 루틴",
       "description": "Health & Routine",
       "icon": "💚",
       "bgImage": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
-      "order": 3
+      "order": 2
     },
     {
       "id": "money-calc",
@@ -30,7 +22,7 @@
       "description": "Money & Calculators",
       "icon": "💰",
       "bgImage": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
-      "order": 4
+      "order": 3
     },
     {
       "id": "learning-tools",
@@ -38,7 +30,7 @@
       "description": "Learning & Tools",
       "icon": "📚",
       "bgImage": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
-      "order": 5
+      "order": 4
     },
     {
       "id": "family-life",
@@ -46,7 +38,7 @@
       "description": "Family & Life",
       "icon": "❤️",
       "bgImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80",
-      "order": 6
+      "order": 5
     }
   ]
 }

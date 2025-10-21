@@ -32,10 +32,10 @@ export default function FengshuiGuidePage() {
             </Link>
           </div>
           <div className="text-center">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
+            <h1 className="text-base sm:text-2xl md:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
               🏠 풍수지리 실전 도감
             </h1>
-            <p className="text-sm md:text-base text-gray-600 dark:text-gray-300">
+            <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 dark:text-gray-300">
               과학적 해석과 체크리스트로 배우는 현대 풍수 (2025년판)
             </p>
           </div>
@@ -261,7 +261,7 @@ function TheorySection() {
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold mb-3">💡 이 장의 핵심 3줄</h2>
+        <h2 className="text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">💡 이 장의 핵심 3줄</h2>
         <ul className="space-y-2">
           <li className="flex items-start gap-2">
             <span className="text-xl">1️⃣</span>
@@ -285,7 +285,7 @@ function TheorySection() {
               onClick={() => setExpandedConcept(expandedConcept === concept.id ? null : concept.id)}
               className="w-full p-6 text-left hover:bg-amber-50 dark:hover:bg-gray-700 transition-colors"
             >
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between gap-2">
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{concept.title}</h3>
                   <p className="text-amber-600 dark:text-amber-400 font-medium">💬 {concept.summary}</p>
@@ -296,7 +296,7 @@ function TheorySection() {
 
             {expandedConcept === concept.id && (
               <div className="px-6 pb-6 space-y-4 border-t border-amber-100 dark:border-gray-700 pt-4">
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
                   <div className="bg-amber-50 dark:bg-gray-700 rounded-lg p-4">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-2">📜 전통 정의</h4>
                     <p className="text-gray-700 dark:text-gray-300 text-sm">{concept.traditional}</p>
@@ -315,7 +315,7 @@ function TheorySection() {
                 </div>
 
                 <div className="bg-blue-50 dark:bg-gray-700 rounded-lg p-4">
-                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">✅ 실무 체크</h4>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1.5 md:mb-2">✅ 실무 체크</h4>
                   <ul className="space-y-2">
                     {concept.checklist.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-gray-700 dark:text-gray-300 text-sm">
@@ -406,17 +406,17 @@ function PracticeSection() {
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold mb-3">🏠 공간별 실전 가이드</h2>
+        <h2 className="text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">🏠 공간별 실전 가이드</h2>
         <p>각 공간의 과학적 배치 원칙과 즉시 적용 가능한 팁을 확인하세요</p>
       </div>
 
       {/* 공간 선택 버튼 */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3" suppressHydrationWarning>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3" suppressHydrationWarning>
         {Object.entries(rooms).map(([key, room]) => (
           <button
             key={key}
             onClick={() => setSelectedRoom(key)}
-            className={`p-4 rounded-xl font-medium text-sm transition-all ${
+            className={`p-2 md:p-4 rounded-xl font-medium text-sm transition-all ${
               selectedRoom === key
                 ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg scale-105'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:shadow-md'
@@ -460,7 +460,7 @@ function PracticeSection() {
       {/* 가구 배치 가이드 */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">🪑 주요 가구 배치 원칙</h3>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
           <div className="bg-green-50 dark:bg-gray-700 rounded-lg p-4">
             <h4 className="font-bold text-gray-900 dark:text-white mb-2">📚 책상</h4>
             <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">✅ 벽을 등지고 문이 보이는 위치 (집중력)</p>
@@ -565,7 +565,7 @@ function ChecklistSection({
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold mb-3">✅ 5분 진단 체크리스트</h2>
+        <h2 className="text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">✅ 5분 진단 체크리스트</h2>
         <p>20문항으로 현재 공간의 풍수 점수를 즉시 확인하세요</p>
       </div>
 
@@ -617,7 +617,7 @@ function ChecklistSection({
 
       {/* 점수별 조언 */}
       <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 rounded-xl p-6 border-l-4 border-amber-500">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">📋 다음 단계</h3>
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1.5 md:mb-2">📋 다음 단계</h3>
         {totalScore >= 80 && (
           <p className="text-gray-700 dark:text-gray-300">
             훌륭합니다! 현재 상태를 유지하고, 계절별 점검으로 지속적으로 관리하세요.
@@ -723,11 +723,11 @@ function CasesSection() {
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold mb-3">📖 실제 사례 연구</h2>
+        <h2 className="text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">📖 실제 사례 연구</h2>
         <p>비용·시간·효과가 명확한 6가지 케이스</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
         {cases.map((caseItem) => (
           <div key={caseItem.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-3 mb-4">
@@ -746,22 +746,22 @@ function CasesSection() {
             </div>
 
             <div className="space-y-3">
-              <div className="bg-red-50 dark:bg-red-900/30 rounded-lg p-3 border-l-4 border-red-400">
+              <div className="bg-red-50 dark:bg-red-900/30 rounded-lg p-2 sm:p-3 border-l-4 border-red-400">
                 <div className="font-bold text-red-700 dark:text-red-400 text-sm mb-1">❌ 문제</div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">{caseItem.problem}</p>
               </div>
 
-              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-3 border-l-4 border-blue-400">
+              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-2 sm:p-3 border-l-4 border-blue-400">
                 <div className="font-bold text-blue-700 dark:text-blue-400 text-sm mb-1">🔧 해결</div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">{caseItem.solution}</p>
               </div>
 
-              <div className="bg-green-50 dark:bg-green-900/30 rounded-lg p-3 border-l-4 border-green-400">
+              <div className="bg-green-50 dark:bg-green-900/30 rounded-lg p-2 sm:p-3 border-l-4 border-green-400">
                 <div className="font-bold text-green-700 dark:text-green-400 text-sm mb-1">✅ 효과</div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">{caseItem.effect}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="grid grid-cols-3 gap-2 text-xs">
                 <div className="bg-gray-100 dark:bg-gray-700 rounded p-2">
                   <div className="text-gray-500 dark:text-gray-400">Before</div>
                   <div className="text-gray-700 dark:text-gray-300">{caseItem.before}</div>
@@ -814,7 +814,7 @@ function ToolsSection({
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold mb-3">⚡ 5분 빠른 진단</h2>
+        <h2 className="text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">⚡ 5분 빠른 진단</h2>
         <p>10문항으로 즉시 거주 적합도 확인</p>
       </div>
 
@@ -849,7 +849,7 @@ function ToolsSection({
       {/* 계절별 점검 */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">🗓️ 계절별 점검표</h3>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
           <div className="bg-green-50 dark:bg-gray-700 rounded-lg p-4">
             <h4 className="font-bold text-gray-900 dark:text-white mb-2">🌸 봄·가을</h4>
             <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
@@ -982,7 +982,7 @@ function FAQSection() {
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl p-6 shadow-lg">
-        <h2 className="text-2xl font-bold mb-3">❓ 자주 묻는 질문</h2>
+        <h2 className="text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">❓ 자주 묻는 질문</h2>
         <p>풍수에 대한 모든 궁금증을 해결하세요</p>
       </div>
 
@@ -1234,15 +1234,15 @@ function FloorPlanDesigner() {
   return (
     <div className="space-y-4 md:space-y-6">
       <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl p-4 md:p-6 shadow-lg">
-        <h2 className="text-xl md:text-2xl font-bold mb-2 md:mb-3">🏠 인터랙티브 도면 설계</h2>
-        <p className="text-sm md:text-base">{isMobile ? '터치로 방을 이동하세요' : '방을 드래그하여 배치하고, 풍수지리 분석을 받아보세요'}</p>
+        <h2 className="text-xl md:text-2xl font-bold mb-2 md:mb-0.5 sm:mb-1.5 md:mb-2">🏠 인터랙티브 도면 설계</h2>
+        <p className="text-[10px] sm:text-xs md:text-sm">{isMobile ? '터치로 방을 이동하세요' : '방을 드래그하여 배치하고, 풍수지리 분석을 받아보세요'}</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
         <div className="space-y-3 md:space-y-4">
           {/* 나침반 */}
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3 md:mb-4 flex items-center gap-2">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1.5 md:mb-2 md:mb-4 flex items-center gap-2">
               <Compass className="w-4 h-4 md:w-5 md:h-5" />
               방향 확인하기
             </h3>
@@ -1261,7 +1261,7 @@ function FloorPlanDesigner() {
                 🧭 BION 나침반 열기
               </Link>
               
-              <div className="bg-indigo-50 dark:bg-indigo-900/30 rounded-lg p-3 text-xs text-gray-700 dark:text-gray-300 text-left">
+              <div className="bg-indigo-50 dark:bg-indigo-900/30 rounded-lg p-2 sm:p-3 text-xs text-gray-700 dark:text-gray-300 text-left">
                 <p className="font-bold mb-2">💡 사용 방법:</p>
                 <ol className="space-y-1 list-decimal list-inside">
                   <li>나침반 시작하기 버튼 클릭</li>
@@ -1275,11 +1275,11 @@ function FloorPlanDesigner() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3 md:mb-4 flex items-center gap-2">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1.5 md:mb-2 md:mb-4 flex items-center gap-2">
               <RotateCw className="w-4 h-4 md:w-5 md:h-5" />
               집 방향 설정
             </h3>
-            <div className="grid grid-cols-2 gap-2 md:gap-3">
+            <div className="grid grid-cols-3 gap-2 md:gap-0 sm:gap-1.5 md:gap-3">
               {[
                 { dir: 0 as const, label: '🌞 남향 (최고)', score: 95 },
                 { dir: 270 as const, label: '🌅 동향 (좋음)', score: 75 },
@@ -1298,8 +1298,8 @@ function FloorPlanDesigner() {
           </div>
 
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
-            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3 md:mb-4">방 추가하기</h3>
-            <div className="grid grid-cols-2 gap-2">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1.5 md:mb-2 md:mb-4">방 추가하기</h3>
+            <div className="grid grid-cols-3 gap-2">
               {(Object.keys(roomStyles) as Array<keyof typeof roomStyles>).map(type => (
                 <button
                   key={type}
@@ -1324,7 +1324,7 @@ function FloorPlanDesigner() {
 
         <div className="lg:col-span-2">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 md:p-6">
-            <div className="flex items-center justify-between mb-3 md:mb-4">
+            <div className="flex items-center justify-between mb-0.5 sm:mb-1.5 md:mb-2 md:mb-4">
               <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white">평면도 ({gridRows}x{gridCols})</h3>
               <div className="text-xs md:text-sm font-semibold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
                 {houseDirection === 0 && '🌞 남향집'}
@@ -1399,7 +1399,7 @@ function FloorPlanDesigner() {
               {analysis.overallScore >= 80 ? '🌟 명당!' : analysis.overallScore >= 60 ? '✅ 양호' : '⚠️ 개선 필요'}
             </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
             <div className="space-y-3">
               <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4">
                 <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-2">🧭 {analysis.direction}</h4>

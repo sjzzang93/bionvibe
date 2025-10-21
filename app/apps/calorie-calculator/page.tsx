@@ -220,16 +220,16 @@ export default function CalorieCalculatorPage() {
         <h1 className="text-4xl md:text-6xl font-extrabold text-center text-white mb-4">
           칼로리 자동계산기
         </h1>
-        <p className="text-center text-green-100 mb-8 text-sm md:text-base">과학적 공식으로 정확한 하루 칼로리 계산 + 맞춤 식단 추천</p>
+        <p className="text-center text-green-100 mb-8 text-[10px] sm:text-xs md:text-sm">과학적 공식으로 정확한 하루 칼로리 계산 + 맞춤 식단 추천</p>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-4 md:space-y-6">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 space-y-4 md:space-y-6">
           {/* 성별 */}
           <div>
-            <label className="text-white font-bold mb-2 block text-sm md:text-base">성별</label>
-            <div className="grid grid-cols-2 gap-3 md:gap-4">
+            <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">성별</label>
+            <div className="grid grid-cols-3 gap-3 md:gap-2">
               <button
                 onClick={() => setGender('male')}
-                className={`py-3 md:py-4 rounded-xl font-bold transition-all text-sm md:text-base ${
+                className={`py-3 md:py-4 rounded-xl font-bold transition-all text-[10px] sm:text-xs md:text-sm ${
                   gender === 'male' ? 'bg-blue-500 text-white' : 'bg-white/20 text-white'
                 }`}
                 style={{ minHeight: '44px' }}
@@ -238,7 +238,7 @@ export default function CalorieCalculatorPage() {
               </button>
               <button
                 onClick={() => setGender('female')}
-                className={`py-3 md:py-4 rounded-xl font-bold transition-all text-sm md:text-base ${
+                className={`py-3 md:py-4 rounded-xl font-bold transition-all text-[10px] sm:text-xs md:text-sm ${
                   gender === 'female' ? 'bg-pink-500 text-white' : 'bg-white/20 text-white'
                 }`}
                 style={{ minHeight: '44px' }}
@@ -249,37 +249,37 @@ export default function CalorieCalculatorPage() {
           </div>
 
           {/* 나이, 키, 몸무게 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-2">
             <div>
-              <label className="text-white font-bold mb-2 block text-sm md:text-base">나이</label>
+              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">나이</label>
               <input
                 type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 placeholder="예: 30"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
                 style={{ fontSize: '16px', minHeight: '44px' }}
               />
             </div>
             <div>
-              <label className="text-white font-bold mb-2 block text-sm md:text-base">키 (cm)</label>
+              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">키 (cm)</label>
               <input
                 type="number"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
                 placeholder="예: 170"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
                 style={{ fontSize: '16px', minHeight: '44px' }}
               />
             </div>
             <div>
-              <label className="text-white font-bold mb-2 block text-sm md:text-base">체중 (kg)</label>
+              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">체중 (kg)</label>
               <input
                 type="number"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
                 placeholder="예: 70"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
                 style={{ fontSize: '16px', minHeight: '44px' }}
               />
             </div>
@@ -287,11 +287,11 @@ export default function CalorieCalculatorPage() {
 
           {/* 활동량 */}
           <div>
-            <label className="text-white font-bold mb-2 block text-sm md:text-base">활동량</label>
+            <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">활동량</label>
             <select
               value={activity}
               onChange={(e) => setActivity(e.target.value)}
-              className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-sm md:text-base"
+              className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
               style={{ fontSize: '16px', minHeight: '44px' }}
             >
               <option value="sedentary">거의 운동 안함</option>
@@ -304,8 +304,8 @@ export default function CalorieCalculatorPage() {
 
           {/* 목표 */}
           <div>
-            <label className="text-white font-bold mb-2 block text-sm md:text-base">목표</label>
-            <div className="grid grid-cols-3 gap-2 md:gap-3">
+            <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">목표</label>
+            <div className="grid grid-cols-3 gap-2 md:gap-0 sm:gap-1.5 md:gap-3">
               <button
                 onClick={() => setGoal('lose')}
                 className={`py-3 rounded-xl font-bold transition-all text-xs md:text-sm ${
@@ -338,7 +338,7 @@ export default function CalorieCalculatorPage() {
 
           <button
             onClick={handleCalculate}
-            className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-lg md:text-xl hover:shadow-lg transition-all"
+            className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm md:text-xl hover:shadow-lg transition-all"
             style={{ minHeight: '48px' }}
           >
             계산하기
@@ -349,7 +349,7 @@ export default function CalorieCalculatorPage() {
               {/* 주요 수치 */}
               <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl p-6 text-center text-white">
                 <div className="text-5xl md:text-6xl mb-2">🎯</div>
-                <div className="text-sm md:text-base mb-2">하루 권장 칼로리</div>
+                <div className="text-[10px] sm:text-xs md:text-sm mb-2">하루 권장 칼로리</div>
                 <div className="text-4xl md:text-6xl font-bold mb-4">{result.targetCalories}</div>
                 <div className="text-xs md:text-sm">kcal</div>
               </div>
@@ -358,23 +358,23 @@ export default function CalorieCalculatorPage() {
               <div className="bg-white rounded-xl p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4">상세 분석</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between text-sm md:text-base">
+                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                     <span className="text-gray-600">기초대사량 (BMR):</span>
                     <span className="font-bold text-blue-600">{result.bmr} kcal</span>
                   </div>
-                  <div className="flex justify-between text-sm md:text-base">
+                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                     <span className="text-gray-600">일일 소비 칼로리 (TDEE):</span>
                     <span className="font-bold text-green-600">{result.tdee} kcal</span>
                   </div>
                   {result.calorieDiff !== 0 && (
                     <>
-                      <div className="flex justify-between text-sm md:text-base">
+                      <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                         <span className="text-gray-600">칼로리 조정:</span>
                         <span className={`font-bold ${result.calorieDiff > 0 ? 'text-blue-600' : 'text-red-600'}`}>
                           {result.calorieDiff > 0 ? '+' : ''}{result.calorieDiff} kcal
                         </span>
                       </div>
-                      <div className="flex justify-between text-sm md:text-base">
+                      <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
                         <span className="text-gray-600">예상 체중 변화:</span>
                         <span className="font-bold text-purple-600">
                           주당 {result.expectedWeightChange > 0 ? '+' : ''}{result.expectedWeightChange}kg
@@ -390,7 +390,7 @@ export default function CalorieCalculatorPage() {
                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4">권장 영양소 (30:40:30)</h3>
                 <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between mb-2 text-sm md:text-base">
+                    <div className="flex justify-between mb-2 text-[10px] sm:text-xs md:text-sm">
                       <span className="text-gray-600">단백질</span>
                       <span className="font-bold text-red-600">{result.protein}g</span>
                     </div>
@@ -399,7 +399,7 @@ export default function CalorieCalculatorPage() {
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between mb-2 text-sm md:text-base">
+                    <div className="flex justify-between mb-2 text-[10px] sm:text-xs md:text-sm">
                       <span className="text-gray-600">탄수화물</span>
                       <span className="font-bold text-yellow-600">{result.carbs}g</span>
                     </div>
@@ -408,7 +408,7 @@ export default function CalorieCalculatorPage() {
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between mb-2 text-sm md:text-base">
+                    <div className="flex justify-between mb-2 text-[10px] sm:text-xs md:text-sm">
                       <span className="text-gray-600">지방</span>
                       <span className="font-bold text-blue-600">{result.fat}g</span>
                     </div>
@@ -432,7 +432,7 @@ export default function CalorieCalculatorPage() {
                   <div className="space-y-4">
                     {/* 아침 */}
                     <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2 mb-0.5 sm:mb-1.5 md:mb-2">
                         <span className="text-2xl">🌅</span>
                         <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100">아침 - {mealPlan.breakfast.name}</h4>
                         <span className="ml-auto text-orange-600 dark:text-orange-400 font-bold">{mealPlan.breakfast.calories}kcal</span>
@@ -449,7 +449,7 @@ export default function CalorieCalculatorPage() {
 
                     {/* 점심 */}
                     <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2 mb-0.5 sm:mb-1.5 md:mb-2">
                         <span className="text-2xl">☀️</span>
                         <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100">점심 - {mealPlan.lunch.name}</h4>
                         <span className="ml-auto text-green-600 dark:text-green-400 font-bold">{mealPlan.lunch.calories}kcal</span>
@@ -466,7 +466,7 @@ export default function CalorieCalculatorPage() {
 
                     {/* 저녁 */}
                     <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2 mb-0.5 sm:mb-1.5 md:mb-2">
                         <span className="text-2xl">🌙</span>
                         <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100">저녁 - {mealPlan.dinner.name}</h4>
                         <span className="ml-auto text-blue-600 dark:text-blue-400 font-bold">{mealPlan.dinner.calories}kcal</span>
@@ -484,12 +484,12 @@ export default function CalorieCalculatorPage() {
                     {/* 간식 */}
                     {mealPlan.snacks.length > 0 && (
                       <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center gap-2 mb-0.5 sm:mb-1.5 md:mb-2">
                           <span className="text-2xl">🍪</span>
                           <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100">간식</h4>
                         </div>
                         {mealPlan.snacks.map((snack, idx) => (
-                          <div key={idx} className="mb-3 last:mb-0">
+                          <div key={idx} className="mb-0.5 sm:mb-1.5 md:mb-2 last:mb-0">
                             <div className="flex items-center gap-2 mb-2">
                               <span className="font-bold text-purple-600 dark:text-purple-400">{snack.name}</span>
                               <span className="text-sm text-purple-600 dark:text-purple-400 font-bold">({snack.calories}kcal)</span>
@@ -539,7 +539,7 @@ export default function CalorieCalculatorPage() {
 
         {/* 돌아가기 버튼 */}
         <div className="text-center mt-8">
-          <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg">
+          <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all duration-300 shadow-lg">
             메인으로 돌아가기
           </Link>
         </div>

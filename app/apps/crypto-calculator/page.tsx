@@ -204,9 +204,9 @@ export default function CryptoKimchiPremium() {
         </div>
 
         {/* 암호화폐 선택 */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 mb-6">
-          <label className="text-white font-bold mb-3 block text-lg">암호화폐 선택</label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 mb-6">
+          <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">암호화폐 선택</label>
+          <div className="grid grid-cols-3 sm:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-0 sm:gap-1.5 md:gap-3">
             {CRYPTO_LIST.map((crypto) => (
               <button
                 key={crypto.id}
@@ -246,7 +246,7 @@ export default function CryptoKimchiPremium() {
               cryptoData.kimchi > 0 
                 ? 'from-red-600 to-orange-600' 
                 : 'from-blue-600 to-cyan-600'
-            } rounded-2xl p-8 mb-6 shadow-2xl`}>
+            } rounded sm:rounded-lg md:rounded-2xl p-8 mb-6 shadow-2xl`}>
               <div className="text-center">
                 <h2 className="text-white text-2xl font-bold mb-4">
                   🌶️ 김치 프리미엄 (김프)
@@ -257,7 +257,7 @@ export default function CryptoKimchiPremium() {
                 <p className="text-white text-xl font-semibold">
                   {getKimchiText(cryptoData.kimchi)}
                 </p>
-                <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="mt-6 grid grid-cols-3 gap-2">
                   <div className="bg-white/20 rounded-xl p-4">
                     <p className="text-white/80 text-sm mb-1">🇰🇷 국내 평균</p>
                     <p className="text-white text-xl font-bold">
@@ -274,9 +274,9 @@ export default function CryptoKimchiPremium() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* 국내 거래소 */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6">
+              <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6">
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                   🇰🇷 국내 거래소 Top 5
                 </h3>
@@ -284,7 +284,7 @@ export default function CryptoKimchiPremium() {
                   {cryptoData.koreanExchanges.map((exchange, idx) => (
                     <div key={idx} className="bg-white/10 rounded-xl p-4">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-white font-bold text-lg">{exchange.name}</span>
+                        <span className="text-white font-bold text-[10px] sm:text-xs md:text-sm">{exchange.name}</span>
                         <span className="text-yellow-300 font-bold">#{idx + 1}</span>
                       </div>
                       <div className="text-green-400 text-xl font-bold mb-1">
@@ -302,7 +302,7 @@ export default function CryptoKimchiPremium() {
               </div>
 
               {/* 해외 거래소 */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6">
+              <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6">
                 <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                   🌍 해외 거래소 Top 5
                 </h3>
@@ -310,7 +310,7 @@ export default function CryptoKimchiPremium() {
                   {cryptoData.globalExchanges.map((exchange, idx) => (
                     <div key={idx} className="bg-white/10 rounded-xl p-4">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-white font-bold text-lg">{exchange.name}</span>
+                        <span className="text-white font-bold text-[10px] sm:text-xs md:text-sm">{exchange.name}</span>
                         <span className="text-blue-300 font-bold">#{idx + 1}</span>
                       </div>
                       <div className="text-cyan-400 text-xl font-bold mb-1">
@@ -329,9 +329,9 @@ export default function CryptoKimchiPremium() {
             </div>
 
             {/* 설명 */}
-            <div className="mt-6 bg-yellow-500/20 border-2 border-yellow-500/50 rounded-2xl p-6">
-              <h4 className="text-yellow-300 font-bold text-lg mb-3">💡 김치 프리미엄이란?</h4>
-              <p className="text-white mb-3">
+            <div className="mt-6 bg-yellow-500/20 border-2 border-yellow-500/50 rounded sm:rounded-lg md:rounded-2xl p-6">
+              <h4 className="text-yellow-300 font-bold text-[10px] sm:text-xs md:text-sm mb-0.5 sm:mb-1.5 md:mb-2">💡 김치 프리미엄이란?</h4>
+              <p className="text-white mb-0.5 sm:mb-1.5 md:mb-2">
                 김치 프리미엄(김프)은 국내 암호화폐 가격이 해외보다 얼마나 비싼지를 나타내는 지표입니다.
               </p>
               <ul className="text-white space-y-2 text-sm">

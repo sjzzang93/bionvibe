@@ -463,7 +463,7 @@ export default function GiftFinderPage() {
           >
             ← 홈으로
           </Link>
-          <h1 className="text-4xl md:text-5xl font-black mb-3 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 dark:from-pink-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-5xl font-black mb-0.5 sm:mb-1.5 md:mb-2 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 dark:from-pink-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
             🎁 선물 추천
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -472,13 +472,13 @@ export default function GiftFinderPage() {
         </div>
 
         {!showResult ? (
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8 space-y-6">
+          <div className="bg-white dark:bg-gray-800 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 md:p-8 space-y-6">
             {/* 받는 사람 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-3">
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
                 🎯 누구에게 선물하나요?
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
                 {[
                   { id: 'parents', label: '부모님', emoji: '👨‍👩‍👦' },
                   { id: 'grandparents', label: '조부모님', emoji: '👴' },
@@ -507,10 +507,10 @@ export default function GiftFinderPage() {
 
             {/* 예산 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-3">
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
                 💰 예산은 얼마나 되나요?
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
                 {[
                   { id: '10000', label: '1만원대' },
                   { id: '20000', label: '2만원대' },
@@ -538,10 +538,10 @@ export default function GiftFinderPage() {
 
             {/* 상황 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-3">
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
                 🎊 어떤 상황인가요?
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
                 {[
                   { id: 'birthday', label: '생일', emoji: '🎂' },
                   { id: 'anniversary', label: '기념일', emoji: '💝' },
@@ -570,10 +570,10 @@ export default function GiftFinderPage() {
 
             {/* 관심사 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-3">
+              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
                 ❤️ 관심사를 선택해주세요 (다중선택 가능)
               </label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
                 {interestOptions.map(opt => (
                   <button
                     key={opt.id}
@@ -601,7 +601,7 @@ export default function GiftFinderPage() {
         ) : (
           <div className="space-y-6">
             {/* 결과 헤더 */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-center">
               <h2 className="text-2xl font-black text-gray-800 dark:text-gray-100 mb-2">
                 🎉 추천 선물 {suggestions.length}개
               </h2>
@@ -611,13 +611,13 @@ export default function GiftFinderPage() {
             </div>
 
             {/* 추천 목록 */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
               {suggestions.map((gift: GiftSuggestion, index: number) => (
                 <div
                   key={index}
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border-2 border-transparent hover:border-purple-300 dark:hover:border-purple-600"
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-2">
                     <div className="text-5xl">{gift.emoji}</div>
                     <div className="flex-1">
                       <h3 className="text-xl font-black text-gray-800 dark:text-gray-100 mb-2">

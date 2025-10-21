@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
+import RelatedApps from '@/app/components/RelatedApps';
 
-import AppFooter from "@/app/components/AppFooter";
 export default function ReflexTest() {
   const [testMode, setTestMode] = useState<'menu' | 'ready' | 'wait' | 'click' | 'result'>('menu');
   const [currentRound, setCurrentRound] = useState(0);
@@ -41,7 +44,7 @@ export default function ReflexTest() {
   };
 
   const handleClick = (e: React.PointerEvent | React.TouchEvent) => {
-    e.preventDefault(); // 기본 동작 방지로 딜레이 제거
+    e.preventDefault();
     
     if (testMode === 'wait') {
       // 너무 일찍 클릭
@@ -55,7 +58,7 @@ export default function ReflexTest() {
         }
       }, 1000);
     } else if (testMode === 'click') {
-      // 반응 시간 측정 (performance.now()로 더 정확)
+      // 반응 시간 측정
       const reactionTime = Math.round(performance.now() - startTime);
       const newTimes = [...reactionTimes, reactionTime];
       setReactionTimes(newTimes);
@@ -81,280 +84,257 @@ export default function ReflexTest() {
     return { avg, best, worst };
   };
 
-  const getGrade = (avgTime: number) => {
-    if (avgTime < 180) return { grade: 'S+', color: 'purple', text: '신의 경지! 🔥' };
-    if (avgTime < 220) return { grade: 'S', color: 'blue', text: '초인적 반응속도!' };
-    if (avgTime < 270) return { grade: 'A+', color: 'green', text: '프로게이머 수준!' };
-    if (avgTime < 320) return { grade: 'A', color: 'cyan', text: '매우 빠른 반응!' };
-    if (avgTime < 370) return { grade: 'B', color: 'yellow', text: '평균 이상' };
-    if (avgTime < 420) return { grade: 'C', color: 'orange', text: '평균 수준' };
-    return { grade: 'D', color: 'red', text: '연습이 필요해요' };
+  const getGrade = (avg: number) => {
+    if (avg === 0) return { grade: '-', text: '데이터 없음', emoji: '😶' };
+    if (avg < 200) return { grade: 'S+', text: '천재적!', emoji: '🚀' };
+    if (avg < 250) return { grade: 'S', text: '매우 빠름', emoji: '⚡' };
+    if (avg < 300) return { grade: 'A', text: '빠름', emoji: '🎯' };
+    if (avg < 350) return { grade: 'B', text: '평균 이상', emoji: '👍' };
+    if (avg < 400) return { grade: 'C', text: '평균', emoji: '😊' };
+    return { grade: 'D', text: '연습 필요', emoji: '🌱' };
   };
 
-  if (testMode === 'result') {
-    const stats = calculateStats();
-    const gradeInfo = getGrade(stats.avg);
+  const stats = calculateStats();
+  const gradeInfo = getGrade(stats.avg);
 
-    return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-purple-900 dark:via-pink-900 dark:to-blue-900 transition-colors">
-        <div className="mx-auto max-w-[600px] px-4 py-6">
-          <div className="mb-4">
+  return (
+    <PremiumLayout theme="orange">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-12 animate-fadeIn">
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-orange-200 via-red-200 to-orange-200 bg-clip-text text-transparent">
+            ⚡ 반사신경 테스트
+          </h1>
+          <p className="text-xl text-white/80">당신의 반응 속도를 측정하세요</p>
+        </div>
+
+        {/* Menu Screen */}
+        {testMode === 'menu' && (
+          <PremiumCard hover gradient className="text-center animate-slideUp">
+            <div className="text-8xl mb-8 animate-float">⏱️</div>
+            <h2 className="text-3xl font-bold text-white mb-6">반사신경을 테스트하세요!</h2>
+            <p className="text-white/80 text-lg mb-8 leading-relaxed">
+              화면이 초록색으로 변하면 최대한 빠르게 클릭하세요!<br />
+              총 {TOTAL_ROUNDS}라운드로 진행됩니다.
+            </p>
             
+            <PremiumButton
+              onClick={startTest}
+              variant="success"
+              size="lg"
+              icon="🚀"
+              fullWidth
+            >
+              테스트 시작하기
+            </PremiumButton>
+
+            <div className="mt-8 text-white/60 text-sm">
+              💡 Tip: 모바일에서는 화면을 터치하세요
+            </div>
+          </PremiumCard>
+        )}
+
+        {/* Test Screen */}
+        {(testMode === 'ready' || testMode === 'wait' || testMode === 'click') && (
+          <div className="space-y-6 animate-fadeIn">
+            {/* Progress */}
+            <PremiumCard className="text-center">
+              <div className="text-white text-lg font-bold mb-2">
+                라운드 {currentRound} / {TOTAL_ROUNDS}
+              </div>
+              <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+                <div
+                  className="bg-gradient-to-r from-orange-500 to-red-500 h-full rounded-full transition-all duration-300"
+                  style={{ width: `${(currentRound / TOTAL_ROUNDS) * 100}%` }}
+                ></div>
+              </div>
+            </PremiumCard>
+
+            {/* Click Area */}
+            <div
+              className="relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-300 border-4"
+              style={{
+                height: '400px',
+                backgroundColor: testMode === 'click' ? '#10b981' : testMode === 'wait' ? '#dc2626' : '#374151',
+                borderColor: testMode === 'click' ? '#10b981' : testMode === 'wait' ? '#dc2626' : '#6b7280',
+                boxShadow: testMode === 'click' 
+                  ? '0 0 60px rgba(16, 185, 129, 0.6)' 
+                  : testMode === 'wait' 
+                    ? '0 0 60px rgba(220, 38, 38, 0.6)'
+                    : '0 20px 60px rgba(0, 0, 0, 0.5)',
+              }}
+              onPointerDown={handleClick}
+              onTouchStart={handleClick}
+            >
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                {testMode === 'ready' && (
+                  <div className="text-center animate-fadeIn">
+                    <div className="text-6xl mb-4">🎯</div>
+                    <div className="text-white text-3xl font-bold">준비하세요...</div>
+                  </div>
+                )}
+                
+                {testMode === 'wait' && !tooEarly && (
+                  <div className="text-center animate-fadeIn">
+                    <div className="text-6xl mb-4">⏳</div>
+                    <div className="text-white text-3xl font-bold">대기 중...</div>
+                    <div className="text-white/70 text-lg mt-2">초록색으로 변할 때까지 기다리세요</div>
+                  </div>
+                )}
+
+                {testMode === 'wait' && tooEarly && (
+                  <div className="text-center animate-shake">
+                    <div className="text-6xl mb-4">❌</div>
+                    <div className="text-white text-3xl font-bold">너무 빨라요!</div>
+                    <div className="text-white/70 text-lg mt-2">초록색으로 변할 때까지 기다리세요</div>
+                  </div>
+                )}
+
+                {testMode === 'click' && (
+                  <div className="text-center animate-pulse-fast">
+                    <div className="text-8xl mb-4">👆</div>
+                    <div className="text-white text-4xl font-bold">지금 클릭!</div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
+        )}
 
-          <section className="bg-white rounded-2xl shadow-xl p-6">
-            <header className="text-center mb-6">
-              <h1 className="text-3xl font-bold text-black mb-2">⚡</h1>
-              <h2 className="text-2xl font-bold text-gray-800">순발력 테스트 결과</h2>
-            </header>
-
-            {/* 등급 */}
-            <div className={`mb-6 p-6 rounded-xl text-center border-4 ${
-              gradeInfo.color === 'purple' ? 'bg-purple-50 border-purple-400' :
-              gradeInfo.color === 'blue' ? 'bg-blue-50 border-blue-400' :
-              gradeInfo.color === 'green' ? 'bg-green-50 border-green-400' :
-              gradeInfo.color === 'cyan' ? 'bg-cyan-50 border-cyan-400' :
-              gradeInfo.color === 'yellow' ? 'bg-yellow-50 border-yellow-400' :
-              gradeInfo.color === 'orange' ? 'bg-orange-50 border-orange-400' :
-              'bg-red-50 border-red-400'
-            }`}>
-              <div className="text-7xl font-bold mb-3" style={{
-                background: gradeInfo.color === 'purple' ? 'linear-gradient(135deg, #a855f7, #9333ea)' :
-                           gradeInfo.color === 'blue' ? 'linear-gradient(135deg, #3b82f6, #2563eb)' :
-                           gradeInfo.color === 'green' ? 'linear-gradient(135deg, #10b981, #059669)' :
-                           gradeInfo.color === 'cyan' ? 'linear-gradient(135deg, #06b6d4, #0891b2)' :
-                           gradeInfo.color === 'yellow' ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
-                           gradeInfo.color === 'orange' ? 'linear-gradient(135deg, #f97316, #ea580c)' :
-                           'linear-gradient(135deg, #ef4444, #dc2626)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>
+        {/* Result Screen */}
+        {testMode === 'result' && (
+          <div className="space-y-6 animate-fadeIn">
+            <PremiumCard hover gradient className="text-center">
+              <div className="text-8xl mb-6 animate-bounce-slow">{gradeInfo.emoji}</div>
+              <div className="text-6xl font-bold mb-4 bg-gradient-to-r from-orange-200 to-red-200 bg-clip-text text-transparent">
                 {gradeInfo.grade}
               </div>
-              <div className="text-xl font-semibold text-gray-700 mb-2">{gradeInfo.text}</div>
-              <div className="text-4xl font-bold text-black">{stats.avg}ms</div>
+              <div className="text-2xl text-white mb-2">{gradeInfo.text}</div>
+              <div className="text-white/70">평균 반응 속도</div>
+              <div className="text-5xl font-bold text-white mt-2">{stats.avg}ms</div>
+            </PremiumCard>
+
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
+              <PremiumCard hover className="text-center">
+                <div className="text-green-400 text-sm font-bold mb-2">⚡ 최고 기록</div>
+                <div className="text-4xl font-bold text-white">{stats.best}ms</div>
+              </PremiumCard>
+
+              <PremiumCard hover className="text-center">
+                <div className="text-blue-400 text-sm font-bold mb-2">📊 평균 기록</div>
+                <div className="text-4xl font-bold text-white">{stats.avg}ms</div>
+              </PremiumCard>
+
+              <PremiumCard hover className="text-center">
+                <div className="text-orange-400 text-sm font-bold mb-2">🐌 최저 기록</div>
+                <div className="text-4xl font-bold text-white">{stats.worst}ms</div>
+              </PremiumCard>
             </div>
 
-            {/* 통계 */}
-            <div className="mb-6 grid grid-cols-3 gap-3">
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200 text-center">
-                <div className="text-sm text-gray-600 mb-1">평균</div>
-                <div className="text-2xl font-bold text-black">{stats.avg}</div>
-                <div className="text-xs text-gray-500">ms</div>
-              </div>
-
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200 text-center">
-                <div className="text-sm text-gray-600 mb-1">최고</div>
-                <div className="text-2xl font-bold text-black">{stats.best}</div>
-                <div className="text-xs text-gray-500">ms</div>
-              </div>
-
-              <div className="bg-gradient-to-br from-red-50 to-blue-50 rounded-lg p-4 border border-red-200 text-center">
-                <div className="text-sm text-gray-600 mb-1">최저</div>
-                <div className="text-2xl font-bold text-black">{stats.worst}</div>
-                <div className="text-xs text-gray-500">ms</div>
-              </div>
-            </div>
-
-            {/* 각 라운드 기록 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">📊 라운드별 기록</h3>
-              <div className="space-y-2">
-                {reactionTimes.map((time, i) => (
-                  <div key={i} className="flex justify-between items-center bg-white rounded p-3">
-                    <span className="font-semibold text-gray-700">Round {i + 1}</span>
-                    <span className={`font-bold ${
-                      time === stats.best ? 'text-black' :
-                      time === stats.worst ? 'text-black' :
-                      'text-gray-800'
-                    }`}>
-                      {time}ms {time === stats.best ? '🏆' : ''}
-                    </span>
+            <PremiumCard hover>
+              <h3 className="text-white font-bold mb-4 text-center">📈 라운드별 기록</h3>
+              <div className="space-y-3">
+                {reactionTimes.map((time, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <div className="text-white/70 font-bold w-24">Round {idx + 1}</div>
+                    <div className="flex-1 bg-white/10 rounded-full h-8 overflow-hidden relative">
+                      <div
+                        className="bg-gradient-to-r from-orange-500 to-red-500 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${Math.min((time / 500) * 100, 100)}%` }}
+                      ></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">{time}ms</span>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
 
-            {/* 반응속도 비교 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">📈 반응속도 비교</h3>
-              <div className="space-y-2 text-sm">
-                <div className="bg-white rounded p-3">
-                  <div className="flex justify-between">
-                    <span>세계 최고 기록</span>
-                    <span className="font-bold text-black">120-180ms</span>
-                  </div>
-                </div>
-                <div className="bg-white rounded p-3">
-                  <div className="flex justify-between">
-                    <span>프로 게이머</span>
-                    <span className="font-bold text-black">180-250ms</span>
-                  </div>
-                </div>
-                <div className="bg-white rounded p-3">
-                  <div className="flex justify-between">
-                    <span>운동선수</span>
-                    <span className="font-bold text-black">250-300ms</span>
-                  </div>
-                </div>
-                <div className="bg-white rounded p-3">
-                  <div className="flex justify-between">
-                    <span>일반 성인 평균</span>
-                    <span className="font-bold text-black">300-400ms</span>
-                  </div>
-                </div>
-                <div className="bg-white rounded p-3">
-                  <div className="flex justify-between">
-                    <span>고령자 평균</span>
-                    <span className="font-bold text-black">450-550ms</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 개선 팁 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">💡 순발력 향상 팁</h3>
-              <div className="space-y-2 text-sm text-gray-700">
-                <div className="bg-white rounded p-3">
-                  🎮 반응속도 게임: 꾸준한 연습이 중요
-                </div>
-                <div className="bg-white rounded p-3">
-                  ⚽ 스포츠 활동: 탁구, 배드민턴 추천
-                </div>
-                <div className="bg-white rounded p-3">
-                  ☕ 카페인: 적당량 섭취 시 반응속도 향상
-                </div>
-                <div className="bg-white rounded p-3">
-                  😴 충분한 수면: 피로는 반응속도 저하
-                </div>
-                <div className="bg-white rounded p-3">
-                  🧘 집중력 훈련: 명상, 집중력 게임
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => setTestMode('menu')}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
-            >
-              다시 테스트
-            </button>
-          </section>
-        </div>
-      </main>
-    );
-  }
-
-  return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-      <div className="mx-auto max-w-[600px] px-4 py-6">
-        <div className="mb-4">
-          
-        </div>
-
-        {testMode === 'menu' ? (
-          <section className="bg-white rounded-2xl shadow-xl p-6">
-            <header className="text-center mb-6">
-              <h1 className="text-4xl font-bold text-black mb-2">⚡</h1>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">순발력 테스트</h2>
-              <p className="text-gray-600">당신의 반응속도를 측정하세요</p>
-            </header>
-
-            <div className="mb-6 p-6 bg-gradient-to-r from-purple-100 to-blue-100 rounded-xl border-2 border-purple-300">
-              <h3 className="font-bold text-black mb-3 text-lg">🎯 테스트 방법</h3>
-              <ol className="space-y-2 text-black">
-                <li>1. 빨간색 화면이 나타날 때까지 대기</li>
-                <li>2. 화면이 초록색으로 바뀌면 즉시 클릭!</li>
-                <li>3. 총 5라운드 진행</li>
-                <li>4. 너무 일찍 클릭하면 실패!</li>
-              </ol>
-            </div>
-
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-black mb-2">📊 반응속도 기준</h3>
-              <div className="text-sm text-black space-y-1">
-                <div>• 180ms 이하: 신의 경지 (S+)</div>
-                <div>• 180-220ms: 초인 (S)</div>
-                <div>• 220-270ms: 프로게이머 (A+)</div>
-                <div>• 270-320ms: 매우 빠름 (A)</div>
-                <div>• 320-370ms: 평균 이상 (B)</div>
-                <div>• 370ms 이상: 연습 필요</div>
-              </div>
-            </div>
-
-            <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-              <h3 className="font-bold text-black mb-2">💡 최고 기록 팁</h3>
-              <div className="text-sm text-black space-y-1">
-                <div>• 집중력을 최대한 유지하세요</div>
-                <div>• 마우스/터치를 준비하세요</div>
-                <div>• 편안한 자세로 시작하세요</div>
-                <div>• 화면만 응시하세요</div>
-              </div>
-            </div>
-
-            <button
-              onClick={startTest}
-              className="w-full py-6 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-2xl rounded-lg shadow-lg hover:shadow-xl transition-all"
-            >
-              시작하기
-            </button>
-          </section>
-        ) : testMode === 'ready' || testMode === 'wait' ? (
-          <section 
-            onPointerDown={handleClick}
-            onTouchStart={handleClick}
-            className="bg-red-600 rounded-2xl shadow-xl p-12 cursor-pointer min-h-[500px] flex flex-col items-center justify-center touch-none select-none"
-            style={{ touchAction: 'none' }}
-          >
             <div className="text-center">
-              <h2 className="text-white text-4xl font-bold mb-4">
-                {tooEarly ? '너무 빨라요! 😅' : '대기 중...'}
-              </h2>
-              <p className="text-white text-xl mb-6">
-                {tooEarly ? '초록색이 될 때까지 기다리세요' : '초록색으로 바뀌면 클릭!'}
-              </p>
-              <div className="text-white text-6xl font-bold">
-                {currentRound} / {TOTAL_ROUNDS}
-              </div>
+              <PremiumButton
+                onClick={() => setTestMode('menu')}
+                variant="primary"
+                size="lg"
+                icon="🔄"
+              >
+                다시 테스트하기
+              </PremiumButton>
             </div>
-          </section>
-        ) : (
-          <section 
-            onPointerDown={handleClick}
-            onTouchStart={handleClick}
-            className="bg-green-600 rounded-2xl shadow-xl p-12 cursor-pointer min-h-[500px] flex flex-col items-center justify-center touch-none select-none"
-            style={{ touchAction: 'none' }}
-          >
-            <div className="text-center">
-              <h2 className="text-white text-5xl font-bold mb-6 animate-pulse">
-                클릭!
-              </h2>
-              <div className="text-white text-7xl font-bold">
-                ⚡
-              </div>
-            </div>
-          </section>
-        )}
 
-        {testMode !== 'menu' && (
-          <div className="mt-4 text-center">
-            <button
-              onClick={() => {
-                if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                setTestMode('menu');
-              }}
-              className="px-6 py-3 bg-white text-gray-700 font-semibold rounded-lg shadow hover:shadow-lg transition-all"
-            >
-              취소
-            </button>
+            {/* Related Apps */}
+            <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+              <RelatedApps 
+                relatedAppIds={['typing-speed-test', 'eye-test', 'iq-test', 'focus-timer']} 
+                currentAppId="reflex-test" 
+              />
+            </div>
           </div>
         )}
       </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
 
-    </main>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-10px); }
+          75% { transform: translateX(10px); }
+        }
+
+        @keyframes pulse-fast {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-bounce-slow {
+          animation: bounce-slow 2s ease-in-out infinite;
+        }
+
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+
+        .animate-pulse-fast {
+          animation: pulse-fast 0.5s ease-in-out infinite;
+        }
+      `}</style>
+    </PremiumLayout>
   );
 }
-

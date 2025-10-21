@@ -1,493 +1,505 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from "react";
+import { FACE_SHAPE_DATA, getFaceShapeByRatio, FaceShapeAnalysis } from "@/lib/face-shape-data";
+import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
-import RelatedApps from '@/app/components/RelatedApps';
 
-const FACE_SHAPES = {
-  oval: {
-    name: '계란형 (Oval)',
-    icon: '🥚',
-    features: [
-      '이마, 광대뼈, 턱의 너비가 비슷',
-      '부드러운 둥근 턱선',
-      '얼굴 길이가 너비의 1.5배',
-      '이상적인 얼굴형'
-    ],
-    hairstyles: {
-      best: [
-        '롱 레이어드 컷',
-        '미디움 웨이브',
-        '앞머리 있는 단발',
-        '허쉬컷',
-        '웨이브 펌',
-        'C컬 단발'
-      ],
-      avoid: ['과도한 볼륨', '너무 짧은 헤어']
-    },
-    makeup: [
-      '자연스러운 셰이딩',
-      '볼 중앙에 블러셔',
-      '자연스러운 눈썹 라인'
-    ],
-    celebrities: ['송혜교', '아이유', '수지', '정려원'],
-    color: 'pink'
-  },
-  round: {
-    name: '둥근형 (Round)',
-    icon: '🌕',
-    features: [
-      '얼굴 길이와 너비가 비슷',
-      '부드러운 곡선',
-      '동글동글한 턱선',
-      '귀여운 인상'
-    ],
-    hairstyles: {
-      best: [
-        '롱 스트레이트',
-        '앞머리 없는 헤어',
-        'V라인 커트',
-        '웨이브 롱',
-        '옆머리 볼륨',
-        '레이어드 컷'
-      ],
-      avoid: ['단발', '앞머리 쳐진 스타일', '볼 옆 볼륨']
-    },
-    makeup: [
-      '세로 방향 셰이딩',
-      '턱 끝 음영',
-      '높은 하이라이트'
-    ],
-    celebrities: ['박보영', '문채원', '김고은'],
-    color: 'amber'
-  },
-  square: {
-    name: '사각형 (Square)',
-    icon: '◻️',
-    features: [
-      '각진 턱선',
-      '이마, 광대, 턱의 너비가 비슷',
-      '강한 인상',
-      '카리스마 있는 느낌'
-    ],
-    hairstyles: {
-      best: [
-        '웨이브 펌',
-        'S컬 롱',
-        '부드러운 레이어드',
-        '옆머리 볼륨',
-        '긴 앞머리',
-        '웨이비 미디움'
-      ],
-      avoid: ['일자 단발', '짧은 헤어', '스트레이트 단발']
-    },
-    makeup: [
-      '턱선 둥글게 셰이딩',
-      '볼에 블러셔',
-      '부드러운 아이라인'
-    ],
-    celebrities: ['안젤리나 졸리', '올리비아 와일드', '데미 무어'],
-    color: 'orange'
-  },
-  heart: {
-    name: '하트형 (Heart)',
-    icon: '❤️',
-    features: [
-      '넓은 이마',
-      '좁은 턱',
-      '뾰족한 턱선',
-      '사랑스러운 인상'
-    ],
-    hairstyles: {
-      best: [
-        '턱선 레이어드',
-        '옆머리 볼륨',
-        '앞머리 있는 단발',
-        '미디움 웨이브',
-        'C컬 펌',
-        '아래 볼륨'
-      ],
-      avoid: ['올백', '짧은 앞머리', '이마 볼륨']
-    },
-    makeup: [
-      '이마 셰이딩',
-      '턱 하이라이트',
-      '자연스러운 블러셔'
-    ],
-    celebrities: ['스칼렛 요한슨', '리즈 위더스푼', '할리 베리'],
-    color: 'red'
-  },
-  oblong: {
-    name: '긴 얼굴형 (Oblong)',
-    icon: '📏',
-    features: [
-      '얼굴 길이가 긺',
-      '좁은 얼굴',
-      '긴 턱선',
-      '세련된 인상'
-    ],
-    hairstyles: {
-      best: [
-        '미디움 레이어드',
-        '웨이브 펌',
-        '앞머리 있는 스타일',
-        '볼륨 단발',
-        '옆으로 볼륨',
-        '허쉬컷'
-      ],
-      avoid: ['롱 스트레이트', '정가운데 가르마', '올백']
-    },
-    makeup: [
-      '이마/턱 셰이딩',
-      '볼 옆 하이라이트',
-      '가로 방향 블러셔'
-    ],
-    celebrities: ['사라 제시카 파커', '리브 타일러'],
-    color: 'blue'
-  },
-  diamond: {
-    name: '다이아몬드형 (Diamond)',
-    icon: '💎',
-    features: [
-      '넓은 광대뼈',
-      '좁은 이마와 턱',
-      '각진 얼굴 라인',
-      '도도한 인상'
-    ],
-    hairstyles: {
-      best: [
-        '사이드 파트',
-        '앞머리 스타일',
-        '웨이브 롱',
-        '볼륨 미디움',
-        '풀뱅 앞머리',
-        '레이어드 웨이브'
-      ],
-      avoid: ['중앙 가르마', '짧은 헤어', '볼 옆 볼륨']
-    },
-    makeup: [
-      '광대뼈 셰이딩',
-      '이마 하이라이트',
-      '부드러운 윤곽'
-    ],
-    celebrities: ['할 베리', '비욘세'],
-    color: 'purple'
-  }
-};
+export default function FaceShapeAnalysis() {
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [analyzing, setAnalyzing] = useState(false);
+  const [result, setResult] = useState<FaceShapeAnalysis | null>(null);
+  const [showResults, setShowResults] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
 
-export default function FaceShape() {
-  const [answers, setAnswers] = useState<{[key: string]: string}>({});
-  const [result, setResult] = useState<any>(null);
-
-  const questions = [
-    {
-      id: 'q1',
-      question: '얼굴 길이와 너비 비교',
-      options: [
-        { value: 'longer', text: '길이가 더 김', shapes: ['oblong'] },
-        { value: 'similar', text: '비슷함', shapes: ['round', 'square'] },
-        { value: 'balanced', text: '1.5배 정도', shapes: ['oval', 'heart', 'diamond'] }
-      ]
-    },
-    {
-      id: 'q2',
-      question: '턱선 모양',
-      options: [
-        { value: 'round', text: '둥근 턱', shapes: ['oval', 'round'] },
-        { value: 'square', text: '각진 턱', shapes: ['square'] },
-        { value: 'pointed', text: '뾰족한 턱', shapes: ['heart', 'diamond'] },
-        { value: 'long', text: '긴 턱', shapes: ['oblong'] }
-      ]
-    },
-    {
-      id: 'q3',
-      question: '광대뼈 위치',
-      options: [
-        { value: 'wide', text: '넓고 튀어나옴', shapes: ['diamond', 'square'] },
-        { value: 'normal', text: '보통', shapes: ['oval', 'round'] },
-        { value: 'narrow', text: '좁음', shapes: ['heart', 'oblong'] }
-      ]
-    },
-    {
-      id: 'q4',
-      question: '이마 너비',
-      options: [
-        { value: 'wide', text: '넓은 편', shapes: ['heart', 'oval'] },
-        { value: 'normal', text: '보통', shapes: ['round', 'square'] },
-        { value: 'narrow', text: '좁은 편', shapes: ['diamond', 'oblong'] }
-      ]
-    },
-    {
-      id: 'q5',
-      question: '얼굴의 가장 넓은 부분',
-      options: [
-        { value: 'forehead', text: '이마', shapes: ['heart'] },
-        { value: 'cheekbone', text: '광대뼈', shapes: ['diamond', 'oval'] },
-        { value: 'jaw', text: '턱', shapes: ['square'] },
-        { value: 'all', text: '전체적으로 비슷', shapes: ['round', 'oblong'] }
-      ]
+  useEffect(() => {
+    if (result) {
+      setTimeout(() => setShowResults(true), 100);
+    } else {
+      setShowResults(false);
     }
-  ];
+  }, [result]);
 
-  const analyze = () => {
-    const scores: {[key: string]: number} = {};
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-    // 각 질문의 답변에서 얼굴형에 점수 부여
-    Object.values(answers).forEach(answer => {
-      const question = questions.find(q => q.options.some(opt => opt.value === answer));
-      const option = question?.options.find(opt => opt.value === answer);
-      
-      option?.shapes.forEach(shape => {
-        scores[shape] = (scores[shape] || 0) + 1;
-      });
-    });
+    if (!file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드 가능합니다.');
+      return;
+    }
 
-    // 가장 높은 점수의 얼굴형 찾기
-    let maxScore = 0;
-    let detectedShape = 'oval';
-
-    Object.entries(scores).forEach(([shape, score]) => {
-      if (score > maxScore) {
-        maxScore = score;
-        detectedShape = shape;
-      }
-    });
-
-    const shapeData = FACE_SHAPES[detectedShape as keyof typeof FACE_SHAPES];
-
-    setResult({
-      shape: detectedShape,
-      data: shapeData,
-      confidence: Math.min(100, Math.round((maxScore / questions.length) * 100))
-    });
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        setImagePreview(event.target?.result as string);
+        analyzeImage(img);
+      };
+      img.onerror = () => {
+        alert('이미지를 불러올 수 없습니다. 다른 이미지를 선택해주세요.');
+        if (fileInputRef.current) fileInputRef.current.value = "";
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.onerror = () => {
+      alert('파일을 읽을 수 없습니다. 다시 시도해주세요.');
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    };
+    reader.readAsDataURL(file);
   };
 
-  if (result) {
-    const data = result.data;
-    return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-pink-50 to-purple-50 text-black placeholder-gray-500">
-        <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          <div className="mb-4 text-black placeholder-gray-500">
-            
-          </div>
+  const analyzeImage = (img: HTMLImageElement) => {
+    setAnalyzing(true);
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
-            <header className="text-center mb-6 text-black placeholder-gray-500">
-              <h1 className="text-4xl mb-2 text-black placeholder-gray-500">{data.icon}</h1>
-              <h2 className="text-2xl font-bold text-gray-800 text-black placeholder-gray-500">당신의 얼굴형은</h2>
-              <div className="text-3xl font-bold mt-2" style={{
-                background: `linear-gradient(135deg, ${
-                  data.color === 'pink' ? '#ec4899, #db2777' :
-                  data.color === 'amber' ? '#f59e0b, #d97706' :
-                  data.color === 'orange' ? '#f97316, #ea580c' :
-                  data.color === 'red' ? '#ef4444, #dc2626' :
-                  data.color === 'blue' ? '#3b82f6, #2563eb' :
-                  '#a855f7, #9333ea'
-                })`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>
-                {data.name}
-              </div>
-              <p className="text-sm text-gray-600 mt-2 text-black placeholder-gray-500">정확도: {result.confidence}%</p>
-            </header>
+    setTimeout(() => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
 
-            {/* 얼굴형 특징 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">📋 얼굴형 특징</h3>
-              <div className="space-y-2 text-black placeholder-gray-500">
-                {data.features.map((feature: string, i: number) => (
-                  <div key={i} className="bg-white rounded p-3 text-sm text-gray-700 text-black placeholder-gray-500">
-                    • {feature}
-                  </div>
-                ))}
-              </div>
-            </div>
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      if (!ctx) return;
 
-            {/* 추천 헤어스타일 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">✨ 추천 헤어스타일</h3>
-              <div className="grid grid-cols-2 gap-2 mb-4 text-black placeholder-gray-500">
-                {data.hairstyles.best.map((style: string, i: number) => (
-                  <div key={i} className="bg-white rounded p-3 text-center font-medium text-black border-2 border-green-400 text-black placeholder-gray-500">
-                    {style}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 text-black placeholder-gray-500">
-                <h4 className="font-semibold text-black mb-2 text-black placeholder-gray-500">🚫 피해야 할 스타일</h4>
-                <div className="flex flex-wrap gap-2 text-black placeholder-gray-500">
-                  {data.hairstyles.avoid.map((style: string, i: number) => (
-                    <span key={i} className="px-3 py-1 bg-red-100 rounded-full text-sm text-black text-black placeholder-gray-500">
-                      {style}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
 
-            {/* 메이크업 팁 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">💄 메이크업 팁</h3>
-              <div className="space-y-2 text-black placeholder-gray-500">
-                {data.makeup.map((tip: string, i: number) => (
-                  <div key={i} className="bg-white rounded p-3 text-sm text-gray-700 text-black placeholder-gray-500">
-                    {i + 1}. {tip}
-                  </div>
-                ))}
-              </div>
-            </div>
+      const topWidth = measureWidth(ctx, img.width, 0, img.height / 3);
+      const midWidth = measureWidth(ctx, img.width, img.height / 3, img.height / 3);
+      const bottomWidth = measureWidth(ctx, img.width, (2 * img.height) / 3, img.height / 3);
 
-            {/* 비슷한 얼굴형 연예인 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">⭐ 같은 얼굴형 연예인</h3>
-              <div className="flex flex-wrap gap-2 text-black placeholder-gray-500">
-                {data.celebrities.map((celeb: string, i: number) => (
-                  <span key={i} className="px-4 py-2 bg-white rounded-full font-semibold text-black border-2 border-amber-400 text-black placeholder-gray-500">
-                    {celeb}
-                  </span>
-                ))}
-              </div>
-              <p className="text-xs text-gray-600 mt-3 text-black placeholder-gray-500">
-                이들의 헤어스타일과 메이크업을 참고하세요!
-              </p>
-            </div>
+      const patternCode = getFaceShapeByRatio(topWidth, midWidth, bottomWidth);
+      const faceShape = FACE_SHAPE_DATA[patternCode];
 
-            {/* 스타일링 가이드 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">🎨 스타일링 꿀팁</h3>
-              <div className="space-y-2 text-sm text-gray-700 text-black placeholder-gray-500">
-                <div className="bg-white rounded p-3 text-black placeholder-gray-500">
-                  <span className="font-semibold text-black placeholder-gray-500">가르마:</span> {
-                    data.name.includes('둥근') ? '중앙 가르마 피하기' :
-                    data.name.includes('긴') ? '사이드 가르마' :
-                    data.name.includes('하트') ? '사이드 가르마' :
-                    '자유롭게 가능'
-                  }
-                </div>
-                <div className="bg-white rounded p-3 text-black placeholder-gray-500">
-                  <span className="font-semibold text-black placeholder-gray-500">볼륨:</span> {
-                    data.name.includes('둥근') ? '옆머리 볼륨 추가' :
-                    data.name.includes('긴') ? '가로 볼륨' :
-                    data.name.includes('사각') ? '부드러운 웨이브' :
-                    '자연스러운 볼륨'
-                  }
-                </div>
-                <div className="bg-white rounded p-3 text-black placeholder-gray-500">
-                  <span className="font-semibold text-black placeholder-gray-500">안경:</span> {
-                    data.name.includes('둥근') ? '각진 프레임' :
-                    data.name.includes('사각') ? '둥근 프레임' :
-                    data.name.includes('긴') ? '넓은 프레임' :
-                    '다양한 스타일 가능'
-                  }
-                </div>
-              </div>
-            </div>
+      setResult(faceShape);
+      setAnalyzing(false);
+    }, 2500);
+  };
 
-            <button
-              onClick={() => {
-                setResult(null);
-                setAnswers({});
-              }}
-              className={`w-full py-4 bg-gradient-to-r ${
-                data.color === 'pink' ? 'from-blue-600 to-blue-600' :
-                data.color === 'amber' ? 'from-amber-600 to-orange-600' :
-                data.color === 'orange' ? 'from-orange-600 to-red-600' :
-                data.color === 'red' ? 'from-red-600 to-blue-600' :
-                data.color === 'blue' ? 'from-blue-600 to-indigo-600' :
-                'from-purple-600 to-blue-600'
-              } text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all`}
-            >
-              다시 분석하기
-            </button>
-            
-            {/* 관련 앱 추천 */}
-            <RelatedApps 
-              relatedAppIds={['saju-mbti-jobs', 'mbti-test', 'voice-fortune', 'analysis-handwriting']}
-              currentAppId="face-shape"
-            />
-          </section>
-        </div>
-      </main>
-    );
-  }
+  const measureWidth = (ctx: CanvasRenderingContext2D, imgWidth: number, startY: number, height: number): number => {
+    const imageData = ctx.getImageData(0, startY, imgWidth, height);
+    const data = imageData.data;
+    
+    let leftEdge = imgWidth;
+    let rightEdge = 0;
+    
+    for (let y = 0; y < height; y += 5) {
+      for (let x = 0; x < imgWidth; x += 5) {
+        const idx = (y * imgWidth + x) * 4;
+        const brightness = (data[idx] + data[idx + 1] + data[idx + 2]) / 3;
+        
+        if (brightness < 200) {
+          if (x < leftEdge) leftEdge = x;
+          if (x > rightEdge) rightEdge = x;
+        }
+      }
+    }
+    
+    return rightEdge - leftEdge;
+  };
+
+  const reset = () => {
+    setImagePreview(null);
+    setResult(null);
+    setAnalyzing(false);
+    setShowResults(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (cameraInputRef.current) cameraInputRef.current.value = "";
+  };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-pink-50 to-purple-50 text-black placeholder-gray-500">
-      <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-        <div className="mb-4 text-black placeholder-gray-500">
-          
-        </div>
+    <main className="min-h-screen relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #4c1d95 50%, #581c87 75%, #3b0764 100%)',
+      backgroundAttachment: 'fixed'
+    }}>
+      {/* 배경 애니메이션 */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }}></div>
+        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }}></div>
+      </div>
 
-        <section className="bg-white rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
-          <header className="text-center mb-6 text-black placeholder-gray-500">
-            <h1 className="text-4xl font-bold text-black mb-2 text-black placeholder-gray-500">👤</h1>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">얼굴형 분석 & 헤어스타일 추천</h2>
-            <p className="text-gray-600 text-black placeholder-gray-500">5가지 질문으로 나에게 맞는 스타일 찾기</p>
+      <div className="relative mx-auto max-w-[800px] px-4 py-8 md:py-12">
+        {/* 글래스모피즘 컨테이너 */}
+        <section className="backdrop-blur-xl bg-white/10 rounded-3xl shadow-2xl p-6 md:p-10 border border-white/20" style={{
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)'
+        }}>
+          {/* 헤더 */}
+          <header className="text-center mb-8 animate-fadeIn">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 bg-clip-text text-transparent animate-gradient" style={{
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              letterSpacing: '-0.02em',
+              backgroundSize: '200% auto',
+              animation: 'gradient 3s ease infinite'
+            }}>
+              얼굴형 AI 분석
+            </h1>
             
-            {/* 프라이버시 안내 */}
-            <div className="mt-4 px-4 py-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800">
-              <div className="flex items-center justify-center gap-2 text-sm text-green-700 dark:text-green-300">
-                <span className="text-lg">🔒</span>
-                <span className="font-semibold">이미지는 어느 서버에도 저장되지 않습니다</span>
+            <p className="text-purple-100 text-base md:text-lg mb-2 font-medium tracking-wide">
+              정밀 AI 분석 시스템 · 27가지 패턴 분류
+            </p>
+            <p className="text-purple-200/80 text-sm">
+              당신만을 위한 맞춤 뷰티 가이드
+            </p>
+            
+            {/* 인포 배지 */}
+            <div className="mt-6 inline-flex items-center gap-3 backdrop-blur-md bg-white/10 rounded sm:rounded-lg md:rounded-2xl px-6 py-4 border border-white/20 shadow-lg">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-white text-sm font-medium">온라인</span>
               </div>
+              <div className="w-px h-4 bg-white/20"></div>
+              <span className="text-purple-100 text-sm">무료 · 무제한 · 즉시 분석</span>
             </div>
           </header>
 
-          <div className="space-y-6 mb-6 text-black placeholder-gray-500">
-            {questions.map((q, i) => (
-              <div key={q.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 text-black placeholder-gray-500">
-                <h3 className="font-bold text-gray-800 mb-3 text-black placeholder-gray-500">
-                  {i + 1}. {q.question}
-                </h3>
-                <div className="space-y-2 text-black placeholder-gray-500">
-                  {q.options.map(option => (
-                    <label
-                      key={option.value}
-                      className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
-                        answers[q.id] === option.value
-                          ? 'bg-blue-100 border-2 border-blue-500'
-                          : 'bg-white border border-gray-300 hover:border-blue-300'
-                      }`}
-                    >
+          {/* 프라이버시 */}
+          <div className="mb-8 backdrop-blur-md bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded sm:rounded-lg md:rounded-2xl p-4 border border-green-400/30 animate-slideUp">
+            <p className="text-green-100 text-sm text-center flex items-center justify-center gap-2 font-medium">
+              <span className="text-xl">🔒</span>
+              <span>완전한 프라이버시 보장 · 이미지는 서버에 전송되지 않습니다</span>
+            </p>
+          </div>
+
+          {/* 업로드 영역 */}
+          {!imagePreview && !result && (
+            <div className="mb-8 animate-fadeIn">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200 animate-gradient" style={{
+                  backgroundSize: '400% 400%',
+                  animation: 'gradient 3s ease infinite'
+                }}></div>
+                
+                <div className="relative backdrop-blur-md bg-white/5 border-2 border-dashed border-white/30 rounded-3xl p-8 md:p-12 text-center transition-all duration-300 hover:border-white/50 hover:bg-white/10">
+                  <div className="text-7xl md:text-8xl mb-6 filter drop-shadow-lg animate-float">📸</div>
+                  <h3 className="text-white text-xl md:text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">얼굴 사진을 업로드하세요</h3>
+                  <p className="text-purple-200 text-[10px] sm:text-xs md:text-sm mb-8 max-w-md mx-auto">
+                    정면 얼굴이 선명한 사진일수록 더 정확한 분석 결과를 받을 수 있습니다
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch max-w-lg mx-auto">
+                    {/* 카메라로 촬영하기 */}
+                    <label className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 md:px-8 py-4 md:py-5 text-base md:text-lg rounded-xl md:rounded-2xl font-bold cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 active:scale-95 group touch-manipulation">
+                      <span className="text-2xl group-hover:scale-110 transition-transform">📷</span>
+                      <span>카메라로 촬영</span>
                       <input
-                        type="radio"
-                        name={q.id}
-                        value={option.value}
-                        checked={answers[q.id] === option.value}
-                        onChange={(e) => setAnswers({...answers, [q.id]: e.target.value})}
-                        className="w-5 h-5 text-black"
+                        ref={cameraInputRef}
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                        onChange={handleImageUpload}
+                        className="hidden"
                       />
-                      <span className="text-gray-700 text-black placeholder-gray-500">{option.text}</span>
                     </label>
-                  ))}
+                    
+                    {/* 갤러리에서 선택 */}
+                    <label className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 md:px-8 py-4 md:py-5 text-base md:text-lg rounded-xl md:rounded-2xl font-bold cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 active:scale-95 group touch-manipulation">
+                      <span className="text-2xl group-hover:scale-110 transition-transform">🖼️</span>
+                      <span>갤러리에서 선택</span>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                  
+                  <p className="text-purple-300 text-xs mt-6 flex items-center justify-center gap-2">
+                    <span>💡</span>
+                    <span>모바일: 카메라 촬영 또는 갤러리 선택 | PC: 파일 선택</span>
+                  </p>
                 </div>
               </div>
-            ))}
+            </div>
+          )}
+
+          {/* 분석 중 */}
+          {analyzing && (
+            <div className="text-center py-16 animate-fadeIn">
+              <div className="relative inline-block mb-8">
+                <div className="w-20 h-20 border-4 border-purple-400/30 border-t-purple-400 rounded-full animate-spin"></div>
+              </div>
+              
+              <h3 className="text-white text-2xl md:text-3xl font-bold mb-4">AI 정밀 분석 중</h3>
+              <p className="text-purple-200 text-base mb-6">27가지 패턴 데이터베이스 매칭</p>
+              
+              {/* 프로그레스 바 */}
+              <div className="max-w-xs mx-auto">
+                <div className="h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
+                  <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-progress"></div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 결과 표시 */}
+          {result && imagePreview && (
+            <div className={`space-y-6 transition-all duration-1000 ${showResults ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              {/* 사진 미리보기 */}
+              <div className="text-center animate-fadeIn">
+                <div className="relative inline-block">
+                  <div className="absolute -inset-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur-lg opacity-30"></div>
+                  <img 
+                    src={imagePreview} 
+                    alt="분석된 사진" 
+                    className="relative max-w-full h-auto max-h-80 mx-auto rounded sm:rounded-lg md:rounded-2xl border-2 border-white/20 shadow-2xl" 
+                  />
+                </div>
+              </div>
+
+              {/* 결과 헤더 */}
+              <div className="backdrop-blur-md bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-3xl p-6 md:p-8 text-center border border-white/20 shadow-xl animate-slideUp" style={{ animationDelay: '0.1s' }}>
+                <div className="text-6xl mb-4 filter drop-shadow-lg">{result.emoji}</div>
+                <h2 className="text-white text-base sm:text-2xl md:text-4xl font-bold mb-2">{result.title}</h2>
+                <p className="text-purple-100 text-lg font-medium mb-2">{result.englishName}</p>
+                <p className="text-purple-50 text-base max-w-2xl mx-auto">{result.summary}</p>
+              </div>
+
+              {/* 점수 카드 */}
+              <div className="grid grid-cols-3 gap-3 md:gap-4 animate-slideUp" style={{ animationDelay: '0.2s' }}>
+                {[
+                  { label: '조화도', score: result.harmonyScore, gradient: 'from-purple-500/20 to-purple-600/20', border: 'border-purple-400/30' },
+                  { label: '선호도', score: result.popularityIndex, gradient: 'from-pink-500/20 to-pink-600/20', border: 'border-pink-400/30' },
+                  { label: '뷰티 잠재력', score: result.beautyPotential, gradient: 'from-indigo-500/20 to-indigo-600/20', border: 'border-indigo-400/30' }
+                ].map((item, i) => (
+                  <div key={i} className={`backdrop-blur-md bg-gradient-to-br ${item.gradient} rounded sm:rounded-lg md:rounded-2xl p-4 md:p-6 text-center border ${item.border} hover:scale-105 transition-transform duration-300`}>
+                    <p className="text-white/80 text-xs md:text-sm mb-2 font-medium">{item.label}</p>
+                    <p className="text-white text-base sm:text-2xl md:text-4xl font-bold">{item.score}</p>
+                    <p className="text-white/60 text-xs mt-1">/ 100</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* 섹션 컴포넌트 */}
+              <Section title="✨ 주요 특징" delay="0.3s">
+                <ul className="space-y-3">
+                  {result.characteristics.map((char, i) => (
+                    <li key={i} className="flex items-start gap-3 text-purple-50 text-[10px] sm:text-xs md:text-sm group hover:translate-x-2 transition-transform duration-200">
+                      <span className="text-purple-300 mt-1 group-hover:scale-125 transition-transform">•</span>
+                      <span className="flex-1">{char}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+
+              {/* 장점 & 주의사항 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-slideUp" style={{ animationDelay: '0.4s' }}>
+                <div className="backdrop-blur-md bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded sm:rounded-lg md:rounded-2xl p-5 md:p-6 border border-green-400/30 hover:scale-105 transition-transform duration-300">
+                  <h4 className="text-green-100 font-bold mb-4 text-lg flex items-center gap-2">
+                    <span>💚</span> 장점
+                  </h4>
+                  <ul className="space-y-2">
+                    {result.advantages.map((adv, i) => (
+                      <li key={i} className="text-green-50 text-sm flex items-start gap-2">
+                        <span className="text-green-300">✓</span>
+                        <span>{adv}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="backdrop-blur-md bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded sm:rounded-lg md:rounded-2xl p-5 md:p-6 border border-orange-400/30 hover:scale-105 transition-transform duration-300">
+                  <h4 className="text-orange-100 font-bold mb-4 text-lg flex items-center gap-2">
+                    <span>⚠️</span> 주의사항
+                  </h4>
+                  <ul className="space-y-2">
+                    {result.considerations.map((con, i) => (
+                      <li key={i} className="text-orange-50 text-sm flex items-start gap-2">
+                        <span className="text-orange-300">•</span>
+                        <span>{con}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* 헤어스타일 */}
+              <Section title="💇‍♀️ 헤어스타일 추천" delay="0.5s">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <h5 className="text-green-200 font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-sm flex items-center gap-2">
+                      <span>✅</span> 추천 스타일
+                    </h5>
+                    <div className="space-y-2">
+                      {result.hairStyles.best.map((style, i) => (
+                        <div key={i} className="backdrop-blur-sm bg-green-500/10 text-green-50 px-4 py-3 rounded-xl text-sm border border-green-400/20 hover:bg-green-500/20 transition-colors duration-200">
+                          {style}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h5 className="text-red-200 font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-sm flex items-center gap-2">
+                      <span>❌</span> 피해야 할 스타일
+                    </h5>
+                    <div className="space-y-2">
+                      {result.hairStyles.avoid.map((style, i) => (
+                        <div key={i} className="backdrop-blur-sm bg-red-500/10 text-red-50 px-4 py-3 rounded-xl text-sm border border-red-400/20 hover:bg-red-500/20 transition-colors duration-200">
+                          {style}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Section>
+
+              {/* 메이크업 */}
+              <Section title="💄 메이크업 가이드" delay="0.6s">
+                <div className="space-y-3">
+                  {[
+                    { icon: '🎨', title: '컨투어링', content: result.makeup.contouring },
+                    { icon: '✨', title: '하이라이트', content: result.makeup.highlight },
+                    { icon: '🌸', title: '블러셔', content: result.makeup.blush },
+                    { icon: '👁️', title: '눈썹', content: result.makeup.eyebrow },
+                    { icon: '💋', title: '립스틱', content: result.makeup.lipstick }
+                  ].map((item, i) => (
+                    <div key={i} className="backdrop-blur-sm bg-white/5 p-2 md:p-4 rounded-xl border border-white/10 hover:bg-white/10 transition-colors duration-200">
+                      <h5 className="text-pink-200 font-bold mb-2 text-sm flex items-center gap-2">
+                        <span>{item.icon}</span> {item.title}
+                      </h5>
+                      <p className="text-purple-50 text-sm leading-relaxed">{item.content}</p>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+
+              {/* 유명인 */}
+              <Section title="⭐ 같은 얼굴형 유명인" delay="0.7s">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <h5 className="text-yellow-200 font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-sm flex items-center gap-2">
+                      <span>🇰🇷</span> 한국
+                    </h5>
+                    <div className="flex flex-wrap gap-2">
+                      {result.celebrities.korean.map((celeb, i) => (
+                        <span key={i} className="backdrop-blur-sm bg-yellow-500/20 text-yellow-50 px-4 py-2 rounded-full text-sm border border-yellow-400/30 hover:scale-110 transition-transform duration-200">
+                          {celeb}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h5 className="text-yellow-200 font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-sm flex items-center gap-2">
+                      <span>🌍</span> 해외
+                    </h5>
+                    <div className="flex flex-wrap gap-2">
+                      {result.celebrities.global.map((celeb, i) => (
+                        <span key={i} className="backdrop-blur-sm bg-yellow-500/20 text-yellow-50 px-4 py-2 rounded-full text-sm border border-yellow-400/30 hover:scale-110 transition-transform duration-200">
+                          {celeb}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Section>
+
+              {/* 전문가 조언 */}
+              <div className="backdrop-blur-md bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-3xl p-6 md:p-8 border border-white/20 shadow-xl animate-slideUp" style={{ animationDelay: '0.8s' }}>
+                <h3 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
+                  <span>💡</span> 전문가의 종합 조언
+                </h3>
+                <p className="text-purple-50 text-[10px] sm:text-xs md:text-sm leading-relaxed">{result.professionalAdvice}</p>
+              </div>
+
+              {/* 다시 하기 버튼 */}
+              <button
+                onClick={reset}
+                className="w-full backdrop-blur-md bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded sm:rounded-lg md:rounded-2xl font-bold transition-all duration-300 hover:scale-105 active:scale-95 border border-white/20 shadow-lg flex items-center justify-center gap-2 group"
+              >
+                <span className="text-xl group-hover:rotate-180 transition-transform duration-500">🔄</span>
+                <span>다른 사진으로 분석하기</span>
+              </button>
+
+              {/* 관련 앱 */}
+              <div className="animate-fadeIn" style={{ animationDelay: '0.9s' }}>
+                <RelatedApps 
+                  relatedAppIds={['lifestyle-face-fortune', 'voice-fortune', 'analysis-handwriting', 'mbti-test']} 
+                  currentAppId="face-shape" 
+                />
+              </div>
+            </div>
+          )}
+
+          {/* 안내 */}
+          <div className="mt-8 backdrop-blur-md bg-white/5 rounded sm:rounded-lg md:rounded-2xl p-4 border border-white/10">
+            <p className="text-purple-200 text-xs text-center leading-relaxed">
+              ※ 본 서비스는 AI 기반 얼굴형 분석으로 엔터테인먼트 목적입니다.<br />
+              사진은 브라우저에서만 처리되며 서버에 저장되지 않습니다.
+            </p>
           </div>
 
-          <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200 text-black placeholder-gray-500">
-            <h3 className="font-bold text-black mb-2 text-black placeholder-gray-500">💡 측정 방법</h3>
-            <ul className="text-sm text-black space-y-1 text-black placeholder-gray-500">
-              <li>• 거울 앞에서 머리를 뒤로 묶으세요</li>
-              <li>• 얼굴 윤곽을 자세히 관찰하세요</li>
-              <li>• 정면 사진을 찍어 확인하면 더 정확해요</li>
-            </ul>
-          </div>
-
-          <button
-            onClick={analyze}
-            disabled={Object.keys(answers).length < questions.length}
-            className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            얼굴형 분석하기
-          </button>
+          <AppFooter />
         </section>
-      </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
 
+        <canvas ref={canvasRef} className="hidden" />
+      </div>
+
+      {/* 커스텀 CSS */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes progress {
+          0% { width: 0%; }
+          100% { width: 100%; }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .animate-slideUp {
+          animation: slideUp 0.8s ease-out forwards;
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-gradient {
+          animation: gradient 3s ease infinite;
+        }
+        
+        .animate-progress {
+          animation: progress 2.5s ease-in-out;
+        }
+      `}</style>
     </main>
   );
 }
 
+// Section 컴포넌트
+function Section({ title, children, delay = '0s' }: { title: string; children: React.ReactNode; delay?: string }) {
+  return (
+    <div className="backdrop-blur-md bg-white/5 rounded sm:rounded-lg md:rounded-2xl p-5 md:p-6 border border-white/10 animate-slideUp hover:bg-white/10 transition-colors duration-300" style={{ animationDelay: delay }}>
+      <h3 className="text-white text-lg md:text-xl font-bold mb-4">{title}</h3>
+      {children}
+    </div>
+  );
+}

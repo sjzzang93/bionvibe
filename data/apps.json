@@ -1,135 +1,6 @@
 {
   "apps": [
     {
-      "id": "gomoku",
-      "name": "오목",
-      "slug": "gomoku",
-      "icon": "🔵",
-      "description": "5개를 먼저 연결하세요! AI 대전, 규칙 학습, 전략 가이드 포함",
-      "categoryId": "game-brain",
-      "url": "/apps/gomoku",
-      "image": "https://images.unsplash.com/photo-1611195974226-ef44a3c19ff1?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-21",
-      "relatedApps": [
-        "baduk",
-        "chess",
-        "iq-test"
-      ]
-    },
-    {
-      "id": "baduk",
-      "name": "바둑",
-      "slug": "baduk",
-      "icon": "⚫",
-      "description": "9x9 바둑 게임! 영역을 차지하고 상대 돌을 따내세요. 활로 시스템 완벽 구현",
-      "categoryId": "game-brain",
-      "url": "/apps/baduk",
-      "image": "https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-21",
-      "relatedApps": [
-        "gomoku",
-        "chess",
-        "games-puzzle"
-      ]
-    },
-    {
-      "id": "chess",
-      "name": "체스",
-      "slug": "chess",
-      "icon": "♔",
-      "description": "정통 체스 게임! 모든 기물 이동 규칙, 학습 모드, 전략 팁 제공",
-      "categoryId": "game-brain",
-      "url": "/apps/chess",
-      "image": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-21",
-      "relatedApps": [
-        "gomoku",
-        "baduk",
-        "mafia-game"
-      ]
-    },
-    {
-      "id": "saju-mbti-jobs",
-      "name": "사주와 MBTI의 조합",
-      "slug": "saju-mbti-jobs",
-      "icon": "🔮",
-      "description": "성격 유형 테스트",
-      "categoryId": "fortune-mind",
-      "url": "/apps/saju-mbti-jobs",
-      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21",
-      "relatedApps": [
-        "mbti-test",
-        "face-shape",
-        "today-fortune",
-        "past-life-job"
-      ]
-    },
-    {
-      "id": "fengshui-guide",
-      "name": "풍수지리 실전 도감",
-      "slug": "fengshui-guide",
-      "icon": "🏠",
-      "description": "과학적 해석으로 배우는 현대 풍수",
-      "categoryId": "fortune-mind",
-      "url": "/apps/fengshui-guide",
-      "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21",
-      "relatedApps": [
-        "compass",
-        "today-fortune",
-        "saju-mbti-jobs"
-      ]
-    },
-    {
-      "id": "startup-naming",
-      "name": "스타트업 네이밍 메이커",
-      "slug": "startup-naming",
-      "icon": "🚀",
-      "description": "완벽한 회사 이름 찾기 (도메인 체크)",
-      "categoryId": "utility-tools",
-      "url": "/apps/startup-naming",
-      "image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21",
-      "relatedApps": [
-        "study-cursor-prompts",
-        "quote-generator",
-        "flashcard"
-      ]
-    },
-    {
-      "id": "compass",
-      "name": "디지털 나침반",
-      "slug": "compass",
-      "icon": "🧭",
-      "description": "실시간 방향 확인! 360도 회전 나침반, 모바일 최적화",
-      "categoryId": "learning-tools",
-      "url": "/apps/compass",
-      "image": "https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21",
-      "relatedApps": [
-        "fengshui-guide",
-        "air-quality",
-        "weather-outfit"
-      ]
-    },
-    {
-      "id": "life-support",
-      "name": "삶이 힘들 때 보세요",
-      "slug": "life-support",
-      "icon": "🌸",
-      "description": "따뜻한 위로와 희망의 메시지",
-      "categoryId": "fortune-mind",
-      "url": "/apps/life-support",
-      "image": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21",
-      "relatedApps": [
-        "quote-generator",
-        "today-fortune",
-        "parents-time"
-      ]
-    },
-    {
       "id": "today-fortune",
       "name": "오늘의 운세",
       "slug": "today-fortune",
@@ -146,137 +17,24 @@
       ]
     },
     {
-      "id": "color-psychology",
-      "name": "색상 심리",
-      "slug": "color-psychology",
-      "icon": "🎨",
-      "description": "심리 분석",
+      "id": "mbti-test",
+      "name": "MBTI 테스트",
+      "slug": "mbti-test",
+      "icon": "🎭",
+      "description": "나는 어떤 성격일까?",
       "categoryId": "fortune-mind",
-      "url": "/apps/color-psychology",
-      "image": "https://images.unsplash.com/photo-1525909002-1b05e0c869d8?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
+      "url": "/apps/mbti-test",
+      "image": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-20",
       "relatedApps": [
-        "mbti-test",
         "saju-mbti-jobs",
-        "analysis-handwriting"
-      ]
-    },
-    {
-      "id": "voice-fortune",
-      "name": "목소리 테스트",
-      "slug": "voice-fortune",
-      "icon": "🎤",
-      "description": "Voice Test (Tone/Age Feel)",
-      "categoryId": "fortune-mind",
-      "url": "/apps/voice-fortune",
-      "image": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
         "face-shape",
-        "voice-age",
-        "analysis-handwriting"
-      ]
-    },
-    {
-      "id": "analysis-handwriting",
-      "name": "손글씨 성향 보기",
-      "slug": "analysis-handwriting",
-      "icon": "✍️",
-      "description": "상세 분석 결과",
-      "categoryId": "fortune-mind",
-      "url": "/apps/analysis-handwriting",
-      "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "face-shape",
-        "color-psychology",
-        "mbti-test"
-      ]
-    },
-    {
-      "id": "face-shape",
-      "name": "얼굴 진단 놀이터",
-      "slug": "face-shape",
-      "icon": "😊",
-      "description": "Face Fun Lab (Shape/Physiognomy)",
-      "categoryId": "fortune-mind",
-      "url": "/apps/face-shape",
-      "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "saju-mbti-jobs",
-        "mbti-test",
-        "voice-fortune",
-        "analysis-handwriting"
-      ]
-    },
-    {
-      "id": "iq-test",
-      "name": "IQ 테스트",
-      "slug": "iq-test",
-      "icon": "🧠",
-      "description": "재미있는 심리 테스트",
-      "categoryId": "fortune-mind",
-      "url": "/apps/iq-test",
-      "image": "https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "reflex-test",
-        "typing-speed-test",
-        "games-puzzle"
-      ]
-    },
-    {
-      "id": "past-life-job",
-      "name": "전생 직업 놀이",
-      "slug": "past-life-job",
-      "icon": "⏳",
-      "description": "전생 서비스",
-      "categoryId": "fortune-mind",
-      "url": "/apps/past-life-job",
-      "image": "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "saju-mbti-jobs",
-        "today-fortune",
-        "dream-interpreter"
-      ]
-    },
-    {
-      "id": "dream-interpreter",
-      "name": "꿈 해몽",
-      "slug": "dream-interpreter",
-      "icon": "💤",
-      "description": "꿈 서비스",
-      "categoryId": "fortune-mind",
-      "url": "/apps/dream-interpreter",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "today-fortune",
-        "past-life-job",
         "color-psychology"
       ]
     },
     {
-      "id": "lotto-generator",
-      "name": "로또 번호 뽑기",
-      "slug": "lotto-generator",
-      "icon": "🎰",
-      "description": "행운의 번호 생성",
-      "categoryId": "fortune-mind",
-      "url": "/apps/lotto-generator",
-      "image": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "today-fortune",
-        "crypto-calculator",
-        "compound-calculator"
-      ]
-    },
-    {
       "id": "water-intake",
-      "name": "물 섭취 기록",
+      "name": "물 섭취량 계산기",
       "slug": "water-intake",
       "icon": "💧",
       "description": "하루 물 섭취량 계산",
@@ -298,7 +56,7 @@
       "description": "하루 권장 칼로리 계산",
       "categoryId": "health-routine",
       "url": "/apps/calorie-calculator",
-      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/calorie-calculator-1761019428466.webp",
+      "image": "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&auto=format&fit=crop",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "water-intake",
@@ -328,9 +86,9 @@
       "slug": "habit-tracker",
       "icon": "🎯",
       "description": "21/66/100일 습관 만들기",
-      "categoryId": "health-routine",
+      "categoryId": "learning-tools",
       "url": "/apps/habit-tracker",
-      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/habit-tracker-1761056967326.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "focus-timer",
@@ -356,7 +114,7 @@
     },
     {
       "id": "parents-time",
-      "name": "부모님과 함께할 시간 계산",
+      "name": "부모님과 시간 계산기",
       "slug": "parents-time",
       "icon": "💕",
       "description": "부모님과 남은 시간 계산",
@@ -388,11 +146,11 @@
     },
     {
       "id": "phone-usage-analyzer",
-      "name": "휴대폰 사용 시간 기록",
+      "name": "스마트폰 사용 분석",
       "slug": "phone-usage-analyzer",
       "icon": "📱",
       "description": "스마트폰 중독도 분석",
-      "categoryId": "health-routine",
+      "categoryId": "learning-tools",
       "url": "/apps/phone-usage-analyzer",
       "image": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&auto=format&fit=crop",
       "createdAt": "2025-01-20",
@@ -404,7 +162,7 @@
     },
     {
       "id": "air-quality",
-      "name": "오늘의 공기질",
+      "name": "공기질 측정기",
       "slug": "air-quality",
       "icon": "🌫️",
       "description": "실시간 미세먼지 측정",
@@ -452,7 +210,7 @@
     },
     {
       "id": "eye-test",
-      "name": "시력 간단 테스트",
+      "name": "시력 테스트",
       "slug": "eye-test",
       "icon": "👁️",
       "description": "시력 건강 체크",
@@ -468,11 +226,11 @@
     },
     {
       "id": "quote-generator",
-      "name": "오늘의 한 줄 명언",
+      "name": "명언 생성기",
       "slug": "quote-generator",
       "icon": "💭",
       "description": "매일 새로운 명언",
-      "categoryId": "learning-tools",
+      "categoryId": "fortune-mind",
       "url": "/apps/quote-generator",
       "image": "https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
@@ -488,7 +246,7 @@
       "slug": "dday-counter",
       "icon": "📅",
       "description": "중요한 날 카운트다운",
-      "categoryId": "health-routine",
+      "categoryId": "money-calc",
       "url": "/apps/dday-counter",
       "image": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
@@ -504,7 +262,7 @@
       "slug": "focus-timer",
       "icon": "⏰",
       "description": "뽀모도로 집중 타이머",
-      "categoryId": "health-routine",
+      "categoryId": "learning-tools",
       "url": "/apps/focus-timer",
       "image": "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
@@ -516,7 +274,7 @@
     },
     {
       "id": "sleep-analyzer",
-      "name": "수면 체크",
+      "name": "수면 분석기",
       "slug": "sleep-analyzer",
       "icon": "😴",
       "description": "수면 패턴 분석",
@@ -528,6 +286,22 @@
         "calorie-calculator",
         "habit-tracker",
         "focus-timer"
+      ]
+    },
+    {
+      "id": "vitamin-check",
+      "name": "비타민 체크",
+      "slug": "vitamin-check",
+      "icon": "💊",
+      "description": "필요한 영양소 진단",
+      "categoryId": "health-routine",
+      "url": "/apps/vitamin-check",
+      "image": "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "calorie-calculator",
+        "water-intake",
+        "sleep-analyzer"
       ]
     },
     {
@@ -563,8 +337,40 @@
       ]
     },
     {
+      "id": "color-psychology",
+      "name": "색상 심리",
+      "slug": "color-psychology",
+      "icon": "🎨",
+      "description": "심리 분석",
+      "categoryId": "fortune-mind",
+      "url": "/apps/color-psychology",
+      "image": "https://images.unsplash.com/photo-1525909002-1b05e0c869d8?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "mbti-test",
+        "saju-mbti-jobs",
+        "analysis-handwriting"
+      ]
+    },
+    {
+      "id": "voice-fortune",
+      "name": "목소리 운세",
+      "slug": "voice-fortune",
+      "icon": "🎤",
+      "description": "오늘의 운세 확인",
+      "categoryId": "fortune-mind",
+      "url": "/apps/voice-fortune",
+      "image": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "face-shape",
+        "voice-age",
+        "analysis-handwriting"
+      ]
+    },
+    {
       "id": "study-cursor-prompts",
-      "name": "Cursor 자동화 프롬프트 모음",
+      "name": "Cursor 프롬프트",
       "slug": "study-cursor-prompts",
       "icon": "💻",
       "description": "Cursor 서비스",
@@ -579,12 +385,40 @@
       ]
     },
     {
+      "id": "study-dev-vocab",
+      "name": "개발 용어 사전",
+      "slug": "study-dev-vocab",
+      "icon": "📚",
+      "description": "프로그래밍 용어를 쉽게 배우는 사전",
+      "categoryId": "learning-tools",
+      "url": "/apps/study-dev-vocab",
+      "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "hidden": true
+    },
+    {
+      "id": "analysis-handwriting",
+      "name": "필적 분석",
+      "slug": "analysis-handwriting",
+      "icon": "✍️",
+      "description": "상세 분석 결과",
+      "categoryId": "fortune-mind",
+      "url": "/apps/analysis-handwriting",
+      "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "face-shape",
+        "color-psychology",
+        "mbti-test"
+      ]
+    },
+    {
       "id": "arcade-mini-games",
       "name": "미니 게임",
       "slug": "arcade-mini-games",
       "icon": "🎮",
       "description": "재미있는 게임",
-      "categoryId": "game-brain",
+      "categoryId": "learning-tools",
       "url": "/apps/arcade-mini-games",
       "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
@@ -592,6 +426,101 @@
         "mafia-game",
         "games-puzzle",
         "games-multiplication"
+      ]
+    },
+    {
+      "id": "quit-smoking-challenge",
+      "name": "금연 챌린지",
+      "slug": "quit-smoking-challenge",
+      "icon": "🚭",
+      "description": "도전 과제",
+      "categoryId": "health-routine",
+      "url": "/apps/quit-smoking-challenge",
+      "image": "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "car-maintenance",
+      "name": "차량 관리",
+      "slug": "car-maintenance",
+      "icon": "🚗",
+      "description": "69개 경고등의 의미와 대처법을 한눈에",
+      "categoryId": "learning-tools",
+      "url": "/apps/car-maintenance",
+      "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "compass",
+        "weather-outfit",
+        "air-quality",
+        "travel-packing-list"
+      ]
+    },
+    {
+      "id": "health-supplement-recommend",
+      "name": "영양제 추천",
+      "slug": "health-supplement-recommend",
+      "icon": "💊",
+      "description": "증상과 생활습관에 맞는 맞춤형 영양제 추천",
+      "categoryId": "health-routine",
+      "url": "/apps/health-supplement-recommend",
+      "image": "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "vitamin-check",
+        "sleep-analyzer",
+        "water-intake",
+        "habit-tracker"
+      ]
+    },
+    {
+      "id": "face-shape",
+      "name": "얼굴형 분석",
+      "slug": "face-shape",
+      "icon": "😊",
+      "description": "상세 분석 결과",
+      "categoryId": "fortune-mind",
+      "url": "/apps/face-shape",
+      "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "saju-mbti-jobs",
+        "mbti-test",
+        "voice-fortune",
+        "analysis-handwriting"
+      ]
+    },
+    {
+      "id": "lifestyle-face-fortune",
+      "name": "관상 분석",
+      "slug": "lifestyle-face-fortune",
+      "icon": "👁️",
+      "description": "상세 분석 결과",
+      "categoryId": "fortune-mind",
+      "url": "/apps/lifestyle-face-fortune",
+      "image": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "face-shape",
+        "saju-mbti-jobs",
+        "today-fortune"
+      ]
+    },
+    {
+      "id": "lifestyle-palm-reading",
+      "name": "손금 보기",
+      "slug": "lifestyle-palm-reading",
+      "icon": "👋",
+      "description": "전통 수상학 기반 AI 분석! 7대 손금선 정밀 분석 + 27가지 패턴 분류",
+      "categoryId": "fortune-mind",
+      "url": "/apps/lifestyle-palm-reading",
+      "image": "https://images.unsplash.com/photo-1591154669695-5f2a8d20c089?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-21",
+      "relatedApps": [
+        "lifestyle-face-fortune",
+        "face-shape",
+        "saju-mbti-jobs",
+        "today-fortune"
       ]
     },
     {
@@ -611,6 +540,71 @@
       ]
     },
     {
+      "id": "iq-test",
+      "name": "IQ 테스트",
+      "slug": "iq-test",
+      "icon": "🧠",
+      "description": "재미있는 심리 테스트",
+      "categoryId": "fortune-mind",
+      "url": "/apps/iq-test",
+      "image": "https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "reflex-test",
+        "typing-speed-test",
+        "games-puzzle"
+      ]
+    },
+    {
+      "id": "past-life-job",
+      "name": "전생 직업",
+      "slug": "past-life-job",
+      "icon": "⏳",
+      "description": "전생 서비스",
+      "categoryId": "fortune-mind",
+      "url": "/apps/past-life-job",
+      "image": "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "saju-mbti-jobs",
+        "today-fortune",
+        "dream-interpreter"
+      ]
+    },
+    {
+      "id": "gift-recommend",
+      "name": "선물 추천",
+      "slug": "gift-recommend",
+      "icon": "🎁",
+      "description": "맞춤 추천",
+      "categoryId": "family-life",
+      "url": "/apps/gift-recommend",
+      "image": "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "envelope-recommend",
+      "name": "봉투 추천",
+      "slug": "envelope-recommend",
+      "icon": "✉️",
+      "description": "맞춤 추천",
+      "categoryId": "money-calc",
+      "url": "/apps/envelope-recommend",
+      "image": "https://images.unsplash.com/photo-1520350094754-f0fdcac35c1c?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20"
+    },
+    {
+      "id": "bodyfat-measure",
+      "name": "체지방 측정기",
+      "slug": "bodyfat-measure",
+      "icon": "⚖️",
+      "description": "체지방 서비스",
+      "categoryId": "health-routine",
+      "url": "/apps/bodyfat-measure",
+      "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20"
+    },
+    {
       "id": "finance-emergency-fund",
       "name": "비상금 계산",
       "slug": "finance-emergency-fund",
@@ -628,7 +622,7 @@
     },
     {
       "id": "finance-loan-refinance",
-      "name": "대출 갈아타기 비교",
+      "name": "대출 갈아타기",
       "slug": "finance-loan-refinance",
       "icon": "🏠",
       "description": "대출 서비스",
@@ -643,12 +637,45 @@
       ]
     },
     {
+      "id": "mood-cheer-up",
+      "name": "기분 전환",
+      "slug": "mood-cheer-up",
+      "icon": "😊",
+      "description": "기분을 분석하고 맞춤 활동을 추천합니다",
+      "categoryId": "family-life",
+      "url": "/apps/mood-cheer-up",
+      "image": "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "quote-generator",
+        "focus-timer",
+        "habit-tracker",
+        "sleep-analyzer"
+      ]
+    },
+    {
+      "id": "voice-age",
+      "name": "목소리 나이",
+      "slug": "voice-age",
+      "icon": "🗣️",
+      "description": "목소리 서비스",
+      "categoryId": "fortune-mind",
+      "url": "/apps/voice-age",
+      "image": "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "voice-fortune",
+        "eye-test",
+        "reflex-test"
+      ]
+    },
+    {
       "id": "games-puzzle",
-      "name": "퍼즐 한 판",
+      "name": "퍼즐 게임",
       "slug": "games-puzzle",
       "icon": "🧩",
       "description": "재미있는 게임",
-      "categoryId": "game-brain",
+      "categoryId": "learning-tools",
       "url": "/apps/games-puzzle",
       "image": "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
@@ -660,11 +687,11 @@
     },
     {
       "id": "games-multiplication",
-      "name": "구구단 챌린지",
+      "name": "구구단 게임",
       "slug": "games-multiplication",
       "icon": "🔢",
       "description": "재미있는 게임",
-      "categoryId": "game-brain",
+      "categoryId": "learning-tools",
       "url": "/apps/games-multiplication",
       "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
@@ -675,12 +702,39 @@
       ]
     },
     {
+      "id": "dream-interpreter",
+      "name": "꿈 해몽",
+      "slug": "dream-interpreter",
+      "icon": "💤",
+      "description": "꿈 서비스",
+      "categoryId": "fortune-mind",
+      "url": "/apps/dream-interpreter",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "today-fortune",
+        "past-life-job",
+        "color-psychology"
+      ]
+    },
+    {
+      "id": "travel-destinations",
+      "name": "여행지 추천",
+      "slug": "travel-destinations",
+      "icon": "✈️",
+      "description": "맞춤 추천",
+      "categoryId": "money-calc",
+      "url": "/apps/travel-destinations",
+      "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20"
+    },
+    {
       "id": "travel-packing-list",
       "name": "여행 짐 체크",
       "slug": "travel-packing-list",
       "icon": "🧳",
       "description": "여행 서비스",
-      "categoryId": "family-life",
+      "categoryId": "money-calc",
       "url": "/apps/travel-packing-list",
       "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
@@ -689,6 +743,17 @@
         "weather-outfit",
         "dday-counter"
       ]
+    },
+    {
+      "id": "breakfast-what-to-eat",
+      "name": "아침식사 추천",
+      "slug": "breakfast-what-to-eat",
+      "icon": "🍳",
+      "description": "맞춤 추천",
+      "categoryId": "health-routine",
+      "url": "/apps/breakfast-what-to-eat",
+      "image": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20"
     },
     {
       "id": "compound-calculator",
@@ -708,7 +773,7 @@
     },
     {
       "id": "credit-card-optimizer",
-      "name": "카드 혜택 최적화",
+      "name": "카드 최적화",
       "slug": "credit-card-optimizer",
       "icon": "💳",
       "description": "카드 서비스",
@@ -739,19 +804,53 @@
       ]
     },
     {
-      "id": "mafia-game",
-      "name": "마피아 게임",
-      "slug": "mafia-game",
-      "icon": "🕵️",
-      "description": "실시간 멀티플레이 마피아",
-      "categoryId": "game-brain",
-      "url": "/apps/mafia-game",
-      "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20",
+      "id": "compass",
+      "name": "디지털 나침반",
+      "slug": "compass",
+      "icon": "🧭",
+      "description": "실시간 방향 확인! 360도 회전 나침반, 모바일 최적화",
+      "categoryId": "learning-tools",
+      "url": "/apps/compass",
+      "image": "https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-21",
       "relatedApps": [
-        "chess",
-        "gomoku",
-        "arcade-mini-games"
+        "fengshui-guide",
+        "air-quality",
+        "weather-outfit"
+      ]
+    },
+    {
+      "id": "saju-mbti-jobs",
+      "name": "사주와 MBTI의 조합",
+      "slug": "saju-mbti-jobs",
+      "icon": "🔮",
+      "description": "성격 유형 테스트",
+      "categoryId": "fortune-mind",
+      "url": "/apps/saju-mbti-jobs",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "mbti-test",
+        "face-shape",
+        "today-fortune",
+        "past-life-job"
+      ]
+    },
+    {
+      "id": "fengshui-guide",
+      "name": "풍수지리 실전 도감",
+      "slug": "fengshui-guide",
+      "icon": "🏠",
+      "description": "과학적 해석과 체크리스트로 배우는 현대 풍수",
+      "categoryId": "fortune-mind",
+      "url": "/apps/fengshui-guide",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "compass",
+        "today-fortune",
+        "dream-interpreter",
+        "color-psychology"
       ]
     },
     {
@@ -759,32 +858,16 @@
       "name": "선물 추천",
       "slug": "gift-finder",
       "icon": "🎁",
-      "description": "완벽한 선물 찾기",
+      "description": "200개 이상의 선물 데이터로 완벽한 선물 찾기",
       "categoryId": "family-life",
       "url": "/apps/gift-finder",
       "image": "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20",
+      "createdAt": "2025-01-21",
       "relatedApps": [
         "parents-time",
-        "travel-packing-list",
-        "weather-outfit"
-      ]
-    },
-    {
-      "id": "meat-calculator",
-      "name": "고기 계산기",
-      "slug": "meat-calculator",
-      "icon": "🥩",
-      "description": "빠른 계산",
-      "categoryId": "health-life",
-      "url": "/apps/meat-calculator",
-      "image": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "hidden": true,
-      "relatedApps": [
-        "calorie-calculator",
-        "water-intake",
-        "coffee-calculator"
+        "dday-counter",
+        "dream-interpreter",
+        "today-fortune"
       ]
     }
   ]

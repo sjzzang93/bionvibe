@@ -98,7 +98,7 @@ export default function SalaryDivider() {
           
         </div>
 
-        <section className="bg-white rounded-2xl shadow-xl p-6 mb-6 text-black placeholder-gray-500">
+        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 mb-6 text-black placeholder-gray-500">
           <header className="text-center mb-6 text-black placeholder-gray-500">
             <h1 className="text-4xl font-bold mb-2 text-black placeholder-gray-500">💰</h1>
             <h2 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2 text-black placeholder-gray-500">
@@ -128,7 +128,7 @@ export default function SalaryDivider() {
             <div className="grid grid-cols-3 gap-3 text-black placeholder-gray-500">
               <button
                 onClick={() => setMethod('503020')}
-                className={`p-4 rounded-xl font-semibold transition-all border-2 ${
+                className={`p-2 md:p-4 rounded-xl font-semibold transition-all border-2 ${
                   method === '503020'
                     ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white border-transparent shadow-lg'
                     : 'bg-white text-gray-700 border-gray-300'
@@ -139,7 +139,7 @@ export default function SalaryDivider() {
               </button>
               <button
                 onClick={() => setMethod('622010')}
-                className={`p-4 rounded-xl font-semibold transition-all border-2 ${
+                className={`p-2 md:p-4 rounded-xl font-semibold transition-all border-2 ${
                   method === '622010'
                     ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-transparent shadow-lg'
                     : 'bg-white text-gray-700 border-gray-300'
@@ -150,7 +150,7 @@ export default function SalaryDivider() {
               </button>
               <button
                 onClick={() => setMethod('custom')}
-                className={`p-4 rounded-xl font-semibold transition-all border-2 ${
+                className={`p-2 md:p-4 rounded-xl font-semibold transition-all border-2 ${
                   method === 'custom'
                     ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white border-transparent shadow-lg'
                     : 'bg-white text-gray-700 border-gray-300'
@@ -165,7 +165,7 @@ export default function SalaryDivider() {
           {/* 커스텀 비율 */}
           {method === 'custom' && (
             <div className="mb-6 p-4 bg-purple-50 rounded-xl border-2 border-purple-300 text-black placeholder-gray-500">
-              <h3 className="font-semibold text-black mb-3 text-black placeholder-gray-500">비율 직접 설정</h3>
+              <h3 className="font-semibold text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">비율 직접 설정</h3>
               <div className="space-y-3 text-black placeholder-gray-500">
                 {[
                   { key: 'needs', label: '필수지출' },
@@ -198,7 +198,7 @@ export default function SalaryDivider() {
           <div className="mb-6 space-y-4 text-black placeholder-gray-500">
             {/* 필수지출 */}
             <div className="p-5 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border-2 border-blue-300 text-black placeholder-gray-500">
-              <div className="flex justify-between items-center mb-3 text-black placeholder-gray-500">
+              <div className="flex justify-between items-center mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                 <div>
                   <h3 className="text-lg font-bold text-gray-800 text-black placeholder-gray-500">🏠 필수지출 (고정지출)</h3>
                   <p className="text-xs text-gray-600 text-black placeholder-gray-500">월세, 관리비, 통신비, 보험 등</p>
@@ -212,7 +212,7 @@ export default function SalaryDivider() {
               </div>
 
               {fixedExpenses.length > 0 && (
-                <div className="mb-3 space-y-2 text-black placeholder-gray-500">
+                <div className="mb-0.5 sm:mb-1.5 md:mb-2 space-y-2 text-black placeholder-gray-500">
                   {fixedExpenses.map(exp => (
                     <div key={exp.id} className="flex justify-between items-center p-2 bg-white rounded text-black placeholder-gray-500">
                       <span className="text-sm text-gray-700 text-black placeholder-gray-500">{exp.name}</span>
@@ -279,7 +279,7 @@ export default function SalaryDivider() {
 
             {/* 여유자금 */}
             <div className="p-5 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border-2 border-purple-300 text-black placeholder-gray-500">
-              <div className="flex justify-between items-center mb-3 text-black placeholder-gray-500">
+              <div className="flex justify-between items-center mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
                 <div>
                   <h3 className="text-lg font-bold text-gray-800 text-black placeholder-gray-500">🎉 여유자금 (변동지출)</h3>
                   <p className="text-xs text-gray-600 text-black placeholder-gray-500">식비, 쇼핑, 문화생활 등</p>
@@ -293,7 +293,7 @@ export default function SalaryDivider() {
               </div>
 
               {variableExpenses.length > 0 && (
-                <div className="mb-3 space-y-2 text-black placeholder-gray-500">
+                <div className="mb-0.5 sm:mb-1.5 md:mb-2 space-y-2 text-black placeholder-gray-500">
                   {variableExpenses.map(exp => (
                     <div key={exp.id} className="flex justify-between items-center p-2 bg-white rounded text-black placeholder-gray-500">
                       <span className="text-sm text-gray-700 text-black placeholder-gray-500">{exp.name}</span>
@@ -377,29 +377,29 @@ export default function SalaryDivider() {
 
           {/* 저축 시뮬레이션 */}
           <div className="p-5 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 text-black placeholder-gray-500">
-            <h3 className="font-bold text-lg text-gray-800 mb-4 text-black placeholder-gray-500">📊 저축 목표 달성 시뮬레이션</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-black placeholder-gray-500">
-              <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+            <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-4 text-black placeholder-gray-500">📊 저축 목표 달성 시뮬레이션</h3>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 text-black placeholder-gray-500">
+              <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                 <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">1개월</div>
                 <div className="text-lg font-bold text-black text-black placeholder-gray-500">{(savingsGoal.month1 / 10000).toFixed(0)}만</div>
               </div>
-              <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+              <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                 <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">3개월</div>
                 <div className="text-lg font-bold text-black text-black placeholder-gray-500">{(savingsGoal.month3 / 10000).toFixed(0)}만</div>
               </div>
-              <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+              <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                 <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">6개월</div>
                 <div className="text-lg font-bold text-black text-black placeholder-gray-500">{(savingsGoal.month6 / 10000).toFixed(0)}만</div>
               </div>
-              <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+              <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                 <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">1년</div>
                 <div className="text-lg font-bold text-black text-black placeholder-gray-500">{(savingsGoal.year1 / 10000).toFixed(0)}만</div>
               </div>
-              <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+              <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                 <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">3년</div>
                 <div className="text-lg font-bold text-black text-black placeholder-gray-500">{(savingsGoal.year3 / 10000).toFixed(0)}만</div>
               </div>
-              <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+              <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                 <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">5년</div>
                 <div className="text-lg font-bold text-black text-black placeholder-gray-500">{(savingsGoal.year5 / 10000).toFixed(0)}만</div>
               </div>
@@ -408,7 +408,7 @@ export default function SalaryDivider() {
         </section>
 
         {/* 재테크 팁 */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 text-black placeholder-gray-500">
+        <div className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-lg p-6 text-black placeholder-gray-500">
           <h3 className="font-bold text-xl text-gray-800 mb-4 text-black placeholder-gray-500">💡 재테크 꿀팁</h3>
           <div className="space-y-3 text-sm text-black placeholder-gray-500">
             <div className="p-3 bg-green-50 rounded-lg text-black placeholder-gray-500">

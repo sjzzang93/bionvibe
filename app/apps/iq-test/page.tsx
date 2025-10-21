@@ -250,13 +250,13 @@ export default function IQTest() {
             </header>
 
             {/* IQ 점수 */}
-            <div className="bg-gradient-to-br from-purple-100 to-purple-100 dark:from-purple-900/30 dark:to-purple-900/30 rounded-2xl p-8 mb-6 border border-purple-200 dark:border-purple-700">
+            <div className="bg-gradient-to-br from-purple-100 to-purple-100 dark:from-purple-900/30 dark:to-purple-900/30 rounded sm:rounded-lg md:rounded-2xl p-8 mb-6 border border-purple-200 dark:border-purple-700">
               <div className="text-center">
                 <div className="text-sm text-gray-900 dark:text-gray-200 font-medium mb-2">당신의 IQ는</div>
                 <div className={`text-7xl font-bold bg-gradient-to-r ${level.color} bg-clip-text text-transparent mb-4`}>
                   {iq}
                 </div>
-                <div className="inline-block bg-white dark:bg-gray-700 rounded-full px-6 py-2 border-2 border-purple-300 dark:border-purple-600 mb-3">
+                <div className="inline-block bg-white dark:bg-gray-700 rounded-full px-6 py-2 border-2 border-purple-300 dark:border-purple-600 mb-0.5 sm:mb-1.5 md:mb-2">
                   <span className="text-xl font-bold text-gray-900 dark:text-white">{level.level}</span>
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">{level.description}</div>
@@ -264,7 +264,7 @@ export default function IQTest() {
             </div>
 
             {/* IQ 분포도 */}
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-6 mb-6 border border-gray-200 dark:border-gray-600">
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded sm:rounded-lg md:rounded-2xl p-6 mb-6 border border-gray-200 dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 text-center">📊 IQ 분포 기준</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between items-center p-2 rounded-lg bg-white">
@@ -297,7 +297,7 @@ export default function IQTest() {
             {/* 다시하기 버튼 */}
             <button
               onClick={restart}
-              className="w-full py-4 bg-gradient-to-r from-purple-500 to-purple-500 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full py-4 bg-gradient-to-r from-purple-500 to-purple-500 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded sm:rounded-lg md:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
             >
               🔄 다시 테스트하기
             </button>
@@ -321,7 +321,7 @@ export default function IQTest() {
         {/* 문제 카드 */}
         <section className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-purple-200">
           <header className="text-center mb-6">
-            <div className="text-5xl mb-3">🧠</div>
+            <div className="text-base sm:text-2xl md:text-4xl mb-0.5 sm:mb-1.5 md:mb-2">🧠</div>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent mb-2">
               초간단 IQ 테스트
             </h1>
@@ -344,14 +344,14 @@ export default function IQTest() {
 
           {/* 문제 */}
           <div className="mb-8">
-            <div className="bg-gradient-to-br from-purple-50 to-purple-50 rounded-2xl p-6 mb-6 border border-purple-200">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-50 rounded sm:rounded-lg md:rounded-2xl p-6 mb-6 border border-purple-200">
               <div className="text-xl font-semibold text-gray-800 text-center whitespace-pre-line">
                 {questions[currentQuestion].question}
               </div>
             </div>
 
             {/* 선택지 */}
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 gap-0 sm:gap-1.5 md:gap-3">
               {questions[currentQuestion].options.map((option, index) => (
                 <button
                   key={index}

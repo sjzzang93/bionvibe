@@ -36,10 +36,10 @@ function GameHome({ onSelectGame }: { onSelectGame: (game: 'sliding' | 'sudoku' 
       </h1>
       <p className="text-center text-purple-100 mb-12">두뇌를 자극하는 다양한 퍼즐 게임</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
         <button
           onClick={() => onSelectGame('sliding')}
-          className="bg-gradient-to-br from-blue-500 to-cyan-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+          className="bg-gradient-to-br from-blue-500 to-cyan-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
         >
           <div className="text-6xl mb-4">🔢</div>
           <h3 className="text-2xl font-bold text-white mb-2">슬라이딩 퍼즐</h3>
@@ -48,7 +48,7 @@ function GameHome({ onSelectGame }: { onSelectGame: (game: 'sliding' | 'sudoku' 
 
         <button
           onClick={() => onSelectGame('sudoku')}
-          className="bg-gradient-to-br from-green-500 to-emerald-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+          className="bg-gradient-to-br from-green-500 to-emerald-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
         >
           <div className="text-6xl mb-4">🎯</div>
           <h3 className="text-2xl font-bold text-white mb-2">스도쿠</h3>
@@ -57,7 +57,7 @@ function GameHome({ onSelectGame }: { onSelectGame: (game: 'sliding' | 'sudoku' 
 
         <button
           onClick={() => onSelectGame('2048')}
-          className="bg-gradient-to-br from-orange-500 to-red-600 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+          className="bg-gradient-to-br from-orange-500 to-red-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
         >
           <div className="text-6xl mb-4">🎲</div>
           <h3 className="text-2xl font-bold text-white mb-2">2048</h3>
@@ -107,7 +107,7 @@ function SlidingPuzzle({ onBack }: { onBack: () => void }) {
         ← 돌아가기
       </button>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+      <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8">
         <h2 className="text-3xl font-bold text-white text-center mb-4">🔢 슬라이딩 퍼즐</h2>
         <p className="text-center text-white/80 mb-6">이동 횟수: {moves}</p>
 
@@ -230,7 +230,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
         ← 돌아가기
       </button>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-8">
+      <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-4 sm:p-8">
         <h2 className="text-3xl font-bold text-white text-center mb-6">🎯 스도쿠</h2>
 
         {isComplete() && (
@@ -247,7 +247,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
                 <button
                   key={`${i}-${j}`}
                   onClick={() => handleCellClick(i, j)}
-                  className={`aspect-square flex items-center justify-center font-bold text-lg sm:text-xl border border-gray-400 ${getCellColor(i, j)} ${
+                  className={`aspect-square flex items-center justify-center font-bold text-[10px] sm:text-xs md:text-sm sm:text-xl border border-gray-400 ${getCellColor(i, j)} ${
                     (i % 3 === 2 && i !== 8) && (j % 3 === 2 && j !== 8) ? 'border-r-2 border-b-2 border-black' :
                     (i % 3 === 2 && i !== 8) ? 'border-b-2 border-black' :
                     (j % 3 === 2 && j !== 8) ? 'border-r-2 border-black' : ''
@@ -461,7 +461,7 @@ function Game2048({ onBack }: { onBack: () => void }) {
         ← 돌아가기
       </button>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+      <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8">
         <h2 className="text-3xl font-bold text-white text-center mb-4">🎲 2048</h2>
         <p className="text-center text-white/80 mb-6">점수: {score}</p>
 

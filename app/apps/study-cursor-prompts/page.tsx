@@ -13,7 +13,7 @@ function CursorPromptsContent() {
       <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* 헤더 */}
         <div className="text-center space-y-2">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-base sm:text-2xl md:text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
             {krText.title}
           </h1>
           <p className="text-sm sm:text-base text-gray-600">{krText.description}</p>
@@ -44,7 +44,7 @@ function CursorPromptsContent() {
         </div>
 
         {/* 탭 내용 */}
-        <div className="bg-white rounded-2xl shadow-xl p-3 sm:p-4 md:p-6">
+        <div className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-3 sm:p-4 md:p-6">
           {activeTab === 'glossary' && <GlossaryTab />}
           {activeTab === 'export' && <ExportTab />}
         </div>
@@ -126,7 +126,7 @@ const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zo
       recKr: 'Tailwind의 반응형 유틸리티를 사용해서 모바일(기본)에서는 1열, 태블릿(md:)에서는 2열, 데스크탑(lg:)에서는 3열 그리드 레이아웃을 만들어줘. gap-4를 적용하고 px-4로 양쪽 여백도 추가해줘.',
       recEn: 'Use Tailwind responsive utilities to create a grid layout: 1 column on mobile (default), 2 columns on tablet (md:), 3 columns on desktop (lg:). Apply gap-4 and px-4 for padding.',
       snippetPrefix: 'responsive-grid',
-      exampleKr: '<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4">...</div>'
+      exampleKr: '<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 px-4">...</div>'
     },
     {
       id: '5',
@@ -435,7 +435,7 @@ export const { handlers, auth } = NextAuth({
   return (
     <div className="space-y-4 sm:space-y-6">
       {/* 검색 & 필터 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-2">
         <input
           type="text"
           placeholder={krText.filter.search}
@@ -472,10 +472,10 @@ export const { handlers, auth } = NextAuth({
       </div>
 
       {/* 프롬프트 카드 목록 */}
-      <div className="grid gap-3 sm:gap-4">
+      <div className="grid gap-3 sm:gap-2">
         {filteredItems.map(item => (
-          <div key={item.id} className="bg-white border-2 border-violet-200 rounded-lg p-3 sm:p-4 md:p-6 hover:border-violet-400 hover:shadow-lg transition-all">
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
+          <div key={item.id} className="bg-white border-2 border-violet-200 rounded-lg p-2 sm:p-3 sm:p-4 md:p-6 hover:border-violet-400 hover:shadow-lg transition-all">
+            <div className="flex items-start justify-between mb-0.5 sm:mb-1.5 md:mb-2 sm:mb-4">
               <div>
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-violet-700">{item.slug}</h3>
                 <div className="flex gap-2 mt-2">
@@ -490,12 +490,12 @@ export const { handlers, auth } = NextAuth({
             </div>
 
             <div className="space-y-3 sm:space-y-4">
-              <div className="bg-red-50 border-l-4 border-red-400 p-3 sm:p-4 rounded">
+              <div className="bg-red-50 border-l-4 border-red-400 p-3 sm:p-2 md:p-4 rounded">
                 <p className="font-semibold text-red-700 mb-2 text-sm sm:text-base">❌ 안티패턴</p>
                 <p className="text-gray-900 text-sm sm:text-base">{item.antiKr}</p>
               </div>
 
-              <div className="bg-green-50 border-l-4 border-green-400 p-3 sm:p-4 rounded">
+              <div className="bg-green-50 border-l-4 border-green-400 p-3 sm:p-2 md:p-4 rounded">
                 <div className="flex items-center justify-between mb-2">
                   <p className="font-semibold text-green-700 text-sm sm:text-base">✅ 권장패턴</p>
                   <CopyButton text={item.recKr} />
@@ -504,12 +504,12 @@ export const { handlers, auth } = NextAuth({
               </div>
 
               {item.exampleKr && (
-                <div className="bg-gray-50 p-3 sm:p-4 rounded">
+                <div className="bg-gray-50 p-3 sm:p-2 md:p-4 rounded">
                   <div className="flex items-center justify-between mb-2">
                     <p className="font-semibold text-gray-900 text-sm sm:text-base">📝 예시</p>
                     <CopyButton text={item.exampleKr} />
                   </div>
-                  <pre className="text-xs sm:text-sm overflow-x-auto bg-gray-900 text-white p-2 sm:p-3 rounded">
+                  <pre className="text-xs sm:text-sm overflow-x-auto bg-gray-900 text-white p-1 sm:p-2.5 rounded">
                     <code>{item.exampleKr}</code>
                   </pre>
                 </div>
@@ -534,7 +534,7 @@ function ExportTab() {
     <div className="space-y-4">
       <p className="text-sm sm:text-base text-gray-600">데이터를 다양한 형식으로 내보낼 수 있습니다</p>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-2">
         <button className="px-4 sm:px-6 py-3 sm:py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
           📄 JSON 내보내기
         </button>

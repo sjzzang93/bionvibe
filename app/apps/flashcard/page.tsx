@@ -74,7 +74,7 @@ export default function FlashcardPage() {
               <button
                 key={setName}
                 onClick={() => setSelectedSet(setName)}
-                className="w-full bg-white/10 backdrop-blur-lg hover:bg-white/20 rounded-2xl p-8 transition-all"
+                className="w-full bg-white/10 backdrop-blur-lg hover:bg-white/20 rounded sm:rounded-lg md:rounded-2xl p-8 transition-all"
               >
                 <h3 className="text-3xl font-bold text-white">{setName}</h3>
               </button>
@@ -96,7 +96,7 @@ export default function FlashcardPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 py-8 px-4">
         <div className="max-w-2xl mx-auto">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-12 text-center">
+          <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-12 text-center">
             <div className="text-6xl mb-6">🎉</div>
             <h2 className="text-4xl font-bold text-white mb-4">학습 완료!</h2>
             <div className="text-2xl text-white mb-8">
@@ -154,7 +154,7 @@ export default function FlashcardPage() {
         </button>
 
         {/* 진행률 */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 mb-6">
+        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-4 mb-6">
           <div className="flex justify-between text-white mb-2">
             <span>{currentIndex + 1} / {currentWords.length}</span>
             <span>암기: {memorized.size}</span>
@@ -200,7 +200,7 @@ export default function FlashcardPage() {
             {memorized.has(currentIndex) ? '✅ 암기함' : '☐ 암기 표시'}
           </button>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-2">
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0}

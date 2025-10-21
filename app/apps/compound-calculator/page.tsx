@@ -74,17 +74,17 @@ export default function CompoundCalculator() {
             
           </div>
 
-          <section className="bg-white rounded-2xl shadow-xl p-6 mb-6 text-black placeholder-gray-500">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 mb-6 text-black placeholder-gray-500">
             <header className="text-center mb-6 text-black placeholder-gray-500">
               <h1 className="text-3xl font-bold mb-2 text-black placeholder-gray-500">📈</h1>
               <h2 className="text-2xl font-bold text-gray-800 text-black placeholder-gray-500">투자 시뮬레이션 결과</h2>
             </header>
 
             {/* 최종 결과 */}
-            <div className="mb-6 p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border-3 border-blue-400 text-black placeholder-gray-500">
+            <div className="mb-6 p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded sm:rounded-lg md:rounded-2xl border-3 border-blue-400 text-black placeholder-gray-500">
               <div className="text-center mb-4 text-black placeholder-gray-500">
                 <div className="text-sm text-gray-600 mb-2 text-black placeholder-gray-500">{years}년 후 예상 자산</div>
-                <div className="text-6xl font-bold mb-3" style={{
+                <div className="text-6xl font-bold mb-0.5 sm:mb-1.5 md:mb-2" style={{
                   background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent'
@@ -97,19 +97,19 @@ export default function CompoundCalculator() {
               </div>
 
               <div className="grid grid-cols-3 gap-3 text-black placeholder-gray-500">
-                <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                   <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">투자 원금</div>
                   <div className="text-lg font-bold text-gray-800 text-black placeholder-gray-500">
                     {(result.totalInvested / 10000).toLocaleString()}만
                   </div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                   <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">이자 수익</div>
                   <div className="text-lg font-bold text-black text-black placeholder-gray-500">
                     {(result.totalInterest / 10000).toLocaleString()}만
                   </div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center text-black placeholder-gray-500">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center text-black placeholder-gray-500">
                   <div className="text-xs text-gray-600 mb-1 text-black placeholder-gray-500">수익률</div>
                   <div className="text-lg font-bold text-black text-black placeholder-gray-500">
                     {result.returnRate}%
@@ -120,7 +120,7 @@ export default function CompoundCalculator() {
 
             {/* 연도별 상세 */}
             <div className="mb-6 text-black placeholder-gray-500">
-              <h3 className="font-bold text-lg text-gray-800 mb-3 text-black placeholder-gray-500">📊 연도별 자산 증가</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">📊 연도별 자산 증가</h3>
               <div className="space-y-2 max-h-96 overflow-y-auto text-black placeholder-gray-500">
                 {result.yearlyData.map((data: any) => (
                   <div key={data.year} className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200 text-black placeholder-gray-500">
@@ -147,7 +147,7 @@ export default function CompoundCalculator() {
 
             <button
               onClick={() => setResult(null)}
-              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
               다시 계산하기
             </button>
@@ -164,7 +164,7 @@ export default function CompoundCalculator() {
           
         </div>
 
-        <section className="bg-white rounded-2xl shadow-xl p-6 mb-6 text-black placeholder-gray-500">
+        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 mb-6 text-black placeholder-gray-500">
           <header className="text-center mb-6 text-black placeholder-gray-500">
             <h1 className="text-4xl font-bold mb-2 text-black placeholder-gray-500">📈</h1>
             <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2 text-black placeholder-gray-500">
@@ -176,7 +176,7 @@ export default function CompoundCalculator() {
           {/* 투자 방식 선택 */}
           <div className="mb-6 text-black placeholder-gray-500">
             <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">투자 방식</label>
-            <div className="grid grid-cols-2 gap-4 text-black placeholder-gray-500">
+            <div className="grid grid-cols-3 gap-4 text-black placeholder-gray-500">
               <button
                 onClick={() => setInvestmentType('lumpsum')}
                 className={`p-5 rounded-xl font-semibold transition-all border-2 ${
@@ -292,7 +292,7 @@ export default function CompoundCalculator() {
 
           {/* 빠른 시뮬레이션 버튼 */}
           <div className="my-6 p-4 bg-gradient-to-r from-purple-50 to-purple-50 rounded-xl border border-purple-300 text-black placeholder-gray-500">
-            <h3 className="font-semibold text-black mb-3 text-black placeholder-gray-500">⚡ 빠른 시뮬레이션</h3>
+            <h3 className="font-semibold text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">⚡ 빠른 시뮬레이션</h3>
             <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
               {[
                 { period: 10, rate: 7, label: '10년/7%' },
@@ -325,7 +325,7 @@ export default function CompoundCalculator() {
         </section>
 
         {/* 복리의 힘 */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 text-black placeholder-gray-500">
+        <div className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-lg p-6 text-black placeholder-gray-500">
           <h3 className="font-bold text-xl text-gray-800 mb-4 text-black placeholder-gray-500">🚀 복리의 힘</h3>
           <div className="space-y-3 text-sm text-black placeholder-gray-500">
             <div className="p-3 bg-blue-50 rounded-lg text-black placeholder-gray-500">

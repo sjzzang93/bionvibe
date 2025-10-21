@@ -1,0 +1,518 @@
+{
+  "warningLights": [
+    {
+      "num": 1,
+      "name": "전면 안개등",
+      "symptom": "전면 안개등이 켜짐/불량 시 전구·배선 문제",
+      "risk": "낮음",
+      "serviceInterval": "전구 2~4년 또는 고장 시",
+      "estimatedCost": { "min": 30000, "max": 150000, "average": 80000 }
+    },
+    {
+      "num": 2,
+      "name": "파워 스티어링 경고등",
+      "symptom": "조향 무거움, EPS 모터·토크센서·펌프 이상",
+      "risk": "높음",
+      "serviceInterval": "이상 시 즉시 점검",
+      "estimatedCost": { "min": 150000, "max": 900000, "average": 380000 }
+    },
+    {
+      "num": 3,
+      "name": "후면 안개등",
+      "symptom": "후면 안개등 켜짐/전구 불량",
+      "risk": "낮음",
+      "serviceInterval": "전구 2~4년 또는 고장 시",
+      "estimatedCost": { "min": 30000, "max": 200000, "average": 90000 }
+    },
+    {
+      "num": 4,
+      "name": "워셔액 부족",
+      "symptom": "워셔액 보충 필요, 누수 시 호스·펌프 점검",
+      "risk": "낮음",
+      "serviceInterval": "필요 시 수시 보충",
+      "estimatedCost": { "min": 0, "max": 50000, "average": 10000 }
+    },
+    {
+      "num": 5,
+      "name": "브레이크 패드 경고",
+      "symptom": "패드 마모 한계, 제동거리 증가",
+      "risk": "높음",
+      "serviceInterval": "패드 3~5만 km",
+      "estimatedCost": { "min": 120000, "max": 250000, "average": 180000 }
+    },
+    {
+      "num": 6,
+      "name": "정속주행 켜짐(크루즈)",
+      "symptom": "크루즈 컨트롤 작동 표시",
+      "risk": "낮음",
+      "serviceInterval": "이상 시 점검",
+      "estimatedCost": { "min": 0, "max": 200000, "average": 80000 }
+    },
+    {
+      "num": 7,
+      "name": "방향지시등",
+      "symptom": "좌/우 점등, 과속점멸 시 전구 단선 가능",
+      "risk": "낮음",
+      "serviceInterval": "전구 2~4년 또는 고장 시",
+      "estimatedCost": { "min": 30000, "max": 100000, "average": 60000 }
+    },
+    {
+      "num": 8,
+      "name": "빗방울/빛 감지(오토와이퍼/오토라이트)",
+      "symptom": "레인·조도 센서 작동/오작동",
+      "risk": "낮음",
+      "serviceInterval": "오작동 시 재학습/교체",
+      "estimatedCost": { "min": 0, "max": 150000, "average": 60000 }
+    },
+    {
+      "num": 9,
+      "name": "동절기(스노우) 모드",
+      "symptom": "미끄럼 방지용 주행 모드 안내",
+      "risk": "낮음",
+      "serviceInterval": "해당 없음",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 10,
+      "name": "정보(i) 표시",
+      "symptom": "안내/주의 메시지, 세부 내용 클러스터 확인",
+      "risk": "낮음",
+      "serviceInterval": "메시지 내용에 따름",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 11,
+      "name": "예열 플러그/디젤 예열 경고",
+      "symptom": "시동 불량·흔들림, 글로우 플러그·릴레이 불량",
+      "risk": "중간",
+      "serviceInterval": "플러그 8~12만 km",
+      "estimatedCost": { "min": 100000, "max": 400000, "average": 220000 }
+    },
+    {
+      "num": 12,
+      "name": "서리 주의(후방 성에 제거)",
+      "symptom": "리어 디프로스터 작동/불량",
+      "risk": "낮음",
+      "serviceInterval": "히팅선 손상 시 수리",
+      "estimatedCost": { "min": 30000, "max": 150000, "average": 80000 }
+    },
+    {
+      "num": 13,
+      "name": "와이퍼 스위치/오토 기능 경고",
+      "symptom": "와이퍼 스위치·모듈 이상",
+      "risk": "낮음",
+      "serviceInterval": "이상 시 점검",
+      "estimatedCost": { "min": 30000, "max": 120000, "average": 70000 }
+    },
+    {
+      "num": 14,
+      "name": "차내 열쇠 없음(스마트키 분실/미인식)",
+      "symptom": "시동 불가/경고음, 키 인식 불량",
+      "risk": "중간",
+      "serviceInterval": "키 배터리 1~2년",
+      "estimatedCost": { "min": 0, "max": 300000, "average": 60000 }
+    },
+    {
+      "num": 15,
+      "name": "전자 열쇠 배터리 부족",
+      "symptom": "스마트키 배터리 저전압",
+      "risk": "낮음",
+      "serviceInterval": "키 배터리 1~2년",
+      "estimatedCost": { "min": 10000, "max": 40000, "average": 20000 }
+    },
+    {
+      "num": 16,
+      "name": "지간거리 경보(전방추돌 경고/LKA 관련)",
+      "symptom": "전방 레이더·카메라 경고/오류",
+      "risk": "중간",
+      "serviceInterval": "카메라·레이더 재교정 필요 시",
+      "estimatedCost": { "min": 80000, "max": 500000, "average": 220000 }
+    },
+    {
+      "num": 17,
+      "name": "클러치 페달 밟기 안내",
+      "symptom": "수동변속기 시동 조건 안내",
+      "risk": "낮음",
+      "serviceInterval": "스위치 불량 시 교체",
+      "estimatedCost": { "min": 30000, "max": 120000, "average": 70000 }
+    },
+    {
+      "num": 18,
+      "name": "브레이크 페달 밟기 안내",
+      "symptom": "시동/변속 조건, 브레이크 스위치 이상 시 경고",
+      "risk": "중간",
+      "serviceInterval": "스위치 고장 시",
+      "estimatedCost": { "min": 60000, "max": 200000, "average": 120000 }
+    },
+    {
+      "num": 19,
+      "name": "스티어링 잠금 장치",
+      "symptom": "전자식 스티어링 락 모듈 이상",
+      "risk": "높음",
+      "serviceInterval": "이상 시 즉시 점검",
+      "estimatedCost": { "min": 80000, "max": 500000, "average": 220000 }
+    },
+    {
+      "num": 20,
+      "name": "전조등(헤드램프) ON",
+      "symptom": "전조등 점등/전구·릴레이 불량",
+      "risk": "낮음",
+      "serviceInterval": "전구 2~4년",
+      "estimatedCost": { "min": 30000, "max": 150000, "average": 80000 }
+    },
+    {
+      "num": 21,
+      "name": "타이어 공기압 부족(TPMS)",
+      "symptom": "공기압 저하 또는 TPMS 센서 배터리 소모",
+      "risk": "중간",
+      "serviceInterval": "공기압 월1회 점검, 센서 5~7년",
+      "estimatedCost": { "min": 60000, "max": 180000, "average": 120000 }
+    },
+    {
+      "num": 22,
+      "name": "차폭등/차폭등 정보(DRL/포지션)",
+      "symptom": "포지션/차폭등 점등, 전구·모듈 불량 시 교체",
+      "risk": "낮음",
+      "serviceInterval": "전구 2~4년",
+      "estimatedCost": { "min": 0, "max": 150000, "average": 60000 }
+    },
+    {
+      "num": 23,
+      "name": "외부 경관등(헤드램프) 결함",
+      "symptom": "전조등 회로·전구·레벨링 이상",
+      "risk": "중간",
+      "serviceInterval": "불량 시 즉시",
+      "estimatedCost": { "min": 60000, "max": 250000, "average": 150000 }
+    },
+    {
+      "num": 24,
+      "name": "브레이크등 경보",
+      "symptom": "브레이크 램프 전구 단선/스위치 불량",
+      "risk": "중간",
+      "serviceInterval": "전구 2~4년, 스위치 고장 시",
+      "estimatedCost": { "min": 60000, "max": 200000, "average": 120000 }
+    },
+    {
+      "num": 25,
+      "name": "디젤 배기가스 후처리 장치 경보(DPF/AdBlue)",
+      "symptom": "DPF 포집 과다/요소수 부족·센서 오류",
+      "risk": "높음",
+      "serviceInterval": "DPF 세척 8~12만 km, 요소수 수시 보충",
+      "estimatedCost": { "min": 150000, "max": 1500000, "average": 600000 }
+    },
+    {
+      "num": 26,
+      "name": "트레일러 견인장치",
+      "symptom": "히치/전기 소켓 접촉 불량",
+      "risk": "낮음",
+      "serviceInterval": "부식·단선 시 수리",
+      "estimatedCost": { "min": 0, "max": 150000, "average": 60000 }
+    },
+    {
+      "num": 27,
+      "name": "공기 현가장치(에어 서스) 경보",
+      "symptom": "차고 높이 이상, 에어백·컴프레서 누기",
+      "risk": "높음",
+      "serviceInterval": "누기 시 즉시 수리",
+      "estimatedCost": { "min": 200000, "max": 1500000, "average": 700000 }
+    },
+    {
+      "num": 28,
+      "name": "차선 이탈 경고/보조",
+      "symptom": "차선 인식 오류·카메라 재교정 필요",
+      "risk": "중간",
+      "serviceInterval": "전방카메라 재교정 필요 시",
+      "estimatedCost": { "min": 80000, "max": 500000, "average": 220000 }
+    },
+    {
+      "num": 29,
+      "name": "속도/기어 변환 장치 경고(AT/DSG 경고)",
+      "symptom": "변속 충격·슬립, 센서·밸브바디 이상",
+      "risk": "높음",
+      "serviceInterval": "증상 발생 즉시",
+      "estimatedCost": { "min": 200000, "max": 2000000, "average": 900000 }
+    },
+    {
+      "num": 30,
+      "name": "안전벨트 미착용",
+      "symptom": "벨트 미착용/버클 스위치 불량",
+      "risk": "중간",
+      "serviceInterval": "즉시 착용, 스위치 불량 시 교체",
+      "estimatedCost": { "min": 0, "max": 50000, "average": 20000 }
+    },
+    {
+      "num": 31,
+      "name": "주차 브레이크",
+      "symptom": "주차 브레이크 체결/EPB 모터 이상",
+      "risk": "중간",
+      "serviceInterval": "이상 시 점검",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 32,
+      "name": "배터리 경고(충전 불량)",
+      "symptom": "배터리·발전기(알터네이터) 충전 이상",
+      "risk": "높음",
+      "serviceInterval": "배터리 3~5년, 벨트 5~8만 km",
+      "estimatedCost": { "min": 120000, "max": 900000, "average": 280000 }
+    },
+    {
+      "num": 33,
+      "name": "주차 보조 장치",
+      "symptom": "자동주차/파크 어시스트 이상",
+      "risk": "낮음",
+      "serviceInterval": "오작동 시 점검",
+      "estimatedCost": { "min": 0, "max": 300000, "average": 120000 }
+    },
+    {
+      "num": 34,
+      "name": "오일 교환/서비스 요망",
+      "symptom": "엔진오일 교환 주기 도래",
+      "risk": "중간",
+      "serviceInterval": "오일 1만~1.5만 km",
+      "estimatedCost": { "min": 60000, "max": 150000, "average": 120000 }
+    },
+    {
+      "num": 35,
+      "name": "자동 전조등(오토 헤드라이트)",
+      "symptom": "조도센서/오토 점등 기능",
+      "risk": "낮음",
+      "serviceInterval": "센서 불량 시",
+      "estimatedCost": { "min": 0, "max": 150000, "average": 60000 }
+    },
+    {
+      "num": 36,
+      "name": "전조등 범위 조정(레벨링)",
+      "symptom": "헤드램프 높낮이 모터·센서 오류",
+      "risk": "낮음",
+      "serviceInterval": "불량 시 교체",
+      "estimatedCost": { "min": 60000, "max": 250000, "average": 150000 }
+    },
+    {
+      "num": 37,
+      "name": "후방 스포일러 경고/외장 가변장치",
+      "symptom": "액추에이터/스위치 불량",
+      "risk": "낮음",
+      "serviceInterval": "고장 시 수리",
+      "estimatedCost": { "min": 80000, "max": 400000, "average": 180000 }
+    },
+    {
+      "num": 38,
+      "name": "컨버터블 루프 경고",
+      "symptom": "소프트톱/하드톱 작동 불량",
+      "risk": "중간",
+      "serviceInterval": "작동 불량 시",
+      "estimatedCost": { "min": 150000, "max": 900000, "average": 380000 }
+    },
+    {
+      "num": 39,
+      "name": "에어백 경고(SRS)",
+      "symptom": "에어백 모듈·클럭스프링·센서 오류",
+      "risk": "높음",
+      "serviceInterval": "즉시 점검",
+      "estimatedCost": { "min": 150000, "max": 1500000, "average": 600000 }
+    },
+    {
+      "num": 40,
+      "name": "수동식 브레이크 경고",
+      "symptom": "핸드브레이크 스위치·케이블 조정 필요",
+      "risk": "중간",
+      "serviceInterval": "고장 시",
+      "estimatedCost": { "min": 60000, "max": 200000, "average": 120000 }
+    },
+    {
+      "num": 41,
+      "name": "연료여과기 물 있음",
+      "symptom": "연료 필터 수분 감지, 수분 배출 필요",
+      "risk": "중간",
+      "serviceInterval": "필터 3~5만 km",
+      "estimatedCost": { "min": 80000, "max": 300000, "average": 160000 }
+    },
+    {
+      "num": 42,
+      "name": "에어백 작동 정지(OFF)",
+      "symptom": "승객석 에어백 비활성화/오류",
+      "risk": "중간",
+      "serviceInterval": "오류 시 점검",
+      "estimatedCost": { "min": 0, "max": 100000, "average": 40000 }
+    },
+    {
+      "num": 43,
+      "name": "결함 문제(차량 점검 필요)",
+      "symptom": "엔진/변속기/차체 등 DTC 존재",
+      "risk": "중간",
+      "serviceInterval": "스캐너 진단 후 수리",
+      "estimatedCost": { "min": 80000, "max": 800000, "average": 350000 }
+    },
+    {
+      "num": 44,
+      "name": "전조등 하향(로우빔) 표시",
+      "symptom": "로우빔 작동/전구·릴레이 불량",
+      "risk": "낮음",
+      "serviceInterval": "전구 2~4년",
+      "estimatedCost": { "min": 30000, "max": 200000, "average": 90000 }
+    },
+    {
+      "num": 45,
+      "name": "공기 여과기 더러움(에어필터 경고/에코모드)",
+      "symptom": "흡기 저항 증가·연비 저하",
+      "risk": "낮음",
+      "serviceInterval": "엔진 에어필터 2만 km",
+      "estimatedCost": { "min": 30000, "max": 60000, "average": 40000 }
+    },
+    {
+      "num": 46,
+      "name": "경제운전 지시기(ECO)",
+      "symptom": "경제 운전 안내",
+      "risk": "낮음",
+      "serviceInterval": "해당 없음",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 47,
+      "name": "내리막길 주행 제어장치",
+      "symptom": "HDC 작동/오작동",
+      "risk": "중간",
+      "serviceInterval": "오작동 시 점검",
+      "estimatedCost": { "min": 80000, "max": 400000, "average": 180000 }
+    },
+    {
+      "num": 48,
+      "name": "온도 주의(냉각수 온도/엔진 과열 경고)",
+      "symptom": "수온 과열, 냉각계 이상",
+      "risk": "치명",
+      "serviceInterval": "즉시 정차·점검",
+      "estimatedCost": { "min": 150000, "max": 1500000, "average": 650000 }
+    },
+    {
+      "num": 49,
+      "name": "쏠림방지(ABS) 브레이크 경고",
+      "symptom": "ABS 기능 제한, 제동 중 휠잠김 가능",
+      "risk": "높음",
+      "serviceInterval": "즉시 점검",
+      "estimatedCost": { "min": 120000, "max": 600000, "average": 280000 }
+    },
+    {
+      "num": 50,
+      "name": "연료 필터 주의/교체",
+      "symptom": "연료 필터 막힘·수분 혼입",
+      "risk": "중간",
+      "serviceInterval": "3~5만 km",
+      "estimatedCost": { "min": 80000, "max": 300000, "average": 160000 }
+    },
+    {
+      "num": 51,
+      "name": "문 열림",
+      "symptom": "도어 미잠금/도어 스위치 불량",
+      "risk": "낮음",
+      "serviceInterval": "불량 시 수리",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 52,
+      "name": "보닛 열림",
+      "symptom": "후드 미잠금/스위치 불량",
+      "risk": "중간",
+      "serviceInterval": "즉시 잠금 또는 수리",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 53,
+      "name": "연료 부족",
+      "symptom": "연료 잔량 경고",
+      "risk": "중간",
+      "serviceInterval": "즉시 주유",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 54,
+      "name": "자동기어박스 경고(변속기 경고)",
+      "symptom": "변속 충격/슬립, 오일 과열·밸브바디 오류",
+      "risk": "높음",
+      "serviceInterval": "증상 시 즉시",
+      "estimatedCost": { "min": 200000, "max": 2000000, "average": 900000 }
+    },
+    {
+      "num": 55,
+      "name": "속도 제한기/ABS 보조 경고(제조사별 상이)",
+      "symptom": "속도 제한/제어 모듈 경고",
+      "risk": "중간",
+      "serviceInterval": "오류 시 점검",
+      "estimatedCost": { "min": 120000, "max": 600000, "average": 280000 }
+    },
+    {
+      "num": 56,
+      "name": "한계 장치 조절(차고/서스/차폭 관련)",
+      "symptom": "레벨링/리프팅 시스템 오류",
+      "risk": "중간",
+      "serviceInterval": "오류 시 수리",
+      "estimatedCost": { "min": 150000, "max": 900000, "average": 380000 }
+    },
+    {
+      "num": 57,
+      "name": "유압 부족(브레이크/파워)",
+      "symptom": "브레이크액 부족 또는 유압 누유",
+      "risk": "높음",
+      "serviceInterval": "액 교환 2년/4만 km",
+      "estimatedCost": { "min": 100000, "max": 700000, "average": 280000 }
+    },
+    {
+      "num": 58,
+      "name": "앞유리 성에 제거(프런트 디프로스트)",
+      "symptom": "히터코어·블로워·레지스터 이상",
+      "risk": "낮음",
+      "serviceInterval": "필터 1만~2만 km",
+      "estimatedCost": { "min": 30000, "max": 200000, "average": 90000 }
+    },
+    {
+      "num": 59,
+      "name": "트렁크 열림",
+      "symptom": "트렁크 미잠금/스위치 불량",
+      "risk": "낮음",
+      "serviceInterval": "불량 시 수리",
+      "estimatedCost": { "min": 0, "max": 30000, "average": 0 }
+    },
+    {
+      "num": 60,
+      "name": "안정 제어장치 개입/오류(ESC)",
+      "symptom": "미끄럼 제어 작동 또는 오류 코드",
+      "risk": "중간",
+      "serviceInterval": "오류 시 점검",
+      "estimatedCost": { "min": 0, "max": 200000, "average": 80000 }
+    },
+    {
+      "num": 61,
+      "name": "빛/비 감지기(오토 기능 표시)",
+      "symptom": "조도·레인 센서 동작",
+      "risk": "낮음",
+      "serviceInterval": "센서 불량 시",
+      "estimatedCost": { "min": 0, "max": 150000, "average": 60000 }
+    },
+    {
+      "num": 62,
+      "name": "엔진/배출 경고(체크 엔진)",
+      "symptom": "점화·연료·배기 제어 이상, DTC 저장",
+      "risk": "높음",
+      "serviceInterval": "즉시 진단기 점검",
+      "estimatedCost": { "min": 80000, "max": 800000, "average": 350000 }
+    },
+    {
+      "num": 63,
+      "name": "유리창 성에 제거(리어 디프로스트)",
+      "symptom": "리어 히팅선 동작/불량",
+      "risk": "낮음",
+      "serviceInterval": "선 단선 시 수리",
+      "estimatedCost": { "min": 30000, "max": 150000, "average": 80000 }
+    },
+    {
+      "num": 64,
+      "name": "와이퍼 자동",
+      "symptom": "오토 와이퍼 작동/센서 오작동",
+      "risk": "낮음",
+      "serviceInterval": "센서·암·블레이드 고장 시",
+      "estimatedCost": { "min": 30000, "max": 120000, "average": 70000 }
+    }
+  ],
+  "currency": "KRW",
+  "note": "평균 비용은 2025년 국내 일반 정비소(순정부품+공임) 기준 추정치이며 차량/지역/부품등급에 따라 달라질 수 있음."
+}

@@ -33,11 +33,11 @@ export default function IncomeTaxCalculatorPage() {
   return (
     <main className="min-h-screen bg-gray-200 dark:bg-gray-800 transition-colors">
       <div className="container mx-auto px-4 py-8 text-black placeholder-gray-500">
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">
+        <div className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">
           <header className="text-center mb-8 text-black placeholder-gray-500">
-            <div className="text-5xl mb-4 text-black placeholder-gray-500">💸</div>
-            <h1 className="text-2xl md:text-4xl font-bold mb-3 text-black placeholder-gray-500">종합소득세 계산기</h1>
-            <p className="text-sm md:text-base text-black placeholder-gray-500">프리랜서/N잡러 필요경비 자동 계산</p>
+            <div className="text-base sm:text-2xl md:text-4xl mb-4 text-black placeholder-gray-500">💸</div>
+            <h1 className="text-2xl md:text-4xl font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">종합소득세 계산기</h1>
+            <p className="text-[10px] sm:text-xs md:text-sm text-black placeholder-gray-500">프리랜서/N잡러 필요경비 자동 계산</p>
           </header>
           <div className="space-y-5 mb-8 text-black placeholder-gray-500">
             <div>
@@ -52,7 +52,7 @@ export default function IncomeTaxCalculatorPage() {
           <button onClick={calculate} className="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-black placeholder-gray-500">계산하기</button>
           {result && (
             <div className="mt-8 space-y-4 text-black placeholder-gray-500">
-              <div className="bg-green-50 p-6 rounded-xl text-black placeholder-gray-500">
+              <div className="bg-green-50 p-1 sm:p-2.5 md:p-5 rounded-xl text-black placeholder-gray-500">
                 <p className="text-center text-sm text-gray-600 mb-2 text-black placeholder-gray-500">과세표준</p>
                 <p className="text-center text-3xl font-bold text-black text-black placeholder-gray-500">{result.taxableIncome.toLocaleString()}원</p>
               </div>

@@ -259,14 +259,14 @@ export default function SleepAnalyzer() {
             
           </div>
 
-          <section className="bg-white rounded-2xl shadow-xl p-6">
+          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6">
             <header className="text-center mb-6">
               <h1 className="text-3xl font-bold text-indigo-700 mb-2">😴</h1>
               <h2 className="text-2xl font-bold text-gray-800">수면 분석 결과</h2>
             </header>
 
             {/* 종합 점수 */}
-            <div className={`mb-6 p-6 rounded-xl text-center border-4 ${
+            <div className={`mb-6 p-1 sm:p-2.5 md:p-5 rounded-xl text-center border-4 ${
               result.score >= 80 ? 'bg-green-50 border-green-400' :
               result.score >= 60 ? 'bg-yellow-50 border-yellow-400' :
               'bg-red-50 border-red-400'
@@ -288,7 +288,7 @@ export default function SleepAnalyzer() {
             </div>
 
             {/* 수면 정보 */}
-            <div className="mb-6 grid grid-cols-2 gap-3">
+            <div className="mb-6 grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
               <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200 text-center">
                 <div className="text-sm text-gray-600 mb-1">총 수면 시간</div>
                 <div className="text-3xl font-bold text-blue-700">{result.sleepHours}</div>
@@ -304,36 +304,36 @@ export default function SleepAnalyzer() {
 
             {/* 수면 타입 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-2">🦉 수면 타입</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">🦉 수면 타입</h3>
               <div className="text-xl font-bold text-amber-700 mb-2">{result.sleepType}</div>
               <p className="text-gray-700 text-sm">{result.personality}</p>
             </div>
 
             {/* 상세 점수 분석 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg border border-slate-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">📊 상세 점수 분석</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                <div className="bg-white rounded-lg p-3 text-center border border-blue-200">
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">📊 상세 점수 분석</h3>
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-0 sm:gap-1.5 md:gap-3">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-blue-200">
                   <div className="text-xs text-gray-600 mb-1">수면 시간</div>
                   <div className="text-lg font-bold text-blue-700">{result.detailedScores.duration}/25</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center border border-green-200">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-green-200">
                   <div className="text-xs text-gray-600 mb-1">수면 품질</div>
                   <div className="text-lg font-bold text-green-700">{result.detailedScores.quality}/20</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center border border-purple-200">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-purple-200">
                   <div className="text-xs text-gray-600 mb-1">잠들기 시간</div>
                   <div className="text-lg font-bold text-purple-700">{result.detailedScores.latency}/15</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center border border-orange-200">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-orange-200">
                   <div className="text-xs text-gray-600 mb-1">야간 각성</div>
                   <div className="text-lg font-bold text-orange-700">{result.detailedScores.awakening}/15</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center border border-yellow-200">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-yellow-200">
                   <div className="text-xs text-gray-600 mb-1">아침 기분</div>
                   <div className="text-lg font-bold text-yellow-700">{result.detailedScores.morning}/10</div>
                 </div>
-                <div className="bg-white rounded-lg p-3 text-center border border-red-200">
+                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-red-200">
                   <div className="text-xs text-gray-600 mb-1">주간 졸음</div>
                   <div className="text-lg font-bold text-red-700">{result.detailedScores.sleepiness}/10</div>
                 </div>
@@ -342,7 +342,7 @@ export default function SleepAnalyzer() {
 
             {/* 수면 효율성 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg border border-emerald-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-2">⚡ 수면 효율성</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">⚡ 수면 효율성</h3>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-gray-600">실제 수면 / 침상 시간</span>
                 <span className="text-lg font-bold text-emerald-700">{result.sleepEfficiency}%</span>
@@ -366,7 +366,7 @@ export default function SleepAnalyzer() {
 
             {/* 수면 단계 분석 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-violet-50 to-purple-50 rounded-lg border border-violet-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">🧠 수면 단계 분석</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">🧠 수면 단계 분석</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">깊은 수면 (Deep Sleep)</span>
@@ -395,14 +395,14 @@ export default function SleepAnalyzer() {
             </div>
 
             {/* 건강 위험도 */}
-            <div className={`mb-6 p-4 rounded-lg border-2 ${
+            <div className={`mb-6 p-2 md:p-4 rounded-lg border-2 ${
               result.riskLevel === 'low' ? 'bg-green-50 border-green-300' :
               result.riskLevel === 'low-medium' ? 'bg-blue-50 border-blue-300' :
               result.riskLevel === 'medium' ? 'bg-yellow-50 border-yellow-300' :
               result.riskLevel === 'medium-high' ? 'bg-orange-50 border-orange-300' :
               'bg-red-50 border-red-300'
             }`}>
-              <h3 className="font-bold text-lg text-gray-800 mb-2">🏥 건강 위험도</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">🏥 건강 위험도</h3>
               <p className={`font-semibold text-lg ${
                 result.riskLevel === 'low' ? 'text-green-700' :
                 result.riskLevel === 'low-medium' ? 'text-blue-700' :
@@ -420,12 +420,12 @@ export default function SleepAnalyzer() {
             </div>
 
             {/* 수면 부채 */}
-            <div className={`mb-6 p-4 rounded-lg border-2 ${
+            <div className={`mb-6 p-2 md:p-4 rounded-lg border-2 ${
               result.sleepDebt.includes('부족') ? 'bg-red-50 border-red-300' :
               result.sleepDebt.includes('과다') ? 'bg-orange-50 border-orange-300' :
               'bg-green-50 border-green-300'
             }`}>
-              <h3 className="font-bold text-lg text-gray-800 mb-2">💤 수면 부채</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">💤 수면 부채</h3>
               <p className={`font-semibold ${
                 result.sleepDebt.includes('부족') ? 'text-red-700' :
                 result.sleepDebt.includes('과다') ? 'text-orange-700' :
@@ -437,7 +437,7 @@ export default function SleepAnalyzer() {
 
             {/* 이상적인 기상 시간 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">⏰ 추천 기상 시간</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">⏰ 추천 기상 시간</h3>
               <div className="space-y-2">
                 {result.idealWakeTime.map((time: string, i: number) => (
                   <div key={i} className="bg-white rounded p-3 text-sm font-semibold text-green-700">
@@ -450,7 +450,7 @@ export default function SleepAnalyzer() {
 
             {/* 조언 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-lg text-gray-800 mb-3">💡 수면 개선 조언</h3>
+              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">💡 수면 개선 조언</h3>
               <div className="space-y-2">
                 {result.advice.map((adv: string, i: number) => (
                   <div key={i} className="bg-white rounded p-3 text-sm text-gray-700">
@@ -463,10 +463,10 @@ export default function SleepAnalyzer() {
             {/* 상세 개선 방안 */}
             {result.detailedAdvice.length > 0 && (
               <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-                <h3 className="font-bold text-lg text-gray-800 mb-3">🎯 상세 개선 방안</h3>
+                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">🎯 상세 개선 방안</h3>
                 <div className="space-y-3">
                   {result.detailedAdvice.map((adv: string, i: number) => (
-                    <div key={i} className="bg-white rounded-lg p-3 text-sm text-gray-700 border-l-4 border-amber-400">
+                    <div key={i} className="bg-white rounded-lg p-2 sm:p-3 text-sm text-gray-700 border-l-4 border-amber-400">
                       <span className="font-medium text-amber-700">📋</span> {adv}
                     </div>
                   ))}
@@ -476,7 +476,7 @@ export default function SleepAnalyzer() {
 
             <button
               onClick={() => setResult(null)}
-              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
             >
               다시 분석하기
             </button>
@@ -493,7 +493,7 @@ export default function SleepAnalyzer() {
           
         </div>
 
-        <section className="bg-white rounded-2xl shadow-xl p-6">
+        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6">
           <header className="text-center mb-6">
             <h1 className="text-4xl font-bold text-indigo-700 mb-2">😴</h1>
             <h2 className="text-2xl font-bold text-gray-800 mb-2">수면 패턴 분석기</h2>
@@ -501,7 +501,7 @@ export default function SleepAnalyzer() {
           </header>
 
           <div className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-2">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">취침 시간</label>
                 <input
@@ -527,7 +527,7 @@ export default function SleepAnalyzer() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 수면 품질 (1-10)
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <input
                   type="range"
                   min="1"
@@ -548,7 +548,7 @@ export default function SleepAnalyzer() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 꿈 빈도 (1-10)
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <input
                   type="range"
                   min="1"
@@ -569,7 +569,7 @@ export default function SleepAnalyzer() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 잠들기까지 걸린 시간 (분)
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <input
                   type="range"
                   min="0"
@@ -591,7 +591,7 @@ export default function SleepAnalyzer() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 야간 각성 횟수
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <input
                   type="range"
                   min="0"
@@ -612,7 +612,7 @@ export default function SleepAnalyzer() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 아침 기분 (1-10)
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <input
                   type="range"
                   min="1"
@@ -633,7 +633,7 @@ export default function SleepAnalyzer() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 주간 졸음 정도 (1-10)
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <input
                   type="range"
                   min="1"
@@ -652,7 +652,7 @@ export default function SleepAnalyzer() {
 
             <button
               onClick={analyzeSleep}
-              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
             >
               수면 분석하기
             </button>
