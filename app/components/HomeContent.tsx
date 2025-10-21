@@ -131,7 +131,7 @@ export default function HomeContent() {
             {/* 주로 쓰는 앱 섹션 */}
             {favoriteApps.length > 0 && (
               <div className="mb-12">
-                <div className="flex items-center gap-3 mb-6">
+                <div className="sticky top-0 z-20 flex items-center gap-3 mb-6 py-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 -mx-4 px-4 sm:-mx-6 sm:px-6">
                   <h3 className="text-2xl font-bold bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
                     ❤️ 주로 쓰는 앱
                   </h3>
@@ -180,7 +180,7 @@ export default function HomeContent() {
             {/* 카테고리별 앱 섹션 */}
             {appsByCategory.map((category) => (
               <div key={category.id} className="mb-12">
-                <div className="flex items-center gap-3 mb-6">
+                <div className="sticky top-0 z-20 flex items-center gap-3 mb-6 py-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 -mx-4 px-4 sm:-mx-6 sm:px-6">
                   <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-200">
                     {category.name}
                   </h3>
