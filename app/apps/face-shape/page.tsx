@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FACE_SHAPE_DATA, getFaceShapeByRatio, FaceShapeAnalysis } from "@/lib/face-shape-data";
+import { FACE_SHAPE_DATA, getFaceShapeByRatio } from "@/lib/face-shape-data";
+import type { FaceShapeAnalysis } from "@/lib/face-shape-data";
 import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
 
-export default function FaceShapeAnalysis() {
+export default function FaceShapeAnalysisPage() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState<FaceShapeAnalysis | null>(null);
