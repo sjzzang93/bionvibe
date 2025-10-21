@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 type Stone = 'empty' | 'black' | 'white';
@@ -434,6 +435,9 @@ export default function BadukPage() {
             </ul>
           </div>
         )}
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

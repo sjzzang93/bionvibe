@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import RelatedApps from '@/app/components/RelatedApps';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 interface MealPlan {
@@ -517,6 +519,12 @@ export default function CalorieCalculatorPage() {
                   </div>
                 </div>
               )}
+              
+              {/* 관련 앱 추천 */}
+              <RelatedApps 
+                relatedAppIds={['water-intake', 'coffee-calculator', 'sleep-analyzer']}
+                currentAppId="calorie-calculator"
+              />
             </div>
           )}
         </div>
@@ -525,6 +533,9 @@ export default function CalorieCalculatorPage() {
           <p>본 계산기는 Harris-Benedict 공식을 사용합니다.</p>
           <p className="mt-2">식단은 일반적인 추천이며, 개인의 건강 상태를 고려하여 조정이 필요합니다.</p>
         </div>
+
+        {/* 제작자 서명 */}
+        <AppFooter />
 
         {/* 돌아가기 버튼 */}
         <div className="text-center mt-8">

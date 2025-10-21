@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 interface GiftSuggestion {
@@ -494,7 +495,7 @@ export default function GiftFinderPage() {
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
                       recipient === opt.id
                         ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600'
+                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
                     }`}
                   >
                     <div className="text-2xl mb-1">{opt.emoji}</div>
@@ -526,7 +527,7 @@ export default function GiftFinderPage() {
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
                       budget === opt.id
                         ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600'
+                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
                     }`}
                   >
                     {opt.label}
@@ -557,7 +558,7 @@ export default function GiftFinderPage() {
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
                       occasion === opt.id
                         ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600'
+                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
                     }`}
                   >
                     <div className="text-2xl mb-1">{opt.emoji}</div>
@@ -580,7 +581,7 @@ export default function GiftFinderPage() {
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
                       interests.includes(opt.id)
                         ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600'
+                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
                     }`}
                   >
                     <div className="text-xs">{opt.label}</div>
@@ -649,6 +650,9 @@ export default function GiftFinderPage() {
           <p>💡 실제 구매 전 받는 분의 취향을 다시 한번 확인해보세요!</p>
           <p className="text-xs">📊 200개 이상의 선물 데이터 기반 추천 시스템</p>
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

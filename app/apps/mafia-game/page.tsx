@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 import { createClient } from '@supabase/supabase-js';
 
@@ -1207,6 +1208,9 @@ export default function MafiaGamePage() {
             </Link>
           </div>
         )}
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

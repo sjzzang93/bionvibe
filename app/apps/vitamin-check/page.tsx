@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 // 비타민별 결핍 증상 데이터베이스
 const VITAMIN_SYMPTOMS = {
   vitaminA: {
@@ -397,6 +398,9 @@ export default function VitaminCheck() {
           </p>
         </footer>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

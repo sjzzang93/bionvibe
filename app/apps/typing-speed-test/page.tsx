@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 
 const koreanTexts = [
   '빠른 갈색 여우가 게으른 개를 뛰어넘습니다',
@@ -171,6 +172,9 @@ export default function TypingSpeedTestPage() {
             </div>
           )}
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

@@ -9,7 +9,12 @@
       "categoryId": "game-brain",
       "url": "/apps/gomoku",
       "image": "https://images.unsplash.com/photo-1611195974226-ef44a3c19ff1?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-21"
+      "createdAt": "2025-10-21",
+      "relatedApps": [
+        "baduk",
+        "chess",
+        "iq-test"
+      ]
     },
     {
       "id": "baduk",
@@ -20,7 +25,12 @@
       "categoryId": "game-brain",
       "url": "/apps/baduk",
       "image": "https://images.unsplash.com/photo-1528819622765-d6bcf132f793?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-21"
+      "createdAt": "2025-10-21",
+      "relatedApps": [
+        "gomoku",
+        "chess",
+        "games-puzzle"
+      ]
     },
     {
       "id": "chess",
@@ -31,18 +41,29 @@
       "categoryId": "game-brain",
       "url": "/apps/chess",
       "image": "https://images.unsplash.com/photo-1586165368502-1bad197a6461?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-21"
+      "createdAt": "2025-10-21",
+      "relatedApps": [
+        "gomoku",
+        "baduk",
+        "mafia-game"
+      ]
     },
     {
       "id": "saju-mbti-jobs",
-      "name": "MBTI+사주 직업 힌트",
+      "name": "사주와 MBTI의 조합",
       "slug": "saju-mbti-jobs",
       "icon": "🔮",
       "description": "성격 유형 테스트",
       "categoryId": "fortune-mind",
       "url": "/apps/saju-mbti-jobs",
       "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21"
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "mbti-test",
+        "face-shape",
+        "today-fortune",
+        "past-life-job"
+      ]
     },
     {
       "id": "fengshui-guide",
@@ -53,7 +74,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/fengshui-guide",
       "image": "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21"
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "compass",
+        "today-fortune",
+        "saju-mbti-jobs"
+      ]
     },
     {
       "id": "startup-naming",
@@ -64,7 +90,28 @@
       "categoryId": "utility-tools",
       "url": "/apps/startup-naming",
       "image": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21"
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "study-cursor-prompts",
+        "quote-generator",
+        "flashcard"
+      ]
+    },
+    {
+      "id": "compass",
+      "name": "디지털 나침반",
+      "slug": "compass",
+      "icon": "🧭",
+      "description": "실시간 방향 확인! 360도 회전 나침반, 모바일 최적화",
+      "categoryId": "learning-tools",
+      "url": "/apps/compass",
+      "image": "https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "fengshui-guide",
+        "air-quality",
+        "weather-outfit"
+      ]
     },
     {
       "id": "life-support",
@@ -75,7 +122,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/life-support",
       "image": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-21"
+      "createdAt": "2025-01-21",
+      "relatedApps": [
+        "quote-generator",
+        "today-fortune",
+        "parents-time"
+      ]
     },
     {
       "id": "today-fortune",
@@ -86,7 +138,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/today-fortune",
       "image": "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "saju-mbti-jobs",
+        "lotto-generator",
+        "dream-interpreter"
+      ]
     },
     {
       "id": "color-psychology",
@@ -97,7 +154,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/color-psychology",
       "image": "https://images.unsplash.com/photo-1525909002-1b05e0c869d8?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "mbti-test",
+        "saju-mbti-jobs",
+        "analysis-handwriting"
+      ]
     },
     {
       "id": "voice-fortune",
@@ -108,7 +170,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/voice-fortune",
       "image": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "face-shape",
+        "voice-age",
+        "analysis-handwriting"
+      ]
     },
     {
       "id": "analysis-handwriting",
@@ -119,7 +186,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/analysis-handwriting",
       "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "face-shape",
+        "color-psychology",
+        "mbti-test"
+      ]
     },
     {
       "id": "face-shape",
@@ -130,7 +202,13 @@
       "categoryId": "fortune-mind",
       "url": "/apps/face-shape",
       "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "saju-mbti-jobs",
+        "mbti-test",
+        "voice-fortune",
+        "analysis-handwriting"
+      ]
     },
     {
       "id": "iq-test",
@@ -141,7 +219,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/iq-test",
       "image": "https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "reflex-test",
+        "typing-speed-test",
+        "games-puzzle"
+      ]
     },
     {
       "id": "past-life-job",
@@ -152,7 +235,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/past-life-job",
       "image": "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "saju-mbti-jobs",
+        "today-fortune",
+        "dream-interpreter"
+      ]
     },
     {
       "id": "dream-interpreter",
@@ -163,7 +251,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/dream-interpreter",
       "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "today-fortune",
+        "past-life-job",
+        "color-psychology"
+      ]
     },
     {
       "id": "lotto-generator",
@@ -174,7 +267,12 @@
       "categoryId": "fortune-mind",
       "url": "/apps/lotto-generator",
       "image": "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "today-fortune",
+        "crypto-calculator",
+        "compound-calculator"
+      ]
     },
     {
       "id": "water-intake",
@@ -185,7 +283,12 @@
       "categoryId": "health-routine",
       "url": "/apps/water-intake",
       "image": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "calorie-calculator",
+        "coffee-calculator",
+        "habit-tracker"
+      ]
     },
     {
       "id": "calorie-calculator",
@@ -196,7 +299,12 @@
       "categoryId": "health-routine",
       "url": "/apps/calorie-calculator",
       "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/calorie-calculator-1761019428466.webp",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "water-intake",
+        "coffee-calculator",
+        "sleep-analyzer"
+      ]
     },
     {
       "id": "coffee-calculator",
@@ -207,7 +315,12 @@
       "categoryId": "health-routine",
       "url": "/apps/coffee-calculator",
       "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "calorie-calculator",
+        "water-intake",
+        "sleep-analyzer"
+      ]
     },
     {
       "id": "habit-tracker",
@@ -218,7 +331,12 @@
       "categoryId": "health-routine",
       "url": "/apps/habit-tracker",
       "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "focus-timer",
+        "dday-counter",
+        "phone-usage-analyzer"
+      ]
     },
     {
       "id": "crypto-calculator",
@@ -229,7 +347,12 @@
       "categoryId": "money-calc",
       "url": "/apps/crypto-calculator",
       "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "income-tax-calculator",
+        "compound-calculator",
+        "lotto-generator"
+      ]
     },
     {
       "id": "parents-time",
@@ -240,7 +363,12 @@
       "categoryId": "family-life",
       "url": "/apps/parents-time",
       "image": "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "life-support",
+        "gift-finder",
+        "dday-counter"
+      ]
     },
     {
       "id": "flashcard",
@@ -251,7 +379,12 @@
       "categoryId": "learning-tools",
       "url": "/apps/flashcard",
       "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "typing-speed-test",
+        "study-cursor-prompts",
+        "games-multiplication"
+      ]
     },
     {
       "id": "phone-usage-analyzer",
@@ -262,7 +395,12 @@
       "categoryId": "health-routine",
       "url": "/apps/phone-usage-analyzer",
       "image": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "habit-tracker",
+        "focus-timer",
+        "eye-test"
+      ]
     },
     {
       "id": "air-quality",
@@ -273,7 +411,12 @@
       "categoryId": "health-routine",
       "url": "/apps/air-quality",
       "image": "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "weather-outfit",
+        "eye-test",
+        "water-intake"
+      ]
     },
     {
       "id": "typing-speed-test",
@@ -284,7 +427,12 @@
       "categoryId": "learning-tools",
       "url": "/apps/typing-speed-test",
       "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "reflex-test",
+        "flashcard",
+        "iq-test"
+      ]
     },
     {
       "id": "reflex-test",
@@ -295,7 +443,12 @@
       "categoryId": "learning-tools",
       "url": "/apps/reflex-test",
       "image": "https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "typing-speed-test",
+        "iq-test",
+        "eye-test"
+      ]
     },
     {
       "id": "eye-test",
@@ -306,7 +459,12 @@
       "categoryId": "health-routine",
       "url": "/apps/eye-test",
       "image": "https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "phone-usage-analyzer",
+        "reflex-test",
+        "sleep-analyzer"
+      ]
     },
     {
       "id": "quote-generator",
@@ -317,7 +475,12 @@
       "categoryId": "learning-tools",
       "url": "/apps/quote-generator",
       "image": "https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "life-support",
+        "today-fortune",
+        "focus-timer"
+      ]
     },
     {
       "id": "dday-counter",
@@ -328,7 +491,12 @@
       "categoryId": "health-routine",
       "url": "/apps/dday-counter",
       "image": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "habit-tracker",
+        "focus-timer",
+        "parents-time"
+      ]
     },
     {
       "id": "focus-timer",
@@ -339,7 +507,12 @@
       "categoryId": "health-routine",
       "url": "/apps/focus-timer",
       "image": "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "habit-tracker",
+        "dday-counter",
+        "study-cursor-prompts"
+      ]
     },
     {
       "id": "sleep-analyzer",
@@ -350,7 +523,12 @@
       "categoryId": "health-routine",
       "url": "/apps/sleep-analyzer",
       "image": "https://images.unsplash.com/photo-1520206183501-b80df61043c2?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "calorie-calculator",
+        "habit-tracker",
+        "focus-timer"
+      ]
     },
     {
       "id": "salary-divider",
@@ -361,7 +539,12 @@
       "categoryId": "money-calc",
       "url": "/apps/salary-divider",
       "image": "https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "income-tax-calculator",
+        "compound-calculator",
+        "finance-emergency-fund"
+      ]
     },
     {
       "id": "income-tax-calculator",
@@ -372,7 +555,12 @@
       "categoryId": "money-calc",
       "url": "/apps/income-tax-calculator",
       "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "salary-divider",
+        "compound-calculator",
+        "crypto-calculator"
+      ]
     },
     {
       "id": "study-cursor-prompts",
@@ -383,7 +571,12 @@
       "categoryId": "learning-tools",
       "url": "/apps/study-cursor-prompts",
       "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "flashcard",
+        "startup-naming",
+        "focus-timer"
+      ]
     },
     {
       "id": "arcade-mini-games",
@@ -394,7 +587,12 @@
       "categoryId": "game-brain",
       "url": "/apps/arcade-mini-games",
       "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "mafia-game",
+        "games-puzzle",
+        "games-multiplication"
+      ]
     },
     {
       "id": "weather-outfit",
@@ -405,7 +603,12 @@
       "categoryId": "health-routine",
       "url": "/apps/weather-outfit",
       "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "air-quality",
+        "travel-packing-list",
+        "gift-finder"
+      ]
     },
     {
       "id": "finance-emergency-fund",
@@ -416,7 +619,12 @@
       "categoryId": "money-calc",
       "url": "/apps/finance-emergency-fund",
       "image": "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "salary-divider",
+        "compound-calculator",
+        "finance-loan-refinance"
+      ]
     },
     {
       "id": "finance-loan-refinance",
@@ -427,7 +635,12 @@
       "categoryId": "money-calc",
       "url": "/apps/finance-loan-refinance",
       "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "finance-emergency-fund",
+        "compound-calculator",
+        "credit-card-optimizer"
+      ]
     },
     {
       "id": "games-puzzle",
@@ -438,7 +651,12 @@
       "categoryId": "game-brain",
       "url": "/apps/games-puzzle",
       "image": "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "iq-test",
+        "arcade-mini-games",
+        "reflex-test"
+      ]
     },
     {
       "id": "games-multiplication",
@@ -449,7 +667,12 @@
       "categoryId": "game-brain",
       "url": "/apps/games-multiplication",
       "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "arcade-mini-games",
+        "flashcard",
+        "typing-speed-test"
+      ]
     },
     {
       "id": "travel-packing-list",
@@ -460,7 +683,12 @@
       "categoryId": "family-life",
       "url": "/apps/travel-packing-list",
       "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "gift-finder",
+        "weather-outfit",
+        "dday-counter"
+      ]
     },
     {
       "id": "compound-calculator",
@@ -471,7 +699,12 @@
       "categoryId": "money-calc",
       "url": "/apps/compound-calculator",
       "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "salary-divider",
+        "income-tax-calculator",
+        "credit-card-optimizer"
+      ]
     },
     {
       "id": "credit-card-optimizer",
@@ -482,7 +715,12 @@
       "categoryId": "money-calc",
       "url": "/apps/credit-card-optimizer",
       "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "compound-calculator",
+        "salary-divider",
+        "finance-loan-refinance"
+      ]
     },
     {
       "id": "utility-electricity-calculator",
@@ -493,7 +731,12 @@
       "categoryId": "money-calc",
       "url": "/apps/utility-electricity-calculator",
       "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
+      "createdAt": "2025-10-20",
+      "relatedApps": [
+        "salary-divider",
+        "credit-card-optimizer",
+        "finance-emergency-fund"
+      ]
     },
     {
       "id": "mafia-game",
@@ -504,7 +747,12 @@
       "categoryId": "game-brain",
       "url": "/apps/mafia-game",
       "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "chess",
+        "gomoku",
+        "arcade-mini-games"
+      ]
     },
     {
       "id": "gift-finder",
@@ -515,7 +763,29 @@
       "categoryId": "family-life",
       "url": "/apps/gift-finder",
       "image": "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20"
+      "createdAt": "2025-01-20",
+      "relatedApps": [
+        "parents-time",
+        "travel-packing-list",
+        "weather-outfit"
+      ]
+    },
+    {
+      "id": "meat-calculator",
+      "name": "고기 계산기",
+      "slug": "meat-calculator",
+      "icon": "🥩",
+      "description": "빠른 계산",
+      "categoryId": "health-life",
+      "url": "/apps/meat-calculator",
+      "image": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-20",
+      "hidden": true,
+      "relatedApps": [
+        "calorie-calculator",
+        "water-intake",
+        "coffee-calculator"
+      ]
     }
   ]
 }

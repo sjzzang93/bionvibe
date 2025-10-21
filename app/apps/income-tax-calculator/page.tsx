@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 export default function IncomeTaxCalculatorPage() {
   const [income, setIncome] = useState('50000000');
   const [expenses, setExpenses] = useState('20000000');
@@ -77,6 +78,9 @@ export default function IncomeTaxCalculatorPage() {
           )}
         </div>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

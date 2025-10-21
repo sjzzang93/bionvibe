@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 type PieceType = 'king' | 'queen' | 'rook' | 'bishop' | 'knight' | 'pawn';
@@ -544,6 +545,9 @@ export default function ChessPage() {
             </p>
           </div>
         )}
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

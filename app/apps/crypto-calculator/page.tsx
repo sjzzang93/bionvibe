@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 interface ExchangePrice {
@@ -353,6 +354,9 @@ export default function CryptoKimchiPremium() {
             메인으로 돌아가기
           </Link>
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

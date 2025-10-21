@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 interface FortuneResult {
@@ -208,6 +209,9 @@ export default function TodayFortunePage() {
       {/* 하단 고지 */}
       <div className="max-w-3xl mx-auto mt-16 text-center text-sm text-gray-500 dark:text-blue-200">
         <p className="text-xs">운세는 재미와 참고용이며, 과학적 근거가 없습니다.</p>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

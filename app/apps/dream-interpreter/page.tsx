@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import dynamic from 'next/dynamic';
 
 
@@ -140,24 +141,15 @@ export default function DreamInterpreterPage() {
               </div>
             </div>
           </div>
-
-          <div className="text-center">
-            <a
-              href="https://"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all"
-            >
-              🛒 행운 아이템 보러가기
-            </a>
-          </div>
         </div>
       )}
 
       {/* 하단 고지 */}
       <div className="max-w-3xl mx-auto mt-16 text-center text-sm text-purple-200">
-        <p>본 페이지는 쿠팡 파트너스 활동을 통해 일정 수수료를 받을 수 있습니다.</p>
-        <p className="mt-2 text-xs">꿈해몽은 재미와 참고용이며, 과학적 근거가 없습니다.</p>
+        <p className="text-xs">꿈해몽은 재미와 참고용이며, 과학적 근거가 없습니다.</p>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

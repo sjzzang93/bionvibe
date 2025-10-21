@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 // 이시하라 색맹 검사 데이터 (숫자가 보이면 정상)
 const COLOR_BLIND_TESTS = [
   { id: 1, number: '12', type: '적록색맹', colors: ['#e74c3c', '#27ae60'] },
@@ -253,13 +254,6 @@ export default function EyeTest() {
               다른 검사하기
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -332,13 +326,6 @@ export default function EyeTest() {
               </ul>
             </div>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -392,13 +379,6 @@ export default function EyeTest() {
               처음으로
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -460,13 +440,6 @@ export default function EyeTest() {
               처음으로
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -526,14 +499,10 @@ export default function EyeTest() {
               처음으로
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
+        {/* 제작자 서명 */}
+        <AppFooter />
+
       </main>
     );
   }

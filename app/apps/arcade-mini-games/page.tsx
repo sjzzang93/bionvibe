@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 
 type GameType = 'home' | 'tictactoe' | 'memory' | 'snake';
 
@@ -426,6 +427,9 @@ function SnakeGame({ onBack }: { onBack: () => void }) {
         <p className="text-white/60 text-xs md:text-sm text-center">
           💡 키보드 방향키 또는 버튼으로 조작
         </p>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

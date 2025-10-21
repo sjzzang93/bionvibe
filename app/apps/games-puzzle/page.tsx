@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import dynamic from 'next/dynamic';
 
 
@@ -14,6 +15,9 @@ export default function PuzzleGamesPage() {
         <div className="bg-white/10 rounded-xl p-4">
           
         </div>
+        {/* 제작자 서명 */}
+        <AppFooter />
+
       </div>
 
       {currentGame === 'home' && <GameHome onSelectGame={setCurrentGame} />}

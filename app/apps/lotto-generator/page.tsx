@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 export default function LottoGenerator() {
   const [numbers, setNumbers] = useState<number[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -371,12 +372,12 @@ export default function LottoGenerator() {
             <p className="text-xs text-gray-600 font-medium mb-2">
               ※ 본 서비스는 번호 추천용이며, 당첨을 보장하지 않습니다
             </p>
-            <p className="text-xs text-gray-500">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
           </div>
         </footer>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 export default function StartupNamingPage() {
@@ -407,6 +408,9 @@ export default function StartupNamingPage() {
             메인으로 돌아가기
           </Link>
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

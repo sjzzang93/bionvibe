@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 export default function VoiceAge() {
   const [recording, setRecording] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
@@ -313,13 +314,6 @@ export default function VoiceAge() {
               다시 측정하기
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -422,14 +416,10 @@ export default function VoiceAge() {
             </ul>
           </div>
         </section>
-
-        <footer className="mt-6 space-y-3 pb-8">
-          
-          <p className="text-xs text-gray-500 text-center px-4">
-            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-          </p>
-        </footer>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

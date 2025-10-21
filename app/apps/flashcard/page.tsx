@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import Link from 'next/link';
 
 const wordSets = {
@@ -100,6 +101,9 @@ export default function FlashcardPage() {
             <h2 className="text-4xl font-bold text-white mb-4">학습 완료!</h2>
             <div className="text-2xl text-white mb-8">
               암기한 단어: {memorized.size}/{currentWords.length}
+              {/* 제작자 서명 */}
+              <AppFooter />
+
             </div>
             <div className="space-y-3">
               <button

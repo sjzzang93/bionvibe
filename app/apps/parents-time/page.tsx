@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import AppFooter from "@/app/components/AppFooter";
 import Link from 'next/link';
 
 interface TimeData {
@@ -434,6 +435,9 @@ export default function ParentsTimeCalculator() {
           </Link>
         </div>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

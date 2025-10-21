@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 interface App {
@@ -20,6 +20,7 @@ export default function ImageManagerPage() {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('file');
+  const uploadFormRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // apps.json 데이터 가져오기
@@ -149,6 +150,13 @@ export default function ImageManagerPage() {
               onClick={() => {
                 setSelectedApp(app);
                 setNewImageUrl(app.image);
+                // 업로드 폼으로 스크롤
+                setTimeout(() => {
+                  uploadFormRef.current?.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                  });
+                }, 100);
               }}
               className={`p-4 rounded-xl transition-all ${
                 selectedApp?.slug === app.slug
@@ -156,13 +164,12 @@ export default function ImageManagerPage() {
                   : 'bg-white/10 border-2 border-white/20 hover:border-purple-400'
               }`}
             >
-              <div className="text-4xl mb-2">{app.icon}</div>
-              <div className="text-white text-sm font-bold truncate">{app.name}</div>
+              <div className="text-white text-sm font-bold truncate mb-2">{app.name}</div>
               {app.image && (
                 <img
                   src={app.image}
                   alt={app.name}
-                  className="w-full h-20 object-cover rounded-lg mt-2"
+                  className="w-full h-20 object-cover rounded-lg"
                   loading="lazy"
                 />
               )}
@@ -172,7 +179,7 @@ export default function ImageManagerPage() {
 
         {/* Update Form */}
         {selectedApp && (
-          <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border-2 border-white/20">
+          <div ref={uploadFormRef} className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border-2 border-white/20">
             <h2 className="text-3xl font-bold text-white mb-6">
               🖼️ {selectedApp.name} 이미지 변경
             </h2>

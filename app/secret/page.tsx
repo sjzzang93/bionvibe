@@ -60,7 +60,7 @@ export default function SecretPage() {
             </div>
 
             <div className="mt-6 text-center text-white/50 text-xs">
-              💡 힌트: BION 로고를 1초에 7번 클릭하면 여기로 올 수 있어요!
+              💡 힌트: BION 로고를 3초 안에 7번 클릭 후 문의하기 버튼을 누르면 여기로 올 수 있어요!
             </div>
           </div>
         </div>

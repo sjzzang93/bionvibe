@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation';
 export function Navigation() {
   const router = useRouter();
   const [clickCount, setClickCount] = useState(0);
+  const [logoClicked7Times, setLogoClicked7Times] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const clickTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const secretTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // 다크모드 초기화
   useEffect(() => {
@@ -34,13 +36,22 @@ export function Navigation() {
   const handleLogoClick = () => {
     const newCount = clickCount + 1;
     
-    // 7번 클릭 시 비밀 페이지로 즉시 이동
+    // 7번 클릭 완료 시
     if (newCount >= 7) {
+      setLogoClicked7Times(true);
       setClickCount(0);
+      
       if (clickTimerRef.current) {
         clearTimeout(clickTimerRef.current);
       }
-      router.push('/secret');
+      
+      // 3초 후 초기화
+      secretTimerRef.current = setTimeout(() => {
+        setLogoClicked7Times(false);
+      }, 3000);
+      
+      // 홈으로 이동
+      router.push('/');
       return;
     }
     
@@ -55,10 +66,26 @@ export function Navigation() {
       clearTimeout(clickTimerRef.current);
     }
 
-    // 1초 후 카운트 리셋
+    // 3초 후 카운트 리셋
     clickTimerRef.current = setTimeout(() => {
       setClickCount(0);
-    }, 1000);
+    }, 3000);
+  };
+
+  const handleContactClick = (e: React.MouseEvent) => {
+    // 로고 7번 클릭 완료된 상태에서 문의하기 클릭 시 Secret 페이지로
+    if (logoClicked7Times) {
+      e.preventDefault();
+      setLogoClicked7Times(false);
+      if (secretTimerRef.current) {
+        clearTimeout(secretTimerRef.current);
+      }
+      router.push('/secret');
+    } else {
+      // 일반적인 경우 문의하기 페이지로
+      e.preventDefault();
+      router.push('/contact');
+    }
   };
 
   return (
@@ -104,7 +131,7 @@ export function Navigation() {
           <div className="flex items-center gap-2 sm:gap-4">
             {/* 문의하기 버튼 */}
             <button
-              onClick={() => router.push('/contact')}
+              onClick={handleContactClick}
               className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-500 dark:to-rose-500 hover:from-red-700 hover:to-rose-700 dark:hover:from-red-600 dark:hover:to-rose-600 text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,8 +161,8 @@ export function Navigation() {
             
             <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
               <span className="relative inline-block w-2 h-2">
-                <span className="absolute inset-0 bg-amber-400 rounded-full animate-ping"></span>
-                <span className="relative inline-block w-2 h-2 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></span>
+                <span className={`absolute inset-0 ${logoClicked7Times ? 'bg-red-400' : 'bg-amber-400'} rounded-full animate-ping`}></span>
+                <span className={`relative inline-block w-2 h-2 ${logoClicked7Times ? 'bg-red-500 shadow-red-500/50' : 'bg-amber-500 shadow-amber-500/50'} rounded-full shadow-lg`}></span>
               </span>
               <span className="font-medium">Light On</span>
             </div>

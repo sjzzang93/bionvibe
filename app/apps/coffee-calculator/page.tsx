@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import Link from 'next/link';
 
 // 카페인 데이터베이스 (mg 단위)
@@ -604,6 +605,9 @@ export default function CoffeeCalculator() {
           </Link>
         </div>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

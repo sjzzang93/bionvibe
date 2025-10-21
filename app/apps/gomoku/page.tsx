@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 type Cell = 'empty' | 'black' | 'white';
@@ -363,6 +364,9 @@ export default function GomokuPage() {
             <li>• 여러 방향에서 동시에 위협하는 수를 노리세요</li>
           </ul>
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

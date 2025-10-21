@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 
 const packingCategories = {
   '의류': ['상의', '하의', '속옷', '양말', '잠옷', '외투', '신발', '슬리퍼', '모자', '선글라스'],
@@ -117,6 +118,9 @@ export default function PackingListPage() {
             🎉 모든 준비가 완료되었습니다! 즐거운 여행 되세요!
           </div>
         )}
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

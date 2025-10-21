@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import dynamic from 'next/dynamic';
 
 
@@ -71,6 +72,9 @@ export default function MultiplicationGamePage() {
           {/* 애드센스 상단 */}
           <div className="bg-white/10 rounded-xl p-4 mb-6">
             
+            {/* 제작자 서명 */}
+            <AppFooter />
+
           </div>
 
           <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">

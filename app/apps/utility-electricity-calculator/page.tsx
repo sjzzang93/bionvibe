@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import dynamic from 'next/dynamic';
 import './styles.css';
 
@@ -250,50 +251,15 @@ export default function ElectricityCalculator() {
                 사용전력량 <span className="kwh">{result.kWh.toFixed(2)}</span> kWh × {result.unitPrice.toFixed(1)} 원/kWh
               </div>
             </div>
-            
-            <aside className="plug">
-              <div style={{ fontWeight: 800, marginBottom: '12px', fontSize: '18px' }}>💡 전기요금 절약 필수템</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <a href="https://" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', backgroundColor: 'white', borderRadius: '8px', border: '2px solid #fbbf24', textDecoration: 'none' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontSize: '24px' }}>🔌</span>
-                    <div>
-                      <div style={{ fontWeight: 'bold', color: '#92400e' }}>스마트 플러그 와이파이 콘센트</div>
-                      <div style={{ fontSize: '12px', color: '#666' }}>앱으로 전원 ON/OFF 자동화</div>
-                    </div>
-                  </div>
-                  <div style={{ backgroundColor: '#f59e0b', color: 'white', padding: '8px 16px', borderRadius: '8px', fontWeight: 'bold', fontSize: '14px', whiteSpace: 'nowrap' }}>구매하러가기 →</div>
-                </a>
-                
-                <a href="https://" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', backgroundColor: 'white', borderRadius: '8px', border: '2px solid #fbbf24', textDecoration: 'none' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontSize: '24px' }}>💡</span>
-                    <div>
-                      <div style={{ fontWeight: 'bold', color: '#92400e' }}>LED 전구 20W 100W 대체</div>
-                      <div style={{ fontSize: '12px', color: '#666' }}>전력 80% 절감</div>
-                    </div>
-                  </div>
-                  <div style={{ backgroundColor: '#f59e0b', color: 'white', padding: '8px 16px', borderRadius: '8px', fontWeight: 'bold', fontSize: '14px', whiteSpace: 'nowrap' }}>구매하러가기 →</div>
-                </a>
-
-                <a href="https://" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', backgroundColor: 'white', borderRadius: '8px', border: '2px solid #fbbf24', textDecoration: 'none' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontSize: '24px' }}>❄️</span>
-                    <div>
-                      <div style={{ fontWeight: 'bold', color: '#92400e' }}>절전형 멀티탭 개별 스위치</div>
-                      <div style={{ fontSize: '12px', color: '#666' }}>대기전력 차단</div>
-                    </div>
-                  </div>
-                  <div style={{ backgroundColor: '#f59e0b', color: 'white', padding: '8px 16px', borderRadius: '8px', fontWeight: 'bold', fontSize: '14px', whiteSpace: 'nowrap' }}>구매하러가기 →</div>
-                </a>
-              </div>
-            </aside>
           </div>
 
           <p className="legal">
             ※ 본 계산기는 평균 단가 기반의 간편 추정치입니다. 실제 고지서는 기본요금·누진제·부가세·전력산업기반기금 등으로 차이가 날 수 있어요.
           </p>
         </section>
+        {/* 제작자 서명 */}
+        <AppFooter />
+
       </main>
 
       {/* 애드센스 하단 배너 */}
@@ -305,9 +271,6 @@ export default function ElectricityCalculator() {
         <div className="banner">
           
         </div>
-        <p className="legal" style={{ textAlign: 'center', padding: '12px', margin: 0, fontSize: '12px', color: '#8d6a00' }}>
-          ※ 본 페이지는 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-        </p>
       </footer>
 
       {showModal && (

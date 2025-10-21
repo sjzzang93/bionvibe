@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 
 export default function LoanRefinancePage() {
   const [currentLoan, setCurrentLoan] = useState('');
@@ -249,6 +250,9 @@ export default function LoanRefinancePage() {
             </div>
           )}
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );

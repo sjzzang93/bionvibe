@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 interface VoiceAnalysis {
   frequency: number; // 평균 주파수 (Hz)
   volume: number; // 평균 볼륨
@@ -273,13 +274,6 @@ export default function VoiceFortune() {
               다시 분석하기
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -392,14 +386,10 @@ export default function VoiceFortune() {
             </div>
           )}
         </section>
-
-        <footer className="mt-6 space-y-3 pb-8">
-          
-          <p className="text-xs text-gray-500 text-center px-4">
-            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-          </p>
-        </footer>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

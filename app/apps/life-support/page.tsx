@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 const messages = [
@@ -538,6 +539,9 @@ export default function LifeSupportPage() {
             </div>
           </div>
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
 
       <style jsx>{`

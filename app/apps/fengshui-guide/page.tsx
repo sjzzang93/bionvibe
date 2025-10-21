@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import Link from 'next/link';
-import { ChevronLeft, Home, CheckSquare, BookOpen, MapPin, Building2, Lightbulb, FileText } from 'lucide-react';
+import { ChevronLeft, Home, CheckSquare, BookOpen, MapPin, Building2, Lightbulb, FileText, Compass, RotateCw, Trash2 } from 'lucide-react';
 
 export default function FengshuiGuidePage() {
-  const [activeTab, setActiveTab] = useState<'theory' | 'practice' | 'checklist' | 'cases' | 'tools' | 'faq'>('theory');
+  const [activeTab, setActiveTab] = useState<'theory' | 'practice' | 'checklist' | 'cases' | 'tools' | 'faq' | 'designer'>('designer');
   const [checklistScores, setChecklistScores] = useState<Record<string, boolean>>({});
 
   // 체크리스트 점수 계산
@@ -43,6 +44,7 @@ export default function FengshuiGuidePage() {
         {/* 탭 네비게이션 */}
         <div className="max-w-7xl mx-auto px-4 pb-3">
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide" suppressHydrationWarning>
+            <TabButton icon={<Home className="w-4 h-4" />} label="도면 설계" active={activeTab === 'designer'} onClick={() => setActiveTab('designer')} />
             <TabButton icon={<BookOpen className="w-4 h-4" />} label="핵심 이론" active={activeTab === 'theory'} onClick={() => setActiveTab('theory')} />
             <TabButton icon={<Building2 className="w-4 h-4" />} label="실전 적용" active={activeTab === 'practice'} onClick={() => setActiveTab('practice')} />
             <TabButton icon={<CheckSquare className="w-4 h-4" />} label="진단 체크" active={activeTab === 'checklist'} onClick={() => setActiveTab('checklist')} />
@@ -55,12 +57,16 @@ export default function FengshuiGuidePage() {
 
       {/* 메인 컨텐츠 */}
       <main className="max-w-7xl mx-auto px-4 py-8" suppressHydrationWarning>
+        {activeTab === 'designer' && <FloorPlanDesigner />}
         {activeTab === 'theory' && <TheorySection />}
         {activeTab === 'practice' && <PracticeSection />}
         {activeTab === 'checklist' && <ChecklistSection checklistScores={checklistScores} toggleCheck={toggleCheck} calculateScore={calculateScore} />}
         {activeTab === 'cases' && <CasesSection />}
         {activeTab === 'tools' && <ToolsSection checklistScores={checklistScores} toggleCheck={toggleCheck} />}
         {activeTab === 'faq' && <FAQSection />}
+        {/* 제작자 서명 */}
+        <AppFooter />
+
       </main>
     </div>
   );
@@ -1039,6 +1045,391 @@ function FAQSection() {
           </table>
         </div>
       </div>
+    </div>
+  );
+}
+
+// 도면 설계 도구
+function FloorPlanDesigner() {
+  const [houseDirection, setHouseDirection] = useState<0 | 90 | 180 | 270>(0);
+  const [rooms, setRooms] = useState<Array<{
+    id: string;
+    type: '거실' | '침실' | '주방' | '화장실' | '현관' | '서재' | '창고';
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    doorPosition: 'top' | 'bottom' | 'left' | 'right';
+  }>>([]);
+  const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
+  const [analysis, setAnalysis] = useState<any>(null);
+  const [draggingRoom, setDraggingRoom] = useState<string | null>(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // 모바일 감지 및 그리드 크기 동적 조정
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  const gridSize = isMobile ? 30 : 40;
+  const gridRows = 10;
+  const gridCols = 10;
+
+  const roomStyles = useMemo(() => ({
+    '거실': { bg: 'bg-blue-200', border: 'border-blue-600', icon: '🛋️' },
+    '침실': { bg: 'bg-purple-200', border: 'border-purple-600', icon: '🛏️' },
+    '주방': { bg: 'bg-red-200', border: 'border-red-600', icon: '🍳' },
+    '화장실': { bg: 'bg-teal-200', border: 'border-teal-600', icon: '🚽' },
+    '현관': { bg: 'bg-yellow-200', border: 'border-yellow-600', icon: '🚪' },
+    '서재': { bg: 'bg-green-200', border: 'border-green-600', icon: '📚' },
+    '창고': { bg: 'bg-gray-200', border: 'border-gray-600', icon: '📦' }
+  }), []);
+
+  const addRoom = useCallback((type: '거실' | '침실' | '주방' | '화장실' | '현관' | '서재' | '창고') => {
+    setRooms(prev => [...prev, {
+      id: Date.now().toString(),
+      type,
+      x: 2,
+      y: 2,
+      width: 2,
+      height: 2,
+      doorPosition: 'top'
+    }]);
+  }, []);
+
+  const deleteRoom = useCallback((id: string) => {
+    setRooms(prev => prev.filter(r => r.id !== id));
+    setSelectedRoom(prev => prev === id ? null : prev);
+  }, []);
+
+  const handleInteractionStart = useCallback((e: React.MouseEvent | React.TouchEvent, roomId: string) => {
+    e.stopPropagation();
+    const room = rooms.find(r => r.id === roomId);
+    if (!room) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    setDragOffset({ x: clientX - rect.left, y: clientY - rect.top });
+    setDraggingRoom(roomId);
+    setSelectedRoom(roomId);
+  }, [rooms]);
+
+  const handleInteractionMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if (!draggingRoom) return;
+    const grid = e.currentTarget as HTMLElement;
+    const rect = grid.getBoundingClientRect();
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    const x = Math.max(0, Math.min(gridCols - 2, Math.floor((clientX - rect.left - dragOffset.x) / gridSize)));
+    const y = Math.max(0, Math.min(gridRows - 2, Math.floor((clientY - rect.top - dragOffset.y) / gridSize)));
+    setRooms(prev => prev.map(r => r.id === draggingRoom ? { ...r, x, y } : r));
+  }, [draggingRoom, dragOffset, gridSize, gridCols]);
+
+  const handleInteractionEnd = useCallback(() => {
+    setDraggingRoom(null);
+  }, []);
+
+  const changeDoorPosition = useCallback((roomId: string) => {
+    setRooms(prev => prev.map(r => {
+      if (r.id !== roomId) return r;
+      const positions: Array<'top' | 'bottom' | 'left' | 'right'> = ['top', 'right', 'bottom', 'left'];
+      const currentIndex = positions.indexOf(r.doorPosition);
+      return { ...r, doorPosition: positions[(currentIndex + 1) % 4] };
+    }));
+  }, []);
+
+  const analyzeFloorPlan = useCallback(() => {
+    // 坐北向南 = 북쪽에 등지고 남쪽을 향함 = 남향 집
+    const directionNames = { 0: '남향 (坐北向南)', 90: '서향 (坐東向西)', 180: '북향 (坐南向北)', 270: '동향 (坐西向東)' };
+    const directionAnalysis = {
+      0: { score: 95, pros: '겨울 일조 최대, 여름 시원함, 최고의 방향', cons: '없음', recommendation: '최상의 선택!' },
+      90: { score: 60, pros: '저녁 햇살', cons: '여름 서향 직사광 심함', recommendation: '서쪽 창문에 차양 필수' },
+      180: { score: 50, pros: '여름 시원함', cons: '겨울 일조 부족, 어두움', recommendation: '난방 강화 및 조명 추가' },
+      270: { score: 75, pros: '아침 햇살 좋음, 상쾌한 시작', cons: '오후 어두움', recommendation: '거실/주방을 동쪽에 배치' }
+    };
+
+    const currentAnalysis = directionAnalysis[houseDirection];
+    const roomIssues: string[] = [];
+    const roomRecommendations: string[] = [];
+
+    const centerX = Math.floor(gridCols / 2);
+    const centerY = Math.floor(gridRows / 2);
+
+    rooms.forEach(room => {
+      const roomCenterX = room.x + room.width / 2;
+      const roomCenterY = room.y + room.height / 2;
+      
+      // 화장실 중앙 위치 체크
+      if (room.type === '화장실' && Math.abs(roomCenterX - centerX) <= 2 && Math.abs(roomCenterY - centerY) <= 2) {
+        roomIssues.push('⚠️ 화장실이 집 중앙에 있습니다');
+        roomRecommendations.push('💡 화장실을 구석으로 이동하세요 (풍수상 대흉)');
+      }
+      
+      // 남향 집 (houseDirection === 0) 분석
+      if (houseDirection === 0) {
+        // 남쪽 = 아래쪽 (y가 큼)
+        if (room.type === '현관' && roomCenterY > gridRows - 4) {
+          roomRecommendations.push('✅ 현관이 남쪽에 있어 최고입니다!');
+        }
+        if (room.type === '거실' && roomCenterY > gridRows - 5) {
+          roomRecommendations.push('✅ 거실이 남쪽에 있어 채광이 좋습니다!');
+        }
+        if (room.type === '침실' && roomCenterY < 3) {
+          roomRecommendations.push('✅ 침실이 북쪽에 있어 조용하고 좋습니다');
+        }
+      }
+      
+      // 동향 집 (houseDirection === 270) 분석
+      if (houseDirection === 270) {
+        // 동쪽 = 오른쪽 (x가 큼)
+        if (room.type === '거실' && roomCenterX > gridCols - 5) {
+          roomRecommendations.push('✅ 거실이 동쪽에 있어 아침 채광이 좋습니다!');
+        }
+        if (room.type === '침실' && roomCenterX < 3) {
+          roomIssues.push('⚠️ 침실이 서쪽에 있어 오후에 덥습니다');
+          roomRecommendations.push('💡 암막 커튼 설치 권장');
+        }
+      }
+      
+      // 서향 집 (houseDirection === 90) 분석
+      if (houseDirection === 90) {
+        // 서쪽 = 왼쪽 (x가 작음)
+        if (room.type === '침실' && roomCenterX < 3) {
+          roomIssues.push('⚠️ 침실이 서쪽이라 오후 직사광이 강합니다');
+          roomRecommendations.push('💡 암막 커튼 필수, 에어컨 용량 키우기');
+        }
+      }
+      
+      // 북향 집 (houseDirection === 180) 분석
+      if (houseDirection === 180) {
+        // 북쪽 = 위쪽 (y가 작음)
+        if (room.type === '거실' && roomCenterY < 3) {
+          roomIssues.push('⚠️ 거실이 북쪽이라 어둡고 추울 수 있습니다');
+          roomRecommendations.push('💡 조명 강화 및 난방 용량 증대');
+        }
+      }
+    });
+
+    const sasinsaScore = 100;
+
+    setAnalysis({
+      direction: directionNames[houseDirection],
+      directionScore: currentAnalysis.score,
+      pros: currentAnalysis.pros,
+      cons: currentAnalysis.cons,
+      recommendation: currentAnalysis.recommendation,
+      sasinsaScore,
+      issues: roomIssues,
+      recommendations: roomRecommendations,
+      overallScore: Math.round((currentAnalysis.score + sasinsaScore - roomIssues.length * 5) / 2)
+    });
+  }, [houseDirection, rooms, gridCols, gridRows]);
+
+  return (
+    <div className="space-y-4 md:space-y-6">
+      <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl p-4 md:p-6 shadow-lg">
+        <h2 className="text-xl md:text-2xl font-bold mb-2 md:mb-3">🏠 인터랙티브 도면 설계</h2>
+        <p className="text-sm md:text-base">{isMobile ? '터치로 방을 이동하세요' : '방을 드래그하여 배치하고, 풍수지리 분석을 받아보세요'}</p>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="space-y-3 md:space-y-4">
+          {/* 나침반 */}
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3 md:mb-4 flex items-center gap-2">
+              <Compass className="w-4 h-4 md:w-5 md:h-5" />
+              방향 확인하기
+            </h3>
+            
+            <div className="text-center space-y-3">
+              <div className="text-gray-600 dark:text-gray-300 text-sm">
+                📱 정확한 방향 확인을 위해<br/>디지털 나침반을 사용하세요
+              </div>
+              
+              {/* BION 디지털 나침반 버튼 */}
+              <Link
+                href="/apps/compass"
+                target="_blank"
+                className="block w-full px-6 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl font-bold text-base transition-all shadow-lg"
+              >
+                🧭 BION 나침반 열기
+              </Link>
+              
+              <div className="bg-indigo-50 dark:bg-indigo-900/30 rounded-lg p-3 text-xs text-gray-700 dark:text-gray-300 text-left">
+                <p className="font-bold mb-2">💡 사용 방법:</p>
+                <ol className="space-y-1 list-decimal list-inside">
+                  <li>나침반 시작하기 버튼 클릭</li>
+                  <li>기기 권한 허용</li>
+                  <li>스마트폰을 수평으로 들기</li>
+                  <li>빨간 바늘이 북쪽을 가리킴</li>
+                  <li>집 방향 확인 후 아래에서 선택!</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3 md:mb-4 flex items-center gap-2">
+              <RotateCw className="w-4 h-4 md:w-5 md:h-5" />
+              집 방향 설정
+            </h3>
+            <div className="grid grid-cols-2 gap-2 md:gap-3">
+              {[
+                { dir: 0 as const, label: '🌞 남향 (최고)', score: 95 },
+                { dir: 270 as const, label: '🌅 동향 (좋음)', score: 75 },
+                { dir: 90 as const, label: '🌆 서향 (보통)', score: 60 },
+                { dir: 180 as const, label: '❄️ 북향 (나쁨)', score: 50 }
+              ].map(({ dir, label, score }) => (
+                <button
+                  key={dir}
+                  onClick={() => setHouseDirection(dir)}
+                  className={`p-3 rounded-lg font-medium transition-all text-sm ${houseDirection === dir ? 'bg-indigo-500 text-white ring-2 ring-indigo-300' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200'}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
+            <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white mb-3 md:mb-4">방 추가하기</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {(Object.keys(roomStyles) as Array<keyof typeof roomStyles>).map(type => (
+                <button
+                  key={type}
+                  onClick={() => addRoom(type)}
+                  className="p-2 md:p-3 bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-900 rounded-lg font-medium text-xs md:text-sm transition-all flex items-center gap-1 md:gap-2 justify-center"
+                >
+                  <span className="text-lg md:text-xl">{roomStyles[type].icon}</span>
+                  <span className="text-gray-700 dark:text-gray-200">{type}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={analyzeFloorPlan}
+            disabled={rooms.length === 0}
+            className="w-full p-3 md:p-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl font-bold text-base md:text-lg shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            🔮 풍수지리 분석하기
+          </button>
+        </div>
+
+        <div className="lg:col-span-2">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 md:p-6">
+            <div className="flex items-center justify-between mb-3 md:mb-4">
+              <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-white">평면도 ({gridRows}x{gridCols})</h3>
+              <div className="text-xs md:text-sm font-semibold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                {houseDirection === 0 && '🌞 남향집'}
+                {houseDirection === 90 && '🌆 서향집'}
+                {houseDirection === 180 && '❄️ 북향집'}
+                {houseDirection === 270 && '🌅 동향집'}
+              </div>
+            </div>
+
+            <div
+              className="relative border-2 md:border-4 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden mx-auto touch-none"
+              style={{
+                width: gridCols * gridSize,
+                height: gridRows * gridSize,
+                backgroundImage: 'linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)',
+                backgroundSize: `${gridSize}px ${gridSize}px`,
+                cursor: draggingRoom ? 'grabbing' : 'default'
+              }}
+              onMouseMove={handleInteractionMove}
+              onMouseUp={handleInteractionEnd}
+              onMouseLeave={handleInteractionEnd}
+              onTouchMove={handleInteractionMove}
+              onTouchEnd={handleInteractionEnd}
+            >
+              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">⬆️ 북</div>
+              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold">⬇️ 남</div>
+              <div className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold">⬅️ 서</div>
+              <div className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">➡️ 동</div>
+
+              {rooms.map(room => {
+                const style = roomStyles[room.type];
+                return (
+                  <div
+                    key={room.id}
+                    className={`absolute ${style.bg} ${style.border} border-2 rounded-lg cursor-move transition-all touch-none ${selectedRoom === room.id ? 'ring-2 md:ring-4 ring-indigo-500 shadow-2xl z-10' : 'z-0'}`}
+                    style={{ left: room.x * gridSize, top: room.y * gridSize, width: room.width * gridSize, height: room.height * gridSize }}
+                    onMouseDown={(e) => handleInteractionStart(e, room.id)}
+                    onTouchStart={(e) => handleInteractionStart(e, room.id)}
+                    onClick={() => setSelectedRoom(room.id)}
+                  >
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-1">
+                      <span className={isMobile ? 'text-lg' : 'text-2xl'}>{style.icon}</span>
+                      <span className="text-xs font-bold text-gray-800">{room.type}</span>
+                    </div>
+                    {room.doorPosition === 'top' && <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-yellow-500 rounded-b-full"></div>}
+                    {room.doorPosition === 'bottom' && <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-yellow-500 rounded-t-full"></div>}
+                    {room.doorPosition === 'left' && <div className="absolute left-0 top-1/2 transform -translate-y-1/2 w-2 h-8 bg-yellow-500 rounded-r-full"></div>}
+                    {room.doorPosition === 'right' && <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-8 bg-yellow-500 rounded-l-full"></div>}
+                    {selectedRoom === room.id && (
+                      <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 flex gap-1 bg-white dark:bg-gray-700 p-1 rounded-lg shadow-lg">
+                        <button onClick={(e) => { e.stopPropagation(); changeDoorPosition(room.id); }} className="p-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded text-xs" title="문 위치">🚪</button>
+                        <button onClick={(e) => { e.stopPropagation(); deleteRoom(room.id); }} className="p-1 bg-red-500 hover:bg-red-600 text-white rounded" title="삭제"><Trash2 className="w-3 h-3" /></button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-4 text-xs text-gray-600 dark:text-gray-400 text-center">
+              💡 방을 드래그하여 이동, 클릭하여 선택. 문 아이콘으로 문 위치 변경 가능
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {analysis && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-4 border-green-500">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">🔮 풍수지리 분석 결과</h3>
+          <div className="text-center mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-xl">
+            <div className="text-6xl font-bold text-green-600 dark:text-green-400 mb-2">{analysis.overallScore}점</div>
+            <div className="text-xl font-bold text-gray-900 dark:text-white">
+              {analysis.overallScore >= 80 ? '🌟 명당!' : analysis.overallScore >= 60 ? '✅ 양호' : '⚠️ 개선 필요'}
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4">
+                <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-2">🧭 {analysis.direction}</h4>
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">{analysis.directionScore}점</div>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-1"><strong>장점:</strong> {analysis.pros}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300"><strong>단점:</strong> {analysis.cons}</p>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <div className="bg-green-50 dark:bg-green-900/30 rounded-lg p-4">
+                <h4 className="font-bold text-green-700 dark:text-green-400 mb-2">💡 권장사항</h4>
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{analysis.recommendation}</p>
+                {analysis.recommendations.length > 0 && (
+                  <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                    {analysis.recommendations.map((rec: string, idx: number) => <li key={idx}>• {rec}</li>)}
+                  </ul>
+                )}
+              </div>
+              {analysis.issues.length > 0 && (
+                <div className="bg-red-50 dark:bg-red-900/30 rounded-lg p-4">
+                  <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">⚠️ 주의사항</h4>
+                  <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                    {analysis.issues.map((issue: string, idx: number) => <li key={idx}>{issue}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

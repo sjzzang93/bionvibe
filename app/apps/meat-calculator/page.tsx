@@ -6,6 +6,7 @@
  */
 
 import { useState, useEffect } from 'react'
+import AppFooter from '@/app/components/AppFooter';
 import type { CalculationMode, MenuInput, CalculationResult, SavedMenu, MeatCategory } from '@/types/meat'
 import {
   convertServings,
@@ -552,6 +553,9 @@ export default function MeatCalculatorPage() {
             </div>
           </div>
         )}
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   )

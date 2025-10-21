@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from 'react';
+import AppFooter from "@/app/components/AppFooter";
+import RelatedApps from '@/app/components/RelatedApps';
 
 const FACE_SHAPES = {
   oval: {
@@ -398,14 +400,13 @@ export default function FaceShape() {
             >
               다시 분석하기
             </button>
-          </section>
-
-          <footer className="mt-6 space-y-3 pb-8 text-black placeholder-gray-500">
             
-            <p className="text-xs text-gray-500 text-center px-4 text-black placeholder-gray-500">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
+            {/* 관련 앱 추천 */}
+            <RelatedApps 
+              relatedAppIds={['saju-mbti-jobs', 'mbti-test', 'voice-fortune', 'analysis-handwriting']}
+              currentAppId="face-shape"
+            />
+          </section>
         </div>
       </main>
     );
@@ -423,6 +424,14 @@ export default function FaceShape() {
             <h1 className="text-4xl font-bold text-black mb-2 text-black placeholder-gray-500">👤</h1>
             <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">얼굴형 분석 & 헤어스타일 추천</h2>
             <p className="text-gray-600 text-black placeholder-gray-500">5가지 질문으로 나에게 맞는 스타일 찾기</p>
+            
+            {/* 프라이버시 안내 */}
+            <div className="mt-4 px-4 py-3 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg border border-green-200 dark:border-green-800">
+              <div className="flex items-center justify-center gap-2 text-sm text-green-700 dark:text-green-300">
+                <span className="text-lg">🔒</span>
+                <span className="font-semibold">이미지는 어느 서버에도 저장되지 않습니다</span>
+              </div>
+            </div>
           </header>
 
           <div className="space-y-6 mb-6 text-black placeholder-gray-500">
@@ -474,14 +483,10 @@ export default function FaceShape() {
             얼굴형 분석하기
           </button>
         </section>
-
-        <footer className="mt-6 space-y-3 pb-8 text-black placeholder-gray-500">
-          
-          <p className="text-xs text-gray-500 text-center px-4 text-black placeholder-gray-500">
-            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-          </p>
-        </footer>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

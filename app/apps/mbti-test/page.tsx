@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import Link from 'next/link';
 
 interface Question {
@@ -459,6 +460,9 @@ export default function MBTI32() {
           </div>
         </div>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

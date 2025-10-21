@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 export default function CarMaintenancePage() {
   const [carAge, setCarAge] = useState('5');
   const [mileage, setMileage] = useState('80000');
@@ -209,55 +210,13 @@ export default function CarMaintenancePage() {
                   </p>
                 </div>
               </div>
-
-              {/* 쿠팡 상품 추천 */}
-              <div className="bg-gradient-to-r from-orange-50 to-yellow-50 p-6 rounded-xl border-2 border-orange-300 text-black placeholder-gray-500">
-                <h3 className="text-lg md:text-xl font-bold text-black mb-4 text-center text-black placeholder-gray-500">
-                  🚗 자동차 필수템
-                </h3>
-                <div className="space-y-3 text-black placeholder-gray-500">
-                  <a
-                    href="https://"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block bg-white p-4 rounded-lg border border-orange-200 hover:border-orange-400 transition-all"
-                  >
-                    <p className="font-bold text-gray-800 mb-1 text-black placeholder-gray-500">📹 블랙박스 (전후방 FHD)</p>
-                    <p className="text-sm text-gray-600 text-black placeholder-gray-500">사고 대비 필수 아이템</p>
-                    <span className="inline-block mt-2 text-black font-semibold text-sm text-black placeholder-gray-500">
-                      구매하러 가기 →
-                    </span>
-                  </a>
-                  <a
-                    href="https://"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block bg-white p-4 rounded-lg border border-orange-200 hover:border-orange-400 transition-all"
-                  >
-                    <p className="font-bold text-gray-800 mb-1 text-black placeholder-gray-500">🧴 불스원샷 (연료첨가제)</p>
-                    <p className="text-sm text-gray-600 text-black placeholder-gray-500">엔진 세정, 연비 개선</p>
-                    <span className="inline-block mt-2 text-black font-semibold text-sm text-black placeholder-gray-500">
-                      구매하러 가기 →
-                    </span>
-                  </a>
-                  <a
-                    href="https://"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block bg-white p-4 rounded-lg border border-orange-200 hover:border-orange-400 transition-all"
-                  >
-                    <p className="font-bold text-gray-800 mb-1 text-black placeholder-gray-500">🔦 LED 작업등 (비상용)</p>
-                    <p className="text-sm text-gray-600 text-black placeholder-gray-500">야간 고장 시 필수</p>
-                    <span className="inline-block mt-2 text-black font-semibold text-sm text-black placeholder-gray-500">
-                      구매하러 가기 →
-                    </span>
-                  </a>
-                </div>
-              </div>
             </div>
           )}
         </div>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

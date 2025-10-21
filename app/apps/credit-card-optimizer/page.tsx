@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 export default function CreditCardOptimizerPage() {
   const [spending, setSpending] = useState({
     groceries: '300000',
@@ -319,55 +320,13 @@ export default function CreditCardOptimizerPage() {
                   ))}
                 </div>
               </div>
-
-              {/* 쿠팡 상품 추천 */}
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-xl border-2 border-purple-300 text-black placeholder-gray-500">
-                <h3 className="text-lg md:text-xl font-bold text-black mb-4 text-center text-black placeholder-gray-500">
-                  💳 카드 관리 필수템
-                </h3>
-                <div className="space-y-3 text-black placeholder-gray-500">
-                  <a
-                    href="https://"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-                  >
-                    <p className="font-bold text-gray-800 mb-1 text-black placeholder-gray-500">📱 카드 지갑 (RFID 차단)</p>
-                    <p className="text-sm text-gray-600 text-black placeholder-gray-500">카드 보안 및 관리 필수</p>
-                    <span className="inline-block mt-2 text-black font-semibold text-sm text-black placeholder-gray-500">
-                      구매하러 가기 →
-                    </span>
-                  </a>
-                  <a
-                    href="https://"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-                  >
-                    <p className="font-bold text-gray-800 mb-1 text-black placeholder-gray-500">📊 가계부 앱 구독 (1년)</p>
-                    <p className="text-sm text-gray-600 text-black placeholder-gray-500">카드 사용 내역 체계적 관리</p>
-                    <span className="inline-block mt-2 text-black font-semibold text-sm text-black placeholder-gray-500">
-                      구매하러 가기 →
-                    </span>
-                  </a>
-                  <a
-                    href="https://"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-                  >
-                    <p className="font-bold text-gray-800 mb-1 text-black placeholder-gray-500">🔔 스마트 알림 벨 (카드 결제)</p>
-                    <p className="text-sm text-gray-600 text-black placeholder-gray-500">실시간 결제 알림, 보안 강화</p>
-                    <span className="inline-block mt-2 text-black font-semibold text-sm text-black placeholder-gray-500">
-                      구매하러 가기 →
-                    </span>
-                  </a>
-                </div>
-              </div>
             </div>
           )}
         </div>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

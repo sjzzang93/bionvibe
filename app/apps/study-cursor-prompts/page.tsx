@@ -1,6 +1,7 @@
 'use client'
 
 import { Suspense, useState } from 'react'
+import AppFooter from "@/app/components/AppFooter";
 import CopyButton from '@/app/components/glossary/CopyButton'
 import krText from '@/lib/i18n/kr.json'
 
@@ -60,6 +61,9 @@ export default function CursorPromptsPage() {
           <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-violet-500 mx-auto"></div>
           <p className="mt-4 text-gray-600 text-sm sm:text-base">로딩 중...</p>
         </div>
+        {/* 제작자 서명 */}
+        <AppFooter />
+
       </div>
     }>
       <CursorPromptsContent />

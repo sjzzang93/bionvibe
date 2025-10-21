@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import AppFooter from "@/app/components/AppFooter";
 import Link from 'next/link';
 
 interface User {
@@ -298,6 +299,9 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
               🎯 습관 트래커
             </h1>
             <p className="text-white/90">👤 {userId}님의 습관 관리</p>
+            {/* 제작자 서명 */}
+            <AppFooter />
+
           </div>
           <button
             onClick={onLogout}

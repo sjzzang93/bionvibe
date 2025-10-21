@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import AppFooter from "@/app/components/AppFooter";
 interface SleepData {
   bedTime: string;
   wakeTime: string;
@@ -473,64 +474,6 @@ export default function SleepAnalyzer() {
               </div>
             )}
 
-            {/* 쿠팡 로켓배송 수면용품 추천 */}
-            <div className="mb-6 p-4 md:p-6 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl md:rounded-2xl border-2 border-indigo-300">
-              <h3 className="font-bold text-lg md:text-xl text-indigo-800 mb-3 md:mb-4 text-center">😴 꿀잠을 위한 필수 아이템</h3>
-              <div className="space-y-2 md:space-y-3">
-                <a href="https://" target="_blank" rel="noopener noreferrer" className="block bg-white rounded-lg md:rounded-xl p-3 md:p-4 border-2 border-indigo-300 hover:shadow-lg transition-all">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 md:gap-3">
-                    <div className="flex items-center gap-2 md:gap-3 flex-1">
-                      <div className="text-2xl md:text-3xl">🛏️</div>
-                      <div className="min-w-0 flex-1">
-                        <div className="font-bold text-indigo-800 text-sm md:text-base leading-tight">템퍼 메모리폼 경추 베개</div>
-                        <div className="text-xs md:text-sm text-gray-600">목 통증 완화 숙면 유도</div>
-                      </div>
-                    </div>
-                    <div className="bg-indigo-500 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap self-start sm:self-auto">구매하러가기 →</div>
-                  </div>
-                </a>
-                
-                <a href="https://" target="_blank" rel="noopener noreferrer" className="block bg-white rounded-lg md:rounded-xl p-3 md:p-4 border-2 border-indigo-300 hover:shadow-lg transition-all">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 md:gap-3">
-                    <div className="flex items-center gap-2 md:gap-3 flex-1">
-                      <div className="text-2xl md:text-3xl">🌙</div>
-                      <div className="min-w-0 flex-1">
-                        <div className="font-bold text-indigo-800 text-sm md:text-base leading-tight">3D 입체 수면 안대 암막</div>
-                        <div className="text-xs md:text-sm text-gray-600">빛 차단 깊은 수면</div>
-                      </div>
-                    </div>
-                    <div className="bg-indigo-500 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap self-start sm:self-auto">구매하러가기 →</div>
-                  </div>
-                </a>
-                
-                <a href="https://" target="_blank" rel="noopener noreferrer" className="block bg-white rounded-lg md:rounded-xl p-3 md:p-4 border-2 border-indigo-300 hover:shadow-lg transition-all">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 md:gap-3">
-                    <div className="flex items-center gap-2 md:gap-3 flex-1">
-                      <div className="text-2xl md:text-3xl">💊</div>
-                      <div className="min-w-0 flex-1">
-                        <div className="font-bold text-indigo-800 text-sm md:text-base leading-tight">종근당 멜라토닌 5mg 수면영양제</div>
-                        <div className="text-xs md:text-sm text-gray-600">자연스러운 수면 유도</div>
-                      </div>
-                    </div>
-                    <div className="bg-indigo-500 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap self-start sm:self-auto">구매하러가기 →</div>
-                  </div>
-                </a>
-
-                <a href="https://" target="_blank" rel="noopener noreferrer" className="block bg-white rounded-lg md:rounded-xl p-3 md:p-4 border-2 border-indigo-300 hover:shadow-lg transition-all">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 md:gap-3">
-                    <div className="flex items-center gap-2 md:gap-3 flex-1">
-                      <div className="text-2xl md:text-3xl">🎵</div>
-                      <div className="min-w-0 flex-1">
-                        <div className="font-bold text-indigo-800 text-sm md:text-base leading-tight">백색소음기 숙면 사운드 머신</div>
-                        <div className="text-xs md:text-sm text-gray-600">편안한 소리로 수면 개선</div>
-                      </div>
-                    </div>
-                    <div className="bg-indigo-500 text-white px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-bold text-xs md:text-sm whitespace-nowrap self-start sm:self-auto">구매하러가기 →</div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
             <button
               onClick={() => setResult(null)}
               className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
@@ -538,13 +481,6 @@ export default function SleepAnalyzer() {
               다시 분석하기
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -722,14 +658,10 @@ export default function SleepAnalyzer() {
             </button>
           </div>
         </section>
-
-        <footer className="mt-6 space-y-3 pb-8">
-          
-          <p className="text-xs text-gray-500 text-center px-4">
-            이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-          </p>
-        </footer>
       </div>
+      {/* 제작자 서명 */}
+      <AppFooter />
+
     </main>
   );
 }

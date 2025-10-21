@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
 
 interface DailyUsage {
@@ -517,6 +518,9 @@ export default function PhoneUsageAnalyzerPage() {
             메인으로 돌아가기
           </Link>
         </div>
+
+      {/* 제작자 서명 */}
+      <AppFooter />
       </div>
     </div>
   );
