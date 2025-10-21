@@ -3,12 +3,10 @@
 import { useState, useEffect } from 'react';
 import AppFooter from '@/app/components/AppFooter';
 import Link from 'next/link';
-import { createClient } from '@supabase/supabase-js';
+import { getBrowserSupabase } from '@/lib/supabase';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// ★ 브라우저 전용 싱글톤 클라이언트 사용
+const supabase = getBrowserSupabase();
 
 interface Player {
   id: number;

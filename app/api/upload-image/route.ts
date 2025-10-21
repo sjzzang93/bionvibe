@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { getServerSupabase } from '@/lib/supabase-server';
 import sharp from 'sharp';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-// Admin 권한으로 Supabase 클라이언트 생성
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 export async function POST(request: NextRequest) {
+  // ★ 서버 전용 클라이언트 사용 (함수 내부에서 호출)
+  const supabase = getServerSupabase();
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File;

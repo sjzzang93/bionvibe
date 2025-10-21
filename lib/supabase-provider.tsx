@@ -1,27 +1,19 @@
+// FILE: /lib/supabase-provider.tsx
 'use client';
 
-import { createContext, useContext } from 'react';
-import { SupabaseClient } from '@supabase/supabase-js';
+import { createContext, useContext, useMemo } from 'react';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { getBrowserSupabase } from './supabase';
 
-const SupabaseContext = createContext<SupabaseClient | undefined>(undefined);
+const SupabaseCtx = createContext<SupabaseClient | null>(null);
 
-export function SupabaseProvider({ children }: { children: React.ReactNode }) {
-  // globalThis를 사용한 싱글톤 인스턴스 사용
-  const supabase = getBrowserSupabase();
+export const useSupabase = () => {
+  const c = useContext(SupabaseCtx);
+  if (!c) throw new Error('useSupabase must be used within <SupabaseProvider>');
+  return c;
+};
 
-  return (
-    <SupabaseContext.Provider value={supabase}>
-      {children}
-    </SupabaseContext.Provider>
-  );
+export default function SupabaseProvider({ children }: { children: React.ReactNode }) {
+  const supabase = useMemo(() => getBrowserSupabase(), []);
+  return <SupabaseCtx.Provider value={supabase}>{children}</SupabaseCtx.Provider>;
 }
-
-export function useSupabase() {
-  const context = useContext(SupabaseContext);
-  if (context === undefined) {
-    throw new Error('useSupabase must be used within SupabaseProvider');
-  }
-  return context;
-}
-

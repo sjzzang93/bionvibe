@@ -1,38 +1,30 @@
+// FILE: /lib/supabase.ts
 // App Router, CSR 전용 브라우저 클라이언트 (HMR-안전)
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-// ▶ 중요한 포인트:
-// - globalThis에 보관해서 HMR/리렌더 시에도 단일 인스턴스만 유지
-// - storageKey를 프로젝트별로 UNIQUE 하게 설정 (도메인 공유 시 충돌 방지)
+// ★ 도메인/프로젝트별로 절대 겹치지 않게 바꾸세요
 const STORAGE_KEY = 'sb-bionvibe-main-auth-v1';
 
 declare global {
   // eslint-disable-next-line no-var
-  var __SUPABASE_CLIENT__: SupabaseClient | undefined;
+  var __SB__: SupabaseClient | undefined;
+  var __SB_COUNT__: number | undefined;
 }
 
 export function getBrowserSupabase(): SupabaseClient {
   if (typeof window === 'undefined') {
-    // Server-side fallback
-    return createClient(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-        detectSessionInUrl: false,
-      },
-    });
+    throw new Error('getBrowserSupabase: browser only');
   }
-  
-  if (!globalThis.__SUPABASE_CLIENT__) {
-    globalThis.__SUPABASE_CLIENT__ = createClient(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        persistSession: true,
+  if (!globalThis.__SB__) {
+    globalThis.__SB__ = createClient(URL, KEY, {
+      auth: { 
+        persistSession: true, 
+        storageKey: STORAGE_KEY,
         autoRefreshToken: true,
         detectSessionInUrl: true,
-        storageKey: STORAGE_KEY,
       },
       realtime: {
         params: {
@@ -40,12 +32,14 @@ export function getBrowserSupabase(): SupabaseClient {
         },
       },
     });
+    globalThis.__SB_COUNT__ = (globalThis.__SB_COUNT__ ?? 0) + 1;
+    // 필요 시 개발 콘솔에서 생성 횟수 확인
+    if (process.env.NODE_ENV === 'development') {
+      console.debug('[Supabase] Browser client created x', globalThis.__SB_COUNT__);
+    }
   }
-  return globalThis.__SUPABASE_CLIENT__!;
+  return globalThis.__SB__!;
 }
-
-// 기존 코드와의 호환성을 위해 export
-export const supabase = getBrowserSupabase();
 
 // 타입 정의
 export interface Contact {
@@ -73,4 +67,3 @@ export interface Ranking {
   score: number;
   created_at?: string;
 }
-
