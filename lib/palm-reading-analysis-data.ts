@@ -112,7 +112,7 @@ type PalmReadingDataType = {
   [key: string]: PalmReadingAnalysis;
 };
 
-export const PALM_READING_DATA: PalmReadingDataType = palmReadingData as PalmReadingDataType;
+export const PALM_READING_DATA: PalmReadingDataType = palmReadingData as unknown as PalmReadingDataType;
 
 // 패턴 코드 목록
 export const PATTERN_CODES = [
