@@ -15,9 +15,18 @@ declare global {
 }
 
 export function getBrowserSupabase(): SupabaseClient {
+  // SSR 단계에서는 임시 클라이언트 반환 (실제 사용 안 됨)
   if (typeof window === 'undefined') {
-    throw new Error('getBrowserSupabase: browser only');
+    return createClient(URL, KEY, {
+      auth: { 
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+    });
   }
+  
+  // 브라우저에서만 싱글톤 인스턴스 사용
   if (!globalThis.__SB__) {
     globalThis.__SB__ = createClient(URL, KEY, {
       auth: { 
