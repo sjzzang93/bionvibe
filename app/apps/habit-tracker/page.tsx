@@ -124,7 +124,7 @@ export default function HabitTrackerPage() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-teal-500 via-green-500 to-emerald-600 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50 dark:from-teal-500 dark:via-green-500 dark:to-emerald-600 flex items-center justify-center px-4 transition-colors">
         <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 max-w-md w-full border-2 border-white/30">
           <div className="text-center mb-8">
             <div className="text-6xl mb-4">🎯</div>

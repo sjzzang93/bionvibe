@@ -1,4 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "BION 소개 - 48개 무료 웹앱을 만든 이야기",
+  description: "일상에 빛을 더하는 BION의 철학과 비전. 계산기, 운세, 게임 등 48개 웹앱을 무료로 제공하는 이유와 만든 사람을 소개합니다.",
+  openGraph: {
+    title: "BION 소개 - 48개 무료 웹앱을 만든 이야기",
+    description: "일상에 빛을 더하는 BION의 철학과 비전",
+    url: 'https://bionvibe.com/about',
+  },
+};
 
 export default function AboutPage() {
   return (

@@ -12,6 +12,51 @@
   --radius-lg: 24px;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1a;
+    --bg-spot: #4a4a00;
+    --ink: #f0e6d2;
+    --line: #6b5b00;
+    --accent: #b89000;
+    --accent-2: #ffd24d;
+    --ok: #4ade80;
+    --danger: #f87171;
+    --shadow: 0 10px 24px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card {
+    background: #2a2a2a;
+  }
+  
+  input[type="number"],
+  select,
+  .seg button {
+    background: #3a3a3a;
+    color: var(--ink);
+  }
+  
+  .seg button.active {
+    background: var(--bg-spot);
+  }
+  
+  .field {
+    background: #2a2a2a;
+  }
+  
+  .panel {
+    background: #2a2a2a;
+  }
+  
+  .modal {
+    background: #2a2a2a;
+  }
+  
+  .btn.secondary {
+    background: #3a3a3a;
+  }
+}
+
 * {
   box-sizing: border-box;
 }

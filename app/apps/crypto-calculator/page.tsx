@@ -185,7 +185,7 @@ export default function CryptoKimchiPremium() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 py-8 px-4" suppressHydrationWarning>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-900 dark:via-indigo-900 dark:to-blue-900 py-8 px-4 transition-colors" suppressHydrationWarning>
       <div className="max-w-6xl mx-auto" suppressHydrationWarning>
         {/* 헤더 */}
         <div className="text-center mb-8">

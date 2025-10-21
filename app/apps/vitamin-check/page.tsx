@@ -203,7 +203,7 @@ export default function VitaminCheck() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-50" style={{
+      <main className="min-h-screen bg-gradient-to-br from-green-100 via-white to-blue-50 dark:from-green-900 dark:via-gray-900 dark:to-blue-900 transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.1) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 40%)',
         backgroundAttachment: 'fixed'
       }}>

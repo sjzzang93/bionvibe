@@ -62,22 +62,22 @@ export default function DreamInterpreterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900 py-8 px-4 transition-colors">
       {/* Hero */}
       <div className="text-center mb-12">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-4">
           💭 꿈해몽
         </h1>
-        <p className="text-lg text-purple-200 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-purple-200 max-w-2xl mx-auto">
           꿈에서 본 것을 입력하면<br />
           전통 꿈해몽으로 의미를 해석해드립니다
         </p>
       </div>
 
       {/* 입력 폼 */}
-      <div className="max-w-[640px] mx-auto bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-8">
+      <div className="max-w-[640px] mx-auto bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 mb-8 border border-gray-200 dark:border-white/10">
         <fieldset>
-          <legend className="text-lg font-bold text-white mb-4">
+          <legend className="text-lg font-bold text-gray-900 dark:text-white mb-4">
             🌙 꿈 내용을 입력하세요
           </legend>
           <textarea
@@ -85,10 +85,10 @@ export default function DreamInterpreterPage() {
             onChange={(e) => setDreamText(e.target.value)}
             placeholder="예: 오늘 꿈에 뱀이 나왔어요..."
             rows={6}
-            className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-pink-500 text-black bg-white"
+            className="w-full px-4 py-3 border-2 border-purple-300 dark:border-purple-600 rounded-lg focus:ring-2 focus:ring-pink-500 text-black dark:text-white bg-white dark:bg-gray-800"
             style={{ fontSize: '16px' }}
           />
-          <p className="text-sm text-purple-200 mt-2">
+          <p className="text-sm text-gray-600 dark:text-purple-200 mt-2">
             💡 키워드: 돈, 뱀, 호랑이, 물, 불, 꽃, 나무, 집, 차, 비행기 등
           </p>
         </fieldset>
@@ -105,23 +105,23 @@ export default function DreamInterpreterPage() {
       {/* 결과 */}
       {result && (
         <div id="result-section" className="max-w-[800px] mx-auto space-y-6">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8">
+          <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-white/10">
             <div className="text-center mb-6">
               <div className="text-6xl mb-4">🔮</div>
-              <h2 className="text-3xl font-bold text-white mb-2">해몽 결과</h2>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">해몽 결과</h2>
               <div className="inline-block bg-purple-500 text-white px-4 py-2 rounded-full text-sm font-bold">
                 {result.category}
               </div>
             </div>
 
             <div className="space-y-6">
-              <div className="bg-white/20 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-3">💫 의미</h3>
-                <p className="text-purple-100 leading-relaxed">{result.meaning}</p>
+              <div className="bg-purple-50 dark:bg-white/20 rounded-xl p-6 border border-purple-100 dark:border-white/10">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">💫 의미</h3>
+                <p className="text-gray-700 dark:text-purple-100 leading-relaxed">{result.meaning}</p>
               </div>
 
-              <div className="bg-white/20 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-3">🎰 행운의 숫자</h3>
+              <div className="bg-yellow-50 dark:bg-white/20 rounded-xl p-6 border border-yellow-100 dark:border-white/10">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">🎰 행운의 숫자</h3>
                 <div className="flex flex-wrap gap-3 justify-center">
                   {result.luckyNumber.map((num, index) => (
                     <div
@@ -134,9 +134,9 @@ export default function DreamInterpreterPage() {
                 </div>
               </div>
 
-              <div className="bg-white/20 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-3">💡 조언</h3>
-                <p className="text-purple-100 leading-relaxed">{result.advice}</p>
+              <div className="bg-pink-50 dark:bg-white/20 rounded-xl p-6 border border-pink-100 dark:border-white/10">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">💡 조언</h3>
+                <p className="text-gray-700 dark:text-purple-100 leading-relaxed">{result.advice}</p>
               </div>
             </div>
           </div>

@@ -132,7 +132,7 @@ export function Navigation() {
               )}
             </button>
             
-            <div className="hidden sm:flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
               <span className="relative inline-block w-2 h-2">
                 <span className="absolute inset-0 bg-amber-400 rounded-full animate-ping"></span>
                 <span className="relative inline-block w-2 h-2 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"></span>

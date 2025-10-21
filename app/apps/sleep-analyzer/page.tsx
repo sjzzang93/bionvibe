@@ -252,7 +252,7 @@ export default function SleepAnalyzer() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50">
+      <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 dark:from-indigo-900 dark:via-purple-900 dark:to-blue-900 transition-colors">
         <div className="mx-auto max-w-[600px] px-4 py-6">
           <div className="mb-4">
             

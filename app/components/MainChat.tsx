@@ -108,17 +108,26 @@ export default function MainChat() {
         setOnlineCount(Object.keys(state).length);
       })
       .subscribe(async (status) => {
-        console.log('🔗 채널 구독 상태:', status);
-        if (status === 'SUBSCRIBED') {
-          console.log('✅ 실시간 채팅 연결 성공!');
-          if (isNicknameSet) {
-            await channel.track({
-              user: nickname,
-              online_at: new Date().toISOString(),
-            });
+        // 프로덕션에서만 중요한 로그 출력
+        if (process.env.NODE_ENV === 'production') {
+          if (status === 'SUBSCRIBED') {
+            console.log('✅ 실시간 채팅 연결 성공!');
+          } else if (status === 'CHANNEL_ERROR') {
+            console.error('❌ 채널 연결 실패');
           }
-        } else if (status === 'CHANNEL_ERROR') {
-          console.error('❌ 채널 연결 실패');
+        } else {
+          // 개발 환경: SUBSCRIBED만 조용히 로그
+          if (status === 'SUBSCRIBED') {
+            console.log('💬 채팅 연결됨');
+          }
+          // CHANNEL_ERROR는 Fast Refresh 때문이므로 무시
+        }
+        
+        if (status === 'SUBSCRIBED' && isNicknameSet) {
+          await channel.track({
+            user: nickname,
+            online_at: new Date().toISOString(),
+          });
         }
       });
 
@@ -229,17 +238,17 @@ export default function MainChat() {
   };
 
   return (
-    <section className="py-8 px-4 bg-gradient-to-br from-red-50 via-rose-50 to-pink-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900">
+    <section className="py-8 px-4 bg-gradient-to-br from-gray-50 via-slate-50 to-zinc-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900">
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
         <div className="text-center mb-3">
           <div className="flex items-center justify-center gap-2 mb-1">
-            {/* BION 반짝이는 로고 */}
-            <div className="relative w-8 h-8 bg-gradient-to-br from-red-500 to-rose-500 dark:from-red-600 dark:to-rose-600 rounded-lg flex items-center justify-center shadow-lg">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/30 via-orange-500/20 to-transparent opacity-100 rounded-lg animate-pulse"></div>
+            {/* BION 전구 로고 */}
+            <div className="relative w-10 h-10 bg-gradient-to-br from-gray-700 via-gray-600 to-gray-700 dark:from-gray-600 dark:via-gray-500 dark:to-gray-600 rounded-xl flex items-center justify-center shadow-2xl group hover:shadow-amber-500/50 transition-all duration-500">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
               <svg 
                 viewBox="0 0 24 24" 
-                className="w-5 h-5 relative z-10"
+                className="w-6 h-6 relative z-10 group-hover:scale-110 transition-transform duration-300"
                 fill="none"
               >
                 <g className="animate-pulse">
@@ -247,19 +256,25 @@ export default function MainChat() {
                   <line x1="12" y1="20" x2="12" y2="22" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
                   <line x1="4" y1="12" x2="2" y2="12" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
                   <line x1="22" y1="12" x2="20" y2="12" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
+                  <line x1="6.34" y1="6.34" x2="4.93" y2="4.93" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="19.07" y1="19.07" x2="17.66" y2="17.66" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
+                  <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
                 </g>
+                <circle cx="12" cy="12" r="4" fill="#FEF3C7" opacity="0.3"/>
                 <circle cx="12" cy="12" r="3" fill="#FCD34D"/>
                 <circle cx="12" cy="12" r="2" fill="#FFFBEB"/>
               </svg>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
-              비온타키
+            <h2 className="text-2xl sm:text-3xl font-black flex items-center gap-1">
+              <span className="bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">BION</span>
+              <span className="text-gray-900 dark:text-gray-100">Talk</span>
             </h2>
           </div>
           <p className="text-xs text-gray-600 dark:text-gray-400">
             {isNicknameSet ? (
               <>
-                지금 <span className="font-bold text-red-600 dark:text-red-400">{onlineCount}명</span>이 대화 중이에요!
+                지금 <span className="font-bold text-gray-700 dark:text-gray-300">{onlineCount}명</span>이 대화 중이에요!
               </>
             ) : (
               '실시간으로 대화할 수 있는 공간이에요!'
@@ -268,16 +283,19 @@ export default function MainChat() {
         </div>
 
         {/* 채팅 영역 */}
-        <div className="max-w-lg mx-auto bg-white dark:bg-gray-800 shadow-xl overflow-hidden border-4 border-red-400 dark:border-red-900">
+        <div className="max-w-lg mx-auto bg-white dark:bg-gray-800 shadow-xl overflow-hidden border-4 border-gray-300 dark:border-gray-700">
           {/* 채팅 헤더 */}
-          <div className="bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-800 dark:to-rose-800 p-3 border-b-2 border-red-600 dark:border-red-900">
+          <div className="bg-gradient-to-r from-gray-700 to-gray-600 dark:from-gray-800 dark:to-gray-700 p-3 border-b-2 border-gray-500 dark:border-gray-600">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg animate-pulse">
                   💬
                 </div>
                 <div suppressHydrationWarning>
-                  <h3 className="text-white font-black text-base">BionTalk</h3>
+                  <h3 className="font-black text-base flex items-center gap-1">
+                    <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">BION</span>
+                    <span className="text-white">Talk</span>
+                  </h3>
                   <p className="text-[10px] text-white/90" suppressHydrationWarning>
                     {isNicknameSet ? `${nickname}님 접속 중` : '관전 중 · 참여하려면 닉네임 입력!'}
                   </p>
@@ -313,9 +331,9 @@ export default function MainChat() {
           {!isCollapsed && (
           <div 
             ref={messagesContainerRef}
-            className="h-[450px] overflow-y-auto p-2 space-y-1.5 bg-gradient-to-b from-rose-50/50 to-white dark:from-gray-900/50 dark:to-gray-800"
+            className="h-[450px] overflow-y-auto p-2 space-y-1.5 bg-gradient-to-b from-gray-50/50 to-white dark:from-gray-900/50 dark:to-gray-800"
             style={{
-              backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(244, 63, 94, 0.03) 20px, rgba(244, 63, 94, 0.03) 40px)'
+              backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(148, 163, 184, 0.03) 20px, rgba(148, 163, 184, 0.03) 40px)'
             }}
             suppressHydrationWarning
           >
@@ -346,8 +364,8 @@ export default function MainChat() {
                   <div
                     className={`max-w-[75%] px-2.5 py-1.5 shadow-sm border ${
                       msg.nickname === nickname
-                        ? 'bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-700 dark:to-rose-700 text-white border-red-600 dark:border-red-800'
-                        : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 border-red-200 dark:border-gray-600'
+                        ? 'bg-gradient-to-r from-gray-600 to-gray-700 dark:from-gray-700 dark:to-gray-800 text-white border-gray-500 dark:border-gray-600'
+                        : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-600'
                     }`}
                   >
                     <p className="text-xs break-words leading-tight">{msg.message}</p>
@@ -361,7 +379,7 @@ export default function MainChat() {
 
           {/* 입력 영역 */}
           {!isCollapsed && (
-          <div className="p-2 bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-800 dark:to-rose-800 border-t-2 border-red-600 dark:border-red-900">
+          <div className="p-2 bg-gradient-to-r from-gray-700 to-gray-600 dark:from-gray-800 dark:to-gray-700 border-t-2 border-gray-500 dark:border-gray-600">
             {isNicknameSet ? (
               // 메시지 입력
               <div className="flex gap-1.5">
@@ -429,9 +447,9 @@ export default function MainChat() {
         {/* 안내 문구 */}
         <div className="mt-4 text-center space-y-1">
           <p className="text-xs text-gray-600 dark:text-gray-400">
-            💡 <span className="font-semibold">비온타키</span>는 누구나 자유롭게 대화할 수 있는 공간이에요!
+            💡 <span className="font-semibold">BION Talk</span>에서 자유롭게 대화를 나눠보세요!
           </p>
-          <p className="text-[10px] text-yellow-600 dark:text-yellow-400 font-medium">
+          <p className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">
             🕐 채팅 메시지는 24시간 후 자동으로 삭제됩니다
           </p>
         </div>

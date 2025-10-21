@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "이용약관",
+  description: "BION 웹사이트 이용에 관한 약관입니다. 서비스 이용 전 반드시 확인해주세요.",
+};
 
 export default function TermsPage() {
   return (

@@ -161,7 +161,7 @@ export default function EyeTest() {
   // 결과 화면
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-blue-900 dark:via-cyan-900 dark:to-teal-900 transition-colors">
         <div className="mx-auto max-w-[600px] px-4 py-6">
           <div className="mb-4">
             

@@ -74,7 +74,7 @@ export default function TypingSpeedTestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-600 dark:via-indigo-600 dark:to-purple-600 py-8 px-4 transition-colors">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">
           ⌨️ 타이핑 속도 측정

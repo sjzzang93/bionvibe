@@ -232,7 +232,7 @@ export default function CoffeeCalculator() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+      <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-900 dark:via-orange-900 dark:to-yellow-900 transition-colors">
         <div className="mx-auto max-w-[600px] px-4 py-6">
           <section className="bg-white rounded-2xl shadow-xl p-6">
             <header className="text-center mb-6">

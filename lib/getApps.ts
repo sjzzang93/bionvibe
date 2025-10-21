@@ -34,15 +34,17 @@ export function getAllCategories(): Category[] {
 
 // 모든 앱 가져오기 (숨김 앱 제외)
 export function getAllApps(includeHidden: boolean = false): App[] {
+  const apps = appsData.apps as App[];
   if (includeHidden) {
-    return appsData.apps;
+    return apps;
   }
-  return appsData.apps.filter(app => !app.hidden);
+  return apps.filter(app => !app.hidden);
 }
 
 // 숨김 앱만 가져오기
 export function getHiddenApps(): App[] {
-  return appsData.apps.filter(app => app.hidden === true);
+  const apps = appsData.apps as App[];
+  return apps.filter(app => app.hidden === true);
 }
 
 // 카테고리별로 앱 그룹화 (숨김 앱 제외)

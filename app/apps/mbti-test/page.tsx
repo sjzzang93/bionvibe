@@ -282,13 +282,13 @@ export default function MBTI32() {
 
   if (showResult && result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
+      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 p-4 transition-colors">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <div className="mb-6">
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 text-white hover:text-blue-200 transition-colors"
+              className="inline-flex items-center gap-2 text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-200 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -298,33 +298,33 @@ export default function MBTI32() {
           </div>
 
           <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
               🎭 MBTI 결과
             </h1>
-            <p className="text-xl text-gray-300">당신의 성격 유형을 분석했습니다!</p>
+            <p className="text-xl text-gray-600 dark:text-gray-300">당신의 성격 유형을 분석했습니다!</p>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/20">
+          <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 dark:border-white/20 shadow-xl">
             <div className="text-center mb-8">
-              <div className="text-6xl md:text-8xl font-bold text-yellow-300 mb-4">
+              <div className="text-6xl md:text-8xl font-bold text-purple-600 dark:text-yellow-300 mb-4">
                 {result.type}
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
                 {result.description}
               </h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="space-y-6">
-                <div className="bg-white/10 rounded-2xl p-6">
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                <div className="bg-purple-50 dark:bg-white/10 rounded-2xl p-6 border border-purple-100 dark:border-white/10">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     🎯 주요 특성
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {result.characteristics.map((char, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-purple-500/30 text-white rounded-full text-sm"
+                        className="px-3 py-1 bg-purple-200 dark:bg-purple-500/30 text-purple-900 dark:text-white rounded-full text-sm"
                       >
                         {char}
                       </span>
@@ -332,14 +332,14 @@ export default function MBTI32() {
                   </div>
                 </div>
 
-                <div className="bg-white/10 rounded-2xl p-6">
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                <div className="bg-green-50 dark:bg-white/10 rounded-2xl p-6 border border-green-100 dark:border-white/10">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     💪 강점
                   </h3>
                   <ul className="space-y-2">
                     {result.strengths.map((strength, index) => (
-                      <li key={index} className="text-gray-300 flex items-center">
-                        <span className="text-green-400 mr-2">✓</span>
+                      <li key={index} className="text-gray-700 dark:text-gray-300 flex items-center">
+                        <span className="text-green-600 dark:text-green-400 mr-2">✓</span>
                         {strength}
                       </li>
                     ))}
@@ -348,28 +348,28 @@ export default function MBTI32() {
               </div>
 
               <div className="space-y-6">
-                <div className="bg-white/10 rounded-2xl p-6">
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                <div className="bg-yellow-50 dark:bg-white/10 rounded-2xl p-6 border border-yellow-100 dark:border-white/10">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     ⚠️ 주의점
                   </h3>
                   <ul className="space-y-2">
                     {result.weaknesses.map((weakness, index) => (
-                      <li key={index} className="text-gray-300 flex items-center">
-                        <span className="text-yellow-400 mr-2">!</span>
+                      <li key={index} className="text-gray-700 dark:text-gray-300 flex items-center">
+                        <span className="text-yellow-600 dark:text-yellow-400 mr-2">!</span>
                         {weakness}
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="bg-white/10 rounded-2xl p-6">
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+                <div className="bg-blue-50 dark:bg-white/10 rounded-2xl p-6 border border-blue-100 dark:border-white/10">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                     💼 추천 직업
                   </h3>
                   <ul className="space-y-2">
                     {result.careers.map((career, index) => (
-                      <li key={index} className="text-gray-300 flex items-center">
-                        <span className="text-blue-400 mr-2">💼</span>
+                      <li key={index} className="text-gray-700 dark:text-gray-300 flex items-center">
+                        <span className="text-blue-600 dark:text-blue-400 mr-2">💼</span>
                         {career}
                       </li>
                     ))}
@@ -396,13 +396,13 @@ export default function MBTI32() {
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 p-4">
+    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 dark:from-purple-900 dark:via-blue-900 dark:to-indigo-900 p-4 transition-colors">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
         <div className="mb-6">
           <Link 
             href="/"
-            className="inline-flex items-center gap-2 text-white hover:text-blue-200 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-200 transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -412,20 +412,20 @@ export default function MBTI32() {
         </div>
 
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
             🎭 MBTI 테스트
           </h1>
-          <p className="text-xl text-gray-300">8문항으로 알아보는 나의 성격 유형</p>
+          <p className="text-xl text-gray-600 dark:text-gray-300">8문항으로 알아보는 나의 성격 유형</p>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/20">
+        <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 dark:border-white/20 shadow-xl">
           {/* 진행률 표시 */}
           <div className="mb-8">
-            <div className="flex justify-between text-white mb-2">
+            <div className="flex justify-between text-gray-900 dark:text-white mb-2">
               <span className="text-sm">문항 {currentQuestion + 1} / {questions.length}</span>
               <span className="text-sm">{Math.round(progress)}%</span>
             </div>
-            <div className="w-full bg-white/20 rounded-full h-3">
+            <div className="w-full bg-gray-200 dark:bg-white/20 rounded-full h-3">
               <div
                 className="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
@@ -435,7 +435,7 @@ export default function MBTI32() {
 
           {/* 질문 */}
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
               {question.question}
             </h2>
           </div>
@@ -446,7 +446,7 @@ export default function MBTI32() {
               <button
                 key={index}
                 onClick={() => handleAnswer(question.type, option.value)}
-                className="w-full p-4 md:p-6 bg-white/10 hover:bg-white/20 text-white text-left rounded-2xl border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
+                className="w-full p-4 md:p-6 bg-white dark:bg-white/10 hover:bg-purple-50 dark:hover:bg-white/20 text-gray-900 dark:text-white text-left rounded-2xl border border-gray-200 dark:border-white/20 hover:border-purple-300 dark:hover:border-white/40 transition-all duration-300 hover:scale-105 shadow-sm"
               >
                 <div className="flex items-center">
                   <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">

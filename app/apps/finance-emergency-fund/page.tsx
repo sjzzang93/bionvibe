@@ -30,7 +30,7 @@ export default function EmergencyFundPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-600 via-emerald-600 to-teal-600 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-600 dark:via-emerald-600 dark:to-teal-600 py-8 px-4 transition-colors">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">
           💰 비상금 목표 계산기

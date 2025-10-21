@@ -66,7 +66,7 @@ export default function MultiplicationGamePage() {
 
   if (mode === 'menu') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 py-8 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-600 dark:via-purple-600 dark:to-pink-600 py-8 px-4 transition-colors">
         <div className="max-w-4xl mx-auto">
           {/* 애드센스 상단 */}
           <div className="bg-white/10 rounded-xl p-4 mb-6">

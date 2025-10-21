@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getTotalAppsCount, getAllApps } from '@/lib/getApps';
+import { getTotalAppsCount, getAllApps, getAllCategories } from '@/lib/getApps';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
@@ -17,6 +17,13 @@ export default function Home() {
   const router = useRouter();
   const totalApps = getTotalAppsCount();
   const allApps = getAllApps();
+  const categories = getAllCategories();
+  
+  // 카테고리 ID -> 이름 매핑
+  const categoryMap = categories.reduce((acc, cat) => {
+    acc[cat.id] = cat.name;
+    return acc;
+  }, {} as Record<string, string>);
 
   // localStorage에서 즐겨찾기 불러오기 (유효한 앱만 필터링)
   useEffect(() => {
@@ -94,6 +101,12 @@ export default function Home() {
   const favoriteApps = allApps.filter(app => favorites.includes(app.id));
   const otherApps = allApps.filter(app => !favorites.includes(app.id));
   
+  // 카테고리별로 앱 그룹화
+  const appsByCategory = categories.map(category => ({
+    ...category,
+    apps: otherApps.filter(app => app.categoryId === category.id)
+  })).filter(category => category.apps.length > 0);
+  
   return (
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       {/* 비온타키 채팅 */}
@@ -127,18 +140,71 @@ export default function Home() {
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {favoriteApps.map((app) => (
+                     <Link
+                       key={app.id}
+                       href={app.url}
+                       className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border-2 border-red-200 dark:border-red-800 hover:border-red-400 dark:hover:border-red-600"
+                     >
+                     {/* 하트 버튼 */}
+                     <button
+                       onClick={(e) => toggleFavorite(app.id, e)}
+                       className="absolute top-1.5 right-1.5 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
+                       suppressHydrationWarning
+                     >
+                       <span className="text-sm">❤️</span>
+                     </button>
+
+                       {/* App Image */}
+                       {app.image && app.image.trim() !== '' && (
+                         <div className="relative h-36 overflow-hidden" suppressHydrationWarning>
+                           <img
+                             src={app.image}
+                             alt={app.name}
+                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                             loading="lazy"
+                           />
+                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                         </div>
+                       )}
+
+                        {/* App Info */}
+                        <div className="p-3 flex flex-col items-center text-center">
+                          <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
+                            {app.name}
+                          </h4>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 카테고리별 앱 섹션 */}
+              {appsByCategory.map((category) => (
+                <div key={category.id} className="mb-12">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-200">
+                      {category.name}
+                    </h3>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                      {category.apps.length}개
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {category.apps.map((app) => (
                       <Link
                         key={app.id}
                         href={app.url}
-                        className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border-2 border-red-200 dark:border-red-800 hover:border-red-400 dark:hover:border-red-600"
+                        className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-600"
                       >
-                      {/* 하트 버튼 */}
-                      <button
-                        onClick={(e) => toggleFavorite(app.id, e)}
-                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
-                      >
-                        <span className="text-sm">❤️</span>
-                      </button>
+                        {/* 하트 버튼 */}
+                        <button
+                          onClick={(e) => toggleFavorite(app.id, e)}
+                          className="absolute top-1.5 right-1.5 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
+                          suppressHydrationWarning
+                        >
+                          <span className="text-sm">🤍</span>
+                        </button>
 
                         {/* App Image */}
                         {app.image && app.image.trim() !== '' && (
@@ -163,58 +229,7 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
-              )}
-
-              {/* 전체 앱 섹션 */}
-              <div>
-                {favoriteApps.length > 0 && (
-                  <div className="flex items-center gap-3 mb-6">
-                    <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-200">
-                      📱 전체 앱
-                    </h3>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                      {otherApps.length}개
-                    </span>
-                  </div>
-                )}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {otherApps.map((app) => (
-                    <Link
-                      key={app.id}
-                      href={app.url}
-                      className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-red-200 dark:hover:border-red-600"
-                    >
-                      {/* 하트 버튼 */}
-                      <button
-                        onClick={(e) => toggleFavorite(app.id, e)}
-                        className="absolute top-1.5 right-1.5 z-10 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full p-1 shadow-sm hover:scale-110 transition-transform"
-                      >
-                        <span className="text-sm">🤍</span>
-                      </button>
-
-                      {/* App Image */}
-                      {app.image && app.image.trim() !== '' && (
-                        <div className="relative h-36 overflow-hidden" suppressHydrationWarning>
-                          <img
-                            src={app.image}
-                            alt={app.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                        </div>
-                      )}
-
-                      {/* App Info */}
-                      <div className="p-3 flex flex-col items-center text-center">
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2">
-                          {app.name}
-                        </h4>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+              ))}
             </>
           )}
         </div>

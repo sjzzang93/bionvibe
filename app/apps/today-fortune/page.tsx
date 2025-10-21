@@ -87,12 +87,12 @@ export default function TodayFortunePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-blue-900 dark:via-purple-900 dark:to-pink-900 py-8 px-4 transition-colors">
       {/* Back Button */}
       <div className="max-w-4xl mx-auto mb-6">
         <Link 
           href="/"
-          className="inline-flex items-center gap-2 text-white hover:text-blue-200 transition-colors"
+          className="inline-flex items-center gap-2 text-gray-700 dark:text-white hover:text-blue-600 dark:hover:text-blue-200 transition-colors"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -103,10 +103,10 @@ export default function TodayFortunePage() {
 
       {/* Hero */}
       <div className="text-center mb-12">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-4">
           🌟 오늘의 운세
         </h1>
-        <p className="text-lg text-blue-200 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-blue-200 max-w-2xl mx-auto">
           별자리별 오늘의 운세를 확인해보세요<br />
           매일 새로운 운세가 업데이트됩니다
         </p>
@@ -114,7 +114,7 @@ export default function TodayFortunePage() {
 
       {/* 별자리 선택 */}
       <div className="max-w-4xl mx-auto mb-12">
-        <h2 className="text-2xl font-bold text-white text-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-6">
           ✨ 별자리를 선택하세요
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -122,13 +122,13 @@ export default function TodayFortunePage() {
             <button
               key={zodiac.name}
               onClick={() => handleSelectZodiac(zodiac.name)}
-              className={`bg-white/10 backdrop-blur-lg hover:bg-white/20 rounded-xl p-6 transition-all hover:scale-105 ${
+              className={`bg-white dark:bg-white/10 backdrop-blur-lg hover:bg-purple-50 dark:hover:bg-white/20 rounded-xl p-6 transition-all hover:scale-105 border border-gray-200 dark:border-white/10 shadow-sm ${
                 selectedZodiac === zodiac.name ? 'ring-4 ring-yellow-400' : ''
               }`}
             >
               <div className="text-5xl mb-2">{zodiac.emoji}</div>
-              <div className="text-white font-bold">{zodiac.name}</div>
-              <div className="text-blue-200 text-xs mt-1">{zodiac.date}</div>
+              <div className="text-gray-900 dark:text-white font-bold">{zodiac.name}</div>
+              <div className="text-gray-600 dark:text-blue-200 text-xs mt-1">{zodiac.date}</div>
             </button>
           ))}
         </div>
@@ -137,11 +137,11 @@ export default function TodayFortunePage() {
       {/* 결과 */}
       {result && (
         <div id="result-section" className="max-w-[800px] mx-auto space-y-6">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8">
+          <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-gray-200 dark:border-white/10">
             <div className="text-center mb-8">
               <div className="text-7xl mb-4">{result.emoji}</div>
-              <h2 className="text-3xl font-bold text-white mb-2">{result.zodiac}</h2>
-              <p className="text-blue-200">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{result.zodiac}</h2>
+              <p className="text-gray-600 dark:text-blue-200">
                 {new Date().toLocaleDateString('ko-KR', { 
                   year: 'numeric', 
                   month: 'long', 
@@ -152,8 +152,8 @@ export default function TodayFortunePage() {
             </div>
 
             {/* 종합 운세 */}
-            <div className="bg-white/20 rounded-xl p-6 mb-6">
-              <h3 className="text-xl font-bold text-white mb-4">📊 종합 운세</h3>
+            <div className="bg-purple-50 dark:bg-white/20 rounded-xl p-6 mb-6 border border-purple-100 dark:border-white/10">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">📊 종합 운세</h3>
               <div className="space-y-4">
                 {[
                   { label: '전체운', value: result.overall, color: 'from-purple-500 to-pink-500' },
@@ -163,11 +163,11 @@ export default function TodayFortunePage() {
                   { label: '학업운', value: result.study, color: 'from-blue-500 to-purple-500' },
                 ].map((item) => (
                   <div key={item.label}>
-                    <div className="flex justify-between text-white mb-1">
+                    <div className="flex justify-between text-gray-900 dark:text-white mb-1">
                       <span className="font-medium">{item.label}</span>
                       <span className="font-bold">{item.value}%</span>
                     </div>
-                    <div className="w-full bg-white/20 rounded-full h-3 overflow-hidden">
+                    <div className="w-full bg-gray-200 dark:bg-white/20 rounded-full h-3 overflow-hidden">
                       <div
                         className={`h-full bg-gradient-to-r ${item.color} transition-all duration-1000`}
                         style={{ width: `${item.value}%` }}
@@ -179,34 +179,34 @@ export default function TodayFortunePage() {
             </div>
 
             {/* 메시지 */}
-            <div className="bg-white/20 rounded-xl p-6 mb-6">
-              <h3 className="text-xl font-bold text-white mb-3">💬 오늘의 메시지</h3>
-              <p className="text-blue-100 leading-relaxed text-lg">{result.message}</p>
+            <div className="bg-blue-50 dark:bg-white/20 rounded-xl p-6 mb-6 border border-blue-100 dark:border-white/10">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">💬 오늘의 메시지</h3>
+              <p className="text-gray-700 dark:text-blue-100 leading-relaxed text-lg">{result.message}</p>
             </div>
 
             {/* 행운 아이템 */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/20 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-white mb-2">🎨 행운의 색</h3>
-                <p className="text-2xl font-bold text-yellow-300">{result.luckyColor}</p>
+              <div className="bg-pink-50 dark:bg-white/20 rounded-xl p-6 border border-pink-100 dark:border-white/10">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">🎨 행운의 색</h3>
+                <p className="text-2xl font-bold text-pink-600 dark:text-yellow-300">{result.luckyColor}</p>
               </div>
-              <div className="bg-white/20 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-white mb-2">🔢 행운의 숫자</h3>
-                <p className="text-2xl font-bold text-yellow-300">{result.luckyNumber}</p>
+              <div className="bg-yellow-50 dark:bg-white/20 rounded-xl p-6 border border-yellow-100 dark:border-white/10">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">🔢 행운의 숫자</h3>
+                <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-300">{result.luckyNumber}</p>
               </div>
             </div>
 
             {/* 조언 */}
-            <div className="bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-xl p-6 mt-6">
-              <h3 className="text-lg font-bold text-white mb-2">💡 오늘의 조언</h3>
-              <p className="text-white leading-relaxed">{result.advice}</p>
+            <div className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-500/30 dark:to-pink-500/30 rounded-xl p-6 mt-6 border border-purple-200 dark:border-white/10">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">💡 오늘의 조언</h3>
+              <p className="text-gray-700 dark:text-white leading-relaxed">{result.advice}</p>
             </div>
           </div>
         </div>
       )}
 
       {/* 하단 고지 */}
-      <div className="max-w-3xl mx-auto mt-16 text-center text-sm text-blue-200">
+      <div className="max-w-3xl mx-auto mt-16 text-center text-sm text-gray-500 dark:text-blue-200">
         <p className="text-xs">운세는 재미와 참고용이며, 과학적 근거가 없습니다.</p>
       </div>
     </div>

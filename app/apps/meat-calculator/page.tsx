@@ -136,7 +136,7 @@ export default function MeatCalculatorPage() {
   
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 py-4 md:py-8 px-3 md:px-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 dark:from-red-900 dark:via-orange-900 dark:to-yellow-900 py-4 md:py-8 px-3 md:px-4 transition-colors">
       <div className="max-w-6xl mx-auto">
         {/* 헤더 */}
         <div className="text-center mb-6 md:mb-8">

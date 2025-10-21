@@ -71,7 +71,7 @@ export default function LoanRefinancePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-600 dark:via-purple-600 dark:to-pink-600 py-8 px-4 transition-colors">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-extrabold text-center text-white mb-4">
           🏦 대출 갈아타기 분석

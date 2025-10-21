@@ -91,7 +91,7 @@ export default function DDayCounter() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 text-black placeholder-gray-500">
+    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-purple-900 dark:via-pink-900 dark:to-blue-900 text-black dark:text-white placeholder-gray-500 transition-colors">
       <div className="mx-auto max-w-[720px] px-4 py-6 text-black placeholder-gray-500">
         {/* 메인 카드 */}
         <section className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-purple-200 text-black placeholder-gray-500">

@@ -177,7 +177,7 @@ export default function WeatherOutfit() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 text-black placeholder-gray-500">
+      <main className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 dark:from-sky-900 dark:via-blue-900 dark:to-indigo-900 text-black dark:text-white placeholder-gray-500 transition-colors">
         <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
           <div className="mb-4 text-black placeholder-gray-500">
             

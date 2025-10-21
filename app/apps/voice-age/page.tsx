@@ -175,7 +175,7 @@ export default function VoiceAge() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black" style={{
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(220, 38, 38, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(239, 68, 68, 0.1) 0%, transparent 40%), linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%)',
         backgroundAttachment: 'fixed'
       }}>
@@ -327,7 +327,7 @@ export default function VoiceAge() {
 
   if (analyzing) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black" style={{
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(220, 38, 38, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(239, 68, 68, 0.1) 0%, transparent 40%), linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%)',
         backgroundAttachment: 'fixed'
       }}>

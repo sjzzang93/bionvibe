@@ -127,7 +127,7 @@ export default function CreditCardOptimizerPage() {
   };
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: 'rgb(217, 217, 217)' }}>
+    <main className="min-h-screen bg-gray-200 dark:bg-gray-800 transition-colors">
       <div className="container mx-auto px-4 py-8 text-black placeholder-gray-500">
         {/* 메인 카드 */}
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border-2 border-black text-black placeholder-gray-500">

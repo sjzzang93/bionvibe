@@ -179,7 +179,7 @@ export default function VoiceFortune() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900" style={{
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900 dark:via-indigo-900 dark:to-purple-900 transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.2) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.2) 0%, transparent 40%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
         backgroundAttachment: 'fixed'
       }}>
@@ -286,7 +286,7 @@ export default function VoiceFortune() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900" style={{
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900 dark:via-indigo-900 dark:to-purple-900 transition-colors" style={{
       backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.2) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.2) 0%, transparent 40%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
       backgroundAttachment: 'fixed'
     }}>

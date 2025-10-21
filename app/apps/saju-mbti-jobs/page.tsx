@@ -188,7 +188,7 @@ export default function SajuMBTIJobs() {
 
   if (step === 2 && result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-red-950 via-amber-950 to-yellow-950" style={{
+      <main className="min-h-screen bg-gradient-to-br from-red-50 via-amber-50 to-yellow-50 dark:from-red-950 dark:via-amber-950 dark:to-yellow-950 transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(180, 83, 9, 0.3) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(161, 98, 7, 0.3) 0%, transparent 40%), linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, transparent 100%)',
         backgroundAttachment: 'fixed'
       }}>
@@ -496,7 +496,7 @@ export default function SajuMBTIJobs() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-red-950 via-amber-950 to-yellow-950" style={{
+    <main className="min-h-screen bg-gradient-to-br from-red-50 via-amber-50 to-yellow-50 dark:from-red-950 dark:via-amber-950 dark:to-yellow-950 transition-colors" style={{
       backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(180, 83, 9, 0.3) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(161, 98, 7, 0.3) 0%, transparent 40%), linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, transparent 100%)',
       backgroundAttachment: 'fixed'
     }}>

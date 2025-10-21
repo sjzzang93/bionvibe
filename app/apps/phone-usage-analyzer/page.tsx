@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 interface DailyUsage {
@@ -17,9 +17,7 @@ interface CategoryUsage {
 }
 
 export default function PhoneUsageAnalyzerPage() {
-  const [step, setStep] = useState(1); // 1: 안내, 2: 선택, 3: 자동입력, 4: 수동입력, 5: 결과
-  const [inputMethod, setInputMethod] = useState<'auto' | 'manual'>('auto');
-  const [jsonData, setJsonData] = useState('');
+  const [hasScreenTimeData, setHasScreenTimeData] = useState(false);
   const [weekData, setWeekData] = useState<DailyUsage[]>([
     { day: '월요일', hours: 0, minutes: 0 },
     { day: '화요일', hours: 0, minutes: 0 },
@@ -36,6 +34,29 @@ export default function PhoneUsageAnalyzerPage() {
     messenger: 0,
   });
   const [result, setResult] = useState<any>(null);
+  const [showResult, setShowResult] = useState(false);
+
+  // URL 파라미터에서 데이터 자동 수신 (Shortcuts에서 전달)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const data = params.get('data');
+    
+    if (data) {
+      try {
+        const parsed = JSON.parse(decodeURIComponent(data));
+        if (parsed.weekData && Array.isArray(parsed.weekData)) {
+          setWeekData(parsed.weekData);
+          if (parsed.categories) {
+            setCategories(parsed.categories);
+          }
+          setHasScreenTimeData(true);
+          analyzeData(parsed.weekData, parsed.categories || categories);
+        }
+      } catch (e) {
+        console.error('URL 데이터 파싱 실패:', e);
+      }
+    }
+  }, []);
 
   const updateDayUsage = (index: number, field: 'hours' | 'minutes', value: string) => {
     const newData = [...weekData];
@@ -43,47 +64,24 @@ export default function PhoneUsageAnalyzerPage() {
     setWeekData(newData);
   };
 
-  const parseJsonData = () => {
-    try {
-      const data = JSON.parse(jsonData);
-      if (data.weekData && Array.isArray(data.weekData)) {
-        setWeekData(data.weekData);
-        if (data.categories) {
-          setCategories(data.categories);
-        }
-        setStep(5);
-        analyzeData();
-      } else {
-        alert('⚠️ JSON 형식이 올바르지 않습니다. Shortcuts 가이드를 다시 확인해주세요.');
-      }
-    } catch (e) {
-      alert('⚠️ JSON 파싱 실패. 데이터 형식을 확인해주세요.');
-    }
-  };
-
-  const openScreenTime = () => {
-    // iOS 스크린 타임 설정 열기
-    window.location.href = 'App-prefs:SCREEN_TIME';
-  };
-
-  const analyzeData = () => {
+  const analyzeData = (data = weekData, cats = categories) => {
     // 총 사용 시간 계산
-    const totalMinutes = weekData.reduce((sum, day) => sum + (day.hours * 60 + day.minutes), 0);
+    const totalMinutes = data.reduce((sum, day) => sum + (day.hours * 60 + day.minutes), 0);
     const totalHours = Math.floor(totalMinutes / 60);
     const remainMinutes = totalMinutes % 60;
-    const avgDaily = totalMinutes / 7 / 60; // 일평균 (시간)
+    const avgDaily = totalMinutes / 7 / 60;
 
     // 주중/주말 구분
-    const weekdayMinutes = weekData.slice(0, 5).reduce((sum, day) => sum + (day.hours * 60 + day.minutes), 0);
-    const weekendMinutes = weekData.slice(5, 7).reduce((sum, day) => sum + (day.hours * 60 + day.minutes), 0);
+    const weekdayMinutes = data.slice(0, 5).reduce((sum, day) => sum + (day.hours * 60 + day.minutes), 0);
+    const weekendMinutes = data.slice(5, 7).reduce((sum, day) => sum + (day.hours * 60 + day.minutes), 0);
     const avgWeekday = weekdayMinutes / 5 / 60;
     const avgWeekend = weekendMinutes / 2 / 60;
-    const weekendIncrease = ((avgWeekend - avgWeekday) / avgWeekday) * 100;
+    const weekendIncrease = avgWeekday > 0 ? ((avgWeekend - avgWeekday) / avgWeekday) * 100 : 0;
 
     // 최대/최소 사용일
-    const dailyHours = weekData.map(day => day.hours + day.minutes / 60);
-    const maxDay = weekData[dailyHours.indexOf(Math.max(...dailyHours))];
-    const minDay = weekData[dailyHours.indexOf(Math.min(...dailyHours))];
+    const dailyHours = data.map(day => day.hours + day.minutes / 60);
+    const maxDay = data[dailyHours.indexOf(Math.max(...dailyHours))];
+    const minDay = data[dailyHours.indexOf(Math.min(...dailyHours))];
 
     // 중독도 계산 (0-10)
     let addictionScore = 0;
@@ -95,8 +93,8 @@ export default function PhoneUsageAnalyzerPage() {
     if (weekendIncrease > 50) addictionScore += 2;
     else if (weekendIncrease > 30) addictionScore += 1;
 
-    const totalCategoryHours = Object.values(categories).reduce((sum, val) => sum + val, 0);
-    if (categories.sns > avgDaily * 0.3) addictionScore += 1;
+    const totalCategoryHours = Object.values(cats).reduce((sum, val) => sum + val, 0);
+    if (cats.sns > avgDaily * 0.3) addictionScore += 1;
     if (totalCategoryHours > avgDaily * 0.8) addictionScore += 1;
 
     addictionScore = Math.min(10, addictionScore);
@@ -131,13 +129,13 @@ export default function PhoneUsageAnalyzerPage() {
     const warnings = [];
     if (avgDaily > 6) warnings.push('하루 평균 6시간 초과 - 수면 및 건강에 영향');
     if (weekendIncrease > 40) warnings.push(`주말 과사용 (평균 대비 ${weekendIncrease.toFixed(0)}% 증가)`);
-    if (categories.sns > avgDaily * 0.3) warnings.push('SNS 의존도 높음 (전체의 30% 이상)');
-    if (categories.game > 3) warnings.push('게임 과몰입 경향 (하루 3시간 초과)');
+    if (cats.sns > avgDaily * 0.3) warnings.push('SNS 의존도 높음 (전체의 30% 이상)');
+    if (cats.game > 3) warnings.push('게임 과몰입 경향 (하루 3시간 초과)');
 
     // 맞춤 처방
     const prescriptions = [];
     if (avgDaily > 6) prescriptions.push(`목표: 하루 ${Math.max(4, avgDaily - 2).toFixed(1)}시간으로 단계적 감소`);
-    if (categories.sns > 2) prescriptions.push('SNS 앱 사용 제한 설정 (하루 1-1.5시간)');
+    if (cats.sns > 2) prescriptions.push('SNS 앱 사용 제한 설정 (하루 1-1.5시간)');
     if (weekendIncrease > 40) prescriptions.push('주말 활동 계획 세우기 (운동, 독서, 만남 등)');
     if (avgDaily > 4) prescriptions.push('밤 11시 이후 스마트폰 거치대에 보관');
     prescriptions.push('30분마다 5분 휴식 (20-20-20 법칙)');
@@ -160,306 +158,131 @@ export default function PhoneUsageAnalyzerPage() {
       dailyHours,
     });
 
-    setStep(3);
+    setShowResult(true);
+  };
+
+  const openScreenTime = () => {
+    // iOS 스크린 타임 설정으로 이동
+    if (window.confirm('스크린 타임 설정으로 이동할까요?')) {
+      window.open('App-prefs:SCREEN_TIME', '_blank');
+    }
+  };
+
+  const generateShortcutUrl = () => {
+    // iOS Shortcuts 앱 실행
+    const currentUrl = window.location.origin + window.location.pathname;
+    const shortcutData = {
+      name: "BION 스크린타임 분석",
+      url: currentUrl,
+      instructions: "Screen Time 데이터를 입력하고 URL을 통해 전달합니다."
+    };
+    
+    // Shortcuts Gallery로 이동
+    alert('📱 iOS Shortcuts 설정 방법:\n\n1. iPhone 설정 → 스크린 타임\n2. 7일 데이터 확인 및 메모\n3. 아래 입력창에 직접 입력\n\n💡 Shortcut으로 자동화하려면 Shortcuts 앱에서 별도 워크플로우를 만들어야 합니다.');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 py-8 px-4" suppressHydrationWarning>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-red-50 dark:from-purple-600 dark:via-pink-600 dark:to-red-600 py-8 px-4 transition-colors" suppressHydrationWarning>
       <div className="max-w-4xl mx-auto">
-        {/* STEP 1: 안내 화면 */}
-        {step === 1 && (
+        {!showResult ? (
           <div className="space-y-6">
+            {/* 헤더 */}
             <div className="text-center">
               <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4">
                 📱 스마트폰 사용 시간 분석
-        </h1>
+              </h1>
               <p className="text-purple-100 text-lg">
-                전문적인 중독성 진단 + 맞춤 개선 계획
-              </p>
-            </div>
-
-        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 space-y-6">
-          <div>
-                <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                  🔍 스크린 타임 확인 방법
-                </h2>
-                <div className="space-y-4">
-                  <div className="bg-white/20 rounded-xl p-6">
-                    <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                      📱 iPhone
-                    </h3>
-                    <ol className="text-white space-y-2 text-sm md:text-base">
-                      <li>1️⃣ <strong>설정</strong> 앱 열기</li>
-                      <li>2️⃣ <strong>스크린 타임</strong> 선택</li>
-                      <li>3️⃣ <strong>모든 활동 보기</strong> 탭</li>
-                      <li>4️⃣ <strong>주</strong> 탭에서 7일 데이터 확인</li>
-                    </ol>
-                  </div>
-
-                  <div className="bg-white/20 rounded-xl p-6">
-                    <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
-                      📱 Android
-                    </h3>
-                    <ol className="text-white space-y-2 text-sm md:text-base">
-                      <li>1️⃣ <strong>설정</strong> 앱 열기</li>
-                      <li>2️⃣ <strong>Digital Wellbeing</strong> 선택</li>
-                      <li>3️⃣ <strong>대시보드</strong> 확인</li>
-                      <li>4️⃣ 각 날짜별 사용 시간 메모</li>
-                    </ol>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-yellow-500/20 border-2 border-yellow-400/50 rounded-xl p-6">
-                <p className="text-white text-center font-semibold">
-                  💡 <strong>지난 7일</strong> 데이터를 준비해주세요!
-                </p>
-              </div>
-
-              <button
-                onClick={() => setStep(2)}
-                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-xl hover:shadow-lg transition-all"
-              >
-                시작하기 →
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* STEP 2: 입력 방식 선택 */}
-        {step === 2 && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2">
-                📲 입력 방식 선택
-              </h1>
-              <p className="text-purple-100">
-                어떤 방식으로 데이터를 입력하시겠어요?
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* 자동 입력 (iPhone) */}
-              <button
-                onClick={() => {
-                  setInputMethod('auto');
-                  setStep(3);
-                }}
-                className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/20 transition-all border-2 border-white/20 hover:border-yellow-400 group"
-              >
-                <div className="text-6xl mb-4">⚡</div>
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  자동 입력 (추천)
-                </h3>
-                <div className="text-white/80 text-sm space-y-2">
-                  <p>✅ iPhone 사용자 전용</p>
-                  <p>✅ Shortcuts로 1초 복붙</p>
-                  <p>✅ 100% 정확한 데이터</p>
-                  <p className="text-yellow-300 font-bold mt-4">
-                    가장 빠르고 쉬워요!
-                  </p>
-                </div>
-              </button>
-
-              {/* 수동 입력 */}
-              <button
-                onClick={() => {
-                  setInputMethod('manual');
-                  setStep(4);
-                }}
-                className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/20 transition-all border-2 border-white/20 hover:border-blue-400 group"
-              >
-                <div className="text-6xl mb-4">✏️</div>
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  직접 입력
-                </h3>
-                <div className="text-white/80 text-sm space-y-2">
-                  <p>✅ 모든 기기 사용 가능</p>
-                  <p>✅ Android도 OK</p>
-                  <p>✅ 설정 없이 바로 시작</p>
-                  <p className="text-blue-300 font-bold mt-4">
-                    간단하게 시작!
-                  </p>
-                </div>
-              </button>
-            </div>
-
-            <button
-              onClick={() => setStep(1)}
-              className="w-full bg-white/20 text-white px-6 py-3 rounded-xl font-bold hover:bg-white/30 transition-all"
-            >
-              ← 뒤로
-            </button>
-          </div>
-        )}
-
-        {/* STEP 3: 자동 입력 (iPhone Shortcuts) */}
-        {step === 3 && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2">
-                ⚡ 자동 입력 (iPhone)
-              </h1>
-              <p className="text-purple-100">
-                Shortcuts로 한 번에 데이터 추출!
+                iPhone 전용 - Screen Time 자동 연동
               </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-6">
-              {/* 단계 안내 */}
-              <div className="bg-yellow-500/20 border-2 border-yellow-400/50 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  📱 iPhone Shortcuts 설정 (1회만)
-                </h3>
-                <ol className="text-white space-y-3 text-sm md:text-base">
+              {/* iPhone Screen Time 안내 */}
+              <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl p-6 text-white">
+                <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                  📱 iPhone Screen Time 확인하기
+                </h2>
+                <ol className="space-y-3 text-sm md:text-base">
                   <li className="flex gap-3">
-                    <span className="font-bold">1️⃣</span>
-                    <span><strong>Shortcuts</strong> 앱 열기</span>
+                    <span className="font-bold text-yellow-300">1️⃣</span>
+                    <span>iPhone <strong>설정</strong> 앱 열기</span>
                   </li>
                   <li className="flex gap-3">
-                    <span className="font-bold">2️⃣</span>
-                    <span>아래 <strong>"Shortcut 다운로드"</strong> 버튼 탭</span>
+                    <span className="font-bold text-yellow-300">2️⃣</span>
+                    <span><strong>스크린 타임</strong> 메뉴 선택</span>
                   </li>
                   <li className="flex gap-3">
-                    <span className="font-bold">3️⃣</span>
-                    <span>Shortcut 실행 → 데이터 자동 복사</span>
+                    <span className="font-bold text-yellow-300">3️⃣</span>
+                    <span><strong>모든 활동 보기</strong> 탭</span>
                   </li>
                   <li className="flex gap-3">
-                    <span className="font-bold">4️⃣</span>
-                    <span>아래 입력창에 <strong>붙여넣기</strong></span>
+                    <span className="font-bold text-yellow-300">4️⃣</span>
+                    <span><strong>주</strong> 탭으로 전환하여 7일 데이터 확인</span>
                   </li>
                 </ol>
-              </div>
-
-              {/* Shortcut 다운로드 버튼 */}
-              <a
-                href="shortcuts://create-shortcut"
-                className="block w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-4 rounded-xl font-bold text-xl text-center hover:shadow-lg transition-all"
-              >
-                📥 Shortcut 다운로드 (iPhone)
-              </a>
-
-              <div className="bg-white/20 rounded-xl p-4">
-                <p className="text-white text-sm text-center mb-2">
-                  💡 <strong>Shortcut이 복잡하다면?</strong>
-                </p>
                 <button
                   onClick={openScreenTime}
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg font-bold transition-all"
+                  className="w-full mt-4 bg-white text-purple-600 px-6 py-3 rounded-lg font-bold hover:bg-purple-50 transition-all"
                 >
-                  📱 스크린 타임 바로 열기
+                  ⚡ 스크린 타임 바로 열기
                 </button>
               </div>
 
-              {/* JSON 데이터 입력 */}
-              <div>
-                <label className="text-white font-bold mb-3 block text-lg">
-                  📋 Shortcuts 데이터 붙여넣기
-                </label>
-                <textarea
-                  value={jsonData}
-                  onChange={(e) => setJsonData(e.target.value)}
-                  placeholder='{"weekData": [{"day": "월요일", "hours": 5, "minutes": 30}, ...], "categories": {"sns": 2, "video": 3, ...}}'
-                  className="w-full px-4 py-3 rounded-lg text-black h-40 font-mono text-sm"
-                  style={{ fontSize: '14px' }}
-                />
-                <p className="text-white/70 text-xs mt-2">
-                  Shortcuts에서 복사한 JSON 데이터를 붙여넣으세요
-                </p>
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setStep(2)}
-                  className="flex-1 bg-white/20 text-white px-6 py-4 rounded-xl font-bold hover:bg-white/30 transition-all"
-                >
-                  ← 뒤로
-                </button>
-                <button
-                  onClick={parseJsonData}
-                  disabled={!jsonData}
-                  className="flex-[2] bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-xl hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  자동 입력 완료 →
-                </button>
-              </div>
-
-              {/* 수동 입력으로 전환 */}
-              <div className="text-center">
-                <button
-                  onClick={() => setStep(4)}
-                  className="text-white/70 hover:text-white underline text-sm"
-                >
-                  어렵다면 직접 입력하기 →
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* STEP 4: 수동 입력 */}
-        {step === 4 && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2">
-                📅 일주일 사용 시간 입력
-              </h1>
-              <p className="text-purple-100">
-                각 요일별 총 사용 시간을 입력해주세요
-              </p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-6">
               {/* 요일별 입력 */}
-              <div className="space-y-4">
-                {weekData.map((day, index) => (
-                  <div key={index} className="bg-white/20 rounded-xl p-4">
-                    <label className="text-white font-bold mb-3 block text-lg">
-                      {day.day}
-                    </label>
-                    <div className="flex gap-3">
-                      <div className="flex-1">
-                        <input
-                          type="number"
-                          min="0"
-                          max="24"
-                          value={day.hours || ''}
-                          onChange={(e) => updateDayUsage(index, 'hours', e.target.value)}
-                          placeholder="0"
-                          className="w-full px-4 py-3 rounded-lg text-black text-center font-bold text-xl"
-                          style={{ fontSize: '18px' }}
-                        />
-                        <p className="text-white/80 text-center mt-1 text-sm">시간</p>
-                      </div>
-                      <div className="flex-1">
-                        <input
-                          type="number"
-                          min="0"
-                          max="59"
-                          value={day.minutes || ''}
-                          onChange={(e) => updateDayUsage(index, 'minutes', e.target.value)}
-                          placeholder="0"
-                          className="w-full px-4 py-3 rounded-lg text-black text-center font-bold text-xl"
-                          style={{ fontSize: '18px' }}
-                        />
-                        <p className="text-white/80 text-center mt-1 text-sm">분</p>
+              <div>
+                <h3 className="text-white font-bold mb-4 text-xl">
+                  📅 7일 사용 시간 입력
+                </h3>
+                <div className="space-y-3">
+                  {weekData.map((day, index) => (
+                    <div key={index} className="bg-white/20 rounded-lg p-4">
+                      <label className="text-white font-bold mb-2 block">
+                        {day.day}
+                      </label>
+                      <div className="flex gap-3">
+                        <div className="flex-1">
+                          <input
+                            type="number"
+                            min="0"
+                            max="24"
+                            value={day.hours || ''}
+                            onChange={(e) => updateDayUsage(index, 'hours', e.target.value)}
+                            placeholder="0"
+                            className="w-full px-4 py-3 rounded-lg text-black text-center font-bold text-xl"
+                            style={{ fontSize: '16px', minHeight: '44px' }}
+                          />
+                          <p className="text-white/80 text-center mt-1 text-sm">시간</p>
+                        </div>
+                        <div className="flex-1">
+                          <input
+                            type="number"
+                            min="0"
+                            max="59"
+                            value={day.minutes || ''}
+                            onChange={(e) => updateDayUsage(index, 'minutes', e.target.value)}
+                            placeholder="0"
+                            className="w-full px-4 py-3 rounded-lg text-black text-center font-bold text-xl"
+                            style={{ fontSize: '16px', minHeight: '44px' }}
+                          />
+                          <p className="text-white/80 text-center mt-1 text-sm">분</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
-              {/* 카테고리별 입력 (선택사항) */}
+              {/* 카테고리별 입력 */}
               <div className="border-t-2 border-white/20 pt-6">
                 <h3 className="text-white font-bold mb-4 text-xl">
                   📊 주요 앱 카테고리 (선택사항)
                 </h3>
                 <p className="text-white/80 text-sm mb-4">
-                  더 정확한 분석을 위해 주요 카테고리별 시간을 입력해주세요
+                  더 정확한 분석을 위해 카테고리별 일평균 시간을 입력해주세요
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-white font-semibold mb-2 block">
+                    <label className="text-white font-semibold mb-2 block text-sm">
                       SNS (인스타/페북)
                     </label>
                     <input
@@ -469,82 +292,77 @@ export default function PhoneUsageAnalyzerPage() {
                       value={categories.sns || ''}
                       onChange={(e) => setCategories({...categories, sns: parseFloat(e.target.value) || 0})}
                       placeholder="0"
-                      className="w-full px-3 py-2 rounded-lg text-black"
-                      style={{ fontSize: '16px' }}
+                      className="w-full px-3 py-2 rounded-lg text-black text-center font-bold"
+                      style={{ fontSize: '16px', minHeight: '44px' }}
                     />
-                    <p className="text-white/60 text-xs mt-1">시간/일</p>
+                    <p className="text-white/60 text-xs mt-1 text-center">시간/일</p>
                   </div>
                   <div>
-                    <label className="text-white font-semibold mb-2 block">
+                    <label className="text-white font-semibold mb-2 block text-sm">
                       유튜브/넷플릭스
                     </label>
-            <input
-              type="number"
+                    <input
+                      type="number"
                       step="0.5"
                       min="0"
                       value={categories.video || ''}
                       onChange={(e) => setCategories({...categories, video: parseFloat(e.target.value) || 0})}
                       placeholder="0"
-                      className="w-full px-3 py-2 rounded-lg text-black"
-              style={{ fontSize: '16px' }}
-            />
-                    <p className="text-white/60 text-xs mt-1">시간/일</p>
-          </div>
-          <div>
-                    <label className="text-white font-semibold mb-2 block">
+                      className="w-full px-3 py-2 rounded-lg text-black text-center font-bold"
+                      style={{ fontSize: '16px', minHeight: '44px' }}
+                    />
+                    <p className="text-white/60 text-xs mt-1 text-center">시간/일</p>
+                  </div>
+                  <div>
+                    <label className="text-white font-semibold mb-2 block text-sm">
                       게임
                     </label>
-            <input
-              type="number"
+                    <input
+                      type="number"
                       step="0.5"
                       min="0"
                       value={categories.game || ''}
                       onChange={(e) => setCategories({...categories, game: parseFloat(e.target.value) || 0})}
                       placeholder="0"
-                      className="w-full px-3 py-2 rounded-lg text-black"
-              style={{ fontSize: '16px' }}
-            />
-                    <p className="text-white/60 text-xs mt-1">시간/일</p>
-          </div>
-          <div>
-                    <label className="text-white font-semibold mb-2 block">
+                      className="w-full px-3 py-2 rounded-lg text-black text-center font-bold"
+                      style={{ fontSize: '16px', minHeight: '44px' }}
+                    />
+                    <p className="text-white/60 text-xs mt-1 text-center">시간/일</p>
+                  </div>
+                  <div>
+                    <label className="text-white font-semibold mb-2 block text-sm">
                       메신저 (카톡/텔레)
                     </label>
-            <input
-              type="number"
+                    <input
+                      type="number"
                       step="0.5"
                       min="0"
                       value={categories.messenger || ''}
                       onChange={(e) => setCategories({...categories, messenger: parseFloat(e.target.value) || 0})}
                       placeholder="0"
-                      className="w-full px-3 py-2 rounded-lg text-black"
-              style={{ fontSize: '16px' }}
-            />
-                    <p className="text-white/60 text-xs mt-1">시간/일</p>
+                      className="w-full px-3 py-2 rounded-lg text-black text-center font-bold"
+                      style={{ fontSize: '16px', minHeight: '44px' }}
+                    />
+                    <p className="text-white/60 text-xs mt-1 text-center">시간/일</p>
                   </div>
                 </div>
-          </div>
+              </div>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setStep(2)}
-                  className="flex-1 bg-white/20 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-white/30 transition-all"
-                >
-                  ← 뒤로
-                </button>
-          <button
-                  onClick={analyzeData}
-                  className="flex-[2] bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-xl hover:shadow-lg transition-all"
-          >
-                  분석 시작하기 →
-          </button>
+              <button
+                onClick={() => analyzeData()}
+                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-xl hover:shadow-lg transition-all"
+                style={{ minHeight: '48px' }}
+              >
+                🔍 분석 시작하기
+              </button>
+
+              <div className="text-center text-white/60 text-sm">
+                <p>💡 iPhone Screen Time에서 확인한 데이터를 입력하세요</p>
+                <p className="mt-2">⚡ 입력 시간: 약 2-3분</p>
               </div>
             </div>
           </div>
-        )}
-
-        {/* STEP 5: 분석 결과 */}
-        {step === 5 && result && (
+        ) : (
           <div className="space-y-6">
             <div className="text-center">
               <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-2">
@@ -619,11 +437,11 @@ export default function PhoneUsageAnalyzerPage() {
                           (+{result.weekendIncrease.toFixed(0)}%↑)
                         </span>
                       )}
-                  </div>
-                  </div>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
 
             {/* 경고 지표 */}
             {result.warnings.length > 0 && (
@@ -662,15 +480,17 @@ export default function PhoneUsageAnalyzerPage() {
             {/* 재분석 버튼 */}
             <div className="flex gap-3">
               <button
-                onClick={() => setStep(inputMethod === 'auto' ? 3 : 4)}
+                onClick={() => {
+                  setShowResult(false);
+                  setResult(null);
+                }}
                 className="flex-1 bg-white/20 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-white/30 transition-all"
               >
                 ← 데이터 수정
               </button>
               <button
                 onClick={() => {
-                  setStep(1);
-                  setJsonData('');
+                  setShowResult(false);
                   setWeekData([
                     { day: '월요일', hours: 0, minutes: 0 },
                     { day: '화요일', hours: 0, minutes: 0 },
@@ -687,9 +507,9 @@ export default function PhoneUsageAnalyzerPage() {
               >
                 🔄 처음부터
               </button>
-              </div>
             </div>
-          )}
+          </div>
+        )}
 
         {/* 돌아가기 버튼 */}
         <div className="text-center mt-8">

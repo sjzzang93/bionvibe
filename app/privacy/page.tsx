@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "개인정보 처리방침",
+  description: "BION의 개인정보 수집 및 이용에 관한 정책을 안내합니다. 사용자의 개인정보 보호를 최우선으로 합니다.",
+};
 
 export default function PrivacyPage() {
   return (

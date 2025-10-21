@@ -309,7 +309,7 @@ export default function PastLifeJob() {
   // Step 1: 생년월일
   if (step === 1) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-violet-900" style={{
+      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 dark:from-purple-900 dark:via-indigo-900 dark:to-violet-900 transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.2) 0%, transparent 50%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
         backgroundAttachment: 'fixed'
       }}>
@@ -389,7 +389,7 @@ export default function PastLifeJob() {
     const allAnswered = Object.values(data.personality).every(v => v !== null);
     
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-violet-900" style={{
+      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 dark:from-purple-900 dark:via-indigo-900 dark:to-violet-900 transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.2) 0%, transparent 50%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
         backgroundAttachment: 'fixed'
       }}>
@@ -560,7 +560,7 @@ export default function PastLifeJob() {
   // Step 3: 결과
   if (step === 3 && result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-violet-900" style={{
+      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 dark:from-purple-900 dark:via-indigo-900 dark:to-violet-900 transition-colors" style={{
         backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.2) 0%, transparent 50%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
         backgroundAttachment: 'fixed'
       }}>

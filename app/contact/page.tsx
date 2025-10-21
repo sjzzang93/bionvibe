@@ -186,6 +186,20 @@ export default function ContactPage() {
                 <div className="flex items-start">
                   <span className="text-red-600 dark:text-red-400 mr-2">•</span>
                   <div>
+                    <strong>인스타그램:</strong>{' '}
+                    <a 
+                      href="https://www.instagram.com/BION_Vibe" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 underline"
+                    >
+                      @BION_Vibe
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-red-600 dark:text-red-400 mr-2">•</span>
+                  <div>
                     <strong>응답 시간:</strong> 보통 1-2 영업일 이내
                   </div>
                 </div>

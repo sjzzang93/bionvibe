@@ -8,21 +8,21 @@ function CursorPromptsContent() {
   const [activeTab, setActiveTab] = useState('glossary');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-violet-50 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-violet-50 p-3 sm:p-4 md:p-8">
+      <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* 헤더 */}
         <div className="text-center space-y-2">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
             {krText.title}
           </h1>
-          <p className="text-gray-600">{krText.description}</p>
+          <p className="text-sm sm:text-base text-gray-600">{krText.description}</p>
         </div>
 
         {/* 탭 버튼 */}
         <div className="flex gap-2 justify-center">
           <button
             onClick={() => setActiveTab('glossary')}
-            className={`px-6 py-3 rounded-xl font-bold transition-all ${
+            className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-bold transition-all ${
               activeTab === 'glossary'
                 ? 'bg-violet-600 text-white'
                 : 'bg-white text-violet-600 hover:bg-violet-50'
@@ -32,7 +32,7 @@ function CursorPromptsContent() {
           </button>
           <button
             onClick={() => setActiveTab('export')}
-            className={`px-6 py-3 rounded-xl font-bold transition-all ${
+            className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-bold transition-all ${
               activeTab === 'export'
                 ? 'bg-violet-600 text-white'
                 : 'bg-white text-violet-600 hover:bg-violet-50'
@@ -43,7 +43,7 @@ function CursorPromptsContent() {
         </div>
 
         {/* 탭 내용 */}
-        <div className="bg-white rounded-2xl shadow-xl p-6">
+        <div className="bg-white rounded-2xl shadow-xl p-3 sm:p-4 md:p-6">
           {activeTab === 'glossary' && <GlossaryTab />}
           {activeTab === 'export' && <ExportTab />}
         </div>
@@ -55,10 +55,10 @@ function CursorPromptsContent() {
 export default function CursorPromptsPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-500 mx-auto"></div>
-          <p className="mt-4 text-gray-600">로딩 중...</p>
+          <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-b-2 border-violet-500 mx-auto"></div>
+          <p className="mt-4 text-gray-600 text-sm sm:text-base">로딩 중...</p>
         </div>
       </div>
     }>
@@ -429,20 +429,20 @@ export const { handlers, auth } = NextAuth({
   })
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* 검색 & 필터 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
         <input
           type="text"
           placeholder={krText.filter.search}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
         />
         <select
           value={levelFilter}
           onChange={(e) => setLevelFilter(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500"
+          className="px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500"
         >
           <option value="all">{krText.filter.all}</option>
           <option value="beginner">{krText.level.beginner}</option>
@@ -452,7 +452,7 @@ export const { handlers, auth } = NextAuth({
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500"
+          className="px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 sm:col-span-2 md:col-span-1"
         >
           <option value="all">{krText.filter.all}</option>
           <option value="react">React</option>
@@ -468,12 +468,12 @@ export const { handlers, auth } = NextAuth({
       </div>
 
       {/* 프롬프트 카드 목록 */}
-      <div className="grid gap-4">
+      <div className="grid gap-3 sm:gap-4">
         {filteredItems.map(item => (
-          <div key={item.id} className="bg-white border-2 border-violet-200 rounded-lg p-6 hover:border-violet-400 hover:shadow-lg transition-all">
-            <div className="flex items-start justify-between mb-4">
+          <div key={item.id} className="bg-white border-2 border-violet-200 rounded-lg p-3 sm:p-4 md:p-6 hover:border-violet-400 hover:shadow-lg transition-all">
+            <div className="flex items-start justify-between mb-3 sm:mb-4">
               <div>
-                <h3 className="text-xl font-bold text-violet-700">{item.slug}</h3>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-violet-700">{item.slug}</h3>
                 <div className="flex gap-2 mt-2">
                   <span className="px-2 py-1 bg-violet-100 text-violet-700 text-xs rounded">
                     {krText.level[item.level as keyof typeof krText.level]}
@@ -485,27 +485,27 @@ export const { handlers, auth } = NextAuth({
               </div>
             </div>
 
-            <div className="space-y-4">
-              <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded">
-                <p className="font-semibold text-red-700 mb-2">❌ 안티패턴</p>
-                <p className="text-gray-900">{item.antiKr}</p>
+            <div className="space-y-3 sm:space-y-4">
+              <div className="bg-red-50 border-l-4 border-red-400 p-3 sm:p-4 rounded">
+                <p className="font-semibold text-red-700 mb-2 text-sm sm:text-base">❌ 안티패턴</p>
+                <p className="text-gray-900 text-sm sm:text-base">{item.antiKr}</p>
               </div>
 
-              <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded">
+              <div className="bg-green-50 border-l-4 border-green-400 p-3 sm:p-4 rounded">
                 <div className="flex items-center justify-between mb-2">
-                  <p className="font-semibold text-green-700">✅ 권장패턴</p>
+                  <p className="font-semibold text-green-700 text-sm sm:text-base">✅ 권장패턴</p>
                   <CopyButton text={item.recKr} />
                 </div>
-                <p className="text-gray-900">{item.recKr}</p>
+                <p className="text-gray-900 text-sm sm:text-base">{item.recKr}</p>
               </div>
 
               {item.exampleKr && (
-                <div className="bg-gray-50 p-4 rounded">
+                <div className="bg-gray-50 p-3 sm:p-4 rounded">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="font-semibold text-gray-900">📝 예시</p>
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base">📝 예시</p>
                     <CopyButton text={item.exampleKr} />
                   </div>
-                  <pre className="text-sm overflow-x-auto bg-gray-900 text-white p-3 rounded">
+                  <pre className="text-xs sm:text-sm overflow-x-auto bg-gray-900 text-white p-2 sm:p-3 rounded">
                     <code>{item.exampleKr}</code>
                   </pre>
                 </div>
@@ -516,7 +516,7 @@ export const { handlers, auth } = NextAuth({
       </div>
 
       {filteredItems.length === 0 && (
-        <div className="text-center py-12 text-gray-500">
+        <div className="text-center py-8 sm:py-12 text-gray-500 text-sm sm:text-base">
           {krText.message.noData}
         </div>
       )}
@@ -528,23 +528,23 @@ export const { handlers, auth } = NextAuth({
 function ExportTab() {
   return (
     <div className="space-y-4">
-      <p className="text-gray-600">데이터를 다양한 형식으로 내보낼 수 있습니다</p>
+      <p className="text-sm sm:text-base text-gray-600">데이터를 다양한 형식으로 내보낼 수 있습니다</p>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <button className="px-6 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-all">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+        <button className="px-4 sm:px-6 py-3 sm:py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
           📄 JSON 내보내기
         </button>
-        <button className="px-6 py-4 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium transition-all">
+        <button className="px-4 sm:px-6 py-3 sm:py-4 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
           📊 CSV 내보내기
         </button>
-        <button className="px-6 py-4 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium transition-all">
+        <button className="px-4 sm:px-6 py-3 sm:py-4 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
           📝 Markdown 내보내기
         </button>
       </div>
 
-      <div className="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <p className="font-semibold text-yellow-800 mb-2">💡 곧 추가될 기능</p>
-        <ul className="text-sm text-yellow-700 space-y-1">
+      <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
+        <p className="font-semibold text-yellow-800 mb-2 text-sm sm:text-base">💡 곧 추가될 기능</p>
+        <ul className="text-xs sm:text-sm text-yellow-700 space-y-1">
           <li>• JSON 파일 가져오기</li>
           <li>• 대량 데이터 생성</li>
           <li>• 히스토리 관리</li>

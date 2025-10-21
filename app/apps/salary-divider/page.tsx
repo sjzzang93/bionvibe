@@ -91,7 +91,7 @@ export default function SalaryDivider() {
   const savingsGoal = getSavingsGoal();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 text-black placeholder-gray-500">
+    <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 dark:from-emerald-900 dark:via-green-900 dark:to-teal-900 text-black dark:text-white placeholder-gray-500 transition-colors">
       <div className="mx-auto max-w-[800px] px-4 py-6 text-black placeholder-gray-500">
         <div className="mb-4 text-black placeholder-gray-500">
           

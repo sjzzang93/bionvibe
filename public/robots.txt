@@ -1,12 +1,11 @@
-# robots.txt for BION (bionvibe.com)
-
+# BION - 모든 검색엔진 허용
 User-agent: *
 Allow: /
-
-# Disallow admin/secret pages
 Disallow: /secret/
 Disallow: /api/
 
-# Sitemap location
+# 사이트맵 위치
 Sitemap: https://bionvibe.com/sitemap.xml
 
+# 크롤링 속도 조절 (선택사항)
+Crawl-delay: 1

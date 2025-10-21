@@ -154,7 +154,7 @@ export default function ParentsTimeCalculator() {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-rose-50 to-red-50 relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-purple-50 via-rose-50 to-red-50 dark:from-purple-900 dark:via-rose-900 dark:to-red-900 relative overflow-hidden transition-colors">
       {/* 카네이션 배경 패턴 */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 right-10 text-6xl text-gray-300 transform rotate-12">🌸</div>

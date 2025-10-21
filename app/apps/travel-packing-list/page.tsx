@@ -30,7 +30,7 @@ export default function PackingListPage() {
   const progress = (checkedItems.size / totalItems) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-500 via-green-500 to-emerald-600 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50 dark:from-teal-500 dark:via-green-500 dark:to-emerald-600 py-8 px-4 transition-colors">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">
           🧳 여행 패킹 체크리스트

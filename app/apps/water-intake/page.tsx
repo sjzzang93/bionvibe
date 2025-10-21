@@ -44,7 +44,7 @@ export default function WaterIntakePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-600 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 dark:from-cyan-500 dark:via-blue-500 dark:to-indigo-600 py-8 px-4 transition-colors">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">
           하루 물 섭취량 계산기

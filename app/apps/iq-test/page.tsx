@@ -234,37 +234,37 @@ export default function IQTest() {
     const level = getIQLevel(iq);
 
     return (
-      <main className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-white dark:from-gray-900 dark:via-gray-800 dark:to-black transition-colors">
         <div className="mx-auto max-w-[520px] px-4 py-6">
           {/* 상단 배너 제거됨 */}
 
           {/* 결과 카드 */}
-          <section className="bg-white rounded-3xl shadow-2xl p-8 border-2 border-purple-200">
+          <section className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border-2 border-purple-200 dark:border-purple-700">
             <header className="text-center mb-8">
               <div className="text-6xl mb-4">🧠</div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-600 bg-clip-text text-transparent mb-2">
                 IQ 테스트 결과
               </h1>
-              <p className="text-gray-600">총 {questions.length}문항 중 {correctCount}문항 정답</p>
+              <p className="text-gray-600 dark:text-gray-400">총 {questions.length}문항 중 {correctCount}문항 정답</p>
             </header>
 
             {/* IQ 점수 */}
-            <div className="bg-gradient-to-br from-purple-100 to-purple-100 rounded-2xl p-8 mb-6 border border-purple-200">
+            <div className="bg-gradient-to-br from-purple-100 to-purple-100 dark:from-purple-900/30 dark:to-purple-900/30 rounded-2xl p-8 mb-6 border border-purple-200 dark:border-purple-700">
               <div className="text-center">
-                <div className="text-sm text-black font-medium mb-2">당신의 IQ는</div>
+                <div className="text-sm text-gray-900 dark:text-gray-200 font-medium mb-2">당신의 IQ는</div>
                 <div className={`text-7xl font-bold bg-gradient-to-r ${level.color} bg-clip-text text-transparent mb-4`}>
                   {iq}
                 </div>
-                <div className="inline-block bg-white rounded-full px-6 py-2 border-2 border-purple-300 mb-3">
-                  <span className="text-xl font-bold text-black">{level.level}</span>
+                <div className="inline-block bg-white dark:bg-gray-700 rounded-full px-6 py-2 border-2 border-purple-300 dark:border-purple-600 mb-3">
+                  <span className="text-xl font-bold text-gray-900 dark:text-white">{level.level}</span>
                 </div>
-                <div className="text-sm text-gray-600 mt-2">{level.description}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400 mt-2">{level.description}</div>
               </div>
             </div>
 
             {/* IQ 분포도 */}
-            <div className="bg-gray-50 rounded-2xl p-6 mb-6 border border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">📊 IQ 분포 기준</h3>
+            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-6 mb-6 border border-gray-200 dark:border-gray-600">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4 text-center">📊 IQ 분포 기준</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between items-center p-2 rounded-lg bg-white">
                   <span className="font-medium">140 이상</span>

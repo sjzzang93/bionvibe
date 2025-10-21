@@ -67,7 +67,7 @@ export default function CompoundCalculator() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 text-black placeholder-gray-500">
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900 dark:via-indigo-900 dark:to-purple-900 text-black dark:text-white placeholder-gray-500 transition-colors">
         <div className="mx-auto max-w-[800px] px-4 py-6 text-black placeholder-gray-500">
           <div className="mb-4 text-black placeholder-gray-500">
             

@@ -87,7 +87,7 @@ export default function LottoGenerator() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100">
+    <main className="min-h-screen bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors">
       <div className="mx-auto max-w-[700px] px-4 py-6">
         {/* 로또 용지 스타일 헤더 */}
         <section className="bg-white rounded-lg shadow-2xl p-6 mb-4 border-4 border-red-600">

@@ -1,44 +1,52 @@
 {
   "categories": [
     {
-      "id": "health-life",
-      "name": "건강과 일상",
-      "description": "매일매일 건강하게",
-      "icon": "💚",
-      "bgImage": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
+      "id": "fortune-mind",
+      "name": "운세 & 마음",
+      "description": "Fortune & Mind",
+      "icon": "🔮",
+      "bgImage": "https://images.unsplash.com/photo-1518796745738-41048802f99a?w=800&q=80",
       "order": 1
     },
     {
-      "id": "fortune-fun",
-      "name": "운세와 재미",
-      "description": "오늘의 행운 찾기",
-      "icon": "🔮",
-      "bgImage": "https://images.unsplash.com/photo-1518796745738-41048802f99a?w=800&q=80",
+      "id": "game-brain",
+      "name": "게임 & 두뇌 놀이터",
+      "description": "Games & Brain Play",
+      "icon": "🎮",
+      "bgImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80",
       "order": 2
     },
     {
-      "id": "money-utility",
-      "name": "돈과 생활",
-      "description": "현명한 생활 관리",
-      "icon": "💰",
-      "bgImage": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
+      "id": "health-routine",
+      "name": "건강 & 루틴",
+      "description": "Health & Routine",
+      "icon": "💚",
+      "bgImage": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
       "order": 3
     },
     {
-      "id": "learn-grow",
-      "name": "학습과 성장",
-      "description": "배우고 성장하는 하루",
-      "icon": "📚",
-      "bgImage": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
+      "id": "money-calc",
+      "name": "돈 & 계산",
+      "description": "Money & Calculators",
+      "icon": "💰",
+      "bgImage": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
       "order": 4
     },
     {
-      "id": "family-love",
-      "name": "가족과 사랑",
-      "description": "소중한 사람들과",
+      "id": "learning-tools",
+      "name": "공부 & 도구",
+      "description": "Learning & Tools",
+      "icon": "📚",
+      "bgImage": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80",
+      "order": 5
+    },
+    {
+      "id": "family-life",
+      "name": "가족 & 취향",
+      "description": "Family & Life",
       "icon": "❤️",
       "bgImage": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80",
-      "order": 5
+      "order": 6
     }
   ]
 }
