@@ -718,9 +718,9 @@ export default function ColorPsychology() {
                     border: color.hex === '#FFFFFF' ? '2px solid #E5E7EB' : 'none'
                   }}
                 >
-                  <div className="h-20"></div>
+                  <div className="h-12"></div>
                   <div 
-                    className="text-xs font-bold text-center mt-2 drop-shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="text-xs font-bold text-center mt-2 drop-shadow-lg"
                     style={{
                       color: ['#FFFFFF', '#FFFBEB', '#FBCFE8', '#FEF3C7', '#FED7AA'].includes(color.hex) 
                         ? '#374151' 
