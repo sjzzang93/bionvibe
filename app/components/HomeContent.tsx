@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { getAllApps, getAllCategories } from '@/lib/getApps';
 import Link from 'next/link';
+import Image from 'next/image';
 import FavoriteButton from './FavoriteButton';
 
 export default function HomeContent() {
@@ -153,10 +154,12 @@ export default function HomeContent() {
 
                       {app.image && app.image.trim() !== '' && (
                         <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
-                          <img
+                          <Image
                             src={app.image}
                             alt={app.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            fill
+                            sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
+                            className="object-cover group-hover:scale-110 transition-transform duration-300"
                             loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -200,10 +203,12 @@ export default function HomeContent() {
 
                       {app.image && app.image.trim() !== '' && (
                         <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
-                          <img
+                          <Image
                             src={app.image}
                             alt={app.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            fill
+                            sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
+                            className="object-cover group-hover:scale-110 transition-transform duration-300"
                             loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
