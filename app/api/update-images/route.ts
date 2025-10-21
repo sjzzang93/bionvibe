@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,39 +16,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // apps.json 파일 경로 (두 곳 모두 업데이트)
-    const dataJsonPath = path.join(process.cwd(), 'data', 'apps.json');
-    const publicJsonPath = path.join(process.cwd(), 'public', 'data', 'apps.json');
-    
-    // public/data/apps.json 파일 읽기 (실제 사용 파일)
-    const fileContents = fs.readFileSync(publicJsonPath, 'utf8');
-    const data = JSON.parse(fileContents);
+    // Supabase 클라이언트 생성
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // 해당 slug의 앱 찾아서 이미지 업데이트
-    const appIndex = data.apps.findIndex((app: any) => app.slug === slug);
-    
-    if (appIndex === -1) {
+    // Supabase에서 이미지 업데이트
+    const { data, error } = await supabase
+      .from('apps')
+      .update({ image: imageUrl, updated_at: new Date().toISOString() })
+      .eq('slug', slug)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return NextResponse.json(
+        { error: `이미지 업데이트 실패: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
+    if (!data) {
       return NextResponse.json(
         { error: '해당 앱을 찾을 수 없습니다.' },
         { status: 404 }
       );
     }
 
-    data.apps[appIndex].image = imageUrl;
-
-    // 두 파일 모두 업데이트
-    const jsonString = JSON.stringify(data, null, 2);
-    fs.writeFileSync(publicJsonPath, jsonString, 'utf8');
-    
-    // data/apps.json이 있으면 함께 업데이트
-    if (fs.existsSync(dataJsonPath)) {
-      fs.writeFileSync(dataJsonPath, jsonString, 'utf8');
-    }
-
     return NextResponse.json({
       success: true,
-      message: '이미지가 업데이트되었습니다!',
-      app: data.apps[appIndex]
+      message: '이미지가 Supabase에 업데이트되었습니다!',
+      app: data
     });
 
   } catch (error) {
