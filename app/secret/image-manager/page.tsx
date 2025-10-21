@@ -223,19 +223,22 @@ export default function ImageManagerPage() {
                   <label className="block text-white font-bold mb-2">이미지 파일 선택</label>
                   <input
                     type="file"
-                    accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                    accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/heic,image/heif"
                     onChange={handleFileUpload}
                     disabled={uploading}
                     className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-500 file:text-white file:font-bold hover:file:bg-purple-600 cursor-pointer disabled:opacity-50"
                   />
                   <p className="text-white/50 text-sm mt-2">
-                    📌 JPG, PNG, WebP, GIF 지원 (최대 10MB)
+                    📌 JPG, PNG, WebP, GIF, HEIC 지원 (최대 10MB)
+                  </p>
+                  <p className="text-yellow-300 text-sm mt-1">
+                    📱 아이폰 HEIC 이미지 자동 변환 지원!
                   </p>
                   <p className="text-green-300 text-sm mt-1">
                     ✨ 자동 최적화: 800x600 WebP 고품질로 변환됩니다!
                   </p>
                   <p className="text-blue-300 text-sm mt-1">
-                    🌍 Vercel Blob CDN: 전세계 모든 사용자가 빠르게 접근!
+                    🌍 Supabase Storage CDN: 전세계 모든 사용자가 빠르게 접근!
                   </p>
                   {uploading && (
                     <div className="mt-3 text-yellow-300 font-bold animate-pulse">

@@ -234,7 +234,7 @@ export default function CoffeeCalculator() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-900 dark:via-orange-900 dark:to-yellow-900 transition-colors">
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-white rounded-2xl shadow-xl p-6">
+          <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-xl p-6 border-4 border-amber-800">
             <header className="text-center mb-6">
               <h1 className="text-3xl font-bold mb-2">☕</h1>
               <h2 className="text-2xl font-bold text-gray-800">카페인 섭취 분석</h2>
@@ -321,6 +321,25 @@ export default function CoffeeCalculator() {
               <h3 className="font-bold text-lg text-gray-800 mb-2">⏰ 다음 커피 가능 시간</h3>
               <div className="text-2xl font-bold text-center">{result.nextCoffeeTime}</div>
               <div className="text-sm text-gray-600 text-center mt-1">남은 권장량: {result.remainingQuota}mg</div>
+              <div className="text-center mt-3 p-3 bg-white rounded-lg border-2 border-amber-300">
+                <div className="text-sm text-gray-600 mb-1">아메리카노 1샷 기준</div>
+                <div className="text-3xl font-bold text-amber-700">
+                  ☕ {Math.floor(result.remainingQuota / 75)}잔
+                </div>
+                <div className="text-xs text-gray-500 mt-1">(에스프레소 1샷 = 75mg)</div>
+              </div>
+            </div>
+
+            {/* 현재 섭취량 아메리카노 환산 */}
+            <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
+              <h3 className="font-bold text-lg text-gray-800 mb-2">📊 현재 섭취량</h3>
+              <div className="text-center p-3 bg-white rounded-lg">
+                <div className="text-sm text-gray-600 mb-1">아메리카노로 환산하면</div>
+                <div className="text-4xl font-bold text-orange-600">
+                  ☕ {(result.totalCaffeine / 75).toFixed(1)}잔
+                </div>
+                <div className="text-xs text-gray-500 mt-1">총 {result.totalCaffeine}mg 섭취</div>
+              </div>
             </div>
 
             {/* 부작용 경고 */}
@@ -371,7 +390,7 @@ export default function CoffeeCalculator() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
       <div className="mx-auto max-w-[600px] px-4 py-6">
-        <section className="bg-white rounded-2xl shadow-xl p-6">
+        <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl shadow-xl p-6 border-4 border-amber-800">
           <header className="text-center mb-6">
             <h1 className="text-4xl font-bold mb-2">☕</h1>
             <h2 className="text-2xl font-bold text-gray-800 mb-2">커피 하루 권장량 계산기</h2>
@@ -440,7 +459,7 @@ export default function CoffeeCalculator() {
               <label className="block text-sm font-medium text-gray-700 mb-2">건강 상태 (해당사항 선택)</label>
               <div className="space-y-2">
                 {healthConditions.map(condition => (
-                  <label key={condition.id} className="flex items-center gap-2 p-2 bg-gray-50 rounded">
+                  <label key={condition.id} className="flex items-center gap-2 p-2 bg-amber-100 rounded border border-amber-300">
                     <input
                       type="checkbox"
                       checked={health.includes(condition.id)}
@@ -493,7 +512,7 @@ export default function CoffeeCalculator() {
               )}
 
               {showAddForm && (
-                <div className="p-4 bg-gray-50 rounded-lg border border-gray-300 space-y-3">
+                <div className="p-4 bg-amber-50 rounded-lg border-2 border-amber-700 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">카테고리</label>
                     <select
@@ -502,7 +521,7 @@ export default function CoffeeCalculator() {
                         setSelectedCategory(e.target.value);
                         setSelectedItem(0);
                       }}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                      className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
                     >
                       <option value="coffee">커피</option>
                       <option value="tea">차</option>
@@ -517,7 +536,7 @@ export default function CoffeeCalculator() {
                     <select
                       value={selectedItem}
                       onChange={(e) => setSelectedItem(Number(e.target.value))}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                      className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
                     >
                       {CAFFEINE_DB[selectedCategory as keyof typeof CAFFEINE_DB].map((item, i) => (
                         <option key={i} value={i}>{item.name} ({item.caffeine}mg)</option>
@@ -534,7 +553,7 @@ export default function CoffeeCalculator() {
                         max="10"
                         value={amount}
                         onChange={(e) => setAmount(Number(e.target.value))}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                        className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
                       />
                     </div>
                     <div>
@@ -543,7 +562,7 @@ export default function CoffeeCalculator() {
                         type="time"
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                        className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
                       />
                     </div>
                   </div>

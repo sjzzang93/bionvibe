@@ -195,7 +195,7 @@
       "description": "하루 권장 칼로리 계산",
       "categoryId": "health-routine",
       "url": "/apps/calorie-calculator",
-      "image": "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/calorie-calculator-1761019428466.webp",
       "createdAt": "2025-01-20"
     },
     {

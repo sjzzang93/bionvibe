@@ -14,11 +14,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // apps.json 파일 경로
-    const appsJsonPath = path.join(process.cwd(), 'data', 'apps.json');
+    // apps.json 파일 경로 (두 곳 모두 업데이트)
+    const dataJsonPath = path.join(process.cwd(), 'data', 'apps.json');
+    const publicJsonPath = path.join(process.cwd(), 'public', 'data', 'apps.json');
     
-    // 파일 읽기
-    const fileContents = fs.readFileSync(appsJsonPath, 'utf8');
+    // public/data/apps.json 파일 읽기 (실제 사용 파일)
+    const fileContents = fs.readFileSync(publicJsonPath, 'utf8');
     const data = JSON.parse(fileContents);
 
     // 해당 slug의 앱 찾아서 이미지 업데이트
@@ -33,8 +34,14 @@ export async function POST(request: NextRequest) {
 
     data.apps[appIndex].image = imageUrl;
 
-    // 파일에 다시 쓰기
-    fs.writeFileSync(appsJsonPath, JSON.stringify(data, null, 2), 'utf8');
+    // 두 파일 모두 업데이트
+    const jsonString = JSON.stringify(data, null, 2);
+    fs.writeFileSync(publicJsonPath, jsonString, 'utf8');
+    
+    // data/apps.json이 있으면 함께 업데이트
+    if (fs.existsSync(dataJsonPath)) {
+      fs.writeFileSync(dataJsonPath, jsonString, 'utf8');
+    }
 
     return NextResponse.json({
       success: true,

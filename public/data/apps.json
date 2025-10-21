@@ -285,7 +285,7 @@
       "url": "/apps/meat-calculator",
       "image": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
-      "hidden": true
+      "hidden": false
     },
     {
       "id": "analysis-handwriting",
