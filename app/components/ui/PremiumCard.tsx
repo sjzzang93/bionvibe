@@ -8,6 +8,7 @@ interface PremiumCardProps {
   hover?: boolean;
   gradient?: boolean;
   depth?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function PremiumCard({ 
@@ -15,7 +16,8 @@ export default function PremiumCard({
   className = '', 
   hover = false,
   gradient = false,
-  depth = true
+  depth = true,
+  style: customStyle
 }: PremiumCardProps) {
   return (
     <div 
@@ -30,7 +32,8 @@ export default function PremiumCard({
         transformStyle: 'preserve-3d',
         boxShadow: depth 
           ? '0 20px 60px -15px rgba(0, 0, 0, 0.5), 0 10px 40px -10px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.1)'
-          : undefined
+          : undefined,
+        ...customStyle
       }}
     >
       {gradient && (
