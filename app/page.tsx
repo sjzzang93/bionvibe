@@ -1,6 +1,6 @@
 'use client';
 
-import { getTotalAppsCount } from '@/lib/getApps';
+import { getTotalAppsCountAsync } from '@/lib/getApps';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
@@ -25,7 +25,7 @@ const HomeContent = dynamic(() => import('./components/HomeContent'), {
 });
 
 export default function Home() {
-  const totalApps = getTotalAppsCount();
+  // totalApps는 HomeContent 내부에서 동적으로 계산됨
   
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors" suppressHydrationWarning>

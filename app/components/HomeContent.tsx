@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getAllApps, getAllCategories } from '@/lib/getApps';
+import { getAllAppsAsync, getAllCategories, type App } from '@/lib/getApps';
 import Link from 'next/link';
 import Image from 'next/image';
 import FavoriteButton from './FavoriteButton';
@@ -9,8 +9,17 @@ import FavoriteButton from './FavoriteButton';
 export default function HomeContent() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [mounted, setMounted] = useState(false);
-  const allApps = getAllApps();
+  const [allApps, setAllApps] = useState<App[]>([]);
+  const [loading, setLoading] = useState(true);
   const categories = getAllCategories();
+
+  // Supabase에서 앱 데이터 가져오기
+  useEffect(() => {
+    getAllAppsAsync().then(apps => {
+      setAllApps(apps);
+      setLoading(false);
+    });
+  }, []);
 
   // 클라이언트 마운트 확인
   useEffect(() => {
@@ -92,7 +101,7 @@ export default function HomeContent() {
     });
   };
 
-  if (!mounted) {
+  if (!mounted || loading) {
     return (
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="w-[85.7%] mx-auto">
