@@ -4,30 +4,36 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-// Singleton pattern to prevent multiple instances
-let supabaseInstance: SupabaseClient | null = null;
-
-function getSupabaseClient() {
-  if (supabaseInstance) {
-    return supabaseInstance;
+// Global singleton using window object to prevent multiple instances across HMR
+function getSupabaseClient(): SupabaseClient {
+  // Use window object to persist instance across hot reloads
+  if (typeof window !== 'undefined') {
+    if (!(window as any).__supabaseClient) {
+      (window as any).__supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+          storageKey: 'bionvibe-auth-token',
+        },
+        realtime: {
+          params: {
+            eventsPerSecond: 10,
+          },
+        },
+      });
+    }
+    return (window as any).__supabaseClient;
   }
 
-  supabaseInstance = createClient(supabaseUrl, supabaseAnonKey, {
+  // Server-side fallback (shouldn't have multiple instances issue)
+  return createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true,
-      storage: typeof window !== 'undefined' ? window.localStorage : undefined,
-      storageKey: 'bionvibe-auth-token', // Unique storage key to avoid conflicts
-    },
-    realtime: {
-      params: {
-        eventsPerSecond: 10,
-      },
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
     },
   });
-
-  return supabaseInstance;
 }
 
 export const supabase = getSupabaseClient();
