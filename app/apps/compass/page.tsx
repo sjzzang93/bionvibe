@@ -31,8 +31,8 @@ export default function CompassPage() {
       let compassHeading = 0;
 
       // iOS - webkitCompassHeading 사용
-      if (event.webkitCompassHeading !== undefined) {
-        compassHeading = event.webkitCompassHeading;
+      if ((event as any).webkitCompassHeading !== undefined) {
+        compassHeading = (event as any).webkitCompassHeading;
       }
       // Android/기타 - alpha 값 사용
       else if (event.alpha !== null) {
