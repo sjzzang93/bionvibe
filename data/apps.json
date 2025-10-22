@@ -8,7 +8,7 @@
       "description": "오늘 하루 어떨까?",
       "categoryId": "fortune-mind",
       "url": "/apps/today-fortune",
-      "image": "https://images.unsplash.com/photo-1532968961962-8a0cb3a2d4f5?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/today-fortune-1761161065680.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "saju-mbti-jobs",
@@ -24,7 +24,7 @@
       "description": "32문항으로 알아보는 정확한 성격 유형",
       "categoryId": "fortune-mind",
       "url": "/apps/mbti-test",
-      "image": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mbti-test-1761161269054.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "saju-mbti-jobs",
@@ -56,7 +56,7 @@
       "description": "하루 물 섭취량 계산",
       "categoryId": "health-routine",
       "url": "/apps/water-intake",
-      "image": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/water-intake-1761161287991.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "calorie-calculator",
@@ -72,7 +72,7 @@
       "description": "하루 권장 칼로리 계산",
       "categoryId": "health-routine",
       "url": "/apps/calorie-calculator",
-      "image": "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/calorie-calculator-1761161777763.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "water-intake",
@@ -88,7 +88,7 @@
       "description": "카페인 섭취량 분석",
       "categoryId": "health-routine",
       "url": "/apps/coffee-calculator",
-      "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/coffee-calculator-1761161703252.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "calorie-calculator",
@@ -104,7 +104,7 @@
       "description": "21/66/100일 습관 만들기",
       "categoryId": "learning-tools",
       "url": "/apps/habit-tracker",
-      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/habit-tracker-1761056967326.webp",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/habit-tracker-1761161813047.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "focus-timer",
@@ -119,7 +119,7 @@
       "description": "실시간 시세 & 투자 수익률 시뮬레이션",
       "categoryId": "money-calc",
       "url": "/apps/crypto-calculator",
-      "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/crypto-calculator-1761162273481.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "lotto-generator"
@@ -133,7 +133,7 @@
       "description": "부모님과 남은 시간 계산",
       "categoryId": "family-life",
       "url": "/apps/parents-time",
-      "image": "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/parents-time-1761161661361.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "life-support",
@@ -149,7 +149,7 @@
       "description": "레벨별 영어 단어 암기",
       "categoryId": "learning-tools",
       "url": "/apps/flashcard",
-      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/flashcard-1761162036686.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "typing-speed-test",
@@ -165,7 +165,7 @@
       "description": "실시간 미세먼지 측정",
       "categoryId": "health-routine",
       "url": "/apps/air-quality",
-      "image": "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/air-quality-1761161937238.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
         "weather-outfit",
@@ -181,7 +181,7 @@
       "description": "타자 속도 측정 및 연습",
       "categoryId": "learning-tools",
       "url": "/apps/typing-speed-test",
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/typing-speed-test-1761161967661.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "reflex-test",
@@ -197,7 +197,7 @@
       "description": "반응속도 테스트",
       "categoryId": "learning-tools",
       "url": "/apps/reflex-test",
-      "image": "https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/reflex-test-1761161845350.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "typing-speed-test",
@@ -213,7 +213,7 @@
       "description": "시력 건강 체크",
       "categoryId": "health-routine",
       "url": "/apps/eye-test",
-      "image": "https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/eye-test-1761161874801.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "reflex-test",
@@ -228,7 +228,7 @@
       "description": "매일 새로운 명언",
       "categoryId": "fortune-mind",
       "url": "/apps/quote-generator",
-      "image": "https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/quote-generator-1761162003289.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "life-support",
@@ -244,7 +244,7 @@
       "description": "중요한 날 카운트다운",
       "categoryId": "money-calc",
       "url": "/apps/dday-counter",
-      "image": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/dday-counter-1761162661531.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "habit-tracker",
@@ -260,7 +260,7 @@
       "description": "뽀모도로 집중 타이머",
       "categoryId": "learning-tools",
       "url": "/apps/focus-timer",
-      "image": "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/focus-timer-1761162734091.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "habit-tracker",
@@ -276,7 +276,7 @@
       "description": "수면 패턴 분석",
       "categoryId": "health-routine",
       "url": "/apps/sleep-analyzer",
-      "image": "https://images.unsplash.com/photo-1520206183501-b80df61043c2?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/sleep-analyzer-1761161903920.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "calorie-calculator",
@@ -292,7 +292,7 @@
       "description": "필요한 영양소 진단",
       "categoryId": "health-routine",
       "url": "/apps/vitamin-check",
-      "image": "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/vitamin-check-1761162597634.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "calorie-calculator",
@@ -308,7 +308,7 @@
       "description": "심리 분석",
       "categoryId": "fortune-mind",
       "url": "/apps/color-psychology",
-      "image": "https://images.unsplash.com/photo-1525909002-1b05e0c869d8?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/color-psychology-1761162904892.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "mbti-test",
@@ -324,7 +324,7 @@
       "description": "오늘의 운세 확인",
       "categoryId": "fortune-mind",
       "url": "/apps/voice-fortune",
-      "image": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/voice-fortune-1761162832085.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "face-shape",
@@ -385,7 +385,7 @@
       "description": "재미있는 게임",
       "categoryId": "learning-tools",
       "url": "/apps/arcade-mini-games",
-      "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/arcade-mini-games-1761161678400.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "mafia-game",
@@ -401,7 +401,7 @@
       "description": "도전 과제",
       "categoryId": "health-routine",
       "url": "/apps/quit-smoking-challenge",
-      "image": "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/quit-smoking-challenge-1761162333404.webp",
       "createdAt": "2025-10-20"
     },
     {
@@ -412,7 +412,7 @@
       "description": "69개 경고등의 의미와 대처법을 한눈에",
       "categoryId": "learning-tools",
       "url": "/apps/car-maintenance",
-      "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/car-maintenance-1761161538314.webp",
       "createdAt": "2025-01-21",
       "relatedApps": [
         "compass",
@@ -429,7 +429,7 @@
       "description": "증상과 생활습관에 맞는 맞춤형 영양제 추천",
       "categoryId": "health-routine",
       "url": "/apps/health-supplement-recommend",
-      "image": "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/health-supplement-recommend-1761161563626.webp",
       "createdAt": "2025-01-21",
       "relatedApps": [
         "vitamin-check",
@@ -446,7 +446,7 @@
       "description": "상세 분석 결과",
       "categoryId": "fortune-mind",
       "url": "/apps/face-shape",
-      "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/face-shape-1761161493081.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "saju-mbti-jobs",
@@ -463,7 +463,7 @@
       "description": "상세 분석 결과",
       "categoryId": "fortune-mind",
       "url": "/apps/lifestyle-face-fortune",
-      "image": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/lifestyle-face-fortune-1761161516223.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "face-shape",
@@ -479,7 +479,7 @@
       "description": "전통 수상학 기반 AI 분석! 7대 손금선 정밀 분석 + 27가지 패턴 분류",
       "categoryId": "fortune-mind",
       "url": "/apps/lifestyle-palm-reading",
-      "image": "https://images.unsplash.com/photo-1591154669695-5f2a8d20c089?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/lifestyle-palm-reading-1761161435391.webp",
       "createdAt": "2025-10-21",
       "relatedApps": [
         "lifestyle-face-fortune",
@@ -512,7 +512,7 @@
       "description": "재미있는 심리 테스트",
       "categoryId": "fortune-mind",
       "url": "/apps/iq-test",
-      "image": "https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/iq-test-1761161589212.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "reflex-test",
@@ -555,7 +555,7 @@
       "description": "체지방 서비스",
       "categoryId": "health-routine",
       "url": "/apps/bodyfat-measure",
-      "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/bodyfat-measure-1761161368178.webp",
       "createdAt": "2025-10-20"
     },
     {
@@ -566,7 +566,7 @@
       "description": "기분을 분석하고 맞춤 활동을 추천합니다",
       "categoryId": "family-life",
       "url": "/apps/mood-cheer-up",
-      "image": "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mood-cheer-up-1761161320869.webp",
       "createdAt": "2025-01-21",
       "relatedApps": [
         "quote-generator",
@@ -583,7 +583,7 @@
       "description": "목소리 서비스",
       "categoryId": "fortune-mind",
       "url": "/apps/voice-age",
-      "image": "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/voice-age-1761161305307.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "voice-fortune",
@@ -599,7 +599,7 @@
       "description": "재미있는 게임",
       "categoryId": "learning-tools",
       "url": "/apps/games-puzzle",
-      "image": "https://images.unsplash.com/photo-1495364141860-b0d03eccd065?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/games-puzzle-1761161469812.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "iq-test",
@@ -615,7 +615,7 @@
       "description": "재미있는 게임",
       "categoryId": "learning-tools",
       "url": "/apps/games-multiplication",
-      "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/games-multiplication-1761162516220.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "arcade-mini-games",
@@ -631,7 +631,7 @@
       "description": "꿈 서비스",
       "categoryId": "fortune-mind",
       "url": "/apps/dream-interpreter",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/dream-interpreter-1761161241812.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "today-fortune",
@@ -658,7 +658,7 @@
       "description": "여행 서비스",
       "categoryId": "money-calc",
       "url": "/apps/travel-packing-list",
-      "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/travel-packing-list-1761161453354.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "gift-finder",
@@ -674,7 +674,7 @@
       "description": "맞춤 추천",
       "categoryId": "health-routine",
       "url": "/apps/breakfast-what-to-eat",
-      "image": "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/breakfast-what-to-eat-1761162396609.webp",
       "createdAt": "2025-10-20"
     },
     {
@@ -697,7 +697,7 @@
       "description": "실시간 방향 확인! 360도 회전 나침반, 모바일 최적화",
       "categoryId": "learning-tools",
       "url": "/apps/compass",
-      "image": "https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/compass-1761161216541.webp",
       "createdAt": "2025-01-21",
       "relatedApps": [
         "fengshui-guide",
@@ -713,7 +713,7 @@
       "description": "성격 유형 테스트",
       "categoryId": "fortune-mind",
       "url": "/apps/saju-mbti-jobs",
-      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/saju-mbti-jobs-1761161111832.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "mbti-test",
@@ -730,7 +730,7 @@
       "description": "과학적 해석과 체크리스트로 배우는 현대 풍수",
       "categoryId": "fortune-mind",
       "url": "/apps/fengshui-guide",
-      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/fengshui-guide-1761161139219.webp",
       "createdAt": "2025-01-21",
       "relatedApps": [
         "compass",
@@ -747,7 +747,7 @@
       "description": "200개 이상의 선물 데이터로 완벽한 선물 찾기",
       "categoryId": "family-life",
       "url": "/apps/gift-finder",
-      "image": "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/gift-finder-1761161097597.webp",
       "createdAt": "2025-01-21",
       "relatedApps": [
         "parents-time",
