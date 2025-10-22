@@ -139,55 +139,61 @@ export default function EyeTest() {
 
             <div className="grid md:grid-cols-3 gap-6">
               {/* 시력 테스트 */}
-              <PremiumCard hover gradient className="text-center cursor-pointer" onClick={() => startTest('vision')}>
-                <div className="text-6xl mb-4">👀</div>
-                <h3 className="text-2xl font-bold text-white mb-3">시력 테스트</h3>
-                <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                  화살표 방향을 맞춰<br />시력을 측정하세요
-                </p>
-                <PremiumButton
-                  variant="primary"
-                  size="md"
-                  icon="▶"
-                  fullWidth
-                >
-                  시작하기
-                </PremiumButton>
-              </PremiumCard>
+              <div onClick={() => startTest('vision')} className="cursor-pointer">
+                <PremiumCard hover gradient className="text-center">
+                  <div className="text-6xl mb-4">👀</div>
+                  <h3 className="text-2xl font-bold text-white mb-3">시력 테스트</h3>
+                  <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                    화살표 방향을 맞춰<br />시력을 측정하세요
+                  </p>
+                  <PremiumButton
+                    variant="primary"
+                    size="md"
+                    icon="▶"
+                    fullWidth
+                  >
+                    시작하기
+                  </PremiumButton>
+                </PremiumCard>
+              </div>
 
               {/* 색맹 테스트 */}
-              <PremiumCard hover gradient className="text-center cursor-pointer" onClick={() => startTest('colorBlind')}>
-                <div className="text-6xl mb-4">🎨</div>
-                <h3 className="text-2xl font-bold text-white mb-3">색맹 테스트</h3>
-                <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                  색상판에서 숫자를<br />찾아보세요
-                </p>
-                <PremiumButton
-                  variant="primary"
-                  size="md"
-                  icon="▶"
-                  fullWidth
-                >
-                  시작하기
-                </PremiumButton>
-              </PremiumCard>
+              <div onClick={() => startTest('colorBlind')} className="cursor-pointer">
+                <PremiumCard hover gradient className="text-center">
+                  <div className="text-6xl mb-4">🎨</div>
+                  <h3 className="text-2xl font-bold text-white mb-3">색맹 테스트</h3>
+                  <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                    색상판에서 숫자를<br />찾아보세요
+                  </p>
+                  <PremiumButton
+                    variant="primary"
+                    size="md"
+                    icon="▶"
+                    fullWidth
+                  >
+                    시작하기
+                  </PremiumButton>
+                </PremiumCard>
+              </div>
 
               {/* 노안 테스트 */}
-              <PremiumCard hover gradient className="text-center cursor-pointer" onClick={() => startTest('presbyopia')}>
-                <div className="text-6xl mb-4">📖</div>
-                <h3 className="text-2xl font-bold text-white mb-3">노안 테스트</h3>
-                <p className="text-white/70 text-sm mb-6 leading-relaxed">
-                  작은 글씨를<br />읽을 수 있는지 확인하세요
-                </p>
-                <PremiumButton
-                  variant="primary"
-                  size="md"
-                  icon="▶"
-                  fullWidth
-                >
-                  시작하기
-                </PremiumButton>
-              </PremiumCard>
+              <div onClick={() => startTest('presbyopia')} className="cursor-pointer">
+                <PremiumCard hover gradient className="text-center">
+                  <div className="text-6xl mb-4">📖</div>
+                  <h3 className="text-2xl font-bold text-white mb-3">노안 테스트</h3>
+                  <p className="text-white/70 text-sm mb-6 leading-relaxed">
+                    작은 글씨를<br />읽을 수 있는지 확인하세요
+                  </p>
+                  <PremiumButton
+                    variant="primary"
+                    size="md"
+                    icon="▶"
+                    fullWidth
+                  >
+                    시작하기
+                  </PremiumButton>
+                </PremiumCard>
+              </div>
             </div>
 
             <PremiumCard className="text-center">
