@@ -98,10 +98,10 @@
     },
     {
       "id": "crypto-calculator",
-      "name": "가상화폐 실시간 시세",
+      "name": "비트코인 vs 금 비교",
       "slug": "crypto-calculator",
-      "icon": "💎",
-      "description": "비트코인, 이더리움 등 실시간 시세 조회",
+      "icon": "⚡",
+      "description": "실시간 시세 & 투자 수익률 시뮬레이션",
       "categoryId": "money-calc",
       "url": "/apps/crypto-calculator",
       "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&auto=format&fit=crop",
