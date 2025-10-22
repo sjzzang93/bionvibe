@@ -11,6 +11,7 @@ export default function HomeContent() {
   const [mounted, setMounted] = useState(false);
   const [allApps, setAllApps] = useState<App[]>([]);
   const [loading, setLoading] = useState(true);
+  const [favoritesLoaded, setFavoritesLoaded] = useState(false);
   const categories = getAllCategories();
 
   // Supabase에서 앱 데이터 가져오기
@@ -47,27 +48,35 @@ export default function HomeContent() {
     setMounted(true);
   }, []);
 
-  // localStorage에서 즐겨찾기 불러오기
+  // localStorage에서 즐겨찾기 불러오기 (앱 데이터 로드 완료 후)
   useEffect(() => {
-    if (!mounted) return;
+    if (!mounted || allApps.length === 0 || favoritesLoaded) return;
     
     const saved = localStorage.getItem('favorite-apps');
+    console.log('📂 localStorage에서 불러온 즐겨찾기:', saved);
+    
     if (saved) {
       try {
         const savedFavorites = JSON.parse(saved);
         const validFavorites = savedFavorites.filter((id: string) => 
           allApps.some(app => app.id === id)
         );
+        
+        console.log('✅ 유효한 즐겨찾기:', validFavorites);
         setFavorites(validFavorites);
+        
         if (validFavorites.length !== savedFavorites.length) {
+          console.log('🧹 유효하지 않은 즐겨찾기 제거됨');
           localStorage.setItem('favorite-apps', JSON.stringify(validFavorites));
         }
       } catch (e) {
-        console.error('Failed to load favorites:', e);
+        console.error('❌ 즐겨찾기 불러오기 실패:', e);
+        localStorage.removeItem('favorite-apps');
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mounted]);
+    
+    setFavoritesLoaded(true);
+  }, [mounted, allApps, favoritesLoaded]);
 
   // 스크롤 위치 복원
   useEffect(() => {
@@ -107,19 +116,28 @@ export default function HomeContent() {
     };
   }, [mounted]);
 
+  // favorites 변경 시 localStorage에 자동 저장 (초기 로드 이후에만)
+  useEffect(() => {
+    if (!mounted || !favoritesLoaded) return;
+    
+    try {
+      localStorage.setItem('favorite-apps', JSON.stringify(favorites));
+      console.log('✅ 즐겨찾기 저장됨:', favorites);
+    } catch (e) {
+      console.error('❌ 즐겨찾기 저장 실패:', e);
+    }
+  }, [favorites, mounted, favoritesLoaded]);
+
   // 즐겨찾기 토글
   const toggleFavorite = (appId: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    setFavorites(prev => {
-      const newFavorites = prev.includes(appId)
+    setFavorites(prev => 
+      prev.includes(appId)
         ? prev.filter(id => id !== appId)
-        : [...prev, appId];
-      
-      localStorage.setItem('favorite-apps', JSON.stringify(newFavorites));
-      return newFavorites;
-    });
+        : [...prev, appId]
+    );
   };
 
   if (!mounted || loading) {
@@ -263,4 +281,3 @@ export default function HomeContent() {
     </section>
   );
 }
-

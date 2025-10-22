@@ -52,6 +52,7 @@ export default function PremiumButton({
 
   return (
     <button
+        type="button"
       {...props}
       onClick={handleClick}
       className={`

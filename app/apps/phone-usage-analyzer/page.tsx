@@ -222,6 +222,7 @@ export default function PhoneUsageAnalyzerPage() {
                   </li>
                 </ol>
                 <button
+        type="button"
                   onClick={openScreenTime}
                   className="w-full mt-4 bg-white text-purple-600 px-6 py-3 rounded-lg font-bold hover:bg-purple-50 transition-all"
                 >
@@ -350,6 +351,7 @@ export default function PhoneUsageAnalyzerPage() {
               </div>
 
               <button
+        type="button"
                 onClick={() => analyzeData()}
                 className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-xl hover:shadow-lg transition-all"
                 style={{ minHeight: '48px' }}
@@ -481,6 +483,7 @@ export default function PhoneUsageAnalyzerPage() {
             {/* 재분석 버튼 */}
             <div className="flex gap-0 sm:gap-1.5 md:gap-3">
               <button
+        type="button"
                 onClick={() => {
                   setShowResult(false);
                   setResult(null);
@@ -490,6 +493,7 @@ export default function PhoneUsageAnalyzerPage() {
                 ← 데이터 수정
               </button>
               <button
+        type="button"
                 onClick={() => {
                   setShowResult(false);
                   setWeekData([

@@ -13,6 +13,7 @@ export default function StickyCategoryBar({ categories, active, onSelect }: Prop
       <div className="flex gap-2 overflow-x-auto px-3 py-2 scrollbar-hide">
         {['ALL', ...categories].map((c) => (
           <button
+        type="button"
             key={c}
             onClick={() => onSelect(c)}
             className={`whitespace-nowrap rounded-full px-3 py-1 text-sm border transition-all

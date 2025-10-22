@@ -173,6 +173,7 @@ export default function QuoteGenerator() {
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
               {Object.entries(QUOTE_DB).map(([key, data]) => (
                 <button
+        type="button"
                   key={key}
                   onClick={() => { setCategory(key); setShowQuote(false); }}
                   className={`p-5 rounded sm:rounded-lg md:rounded-2xl font-semibold transition-all border-2 ${
@@ -233,6 +234,7 @@ export default function QuoteGenerator() {
 
               <div className="grid grid-cols-3 gap-2">
                 <button
+        type="button"
                   onClick={generateQuote}
                   className="py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
                 >
@@ -240,6 +242,7 @@ export default function QuoteGenerator() {
                   <div className="text-sm">다시</div>
                 </button>
                 <button
+        type="button"
                   onClick={copyQuote}
                   className="py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
                 >
@@ -247,6 +250,7 @@ export default function QuoteGenerator() {
                   <div className="text-sm">복사</div>
                 </button>
                 <button
+        type="button"
                   onClick={shareQuote}
                   className="py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
                 >
@@ -256,6 +260,7 @@ export default function QuoteGenerator() {
               </div>
 
               <button
+        type="button"
                 onClick={() => setShowQuote(false)}
                 className="w-full py-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-xl transition-all border border-white/30"
               >

@@ -162,6 +162,7 @@ export default function ImageManagerPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-12">
           {filteredApps.map((app) => (
             <button
+        type="button"
               key={app.id}
               onClick={() => {
                 setSelectedApp(app);
@@ -218,6 +219,7 @@ export default function ImageManagerPage() {
                 <label className="block text-white font-bold mb-3">업로드 방식</label>
                 <div className="flex gap-4">
                   <button
+        type="button"
                     onClick={() => setUploadMethod('file')}
                     className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
                       uploadMethod === 'file'
@@ -228,6 +230,7 @@ export default function ImageManagerPage() {
                     📁 파일 업로드
                   </button>
                   <button
+        type="button"
                     onClick={() => setUploadMethod('url')}
                     className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
                       uploadMethod === 'url'
@@ -307,6 +310,7 @@ export default function ImageManagerPage() {
               {/* Buttons */}
               <div className="flex gap-4">
                 <button
+        type="button"
                   onClick={handleUpdateImage}
                   disabled={loading || !newImageUrl || newImageUrl === selectedApp.image}
                   className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -314,6 +318,7 @@ export default function ImageManagerPage() {
                   {loading ? '⏳ 업데이트 중...' : '✅ 이미지 업데이트'}
                 </button>
                 <button
+        type="button"
                   onClick={() => {
                     setSelectedApp(null);
                     setNewImageUrl('');

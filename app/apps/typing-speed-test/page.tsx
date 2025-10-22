@@ -98,6 +98,7 @@ export default function TypingSpeedTestPage() {
               <div className="flex gap-4 justify-center">
                 {['korean', 'english'].map((m) => (
                   <button
+        type="button"
                     key={m}
                     onClick={() => setMode(m as 'korean' | 'english')}
                     className={`px-8 py-4 rounded-xl font-bold transition-all ${

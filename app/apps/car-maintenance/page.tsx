@@ -143,6 +143,7 @@ export default function CarWarningLightsPage() {
                   </div>
                 </div>
                 <button
+        type="button"
                   onClick={() => setShowModal(false)}
                   className="text-white hover:text-red-400 text-4xl font-bold transition-colors ml-4"
                 >

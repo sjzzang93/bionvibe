@@ -112,6 +112,7 @@ export default function GuestbookManager() {
         <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border-2 border-white/10 mb-6">
           <div className="flex flex-wrap gap-4 justify-between items-center">
             <button
+        type="button"
               onClick={loadMessages}
               disabled={loading}
               className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-bold transition-all disabled:opacity-50"
@@ -119,6 +120,7 @@ export default function GuestbookManager() {
               🔄 새로고침
             </button>
             <button
+        type="button"
               onClick={handleDeleteAll}
               disabled={loading || messages.length === 0}
               className="px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg font-bold transition-all disabled:opacity-50"
@@ -161,6 +163,7 @@ export default function GuestbookManager() {
                     </p>
                   </div>
                   <button
+        type="button"
                     onClick={() => handleDelete(msg.id)}
                     disabled={deleting === msg.id}
                     className="px-4 py-2 bg-red-500/80 hover:bg-red-500 text-white rounded-lg font-bold transition-all disabled:opacity-50 whitespace-nowrap"

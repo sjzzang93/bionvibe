@@ -261,6 +261,7 @@ export default function MainChat() {
               <div className="flex items-center gap-2" suppressHydrationWarning>
                 {isNicknameSet && (
                   <button
+        type="button"
                     onClick={() => {
                       if (confirm('닉네임을 변경하시겠어요?')) {
                         localStorage.removeItem('bion_chat_nickname');
@@ -274,6 +275,7 @@ export default function MainChat() {
                   </button>
                 )}
                 <button
+        type="button"
                   onClick={() => setIsCollapsed(!isCollapsed)}
                   className="px-3 py-1.5 bg-white hover:bg-orange-100 text-orange-600 text-sm rounded-full font-bold shadow-md transition-all border-2 border-orange-300"
                   aria-label={isCollapsed ? '방명록 펼치기' : '방명록 접기'}
@@ -365,6 +367,7 @@ export default function MainChat() {
                   className="flex-1 px-3 py-2 text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-500 border border-white dark:border-gray-600"
                 />
                 <button
+        type="button"
                   onClick={sendMessage}
                   disabled={!message.trim()}
                   className="px-4 py-2 bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-600 dark:text-red-400 font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm border border-red-200 dark:border-gray-600"
@@ -397,6 +400,7 @@ export default function MainChat() {
                     className="flex-1 px-3 py-2 font-bold text-base text-center bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-500 border border-white dark:border-gray-600"
                   />
                   <button
+        type="button"
                     onClick={handleNicknameSubmit}
                     disabled={!nickname.trim()}
                     className="px-4 py-2 bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-red-600 dark:text-red-400 font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm border border-red-200 dark:border-gray-600"

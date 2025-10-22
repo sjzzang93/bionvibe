@@ -116,6 +116,7 @@ export default function DDayCounter() {
                         <h4 className="text-lg font-semibold text-white">일정 {index + 1}</h4>
                         {events.length > 1 && (
                           <button
+        type="button"
                             onClick={() => removeEvent(index)}
                             className="px-3 py-1 bg-red-500 text-white text-sm rounded-lg hover:bg-red-600 transition-colors"
                           >
@@ -154,6 +155,7 @@ export default function DDayCounter() {
                 </div>
 
                 <button
+        type="button"
                   onClick={addEvent}
                   className="w-full py-3 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-xl transition-all border border-white/30"
                 >

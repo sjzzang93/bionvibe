@@ -1,0 +1,425 @@
+{
+  "testName": "시력 검사",
+  "testType": "visual-acuity",
+  "description": "E 차트를 사용한 표준 시력 검사(8방향). 화면/거리 보정이 필요합니다.",
+  "viewingDistanceGuide": {
+    "recommendedCm": 200,
+    "note": "모바일은 팔 길이(40–50cm)에서 축척 보정 안내를 표시하세요."
+  },
+  "levels": [
+    {
+      "level": 1,
+      "vision": 2.0,
+      "sizePx": 24,
+      "label": "2.0 (매우 좋음)",
+      "description": "전투기 조종사/특수 임무 수준의 매우 뛰어난 시력입니다.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        },
+        {
+          "direction": "up",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "right",
+          "rotationDeg": 90
+        },
+        {
+          "direction": "left",
+          "rotationDeg": 270
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "vision": 1.5,
+      "sizePx": 28,
+      "label": "1.5 (아주 좋음)",
+      "description": "일상 활동에서 탁월한 원거리 식별력을 보입니다.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "left",
+          "rotationDeg": 270
+        },
+        {
+          "direction": "down-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        },
+        {
+          "direction": "up-right",
+          "rotationDeg": 0
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "vision": 1.2,
+      "sizePx": 32,
+      "label": "1.2 (우수)",
+      "description": "세부 식별력이 우수하며 피로가 적습니다.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "down-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        },
+        {
+          "direction": "left",
+          "rotationDeg": 270
+        },
+        {
+          "direction": "up-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "right",
+          "rotationDeg": 90
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "vision": 1.0,
+      "sizePx": 36,
+      "label": "1.0 (정상)",
+      "description": "표준 정상 시력. 일상생활에 불편이 거의 없습니다.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "up",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "left",
+          "rotationDeg": 270
+        },
+        {
+          "direction": "down-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "vision": 0.8,
+      "sizePx": 44,
+      "label": "0.8 (경도 저하)",
+      "description": "원거리 작은 글씨에서 약간의 불편이 있을 수 있습니다.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "down-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "left",
+          "rotationDeg": 270
+        },
+        {
+          "direction": "up",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "right",
+          "rotationDeg": 90
+        },
+        {
+          "direction": "down-left",
+          "rotationDeg": 0
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "vision": 0.6,
+      "sizePx": 52,
+      "label": "0.6 (경계)",
+      "description": "휴식 시 피로감 증가. 교정 필요성 평가 권장.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "down-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "left",
+          "rotationDeg": 270
+        },
+        {
+          "direction": "right",
+          "rotationDeg": 90
+        },
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        },
+        {
+          "direction": "up-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-right",
+          "rotationDeg": 0
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "vision": 0.4,
+      "sizePx": 64,
+      "label": "0.4 (저하)",
+      "description": "원거리 표지판 인식이 어렵습니다. 교정 안경/검사 필요.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        },
+        {
+          "direction": "up",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "left",
+          "rotationDeg": 270
+        },
+        {
+          "direction": "down-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-left",
+          "rotationDeg": 0
+        }
+      ]
+    },
+    {
+      "level": 8,
+      "vision": 0.2,
+      "sizePx": 88,
+      "label": "0.2 (중등도 저하)",
+      "description": "교통·안전과 관련된 활동에 주의가 필요합니다.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "up-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        },
+        {
+          "direction": "right",
+          "rotationDeg": 90
+        }
+      ]
+    },
+    {
+      "level": 9,
+      "vision": 0.1,
+      "sizePx": 120,
+      "label": "0.1 (중증 저하)",
+      "description": "전문적 검사와 빠른 교정이 권장됩니다.",
+      "directions": [
+        "up",
+        "down",
+        "left",
+        "right",
+        "up-left",
+        "up-right",
+        "down-left",
+        "down-right"
+      ],
+      "trials": [
+        {
+          "direction": "down",
+          "rotationDeg": 180
+        },
+        {
+          "direction": "up-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "right",
+          "rotationDeg": 90
+        },
+        {
+          "direction": "down-right",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "up-left",
+          "rotationDeg": 0
+        },
+        {
+          "direction": "down-left",
+          "rotationDeg": 0
+        }
+      ]
+    }
+  ],
+  "results": {
+    "2.0-1.5": {
+      "grade": "S",
+      "description": "탁월한 시력",
+      "advice": "정기 검진(연 1회)과 화면 블루라이트 관리로 현 상태 유지하세요."
+    },
+    "1.2-1.0": {
+      "grade": "A",
+      "description": "우수/정상 시력",
+      "advice": "장시간 근거리 작업 시 20-20-20 규칙을 지키세요."
+    },
+    "0.8-0.6": {
+      "grade": "B",
+      "description": "경도 저하",
+      "advice": "안과 검진 및 안경/콘택트렌즈 교정 여부를 확인하세요."
+    },
+    "0.4-0.2": {
+      "grade": "C",
+      "description": "중등도 저하",
+      "advice": "교정 시력 평가 및 기저 질환(각막·망막) 검사를 권합니다."
+    },
+    "0.1-0.0": {
+      "grade": "D",
+      "description": "중증 저하",
+      "advice": "시급히 전문의 진료를 받으세요. 일시적 시력 저하 요인(건조, 약물, 피로)도 점검."
+    }
+  }
+}

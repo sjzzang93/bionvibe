@@ -91,6 +91,7 @@ export default function EmergencyFundPage() {
           </div>
 
           <button
+        type="button"
             onClick={handleCalculate}
             className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-xl hover:shadow-lg transition-all"
           >

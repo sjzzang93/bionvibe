@@ -98,15 +98,16 @@ export default function BodyFatMeasure() {
 
           {!result ? (
             <PremiumCard className="max-w-2xl mx-auto" gradient>
-              <div className="space-y-6">
+              <div className="space-y-5 sm:space-y-6">
                 <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">👤 성별</label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <label className="text-white font-bold mb-2 sm:mb-3 block text-base sm:text-lg md:text-xl">👤 성별</label>
+                  <div className="grid grid-cols-2 gap-2 sm:gap-3">
                     {['male', 'female'].map((g) => (
                       <button
+        type="button"
                         key={g}
                         onClick={() => setGender(g)}
-                        className={`py-4 rounded-xl font-bold transition-all ${
+                        className={`py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base transition-all ${
                           gender === g
                             ? 'bg-white text-orange-600 scale-105'
                             : 'bg-white/20 text-white hover:bg-white/30'
@@ -119,8 +120,9 @@ export default function BodyFatMeasure() {
                 </div>
 
                 <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">
-                    🎂 나이: {age}세
+                  <label className="text-white font-bold mb-2 sm:mb-3 block text-base sm:text-lg md:text-xl flex items-center justify-between">
+                    <span>🎂 나이</span>
+                    <span className="text-orange-300 text-xl sm:text-2xl">{age}세</span>
                   </label>
                   <input
                     type="range"
@@ -128,42 +130,61 @@ export default function BodyFatMeasure() {
                     max="80"
                     value={age}
                     onChange={(e) => setAge(Number(e.target.value))}
-                    className="w-full"
+                    className="w-full h-3"
                   />
+                  <div className="flex justify-between text-white/60 text-xs mt-1">
+                    <span>15세</span>
+                    <span>80세</span>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block">📏 키: {height}cm</label>
+                    <label className="text-white font-bold mb-2 sm:mb-3 block text-base sm:text-lg flex items-center justify-between">
+                      <span>📏 키</span>
+                      <span className="text-blue-300 text-lg sm:text-xl">{height}cm</span>
+                    </label>
                     <input
                       type="range"
                       min="140"
                       max="200"
                       value={height}
                       onChange={(e) => setHeight(Number(e.target.value))}
-                      className="w-full"
+                      className="w-full h-3"
                     />
+                    <div className="flex justify-between text-white/60 text-xs mt-1">
+                      <span>140cm</span>
+                      <span>200cm</span>
+                    </div>
                   </div>
                   <div>
-                    <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block">⚖️ 몸무게: {weight}kg</label>
+                    <label className="text-white font-bold mb-2 sm:mb-3 block text-base sm:text-lg flex items-center justify-between">
+                      <span>⚖️ 몸무게</span>
+                      <span className="text-green-300 text-lg sm:text-xl">{weight}kg</span>
+                    </label>
                     <input
                       type="range"
                       min="40"
                       max="150"
                       value={weight}
                       onChange={(e) => setWeight(Number(e.target.value))}
-                      className="w-full"
+                      className="w-full h-3"
                     />
+                    <div className="flex justify-between text-white/60 text-xs mt-1">
+                      <span>40kg</span>
+                      <span>150kg</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="bg-blue-500/20 rounded-xl p-4 border border-blue-400/30">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-white font-bold">📐 둘레 측정</h4>
+                <div className="bg-blue-500/20 rounded-xl p-3 sm:p-4 border border-blue-400/30">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+                    <h4 className="text-white font-bold text-base sm:text-lg">📐 둘레 측정</h4>
                     <div className="flex gap-2">
                       <button
+        type="button"
                         onClick={() => setUnit('cm')}
-                        className={`px-4 py-2 rounded-lg font-bold transition-all ${
+                        className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-bold text-sm sm:text-base transition-all ${
                           unit === 'cm'
                             ? 'bg-white text-blue-600'
                             : 'bg-white/20 text-white hover:bg-white/30'
@@ -172,8 +193,9 @@ export default function BodyFatMeasure() {
                         cm
                       </button>
                       <button
+        type="button"
                         onClick={() => setUnit('inch')}
-                        className={`px-4 py-2 rounded-lg font-bold transition-all ${
+                        className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg font-bold text-sm sm:text-base transition-all ${
                           unit === 'inch'
                             ? 'bg-white text-blue-600'
                             : 'bg-white/20 text-white hover:bg-white/30'
@@ -186,8 +208,9 @@ export default function BodyFatMeasure() {
                   
                   <div className="space-y-4">
                     <div>
-                      <label className="text-white/90 mb-2 block">
-                        허리 둘레: {getDisplayValue(waist)}{unit}
+                      <label className="text-white/90 mb-2 block text-sm sm:text-base flex items-center justify-between">
+                        <span>허리 둘레</span>
+                        <span className="text-yellow-300 font-bold text-base sm:text-lg">{getDisplayValue(waist)}{unit}</span>
                       </label>
                       <input
                         type="range"
@@ -199,13 +222,14 @@ export default function BodyFatMeasure() {
                           const val = Number(e.target.value);
                           setWaist(unit === 'cm' ? val : val * 2.54);
                         }}
-                        className="w-full"
+                        className="w-full h-3"
                       />
                     </div>
                     {gender === 'female' && (
                       <div>
-                        <label className="text-white/90 mb-2 block">
-                          엉덩이 둘레: {getDisplayValue(hip)}{unit}
+                        <label className="text-white/90 mb-2 block text-sm sm:text-base flex items-center justify-between">
+                          <span>엉덩이 둘레</span>
+                          <span className="text-pink-300 font-bold text-base sm:text-lg">{getDisplayValue(hip)}{unit}</span>
                         </label>
                         <input
                           type="range"
@@ -217,7 +241,7 @@ export default function BodyFatMeasure() {
                             const val = Number(e.target.value);
                             setHip(unit === 'cm' ? val : val * 2.54);
                           }}
-                          className="w-full"
+                          className="w-full h-3"
                         />
                       </div>
                     )}
@@ -234,45 +258,45 @@ export default function BodyFatMeasure() {
               </div>
             </PremiumCard>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <PremiumCard gradient className="text-center">
-                <div className="text-8xl mb-6 animate-bounce-slow">📊</div>
-                <h3 className="text-3xl font-bold text-white mb-8">측정 결과</h3>
+                <div className="text-5xl sm:text-6xl md:text-8xl mb-4 sm:mb-6 animate-bounce-slow">📊</div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">측정 결과</h3>
 
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div className="bg-white/20 rounded-2xl p-6">
-                    <div className="text-white/70 text-sm mb-2">체지방률</div>
-                    <div className="text-5xl font-black text-orange-200 mb-2">{result.bodyFat}%</div>
-                    <div className="text-white/90 font-bold">{result.bodyFatCategory}</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                  <div className="bg-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                    <div className="text-white/70 text-xs sm:text-sm mb-2">체지방률</div>
+                    <div className="text-3xl sm:text-4xl md:text-5xl font-black text-orange-200 mb-2">{result.bodyFat}%</div>
+                    <div className="text-sm sm:text-base text-white/90 font-bold">{result.bodyFatCategory}</div>
                   </div>
-                  <div className="bg-white/20 rounded-2xl p-6">
-                    <div className="text-white/70 text-sm mb-2">BMI</div>
-                    <div className="text-5xl font-black text-blue-200 mb-2">{result.bmi}</div>
-                    <div className="text-white/90 font-bold">{result.bmiCategory}</div>
+                  <div className="bg-white/20 rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                    <div className="text-white/70 text-xs sm:text-sm mb-2">BMI</div>
+                    <div className="text-3xl sm:text-4xl md:text-5xl font-black text-blue-200 mb-2">{result.bmi}</div>
+                    <div className="text-sm sm:text-base text-white/90 font-bold">{result.bmiCategory}</div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/10 rounded-xl p-4">
-                    <div className="text-white/70 text-sm">제지방량</div>
-                    <div className="text-2xl font-bold text-green-200">{result.leanMass}kg</div>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="bg-white/10 rounded-lg sm:rounded-xl p-3 sm:p-4">
+                    <div className="text-white/70 text-xs sm:text-sm mb-1">제지방량</div>
+                    <div className="text-xl sm:text-2xl font-bold text-green-200">{result.leanMass}kg</div>
                   </div>
-                  <div className="bg-white/10 rounded-xl p-4">
-                    <div className="text-white/70 text-sm">체지방량</div>
-                    <div className="text-2xl font-bold text-yellow-200">{result.fatMass}kg</div>
+                  <div className="bg-white/10 rounded-lg sm:rounded-xl p-3 sm:p-4">
+                    <div className="text-white/70 text-xs sm:text-sm mb-1">체지방량</div>
+                    <div className="text-xl sm:text-2xl font-bold text-yellow-200">{result.fatMass}kg</div>
                   </div>
                 </div>
               </PremiumCard>
 
               <PremiumCard>
-                <h3 className="text-2xl font-bold text-white mb-4">💪 운동 추천</h3>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4">💪 운동 추천</h3>
                 <div className="space-y-3">
                   {BODY_FAT_DATA.exerciseRecommendations.slice(0, 3).map((ex: any, i: number) => (
-                    <div key={i} className="bg-white/10 rounded-xl p-4">
-                      <h4 className="text-white font-bold mb-2">{ex.goal}</h4>
-                      <div className="space-y-2">
+                    <div key={i} className="bg-white/10 rounded-lg sm:rounded-xl p-3 sm:p-4">
+                      <h4 className="text-white font-bold text-sm sm:text-base mb-2">{ex.goal}</h4>
+                      <div className="space-y-1 sm:space-y-2">
                         {ex.exercises?.slice(0, 2).map((exercise: any, j: number) => (
-                          <div key={j} className="text-white/80 text-sm">
+                          <div key={j} className="text-white/80 text-xs sm:text-sm">
                             • {exercise.name}: {exercise.frequency}
                           </div>
                         ))}

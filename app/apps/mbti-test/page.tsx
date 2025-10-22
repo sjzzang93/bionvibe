@@ -24,86 +24,286 @@ const questions: Question[] = [
     type: 'E',
     options: [
       { text: "많은 사람들과 대화하며 에너지를 얻는다", value: 2 },
-      { text: "몇 명과 깊은 대화를 나눈다", value: -2 },
-      { text: "가끔 대화에 참여하지만 주로 관찰한다", value: -1 },
-      { text: "빨리 나가고 싶다", value: -2 }
+      { text: "소수의 친한 사람들과 깊은 대화를 나눈다", value: -2 }
     ]
   },
   {
     id: 2,
-    question: "문제를 해결할 때 당신은?",
+    question: "새로운 것을 배울 때 당신은?",
     type: 'S',
     options: [
-      { text: "단계별로 차근차근 접근한다", value: 2 },
-      { text: "새로운 방법을 찾아 시도한다", value: -2 },
-      { text: "경험에서 배운 방법을 사용한다", value: 1 },
-      { text: "직감을 믿고 진행한다", value: -1 }
+      { text: "구체적인 예시와 단계가 필요하다", value: 2 },
+      { text: "큰 그림과 개념부터 이해하고 싶다", value: -2 }
     ]
   },
   {
     id: 3,
-    question: "중요한 결정을 내릴 때 당신은?",
-    type: 'T',
+    question: "친구가 고민을 털어놓으면?",
+    type: 'F',
     options: [
-      { text: "논리적 분석을 통해 결정한다", value: 2 },
-      { text: "감정과 가치를 고려한다", value: -2 },
-      { text: "다른 사람들의 의견을 듣는다", value: -1 },
-      { text: "장단점을 모두 분석한다", value: 1 }
+      { text: "공감하며 위로해준다", value: 2 },
+      { text: "해결책을 제시한다", value: -2 }
     ]
   },
   {
     id: 4,
-    question: "일상 생활에서 당신은?",
+    question: "여행을 준비할 때",
     type: 'J',
     options: [
-      { text: "계획을 세우고 그에 따라 행동한다", value: 2 },
-      { text: "상황에 따라 유연하게 대응한다", value: -2 },
-      { text: "중요한 일만 계획하고 나머지는 유연하게", value: 1 },
-      { text: "즉흥적으로 행동한다", value: -1 }
+      { text: "일정표를 만들고 예약을 미리 한다", value: 2 },
+      { text: "대충 정하고 현지에서 즉흥적으로", value: -2 }
     ]
   },
   {
     id: 5,
-    question: "스트레스를 받을 때 당신은?",
+    question: "힘든 일이 있을 때 당신은?",
     type: 'I',
     options: [
-      { text: "혼자만의 시간을 가지며 회복한다", value: 2 },
-      { text: "친한 사람들과 대화하며 해소한다", value: -2 },
-      { text: "취미 활동을 하며 스트레스를 풀어낸다", value: 1 },
-      { text: "새로운 활동을 시작한다", value: -1 }
+      { text: "혼자 생각하며 정리한다", value: 2 },
+      { text: "친구들과 이야기하며 풀어낸다", value: -2 }
     ]
   },
   {
     id: 6,
-    question: "새로운 프로젝트를 시작할 때 당신은?",
+    question: "대화를 할 때 당신은?",
     type: 'N',
     options: [
-      { text: "큰 그림과 가능성을 생각한다", value: 2 },
-      { text: "구체적인 계획과 단계를 세운다", value: -2 },
-      { text: "다양한 아이디어를 모아본다", value: 1 },
-      { text: "검증된 방법을 사용한다", value: -1 }
+      { text: "비유와 상징을 자주 사용한다", value: 2 },
+      { text: "사실과 구체적인 내용을 말한다", value: -2 }
     ]
   },
   {
     id: 7,
-    question: "갈등 상황에서 당신은?",
-    type: 'F',
+    question: "중요한 결정을 내릴 때",
+    type: 'T',
     options: [
-      { text: "모든 사람의 감정을 고려한다", value: 2 },
-      { text: "공정한 해결책을 찾는다", value: -2 },
-      { text: "상대방의 입장을 이해하려 노력한다", value: 1 },
-      { text: "객관적 사실에 집중한다", value: -1 }
+      { text: "논리와 효율성을 우선한다", value: 2 },
+      { text: "사람들의 감정을 고려한다", value: -2 }
     ]
   },
   {
     id: 8,
-    question: "여행을 계획할 때 당신은?",
+    question: "과제나 업무 마감이 있을 때",
+    type: 'J',
+    options: [
+      { text: "미리미리 완료한다", value: 2 },
+      { text: "마감 직전에 몰아서 한다", value: -2 }
+    ]
+  },
+  {
+    id: 9,
+    question: "주말에 친구들이 갑자기 약속을 제안하면?",
+    type: 'E',
+    options: [
+      { text: "좋아! 바로 나간다", value: 2 },
+      { text: "집에서 쉬고 싶은데... 고민된다", value: -2 }
+    ]
+  },
+  {
+    id: 10,
+    question: "일을 할 때 당신은?",
+    type: 'S',
+    options: [
+      { text: "검증된 방법을 따라 정확하게 한다", value: 2 },
+      { text: "새로운 방법을 시도해보고 싶다", value: -2 }
+    ]
+  },
+  {
+    id: 11,
+    question: "영화를 볼 때",
+    type: 'F',
+    options: [
+      { text: "등장인물의 감정에 몰입한다", value: 2 },
+      { text: "스토리 전개와 논리를 분석한다", value: -2 }
+    ]
+  },
+  {
+    id: 12,
+    question: "계획이 갑자기 변경되면?",
     type: 'P',
     options: [
-      { text: "자유롭게 탐험하며 즐긴다", value: 2 },
-      { text: "미리 모든 것을 계획해둔다", value: -2 },
-      { text: "주요 장소만 정하고 나머지는 유연하게", value: 1 },
-      { text: "현지에서 추천받은 곳을 간다", value: -1 }
+      { text: "괜찮아, 그럼 다른 걸 하지", value: 2 },
+      { text: "스트레스 받는다, 계획대로 하고 싶다", value: -2 }
+    ]
+  },
+  {
+    id: 13,
+    question: "전화 통화와 문자 중에서는?",
+    type: 'I',
+    options: [
+      { text: "문자나 메시지가 편하다", value: 2 },
+      { text: "전화로 직접 말하는 게 편하다", value: -2 }
+    ]
+  },
+  {
+    id: 14,
+    question: "책을 읽을 때",
+    type: 'N',
+    options: [
+      { text: "행간의 의미를 찾으며 읽는다", value: 2 },
+      { text: "쓰여진 내용 그대로를 이해한다", value: -2 }
+    ]
+  },
+  {
+    id: 15,
+    question: "비판을 받으면",
+    type: 'T',
+    options: [
+      { text: "객관적으로 분석하고 개선한다", value: 2 },
+      { text: "상처받고 감정적으로 받아들인다", value: -2 }
+    ]
+  },
+  {
+    id: 16,
+    question: "방 청소는?",
+    type: 'J',
+    options: [
+      { text: "규칙적으로 정리정돈한다", value: 2 },
+      { text: "필요할 때만 한다", value: -2 }
+    ]
+  },
+  {
+    id: 17,
+    question: "처음 만난 사람들과 대화할 때",
+    type: 'E',
+    options: [
+      { text: "먼저 말을 걸고 대화를 이어간다", value: 2 },
+      { text: "상대방이 먼저 말을 걸어주길 기다린다", value: -2 }
+    ]
+  },
+  {
+    id: 18,
+    question: "미래를 생각할 때",
+    type: 'N',
+    options: [
+      { text: "다양한 가능성을 상상한다", value: 2 },
+      { text: "현실적인 계획을 세운다", value: -2 }
+    ]
+  },
+  {
+    id: 19,
+    question: "논쟁 상황에서",
+    type: 'T',
+    options: [
+      { text: "사실과 논리로 설득한다", value: 2 },
+      { text: "상대방의 감정을 먼저 배려한다", value: -2 }
+    ]
+  },
+  {
+    id: 20,
+    question: "하루 일과는?",
+    type: 'J',
+    options: [
+      { text: "To-do 리스트대로 진행한다", value: 2 },
+      { text: "그때그때 하고 싶은 대로", value: -2 }
+    ]
+  },
+  {
+    id: 21,
+    question: "사람들과 오래 어울린 후에는?",
+    type: 'I',
+    options: [
+      { text: "혼자만의 시간이 필요하다", value: 2 },
+      { text: "더 많은 사람들과 어울리고 싶다", value: -2 }
+    ]
+  },
+  {
+    id: 22,
+    question: "문제 해결 시",
+    type: 'S',
+    options: [
+      { text: "경험과 데이터를 바탕으로 접근한다", value: 2 },
+      { text: "직관과 영감을 따라간다", value: -2 }
+    ]
+  },
+  {
+    id: 23,
+    question: "칭찬을 할 때",
+    type: 'F',
+    options: [
+      { text: "따뜻한 말과 감정을 표현한다", value: 2 },
+      { text: "구체적인 성과를 언급한다", value: -2 }
+    ]
+  },
+  {
+    id: 24,
+    question: "쇼핑을 할 때",
+    type: 'J',
+    options: [
+      { text: "필요한 것 리스트를 만들고 간다", value: 2 },
+      { text: "돌아다니며 마음에 드는 걸 산다", value: -2 }
+    ]
+  },
+  {
+    id: 25,
+    question: "친구들 사이에서 당신은?",
+    type: 'E',
+    options: [
+      { text: "분위기를 주도하고 리드하는 편", value: 2 },
+      { text: "조용히 듣고 필요할 때만 말하는 편", value: -2 }
+    ]
+  },
+  {
+    id: 26,
+    question: "일상에서 당신은?",
+    type: 'S',
+    options: [
+      { text: "현재에 집중하며 산다", value: 2 },
+      { text: "미래를 상상하며 산다", value: -2 }
+    ]
+  },
+  {
+    id: 27,
+    question: "갈등 상황에서",
+    type: 'T',
+    options: [
+      { text: "공정한 해결책을 찾는다", value: 2 },
+      { text: "모두가 상처받지 않도록 조율한다", value: -2 }
+    ]
+  },
+  {
+    id: 28,
+    question: "새로운 취미를 시작하면?",
+    type: 'P',
+    options: [
+      { text: "이것저것 시도해보며 즐긴다", value: 2 },
+      { text: "체계적으로 배우고 마스터한다", value: -2 }
+    ]
+  },
+  {
+    id: 29,
+    question: "에너지 충전 방법은?",
+    type: 'I',
+    options: [
+      { text: "혼자 책 읽기, 영화 보기", value: 2 },
+      { text: "친구들 만나서 수다 떨기", value: -2 }
+    ]
+  },
+  {
+    id: 30,
+    question: "새로운 아이디어를 접하면?",
+    type: 'N',
+    options: [
+      { text: "흥미롭다! 어떻게 응용할 수 있을까?", value: 2 },
+      { text: "실용적인가? 검증이 필요하다", value: -2 }
+    ]
+  },
+  {
+    id: 31,
+    question: "일을 평가할 때",
+    type: 'F',
+    options: [
+      { text: "노력한 과정을 중요하게 본다", value: 2 },
+      { text: "결과와 성과를 중요하게 본다", value: -2 }
+    ]
+  },
+  {
+    id: 32,
+    question: "결정을 내릴 때",
+    type: 'P',
+    options: [
+      { text: "최대한 열어두고 나중에 결정한다", value: 2 },
+      { text: "빨리 결정하고 진행한다", value: -2 }
     ]
   }
 ];
@@ -300,17 +500,17 @@ export default function MBTI32() {
           </Link>
 
           {/* Header */}
-          <div className="text-center mb-12 animate-fadeIn">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 bg-clip-text text-transparent">
+          <div className="text-center mb-8 md:mb-12 animate-fadeIn">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 bg-clip-text text-transparent px-4">
               🎭 MBTI 결과
             </h1>
-            <p className="text-xl text-white/80">당신의 성격 유형을 분석했습니다!</p>
+            <p className="text-base sm:text-lg md:text-xl text-white/80 px-4">당신의 성격 유형을 분석했습니다!</p>
           </div>
 
           {/* Result Card */}
           <PremiumCard hover gradient className="mb-8 animate-slideUp">
-            <div className="text-center mb-10">
-              <div className="text-7xl md:text-9xl font-bold mb-6 animate-bounce-slow" style={{
+            <div className="text-center mb-8 md:mb-10">
+              <div className="text-6xl sm:text-7xl md:text-9xl font-bold mb-4 md:mb-6 animate-bounce-slow" style={{
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -318,22 +518,22 @@ export default function MBTI32() {
               }}>
                 {result.type}
               </div>
-              <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">
+              <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-2 px-4">
                 {result.description}
               </h2>
             </div>
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8">
               {/* 주요 특성 */}
-              <div className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-2xl">🎯</span> 주요 특성
+              <div className="bg-white/5 backdrop-blur-sm rounded-lg md:rounded-2xl p-4 md:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
+                  <span className="text-xl md:text-2xl">🎯</span> 주요 특성
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {result.characteristics.map((char, index) => (
                     <span
                       key={index}
-                      className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white rounded-full text-sm border border-white/20 hover:scale-110 transition-transform duration-300"
+                      className="px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white rounded-full text-xs md:text-sm border border-white/20 hover:scale-110 transition-transform duration-300"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
                       {char}
@@ -342,30 +542,15 @@ export default function MBTI32() {
                 </div>
               </div>
 
-              {/* 추천 직업 */}
-              <div className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-2xl">💼</span> 추천 직업
-                </h3>
-                <ul className="space-y-2">
-                  {result.careers.map((career, index) => (
-                    <li key={index} className="text-white/90 flex items-center group">
-                      <span className="text-blue-400 mr-3 group-hover:scale-125 transition-transform">💼</span>
-                      <span className="group-hover:translate-x-1 transition-transform">{career}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               {/* 강점 */}
-              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-green-400/30 hover:border-green-400/50 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-2xl">💪</span> 강점
+              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded-lg md:rounded-2xl p-4 md:p-6 border border-green-400/30 hover:border-green-400/50 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
+                  <span className="text-xl md:text-2xl">💪</span> 강점
                 </h3>
                 <ul className="space-y-2">
                   {result.strengths.map((strength, index) => (
-                    <li key={index} className="text-white/90 flex items-center group">
-                      <span className="text-green-400 mr-3 group-hover:scale-125 transition-transform">✓</span>
+                    <li key={index} className="text-sm md:text-base text-white/90 flex items-center group">
+                      <span className="text-green-400 mr-2 md:mr-3 group-hover:scale-125 transition-transform">✓</span>
                       <span className="group-hover:translate-x-1 transition-transform">{strength}</span>
                     </li>
                   ))}
@@ -373,22 +558,37 @@ export default function MBTI32() {
               </div>
 
               {/* 주의점 */}
-              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-amber-400/30 hover:border-amber-400/50 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="text-2xl">⚠️</span> 주의점
+              <div className="bg-gradient-to-br from-amber-500/10 to-orange-500/10 backdrop-blur-sm rounded-lg md:rounded-2xl p-4 md:p-6 border border-amber-400/30 hover:border-amber-400/50 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
+                  <span className="text-xl md:text-2xl">⚠️</span> 주의점
                 </h3>
                 <ul className="space-y-2">
                   {result.weaknesses.map((weakness, index) => (
-                    <li key={index} className="text-white/90 flex items-center group">
-                      <span className="text-amber-400 mr-3 group-hover:scale-125 transition-transform">!</span>
+                    <li key={index} className="text-sm md:text-base text-white/90 flex items-center group">
+                      <span className="text-amber-400 mr-2 md:mr-3 group-hover:scale-125 transition-transform">!</span>
                       <span className="group-hover:translate-x-1 transition-transform">{weakness}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 추천 직업 */}
+              <div className="bg-white/5 backdrop-blur-sm rounded-lg md:rounded-2xl p-4 md:p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 hover:scale-105" style={{ transform: 'translateZ(10px)' }}>
+                <h3 className="text-lg md:text-xl font-bold text-white mb-3 md:mb-4 flex items-center gap-2">
+                  <span className="text-xl md:text-2xl">💼</span> 추천 직업
+                </h3>
+                <ul className="space-y-2">
+                  {result.careers.map((career, index) => (
+                    <li key={index} className="text-sm md:text-base text-white/90 flex items-center group">
+                      <span className="text-blue-400 mr-2 md:mr-3 group-hover:scale-125 transition-transform">💼</span>
+                      <span className="group-hover:translate-x-1 transition-transform">{career}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
 
-            <div className="text-center">
+            <div className="text-center pt-4 md:pt-0">
               <PremiumButton
                 onClick={resetTest}
                 variant="primary"
@@ -465,21 +665,21 @@ export default function MBTI32() {
         </Link>
 
         {/* Header */}
-        <div className="text-center mb-12 animate-fadeIn">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 bg-clip-text text-transparent">
+        <div className="text-center mb-8 md:mb-12 animate-fadeIn">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 bg-clip-text text-transparent px-4">
             🎭 MBTI 테스트
           </h1>
-          <p className="text-xl text-white/80">8문항으로 알아보는 나의 성격 유형</p>
+          <p className="text-base sm:text-lg md:text-xl text-white/80 px-4">32문항으로 알아보는 정확한 성격 유형</p>
         </div>
 
         <PremiumCard hover gradient className="animate-slideUp">
           {/* Progress Bar */}
-          <div className="mb-10">
-            <div className="flex justify-between text-white mb-0.5 sm:mb-1.5 md:mb-2">
-              <span className="text-sm font-medium">문항 {currentQuestion + 1} / {questions.length}</span>
-              <span className="text-sm font-medium">{Math.round(progress)}%</span>
+          <div className="mb-6 md:mb-10">
+            <div className="flex justify-between text-white mb-2">
+              <span className="text-xs sm:text-sm font-medium">문항 {currentQuestion + 1} / {questions.length}</span>
+              <span className="text-xs sm:text-sm font-medium">{Math.round(progress)}%</span>
             </div>
-            <div className="relative w-full bg-white/10 rounded-full h-4 overflow-hidden backdrop-blur-sm border border-white/20">
+            <div className="relative w-full bg-white/10 rounded-full h-3 md:h-4 overflow-hidden backdrop-blur-sm border border-white/20">
               <div
                 className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 transition-all duration-500 ease-out"
                 style={{ 
@@ -493,16 +693,17 @@ export default function MBTI32() {
           </div>
 
           {/* Question */}
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-4xl font-bold text-white leading-relaxed">
+          <div className="text-center mb-6 md:mb-10 px-2">
+            <h2 className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed">
               {question.question}
             </h2>
           </div>
 
           {/* Options */}
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {question.options.map((option, index) => (
               <button
+        type="button"
                 key={index}
                 onClick={() => handleAnswer(question.type, option.value)}
                 className="w-full group relative"
@@ -511,13 +712,13 @@ export default function MBTI32() {
                   animation: 'slideUp 0.5s ease-out forwards'
                 }}
               >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded sm:rounded-lg md:rounded-2xl opacity-0 group-hover:opacity-100 blur transition-all duration-300"></div>
-                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded sm:rounded-lg md:rounded-2xl p-5 md:p-6 text-left hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 hover:-translate-y-1" style={{ transform: 'translateZ(0)' }}>
-                  <div className="flex items-center gap-2">
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-[10px] sm:text-xs md:text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg md:rounded-2xl opacity-0 group-hover:opacity-100 blur transition-all duration-300"></div>
+                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg md:rounded-2xl p-4 md:p-6 text-left hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 hover:-translate-y-1" style={{ transform: 'translateZ(0)' }}>
+                  <div className="flex items-center gap-3 md:gap-4">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                       {String.fromCharCode(65 + index)}
                     </div>
-                    <span className="text-white text-base md:text-lg flex-1 group-hover:translate-x-1 transition-transform duration-300">{option.text}</span>
+                    <span className="text-white text-sm sm:text-base md:text-lg flex-1 group-hover:translate-x-1 transition-transform duration-300 leading-snug">{option.text}</span>
                   </div>
                 </div>
               </button>

@@ -90,6 +90,7 @@ export default function MultiplicationGamePage() {
               <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                 {[2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
                   <button
+        type="button"
                     key={num}
                     onClick={() => startPracticeMode(num)}
                     className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-xl font-bold text-2xl hover:shadow-lg transition-all hover:scale-105"
@@ -107,6 +108,7 @@ export default function MultiplicationGamePage() {
               <div className="flex flex-col items-center">
                 <div className="text-6xl mb-6">🏃</div>
                 <button
+        type="button"
                   onClick={startSpeedMode}
                   className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-bold text-xl hover:shadow-lg transition-all"
                 >
@@ -124,6 +126,7 @@ export default function MultiplicationGamePage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <button
+        type="button"
           onClick={() => setMode('menu')}
           className="mb-6 bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30"
         >
@@ -182,6 +185,7 @@ export default function MultiplicationGamePage() {
                 최종 점수: {score}/{total} ({total > 0 ? Math.round((score / total) * 100) : 0}%)
               </div>
               <button
+        type="button"
                 onClick={startSpeedMode}
                 className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-xl font-bold text-xl"
               >

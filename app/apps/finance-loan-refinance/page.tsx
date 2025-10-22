@@ -149,6 +149,7 @@ export default function LoanRefinancePage() {
           </div>
 
           <button
+        type="button"
             onClick={handleAnalyze}
             className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm md:text-xl hover:shadow-lg transition-all"
             style={{ minHeight: '48px' }}

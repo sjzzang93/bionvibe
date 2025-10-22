@@ -127,6 +127,7 @@ export default function SalaryDivider() {
             <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">배분 방식</label>
             <div className="grid grid-cols-3 gap-3 text-black placeholder-gray-500">
               <button
+        type="button"
                 onClick={() => setMethod('503020')}
                 className={`p-2 md:p-4 rounded-xl font-semibold transition-all border-2 ${
                   method === '503020'
@@ -138,6 +139,7 @@ export default function SalaryDivider() {
                 <div className="text-xs opacity-80 text-black placeholder-gray-500">균형잡힌</div>
               </button>
               <button
+        type="button"
                 onClick={() => setMethod('622010')}
                 className={`p-2 md:p-4 rounded-xl font-semibold transition-all border-2 ${
                   method === '622010'
@@ -149,6 +151,7 @@ export default function SalaryDivider() {
                 <div className="text-xs opacity-80 text-black placeholder-gray-500">안정적</div>
               </button>
               <button
+        type="button"
                 onClick={() => setMethod('custom')}
                 className={`p-2 md:p-4 rounded-xl font-semibold transition-all border-2 ${
                   method === 'custom'
@@ -219,6 +222,7 @@ export default function SalaryDivider() {
                       <div className="flex items-center gap-2 text-black placeholder-gray-500">
                         <span className="font-bold text-gray-800 text-black placeholder-gray-500">{(exp.amount / 10000).toFixed(0)}만</span>
                         <button
+        type="button"
                           onClick={() => deleteExpense(exp.id, 'fixed')}
                           className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                         >
@@ -231,6 +235,7 @@ export default function SalaryDivider() {
               )}
 
               <button
+        type="button"
                 onClick={() => setShowAddExpense(showAddExpense === 'fixed' ? null : 'fixed')}
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
               >
@@ -258,6 +263,7 @@ export default function SalaryDivider() {
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                   />
                   <button
+        type="button"
                     onClick={() => addExpense('fixed')}
                     disabled={!newExpenseName || newExpenseAmount <= 0}
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
@@ -300,6 +306,7 @@ export default function SalaryDivider() {
                       <div className="flex items-center gap-2 text-black placeholder-gray-500">
                         <span className="font-bold text-gray-800 text-black placeholder-gray-500">{(exp.amount / 10000).toFixed(0)}만</span>
                         <button
+        type="button"
                           onClick={() => deleteExpense(exp.id, 'variable')}
                           className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                         >
@@ -312,6 +319,7 @@ export default function SalaryDivider() {
               )}
 
               <button
+        type="button"
                 onClick={() => setShowAddExpense(showAddExpense === 'variable' ? null : 'variable')}
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
               >
@@ -339,6 +347,7 @@ export default function SalaryDivider() {
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                   />
                   <button
+        type="button"
                     onClick={() => addExpense('variable')}
                     disabled={!newExpenseName || newExpenseAmount <= 0}
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"

@@ -445,7 +445,7 @@ export default function ColorPsychology() {
   if (result) {
     return (
       <PremiumLayout theme="pink">
-        <div className="mx-auto max-w-[900px] px-4 py-8">
+        <div className="mx-auto max-w-[1000px] px-4 py-8">
           {/* Back Button */}
           <Link 
             href="/"
@@ -458,143 +458,251 @@ export default function ColorPsychology() {
           </Link>
 
           {/* Header */}
-          <div className="text-center mb-12 animate-fadeIn">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 bg-clip-text text-transparent">
-              🎨 색상 심리 분석
-            </h1>
-            <p className="text-xl text-white/80">당신의 마음 속 색채를 분석했습니다</p>
+          <div className="bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 text-white rounded-xl md:rounded-2xl p-6 md:p-8 shadow-2xl text-center mb-6 md:mb-8 animate-fadeIn">
+            <div className="text-4xl md:text-5xl mb-3 md:mb-4 animate-bounce">🎨</div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-3">당신의 색채 심리 분석</h1>
+            <p className="text-base md:text-lg opacity-90">색상이 말해주는 당신의 마음과 성격</p>
           </div>
 
-          {/* 선택한 색상들 */}
-          <PremiumCard hover gradient className="mb-8 animate-slideUp">
-            <h3 className="text-2xl font-bold text-white mb-6 text-center">📝 당신의 선택</h3>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
-              {QUESTIONS.map((q, idx) => (
-                <div key={q.id} className="text-center">
-                  <div className="text-3xl mb-2">{q.emoji}</div>
-                  <div 
-                    className="w-full h-24 rounded sm:rounded-lg md:rounded-2xl shadow-2xl mb-0.5 sm:mb-1.5 md:mb-2 border-2 border-white/20 hover:scale-110 transition-all duration-300"
-                    style={{
-                      backgroundColor: result.answers[idx]?.hex,
-                      boxShadow: `0 10px 30px ${result.answers[idx]?.hex}40`
-                    }}
-                  ></div>
-                  <p className="text-white font-bold text-sm">{result.answers[idx]?.name}</p>
-                  <p className="text-white/70 text-xs mt-1">{q.question}</p>
-                </div>
-              ))}
-            </div>
-          </PremiumCard>
-
-          {/* 종합 분석 */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 mb-8">
-            {/* 오행 에너지 */}
-            <PremiumCard hover gradient className="animate-slideUp" style={{ animationDelay: '0.1s' }}>
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">☯️</span> 오행 에너지
-              </h3>
-              <div className="text-center">
-                <div className="text-6xl font-bold mb-2 bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
-                  {result.dominantElement}
-                </div>
-                <div className="text-white/80 text-sm mb-4">
-                  {result.elementStrength}/5 강도
-                </div>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  {getElementDescription(result.dominantElement)}
-                </p>
-              </div>
-            </PremiumCard>
-
-            {/* MBTI 유형 */}
-            <PremiumCard hover gradient className="animate-slideUp" style={{ animationDelay: '0.2s' }}>
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">🎯</span> 예상 MBTI
-              </h3>
-              <div className="flex gap-3 justify-center">
-                {result.mbti.map((type: string, i: number) => (
-                  <div 
-                    key={i} 
-                    className="flex-1 bg-gradient-to-br from-purple-500/30 to-pink-500/30 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-4 text-center border border-white/20 hover:scale-110 transition-all duration-300"
-                    style={{ animationDelay: `${i * 0.1}s` }}
-                  >
-                    <div className="text-3xl font-bold text-white">{type}</div>
+          {/* 선택한 색상들 with 의미 */}
+          <div className="mb-6 md:mb-8 space-y-3 md:space-y-4 animate-slideUp">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-4 md:mb-6">🌈 당신이 선택한 색상의 의미</h3>
+            {QUESTIONS.map((q, idx) => {
+              const selectedColor = result.answers[idx];
+              return (
+                <PremiumCard key={q.id} hover gradient>
+                  <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+                    <div className="flex-shrink-0 w-full md:w-auto flex md:flex-col items-center md:items-start gap-4 md:gap-0">
+                      <div className="text-3xl sm:text-4xl md:text-5xl md:mb-3">{q.emoji}</div>
+                      <div 
+                        className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-xl md:rounded-2xl shadow-2xl border-3 md:border-4 border-white/30"
+                        style={{
+                          backgroundColor: selectedColor?.hex,
+                          boxShadow: `0 15px 40px ${selectedColor?.hex}60`
+                        }}
+                      ></div>
+                      <p className="text-white font-bold text-center md:mt-3 text-base md:text-lg flex-1 md:flex-none">{selectedColor?.name}</p>
+                    </div>
+                    <div className="flex-1 w-full">
+                      <div className="mb-3">
+                        <p className="text-pink-200 font-semibold text-xs sm:text-sm mb-1">{q.question}</p>
+                        <p className="text-white text-lg sm:text-xl md:text-2xl font-bold">{selectedColor?.psychology}</p>
+                      </div>
+                      <p className="text-white/90 leading-relaxed text-sm sm:text-base mb-3 md:mb-4">
+                        {selectedColor?.detail}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedColor?.traits.map((trait: string, i: number) => (
+                          <span key={i} className="px-2.5 py-1 md:px-3 bg-white/20 rounded-full text-xs sm:text-sm text-white font-medium">
+                            {trait}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                ))}
+                </PremiumCard>
+              );
+            })}
+          </div>
+
+          {/* 종합 심리 분석 */}
+          <div className="mb-6 md:mb-8 animate-slideUp" style={{ animationDelay: '0.2s' }}>
+            <PremiumCard hover gradient className="bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+              <div className="text-center mb-4 md:mb-6">
+                <div className="text-4xl md:text-5xl mb-3 md:mb-4">🧠</div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-4">당신의 종합 심리 분석</h3>
+                <p className="text-base md:text-lg text-white/80">선택한 색상들이 말하는 당신의 내면</p>
+              </div>
+              
+              {/* 오행 에너지 */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 mb-4 md:mb-6 border-2 border-white/20">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-3 md:mb-4">
+                  <div className="text-4xl md:text-5xl">☯️</div>
+                  <div className="flex-1">
+                    <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">당신의 오행 에너지</h4>
+                    <div className="flex items-center gap-3">
+                      <div className="text-3xl sm:text-4xl md:text-5xl font-black text-yellow-300">{result.dominantElement}</div>
+                      <div className="text-white/80">
+                        <div className="text-xs sm:text-sm">강도</div>
+                        <div className="text-xl sm:text-2xl font-bold">{result.elementStrength}/5</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-lg md:rounded-xl p-4 md:p-5 border-l-4 border-yellow-400">
+                  <p className="text-white leading-relaxed text-sm md:text-base">
+                    {getElementDescription(result.dominantElement)}
+                  </p>
+                  <p className="text-white/70 text-xs sm:text-sm mt-2 md:mt-3">
+                    {result.elementStrength >= 4 && '당신의 오행 에너지가 매우 강합니다! 이 특성이 당신의 성격과 행동을 크게 좌우합니다.'}
+                    {result.elementStrength === 3 && '당신의 오행 에너지가 균형잡혀 있습니다. 여러 면모를 가진 다채로운 성격이에요.'}
+                    {result.elementStrength <= 2 && '여러 오행 에너지가 섞여 있어 유연하고 적응력이 좋습니다!'}
+                  </p>
+                </div>
+              </div>
+
+              {/* MBTI 유형 */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 border-2 border-white/20">
+                <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                  <div className="text-3xl md:text-4xl">🎯</div>
+                  <h4 className="text-base sm:text-lg md:text-xl font-bold text-white">예상 MBTI 유형</h4>
+                </div>
+                <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 mb-3 md:mb-4 justify-center">
+                  {result.mbti.map((type: string, i: number) => (
+                    <div 
+                      key={i} 
+                      className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 text-center min-w-[80px] sm:min-w-[90px] md:min-w-[100px] shadow-xl border-2 border-white/30"
+                    >
+                      <div className="text-2xl sm:text-3xl md:text-4xl font-black text-white">{type}</div>
+                      <div className="text-white/80 text-[10px] sm:text-xs mt-1 md:mt-2">
+                        {i === 0 ? '가능성 높음' : i === 1 ? '다음 가능성' : '참고'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-white/80 text-xs sm:text-sm text-center">
+                  색상 선택을 통해 분석한 결과입니다. 정확한 MBTI는 공식 테스트를 권장합니다!
+                </p>
               </div>
             </PremiumCard>
           </div>
 
           {/* 성격 특성 */}
-          <PremiumCard hover gradient className="mb-8 animate-slideUp" style={{ animationDelay: '0.3s' }}>
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <span className="text-2xl">🧠</span> 성격 특성
-            </h3>
-            <div className="flex flex-wrap gap-0 sm:gap-1.5 md:gap-3">
+          <PremiumCard hover gradient className="mb-6 md:mb-8 animate-slideUp" style={{ animationDelay: '0.3s' }}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-4 md:mb-6">
+              <div className="text-4xl md:text-5xl">💎</div>
+              <div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">당신의 성격 특성</h3>
+                <p className="text-sm md:text-base text-white/70">색상으로 드러난 당신의 매력</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 md:gap-3">
               {result.allTraits.map((trait: string, i: number) => (
                 <span 
                   key={i} 
-                  className="px-5 py-3 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-semibold border border-white/20 hover:bg-white/20 hover:scale-110 transition-all duration-300"
+                  className="px-3 py-2 sm:px-4 sm:py-2.5 md:px-5 md:py-3 bg-gradient-to-r from-pink-500/30 to-purple-500/30 backdrop-blur-sm text-white rounded-full text-xs sm:text-sm md:text-base font-bold border-2 border-white/30 hover:bg-white/40 hover:scale-110 transition-all duration-300 shadow-lg"
                   style={{ animationDelay: `${i * 0.05}s` }}
                 >
-                  {trait}
+                  ✨ {trait}
                 </span>
               ))}
             </div>
+            <p className="text-white/80 mt-4 md:mt-6 text-xs sm:text-sm leading-relaxed">
+              이런 특성들이 모여 당신만의 독특한 매력을 만들어냅니다! 각각의 특성을 잘 활용하면 더욱 빛날 거예요. 💫
+            </p>
           </PremiumCard>
 
           {/* 추천 직업 */}
-          <PremiumCard hover gradient className="mb-8 animate-slideUp" style={{ animationDelay: '0.4s' }}>
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <span className="text-2xl">💼</span> 추천 직업
-            </h3>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-0 sm:gap-1.5 md:gap-3">
+          <PremiumCard hover gradient className="mb-6 md:mb-8 animate-slideUp" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-4 md:mb-6">
+              <div className="text-4xl md:text-5xl">💼</div>
+              <div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">당신에게 어울리는 직업</h3>
+                <p className="text-sm md:text-base text-white/70">색상 심리가 추천하는 커리어</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
               {result.careers.map((career: string, i: number) => (
                 <div 
                   key={i} 
-                  className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-xl p-4 text-center text-white font-semibold border border-white/20 hover:scale-105 transition-all duration-300"
+                  className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-lg md:rounded-xl p-3 sm:p-4 md:p-5 text-center text-white font-bold border-2 border-white/20 hover:scale-105 hover:bg-white/30 transition-all duration-300 shadow-lg"
                   style={{ animationDelay: `${i * 0.05}s` }}
                 >
-                  {career}
+                  <div className="text-xl sm:text-2xl mb-1 sm:mb-2">
+                    {i === 0 ? '🏆' : i === 1 ? '🌟' : i === 2 ? '✨' : '💡'}
+                  </div>
+                  <div className="text-xs sm:text-sm md:text-base">{career}</div>
                 </div>
               ))}
+            </div>
+            <div className="mt-4 md:mt-6 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg md:rounded-xl p-3 sm:p-4 md:p-5 border-l-4 border-blue-400">
+              <p className="text-white text-xs sm:text-sm leading-relaxed">
+                💡 <strong>팁:</strong> 이 직업들은 당신의 성격과 잘 맞아요! 현재 하는 일과 다르다면, 취미로 시도해보는 것도 좋습니다. 
+                자신의 성향을 이해하면 일할 때도 더 행복해질 수 있어요!
+              </p>
             </div>
           </PremiumCard>
 
           {/* 운세 */}
-          <PremiumCard hover gradient className="mb-8 animate-slideUp" style={{ animationDelay: '0.5s' }}>
-            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <span className="text-2xl">🍀</span> 운세
-            </h3>
-            <div className="space-y-3">
+          <PremiumCard hover gradient className="mb-6 md:mb-8 animate-slideUp" style={{ animationDelay: '0.5s' }}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-4 md:mb-6">
+              <div className="text-4xl md:text-5xl">🍀</div>
+              <div>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">당신의 운세</h3>
+                <p className="text-sm md:text-base text-white/70">색상이 말하는 행운의 기운</p>
+              </div>
+            </div>
+            <div className="space-y-3 md:space-y-4">
               {result.fortunes.map((fortune: string, i: number) => (
                 <div 
                   key={i} 
-                  className="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-white/90 border border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                  className="bg-gradient-to-r from-amber-500/20 to-yellow-500/20 backdrop-blur-sm rounded-lg md:rounded-xl p-3 sm:p-4 md:p-5 text-white border-2 border-amber-400/30 hover:border-amber-400/60 transition-all duration-300 group"
                 >
-                  <span className="text-yellow-300 mr-2 group-hover:scale-125 inline-block transition-transform">✨</span>
-                  {fortune}
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <span className="text-2xl sm:text-3xl md:text-4xl group-hover:scale-125 transition-transform flex-shrink-0">
+                      {i === 0 ? '✨' : i === 1 ? '🌟' : i === 2 ? '💫' : i === 3 ? '⭐' : '🌠'}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-base sm:text-lg font-bold mb-1 sm:mb-2">{fortune}</p>
+                      <p className="text-white/70 text-xs sm:text-sm leading-relaxed">
+                        {fortune.includes('재물운') && '금전적인 행운이 따르는 시기예요. 투자나 사업에 좋은 기회가 올 수 있습니다!'}
+                        {fortune.includes('사랑운') && '사랑과 인연의 운이 강해요. 좋은 만남이나 관계 개선의 기회가 있을 거예요!'}
+                        {fortune.includes('건강운') && '건강과 활력이 넘치는 시기입니다. 새로운 건강 습관을 시작하기 좋아요!'}
+                        {fortune.includes('창의') && '예술적, 창의적 활동에서 빛을 발할 시기입니다. 당신의 아이디어를 표현해보세요!'}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </PremiumCard>
 
+          {/* 최종 메시지 */}
+          <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-xl md:rounded-2xl p-6 md:p-8 shadow-2xl mb-6 md:mb-8 animate-slideUp" style={{ animationDelay: '0.6s' }}>
+            <div className="text-center">
+              <div className="text-4xl md:text-5xl mb-3 md:mb-4">🌈</div>
+              <h4 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 md:mb-4">당신은 아름다운 색채를 가진 사람이에요</h4>
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed opacity-95 max-w-3xl mx-auto">
+                색상 선택은 무의식적인 마음의 표현입니다. 당신이 선택한 색상들은 당신의 현재 감정 상태, 성격, 그리고 
+                미래에 대한 바람을 담고 있어요. 이 결과를 통해 자신을 더 잘 이해하고, 자신만의 색깔로 세상을 
+                아름답게 칠해나가세요! 🎨✨
+              </p>
+              <div className="mt-4 md:mt-6 text-xs sm:text-sm opacity-90">
+                💌 색상은 계속 변할 수 있어요. 시간이 지나면 다시 해보는 것도 재미있을 거예요!
+              </div>
+            </div>
+          </div>
+
           {/* 다시 하기 버튼 */}
-          <div className="text-center mb-8">
-            <PremiumButton
+          <div className="text-center mb-6 md:mb-8 animate-fadeIn" style={{ animationDelay: '0.7s' }}>
+            <button
+        type="button"
               onClick={restart}
-              variant="primary"
-              size="lg"
-              icon="🔄"
-              className="animate-fadeIn"
-              style={{ animationDelay: '0.6s' }}
+              className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 py-4 sm:px-8 sm:py-5 md:px-10 md:py-6 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 text-white text-base sm:text-lg md:text-xl font-bold rounded-xl md:rounded-2xl shadow-2xl hover:shadow-pink-500/50 transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white/30"
             >
-              다시 테스트하기
-            </PremiumButton>
+              {/* 반짝이는 배경 효과 */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-xl md:rounded-2xl animate-shimmer opacity-0 group-hover:opacity-100"></div>
+              
+              {/* 아이콘 */}
+              <span className="text-2xl sm:text-3xl md:text-4xl group-hover:rotate-180 transition-transform duration-500">🔄</span>
+              
+              {/* 텍스트 */}
+              <span className="relative z-10">다시 테스트하기</span>
+              
+              {/* 화살표 */}
+              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+            
+            {/* 힌트 텍스트 */}
+            <p className="text-white/60 text-xs sm:text-sm mt-3 md:mt-4 animate-pulse">
+              마음이 바뀌었다면? 다른 색상을 선택해보세요! 💫
+            </p>
           </div>
 
           {/* Related Apps */}
-          <div className="animate-fadeIn" style={{ animationDelay: '0.7s' }}>
+          <div className="animate-fadeIn" style={{ animationDelay: '0.8s' }}>
             <RelatedApps 
               relatedAppIds={['mbti-test', 'today-fortune', 'dream-interpreter', 'voice-fortune']} 
               currentAppId="color-psychology" 
@@ -618,6 +726,11 @@ export default function ColorPsychology() {
               transform: translateY(0);
             }
           }
+
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
           
           .animate-fadeIn {
             animation: fadeIn 0.8s ease-out forwards;
@@ -625,6 +738,10 @@ export default function ColorPsychology() {
           
           .animate-slideUp {
             animation: slideUp 0.8s ease-out forwards;
+          }
+
+          .animate-shimmer {
+            animation: shimmer 2s ease-in-out infinite;
           }
         `}</style>
       </PremiumLayout>
@@ -687,26 +804,27 @@ export default function ColorPsychology() {
           </div>
 
           {/* Color Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-4">
             {COLORS.map((color, idx) => (
               <button
+        type="button"
                 key={color.name}
                 onClick={() => selectColor(color)}
-                className="group relative rounded sm:rounded-lg md:rounded-2xl transition-all duration-300 hover:scale-110 hover:-translate-y-2"
+                className="group relative rounded-xl md:rounded-2xl transition-all duration-300 hover:scale-110 hover:-translate-y-2 active:scale-95"
                 style={{
                   backgroundColor: color.hex,
                   border: ['#FFFFFF', '#FFFBEB', '#FBCFE8', '#FEF3C7', '#FED7AA', '#D1D5DB'].includes(color.hex) 
-                    ? '2px solid rgba(255, 255, 255, 0.3)' 
-                    : 'none',
-                  boxShadow: `0 10px 30px ${color.hex}40`,
-                  animation: 'slideUp 0.5s ease-out forwards',
-                  animationDelay: `${idx * 0.03}s`,
+                    ? '3px solid rgba(255, 255, 255, 0.4)' 
+                    : '2px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: `0 10px 30px ${color.hex}40, 0 0 0 0 ${color.hex}`,
+                  animation: 'slideUp 0.5s ease-out forwards, pulse 2s ease-in-out infinite',
+                  animationDelay: `${idx * 0.03}s, 0s`,
                   opacity: 0
                 }}
               >
-                <div className="p-4 h-20 flex items-center justify-center relative z-10">
+                <div className="p-4 md:p-5 h-24 md:h-28 flex items-center justify-center relative z-10">
                   <span 
-                    className="text-xs font-bold text-center drop-shadow-lg"
+                    className="text-xs md:text-sm font-bold text-center drop-shadow-lg leading-tight"
                     style={{
                       color: ['#FFFFFF', '#FFFBEB', '#FBCFE8', '#FEF3C7', '#FED7AA', '#D1D5DB'].includes(color.hex) 
                         ? '#374151' 
@@ -717,23 +835,31 @@ export default function ColorPsychology() {
                   </span>
                 </div>
                 {/* Glow effect */}
-                <div className="absolute inset-0 rounded sm:rounded-lg md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" 
+                <div className="absolute inset-0 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" 
                   style={{ backgroundColor: color.hex }}
                 ></div>
+                {/* 선택 표시 */}
+                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <svg className="w-6 h-6 md:w-8 md:h-8 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                </div>
               </button>
             ))}
           </div>
 
           {currentStep > 0 && (
             <div className="text-center mt-8">
-              <PremiumButton
+              <button
+        type="button"
                 onClick={() => setCurrentStep(currentStep - 1)}
-                variant="secondary"
-                size="md"
-                icon="←"
+                className="group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white text-base md:text-lg font-semibold rounded-xl border-2 border-white/30 hover:border-white/50 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg"
               >
-                이전 질문
-              </PremiumButton>
+                <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+                </svg>
+                <span>이전 질문</span>
+              </button>
             </div>
           )}
         </PremiumCard>
@@ -764,6 +890,15 @@ export default function ColorPsychology() {
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
+        }
+
+        @keyframes pulse {
+          0%, 100% { 
+            box-shadow: 0 10px 30px currentColor40, 0 0 0 0 currentColor;
+          }
+          50% { 
+            box-shadow: 0 10px 30px currentColor40, 0 0 0 4px currentColor;
+          }
         }
         
         .animate-fadeIn {

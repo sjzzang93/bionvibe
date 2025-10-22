@@ -30,7 +30,8 @@ export default function TermModal({ open, term, onClose }: {
                       overflow-auto shadow-2xl animate-in slide-in-from-bottom md:slide-in-from-bottom-0">
         <div className="flex items-start justify-between gap-4">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">{term.term}</h2>
-          <button 
+          <button
+        type="button" 
             onClick={onClose} 
             aria-label="닫기" 
             className="rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-700 

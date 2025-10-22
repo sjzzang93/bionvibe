@@ -9,19 +9,27 @@ import { DevTerm } from './_lib/types';
 import { matches, byCategory } from './_lib/filter';
 
 export default function DevGlossaryPage() {
+  const [mounted, setMounted] = useState(false);
   const [terms, setTerms] = useState<DevTerm[]>([]);
   const [query, setQuery] = useState('');
   const [cat, setCat] = useState('ALL');
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<DevTerm | undefined>(undefined);
 
+  // 클라이언트 마운트 확인
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // 데이터 로드(API 분리)
   useEffect(() => {
+    if (!mounted) return;
+    
     fetch('/api/dev-terms')
       .then((r) => r.json())
       .then((json) => setTerms(json.terms ?? []))
       .catch(() => setTerms([]));
-  }, []);
+  }, [mounted]);
 
   const categories = useMemo(() => {
     const set = new Set(terms.map((t) => t.category));
@@ -35,6 +43,23 @@ export default function DevGlossaryPage() {
 
   function onOpen(t: DevTerm) { setCurrent(t); setOpen(true); }
   function onClose() { setOpen(false); setCurrent(undefined); }
+
+  // 초기 로딩 중
+  if (!mounted) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50 
+                       dark:from-gray-900 dark:via-gray-800 dark:to-purple-900">
+        <div className="mx-auto w-full max-w-3xl px-4 py-6">
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="text-center">
+              <div className="text-6xl mb-4 animate-bounce">📖</div>
+              <p className="text-xl text-gray-600 dark:text-gray-400 animate-pulse">로딩 중...</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50 
@@ -110,4 +135,3 @@ export default function DevGlossaryPage() {
     </main>
   );
 }
-

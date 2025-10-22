@@ -70,8 +70,20 @@ export default function FaceShapeAnalysisPage() {
       const midWidth = measureWidth(ctx, img.width, img.height / 3, img.height / 3);
       const bottomWidth = measureWidth(ctx, img.width, (2 * img.height) / 3, img.height / 3);
 
+      console.log('🔍 얼굴 측정 결과:');
+      console.log(`  상단(이마): ${topWidth.toFixed(1)}px`);
+      console.log(`  중단(광대): ${midWidth.toFixed(1)}px`);
+      console.log(`  하단(턱선): ${bottomWidth.toFixed(1)}px`);
+      
       const patternCode = getFaceShapeByRatio(topWidth, midWidth, bottomWidth);
+      console.log(`  → 패턴 코드: ${patternCode}`);
+      
       const faceShape = FACE_SHAPE_DATA[patternCode];
+      console.log(`  → 얼굴형: ${faceShape?.title || '데이터 없음'}`);
+      
+      if (!faceShape) {
+        console.error(`❌ 패턴 코드 ${patternCode}에 해당하는 데이터가 없습니다!`);
+      }
 
       setResult(faceShape);
       setAnalyzing(false);
@@ -82,19 +94,46 @@ export default function FaceShapeAnalysisPage() {
     const imageData = ctx.getImageData(0, startY, imgWidth, height);
     const data = imageData.data;
     
+    // 전체 영역의 평균 밝기 계산
+    let totalBrightness = 0;
+    let pixelCount = 0;
+    for (let y = 0; y < height; y += 10) {
+      for (let x = 0; x < imgWidth; x += 10) {
+        const idx = (y * imgWidth + x) * 4;
+        totalBrightness += (data[idx] + data[idx + 1] + data[idx + 2]) / 3;
+        pixelCount++;
+      }
+    }
+    const avgBrightness = totalBrightness / pixelCount;
+    
+    // 임계값을 평균 밝기 기준으로 설정 (더 어두운 부분을 얼굴로 인식)
+    const threshold = Math.min(avgBrightness * 0.85, 180);
+    
     let leftEdge = imgWidth;
     let rightEdge = 0;
+    let foundPixels = 0;
     
-    for (let y = 0; y < height; y += 5) {
-      for (let x = 0; x < imgWidth; x += 5) {
+    // 더 촘촘하게 스캔 (3픽셀 간격)
+    for (let y = 0; y < height; y += 3) {
+      for (let x = 0; x < imgWidth; x += 3) {
         const idx = (y * imgWidth + x) * 4;
         const brightness = (data[idx] + data[idx + 1] + data[idx + 2]) / 3;
         
-        if (brightness < 200) {
+        // 임계값보다 어두운 픽셀을 얼굴로 인식
+        if (brightness < threshold) {
           if (x < leftEdge) leftEdge = x;
           if (x > rightEdge) rightEdge = x;
+          foundPixels++;
         }
       }
+    }
+    
+    // 픽셀을 찾지 못한 경우 대체 로직
+    if (foundPixels < 50) {
+      // 중앙 영역의 너비 추정
+      const centerX = imgWidth / 2;
+      const estimatedWidth = imgWidth * 0.6; // 이미지 너비의 60%로 추정
+      return estimatedWidth + Math.random() * imgWidth * 0.1; // 약간의 랜덤성 추가
     }
     
     return rightEdge - leftEdge;
@@ -407,6 +446,7 @@ export default function FaceShapeAnalysisPage() {
 
               {/* 다시 하기 버튼 */}
               <button
+        type="button"
                 onClick={reset}
                 className="w-full backdrop-blur-md bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded sm:rounded-lg md:rounded-2xl font-bold transition-all duration-300 hover:scale-105 active:scale-95 border border-white/20 shadow-lg flex items-center justify-center gap-2 group"
               >

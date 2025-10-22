@@ -146,6 +146,7 @@ export default function CompoundCalculator() {
             </div>
 
             <button
+        type="button"
               onClick={() => setResult(null)}
               className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
@@ -178,6 +179,7 @@ export default function CompoundCalculator() {
             <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">투자 방식</label>
             <div className="grid grid-cols-3 gap-4 text-black placeholder-gray-500">
               <button
+        type="button"
                 onClick={() => setInvestmentType('lumpsum')}
                 className={`p-5 rounded-xl font-semibold transition-all border-2 ${
                   investmentType === 'lumpsum'
@@ -190,6 +192,7 @@ export default function CompoundCalculator() {
                 <div className="text-xs opacity-80 text-black placeholder-gray-500">목돈을 한 번에 투자</div>
               </button>
               <button
+        type="button"
                 onClick={() => setInvestmentType('monthly')}
                 className={`p-5 rounded-xl font-semibold transition-all border-2 ${
                   investmentType === 'monthly'
@@ -303,6 +306,7 @@ export default function CompoundCalculator() {
                 { period: 30, rate: 10, label: '30년/10%' }
               ].map((preset, i) => (
                 <button
+        type="button"
                   key={i}
                   onClick={() => {
                     setYears(preset.period);
@@ -317,6 +321,7 @@ export default function CompoundCalculator() {
           </div>
 
           <button
+        type="button"
             onClick={calculate}
             className="w-full py-5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold text-xl rounded-xl shadow-lg hover:shadow-xl transition-all"
           >

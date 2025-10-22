@@ -5,27 +5,9 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
+import { dreamDatabase, findDreamByKeyword, type DreamResult } from '@/lib/dreamDatabase';
 
-interface DreamResult {
-  keyword: string;
-  meaning: string;
-  luckyNumber: number[];
-  advice: string;
-  category: string;
-}
-
-const dreamDatabase: Record<string, DreamResult> = {
-  '돈': { keyword: '돈', meaning: '재물운이 상승하고 있습니다. 새로운 기회가 찾아올 수 있습니다.', luckyNumber: [7, 14, 21, 28, 35, 42], advice: '투자나 재테크에 관심을 가져보세요.', category: '재물' },
-  '뱀': { keyword: '뱀', meaning: '지혜와 변화를 상징합니다. 인생의 전환점이 될 수 있습니다.', luckyNumber: [3, 9, 15, 21, 27, 33], advice: '새로운 도전을 두려워하지 마세요.', category: '동물' },
-  '호랑이': { keyword: '호랑이', meaning: '권력과 성공을 의미합니다. 승진이나 승리의 기회가 있습니다.', luckyNumber: [1, 10, 19, 28, 37, 46], advice: '자신감을 가지고 앞으로 나아가세요.', category: '동물' },
-  '물': { keyword: '물', meaning: '재물과 감정의 흐름을 나타냅니다. 깨끗한 물은 좋은 징조입니다.', luckyNumber: [2, 8, 16, 24, 32, 40], advice: '마음을 정화하고 긍정적으로 생각하세요.', category: '자연' },
-  '불': { keyword: '불', meaning: '정열과 에너지를 상징합니다. 큰 성취를 이룰 수 있습니다.', luckyNumber: [5, 11, 17, 23, 29, 35], advice: '열정을 가지고 목표를 향해 나아가세요.', category: '자연' },
-  '꽃': { keyword: '꽃', meaning: '사랑과 행복이 찾아옵니다. 좋은 인연을 만날 수 있습니다.', luckyNumber: [4, 12, 20, 28, 36, 44], advice: '주변 사람들에게 따뜻하게 대하세요.', category: '식물' },
-  '나무': { keyword: '나무', meaning: '성장과 안정을 의미합니다. 꾸준한 노력이 결실을 맺습니다.', luckyNumber: [6, 13, 18, 25, 31, 38], advice: '인내심을 가지고 차근차근 진행하세요.', category: '식물' },
-  '집': { keyword: '집', meaning: '안정과 가족을 상징합니다. 가정에 행복이 찾아옵니다.', luckyNumber: [8, 15, 22, 29, 36, 43], advice: '가족과 소중한 시간을 보내세요.', category: '건물' },
-  '차': { keyword: '차', meaning: '이동과 변화를 나타냅니다. 새로운 환경이나 기회가 올 수 있습니다.', luckyNumber: [9, 16, 23, 30, 37, 44], advice: '변화를 긍정적으로 받아들이세요.', category: '사물' },
-  '비행기': { keyword: '비행기', meaning: '비상과 성취를 의미합니다. 목표 달성이 가까워집니다.', luckyNumber: [11, 17, 24, 31, 38, 45], advice: '높은 목표를 세우고 도전하세요.', category: '사물' },
-};
+export const dynamic = 'force-dynamic';
 
 export default function DreamInterpreterPage() {
   const [dreamText, setDreamText] = useState('');
@@ -38,22 +20,24 @@ export default function DreamInterpreterPage() {
     }
 
     // 입력된 텍스트에서 키워드 찾기
-    let foundResult: DreamResult | null = null;
-    for (const [key, value] of Object.entries(dreamDatabase)) {
-      if (dreamText.includes(key)) {
-        foundResult = value;
-        break;
-      }
-    }
+    let foundResult = findDreamByKeyword(dreamText);
 
     // 키워드를 찾지 못한 경우 기본 해몽
     if (!foundResult) {
       foundResult = {
         keyword: '일반',
         meaning: '꿈은 당신의 무의식이 보내는 메시지입니다. 꿈 속의 감정과 상황을 되돌아보세요.',
+        detailedMeaning: '꿈은 개인의 경험, 감정, 기억이 복합적으로 작용하여 만들어집니다. 특정 키워드가 없더라도 꿈에서 느낀 감정의 흐름과 분위기가 중요한 의미를 담고 있습니다. 밝고 평화로운 꿈이었다면 현재 심리 상태가 안정적임을, 불안하거나 혼란스러웠다면 해결이 필요한 과제가 있음을 암시합니다.',
+        positiveAspects: ['내면 성찰 기회', '잠재의식과의 소통', '창의적 영감'],
+        negativeAspects: ['구체적 해석 어려움', '불명확한 메시지'],
         luckyNumber: Array.from({ length: 6 }, () => Math.floor(Math.random() * 45) + 1),
-        advice: '꿈에서 느낀 감정이 중요합니다. 긍정적인 마음을 유지하세요.',
+        advice: '꿈에서 느낀 감정이 중요합니다. 긍정적인 마음을 유지하고, 꿈 일기를 작성하면 패턴을 발견할 수 있습니다.',
+        relatedKeywords: ['감정', '무의식', '내면'],
         category: '일반',
+        fortuneRating: 5,
+        traditionalMeaning: '모든 꿈은 하늘이 주는 계시로 여겨졌습니다.',
+        modernMeaning: '꿈은 무의식의 자기조절 과정입니다.',
+        actionTips: ['꿈 일기 시작하기', '감정 패턴 관찰', '수면 환경 개선'],
       };
     }
 
@@ -101,6 +85,7 @@ export default function DreamInterpreterPage() {
             <div className="flex flex-wrap gap-2 justify-center">
               {Object.keys(dreamDatabase).map((keyword) => (
                 <button
+        type="button"
                   key={keyword}
                   onClick={() => setDreamText(keyword)}
                   className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm border border-white/20 transition-all duration-300 hover:scale-110"
@@ -121,30 +106,94 @@ export default function DreamInterpreterPage() {
                 <h2 className="text-3xl font-bold text-white mb-2">
                   "{result.keyword}" 꿈의 해석
                 </h2>
-                <span className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white rounded-full text-sm border border-white/20">
-                  {result.category}
-                </span>
+                <div className="flex gap-2 justify-center items-center flex-wrap">
+                  <span className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-white rounded-full text-sm border border-white/20">
+                    {result.category}
+                  </span>
+                  <span className="px-4 py-2 bg-gradient-to-r from-yellow-500/30 to-orange-500/30 text-white rounded-full text-sm border border-yellow-400/30">
+                    ⭐ 길몽 지수: {result.fortuneRating}/10
+                  </span>
+                </div>
               </div>
 
+              {/* 기본 의미 */}
               <div className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-white/10 mb-6">
-                <h3 className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
+                <h3 className="text-white font-bold mb-3 flex items-center gap-2">
                   <span className="text-xl">✨</span> 꿈의 의미
                 </h3>
-                <p className="text-white/90 text-lg leading-relaxed">{result.meaning}</p>
+                <p className="text-white/90 text-lg leading-relaxed mb-4">{result.meaning}</p>
+                <p className="text-white/80 leading-relaxed">{result.detailedMeaning}</p>
               </div>
 
-              <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-yellow-400/30 mb-6">
-                <h3 className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
-                  <span className="text-xl">🎯</span> 조언
+              {/* 긍정적 측면 */}
+              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-green-400/30 mb-6">
+                <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <span className="text-xl">💚</span> 긍정적 해석
                 </h3>
-                <p className="text-white/90 leading-relaxed">{result.advice}</p>
+                <ul className="space-y-2">
+                  {result.positiveAspects.map((aspect, idx) => (
+                    <li key={idx} className="text-white/90 leading-relaxed flex items-start gap-2">
+                      <span className="text-green-300 mt-1">•</span>
+                      <span>{aspect}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-green-400/30">
+              {/* 주의사항 */}
+              <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-orange-400/30 mb-6">
+                <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <span className="text-xl">⚠️</span> 주의할 점
+                </h3>
+                <ul className="space-y-2">
+                  {result.negativeAspects.map((aspect, idx) => (
+                    <li key={idx} className="text-white/90 leading-relaxed flex items-start gap-2">
+                      <span className="text-orange-300 mt-1">•</span>
+                      <span>{aspect}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 전통 vs 현대 해석 */}
+              <div className="grid md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-gradient-to-br from-amber-500/10 to-yellow-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-amber-400/30">
+                  <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                    <span className="text-xl">📜</span> 전통 해몽
+                  </h3>
+                  <p className="text-white/90 text-sm leading-relaxed">{result.traditionalMeaning}</p>
+                </div>
+                <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-blue-400/30">
+                  <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                    <span className="text-xl">🧠</span> 현대 심리학
+                  </h3>
+                  <p className="text-white/90 text-sm leading-relaxed">{result.modernMeaning}</p>
+                </div>
+              </div>
+
+              {/* 실천 조언 */}
+              <div className="bg-gradient-to-br from-indigo-500/10 to-purple-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-indigo-400/30 mb-6">
+                <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <span className="text-xl">🎯</span> 실천 조언
+                </h3>
+                <p className="text-white/90 leading-relaxed mb-4">{result.advice}</p>
+                <div className="space-y-2">
+                  <h4 className="text-white/80 font-semibold text-sm mb-2">구체적 행동 지침:</h4>
+                  {result.actionTips.map((tip, idx) => (
+                    <div key={idx} className="flex items-start gap-2 text-white/80 text-sm">
+                      <span className="text-indigo-300">✓</span>
+                      <span>{tip}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 행운의 번호 */}
+              <div className="bg-gradient-to-br from-pink-500/10 to-rose-500/10 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-pink-400/30 mb-6">
                 <h3 className="text-white font-bold mb-4 flex items-center gap-2">
                   <span className="text-xl">🍀</span> 행운의 번호
                 </h3>
-                <div className="grid grid-cols-3 md:grid-cols-6 gap-0 sm:gap-1.5 md:gap-3">
+                <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
                   {result.luckyNumber.map((num, idx) => (
                     <div
                       key={idx}
@@ -153,6 +202,31 @@ export default function DreamInterpreterPage() {
                     >
                       <div className="text-3xl font-bold text-white">{num}</div>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 연관 키워드 */}
+              <div className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-6 border border-white/10 mb-6">
+                <h3 className="text-white font-bold mb-3 flex items-center gap-2">
+                  <span className="text-xl">🔗</span> 연관 키워드
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {result.relatedKeywords.map((keyword, idx) => (
+                    <button
+        type="button"
+                      key={idx}
+                      onClick={() => {
+                        const foundResult = findDreamByKeyword(keyword);
+                        if (foundResult) {
+                          setResult(foundResult);
+                          setDreamText(keyword);
+                        }
+                      }}
+                      className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-full text-sm border border-white/20 transition-all duration-300 hover:scale-105"
+                    >
+                      {keyword}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -174,9 +248,9 @@ export default function DreamInterpreterPage() {
 
             {/* Related Apps */}
             <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-              <RelatedApps 
-                relatedAppIds={['today-fortune', 'color-psychology', 'mbti-test', 'voice-fortune']} 
-                currentAppId="dream-interpreter" 
+              <RelatedApps
+                relatedAppIds={['today-fortune', 'color-psychology', 'mbti-test', 'voice-fortune']}
+                currentAppId="dream-interpreter"
               />
             </div>
           </div>

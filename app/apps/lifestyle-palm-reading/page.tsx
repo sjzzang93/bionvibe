@@ -638,6 +638,7 @@ export default function PalmReading() {
 
               {/* 다시 하기 버튼 */}
               <button
+        type="button"
                 onClick={reset}
                 className="w-full backdrop-blur-md bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded sm:rounded-lg md:rounded-2xl font-bold transition-all duration-300 hover:scale-105 active:scale-95 border border-white/20 shadow-lg flex items-center justify-center gap-2 group"
               >

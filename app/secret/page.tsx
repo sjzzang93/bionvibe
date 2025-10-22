@@ -67,6 +67,7 @@ export default function SecretPage() {
               />
               
               <button
+        type="button"
                 onClick={handleUnlock}
                 className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all"
               >

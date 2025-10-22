@@ -90,6 +90,7 @@ export default function HealthSupplementRecommend() {
                 <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2">
                   {symptoms.map((symptomData) => (
                     <button
+        type="button"
                       key={symptomData.symptom}
                       onClick={() => toggleSymptom(symptomData.symptom)}
                       disabled={selectedSymptoms.length >= 5 && !selectedSymptoms.includes(symptomData.symptom)}
@@ -120,6 +121,7 @@ export default function HealthSupplementRecommend() {
                         >
                           {symptom}
                           <button
+        type="button"
                             onClick={() => toggleSymptom(symptom)}
                             className="hover:text-red-600 font-bold"
                           >

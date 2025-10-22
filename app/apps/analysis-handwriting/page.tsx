@@ -245,6 +245,7 @@ export default function HandwritingAnalysisPage() {
           {/* 입력 방식 선택 */}
           <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
             <button
+        type="button"
               onClick={() => {
                 setInputMethod('draw');
                 clearCanvas();
@@ -258,6 +259,7 @@ export default function HandwritingAnalysisPage() {
               ✍️ 직접 쓰기
             </button>
             <button
+        type="button"
               onClick={() => {
                 setInputMethod('upload');
                 clearCanvas();
@@ -316,6 +318,7 @@ export default function HandwritingAnalysisPage() {
                 className="hidden"
               />
               <button
+        type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="w-full bg-gradient-to-r from-blue-400 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold text-base md:text-lg hover:shadow-lg transition-all"
               >
@@ -327,12 +330,14 @@ export default function HandwritingAnalysisPage() {
           {/* 버튼 */}
           <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
             <button
+        type="button"
               onClick={clearCanvas}
               className="bg-gray-200 dark:bg-white/20 text-gray-900 dark:text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:bg-gray-300 dark:hover:bg-white/30 transition-all"
             >
               🗑️ 지우기
             </button>
             <button
+        type="button"
               onClick={analyze}
               className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
             >

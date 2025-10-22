@@ -107,6 +107,7 @@ export default function FocusTimer() {
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
               {Object.entries(TECHNIQUES).map(([key, tech]) => (
                 <button
+        type="button"
                   key={key}
                   onClick={() => setTechnique(key as keyof typeof TECHNIQUES)}
                   className={`relative overflow-hidden rounded-3xl p-6 transition-all duration-300 ${

@@ -54,6 +54,7 @@ export default function MoodCheerUpPage() {
                 <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-4">
                   {moods.map((mood) => (
                     <button
+        type="button"
                       key={mood.mood}
                       onClick={() => handleSelectMood(mood.mood)}
                       className="p-3 md:p-6 rounded-xl md:rounded-2xl bg-white/20 hover:bg-white/30 text-white transition-all hover:scale-105 group"

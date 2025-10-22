@@ -38,6 +38,7 @@ function GameHome({ onSelectGame }: { onSelectGame: (game: 'sliding' | 'sudoku' 
 
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
         <button
+        type="button"
           onClick={() => onSelectGame('sliding')}
           className="bg-gradient-to-br from-blue-500 to-cyan-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
         >
@@ -47,6 +48,7 @@ function GameHome({ onSelectGame }: { onSelectGame: (game: 'sliding' | 'sudoku' 
         </button>
 
         <button
+        type="button"
           onClick={() => onSelectGame('sudoku')}
           className="bg-gradient-to-br from-green-500 to-emerald-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
         >
@@ -56,6 +58,7 @@ function GameHome({ onSelectGame }: { onSelectGame: (game: 'sliding' | 'sudoku' 
         </button>
 
         <button
+        type="button"
           onClick={() => onSelectGame('2048')}
           className="bg-gradient-to-br from-orange-500 to-red-600 p-8 rounded sm:rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:scale-105"
         >
@@ -103,7 +106,7 @@ function SlidingPuzzle({ onBack }: { onBack: () => void }) {
 
   return (
     <div className="max-w-lg mx-auto">
-      <button onClick={onBack} className="mb-6 bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30" style={{ minHeight: "44px" }}>
+      <button type="button" onClick={onBack} className="mb-6 bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30" style={{ minHeight: "44px" }}>
         ← 돌아가기
       </button>
 
@@ -120,6 +123,7 @@ function SlidingPuzzle({ onBack }: { onBack: () => void }) {
         <div className="grid grid-cols-3 gap-3 mb-6 max-w-sm mx-auto">
           {board.map((num, idx) => (
             <button
+        type="button"
               key={idx}
               onClick={() => handleClick(idx)}
               className={`aspect-square rounded-xl text-3xl font-bold flex items-center justify-center transition-all ${
@@ -132,6 +136,7 @@ function SlidingPuzzle({ onBack }: { onBack: () => void }) {
         </div>
 
         <button
+        type="button"
           onClick={resetGame}
           className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-xl font-bold"
         >
@@ -226,7 +231,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <button onClick={onBack} className="mb-6 bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30" style={{ minHeight: "44px" }}>
+      <button type="button" onClick={onBack} className="mb-6 bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30" style={{ minHeight: "44px" }}>
         ← 돌아가기
       </button>
 
@@ -245,6 +250,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
             {board.map((row, i) =>
               row.map((cell, j) => (
                 <button
+        type="button"
                   key={`${i}-${j}`}
                   onClick={() => handleCellClick(i, j)}
                   className={`aspect-square flex items-center justify-center font-bold text-[10px] sm:text-xs md:text-sm sm:text-xl border border-gray-400 ${getCellColor(i, j)} ${
@@ -265,6 +271,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
         <div className="grid grid-cols-5 gap-2 mb-4">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
+        type="button"
               key={num}
               onClick={() => handleNumberClick(num)}
               className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-all"
@@ -274,6 +281,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
             </button>
           ))}
           <button
+        type="button"
             onClick={handleClear}
             className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-lg transition-all"
             disabled={!selected}
@@ -285,6 +293,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
         {/* 새 게임 버튼 */}
         <div className="flex gap-2">
           <button
+        type="button"
             onClick={() => {
               setPuzzleIndex(0);
             }}
@@ -293,6 +302,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
             퍼즐 1
           </button>
           <button
+        type="button"
             onClick={() => {
               setPuzzleIndex(1);
             }}
@@ -457,7 +467,7 @@ function Game2048({ onBack }: { onBack: () => void }) {
 
   return (
     <div className="max-w-lg mx-auto">
-      <button onClick={onBack} className="mb-6 bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30" style={{ minHeight: "44px" }}>
+      <button type="button" onClick={onBack} className="mb-6 bg-white/20 text-white px-6 py-3 rounded-lg hover:bg-white/30" style={{ minHeight: "44px" }}>
         ← 돌아가기
       </button>
 
@@ -494,6 +504,7 @@ function Game2048({ onBack }: { onBack: () => void }) {
         <div className="grid grid-cols-3 gap-2 mb-4 max-w-xs mx-auto">
           <div></div>
           <button
+        type="button"
             onClick={() => move('ArrowUp')}
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-lg"
           >
@@ -501,18 +512,21 @@ function Game2048({ onBack }: { onBack: () => void }) {
           </button>
           <div></div>
           <button
+        type="button"
             onClick={() => move('ArrowLeft')}
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-lg"
           >
             ←
           </button>
           <button
+        type="button"
             onClick={() => move('ArrowDown')}
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-lg"
           >
             ↓
           </button>
           <button
+        type="button"
             onClick={() => move('ArrowRight')}
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-lg"
           >
@@ -521,6 +535,7 @@ function Game2048({ onBack }: { onBack: () => void }) {
         </div>
 
         <button
+        type="button"
           onClick={newGame}
           className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 rounded-xl font-bold"
         >

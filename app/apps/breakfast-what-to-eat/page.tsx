@@ -124,6 +124,7 @@ export default function BreakfastWhatToEatPage() {
             {!selected && (
               <div className="mt-8 flex flex-col items-center">
                 <button
+        type="button"
                   onClick={handleDraw}
                   disabled={loading}
                   className={`w-full h-14 sm:h-16 rounded-2xl text-lg sm:text-xl font-semibold transition-all
@@ -174,6 +175,7 @@ export default function BreakfastWhatToEatPage() {
                   </div>
 
                   <button
+        type="button"
                     onClick={handleDraw}
                     disabled={loading}
                     className={`mt-6 w-full h-12 rounded-xl text-base font-semibold transition-all

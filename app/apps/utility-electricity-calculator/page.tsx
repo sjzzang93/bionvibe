@@ -168,7 +168,8 @@ export default function ElectricityCalculator() {
           <div className="space-y-4">
             {/* 모드 선택 */}
             <div className="flex gap-2 p-1 bg-white/60 backdrop-blur rounded-xl border-2 border-blue-200">
-              <button 
+              <button
+        type="button" 
                 onClick={() => setMode('total')}
                 className={`flex-1 px-3 py-2 rounded-lg font-bold text-sm transition-all ${
                   mode === 'total' 
@@ -178,7 +179,8 @@ export default function ElectricityCalculator() {
               >
                 총 사용시간
               </button>
-              <button 
+              <button
+        type="button" 
                 onClick={() => setMode('daily')}
                 className={`flex-1 px-3 py-2 rounded-lg font-bold text-sm transition-all ${
                   mode === 'daily' 
@@ -249,7 +251,8 @@ export default function ElectricityCalculator() {
               <p className="text-xs sm:text-sm text-green-700 font-medium">
                 현재 단가: {rates[category].toFixed(1)} 원/kWh
               </p>
-              <button 
+              <button
+        type="button" 
                 onClick={() => { setTempRates(rates); setShowModal(true); }}
                 className="px-3 py-1.5 bg-white/80 hover:bg-white border-2 border-green-300 hover:border-green-500 
                          rounded-lg text-xs sm:text-sm font-bold text-green-700 transition-all"
@@ -263,7 +266,8 @@ export default function ElectricityCalculator() {
         {/* 계산 버튼 */}
         <PremiumCard title="🎯 계산하기" style={{ background: 'linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)' }}>
           <div className="space-y-3">
-            <button 
+            <button
+        type="button" 
               onClick={calculate}
               className="w-full px-6 py-4 bg-gradient-to-r from-yellow-400 via-yellow-500 to-amber-500 
                        hover:from-yellow-500 hover:via-yellow-600 hover:to-amber-600
@@ -272,7 +276,8 @@ export default function ElectricityCalculator() {
             >
               ⚡ 전기요금 계산하기
             </button>
-            <button 
+            <button
+        type="button" 
               onClick={resetAll}
               className="w-full px-6 py-3 bg-white/80 hover:bg-white border-2 border-pink-300 hover:border-pink-500 
                        text-pink-700 font-bold text-base rounded-xl transition-all"
@@ -369,6 +374,7 @@ export default function ElectricityCalculator() {
                 💰 단가 편집
               </h3>
               <button
+        type="button"
                 onClick={() => setShowModal(false)}
                 className="w-8 h-8 flex items-center justify-center bg-red-100 hover:bg-red-200 
                          rounded-full text-red-600 font-bold transition-all"
@@ -433,21 +439,24 @@ export default function ElectricityCalculator() {
 
             {/* 버튼 */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <button 
+              <button
+        type="button" 
                 onClick={restoreDefaults}
                 className="flex-1 px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-xl 
                          transition-all"
               >
                 기본값 복원
               </button>
-              <button 
+              <button
+        type="button" 
                 onClick={() => setShowModal(false)}
                 className="flex-1 px-4 py-3 bg-white hover:bg-gray-50 border-2 border-gray-300 text-gray-700 
                          font-bold rounded-xl transition-all"
               >
                 취소
               </button>
-              <button 
+              <button
+        type="button" 
                 onClick={saveRates}
                 className="flex-1 px-4 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 
                          hover:to-amber-600 text-gray-900 font-black rounded-xl shadow-lg hover:shadow-xl 

@@ -49,7 +49,8 @@ export default function IncomeTaxCalculatorPage() {
               <input type="number" value={expenses} onChange={(e) => setExpenses(e.target.value)} className="w-full p-3 border-2 rounded-lg text-black" />
             </div>
           </div>
-          <button onClick={calculate} className="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-black placeholder-gray-500">계산하기</button>
+          <button
+        type="button" onClick={calculate} className="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-black placeholder-gray-500">계산하기</button>
           {result && (
             <div className="mt-8 space-y-4 text-black placeholder-gray-500">
               <div className="bg-green-50 p-1 sm:p-2.5 md:p-5 rounded-xl text-black placeholder-gray-500">

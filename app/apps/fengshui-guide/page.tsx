@@ -76,6 +76,7 @@ export default function FengshuiGuidePage() {
 function TabButton({ icon, label, active, onClick }: { icon: React.ReactNode; label: string; active: boolean; onClick: () => void }) {
   return (
     <button
+        type="button"
       onClick={onClick}
       className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
         active
@@ -282,6 +283,7 @@ function TheorySection() {
         {concepts.map((concept) => (
           <div key={concept.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-amber-200 dark:border-amber-700" suppressHydrationWarning>
             <button
+        type="button"
               onClick={() => setExpandedConcept(expandedConcept === concept.id ? null : concept.id)}
               className="w-full p-6 text-left hover:bg-amber-50 dark:hover:bg-gray-700 transition-colors"
             >
@@ -414,6 +416,7 @@ function PracticeSection() {
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3" suppressHydrationWarning>
         {Object.entries(rooms).map(([key, room]) => (
           <button
+        type="button"
             key={key}
             onClick={() => setSelectedRoom(key)}
             className={`p-2 md:p-4 rounded-xl font-medium text-sm transition-all ${
@@ -990,6 +993,7 @@ function FAQSection() {
         {faqs.map((faq, idx) => (
           <div key={idx} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-indigo-200 dark:border-indigo-700" suppressHydrationWarning>
             <button
+        type="button"
               onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
               className="w-full p-4 text-left hover:bg-indigo-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-between gap-4"
             >
@@ -1287,6 +1291,7 @@ function FloorPlanDesigner() {
                 { dir: 180 as const, label: '❄️ 북향 (나쁨)', score: 50 }
               ].map(({ dir, label, score }) => (
                 <button
+        type="button"
                   key={dir}
                   onClick={() => setHouseDirection(dir)}
                   className={`p-3 rounded-lg font-medium transition-all text-sm ${houseDirection === dir ? 'bg-indigo-500 text-white ring-2 ring-indigo-300' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200'}`}
@@ -1302,6 +1307,7 @@ function FloorPlanDesigner() {
             <div className="grid grid-cols-3 gap-2">
               {(Object.keys(roomStyles) as Array<keyof typeof roomStyles>).map(type => (
                 <button
+        type="button"
                   key={type}
                   onClick={() => addRoom(type)}
                   className="p-2 md:p-3 bg-gray-100 dark:bg-gray-700 hover:bg-indigo-100 dark:hover:bg-indigo-900 rounded-lg font-medium text-xs md:text-sm transition-all flex items-center gap-1 md:gap-2 justify-center"
@@ -1314,6 +1320,7 @@ function FloorPlanDesigner() {
           </div>
 
           <button
+        type="button"
             onClick={analyzeFloorPlan}
             disabled={rooms.length === 0}
             className="w-full p-3 md:p-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl font-bold text-base md:text-lg shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -1375,8 +1382,10 @@ function FloorPlanDesigner() {
                     {room.doorPosition === 'right' && <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-2 h-8 bg-yellow-500 rounded-l-full"></div>}
                     {selectedRoom === room.id && (
                       <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 flex gap-1 bg-white dark:bg-gray-700 p-1 rounded-lg shadow-lg">
-                        <button onClick={(e) => { e.stopPropagation(); changeDoorPosition(room.id); }} className="p-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded text-xs" title="문 위치">🚪</button>
-                        <button onClick={(e) => { e.stopPropagation(); deleteRoom(room.id); }} className="p-1 bg-red-500 hover:bg-red-600 text-white rounded" title="삭제"><Trash2 className="w-3 h-3" /></button>
+                        <button
+        type="button" onClick={(e) => { e.stopPropagation(); changeDoorPosition(room.id); }} className="p-1 bg-yellow-500 hover:bg-yellow-600 text-white rounded text-xs" title="문 위치">🚪</button>
+                        <button
+        type="button" onClick={(e) => { e.stopPropagation(); deleteRoom(room.id); }} className="p-1 bg-red-500 hover:bg-red-600 text-white rounded" title="삭제"><Trash2 className="w-3 h-3" /></button>
                       </div>
                     )}
                   </div>
@@ -1391,41 +1400,209 @@ function FloorPlanDesigner() {
       </div>
 
       {analysis && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border-4 border-green-500">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">🔮 풍수지리 분석 결과</h3>
-          <div className="text-center mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-xl">
-            <div className="text-6xl font-bold text-green-600 dark:text-green-400 mb-2">{analysis.overallScore}점</div>
-            <div className="text-xl font-bold text-gray-900 dark:text-white">
-              {analysis.overallScore >= 80 ? '🌟 명당!' : analysis.overallScore >= 60 ? '✅ 양호' : '⚠️ 개선 필요'}
+        <div className="space-y-6">
+          {/* 헤더 */}
+          <div className="bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 text-white rounded-2xl p-8 shadow-2xl text-center">
+            <div className="text-5xl mb-4 animate-bounce">🔮</div>
+            <h3 className="text-3xl md:text-4xl font-bold mb-3">당신의 집, 풍수지리 분석 결과</h3>
+            <p className="text-lg opacity-90">과학과 전통의 조화로 본 당신의 공간</p>
+          </div>
+
+          {/* 총점 카드 */}
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border-4 border-green-500">
+            <div className="text-center">
+              <div className="inline-block">
+                <div className="text-7xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 mb-4 animate-pulse">
+                  {analysis.overallScore}점
+                </div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                  {analysis.overallScore >= 90 ? '🏆 완벽한 명당입니다!' : 
+                   analysis.overallScore >= 80 ? '🌟 훌륭한 공간이에요!' : 
+                   analysis.overallScore >= 70 ? '✨ 좋은 기운이 느껴져요' :
+                   analysis.overallScore >= 60 ? '👍 괜찮은 공간입니다' : 
+                   analysis.overallScore >= 50 ? '😊 개선하면 더 좋아질 거예요' : '💪 함께 개선해봐요!'}
+                </div>
+                <div className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {analysis.overallScore >= 90 ? '현재 공간은 최고 수준입니다! 채광, 통풍, 배치가 모두 완벽해요. 이 상태를 계속 유지하시면 됩니다.' :
+                   analysis.overallScore >= 80 ? '정말 잘 구성된 공간이네요! 거의 완벽에 가깝습니다. 몇 가지만 보완하면 100점 만점이 될 거예요.' :
+                   analysis.overallScore >= 70 ? '전반적으로 좋은 기운이 흐르는 공간입니다. 아래 조언을 참고해서 조금만 개선하면 더욱 완벽해질 거예요.' :
+                   analysis.overallScore >= 60 ? '나쁘지 않은 구조예요. 몇 가지 포인트만 개선하면 훨씬 쾌적한 공간이 될 겁니다.' :
+                   analysis.overallScore >= 50 ? '개선할 부분이 보이지만 충분히 좋아질 수 있어요. 걱정하지 마세요, 함께 하나씩 개선해나가봐요!' :
+                   '괜찮아요! 지금부터 시작하는 겁니다. 아래 조언들을 천천히 따라가면 분명히 살기 좋은 공간으로 변할 거예요.'}
+                </div>
+              </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6">
-            <div className="space-y-3">
-              <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-4">
-                <h4 className="font-bold text-blue-700 dark:text-blue-400 mb-2">🧭 {analysis.direction}</h4>
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">{analysis.directionScore}점</div>
-                <p className="text-sm text-gray-700 dark:text-gray-300 mb-1"><strong>장점:</strong> {analysis.pros}</p>
-                <p className="text-sm text-gray-700 dark:text-gray-300"><strong>단점:</strong> {analysis.cons}</p>
+
+          {/* 방향 분석 */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 rounded-2xl p-6 md:p-8 shadow-lg border-2 border-blue-200 dark:border-blue-700">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="text-5xl">🧭</div>
+              <div>
+                <h4 className="text-2xl md:text-3xl font-bold text-blue-900 dark:text-blue-200">{analysis.direction}</h4>
+                <p className="text-blue-700 dark:text-blue-300">방향 점수: <span className="text-3xl font-bold">{analysis.directionScore}점</span></p>
               </div>
             </div>
-            <div className="space-y-3">
-              <div className="bg-green-50 dark:bg-green-900/30 rounded-lg p-4">
-                <h4 className="font-bold text-green-700 dark:text-green-400 mb-2">💡 권장사항</h4>
-                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{analysis.recommendation}</p>
-                {analysis.recommendations.length > 0 && (
-                  <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                    {analysis.recommendations.map((rec: string, idx: number) => <li key={idx}>• {rec}</li>)}
-                  </ul>
-                )}
+
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              <div className="bg-white/80 dark:bg-gray-800/80 rounded-xl p-5 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl">✅</span>
+                  <h5 className="text-lg font-bold text-green-700 dark:text-green-400">이런 점이 좋아요!</h5>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{analysis.pros}</p>
               </div>
-              {analysis.issues.length > 0 && (
-                <div className="bg-red-50 dark:bg-red-900/30 rounded-lg p-4">
-                  <h4 className="font-bold text-red-700 dark:text-red-400 mb-2">⚠️ 주의사항</h4>
-                  <ul className="space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                    {analysis.issues.map((issue: string, idx: number) => <li key={idx}>{issue}</li>)}
-                  </ul>
+              
+              {analysis.cons !== '없음' && (
+                <div className="bg-white/80 dark:bg-gray-800/80 rounded-xl p-5 backdrop-blur-sm">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-2xl">⚠️</span>
+                    <h5 className="text-lg font-bold text-amber-700 dark:text-amber-400">이 부분은 주의하세요</h5>
+                  </div>
+                  <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{analysis.cons}</p>
                 </div>
               )}
+            </div>
+
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl p-5">
+              <div className="flex items-start gap-3">
+                <span className="text-3xl">💡</span>
+                <div>
+                  <h5 className="text-xl font-bold mb-2">지금 바로 할 수 있는 개선 방법</h5>
+                  <p className="text-base leading-relaxed opacity-95">{analysis.recommendation}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 긍정적인 발견사항 */}
+          {analysis.recommendations.length > 0 && (
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 rounded-2xl p-6 md:p-8 shadow-lg border-2 border-green-200 dark:border-green-700">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="text-5xl">🎉</div>
+                <div>
+                  <h4 className="text-2xl md:text-3xl font-bold text-green-900 dark:text-green-200">발견한 좋은 점들</h4>
+                  <p className="text-green-700 dark:text-green-300">당신의 공간에서 찾은 긍정적인 요소들이에요!</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                {analysis.recommendations.map((rec: string, idx: number) => (
+                  <div key={idx} className="flex items-start gap-4 bg-white/80 dark:bg-gray-800/80 rounded-xl p-5 backdrop-blur-sm hover:shadow-md transition-shadow">
+                    <span className="text-3xl flex-shrink-0">
+                      {rec.includes('남쪽') || rec.includes('채광') ? '☀️' : 
+                       rec.includes('북쪽') || rec.includes('조용') ? '🌙' :
+                       rec.includes('동쪽') || rec.includes('아침') ? '🌅' : '✨'}
+                    </span>
+                    <div>
+                      <p className="text-gray-800 dark:text-gray-200 text-base font-medium leading-relaxed">{rec}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                        {rec.includes('채광') && '자연광이 충분하면 기분이 좋아지고 집중력도 올라가요!'}
+                        {rec.includes('조용') && '조용한 환경은 숙면에 도움이 되고 스트레스를 줄여줘요.'}
+                        {rec.includes('아침') && '아침 햇살은 하루를 상쾌하게 시작하게 도와줍니다!'}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 개선이 필요한 부분 */}
+          {analysis.issues.length > 0 && (
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl p-6 md:p-8 shadow-lg border-2 border-amber-200 dark:border-amber-700">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="text-5xl">🔧</div>
+                <div>
+                  <h4 className="text-2xl md:text-3xl font-bold text-amber-900 dark:text-amber-200">개선하면 더 좋아질 부분</h4>
+                  <p className="text-amber-700 dark:text-amber-300">걱정하지 마세요! 모두 해결 가능합니다</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                {analysis.issues.map((issue: string, idx: number) => {
+                  const solutions: Record<string, { solution: string; cost: string; difficulty: string }> = {
+                    '화장실': { 
+                      solution: '환풍기를 24시간 가동하고, 문을 항상 닫아두세요. 제습제와 방향제를 활용하면 습기와 냄새 문제를 크게 줄일 수 있어요.',
+                      cost: '5~10만원',
+                      difficulty: '쉬움'
+                    },
+                    '서쪽': {
+                      solution: '3중 암막 커튼을 설치하고, 창문에 열차단 필름을 붙이세요. 에어컨 용량을 조금 높이면 여름이 훨씬 시원해져요.',
+                      cost: '10~30만원',
+                      difficulty: '쉬움'
+                    },
+                    '북쪽': {
+                      solution: 'LED 조명을 추가하고 밝은 톤의 인테리어로 바꿔보세요. 난방 효율을 높이고 단열을 보강하면 훨씬 따뜻해집니다.',
+                      cost: '20~50만원',
+                      difficulty: '보통'
+                    },
+                    '오후': {
+                      solution: '블라인드나 롤스크린으로 오후 햇빛을 조절하세요. 선풍기나 서큘레이터로 공기를 순환시키면 더욱 시원해요.',
+                      cost: '5~15만원',
+                      difficulty: '쉬움'
+                    },
+                    '어둡': {
+                      solution: '벽을 밝은 색으로 칠하고, 거울을 전략적으로 배치하면 빛이 반사되어 훨씬 밝아져요. LED 간접조명도 분위기를 살려줍니다.',
+                      cost: '15~40만원',
+                      difficulty: '보통'
+                    }
+                  };
+
+                  let matchedKey = Object.keys(solutions).find(key => issue.includes(key));
+                  let solutionData = matchedKey ? solutions[matchedKey] : {
+                    solution: '전문가와 상담하여 맞춤 솔루션을 찾아보세요. 대부분의 문제는 저비용으로 개선 가능합니다.',
+                    cost: '상황에 따라',
+                    difficulty: '상담 필요'
+                  };
+
+                  return (
+                    <div key={idx} className="bg-white/80 dark:bg-gray-800/80 rounded-xl p-5 backdrop-blur-sm border-l-4 border-amber-500">
+                      <div className="flex items-start gap-4">
+                        <span className="text-3xl flex-shrink-0">⚠️</span>
+                        <div className="flex-1">
+                          <p className="text-gray-800 dark:text-gray-200 font-bold text-lg mb-3">{issue}</p>
+                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-lg p-4 mb-3">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-xl">💡</span>
+                              <span className="font-bold text-green-700 dark:text-green-400">해결 방법</span>
+                            </div>
+                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{solutionData.solution}</p>
+                          </div>
+                          <div className="flex gap-4 text-sm">
+                            <span className="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full font-medium">
+                              💰 예상 비용: {solutionData.cost}
+                            </span>
+                            <span className="bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 px-3 py-1 rounded-full font-medium">
+                              🛠️ 난이도: {solutionData.difficulty}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* 최종 메시지 */}
+          <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-2xl p-8 shadow-2xl">
+            <div className="text-center">
+              <div className="text-5xl mb-4">🏡</div>
+              <h4 className="text-2xl md:text-3xl font-bold mb-4">
+                {analysis.overallScore >= 80 ? '완벽한 공간이에요!' :
+                 analysis.overallScore >= 60 ? '좋은 시작입니다!' :
+                 '함께 만들어가요!'}
+              </h4>
+              <p className="text-lg leading-relaxed opacity-95 max-w-3xl mx-auto">
+                {analysis.overallScore >= 80 
+                  ? '현재 공간은 채광, 통풍, 배치가 모두 훌륭합니다. 계절별로 점검하며 이 상태를 유지하세요. 살기 좋은 집은 기분을 좋게 만들고, 건강에도 도움이 됩니다. 잘 하고 계세요! 💚'
+                  : analysis.overallScore >= 60
+                  ? '좋은 기반이 있어요! 위에서 제안한 몇 가지만 개선하면 완벽한 공간이 될 겁니다. 작은 변화가 큰 차이를 만들어낼 거예요. 하나씩 천천히 시도해보세요! 화이팅! 💪'
+                  : '괜찮아요, 모든 집은 개선할 수 있습니다. 위의 조언들을 우선순위대로 하나씩 실천해보세요. 가장 중요한 것은 안전과 건강입니다. 비용이 크게 들지 않는 것부터 시작하면 됩니다. 응원합니다! 🌟'}
+              </p>
+              <div className="mt-6 text-base opacity-90">
+                💌 궁금한 점이 있다면 "FAQ" 탭을 확인하시거나, "실전 적용" 탭에서 구체적인 개선 방법을 찾아보세요!
+              </div>
             </div>
           </div>
         </div>
@@ -1433,4 +1610,3 @@ function FloorPlanDesigner() {
     </div>
   );
 }
-

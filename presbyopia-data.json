@@ -1,0 +1,107 @@
+{
+  "testName": "노안 검사",
+  "testType": "presbyopia",
+  "description": "근거리(30–40cm)에서 작은 글씨를 읽는 능력 평가. 주변 조명 500 lux 이상 권장.",
+  "distance": "30-40cm",
+  "levels": [
+    {
+      "level": 1,
+      "fontSizePt": 14,
+      "text": "가까운 글씨가 겹쳐 보이거나, 초점을 맞추는 데 시간이 걸리시나요?",
+      "difficulty": "very-easy"
+    },
+    {
+      "level": 2,
+      "fontSizePt": 12,
+      "text": "스마트폰 화면을 멀리 떼어야 편하게 읽히나요?",
+      "difficulty": "easy"
+    },
+    {
+      "level": 3,
+      "fontSizePt": 10,
+      "text": "밝은 곳에서는 괜찮지만 어두운 곳에서 특히 힘든가요?",
+      "difficulty": "moderate"
+    },
+    {
+      "level": 4,
+      "fontSizePt": 8,
+      "text": "오랫동안 책을 읽으면 눈이 피로해지고 두통이 오나요?",
+      "difficulty": "hard"
+    },
+    {
+      "level": 5,
+      "fontSizePt": 6,
+      "text": "글자 주변이 번져 보이거나 흐릿하게 느껴지나요?",
+      "difficulty": "very-hard"
+    },
+    {
+      "level": 6,
+      "fontSizePt": 4,
+      "text": "돋보기를 벗으면 즉시 흐릿하게 변하나요?",
+      "difficulty": "extreme"
+    }
+  ],
+  "ageGroups": {
+    "40s": {
+      "minReadablePt": 10,
+      "description": "초기 노안 가능성",
+      "advice": "작업 거리 40cm 유지, 약한 돋보기(+0.75D~+1.25D) 고려."
+    },
+    "50s": {
+      "minReadablePt": 12,
+      "description": "중기 노안",
+      "advice": "근용 안경 또는 다초점 렌즈 상담 권장."
+    },
+    "60sPlus": {
+      "minReadablePt": 14,
+      "description": "진행성 노안",
+      "advice": "정기 검진과 조명 개선, 대비 향상 도구 사용."
+    }
+  },
+  "results": [
+    {
+      "minFontSizePt": 14,
+      "maxFontSizePt": 20,
+      "grade": "주의",
+      "ageEstimate": "60대 이상",
+      "description": "근거리 시력이 많이 저하되었습니다.",
+      "advice": "전문의 상담 및 근용 교정 권장."
+    },
+    {
+      "minFontSizePt": 12,
+      "maxFontSizePt": 14,
+      "grade": "보통",
+      "ageEstimate": "50대",
+      "description": "근거리 집중 시간이 짧아질 수 있습니다.",
+      "advice": "근용 보조도구(돋보기) 사용 고려."
+    },
+    {
+      "minFontSizePt": 10,
+      "maxFontSizePt": 12,
+      "grade": "경도",
+      "ageEstimate": "40대",
+      "description": "작은 글씨에서 피로감이 생길 수 있습니다.",
+      "advice": "휴식 규칙과 조명 개선으로 완화."
+    },
+    {
+      "minFontSizePt": 8,
+      "maxFontSizePt": 10,
+      "grade": "양호",
+      "ageEstimate": "30대",
+      "description": "근거리 시력이 비교적 양호합니다.",
+      "advice": "정기 관리로 유지."
+    },
+    {
+      "minFontSizePt": 4,
+      "maxFontSizePt": 8,
+      "grade": "우수",
+      "ageEstimate": "20대",
+      "description": "근거리 시력이 매우 우수합니다.",
+      "advice": "자세·거리 습관만 유지."
+    }
+  ],
+  "renderingNotes": {
+    "cssMapping": "pt 단위를 CSS px로 변환 시 96DPI 기준 1pt=1.333px",
+    "calibration": "기기별 픽셀 밀도(DPR)에 따른 보정 슬라이더 제공 권장"
+  }
+}

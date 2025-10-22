@@ -72,7 +72,7 @@ export default function AnalyticsTracker() {
           .from('analytics')
           .select('*')
           .eq('session_id', sessionId)
-          .single();
+          .maybeSingle();
 
         if (existingSession) {
           // 기존 세션 업데이트 (페이지뷰 증가)
@@ -119,7 +119,7 @@ export default function AnalyticsTracker() {
             .from('analytics')
             .select('duration')
             .eq('session_id', sessionId)
-            .single();
+            .maybeSingle();
 
           const totalDuration = (existingSession?.duration || 0) + duration;
 

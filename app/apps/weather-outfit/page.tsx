@@ -264,6 +264,7 @@ export default function WeatherOutfit() {
             </div>
 
             <button
+        type="button"
               onClick={() => setResult(null)}
               className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
             >
@@ -322,6 +323,7 @@ export default function WeatherOutfit() {
               <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">날씨</label>
               <div className="grid grid-cols-4 gap-2 text-black placeholder-gray-500">
                 <button
+        type="button"
                   onClick={() => setWeather('sunny')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'sunny'
@@ -333,6 +335,7 @@ export default function WeatherOutfit() {
                   <div className="text-xs text-black placeholder-gray-500">맑음</div>
                 </button>
                 <button
+        type="button"
                   onClick={() => setWeather('cloudy')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'cloudy'
@@ -344,6 +347,7 @@ export default function WeatherOutfit() {
                   <div className="text-xs text-black placeholder-gray-500">흐림</div>
                 </button>
                 <button
+        type="button"
                   onClick={() => setWeather('rainy')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'rainy'
@@ -355,6 +359,7 @@ export default function WeatherOutfit() {
                   <div className="text-xs text-black placeholder-gray-500">비</div>
                 </button>
                 <button
+        type="button"
                   onClick={() => setWeather('snowy')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     weather === 'snowy'
@@ -372,6 +377,7 @@ export default function WeatherOutfit() {
               <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">계절</label>
               <div className="grid grid-cols-4 gap-2 text-black placeholder-gray-500">
                 <button
+        type="button"
                   onClick={() => setSeason('spring')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'spring'
@@ -383,6 +389,7 @@ export default function WeatherOutfit() {
                   <div className="text-xs text-black placeholder-gray-500">봄</div>
                 </button>
                 <button
+        type="button"
                   onClick={() => setSeason('summer')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'summer'
@@ -394,6 +401,7 @@ export default function WeatherOutfit() {
                   <div className="text-xs text-black placeholder-gray-500">여름</div>
                 </button>
                 <button
+        type="button"
                   onClick={() => setSeason('fall')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'fall'
@@ -405,6 +413,7 @@ export default function WeatherOutfit() {
                   <div className="text-xs text-black placeholder-gray-500">가을</div>
                 </button>
                 <button
+        type="button"
                   onClick={() => setSeason('winter')}
                   className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
                     season === 'winter'
@@ -429,6 +438,7 @@ export default function WeatherOutfit() {
             </div>
 
             <button
+        type="button"
               onClick={getRecommendation}
               className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
             >

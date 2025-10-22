@@ -418,6 +418,7 @@ export default function FaceFortune() {
 
               {/* 다시 하기 버튼 */}
               <button
+        type="button"
                 onClick={reset}
                 className="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white px-6 py-3 rounded-lg font-bold hover:from-gray-500 hover:to-gray-600 transition-all"
               >

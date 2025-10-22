@@ -70,21 +70,84 @@ export function getFaceShapeByRatio(
   midWidth: number,
   bottomWidth: number
 ): string {
-  const total = topWidth + midWidth + bottomWidth;
-  const avgWidth = total / 3;
+  // 세 부위를 정렬하여 상대적 크기 비교
+  const widths = [
+    { value: topWidth, position: 'top' },
+    { value: midWidth, position: 'mid' },
+    { value: bottomWidth, position: 'bottom' }
+  ];
   
-  // 각 영역을 평균 대비 비율로 분류
+  // 크기 순으로 정렬
+  widths.sort((a, b) => b.value - a.value);
+  
+  const maxWidth = widths[0].value;
+  const midWidthVal = widths[1].value;
+  const minWidth = widths[2].value;
+  
+  // 차이가 거의 없으면 (1% 미만) 계란형
+  const range = maxWidth - minWidth;
+  const avgWidth = (topWidth + midWidth + bottomWidth) / 3;
+  const diffRatio = range / avgWidth;
+  
+  // 정말 균형잡힌 경우만 MMM (계란형)
+  if (diffRatio < 0.02) {
+    return 'MMM';
+  }
+  
+  // 각 부위를 W/M/N으로 분류
   const getLevel = (width: number) => {
-    const ratio = width / avgWidth;
-    if (ratio >= 1.1) return 'W'; // Wide
-    if (ratio <= 0.9) return 'N'; // Narrow
-    return 'M'; // Medium
+    // 최대값과의 차이
+    const maxDiff = (maxWidth - width) / avgWidth;
+    // 최소값과의 차이
+    const minDiff = (width - minWidth) / avgWidth;
+    
+    // 최대값에 가까우면 Wide
+    if (maxDiff < 0.015) return 'W';
+    // 최소값에 가까우면 Narrow
+    if (minDiff < 0.015) return 'N';
+    // 중간이면 Medium
+    return 'M';
   };
   
   const topLevel = getLevel(topWidth);
   const midLevel = getLevel(midWidth);
   const bottomLevel = getLevel(bottomWidth);
   
-  return `${topLevel}${midLevel}${bottomLevel}`;
+  let patternCode = `${topLevel}${midLevel}${bottomLevel}`;
+  
+  // 여전히 MMM이면 강제로 다양화
+  if (patternCode === 'MMM') {
+    // 세 값 중 어느 것이 가장 큰지/작은지 확인
+    const maxPos = widths[0].position;
+    const minPos = widths[2].position;
+    
+    // 가장 큰 부위와 작은 부위를 명확히 표시
+    if (maxPos === 'top') {
+      if (minPos === 'mid') {
+        patternCode = 'WNM';
+      } else { // minPos === 'bottom'
+        patternCode = 'WMN';
+      }
+    } else if (maxPos === 'mid') {
+      if (minPos === 'top') {
+        patternCode = 'NWM';
+      } else { // minPos === 'bottom'
+        patternCode = 'MWN';
+      }
+    } else { // maxPos === 'bottom'
+      if (minPos === 'top') {
+        patternCode = 'NMW';
+      } else { // minPos === 'mid'
+        patternCode = 'MNW';
+      }
+    }
+  }
+  
+  // 패턴 코드가 존재하는지 확인
+  if (!PATTERN_CODES.includes(patternCode)) {
+    console.warn(`Unknown pattern code: ${patternCode}, falling back to MMM`);
+    return 'MMM';
+  }
+  
+  return patternCode;
 }
-

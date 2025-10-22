@@ -304,6 +304,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
 
           </div>
           <button
+        type="button"
             onClick={onLogout}
             className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-bold transition-all"
             style={{ minHeight: '48px' }}
@@ -315,6 +316,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
         {/* 습관 추가 버튼 */}
         {!showAddForm && (
           <button
+        type="button"
             onClick={() => setShowAddForm(true)}
             className="w-full bg-white/20 hover:bg-white/30 text-white font-bold py-4 rounded sm:rounded-lg md:rounded-2xl mb-6 flex items-center justify-center gap-2 transition-all"
           >
@@ -346,6 +348,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
                 <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
                   {Object.entries(GOAL_INFO).map(([days, info]) => (
                     <button
+        type="button"
                       key={days}
                       onClick={() => setSelectedGoal(Number(days) as 21 | 66 | 100)}
                       className={`p-2 md:p-4 rounded-xl font-bold transition-all ${
@@ -377,6 +380,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
               </div>
 
               <button
+        type="button"
                 onClick={() => setShowTemplates(!showTemplates)}
                 className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-all"
               >
@@ -387,6 +391,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
                 <div className="bg-white/10 rounded-xl p-4 max-h-60 overflow-y-auto">
                   {HABIT_TEMPLATES[selectedCategory as keyof typeof HABIT_TEMPLATES].map((template) => (
                     <button
+        type="button"
                       key={template}
                       onClick={() => {
                         setNewHabitName(template);
@@ -402,12 +407,14 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
 
               <div className="flex gap-0 sm:gap-1.5 md:gap-3">
                 <button
+        type="button"
                   onClick={addHabit}
                   className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-all"
                 >
                   추가
                 </button>
                 <button
+        type="button"
                   onClick={() => {
                     setShowAddForm(false);
                     setNewHabitName('');
@@ -447,6 +454,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-bold text-white">{habit.name}</h3>
                     <button
+        type="button"
                       onClick={() => deleteHabit(habit.id)}
                       className="text-red-300 hover:text-red-100 text-xl"
                     >
@@ -486,6 +494,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
                   </div>
 
                   <button
+        type="button"
                     onClick={() => toggleCheck(habit.id)}
                     className={`w-full py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all ${
                       isChecked

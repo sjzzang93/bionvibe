@@ -5,6 +5,7 @@ import { DevTerm } from '../_lib/types';
 export default function TermCard({ term, onOpen }: { term: DevTerm; onOpen: (t: DevTerm) => void }) {
   return (
     <button
+        type="button"
       onClick={() => onOpen(term)}
       className="w-full text-left rounded-lg border border-gray-200 dark:border-gray-700 
                  bg-white dark:bg-gray-800 p-4 hover:shadow-md hover:border-purple-300 

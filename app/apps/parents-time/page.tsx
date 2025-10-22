@@ -137,6 +137,7 @@ export default function ParentsTimeCalculator() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <button
+        type="button"
                 onClick={() => handleParentSelect('both')}
                 className="group bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/50 rounded-2xl p-8 transition-all hover:scale-105 active:scale-95"
               >
@@ -144,6 +145,7 @@ export default function ParentsTimeCalculator() {
                 <div className="text-white text-xl font-bold">부모님 모두</div>
               </button>
               <button
+        type="button"
                 onClick={() => handleParentSelect('father')}
                 className="group bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/50 rounded-2xl p-8 transition-all hover:scale-105 active:scale-95"
               >
@@ -151,6 +153,7 @@ export default function ParentsTimeCalculator() {
                 <div className="text-white text-xl font-bold">아버지</div>
               </button>
               <button
+        type="button"
                 onClick={() => handleParentSelect('mother')}
                 className="group bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/50 rounded-2xl p-8 transition-all hover:scale-105 active:scale-95"
               >
@@ -238,6 +241,7 @@ export default function ParentsTimeCalculator() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
+        type="button"
                 onClick={() => handleTimeType('weekly')}
                 className="bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/50 rounded-2xl p-8 transition-all hover:scale-105 active:scale-95"
               >
@@ -245,6 +249,7 @@ export default function ParentsTimeCalculator() {
                 <div className="text-white text-xl font-bold">일주일 평균</div>
               </button>
               <button
+        type="button"
                 onClick={() => handleTimeType('monthly')}
                 className="bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/50 rounded-2xl p-8 transition-all hover:scale-105 active:scale-95"
               >

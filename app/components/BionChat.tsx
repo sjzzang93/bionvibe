@@ -104,6 +104,7 @@ export default function BionChat() {
   if (!isOpen) {
     return (
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white px-5 py-3 rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 font-semibold"
       >
@@ -134,6 +135,7 @@ export default function BionChat() {
           </div>
         </div>
         <button
+        type="button"
           onClick={() => setIsOpen(false)}
           className="w-8 h-8 bg-white/20 hover:bg-white/30 text-white rounded-lg font-bold transition-all"
         >
@@ -162,6 +164,7 @@ export default function BionChat() {
                 autoFocus
               />
               <button
+        type="button"
                 onClick={handleNicknameSubmit}
                 disabled={!nickname.trim()}
                 className="w-full py-3 bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white font-semibold rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -228,6 +231,7 @@ export default function BionChat() {
                 className="flex-1 px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
               />
               <button
+        type="button"
                 onClick={sendMessage}
                 disabled={!message.trim()}
                 className="px-5 py-2.5 bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white font-semibold rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -237,6 +241,7 @@ export default function BionChat() {
             </div>
             <div className="mt-2 text-center">
               <button
+        type="button"
                 onClick={() => {
                   localStorage.removeItem('bion_chat_nickname');
                   setIsNicknameSet(false);

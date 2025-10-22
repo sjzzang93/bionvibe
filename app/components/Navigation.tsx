@@ -93,7 +93,8 @@ export function Navigation() {
     <nav className="sticky top-0 z-50 bg-white dark:bg-black backdrop-blur-xl border-b-2 border-black dark:border-gray-700 shadow-sm transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <button 
+          <button
+        type="button" 
             onClick={handleLogoClick}
             className="flex items-center gap-0.5 hover:opacity-80 transition-opacity cursor-pointer"
           >
@@ -124,6 +125,7 @@ export function Navigation() {
           <div className="flex items-center gap-2 sm:gap-4">
             {/* 이벤트 버튼 */}
             <button
+        type="button"
               onClick={handleContactClick}
               className="relative flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-500 dark:to-rose-500 hover:from-red-700 hover:to-rose-700 dark:hover:from-red-600 dark:hover:to-rose-600 text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 overflow-hidden animate-pulse"
             >
@@ -152,6 +154,7 @@ export function Navigation() {
 
             {/* 다크모드 토글 */}
             <button
+        type="button"
               onClick={toggleDarkMode}
               className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="다크모드 토글"

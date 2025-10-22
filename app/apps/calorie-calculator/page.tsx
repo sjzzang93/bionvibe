@@ -228,6 +228,7 @@ export default function CalorieCalculatorPage() {
             <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">성별</label>
             <div className="grid grid-cols-3 gap-3 md:gap-2">
               <button
+        type="button"
                 onClick={() => setGender('male')}
                 className={`py-3 md:py-4 rounded-xl font-bold transition-all text-[10px] sm:text-xs md:text-sm ${
                   gender === 'male' ? 'bg-blue-500 text-white' : 'bg-white/20 text-white'
@@ -237,6 +238,7 @@ export default function CalorieCalculatorPage() {
                 남성
               </button>
               <button
+        type="button"
                 onClick={() => setGender('female')}
                 className={`py-3 md:py-4 rounded-xl font-bold transition-all text-[10px] sm:text-xs md:text-sm ${
                   gender === 'female' ? 'bg-pink-500 text-white' : 'bg-white/20 text-white'
@@ -307,6 +309,7 @@ export default function CalorieCalculatorPage() {
             <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">목표</label>
             <div className="grid grid-cols-3 gap-2 md:gap-0 sm:gap-1.5 md:gap-3">
               <button
+        type="button"
                 onClick={() => setGoal('lose')}
                 className={`py-3 rounded-xl font-bold transition-all text-xs md:text-sm ${
                   goal === 'lose' ? 'bg-red-500 text-white' : 'bg-white/20 text-white'
@@ -316,6 +319,7 @@ export default function CalorieCalculatorPage() {
                 감량
               </button>
               <button
+        type="button"
                 onClick={() => setGoal('maintain')}
                 className={`py-3 rounded-xl font-bold transition-all text-xs md:text-sm ${
                   goal === 'maintain' ? 'bg-green-500 text-white' : 'bg-white/20 text-white'
@@ -325,6 +329,7 @@ export default function CalorieCalculatorPage() {
                 유지
               </button>
               <button
+        type="button"
                 onClick={() => setGoal('gain')}
                 className={`py-3 rounded-xl font-bold transition-all text-xs md:text-sm ${
                   goal === 'gain' ? 'bg-blue-500 text-white' : 'bg-white/20 text-white'
@@ -337,6 +342,7 @@ export default function CalorieCalculatorPage() {
           </div>
 
           <button
+        type="button"
             onClick={handleCalculate}
             className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm md:text-xl hover:shadow-lg transition-all"
             style={{ minHeight: '48px' }}

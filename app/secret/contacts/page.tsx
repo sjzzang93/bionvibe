@@ -159,6 +159,7 @@ export default function ContactsManagement() {
         <div className="flex gap-2 mb-6">
           {(['all', 'pending', 'answered', 'closed'] as const).map((f) => (
             <button
+        type="button"
               key={f}
               onClick={() => setFilter(f)}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
@@ -204,6 +205,7 @@ export default function ContactsManagement() {
                   <div className="flex gap-2">
                     {contact.status === 'pending' && (
                       <button
+        type="button"
                         onClick={() => {
                           setSelectedContact(contact);
                           setReplyText(contact.admin_reply || '');
@@ -215,6 +217,7 @@ export default function ContactsManagement() {
                     )}
                     {contact.status === 'answered' && (
                       <button
+        type="button"
                         onClick={() => updateStatus(contact.id!, 'closed')}
                         className="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white rounded text-sm font-semibold"
                       >
@@ -265,6 +268,7 @@ export default function ContactsManagement() {
 
               <div className="flex gap-3 justify-end">
                 <button
+        type="button"
                   onClick={() => {
                     setSelectedContact(null);
                     setReplyText('');
@@ -274,6 +278,7 @@ export default function ContactsManagement() {
                   취소
                 </button>
                 <button
+        type="button"
                   onClick={saveReply}
                   disabled={!replyText.trim()}
                   className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed"

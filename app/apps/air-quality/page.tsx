@@ -258,12 +258,14 @@ export default function AirQuality() {
 
             <div className="flex gap-0 sm:gap-1.5 md:gap-3">
               <button
+        type="button"
                 onClick={() => setData(null)}
                 className="flex-1 py-4 bg-gray-500 hover:bg-gray-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
               >
                 뒤로
               </button>
               <button
+        type="button"
                 onClick={() => {
                   setData(null);
                   measureAirQuality();
@@ -339,6 +341,7 @@ export default function AirQuality() {
           {!loading ? (
             <>
               <button
+        type="button"
                 onClick={measureAirQuality}
                 className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all mb-4"
               >

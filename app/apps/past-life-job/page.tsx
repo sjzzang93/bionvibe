@@ -366,6 +366,7 @@ export default function PastLifeJob() {
               </div>
 
               <button
+        type="button"
                 onClick={() => setStep(2)}
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
               >
@@ -405,6 +406,7 @@ export default function PastLifeJob() {
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
                   <button
+        type="button"
                     onClick={() => handlePersonality('introvert', true)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.introvert === true
@@ -416,6 +418,7 @@ export default function PastLifeJob() {
                     {data.personality.introvert === true && ' ✓'}
                   </button>
                   <button
+        type="button"
                     onClick={() => handlePersonality('introvert', false)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.introvert === false
@@ -436,6 +439,7 @@ export default function PastLifeJob() {
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
                   <button
+        type="button"
                     onClick={() => handlePersonality('logical', true)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.logical === true
@@ -447,6 +451,7 @@ export default function PastLifeJob() {
                     {data.personality.logical === true && ' ✓'}
                   </button>
                   <button
+        type="button"
                     onClick={() => handlePersonality('logical', false)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.logical === false
@@ -467,6 +472,7 @@ export default function PastLifeJob() {
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
                   <button
+        type="button"
                     onClick={() => handlePersonality('adventurous', true)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.adventurous === true
@@ -478,6 +484,7 @@ export default function PastLifeJob() {
                     {data.personality.adventurous === true && ' ✓'}
                   </button>
                   <button
+        type="button"
                     onClick={() => handlePersonality('adventurous', false)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.adventurous === false
@@ -498,6 +505,7 @@ export default function PastLifeJob() {
                 </label>
                 <div className="flex gap-3 text-black placeholder-gray-500">
                   <button
+        type="button"
                     onClick={() => handlePersonality('creative', true)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.creative === true
@@ -509,6 +517,7 @@ export default function PastLifeJob() {
                     {data.personality.creative === true && ' ✓'}
                   </button>
                   <button
+        type="button"
                     onClick={() => handlePersonality('creative', false)}
                     className={`flex-1 py-4 rounded-lg border-2 transition-all ${
                       data.personality.creative === false
@@ -524,12 +533,14 @@ export default function PastLifeJob() {
 
               <div className="flex gap-3 text-black placeholder-gray-500">
                 <button
+        type="button"
                   onClick={() => setStep(1)}
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
                 >
                   이전
                 </button>
                 <button
+        type="button"
                   onClick={analyzePastLife}
                   disabled={!allAnswered}
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
@@ -612,6 +623,7 @@ export default function PastLifeJob() {
             </div>
 
             <button
+        type="button"
               onClick={() => {
                 setStep(1);
                 setResult(null);

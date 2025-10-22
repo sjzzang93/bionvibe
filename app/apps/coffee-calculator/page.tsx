@@ -370,6 +370,7 @@ export default function CoffeeCalculator() {
             </div>
 
             <button
+        type="button"
               onClick={() => setResult(null)}
               className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
             >
@@ -429,6 +430,7 @@ export default function CoffeeCalculator() {
               <div className="grid grid-cols-3 gap-2">
                 {(['low', 'normal', 'high'] as const).map(level => (
                   <button
+        type="button"
                     key={level}
                     onClick={() => setSensitivity(level)}
                     className={`p-3 rounded-lg font-semibold transition-all ${
@@ -484,6 +486,7 @@ export default function CoffeeCalculator() {
               <div className="flex justify-between items-center mb-0.5 sm:mb-1.5 md:mb-2">
                 <h3 className="font-bold text-gray-800">오늘 마신 음료</h3>
                 <button
+        type="button"
                   onClick={() => setShowAddForm(!showAddForm)}
                   className="px-4 py-2 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-all"
                 >
@@ -502,6 +505,7 @@ export default function CoffeeCalculator() {
                         </div>
                       </div>
                       <button
+        type="button"
                         onClick={() => removeIntake(i)}
                         className="font-bold hover:text-red-600"
                       >
@@ -569,6 +573,7 @@ export default function CoffeeCalculator() {
                   </div>
 
                   <button
+        type="button"
                     onClick={addIntake}
                     className="w-full py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
                   >
@@ -590,6 +595,7 @@ export default function CoffeeCalculator() {
             </div>
 
             <button
+        type="button"
               onClick={calculate}
               className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
             >

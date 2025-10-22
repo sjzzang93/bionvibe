@@ -490,6 +490,7 @@ export default function GiftFinderPage() {
                   { id: 'other', label: '기타', emoji: '🙂' }
                 ].map(opt => (
                   <button
+        type="button"
                     key={opt.id}
                     onClick={() => setRecipient(opt.id)}
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
@@ -522,6 +523,7 @@ export default function GiftFinderPage() {
                   { id: '500000', label: '50만원 이상' }
                 ].map(opt => (
                   <button
+        type="button"
                     key={opt.id}
                     onClick={() => setBudget(opt.id)}
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
@@ -553,6 +555,7 @@ export default function GiftFinderPage() {
                   { id: 'etc', label: '그냥', emoji: '💝' }
                 ].map(opt => (
                   <button
+        type="button"
                     key={opt.id}
                     onClick={() => setOccasion(opt.id)}
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
@@ -576,6 +579,7 @@ export default function GiftFinderPage() {
               <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
                 {interestOptions.map(opt => (
                   <button
+        type="button"
                     key={opt.id}
                     onClick={() => toggleInterest(opt.id)}
                     className={`p-3 rounded-lg border-2 font-bold transition-all ${
@@ -592,6 +596,7 @@ export default function GiftFinderPage() {
 
             {/* 추천 받기 버튼 */}
             <button
+        type="button"
               onClick={generateSuggestions}
               className="w-full py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white font-black text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
@@ -637,6 +642,7 @@ export default function GiftFinderPage() {
 
             {/* 다시 하기 버튼 */}
             <button
+        type="button"
               onClick={reset}
               className="w-full py-4 bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-black text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
             >

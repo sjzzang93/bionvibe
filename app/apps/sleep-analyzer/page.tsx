@@ -253,34 +253,67 @@ export default function SleepAnalyzer() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 dark:from-indigo-900 dark:via-purple-900 dark:to-blue-900 transition-colors">
-        <div className="mx-auto max-w-[600px] px-4 py-6">
+      <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
+        {/* Animated Background Blobs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+          <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div className="mx-auto max-w-[600px] px-4 py-6 relative z-10">
           <div className="mb-4">
             
           </div>
 
-          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6">
-            <header className="text-center mb-6">
-              <h1 className="text-3xl font-bold text-indigo-700 mb-2">😴</h1>
-              <h2 className="text-2xl font-bold text-gray-800">수면 분석 결과</h2>
+          <section className="bg-white/10 backdrop-blur-2xl rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 border-2 border-white/30 relative"
+            style={{
+              transform: 'perspective(1000px) rotateX(2deg)',
+              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 0 100px rgba(99, 102, 241, 0.2), inset 0 0 100px rgba(255, 255, 255, 0.1)'
+            }}>
+            {/* Shimmering Overlay */}
+            <div className="absolute inset-0 rounded-2xl sm:rounded-3xl overflow-hidden pointer-events-none">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
+            </div>
+
+            <header className="text-center mb-6 sm:mb-8 relative">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl mb-3 sm:mb-4 animate-bounce-slow"
+                style={{ textShadow: '0 0 20px rgba(99, 102, 241, 0.8)' }}>
+                😴
+              </h1>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 bg-gradient-to-r from-indigo-200 via-purple-200 to-blue-200 bg-clip-text text-transparent drop-shadow-2xl">
+                수면 분석 결과
+              </h2>
             </header>
 
             {/* 종합 점수 */}
-            <div className={`mb-6 p-1 sm:p-2.5 md:p-5 rounded-xl text-center border-4 ${
-              result.score >= 80 ? 'bg-green-50 border-green-400' :
-              result.score >= 60 ? 'bg-yellow-50 border-yellow-400' :
-              'bg-red-50 border-red-400'
-            }`}>
-              <div className="text-6xl font-bold mb-2" style={{
+            <div className={`relative mb-6 sm:mb-8 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl text-center border-4 backdrop-blur-xl hover:scale-105 transition-all duration-300 ${
+              result.score >= 80 ? 'bg-gradient-to-br from-green-500/30 to-emerald-500/30 border-green-400/50' :
+              result.score >= 60 ? 'bg-gradient-to-br from-yellow-500/30 to-amber-500/30 border-yellow-400/50' :
+              'bg-gradient-to-br from-red-500/30 to-rose-500/30 border-red-400/50'
+            }`}
+              style={{
+                transform: 'perspective(1000px) translateZ(20px)',
+                boxShadow: result.score >= 80 ? '0 20px 40px rgba(16, 185, 129, 0.4)' :
+                          result.score >= 60 ? '0 20px 40px rgba(245, 158, 11, 0.4)' :
+                          '0 20px 40px rgba(239, 68, 68, 0.4)'
+              }}>
+              <div className="text-5xl sm:text-6xl md:text-7xl font-black mb-3 sm:mb-4 animate-pulse" style={{
                 background: result.score >= 80 ? 'linear-gradient(135deg, #10b981, #059669)' :
                            result.score >= 60 ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
                            'linear-gradient(135deg, #ef4444, #dc2626)',
                 WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 40px rgba(255, 255, 255, 0.5)'
               }}>
                 {result.score}점
               </div>
-              <div className="text-lg font-semibold text-gray-700">
+              <div className={`text-lg sm:text-xl md:text-2xl font-black px-4 py-2 rounded-full inline-block backdrop-blur-sm border-2 ${
+                result.score >= 80 ? 'bg-green-500/50 border-green-300 text-green-100' :
+                result.score >= 60 ? 'bg-yellow-500/50 border-yellow-300 text-yellow-100' :
+                'bg-red-500/50 border-red-300 text-red-100'
+              }`}
+                style={{ boxShadow: '0 10px 20px rgba(0, 0, 0, 0.2)' }}>
                 {result.score >= 80 ? '훌륭한 수면!' :
                  result.score >= 60 ? '괜찮은 수면' :
                  '수면 개선 필요'}
@@ -288,172 +321,218 @@ export default function SleepAnalyzer() {
             </div>
 
             {/* 수면 정보 */}
-            <div className="mb-6 grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200 text-center">
-                <div className="text-sm text-gray-600 mb-1">총 수면 시간</div>
-                <div className="text-3xl font-bold text-blue-700">{result.sleepHours}</div>
-                <div className="text-xs text-gray-500">시간</div>
+            <div className="mb-6 sm:mb-8 grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-5 border-2 border-white/30 text-center hover:scale-105 transition-all duration-300"
+                style={{
+                  transform: 'perspective(1000px) translateZ(10px)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+                }}>
+                <div className="text-xs sm:text-sm text-white/70 mb-2">총 수면 시간</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-black text-cyan-200">{result.sleepHours}</div>
+                <div className="text-xs sm:text-sm text-white/60 mt-1">시간</div>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200 text-center">
-                <div className="text-sm text-gray-600 mb-1">수면 사이클</div>
-                <div className="text-3xl font-bold text-purple-700">{result.cycles}</div>
-                <div className="text-xs text-gray-500">회 (90분/회)</div>
+              <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-5 border-2 border-white/30 text-center hover:scale-105 transition-all duration-300"
+                style={{
+                  transform: 'perspective(1000px) translateZ(10px)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+                }}>
+                <div className="text-xs sm:text-sm text-white/70 mb-2">수면 사이클</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-black text-pink-200">{result.cycles}</div>
+                <div className="text-xs sm:text-sm text-white/60 mt-1">회 (90분/회)</div>
               </div>
             </div>
 
             {/* 수면 타입 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">🦉 수면 타입</h3>
-              <div className="text-xl font-bold text-amber-700 mb-2">{result.sleepType}</div>
-              <p className="text-gray-700 text-sm">{result.personality}</p>
+            <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-amber-500/20 to-yellow-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-white/30 hover:scale-105 transition-all duration-300"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-3">🦉 수면 타입</h3>
+              <div className="text-xl sm:text-2xl md:text-3xl font-black text-amber-200 mb-3">{result.sleepType}</div>
+              <p className="text-sm sm:text-base text-white/80">{result.personality}</p>
             </div>
 
             {/* 상세 점수 분석 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-slate-50 to-gray-50 rounded-lg border border-slate-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">📊 상세 점수 분석</h3>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-0 sm:gap-1.5 md:gap-3">
-                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-blue-200">
-                  <div className="text-xs text-gray-600 mb-1">수면 시간</div>
-                  <div className="text-lg font-bold text-blue-700">{result.detailedScores.duration}/25</div>
+            <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-slate-500/20 to-gray-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-white/30 hover:scale-105 transition-all duration-300"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-4">📊 상세 점수 분석</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-white/30 hover:scale-110 transition-all">
+                  <div className="text-xs text-white/70 mb-1">수면 시간</div>
+                  <div className="text-base sm:text-lg md:text-xl font-black text-blue-300">{result.detailedScores.duration}/25</div>
                 </div>
-                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-green-200">
-                  <div className="text-xs text-gray-600 mb-1">수면 품질</div>
-                  <div className="text-lg font-bold text-green-700">{result.detailedScores.quality}/20</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-white/30 hover:scale-110 transition-all">
+                  <div className="text-xs text-white/70 mb-1">수면 품질</div>
+                  <div className="text-base sm:text-lg md:text-xl font-black text-green-300">{result.detailedScores.quality}/20</div>
                 </div>
-                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-purple-200">
-                  <div className="text-xs text-gray-600 mb-1">잠들기 시간</div>
-                  <div className="text-lg font-bold text-purple-700">{result.detailedScores.latency}/15</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-white/30 hover:scale-110 transition-all">
+                  <div className="text-xs text-white/70 mb-1">잠들기 시간</div>
+                  <div className="text-base sm:text-lg md:text-xl font-black text-purple-300">{result.detailedScores.latency}/15</div>
                 </div>
-                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-orange-200">
-                  <div className="text-xs text-gray-600 mb-1">야간 각성</div>
-                  <div className="text-lg font-bold text-orange-700">{result.detailedScores.awakening}/15</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-white/30 hover:scale-110 transition-all">
+                  <div className="text-xs text-white/70 mb-1">야간 각성</div>
+                  <div className="text-base sm:text-lg md:text-xl font-black text-orange-300">{result.detailedScores.awakening}/15</div>
                 </div>
-                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-yellow-200">
-                  <div className="text-xs text-gray-600 mb-1">아침 기분</div>
-                  <div className="text-lg font-bold text-yellow-700">{result.detailedScores.morning}/10</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-white/30 hover:scale-110 transition-all">
+                  <div className="text-xs text-white/70 mb-1">아침 기분</div>
+                  <div className="text-base sm:text-lg md:text-xl font-black text-yellow-300">{result.detailedScores.morning}/10</div>
                 </div>
-                <div className="bg-white rounded-lg p-2 sm:p-3 text-center border border-red-200">
-                  <div className="text-xs text-gray-600 mb-1">주간 졸음</div>
-                  <div className="text-lg font-bold text-red-700">{result.detailedScores.sleepiness}/10</div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-white/30 hover:scale-110 transition-all">
+                  <div className="text-xs text-white/70 mb-1">주간 졸음</div>
+                  <div className="text-base sm:text-lg md:text-xl font-black text-red-300">{result.detailedScores.sleepiness}/10</div>
                 </div>
               </div>
             </div>
 
             {/* 수면 효율성 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg border border-emerald-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">⚡ 수면 효율성</h3>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-gray-600">실제 수면 / 침상 시간</span>
-                <span className="text-lg font-bold text-emerald-700">{result.sleepEfficiency}%</span>
+            <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-emerald-500/20 to-teal-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-white/30 hover:scale-105 transition-all duration-300"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-3">⚡ 수면 효율성</h3>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs sm:text-sm text-white/70">실제 수면 / 침상 시간</span>
+                <span className="text-lg sm:text-xl md:text-2xl font-black text-emerald-200">{result.sleepEfficiency}%</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-3">
+              <div className="w-full bg-white/20 backdrop-blur-sm rounded-full h-4">
                 <div 
-                  className={`h-3 rounded-full transition-all duration-1000 ${
-                    result.sleepEfficiency >= 85 ? 'bg-emerald-500' :
-                    result.sleepEfficiency >= 75 ? 'bg-yellow-500' :
-                    'bg-red-500'
+                  className={`h-4 rounded-full transition-all duration-1000 ${
+                    result.sleepEfficiency >= 85 ? 'bg-gradient-to-r from-emerald-400 to-emerald-500' :
+                    result.sleepEfficiency >= 75 ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' :
+                    'bg-gradient-to-r from-red-400 to-red-500'
                   }`}
-                  style={{ width: `${result.sleepEfficiency}%` }}
+                  style={{ width: `${result.sleepEfficiency}%`, boxShadow: '0 0 20px rgba(255, 255, 255, 0.5)' }}
                 />
               </div>
-              <p className="text-xs text-gray-600 mt-2">
-                {result.sleepEfficiency >= 85 ? '우수한 수면 효율성' :
-                 result.sleepEfficiency >= 75 ? '양호한 수면 효율성' :
-                 '수면 효율성 개선 필요'}
+              <p className="text-xs sm:text-sm text-white/80 mt-3">
+                {result.sleepEfficiency >= 85 ? '✅ 우수한 수면 효율성' :
+                 result.sleepEfficiency >= 75 ? '👍 양호한 수면 효율성' :
+                 '⚠️ 수면 효율성 개선 필요'}
               </p>
             </div>
 
             {/* 수면 단계 분석 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-violet-50 to-purple-50 rounded-lg border border-violet-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">🧠 수면 단계 분석</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">깊은 수면 (Deep Sleep)</span>
-                  <span className="font-bold text-violet-700">{result.sleepStages.deep}시간</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="h-2 bg-violet-500 rounded-full" style={{ width: '20%' }} />
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">REM 수면 (꿈)</span>
-                  <span className="font-bold text-purple-700">{result.sleepStages.rem}시간</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="h-2 bg-purple-500 rounded-full" style={{ width: '23%' }} />
+            <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-violet-500/20 to-purple-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-white/30 hover:scale-105 transition-all duration-300"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-4">🧠 수면 단계 분석</h3>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-xs sm:text-sm text-white/70">깊은 수면 (Deep Sleep)</span>
+                    <span className="font-black text-sm sm:text-base text-violet-200">{result.sleepStages.deep}시간</span>
+                  </div>
+                  <div className="w-full bg-white/20 backdrop-blur-sm rounded-full h-3">
+                    <div className="h-3 bg-gradient-to-r from-violet-400 to-violet-500 rounded-full" style={{ width: '20%', boxShadow: '0 0 15px rgba(139, 92, 246, 0.5)' }} />
+                  </div>
                 </div>
                 
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">얕은 수면 (Light Sleep)</span>
-                  <span className="font-bold text-indigo-700">{result.sleepStages.light}시간</span>
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-xs sm:text-sm text-white/70">REM 수면 (꿈)</span>
+                    <span className="font-black text-sm sm:text-base text-purple-200">{result.sleepStages.rem}시간</span>
+                  </div>
+                  <div className="w-full bg-white/20 backdrop-blur-sm rounded-full h-3">
+                    <div className="h-3 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full" style={{ width: '23%', boxShadow: '0 0 15px rgba(168, 85, 247, 0.5)' }} />
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div className="h-2 bg-indigo-500 rounded-full" style={{ width: '57%' }} />
+                
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-xs sm:text-sm text-white/70">얕은 수면 (Light Sleep)</span>
+                    <span className="font-black text-sm sm:text-base text-indigo-200">{result.sleepStages.light}시간</span>
+                  </div>
+                  <div className="w-full bg-white/20 backdrop-blur-sm rounded-full h-3">
+                    <div className="h-3 bg-gradient-to-r from-indigo-400 to-indigo-500 rounded-full" style={{ width: '57%', boxShadow: '0 0 15px rgba(99, 102, 241, 0.5)' }} />
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* 건강 위험도 */}
-            <div className={`mb-6 p-2 md:p-4 rounded-lg border-2 ${
-              result.riskLevel === 'low' ? 'bg-green-50 border-green-300' :
-              result.riskLevel === 'low-medium' ? 'bg-blue-50 border-blue-300' :
-              result.riskLevel === 'medium' ? 'bg-yellow-50 border-yellow-300' :
-              result.riskLevel === 'medium-high' ? 'bg-orange-50 border-orange-300' :
-              'bg-red-50 border-red-300'
-            }`}>
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">🏥 건강 위험도</h3>
-              <p className={`font-semibold text-lg ${
-                result.riskLevel === 'low' ? 'text-green-700' :
-                result.riskLevel === 'low-medium' ? 'text-blue-700' :
-                result.riskLevel === 'medium' ? 'text-yellow-700' :
-                result.riskLevel === 'medium-high' ? 'text-orange-700' :
-                'text-red-700'
+            <div className={`mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 hover:scale-105 transition-all duration-300 ${
+              result.riskLevel === 'low' ? 'bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-green-400/50' :
+              result.riskLevel === 'low-medium' ? 'bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border-blue-400/50' :
+              result.riskLevel === 'medium' ? 'bg-gradient-to-br from-yellow-500/20 to-amber-500/20 border-yellow-400/50' :
+              result.riskLevel === 'medium-high' ? 'bg-gradient-to-br from-orange-500/20 to-red-500/20 border-orange-400/50' :
+              'bg-gradient-to-br from-red-500/20 to-rose-500/20 border-red-400/50'
+            }`}
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-3">🏥 건강 위험도</h3>
+              <p className={`font-black text-lg sm:text-xl md:text-2xl ${
+                result.riskLevel === 'low' ? 'text-green-200' :
+                result.riskLevel === 'low-medium' ? 'text-blue-200' :
+                result.riskLevel === 'medium' ? 'text-yellow-200' :
+                result.riskLevel === 'medium-high' ? 'text-orange-200' :
+                'text-red-200'
               }`}>
                 {result.healthRisk}
               </p>
               {result.riskLevel === 'high' && (
-                <p className="text-sm text-red-600 mt-2">
+                <p className="text-sm sm:text-base text-red-200 mt-3 px-3 py-2 bg-red-500/30 rounded-lg">
                   ⚠️ 전문의 상담을 권장합니다
                 </p>
               )}
             </div>
 
             {/* 수면 부채 */}
-            <div className={`mb-6 p-2 md:p-4 rounded-lg border-2 ${
-              result.sleepDebt.includes('부족') ? 'bg-red-50 border-red-300' :
-              result.sleepDebt.includes('과다') ? 'bg-orange-50 border-orange-300' :
-              'bg-green-50 border-green-300'
-            }`}>
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">💤 수면 부채</h3>
-              <p className={`font-semibold ${
-                result.sleepDebt.includes('부족') ? 'text-red-700' :
-                result.sleepDebt.includes('과다') ? 'text-orange-700' :
-                'text-green-700'
+            <div className={`mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 hover:scale-105 transition-all duration-300 ${
+              result.sleepDebt.includes('부족') ? 'bg-gradient-to-br from-red-500/20 to-rose-500/20 border-red-400/50' :
+              result.sleepDebt.includes('과다') ? 'bg-gradient-to-br from-orange-500/20 to-amber-500/20 border-orange-400/50' :
+              'bg-gradient-to-br from-green-500/20 to-emerald-500/20 border-green-400/50'
+            }`}
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-3">💤 수면 부채</h3>
+              <p className={`font-black text-lg sm:text-xl md:text-2xl ${
+                result.sleepDebt.includes('부족') ? 'text-red-200' :
+                result.sleepDebt.includes('과다') ? 'text-orange-200' :
+                'text-green-200'
               }`}>
                 {result.sleepDebt}
               </p>
             </div>
 
             {/* 이상적인 기상 시간 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">⏰ 추천 기상 시간</h3>
-              <div className="space-y-2">
+            <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-white/30 hover:scale-105 transition-all duration-300"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-4">⏰ 추천 기상 시간</h3>
+              <div className="space-y-2 sm:space-y-3">
                 {result.idealWakeTime.map((time: string, i: number) => (
-                  <div key={i} className="bg-white rounded p-3 text-sm font-semibold text-green-700">
-                    {time}
+                  <div key={i} className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 text-sm sm:text-base font-bold text-green-200 border border-white/30 hover:scale-105 transition-all">
+                    ⏰ {time}
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-green-700 mt-2">수면 사이클이 완료되는 시간에 일어나면 개운합니다</p>
+              <p className="text-xs sm:text-sm text-white/70 mt-3 sm:mt-4">💡 수면 사이클이 완료되는 시간에 일어나면 개운합니다</p>
             </div>
 
             {/* 조언 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">💡 수면 개선 조언</h3>
-              <div className="space-y-2">
+            <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-white/30 hover:scale-105 transition-all duration-300"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-4">💡 수면 개선 조언</h3>
+              <div className="space-y-2 sm:space-y-3">
                 {result.advice.map((adv: string, i: number) => (
-                  <div key={i} className="bg-white rounded p-3 text-sm text-gray-700">
+                  <div key={i} className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 text-xs sm:text-sm text-white/90 border border-white/30">
                     • {adv}
                   </div>
                 ))}
@@ -462,12 +541,16 @@ export default function SleepAnalyzer() {
 
             {/* 상세 개선 방안 */}
             {result.detailedAdvice.length > 0 && (
-              <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">🎯 상세 개선 방안</h3>
+              <div className="mb-6 sm:mb-8 p-4 sm:p-5 md:p-6 bg-gradient-to-br from-amber-500/20 to-yellow-500/20 backdrop-blur-xl rounded-xl sm:rounded-2xl border-2 border-white/30 hover:scale-105 transition-all duration-300"
+                style={{
+                  transform: 'perspective(1000px) translateZ(10px)',
+                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+                }}>
+                <h3 className="font-bold text-sm sm:text-base md:text-lg text-white mb-4">🎯 상세 개선 방안</h3>
                 <div className="space-y-3">
                   {result.detailedAdvice.map((adv: string, i: number) => (
-                    <div key={i} className="bg-white rounded-lg p-2 sm:p-3 text-sm text-gray-700 border-l-4 border-amber-400">
-                      <span className="font-medium text-amber-700">📋</span> {adv}
+                    <div key={i} className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 text-xs sm:text-sm text-white/90 border-l-4 border-amber-400">
+                      <span className="font-bold text-amber-200">📋</span> {adv}
                     </div>
                   ))}
                 </div>
@@ -475,186 +558,269 @@ export default function SleepAnalyzer() {
             )}
 
             <button
+        type="button"
               onClick={() => setResult(null)}
-              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="group relative w-full max-w-md mx-auto py-4 sm:py-5 md:py-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-black text-base sm:text-lg md:text-xl rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4), 0 0 60px rgba(168, 85, 247, 0.3)'
+              }}
             >
-              다시 분석하기
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer pointer-events-none"></div>
+              <span className="relative flex items-center justify-center gap-2 sm:gap-3 px-4">
+                <span className="text-xl sm:text-2xl md:text-3xl group-hover:rotate-180 transition-transform duration-500">🔄</span>
+                <span className="whitespace-nowrap">다시 분석하기</span>
+                <span className="text-lg sm:text-xl md:text-2xl group-hover:translate-x-2 transition-transform duration-300">→</span>
+              </span>
             </button>
           </section>
         </div>
+
+        <style jsx>{`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          
+          @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+          }
+          
+          @keyframes bounce-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+          }
+          
+          @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+          }
+          
+          .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out forwards;
+          }
+          
+          .animate-blob {
+            animation: blob 7s infinite;
+          }
+          
+          .animate-bounce-slow {
+            animation: bounce-slow 2s ease-in-out infinite;
+          }
+          
+          .animate-shimmer {
+            animation: shimmer 3s infinite;
+          }
+          
+          .animation-delay-2000 {
+            animation-delay: 2s;
+          }
+          
+          .animation-delay-4000 {
+            animation-delay: 4s;
+          }
+        `}</style>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50">
-      <div className="mx-auto max-w-[600px] px-4 py-6">
+    <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
+      {/* Animated Background Blobs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="mx-auto max-w-[600px] px-4 py-6 relative z-10">
         <div className="mb-4">
           
         </div>
 
-        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6">
-          <header className="text-center mb-6">
-            <h1 className="text-4xl font-bold text-indigo-700 mb-2">😴</h1>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">수면 패턴 분석기</h2>
-            <p className="text-gray-600">어제 수면을 분석하고 개선 방법을 찾아보세요</p>
+        <section className="bg-white/10 backdrop-blur-2xl rounded-2xl sm:rounded-3xl shadow-2xl p-5 sm:p-6 md:p-8 border-2 border-white/30 relative"
+          style={{
+            transform: 'perspective(1000px) rotateX(2deg)',
+            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), 0 0 100px rgba(99, 102, 241, 0.2), inset 0 0 100px rgba(255, 255, 255, 0.1)'
+          }}>
+          {/* Shimmering Overlay */}
+          <div className="absolute inset-0 rounded-2xl sm:rounded-3xl overflow-hidden pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
+          </div>
+
+          <header className="text-center mb-6 sm:mb-8 relative">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl mb-3 sm:mb-4 animate-bounce-slow"
+              style={{ textShadow: '0 0 20px rgba(99, 102, 241, 0.8)' }}>
+              😴
+            </h1>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 sm:mb-3 bg-gradient-to-r from-indigo-200 via-purple-200 to-blue-200 bg-clip-text text-transparent drop-shadow-2xl">
+              수면 패턴 분석기
+            </h2>
+            <p className="text-sm sm:text-base text-white/80">어제 수면을 분석하고 개선 방법을 찾아보세요</p>
           </header>
 
-          <div className="space-y-6">
-            <div className="grid grid-cols-3 gap-2">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">취침 시간</label>
-                <input
-                  type="time"
-                  value={data.bedTime}
-                  onChange={(e) => setData({...data, bedTime: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
+          <div className="space-y-5 sm:space-y-6 relative">
+            <div className="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-2 border-white/30 transition-all duration-300 group mb-8 sm:mb-10"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.1)'
+              }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-4">
+                <div className="flex flex-col items-center">
+                  <label className="block text-sm sm:text-base font-bold text-white mb-2 w-full text-center">🌙 취침 시간</label>
+                  <input
+                    type="time"
+                    value={data.bedTime}
+                    onChange={(e) => setData({...data, bedTime: e.target.value})}
+                    className="w-full max-w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-xl text-white font-bold text-center focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition-all"
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">기상 시간</label>
-                <input
-                  type="time"
-                  value={data.wakeTime}
-                  onChange={(e) => setData({...data, wakeTime: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                />
+                <div className="flex flex-col items-center">
+                  <label className="block text-sm sm:text-base font-bold text-white mb-2 w-full text-center">☀️ 기상 시간</label>
+                  <input
+                    type="time"
+                    value={data.wakeTime}
+                    onChange={(e) => setData({...data, wakeTime: e.target.value})}
+                    className="w-full max-w-full px-3 py-2.5 sm:px-4 sm:py-3 bg-white/20 backdrop-blur-sm border-2 border-white/30 rounded-xl text-white font-bold text-center focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition-all"
+                  />
+                </div>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                수면 품질 (1-10)
+            <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-2 border-white/30 hover:scale-105 transition-all duration-300">
+              <label className="block text-sm sm:text-base font-bold text-white mb-3 flex items-center justify-between">
+                <span>💤 수면 품질</span>
+                <span className="text-xl sm:text-2xl text-cyan-300">{data.sleepQuality}/10</span>
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={data.sleepQuality}
-                  onChange={(e) => setData({...data, sleepQuality: Number(e.target.value)})}
-                  className="flex-1"
-                />
-                <span className="text-2xl font-bold text-indigo-700 w-12 text-center">{data.sleepQuality}</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={data.sleepQuality}
+                onChange={(e) => setData({...data, sleepQuality: Number(e.target.value)})}
+                className="w-full h-3"
+              />
+              <div className="flex justify-between text-white/60 text-xs mt-2">
                 <span>매우 나쁨</span>
                 <span>완벽</span>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                꿈 빈도 (1-10)
+            <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-2 border-white/30 hover:scale-105 transition-all duration-300">
+              <label className="block text-sm sm:text-base font-bold text-white mb-3 flex items-center justify-between">
+                <span>💭 꿈 빈도</span>
+                <span className="text-xl sm:text-2xl text-pink-300">{data.dreamFrequency}/10</span>
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={data.dreamFrequency}
-                  onChange={(e) => setData({...data, dreamFrequency: Number(e.target.value)})}
-                  className="flex-1"
-                />
-                <span className="text-2xl font-bold text-purple-700 w-12 text-center">{data.dreamFrequency}</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={data.dreamFrequency}
+                onChange={(e) => setData({...data, dreamFrequency: Number(e.target.value)})}
+                className="w-full h-3"
+              />
+              <div className="flex justify-between text-white/60 text-xs mt-2">
                 <span>거의 없음</span>
                 <span>매우 많음</span>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                잠들기까지 걸린 시간 (분)
+            <div className="bg-gradient-to-br from-green-500/20 to-teal-500/20 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-2 border-white/30 hover:scale-105 transition-all duration-300">
+              <label className="block text-sm sm:text-base font-bold text-white mb-3 flex items-center justify-between">
+                <span>⏱️ 잠들기까지</span>
+                <span className="text-xl sm:text-2xl text-teal-300">{data.sleepLatency}분</span>
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="0"
-                  max="120"
-                  step="5"
-                  value={data.sleepLatency}
-                  onChange={(e) => setData({...data, sleepLatency: Number(e.target.value)})}
-                  className="flex-1"
-                />
-                <span className="text-2xl font-bold text-blue-700 w-16 text-center">{data.sleepLatency}분</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <input
+                type="range"
+                min="0"
+                max="120"
+                step="5"
+                value={data.sleepLatency}
+                onChange={(e) => setData({...data, sleepLatency: Number(e.target.value)})}
+                className="w-full h-3"
+              />
+              <div className="flex justify-between text-white/60 text-xs mt-2">
                 <span>즉시 잠듦</span>
                 <span>2시간 이상</span>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                야간 각성 횟수
+            <div className="bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-2 border-white/30 hover:scale-105 transition-all duration-300">
+              <label className="block text-sm sm:text-base font-bold text-white mb-3 flex items-center justify-between">
+                <span>🔄 야간 각성</span>
+                <span className="text-xl sm:text-2xl text-orange-300">{data.nightAwakenings}회</span>
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="0"
-                  max="10"
-                  value={data.nightAwakenings}
-                  onChange={(e) => setData({...data, nightAwakenings: Number(e.target.value)})}
-                  className="flex-1"
-                />
-                <span className="text-2xl font-bold text-orange-700 w-12 text-center">{data.nightAwakenings}회</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value={data.nightAwakenings}
+                onChange={(e) => setData({...data, nightAwakenings: Number(e.target.value)})}
+                className="w-full h-3"
+              />
+              <div className="flex justify-between text-white/60 text-xs mt-2">
                 <span>한 번도 안 깸</span>
                 <span>10회 이상</span>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                아침 기분 (1-10)
+            <div className="bg-gradient-to-br from-yellow-500/20 to-amber-500/20 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-2 border-white/30 hover:scale-105 transition-all duration-300">
+              <label className="block text-sm sm:text-base font-bold text-white mb-3 flex items-center justify-between">
+                <span>😊 아침 기분</span>
+                <span className="text-xl sm:text-2xl text-yellow-300">{data.morningMood}/10</span>
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={data.morningMood}
-                  onChange={(e) => setData({...data, morningMood: Number(e.target.value)})}
-                  className="flex-1"
-                />
-                <span className="text-2xl font-bold text-yellow-700 w-12 text-center">{data.morningMood}</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={data.morningMood}
+                onChange={(e) => setData({...data, morningMood: Number(e.target.value)})}
+                className="w-full h-3"
+              />
+              <div className="flex justify-between text-white/60 text-xs mt-2">
                 <span>매우 나쁨</span>
                 <span>완벽</span>
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                주간 졸음 정도 (1-10)
+            <div className="bg-gradient-to-br from-red-500/20 to-rose-500/20 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-2 border-white/30 hover:scale-105 transition-all duration-300">
+              <label className="block text-sm sm:text-base font-bold text-white mb-3 flex items-center justify-between">
+                <span>😴 주간 졸음</span>
+                <span className="text-xl sm:text-2xl text-rose-300">{data.daytimeSleepiness}/10</span>
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={data.daytimeSleepiness}
-                  onChange={(e) => setData({...data, daytimeSleepiness: Number(e.target.value)})}
-                  className="flex-1"
-                />
-                <span className="text-2xl font-bold text-red-700 w-12 text-center">{data.daytimeSleepiness}</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={data.daytimeSleepiness}
+                onChange={(e) => setData({...data, daytimeSleepiness: Number(e.target.value)})}
+                className="w-full h-3"
+              />
+              <div className="flex justify-between text-white/60 text-xs mt-2">
                 <span>전혀 안 졸림</span>
                 <span>매우 졸림</span>
               </div>
             </div>
 
             <button
+        type="button"
               onClick={analyzeSleep}
-              className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="group relative w-full max-w-md mx-auto py-4 sm:py-5 md:py-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-500 text-white font-black text-base sm:text-lg md:text-xl rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center"
+              style={{
+                transform: 'perspective(1000px) translateZ(10px)',
+                boxShadow: '0 20px 40px rgba(99, 102, 241, 0.4), 0 0 60px rgba(168, 85, 247, 0.3)'
+              }}
             >
-              수면 분석하기
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer pointer-events-none"></div>
+              <span className="relative flex items-center justify-center gap-2 sm:gap-3 px-4">
+                <span className="text-xl sm:text-2xl md:text-3xl animate-pulse">😴</span>
+                <span className="whitespace-nowrap">수면 분석하기</span>
+                <span className="text-lg sm:text-xl md:text-2xl group-hover:translate-x-2 transition-transform duration-300">→</span>
+              </span>
             </button>
           </div>
         </section>
@@ -662,6 +828,53 @@ export default function SleepAnalyzer() {
       {/* 제작자 서명 */}
       <AppFooter />
 
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        
+        .animate-bounce-slow {
+          animation: bounce-slow 2s ease-in-out infinite;
+        }
+        
+        .animate-shimmer {
+          animation: shimmer 3s infinite;
+        }
+        
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </main>
   );
 }

@@ -72,6 +72,7 @@ export default function FlashcardPage() {
           <div className="space-y-4 mb-8">
             {Object.keys(wordSets).map((setName) => (
               <button
+        type="button"
                 key={setName}
                 onClick={() => setSelectedSet(setName)}
                 className="w-full bg-white/10 backdrop-blur-lg hover:bg-white/20 rounded sm:rounded-lg md:rounded-2xl p-8 transition-all"
@@ -107,6 +108,7 @@ export default function FlashcardPage() {
             </div>
             <div className="space-y-3">
               <button
+        type="button"
                 onClick={() => {
                   setCurrentIndex(0);
                   setShowResult(false);
@@ -117,6 +119,7 @@ export default function FlashcardPage() {
                 다시 학습
               </button>
               <button
+        type="button"
                 onClick={() => {
                   setSelectedSet('');
                   setCurrentIndex(0);
@@ -143,6 +146,7 @@ export default function FlashcardPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 py-8 px-4">
       <div className="max-w-2xl mx-auto">
         <button
+        type="button"
           onClick={() => {
             setSelectedSet('');
             setCurrentIndex(0);
@@ -190,6 +194,7 @@ export default function FlashcardPage() {
         {/* 컨트롤 */}
         <div className="space-y-4">
           <button
+        type="button"
             onClick={toggleMemorized}
             className={`w-full px-6 py-4 rounded-xl font-bold text-xl transition-all ${
               memorized.has(currentIndex)
@@ -202,6 +207,7 @@ export default function FlashcardPage() {
 
           <div className="grid grid-cols-3 gap-2">
             <button
+        type="button"
               onClick={handlePrev}
               disabled={currentIndex === 0}
               className="bg-white/20 text-white px-6 py-4 rounded-xl font-bold disabled:opacity-50"
@@ -209,6 +215,7 @@ export default function FlashcardPage() {
               ← 이전
             </button>
             <button
+        type="button"
               onClick={handleNext}
               className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-4 rounded-xl font-bold"
             >

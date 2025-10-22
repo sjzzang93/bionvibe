@@ -201,6 +201,7 @@ export default function CryptoKimchiPremium() {
           <div className="grid grid-cols-3 sm:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-0 sm:gap-1.5 md:gap-3">
             {CRYPTO_LIST.map((crypto) => (
               <button
+        type="button"
                 key={crypto.id}
                 onClick={() => setSelectedCrypto(crypto)}
                 className={`py-4 px-4 rounded-xl font-bold transition-all ${
@@ -216,6 +217,7 @@ export default function CryptoKimchiPremium() {
           </div>
 
           <button
+        type="button"
             onClick={fetchCryptoData}
             disabled={loading}
             className="mt-4 w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-500 text-white py-3 rounded-xl font-bold transition-all"
