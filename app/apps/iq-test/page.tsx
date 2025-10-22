@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import AppFooter from "@/app/components/AppFooter";
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from "@/app/components/RelatedApps";
 
 interface Question {
@@ -246,17 +247,6 @@ export default function IQTest() {
         </div>
 
         <div className="relative mx-auto max-w-[520px] px-4 py-8 sm:py-12">
-          {/* Back Button */}
-          <Link 
-            href="/"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-all duration-300 mb-6 sm:mb-8 group"
-          >
-            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            <span className="font-medium">돌아가기</span>
-          </Link>
-
           {/* 결과 카드 - Glassmorphism + 3D */}
           <section 
             className="relative bg-white/10 dark:bg-white/5 backdrop-blur-2xl rounded-3xl sm:rounded-[2rem] shadow-2xl p-6 sm:p-8 md:p-10 border border-white/20 hover:border-white/30 transition-all duration-500"
@@ -439,17 +429,6 @@ export default function IQTest() {
       </div>
 
       <div className="relative mx-auto max-w-[520px] px-4 py-8 sm:py-12">
-        {/* Back Button */}
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-all duration-300 mb-6 sm:mb-8 group"
-        >
-          <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          <span className="font-medium">돌아가기</span>
-        </Link>
-
         {/* 문제 카드 - Glassmorphism + 3D */}
         <section 
           className="relative bg-white/10 backdrop-blur-2xl rounded-3xl sm:rounded-[2rem] shadow-2xl p-6 sm:p-8 md:p-10 border border-white/20 hover:border-white/30 transition-all duration-500"
@@ -576,9 +555,6 @@ export default function IQTest() {
           animation-delay: 4s;
         }
       `}</style>
-      
-      {/* 제작자 서명 */}
-      <AppFooter />
     </main>
   );
 }
