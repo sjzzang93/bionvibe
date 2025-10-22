@@ -103,3 +103,5 @@ console.log(`\n✅ 업데이트 완료: ${updatedCount}개 경고등`);
 console.log(`📁 백업: lib/car-warning-lights-data.json.backup`);
 
 
+
+

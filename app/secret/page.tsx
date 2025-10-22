@@ -2,16 +2,38 @@
 
 import { getHiddenApps } from '@/lib/getApps';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SecretPage() {
   const [unlocked, setUnlocked] = useState(false);
   const [password, setPassword] = useState('');
   const hiddenApps = getHiddenApps();
 
+  // 페이지 로드 시 세션 확인
+  useEffect(() => {
+    const savedSession = localStorage.getItem('secret_session');
+    if (savedSession) {
+      const sessionData = JSON.parse(savedSession);
+      const now = Date.now();
+      const thirtyMinutes = 30 * 60 * 1000; // 30분
+      
+      // 30분 이내면 자동 로그인
+      if (now - sessionData.timestamp < thirtyMinutes) {
+        setUnlocked(true);
+      } else {
+        // 세션 만료
+        localStorage.removeItem('secret_session');
+      }
+    }
+  }, []);
+
   const handleUnlock = () => {
     if (password === '123!8314') {
       setUnlocked(true);
+      // 세션 저장 (30분 유효)
+      localStorage.setItem('secret_session', JSON.stringify({
+        timestamp: Date.now()
+      }));
     } else {
       alert('❌ 비밀번호가 틀렸습니다!');
       setPassword('');
@@ -165,6 +187,12 @@ export default function SecretPage() {
               className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-orange-500/50 transition-all"
             >
               📖 개발자 용어 사전
+            </Link>
+            <Link
+              href="/secret/guestbook"
+              className="bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-amber-500/50 transition-all"
+            >
+              📝 방명록 관리
             </Link>
           </div>
         </div>

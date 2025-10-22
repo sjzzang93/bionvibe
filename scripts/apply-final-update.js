@@ -50,3 +50,5 @@ console.log(`\n🔍 업데이트된 경고등 ID 목록:`);
 console.log([...updated].sort().join(', '));
 
 
+
+

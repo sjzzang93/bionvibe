@@ -29,16 +29,16 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors" suppressHydrationWarning>
-      {/* 비온타키 채팅 */}
+      {/* 비온 방명록 */}
       <MainChat />
 
       {/* Apps Grid */}
       <HomeContent />
 
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 border-t border-gray-200 dark:border-gray-800 py-12 px-4">
+      <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-base text-gray-600 dark:text-gray-300 mb-2 font-medium">
+          <p className="text-base text-gray-700 dark:text-white mb-2 font-medium">
             Creating light for everyday life
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">

@@ -79,17 +79,22 @@ export default function ContactPage() {
         </Link>
 
         <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
-          문의하기
+          🎉 이벤트 신청
         </h1>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Contact Form */}
           <div>
             <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-              BION에 대한 문의사항, 제안, 피드백이 있으시다면 
-              아래 양식을 통해 연락해주세요. 
-              최대한 빠르게 답변드리겠습니다!
+              요청하고 싶은 웹앱 또는 프로그램을 작성해주세요!<br />
+              방명록을 남기신 후 아래 양식으로 신청하시면<br />
+              원하시는 기능을 개발해드립니다. 🎯
             </p>
+            <div className="bg-orange-50 dark:bg-orange-900/20 border-2 border-orange-300 dark:border-orange-700 rounded-xl p-4 mb-6">
+              <p className="text-sm text-orange-800 dark:text-orange-200 leading-relaxed">
+                💡 <strong>예시:</strong> 코인자동매매 프로그램, 주식 분석 도구, 식당 이벤트용 QR, 와이파이 QR, 네이버리뷰 QR 등
+              </p>
+            </div>
 
             {error && (
               <div className="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 dark:border-red-600 rounded-xl p-4 mb-4 text-center">

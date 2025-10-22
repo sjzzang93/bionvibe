@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useSupabase } from '@/lib/supabase-provider';
+import Image from 'next/image';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 
 interface Message {
@@ -51,28 +52,11 @@ export default function MainChat() {
   // 메시지 로드 및 실시간 구독
   useEffect(() => {
     
-    // 24시간 지난 메시지 삭제 (Supabase Function 호출)
-    const deleteOldMessages = async () => {
-      try {
-        const { error } = await supabase.rpc('delete_old_chat_messages');
-        if (error) {
-          console.log('오래된 메시지 삭제 중 오류:', error.message);
-        } else {
-          console.log('✅ 24시간 지난 메시지 삭제 완료');
-        }
-      } catch (err) {
-        console.log('메시지 정리 중 오류:', err);
-      }
-    };
-    
-    // 최근 24시간 이내 메시지만 로드
+    // 모든 메시지 로드
     const loadMessages = async () => {
-      const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-      
       const { data, error } = await supabase
         .from('chat_messages')
         .select('*')
-        .gte('created_at', twentyFourHoursAgo)  // 24시간 이내 메시지만
         .order('created_at', { ascending: false })
         .limit(50);
 
@@ -86,8 +70,8 @@ export default function MainChat() {
       }
     };
 
-    // 먼저 오래된 메시지 삭제 후 로드
-    deleteOldMessages().then(() => loadMessages());
+    // 메시지 로드
+    loadMessages();
 
     // 실시간 구독
     const channel = supabase
@@ -112,14 +96,14 @@ export default function MainChat() {
         // 프로덕션에서만 중요한 로그 출력
         if (process.env.NODE_ENV === 'production') {
           if (status === 'SUBSCRIBED') {
-            console.log('✅ 실시간 채팅 연결 성공!');
+            console.log('✅ 실시간 방명록 연결 성공!');
           } else if (status === 'CHANNEL_ERROR') {
             console.error('❌ 채널 연결 실패');
           }
         } else {
           // 개발 환경: SUBSCRIBED만 조용히 로그
           if (status === 'SUBSCRIBED') {
-            console.log('💬 채팅 연결됨');
+            console.log('📝 방명록 연결됨');
           }
           // CHANNEL_ERROR는 Fast Refresh 때문이므로 무시
         }
@@ -244,61 +228,40 @@ export default function MainChat() {
         {/* 헤더 */}
         <div className="text-center mb-3">
           <div className="flex items-center justify-center gap-2 mb-1">
-            {/* BION 전구 로고 */}
-            <div className="relative w-10 h-10 bg-gradient-to-br from-gray-700 via-gray-600 to-gray-700 dark:from-gray-600 dark:via-gray-500 dark:to-gray-600 rounded-xl flex items-center justify-center shadow-2xl group hover:shadow-amber-500/50 transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
-              <svg 
-                viewBox="0 0 24 24" 
-                className="w-6 h-6 relative z-10 group-hover:scale-110 transition-transform duration-300"
-                fill="none"
-              >
-                <g className="animate-pulse">
-                  <line x1="12" y1="2" x2="12" y2="4" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="12" y1="20" x2="12" y2="22" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="4" y1="12" x2="2" y2="12" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="22" y1="12" x2="20" y2="12" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="6.34" y1="6.34" x2="4.93" y2="4.93" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="19.07" y1="19.07" x2="17.66" y2="17.66" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                </g>
-                <circle cx="12" cy="12" r="4" fill="#FEF3C7" opacity="0.3"/>
-                <circle cx="12" cy="12" r="3" fill="#FCD34D"/>
-                <circle cx="12" cy="12" r="2" fill="#FFFBEB"/>
-              </svg>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black flex items-center gap-1">
-              <span className="bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">BION</span>
-              <span className="text-gray-900 dark:text-gray-100">Talk</span>
+            <h2 className="text-2xl sm:text-3xl font-black flex items-center gap-2" style={{ fontFamily: 'cursive' }}>
+              <span className="text-orange-600 dark:text-orange-400">BION 방명록</span>
+              <span className="text-orange-600 dark:text-orange-400">📖</span>
             </h2>
           </div>
-          <p className="text-xs text-gray-600 dark:text-gray-400">
+          <p className="text-xs text-orange-700 dark:text-orange-300 font-semibold">
             {isNicknameSet ? (
               <>
-                지금 <span className="font-bold text-gray-700 dark:text-gray-300">{onlineCount}명</span>이 대화 중이에요!
+                💝 지금 <span className="font-bold text-orange-600 dark:text-orange-400">{onlineCount}명</span>이 함께해요!
               </>
             ) : (
-              '실시간으로 대화할 수 있는 공간이에요!'
+              '✨ 추억을 남겨주세요! 일촌신청 환영 ✨'
             )}
           </p>
         </div>
 
-        {/* 채팅 영역 */}
-        <div className="max-w-lg mx-auto bg-white dark:bg-gray-800 shadow-xl overflow-hidden border-4 border-gray-300 dark:border-gray-700">
-          {/* 채팅 헤더 */}
-          <div className="bg-gradient-to-r from-gray-700 to-gray-600 dark:from-gray-800 dark:to-gray-700 p-3 border-b-2 border-gray-500 dark:border-gray-600">
+        {/* 방명록 영역 - 싸이월드 감성 */}
+        <div className="max-w-lg mx-auto bg-amber-50/80 dark:bg-orange-900/20 shadow-2xl overflow-hidden border-4 border-orange-200 dark:border-orange-800">
+          {/* 방명록 헤더 - 싸이월드 스타일 */}
+          <div className="bg-orange-400 dark:bg-orange-700 p-4 border-b-4 border-white/50">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-lg animate-pulse">
-                  💬
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-xl shadow-lg">
+                    <span style={{ transform: 'scaleX(-1)', display: 'inline-block' }}>🐿️</span>
+                  </div>
                 </div>
                 <div suppressHydrationWarning>
-                  <h3 className="font-black text-base flex items-center gap-1">
-                    <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent">BION</span>
-                    <span className="text-white">Talk</span>
+                  <h3 className="font-black text-lg flex items-center gap-1.5 text-white" style={{ fontFamily: 'cursive' }}>
+                    <span>BION 방명록</span>
+                    <span className="text-xl">📖</span>
                   </h3>
-                  <p className="text-[10px] text-white/90" suppressHydrationWarning>
-                    {isNicknameSet ? `${nickname}님 접속 중` : '관전 중 · 참여하려면 닉네임 입력!'}
+                  <p className="text-[10px] text-white/90 font-semibold" suppressHydrationWarning>
+                    {isNicknameSet ? `🌸 ${nickname}님 환영해요!` : '💝 일촌이 되어주세요!'}
                   </p>
                 </div>
               </div>
@@ -312,17 +275,17 @@ export default function MainChat() {
                         setNickname('');
                       }
                     }}
-                    className="px-2 py-1 bg-white/20 hover:bg-white/30 text-white text-xs rounded font-bold transition-all"
+                    className="px-3 py-1.5 bg-white hover:bg-orange-100 text-orange-600 text-xs rounded-full font-bold shadow-md transition-all border-2 border-orange-300"
                   >
-                    닉네임 변경
+                    ✏️ 변경
                   </button>
                 )}
                 <button
                   onClick={() => setIsCollapsed(!isCollapsed)}
-                  className="px-2 py-1 bg-white/20 hover:bg-white/30 text-white text-base rounded font-bold transition-all"
-                  aria-label={isCollapsed ? '채팅 펼치기' : '채팅 접기'}
+                  className="px-3 py-1.5 bg-white hover:bg-orange-100 text-orange-600 text-sm rounded-full font-bold shadow-md transition-all border-2 border-orange-300"
+                  aria-label={isCollapsed ? '방명록 펼치기' : '방명록 접기'}
                 >
-                  {isCollapsed ? '▼' : '▲'}
+                  {isCollapsed ? '📖' : '📕'}
                 </button>
               </div>
             </div>
@@ -332,9 +295,11 @@ export default function MainChat() {
           {!isCollapsed && (
           <div 
             ref={messagesContainerRef}
-            className="h-[450px] overflow-y-auto p-2 space-y-1.5 bg-gradient-to-b from-gray-50/50 to-white dark:from-gray-900/50 dark:to-gray-800"
+            className="h-[300px] overflow-y-auto p-4 space-y-3 bg-amber-50/90 dark:bg-orange-900/10"
             style={{
-              backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(148, 163, 184, 0.03) 20px, rgba(148, 163, 184, 0.03) 40px)'
+              backgroundImage: `
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fb923c' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+              `
             }}
             suppressHydrationWarning
           >
@@ -348,29 +313,36 @@ export default function MainChat() {
                 </p>
               </div>
             ) : (
-              // 메시지 목록
-              messages.map((msg) => (
+              // 메시지 목록 - 포스트잇 스타일
+              messages.map((msg, index) => (
                 <div
                   key={msg.id}
-                  className={`flex flex-col ${msg.nickname === nickname ? 'items-end' : 'items-start'}`}
+                  className={`relative bg-gradient-to-br ${
+                    msg.nickname === nickname
+                      ? 'from-orange-100 to-amber-100 dark:from-orange-900/40 dark:to-amber-900/40 border-orange-300 dark:border-orange-700'
+                      : 'from-yellow-50 to-amber-50 dark:from-yellow-900/30 dark:to-amber-900/30 border-yellow-300 dark:border-yellow-700'
+                  } rounded-lg p-4 shadow-md border-2 hover:shadow-lg transition-all`}
+                  style={{
+                    transform: `rotate(${index % 2 === 0 ? '0.2deg' : '-0.2deg'})`,
+                  }}
                 >
-                  <div className="flex items-center gap-1 mb-0.5 px-0.5">
-                    <span className="text-[11px] font-bold text-gray-700 dark:text-gray-300">
-                      {msg.nickname === nickname ? '나' : msg.nickname}
+                  {/* 압정 효과 */}
+                  <div className="absolute -top-2 left-4 w-4 h-4 bg-red-400 dark:bg-red-500 rounded-full shadow-lg"></div>
+                  
+                  {/* 작성자 & 시간 */}
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-bold text-orange-800 dark:text-orange-200">
+                      {msg.nickname === nickname ? '나 📝' : `${msg.nickname} 🐿️`}
                     </span>
-                    <span className="text-[9px] text-gray-500 dark:text-gray-400">
+                    <span className="text-[10px] text-orange-600 dark:text-orange-400">
                       {formatTime(msg.created_at)}
                     </span>
                   </div>
-                  <div
-                    className={`max-w-[75%] px-2.5 py-1.5 shadow-sm border ${
-                      msg.nickname === nickname
-                        ? 'bg-gradient-to-r from-gray-600 to-gray-700 dark:from-gray-700 dark:to-gray-800 text-white border-gray-500 dark:border-gray-600'
-                        : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-600'
-                    }`}
-                  >
-                    <p className="text-xs break-words leading-tight">{msg.message}</p>
-                  </div>
+                  
+                  {/* 메시지 내용 */}
+                  <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed break-words whitespace-pre-wrap">
+                    {msg.message}
+                  </p>
                 </div>
               ))
             )}
@@ -395,7 +367,7 @@ export default function MainChat() {
                       sendMessage();
                     }
                   }}
-                  placeholder="메시지를 입력하세요..."
+                  placeholder="방명록을 작성하세요"
                   maxLength={200}
                   className="flex-1 px-3 py-2 text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-300 dark:focus:ring-red-500 border border-white dark:border-gray-600"
                 />
@@ -446,13 +418,19 @@ export default function MainChat() {
         </div>
 
         {/* 안내 문구 */}
-        <div className="mt-4 text-center space-y-1">
-          <p className="text-xs text-gray-600 dark:text-gray-400">
-            💡 <span className="font-semibold">BION Talk</span>에서 자유롭게 대화를 나눠보세요!
-          </p>
-          <p className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">
-            🕐 채팅 메시지는 24시간 후 자동으로 삭제됩니다
-          </p>
+        <div className="mt-4 text-center space-y-2 px-4">
+          <div className="bg-amber-100/80 dark:bg-orange-900/30 rounded-lg p-3 border-2 border-orange-300 dark:border-orange-700">
+            <p className="text-sm font-bold text-orange-600 dark:text-orange-400 mb-1">
+              🎉 이벤트 안내
+            </p>
+            <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+              방명록 작성하시고 <span className="font-bold text-orange-600 dark:text-orange-400">Event 버튼</span>으로 이벤트 참여하시면<br />
+              원하시는 <span className="font-bold text-orange-700 dark:text-orange-300">웹앱 추가</span> 또는 <span className="font-bold text-orange-700 dark:text-orange-300">프로그램</span>으로 만들어드립니다!
+            </p>
+            <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-1 italic">
+              (ex: 코인자동매매 프로그램)
+            </p>
+          </div>
         </div>
       </div>
     </section>

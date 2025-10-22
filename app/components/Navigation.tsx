@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export function Navigation() {
   const router = useRouter();
@@ -73,7 +74,7 @@ export function Navigation() {
   };
 
   const handleContactClick = (e: React.MouseEvent) => {
-    // 로고 7번 클릭 완료된 상태에서 문의하기 클릭 시 Secret 페이지로
+    // 로고 7번 클릭 완료된 상태에서 이벤트 신청 클릭 시 Secret 페이지로
     if (logoClicked7Times) {
       e.preventDefault();
       setLogoClicked7Times(false);
@@ -82,63 +83,72 @@ export function Navigation() {
       }
       router.push('/secret');
     } else {
-      // 일반적인 경우 문의하기 페이지로
+      // 일반적인 경우 이벤트 신청 페이지로 (contact 페이지 활용)
       e.preventDefault();
       router.push('/contact');
     }
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border-b-2 border-black dark:border-gray-700 shadow-sm transition-colors">
+    <nav className="sticky top-0 z-50 bg-white/70 dark:bg-black/90 backdrop-blur-xl border-b-2 border-black dark:border-gray-700 shadow-sm transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <button 
             onClick={handleLogoClick}
-            className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer"
+            className="flex items-center gap-0.5 hover:opacity-80 transition-opacity cursor-pointer"
           >
-            <div className="relative w-12 h-12 bg-gradient-to-br from-gray-700 via-gray-600 to-gray-700 dark:from-gray-600 dark:via-gray-500 dark:to-gray-600 rounded-xl flex items-center justify-center shadow-2xl group hover:shadow-amber-500/50 transition-all duration-500">
-              {/* Warm glow effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
-              
-              {/* Light icon */}
-              <svg 
-                viewBox="0 0 24 24" 
-                className="w-7 h-7 relative z-10 group-hover:scale-110 transition-transform duration-300"
-                fill="none"
-              >
-                {/* Light rays */}
-                <g className="animate-pulse">
-                  <line x1="12" y1="2" x2="12" y2="4" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="12" y1="20" x2="12" y2="22" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="4" y1="12" x2="2" y2="12" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="22" y1="12" x2="20" y2="12" stroke="#FCD34D" strokeWidth="2" strokeLinecap="round"/>
-                  <line x1="6.34" y1="6.34" x2="4.93" y2="4.93" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="19.07" y1="19.07" x2="17.66" y2="17.66" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                  <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" stroke="#FBBF24" strokeWidth="1.5" strokeLinecap="round"/>
-                </g>
-                
-                {/* Center glow */}
-                <circle cx="12" cy="12" r="4" fill="#FEF3C7" opacity="0.3"/>
-                <circle cx="12" cy="12" r="3" fill="#FCD34D"/>
-                <circle cx="12" cy="12" r="2" fill="#FFFBEB"/>
-              </svg>
+            {/* BION 로고 */}
+            <div className="relative w-14 h-14 bg-transparent dark:bg-black rounded-lg p-1 flex items-center justify-center transition-colors">
+              <Image
+                src="/logo.png"
+                alt="BION Logo"
+                width={52}
+                height={52}
+                className="dark:hidden animate-bounce"
+                style={{ animationDuration: '2s' }}
+                priority
+              />
+              <video
+                src="/logo-dark.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="hidden dark:block w-[40px] h-[40px] object-cover"
+              />
             </div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
               BION
             </h1>
           </button>
           <div className="flex items-center gap-2 sm:gap-4">
-            {/* 문의하기 버튼 */}
+            {/* 이벤트 버튼 */}
             <button
               onClick={handleContactClick}
-              className="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-500 dark:to-rose-500 hover:from-red-700 hover:to-rose-700 dark:hover:from-red-600 dark:hover:to-rose-600 text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105"
+              className="relative flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-500 dark:to-rose-500 hover:from-red-700 hover:to-rose-700 dark:hover:from-red-600 dark:hover:to-rose-600 text-white rounded-lg font-medium text-xs sm:text-sm transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 overflow-hidden animate-pulse"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              {/* 반짝반짝 효과 */}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine"></span>
+              
+              <svg className="w-4 h-4 relative z-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
-              <span className="hidden sm:inline">문의하기</span>
+              <span className="relative z-10">Event</span>
             </button>
+            
+            <style jsx>{`
+              @keyframes shine {
+                0% {
+                  transform: translateX(-100%) skewX(-15deg);
+                }
+                100% {
+                  transform: translateX(200%) skewX(-15deg);
+                }
+              }
+              .animate-shine {
+                animation: shine 3s infinite;
+              }
+            `}</style>
 
             {/* 다크모드 토글 */}
             <button
@@ -164,7 +174,7 @@ export function Navigation() {
                 <span className={`absolute inset-0 ${logoClicked7Times ? 'bg-red-400' : 'bg-amber-400'} rounded-full animate-ping`}></span>
                 <span className={`relative inline-block w-2 h-2 ${logoClicked7Times ? 'bg-red-500 shadow-red-500/50' : 'bg-amber-500 shadow-amber-500/50'} rounded-full shadow-lg`}></span>
               </span>
-              <span className="font-medium">Light On</span>
+              <span className="font-medium">Life On</span>
             </div>
           </div>
         </div>

@@ -149,3 +149,5 @@ console.log(`\n✅ 업데이트 완료: ${updatedCount}개 성공, ${notFoundCou
 console.log(`📁 백업: lib/car-warning-lights-data.json.backup`);
 
 
+
+
