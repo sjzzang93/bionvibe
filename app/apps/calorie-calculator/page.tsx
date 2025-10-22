@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
-import AppFooter from '@/app/components/AppFooter';
-import Link from 'next/link';
 
 interface MealPlan {
   breakfast: { name: string; calories: number; items: string[] };
