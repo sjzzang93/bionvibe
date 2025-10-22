@@ -9,6 +9,7 @@ interface PremiumCardProps {
   gradient?: boolean;
   depth?: boolean;
   style?: React.CSSProperties;
+  title?: string;
 }
 
 export default function PremiumCard({ 
@@ -17,7 +18,8 @@ export default function PremiumCard({
   hover = false,
   gradient = false,
   depth = true,
-  style: customStyle
+  style: customStyle,
+  title
 }: PremiumCardProps) {
   return (
     <div 
@@ -49,6 +51,11 @@ export default function PremiumCard({
       )}
       
       <div className="relative z-10" style={{ transform: 'translateZ(20px)' }}>
+        {title && (
+          <h3 className="text-lg sm:text-xl font-bold mb-4 text-gray-900 dark:text-white">
+            {title}
+          </h3>
+        )}
         {children}
       </div>
 
