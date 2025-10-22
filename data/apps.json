@@ -92,8 +92,7 @@
       "createdAt": "2025-01-20",
       "relatedApps": [
         "focus-timer",
-        "dday-counter",
-        "phone-usage-analyzer"
+        "dday-counter"
       ]
     },
     {
@@ -107,8 +106,6 @@
       "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&auto=format&fit=crop",
       "createdAt": "2025-01-20",
       "relatedApps": [
-        "income-tax-calculator",
-        "compound-calculator",
         "lotto-generator"
       ]
     },
@@ -142,22 +139,6 @@
         "typing-speed-test",
         "study-cursor-prompts",
         "games-multiplication"
-      ]
-    },
-    {
-      "id": "phone-usage-analyzer",
-      "name": "스마트폰 사용 분석",
-      "slug": "phone-usage-analyzer",
-      "icon": "📱",
-      "description": "스마트폰 중독도 분석",
-      "categoryId": "learning-tools",
-      "url": "/apps/phone-usage-analyzer",
-      "image": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&auto=format&fit=crop",
-      "createdAt": "2025-01-20",
-      "relatedApps": [
-        "habit-tracker",
-        "focus-timer",
-        "eye-test"
       ]
     },
     {
@@ -219,7 +200,6 @@
       "image": "https://images.unsplash.com/photo-1574169208507-84376144848b?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
       "relatedApps": [
-        "phone-usage-analyzer",
         "reflex-test",
         "sleep-analyzer"
       ]
@@ -302,38 +282,6 @@
         "calorie-calculator",
         "water-intake",
         "sleep-analyzer"
-      ]
-    },
-    {
-      "id": "salary-divider",
-      "name": "월급 쪼개기",
-      "slug": "salary-divider",
-      "icon": "💰",
-      "description": "월급 예산 계획",
-      "categoryId": "money-calc",
-      "url": "/apps/salary-divider",
-      "image": "https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "income-tax-calculator",
-        "compound-calculator",
-        "finance-emergency-fund"
-      ]
-    },
-    {
-      "id": "income-tax-calculator",
-      "name": "소득세 계산기",
-      "slug": "income-tax-calculator",
-      "icon": "🧾",
-      "description": "소득세 자동 계산",
-      "categoryId": "money-calc",
-      "url": "/apps/income-tax-calculator",
-      "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "salary-divider",
-        "compound-calculator",
-        "crypto-calculator"
       ]
     },
     {
@@ -595,38 +543,6 @@
       "createdAt": "2025-10-20"
     },
     {
-      "id": "finance-emergency-fund",
-      "name": "비상금 계산",
-      "slug": "finance-emergency-fund",
-      "icon": "🏦",
-      "description": "비상금 서비스",
-      "categoryId": "money-calc",
-      "url": "/apps/finance-emergency-fund",
-      "image": "https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "salary-divider",
-        "compound-calculator",
-        "finance-loan-refinance"
-      ]
-    },
-    {
-      "id": "finance-loan-refinance",
-      "name": "대출 갈아타기",
-      "slug": "finance-loan-refinance",
-      "icon": "🏠",
-      "description": "대출 서비스",
-      "categoryId": "money-calc",
-      "url": "/apps/finance-loan-refinance",
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "finance-emergency-fund",
-        "compound-calculator",
-        "credit-card-optimizer"
-      ]
-    },
-    {
       "id": "mood-cheer-up",
       "name": "기분 전환",
       "slug": "mood-cheer-up",
@@ -746,38 +662,6 @@
       "createdAt": "2025-10-20"
     },
     {
-      "id": "compound-calculator",
-      "name": "복리 계산기",
-      "slug": "compound-calculator",
-      "icon": "📈",
-      "description": "빠른 계산",
-      "categoryId": "money-calc",
-      "url": "/apps/compound-calculator",
-      "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "salary-divider",
-        "income-tax-calculator",
-        "credit-card-optimizer"
-      ]
-    },
-    {
-      "id": "credit-card-optimizer",
-      "name": "카드 최적화",
-      "slug": "credit-card-optimizer",
-      "icon": "💳",
-      "description": "카드 서비스",
-      "categoryId": "money-calc",
-      "url": "/apps/credit-card-optimizer",
-      "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20",
-      "relatedApps": [
-        "compound-calculator",
-        "salary-divider",
-        "finance-loan-refinance"
-      ]
-    },
-    {
       "id": "utility-electricity-calculator",
       "name": "전기요금 계산기",
       "slug": "utility-electricity-calculator",
@@ -787,11 +671,7 @@
       "url": "/apps/utility-electricity-calculator",
       "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
-      "relatedApps": [
-        "salary-divider",
-        "credit-card-optimizer",
-        "finance-emergency-fund"
-      ]
+      "relatedApps": []
     },
     {
       "id": "compass",
