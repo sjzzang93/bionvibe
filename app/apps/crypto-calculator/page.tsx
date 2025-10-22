@@ -19,6 +19,15 @@ interface PriceData {
   exchangeRate: number;
 }
 
+interface Investment {
+  id: string;
+  asset: 'bitcoin' | 'gold';
+  amount: number;
+  price: number;
+  quantity: number;
+  date: string;
+}
+
 export default function BitcoinVsGold() {
   const [mounted, setMounted] = useState(false);
   const [priceData, setPriceData] = useState<PriceData | null>(null);
@@ -26,6 +35,13 @@ export default function BitcoinVsGold() {
   const [investAmount, setInvestAmount] = useState(10000000); // 1000만원
   const [selectedPeriod, setSelectedPeriod] = useState('1y'); // 1년
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  
+  // 가상 투자 관련
+  const [virtualBalance, setVirtualBalance] = useState(100000000); // 1억원
+  const [investments, setInvestments] = useState<Investment[]>([]);
+  const [showInvestModal, setShowInvestModal] = useState(false);
+  const [investAsset, setInvestAsset] = useState<'bitcoin' | 'gold'>('bitcoin');
+  const [investMoney, setInvestMoney] = useState(1000000); // 100만원
 
   // CSS 애니메이션 추가
   useEffect(() => {
@@ -68,6 +84,29 @@ export default function BitcoinVsGold() {
       }
     }
   }, []);
+
+  // localStorage에서 투자 데이터 불러오기
+  useEffect(() => {
+    if (!mounted) return;
+    
+    const savedBalance = localStorage.getItem('virtualBalance');
+    const savedInvestments = localStorage.getItem('investments');
+    
+    if (savedBalance) {
+      setVirtualBalance(Number(savedBalance));
+    }
+    if (savedInvestments) {
+      setInvestments(JSON.parse(savedInvestments));
+    }
+  }, [mounted]);
+
+  // localStorage에 투자 데이터 저장
+  useEffect(() => {
+    if (!mounted) return;
+    
+    localStorage.setItem('virtualBalance', virtualBalance.toString());
+    localStorage.setItem('investments', JSON.stringify(investments));
+  }, [virtualBalance, investments, mounted]);
 
   // 데이터 가져오기
   useEffect(() => {
@@ -118,6 +157,76 @@ export default function BitcoinVsGold() {
     return () => clearInterval(interval);
   }, [mounted]);
 
+  // 가상 투자 함수
+  const handleInvest = () => {
+    if (!priceData) return;
+    if (investMoney > virtualBalance) {
+      alert('잔액이 부족합니다!');
+      return;
+    }
+
+    const price = investAsset === 'bitcoin' ? priceData.bitcoin.current : priceData.gold.buy;
+    const quantity = investMoney / price;
+
+    const newInvestment: Investment = {
+      id: Date.now().toString(),
+      asset: investAsset,
+      amount: investMoney,
+      price,
+      quantity,
+      date: new Date().toISOString()
+    };
+
+    setInvestments([...investments, newInvestment]);
+    setVirtualBalance(virtualBalance - investMoney);
+    setShowInvestModal(false);
+    setInvestMoney(1000000);
+  };
+
+  // 매도 함수
+  const handleSell = (investment: Investment) => {
+    if (!priceData) return;
+
+    const currentPrice = investment.asset === 'bitcoin' 
+      ? priceData.bitcoin.current 
+      : priceData.gold.buy;
+    
+    const currentValue = investment.quantity * currentPrice;
+    
+    setVirtualBalance(virtualBalance + currentValue);
+    setInvestments(investments.filter(inv => inv.id !== investment.id));
+  };
+
+  // 투자 수익률 계산
+  const calculateProfit = (investment: Investment) => {
+    if (!priceData) return { value: 0, profit: 0, profitPct: 0 };
+
+    const currentPrice = investment.asset === 'bitcoin' 
+      ? priceData.bitcoin.current 
+      : priceData.gold.buy;
+    
+    const currentValue = investment.quantity * currentPrice;
+    const profit = currentValue - investment.amount;
+    const profitPct = (profit / investment.amount) * 100;
+
+    return { value: currentValue, profit, profitPct };
+  };
+
+  // 전체 포트폴리오 가치
+  const getTotalPortfolioValue = () => {
+    if (!priceData) return 0;
+    
+    return investments.reduce((total, inv) => {
+      const { value } = calculateProfit(inv);
+      return total + value;
+    }, 0);
+  };
+
+  // 총 자산
+  const getTotalAssets = () => {
+    return virtualBalance + getTotalPortfolioValue();
+  };
+
   // 기간별 수익률 (역사적 데이터 기반 추정)
   const getHistoricalReturn = (asset: 'bitcoin' | 'gold', period: string) => {
     const returns: { [key: string]: { bitcoin: number; gold: number } } = {
@@ -151,6 +260,14 @@ export default function BitcoinVsGold() {
       '5y': '5년'
     };
     return texts[period] || period;
+  };
+
+  // 잔액 초기화
+  const resetBalance = () => {
+    if (confirm('정말 초기화하시겠습니까? (1억원으로 리셋)')) {
+      setVirtualBalance(100000000);
+      setInvestments([]);
+    }
   };
 
   if (!mounted) {
@@ -198,14 +315,135 @@ export default function BitcoinVsGold() {
           </div>
         ) : priceData && (
           <div className="space-y-4 sm:space-y-6">
+            {/* 가상 투자 포트폴리오 */}
+            <section 
+              className="bg-gradient-to-br from-green-500/30 to-emerald-500/30 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border-2 border-white/30 relative"
+              style={{
+                transform: 'perspective(1000px) rotateX(2deg)',
+                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 0 100px rgba(255, 255, 255, 0.1)'
+              }}
+            >
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+                <h2 className="text-2xl sm:text-3xl font-black text-white">
+                  🎮 가상 투자 포트폴리오
+                </h2>
+                <button
+                  type="button"
+                  onClick={resetBalance}
+                  className="px-4 py-2 bg-red-500/50 hover:bg-red-500/70 text-white rounded-lg text-sm transition-all"
+                >
+                  초기화
+                </button>
+              </div>
+
+              {/* 총 자산 & 잔액 */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/30">
+                  <p className="text-white/70 text-sm mb-1">💰 총 자산</p>
+                  <p className="text-2xl font-black text-white">
+                    ₩{getTotalAssets().toLocaleString()}
+                  </p>
+                  <p className={`text-sm font-bold mt-1 ${getTotalAssets() - 100000000 >= 0 ? 'text-green-300' : 'text-red-300'}`}>
+                    {getTotalAssets() - 100000000 >= 0 ? '+' : ''}{(getTotalAssets() - 100000000).toLocaleString()}원 
+                    ({((getTotalAssets() - 100000000) / 100000000 * 100).toFixed(2)}%)
+                  </p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/30">
+                  <p className="text-white/70 text-sm mb-1">💵 가상 잔액</p>
+                  <p className="text-2xl font-black text-white">
+                    ₩{virtualBalance.toLocaleString()}
+                  </p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/30">
+                  <p className="text-white/70 text-sm mb-1">📊 투자 금액</p>
+                  <p className="text-2xl font-black text-white">
+                    ₩{getTotalPortfolioValue().toLocaleString()}
+                  </p>
+                </div>
+              </div>
+
+              {/* 투자 내역 */}
+              <div className="mb-4">
+                <h3 className="text-lg font-black text-white mb-3">📈 보유 자산 ({investments.length}개)</h3>
+                {investments.length === 0 ? (
+                  <div className="text-center py-8 text-white/60">
+                    아직 투자한 자산이 없습니다
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {investments.map((inv) => {
+                      const { value, profit, profitPct } = calculateProfit(inv);
+                      return (
+                        <div 
+                          key={inv.id}
+                          className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/30"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-2">
+                                <span className="text-2xl">{inv.asset === 'bitcoin' ? '₿' : '🏆'}</span>
+                                <div>
+                                  <p className="text-white font-bold">
+                                    {inv.asset === 'bitcoin' ? '비트코인' : '순금 (1돈)'}
+                                  </p>
+                                  <p className="text-white/60 text-xs">
+                                    {new Date(inv.date).toLocaleString('ko-KR')}
+                                  </p>
+                                </div>
+                              </div>
+                              
+                              <div className="grid grid-cols-2 gap-2 text-sm">
+                                <div>
+                                  <p className="text-white/70">투자금</p>
+                                  <p className="text-white font-bold">₩{inv.amount.toLocaleString()}</p>
+                                </div>
+                                <div>
+                                  <p className="text-white/70">매수가</p>
+                                  <p className="text-white font-bold">₩{inv.price.toLocaleString()}</p>
+                                </div>
+                                <div>
+                                  <p className="text-white/70">현재가</p>
+                                  <p className="text-white font-bold">₩{value.toLocaleString()}</p>
+                                </div>
+                                <div>
+                                  <p className="text-white/70">수익률</p>
+                                  <p className={`font-bold ${profit >= 0 ? 'text-green-300' : 'text-red-300'}`}>
+                                    {profit >= 0 ? '+' : ''}{profit.toLocaleString()}원 ({profitPct.toFixed(2)}%)
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              type="button"
+                              onClick={() => handleSell(inv)}
+                              className="px-4 py-2 bg-red-500/50 hover:bg-red-500/70 text-white rounded-lg text-sm transition-all whitespace-nowrap"
+                            >
+                              매도
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </section>
+
             {/* 실시간 가격 비교 */}
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {/* 비트코인 카드 */}
               <div 
-                className="bg-gradient-to-br from-orange-500/30 to-amber-500/30 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border-2 border-white/30 hover:scale-105 transition-all duration-300 relative"
+                className="bg-gradient-to-br from-orange-500/30 to-amber-500/30 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border-2 border-white/30 hover:scale-105 transition-all duration-300 relative cursor-pointer"
                 style={{
                   transform: 'perspective(1000px) translateZ(10px)',
                   boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 0 100px rgba(255, 255, 255, 0.1)'
+                }}
+                onClick={() => {
+                  setInvestAsset('bitcoin');
+                  setShowInvestModal(true);
                 }}
               >
                 <div className="absolute inset-0 rounded-2xl sm:rounded-3xl overflow-hidden pointer-events-none">
@@ -225,15 +463,31 @@ export default function BitcoinVsGold() {
                     </span>
                   </div>
                   <p className="text-white/70 text-sm mt-2">24시간 변동률</p>
+                  
+                  <button
+                    type="button"
+                    className="mt-4 px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-xl hover:scale-105 transition-all"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setInvestAsset('bitcoin');
+                      setShowInvestModal(true);
+                    }}
+                  >
+                    💰 투자하기
+                  </button>
                 </div>
               </div>
 
-              {/* 금 카드 */}
+              {/* 순금 카드 */}
               <div 
-                className="bg-gradient-to-br from-yellow-500/30 to-amber-600/30 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border-2 border-white/30 hover:scale-105 transition-all duration-300 relative"
+                className="bg-gradient-to-br from-yellow-500/30 to-amber-600/30 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 border-2 border-white/30 hover:scale-105 transition-all duration-300 relative cursor-pointer"
                 style={{
                   transform: 'perspective(1000px) translateZ(10px)',
                   boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 0 100px rgba(255, 255, 255, 0.1)'
+                }}
+                onClick={() => {
+                  setInvestAsset('gold');
+                  setShowInvestModal(true);
                 }}
               >
                 <div className="absolute inset-0 rounded-2xl sm:rounded-3xl overflow-hidden pointer-events-none">
@@ -253,9 +507,82 @@ export default function BitcoinVsGold() {
                     </span>
                   </div>
                   <p className="text-white/70 text-sm mt-2">오늘 변동률</p>
+                  
+                  <button
+                    type="button"
+                    className="mt-4 px-6 py-3 bg-gradient-to-r from-yellow-500 to-amber-500 text-white font-bold rounded-xl hover:scale-105 transition-all"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setInvestAsset('gold');
+                      setShowInvestModal(true);
+                    }}
+                  >
+                    💰 투자하기
+                  </button>
                 </div>
               </div>
             </section>
+
+            {/* 투자 모달 */}
+            {showInvestModal && (
+              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div className="bg-gradient-to-br from-indigo-900 to-purple-900 rounded-2xl p-6 max-w-md w-full border-2 border-white/30">
+                  <h3 className="text-2xl font-black text-white mb-4">
+                    {investAsset === 'bitcoin' ? '₿ 비트코인' : '🏆 순금'} 투자
+                  </h3>
+                  
+                  <div className="mb-4">
+                    <p className="text-white/70 text-sm mb-2">현재 가격</p>
+                    <p className="text-2xl font-black text-white">
+                      ₩{(investAsset === 'bitcoin' ? priceData.bitcoin.current : priceData.gold.buy).toLocaleString()}
+                    </p>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-white/70 text-sm mb-2">투자 금액</p>
+                    <input
+                      type="range"
+                      min="100000"
+                      max={virtualBalance}
+                      step="100000"
+                      value={investMoney}
+                      onChange={(e) => setInvestMoney(Number(e.target.value))}
+                      className="w-full h-3 mb-2"
+                    />
+                    <div className="flex justify-between items-center">
+                      <input
+                        type="number"
+                        value={investMoney}
+                        onChange={(e) => setInvestMoney(Number(e.target.value))}
+                        className="bg-white/20 text-white px-4 py-2 rounded-lg w-full font-bold text-right"
+                        max={virtualBalance}
+                      />
+                      <span className="text-white ml-2">원</span>
+                    </div>
+                    <p className="text-white/60 text-xs mt-2">
+                      구매 가능 수량: {(investMoney / (investAsset === 'bitcoin' ? priceData.bitcoin.current : priceData.gold.buy)).toFixed(8)}
+                    </p>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setShowInvestModal(false)}
+                      className="flex-1 px-4 py-3 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-all"
+                    >
+                      취소
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleInvest}
+                      className="flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold rounded-lg hover:scale-105 transition-all"
+                    >
+                      투자하기
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* 투자 시뮬레이션 */}
             <section 
@@ -266,7 +593,7 @@ export default function BitcoinVsGold() {
               }}
             >
               <h2 className="text-2xl sm:text-3xl font-black text-white mb-4 sm:mb-6 text-center">
-                📊 투자 시뮬레이션
+                📊 과거 수익률 시뮬레이션
               </h2>
 
               {/* 투자금액 입력 */}
@@ -421,7 +748,7 @@ export default function BitcoinVsGold() {
               <div className="mt-6 bg-yellow-500/20 backdrop-blur-sm rounded-xl p-4 border border-yellow-400/50">
                 <p className="text-white text-center text-sm">
                   ⚠️ <span className="font-bold">면책 조항</span>: 이 시뮬레이션은 과거 데이터 기반 예시이며, 실제 수익을 보장하지 않습니다. 
-                  투자 결정은 본인의 판단과 책임 하에 이루어져야 합니다.
+                  투자 결정은 본인의 판단과 책임 하에 이루어져야 합니다. 가상 투자 기능은 교육 목적으로만 사용됩니다.
                 </p>
               </div>
             </section>
