@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "name": "Conversation Intents",
+    "version": "1.0.0",
+    "locale": "ko-KR"
+  },
+  "intents": [
+    {
+      "id": "greeting",
+      "userPatterns": [
+        "안녕",
+        "하이",
+        "안녕하세요",
+        "왔어",
+        "시작하자"
+      ],
+      "slots": [],
+      "plan": [
+        {
+          "step": "persona.greeting"
+        },
+        {
+          "step": "probe",
+          "text": "오늘 무엇부터 함께할까요?"
+        }
+      ]
+    },
+    {
+      "id": "venting",
+      "userPatterns": [
+        "답답",
+        "힘들",
+        "짜증",
+        "멘탈",
+        "스트레스"
+      ],
+      "slots": [],
+      "plan": [
+        {
+          "step": "reflect",
+          "text": "그랬군요. 그런 상황이면 정말 버거웠을 것 같아요."
+        },
+        {
+          "step": "probe",
+          "text": "지금 가장 힘든 포인트 하나만 꼽아볼까요?"
+        },
+        {
+          "step": "suggest",
+          "text": "5분만 산책하거나 물 한 잔 어떠세요? 그 뒤에 정리해봐요."
+        }
+      ]
+    },
+    {
+      "id": "task_planning",
+      "userPatterns": [
+        "계획",
+        "플랜",
+        "할일",
+        "할 일",
+        "투두",
+        "정리"
+      ],
+      "slots": [
+        "deadline",
+        "priority"
+      ],
+      "plan": [
+        {
+          "step": "summon",
+          "text": "핵심 목표 3가지를 먼저 적어볼게요."
+        },
+        {
+          "step": "structure",
+          "text": "각 목표에 마감과 우선순위를 붙여요."
+        },
+        {
+          "step": "cta",
+          "text": "바로 시작할 첫 10분 작업은 무엇으로 할까요?"
+        }
+      ]
+    },
+    {
+      "id": "smalltalk_fun",
+      "userPatterns": [
+        "농담",
+        "재밌는",
+        "웃긴",
+        "심심"
+      ],
+      "slots": [],
+      "plan": [
+        {
+          "step": "quip",
+          "choices": [
+            "아재개그 경고: 바나나는 바빠서 바나?",
+            "서버가 다운되면 개발자는 Upset…"
+          ]
+        },
+        {
+          "step": "probe",
+          "text": "이런 류 괜찮으세요? 취향 알려주시면 조절해볼게요."
+        }
+      ]
+    }
+  ],
+  "fallback": {
+    "id": "fallback.generic",
+    "plan": [
+      {
+        "step": "clarify",
+        "text": "조금 더 구체히 말씀해주실 수 있을까요?"
+      },
+      {
+        "step": "offer",
+        "text": "원하시면 예시를 들어드릴게요: 일정 계획, 아이디어 브레인스토밍, 고민상담 등"
+      }
+    ]
+  }
+}

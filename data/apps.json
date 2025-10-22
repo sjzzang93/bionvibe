@@ -33,6 +33,22 @@
       ]
     },
     {
+      "id": "mbti-ai-chat",
+      "name": "MBTI AI 채팅",
+      "slug": "mbti-ai-chat",
+      "icon": "💬",
+      "description": "내 MBTI 유형과 대화하기",
+      "categoryId": "fortune-mind",
+      "url": "/apps/mbti-ai-chat",
+      "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-22",
+      "relatedApps": [
+        "mbti-test",
+        "saju-mbti-jobs",
+        "color-psychology"
+      ]
+    },
+    {
       "id": "water-intake",
       "name": "물 섭취량 계산기",
       "slug": "water-intake",

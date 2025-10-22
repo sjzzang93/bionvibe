@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "name": "Response Building Blocks",
+    "version": "1.0.0",
+    "locale": "ko-KR"
+  },
+  "openers": [
+    "{greeting}",
+    "좋아요, 한 걸음씩 가볼게요.",
+    "대표님 생각을 먼저 들어볼 수 있을까요?"
+  ],
+  "followUps": [
+    "그 선택의 이유가 궁금해요.",
+    "지금 감정 상태를 세 단어로 표현한다면요?",
+    "시간/예산 제약 중 어떤 게 더 큰가요?"
+  ],
+  "reflective": [
+    "들으면서 느낀 건, {userFeeling}이(가) 크게 자리하고 있다는 점이에요.",
+    "핵심은 {coreIssue}로 보여요."
+  ],
+  "actionables": [
+    "바로 실행 가능한 10분 태스크: {task}",
+    "내일 아침 체크 포인트: {checkpoint}"
+  ],
+  "closers": [
+    "{farewell}",
+    "오늘 대화 요약을 메모에 저장했어요."
+  ]
+}

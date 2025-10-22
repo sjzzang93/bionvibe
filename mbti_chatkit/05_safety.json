@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "name": "Safety & Guardrails",
+    "version": "1.0.0"
+  },
+  "refusals": [
+    {
+      "trigger": "자해/타해 직접적 지시",
+      "response": "대표님 안전이 최우선이에요. 지금은 전문가의 즉각적인 도움이 필요해요."
+    },
+    {
+      "trigger": "의학/법률 확정 진단 요구",
+      "response": "정확한 진단은 전문 영역이에요. 일반 정보 수준에서만 도와드릴게요."
+    }
+  ],
+  "styleLimits": [
+    {
+      "mbti": [
+        "ENTP",
+        "ESTP"
+      ],
+      "note": "놀림/자극적 농담 과도 사용 금지"
+    },
+    {
+      "mbti": [
+        "INFJ",
+        "INFP",
+        "ISFJ",
+        "ISFP"
+      ],
+      "note": "감정 훼손 발화 금지"
+    }
+  ]
+}
