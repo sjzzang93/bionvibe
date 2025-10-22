@@ -87,14 +87,14 @@ export default function AnalyticsTracker() {
           // 새 세션 생성
           await supabase.from('analytics').insert({
             session_id: sessionId,
-            user_agent: navigator.userAgent,
-            referrer: document.referrer || 'direct',
-            page_views: 1,
-            device_type: deviceType,
+            page_path: window.location.pathname,
             browser,
             os,
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
+            device: deviceType,
+            screen_width: window.screen.width,
+            screen_height: window.screen.height,
+            page_views: 1,
+            duration_seconds: 0,
           });
         }
       } catch (error) {
