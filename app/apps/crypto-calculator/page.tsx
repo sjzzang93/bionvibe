@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AppFooter from '@/app/components/AppFooter';
-import Link from 'next/link';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 interface PriceData {
   bitcoin: {
@@ -284,13 +285,6 @@ export default function BitcoinVsGold() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
-        {/* 돌아가기 버튼 */}
-        <Link 
-          href="/" 
-          className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg hover:bg-white/20 transition-all border border-white/30"
-        >
-          <span>←</span> 돌아가기
-        </Link>
 
         {/* 헤더 */}
         <header className="text-center mb-6 sm:mb-8">
@@ -755,8 +749,6 @@ export default function BitcoinVsGold() {
           </div>
         )}
       </div>
-
-      <AppFooter />
     </main>
   );
 }
