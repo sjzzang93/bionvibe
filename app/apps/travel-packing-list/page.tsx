@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import AppFooter from '@/app/components/AppFooter';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 const packingCategories = {
   '의류': ['상의', '하의', '속옷', '양말', '잠옷', '외투', '신발', '슬리퍼', '모자', '선글라스'],

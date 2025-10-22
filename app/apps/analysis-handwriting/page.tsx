@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import AppFooter from '@/app/components/AppFooter';
-import Link from 'next/link';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 export default function HandwritingAnalysisPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -412,16 +413,6 @@ export default function HandwritingAnalysisPage() {
             </div>
           )}
         </div>
-
-        {/* 돌아가기 */}
-        <div className="text-center mt-8">
-          <Link href="/" className="inline-block bg-gray-200 dark:bg-white/20 hover:bg-gray-300 dark:hover:bg-white/30 text-gray-900 dark:text-white px-8 py-3 rounded-xl font-bold transition-all">
-            메인으로 돌아가기
-          </Link>
-        </div>
-
-      {/* 제작자 서명 */}
-      <AppFooter />
       </div>
     </div>
   );

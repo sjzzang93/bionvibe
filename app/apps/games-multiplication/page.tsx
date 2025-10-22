@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AppFooter from "@/app/components/AppFooter";
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 import dynamic from 'next/dynamic';
 
 
@@ -71,10 +73,6 @@ export default function MultiplicationGamePage() {
         <div className="max-w-4xl mx-auto">
           {/* 애드센스 상단 */}
           <div className="bg-white/10 rounded-xl p-4 mb-6">
-            
-            {/* 제작자 서명 */}
-            <AppFooter />
-
           </div>
 
           <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">

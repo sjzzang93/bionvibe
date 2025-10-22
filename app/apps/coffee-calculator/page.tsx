@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import AppFooter from "@/app/components/AppFooter";
-import Link from 'next/link';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 // 카페인 데이터베이스 (mg 단위)
 const CAFFEINE_DB = {
@@ -377,13 +378,6 @@ export default function CoffeeCalculator() {
               다시 계산하기
             </button>
           </section>
-
-          {/* 돌아가기 버튼 */}
-          <div className="text-center mt-8">
-            <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all duration-300 shadow-lg">
-              메인으로 돌아가기
-            </Link>
-          </div>
         </div>
       </main>
     );
@@ -604,16 +598,7 @@ export default function CoffeeCalculator() {
           </div>
         </section>
 
-        {/* 돌아가기 버튼 */}
-        <div className="text-center mt-8">
-          <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all duration-300 shadow-lg">
-            메인으로 돌아가기
-          </Link>
-        </div>
       </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
-
     </main>
   );
 }

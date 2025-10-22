@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import AppFooter from "@/app/components/AppFooter";
-import Link from 'next/link';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 interface AirQualityData {
   pm10: number;
@@ -275,15 +276,6 @@ export default function AirQuality() {
                 🔄 다시 측정하기
               </button>
             </div>
-
-            <div className="mt-4">
-              <Link 
-                href="/"
-                className="block text-center text-gray-600 hover:text-gray-800 text-sm"
-              >
-                ← 메인으로 돌아가기
-              </Link>
-            </div>
           </section>
 
         </div>
@@ -347,13 +339,6 @@ export default function AirQuality() {
               >
                 📍 내 위치 공기질 측정
               </button>
-              
-              <Link 
-                href="/"
-                className="block text-center text-gray-600 hover:text-gray-800 text-sm"
-              >
-                ← 메인으로 돌아가기
-              </Link>
             </>
           ) : (
             <div className="text-center py-8">
@@ -365,9 +350,6 @@ export default function AirQuality() {
         </section>
 
       </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
-
     </main>
   );
 }

@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import AppFooter from "@/app/components/AppFooter";
-import Link from 'next/link';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 const wordSets = {
   '초급 (300단어)': [
@@ -82,12 +83,6 @@ export default function FlashcardPage() {
             ))}
           </div>
 
-          {/* 돌아가기 버튼 */}
-          <div className="text-center mt-8">
-            <Link href="/" className="inline-block bg-white/20 hover:bg-white/30 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300">
-              메인으로 돌아가기
-            </Link>
-          </div>
         </div>
       </div>
     );
@@ -102,9 +97,6 @@ export default function FlashcardPage() {
             <h2 className="text-4xl font-bold text-white mb-4">학습 완료!</h2>
             <div className="text-2xl text-white mb-8">
               암기한 단어: {memorized.size}/{currentWords.length}
-              {/* 제작자 서명 */}
-              <AppFooter />
-
             </div>
             <div className="space-y-3">
               <button
@@ -130,9 +122,6 @@ export default function FlashcardPage() {
               >
                 레벨 선택
               </button>
-              <Link href="/" className="block w-full bg-gray-700 hover:bg-gray-600 text-white px-6 py-4 rounded-xl font-bold text-xl transition-all">
-                메인으로 돌아가기
-              </Link>
             </div>
           </div>
         </div>

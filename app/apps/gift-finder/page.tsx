@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import AppFooter from '@/app/components/AppFooter';
-import Link from 'next/link';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 interface GiftSuggestion {
   name: string;
@@ -457,12 +458,6 @@ export default function GiftFinderPage() {
       <div className="max-w-4xl mx-auto">
         {/* 헤더 */}
         <div className="text-center mb-8">
-          <Link 
-            href="/"
-            className="inline-block mb-4 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
-          >
-            ← 홈으로
-          </Link>
           <h1 className="text-4xl md:text-5xl font-black mb-0.5 sm:mb-1.5 md:mb-2 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 dark:from-pink-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
             🎁 선물 추천
           </h1>
@@ -657,8 +652,6 @@ export default function GiftFinderPage() {
           <p className="text-xs">📊 200개 이상의 선물 데이터 기반 추천 시스템</p>
         </div>
 
-      {/* 제작자 서명 */}
-      <AppFooter />
       </div>
     </div>
   );
