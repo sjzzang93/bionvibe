@@ -21,7 +21,7 @@
       "name": "MBTI 테스트",
       "slug": "mbti-test",
       "icon": "🎭",
-      "description": "나는 어떤 성격일까?",
+      "description": "32문항으로 알아보는 정확한 성격 유형",
       "categoryId": "fortune-mind",
       "url": "/apps/mbti-test",
       "image": "https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&auto=format&fit=crop",
@@ -378,6 +378,7 @@
       "url": "/apps/study-cursor-prompts",
       "image": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop",
       "createdAt": "2025-10-20",
+      "hidden": true,
       "relatedApps": [
         "flashcard",
         "startup-naming",
@@ -570,17 +571,6 @@
         "today-fortune",
         "dream-interpreter"
       ]
-    },
-    {
-      "id": "gift-recommend",
-      "name": "선물 추천",
-      "slug": "gift-recommend",
-      "icon": "🎁",
-      "description": "맞춤 추천",
-      "categoryId": "family-life",
-      "url": "/apps/gift-recommend",
-      "image": "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-20"
     },
     {
       "id": "envelope-recommend",

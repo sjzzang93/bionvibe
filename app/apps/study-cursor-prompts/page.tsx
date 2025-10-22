@@ -22,6 +22,7 @@ function CursorPromptsContent() {
         {/* 탭 버튼 */}
         <div className="flex gap-2 justify-center">
           <button
+        type="button"
             onClick={() => setActiveTab('glossary')}
             className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-bold transition-all ${
               activeTab === 'glossary'
@@ -32,6 +33,7 @@ function CursorPromptsContent() {
             📚 {krText.tabs.glossary}
           </button>
           <button
+        type="button"
             onClick={() => setActiveTab('export')}
             className={`px-4 sm:px-6 py-2 sm:py-3 rounded-xl text-sm sm:text-base font-bold transition-all ${
               activeTab === 'export'
@@ -89,7 +91,7 @@ function GlossaryTab() {
       recKr: '버튼에 Tailwind CSS로 bg-blue-500, hover:bg-blue-600, text-white, px-4 py-2, rounded-lg 클래스를 적용해줘. 포커스 시 ring-2 ring-blue-300도 추가해줘.',
       recEn: 'Apply Tailwind CSS classes to the button: bg-blue-500, hover:bg-blue-600, text-white, px-4 py-2, rounded-lg. Also add ring-2 ring-blue-300 on focus.',
       snippetPrefix: 'btn-style',
-      exampleKr: '<button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-300">클릭</button>'
+      exampleKr: '<button type="button" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-300">클릭</button>'
     },
     {
       id: '2',
@@ -237,7 +239,8 @@ const handleClick = useCallback(() => { ... }, [dependency])`
       recKr: '버튼에 aria-label로 의미있는 레이블을 추가하고, 키보드 네비게이션을 위해 tabIndex를 설정하고, 모달에는 role="dialog"와 aria-modal="true"를 추가해줘. 포커스 트랩을 구현하고, ESC 키로 닫을 수 있게 해줘.',
       recEn: 'Add meaningful aria-label to buttons, set tabIndex for keyboard navigation, add role="dialog" and aria-modal="true" to modals. Implement focus trap and allow closing with ESC key.',
       snippetPrefix: 'a11y-aria',
-      exampleKr: `<button aria-label="메뉴 닫기" onClick={close}>
+      exampleKr: `<button
+        type="button" aria-label="메뉴 닫기" onClick={close}>
   <X />
 </button>
 <div role="dialog" aria-modal="true" aria-labelledby="dialog-title">...</div>`
@@ -535,13 +538,16 @@ function ExportTab() {
       <p className="text-sm sm:text-base text-gray-600">데이터를 다양한 형식으로 내보낼 수 있습니다</p>
       
       <div className="grid grid-cols-1 sm:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-2">
-        <button className="px-4 sm:px-6 py-3 sm:py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
+        <button
+        type="button" className="px-4 sm:px-6 py-3 sm:py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
           📄 JSON 내보내기
         </button>
-        <button className="px-4 sm:px-6 py-3 sm:py-4 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
+        <button
+        type="button" className="px-4 sm:px-6 py-3 sm:py-4 bg-green-500 hover:bg-green-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
           📊 CSV 내보내기
         </button>
-        <button className="px-4 sm:px-6 py-3 sm:py-4 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
+        <button
+        type="button" className="px-4 sm:px-6 py-3 sm:py-4 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium text-sm sm:text-base transition-all">
           📝 Markdown 내보내기
         </button>
       </div>

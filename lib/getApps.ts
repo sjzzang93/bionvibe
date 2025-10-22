@@ -68,7 +68,7 @@ async function fetchAppsFromSupabase(bypassCache = false): Promise<App[]> {
     url: row.url,
     image: row.image || '',
     createdAt: row.created_at,
-    hidden: false,
+    hidden: row.hidden || false,
   }));
 
   // 캐시 저장

@@ -14,7 +14,7 @@ export default function ReflexTest() {
   const [tooEarly, setTooEarly] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const TOTAL_ROUNDS = 5;
+  const TOTAL_ROUNDS = 10;
 
   useEffect(() => {
     return () => {
@@ -43,7 +43,7 @@ export default function ReflexTest() {
     }, waitTime);
   };
 
-  const handleClick = (e: React.PointerEvent | React.TouchEvent) => {
+  const handleClick = (e: React.PointerEvent) => {
     e.preventDefault();
     
     if (testMode === 'wait') {
@@ -162,9 +162,9 @@ export default function ReflexTest() {
                   : testMode === 'wait' 
                     ? '0 0 60px rgba(220, 38, 38, 0.6)'
                     : '0 20px 60px rgba(0, 0, 0, 0.5)',
+                touchAction: 'none',
               }}
               onPointerDown={handleClick}
-              onTouchStart={handleClick}
             >
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 {testMode === 'ready' && (

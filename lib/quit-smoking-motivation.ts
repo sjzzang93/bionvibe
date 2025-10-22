@@ -1,0 +1,125 @@
+export interface DailyMessage {
+  day: number;
+  message: string;
+  tip: string;
+  fact: string;
+  actionItem: string;
+}
+
+export interface WeeklyMessage {
+  week: number;
+  message: string;
+  tip: string;
+  achievement: string;
+  reward: string;
+}
+
+export interface MonthlyMessage {
+  month: number;
+  message: string;
+  tip: string;
+  fact: string;
+  celebration: string;
+}
+
+export interface YearlyMessage {
+  year: number;
+  message: string;
+  tip: string;
+  fact: string;
+  actionItem: string;
+}
+
+export interface Badge {
+  code: string;
+  label: string;
+  icon: string;
+}
+
+export interface MotivationData {
+  version: string;
+  dailyMessages: DailyMessage[];
+  weeklyMessages: WeeklyMessage[];
+  monthlyMessages: MonthlyMessage[];
+  yearlyMessages: YearlyMessage[];
+  badges: Badge[];
+  shareTemplates: {
+    sns: string;
+    kakao: string;
+  };
+}
+
+export const MOTIVATION_DATA: MotivationData = {
+  "version": "1.0.0",
+  "dailyMessages": [
+    {"day": 1, "message": "첫날 성공! 가장 어려운 문을 여셨어요.", "tip": "담배 생각 나면 물 한 잔 + 심호흡 10회.", "fact": "금연 20분 후 혈압·맥박이 안정화 방향으로 움직입니다.", "actionItem": "금연 이유 5가지를 메모장에 작성하고 즐겨찾기에 고정."},
+    {"day": 2, "message": "이틀째, 몸이 분명히 반응하고 있어요.", "tip": "단 음식 대신 견과류 한 줌 준비.", "fact": "24시간 금연 시 심혈관 부담 요인이 줄어듭니다.", "actionItem": "갈망이 왔을 때의 대처법을 앱에 저장."},
+    {"day": 3, "message": "3일 고비! 곧 호흡이 편해집니다.", "tip": "뜨거운 샤워로 이완, 조기 취침.", "fact": "72시간 후 기관지가 이완되어 호흡이 편안해지는 경향.", "actionItem": "오늘 저녁 20분 산책."},
+    {"day": 4, "message": "냄새·맛이 조금씩 또렷해져요.", "tip": "양치·가글을 자주해서 상쾌함 유지.", "fact": "후각·미각 수용체가 서서히 회복됩니다.", "actionItem": "단백질 중심 식사로 포만감 유지."},
+    {"day": 5, "message": "주말 유혹? 당신은 준비되어 있어요.", "tip": "술자리 계획 시 금연 선언부터.", "fact": "환경 트리거 회피가 재발 위험을 낮춥니다.", "actionItem": "동료 1명에게 금연 서포터 부탁."},
+    {"day": 6, "message": "갈망은 파도, 당신은 서퍼!", "tip": "3분 타이머로 파도 넘기기.", "fact": "대부분의 갈망은 3~5분 안에 사라집니다.", "actionItem": "파도 타기 성공 횟수 기록."},
+    {"day": 7, "message": "1주 달성! 엄청난 성취예요.", "tip": "스스로에게 작은 선물.", "fact": "1주에 순환·피부톤 개선을 체감하기도 합니다.", "actionItem": "주간 회고 노트 5줄."},
+    {"day": 8, "message": "둘째 주, 더 단단해져요.", "tip": "카페인은 평소의 70%만.", "fact": "불안·초조는 2~4주 사이 완화되는 경향.", "actionItem": "저녁 15분 스트레칭."},
+    {"day": 9, "message": "습관을 이기는 루틴이 생기고 있어요.", "tip": "식사 후 양치 루틴 고정.", "fact": "행동 대체는 재발 방지의 핵심.", "actionItem": "식후 산책 10분."},
+    {"day": 10, "message": "호흡이 가벼워졌나요?", "tip": "물 8잔 챌린지.", "fact": "수분은 점액 점도를 낮춰 폐 청소에 도움.", "actionItem": "물 마신 횟수 체크박스."},
+    {"day": 11, "message": "거의 비흡연자의 일상!", "tip": "휴대폰에 금연 위젯 배치.", "fact": "시각적 보상은 동기 지속에 효과적.", "actionItem": "절약 금액 알림 켜기."},
+    {"day": 12, "message": "집중이 조금 흐트러져도 정상.", "tip": "포모도로 25:5.", "fact": "주의력은 2~4주 사이 회복되는 경향.", "actionItem": "오늘 3세트만 수행."},
+    {"day": 13, "message": "감정파도? 호흡이 딱이에요.", "tip": "4-7-8 호흡 4회.", "fact": "호흡은 자율신경 균형에 도움.", "actionItem": "분노 90초 타임아웃 카드 만들기."},
+    {"day": 14, "message": "2주! 트리거만 조심하면 돼요.", "tip": "흡연자와의 거리두기.", "fact": "환경 노출은 재발 확률을 높입니다.", "actionItem": "회식 대비 플랜 A/B 작성."},
+    {"day": 15, "message": "갈망 파도 간격이 벌어지고 있어요.", "tip": "껌·사탕 상시 휴대.", "fact": "구강 대체는 강력한 도우미.", "actionItem": "차·물로 손·입 심심함 대체."},
+    {"day": 16, "message": "피곤하면 쉬어도 OK.", "tip": "짧은 낮잠 15분.", "fact": "과로는 재발 유인.", "actionItem": "오늘 업무 To-Do 3개만."},
+    {"day": 17, "message": "여기까지 온 당신, 대단해요.", "tip": "자기 칭찬 3문장 적기.", "fact": "자기효능감은 성과를 예측합니다.", "actionItem": "성공 순간 캡처 공유."},
+    {"day": 18, "message": "입이 심심하면 물·야채 스틱!", "tip": "당류 대신 식이섬유.", "fact": "체중 증가는 관리 가능합니다.", "actionItem": "야식 줄이기 체크."},
+    {"day": 19, "message": "슬럼프도 지나갑니다.", "tip": "작은 보상 예약.", "fact": "강화학습은 보상 예측에 반응.", "actionItem": "주말 즐길거리 계획."},
+    {"day": 20, "message": "20일, 습관은 거의 바뀌었습니다.", "tip": "새 건강 습관 1개 추가.", "fact": "새 루틴은 재발 방지에 효과.", "actionItem": "계단 오르기 10층 도전."},
+    {"day": 21, "message": "3주! 숨이 더 편하죠?", "tip": "물이 지루하면 무가당 탄산수.", "fact": "폐 섬모기능 회복에 수분이 도움.", "actionItem": "수분 트래커 업데이트."},
+    {"day": 22, "message": "트리거 지도 만들기.", "tip": "장소·시간·사람 기록.", "fact": "패턴 인식은 재발 방지의 시작.", "actionItem": "지도에 대체 행동 매핑."},
+    {"day": 23, "message": "감정관리 스킬이 늘고 있어요.", "tip": "감정 라벨링 연습.", "fact": "정서 인식은 충동 억제에 도움.", "actionItem": "오늘 감정 3개 기록."},
+    {"day": 24, "message": "수면도 점차 안정됩니다.", "tip": "취침 1시간 전 스크린 OFF.", "fact": "블루라이트 차단은 수면질↑.", "actionItem": "수면 위생 체크리스트."},
+    {"day": 25, "message": "절약 금액이 쌓이고 있어요!", "tip": "보상 쇼핑목록 작성.", "fact": "가시적 절약은 동기 강화.", "actionItem": "저축/보상 50:50 규칙."},
+    {"day": 26, "message": "오늘도 파도는 지나갑니다.", "tip": "3분 타이머 습관화.", "fact": "갈망 지속시간은 짧습니다.", "actionItem": "성공 횟수 카운트."},
+    {"day": 27, "message": "사회적 상황 대비 완료?", "tip": "회식 동반 음료·간식 미리 준비.", "fact": "대체 행동이 재발 위험↓.", "actionItem": "금연 선언 멘트 준비."},
+    {"day": 28, "message": "4주차, 거의 비흡연자 느낌!", "tip": "운동 강도 살짝 올리기.", "fact": "운동은 기분·수면 개선.", "actionItem": "주 3회 루틴 기록."},
+    {"day": 29, "message": "거의 한 달—자랑해도 돼요.", "tip": "SNS 공유로 동기 강화.", "fact": "사회적 지지가 유지율↑.", "actionItem": "공유 해시태그 #금연챌린지."},
+    {"day": 30, "message": "30일 달성! 인생의 전환점.", "tip": "기념 보상(경험형).", "fact": "1개월 후 폐 기능이 유의미하게 개선되는 경향.", "actionItem": "배지 수령·캘린더 표시."}
+  ],
+  "weeklyMessages": [
+    {"week": 1, "message": "첫 주 완료! 강력한 출발입니다.", "tip": "심리적 트리거 정리", "achievement": "1주 배지", "reward": "맛있는 건강식"},
+    {"week": 2, "message": "둘째 주, 체감이 달라져요.", "tip": "수면·카페인 관리", "achievement": "2주 배지", "reward": "양질의 수면템"},
+    {"week": 3, "message": "셋째 주, 루틴이 자리잡아요.", "tip": "운동 루틴 고정", "achievement": "3주 배지", "reward": "스포츠 소품"},
+    {"week": 4, "message": "넷째 주, 안정권 진입!", "tip": "스트레스 대체 행동 강화", "achievement": "4주 배지", "reward": "하루 휴식권"},
+    {"week": 8, "message": "8주, 눈에 보이는 변화!", "tip": "체중·체력 관리 플랜", "achievement": "8주 배지", "reward": "운동화"},
+    {"week": 12, "message": "12주, 장기 성공 궤도!", "tip": "장기 목표 재설정", "achievement": "12주 배지", "reward": "하프데이 여행"},
+    {"week": 20, "message": "20주, 완전한 새 습관!", "tip": "동기 재점검", "achievement": "20주 배지", "reward": "원했던 클래스 수강"}
+  ],
+  "monthlyMessages": [
+    {"month": 1, "message": "1개월! 당신은 비흡연자입니다.", "tip": "회식·여행 대비 플랜", "fact": "폐 기능이 의미 있게 좋아지는 시기.", "celebration": "가족과 작은 파티"},
+    {"month": 2, "message": "2개월, 체력 상승 체감!", "tip": "운동 강도 늘리기", "fact": "운동 회복속도 개선.", "celebration": "등산/러닝 도전"},
+    {"month": 3, "message": "3개월, 기침·가래 감소!", "tip": "수분·가습 유지", "fact": "섬모기능 회복 진행.", "celebration": "호캉스 하루"},
+    {"month": 6, "message": "6개월, 반년의 기적!", "tip": "장기 목표 업데이트", "fact": "재발 위험 추가 감소.", "celebration": "원데이 취미 클래스"},
+    {"month": 9, "message": "9개월, 호흡기 방어력 강해져요.", "tip": "환절기 관리", "fact": "감염 위험 낮아지는 경향.", "celebration": "건강검진 예약"},
+    {"month": 12, "message": "1년, 진정한 마스터!", "tip": "새로운 '건강 프로젝트' 시작", "fact": "심혈관 위험 유의미한 감소.", "celebration": "기념 여행"}
+  ],
+  "yearlyMessages": [
+    {"year": 1, "message": "1년 완주! 대체불가 성취입니다.", "tip": "멘토가 되어보세요.", "fact": "관상동맥질환 위험 감소 경향.", "actionItem": "금연 스토리 작성"},
+    {"year": 2, "message": "2년, 뇌혈관 건강에도 이득.", "tip": "규칙 검진", "fact": "뇌졸중 위험 하향 추세.", "actionItem": "검진 스케줄 고정"},
+    {"year": 5, "message": "5년, 삶의 질이 달라집니다.", "tip": "장기 목표 재설계", "fact": "여러 질환 위험 추가 감소.", "actionItem": "건강 포트폴리오"},
+    {"year": 10, "message": "10년, 최고의 선물은 건강입니다.", "tip": "새로운 도전", "fact": "폐암 등 주요 위험 큰 폭 감소 경향.", "actionItem": "장기 기부/후원 결정"}
+  ],
+  "badges": [
+    {"code": "DAY_1", "label": "1일 배지", "icon": "🔰"},
+    {"code": "DAY_3", "label": "3일 배지", "icon": "🥉"},
+    {"code": "WEEK_1", "label": "1주 배지", "icon": "🥈"},
+    {"code": "MONTH_1", "label": "1개월 배지", "icon": "🏅"},
+    {"code": "MONTH_3", "label": "3개월 배지", "icon": "🎖️"},
+    {"code": "MONTH_6", "label": "6개월 배지", "icon": "🏆"},
+    {"code": "YEAR_1", "label": "1년 마스터", "icon": "👑"},
+    {"code": "STREAK_100D", "label": "100일 무결점", "icon": "💯"},
+    {"code": "CRISIS_CLEAR", "label": "위기 극복", "icon": "🛡️"}
+  ],
+  "shareTemplates": {
+    "sns": "금연 {days}일 달성! 절약 {savingsKRW}원 🎉 #금연챌린지 #BIONVIBE",
+    "kakao": "[BION VIBE] 금연 {days}일! 오늘도 파도 넘기기 성공 🙌"
+  }
+};
+
