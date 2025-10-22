@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import AppFooter from "@/app/components/AppFooter";
-import Link from 'next/link';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 interface User {
   id: string;
@@ -185,12 +186,6 @@ export default function HabitTrackerPage() {
             </button>
           </form>
 
-          {/* 돌아가기 버튼 */}
-          <div className="text-center mt-6">
-            <Link href="/" className="inline-block bg-gray-700 hover:bg-gray-600 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300">
-              메인으로 돌아가기
-            </Link>
-          </div>
         </div>
       </div>
     );
@@ -299,9 +294,6 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
               🎯 습관 트래커
             </h1>
             <p className="text-white/90">👤 {userId}님의 습관 관리</p>
-            {/* 제작자 서명 */}
-            <AppFooter />
-
           </div>
           <button
         type="button"
@@ -510,12 +502,6 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
           </div>
         )}
 
-        {/* 돌아가기 버튼 */}
-        <div className="text-center mt-8">
-          <Link href="/" className="inline-block bg-white/20 hover:bg-white/30 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300">
-            메인으로 돌아가기
-          </Link>
-        </div>
       </div>
     </div>
   );
