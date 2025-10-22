@@ -93,20 +93,13 @@ export default function MainChat() {
         setOnlineCount(Object.keys(state).length);
       })
       .subscribe(async (status) => {
-        // 프로덕션에서만 중요한 로그 출력
-        if (process.env.NODE_ENV === 'production') {
-          if (status === 'SUBSCRIBED') {
-            console.log('✅ 실시간 방명록 연결 성공!');
-          } else if (status === 'CHANNEL_ERROR') {
-            console.error('❌ 채널 연결 실패');
-          }
-        } else {
-          // 개발 환경: SUBSCRIBED만 조용히 로그
-          if (status === 'SUBSCRIBED') {
+        // SUBSCRIBED만 조용히 로그 (개발/프로덕션 모두)
+        if (status === 'SUBSCRIBED') {
+          if (process.env.NODE_ENV !== 'production') {
             console.log('📝 방명록 연결됨');
           }
-          // CHANNEL_ERROR는 Fast Refresh 때문이므로 무시
         }
+        // CHANNEL_ERROR는 Fast Refresh나 일시적 연결 끊김이므로 무시
         
         if (status === 'SUBSCRIBED' && isNicknameSet) {
           await channel.track({

@@ -6,6 +6,8 @@ import { getBrowserSupabase } from '@/lib/supabase';
 
 interface AnalyticsStats {
   todayVisits: number;
+  weeklyVisits: number;
+  monthlyVisits: number;
   pageViews: number;
   avgDuration: number;
   realtimeUsers: number;
@@ -15,6 +17,8 @@ export default function AnalyticsPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [stats, setStats] = useState<AnalyticsStats>({
     todayVisits: 0,
+    weeklyVisits: 0,
+    monthlyVisits: 0,
     pageViews: 0,
     avgDuration: 0,
     realtimeUsers: 0,
@@ -27,14 +31,37 @@ export default function AnalyticsPage() {
     
     const fetchAnalytics = async () => {
       try {
+        const now = new Date();
         const today = new Date();
         today.setHours(0, 0, 0, 0);
+        
+        // 일주일 전
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        oneWeekAgo.setHours(0, 0, 0, 0);
+        
+        // 한 달 전
+        const oneMonthAgo = new Date();
+        oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+        oneMonthAgo.setHours(0, 0, 0, 0);
         
         // 오늘 방문자 수
         const { count: todayCount } = await supabase
           .from('analytics')
           .select('*', { count: 'exact', head: true })
           .gte('created_at', today.toISOString());
+        
+        // 이번주 방문자 수
+        const { count: weeklyCount } = await supabase
+          .from('analytics')
+          .select('*', { count: 'exact', head: true })
+          .gte('created_at', oneWeekAgo.toISOString());
+        
+        // 한 달 방문자 수
+        const { count: monthlyCount } = await supabase
+          .from('analytics')
+          .select('*', { count: 'exact', head: true })
+          .gte('created_at', oneMonthAgo.toISOString());
         
         // 총 페이지뷰 (오늘)
         const { data: pageViewData } = await supabase
@@ -55,7 +82,7 @@ export default function AnalyticsPage() {
           ? durationData.reduce((sum, item) => sum + (item.duration || 0), 0) / durationData.length / 60
           : 0;
         
-        // 실시간 사용자 (최근 5분)
+        // 실시간 사용자 (최근 5분, created_at 기준)
         const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
         const { count: realtimeCount } = await supabase
           .from('analytics')
@@ -64,6 +91,8 @@ export default function AnalyticsPage() {
         
         setStats({
           todayVisits: todayCount || 0,
+          weeklyVisits: weeklyCount || 0,
+          monthlyVisits: monthlyCount || 0,
           pageViews: totalPageViews,
           avgDuration: Math.round(avgDuration * 10) / 10,
           realtimeUsers: realtimeCount || 0,
@@ -111,7 +140,7 @@ export default function AnalyticsPage() {
             </div>
             <div className="text-right">
               <div className="text-white/60 text-sm">현재 시간</div>
-              <div className="text-white font-mono text-lg">
+              <div className="text-white font-mono text-lg" suppressHydrationWarning>
                 {currentTime.toLocaleTimeString('ko-KR')}
               </div>
             </div>
@@ -119,13 +148,13 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
           <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 backdrop-blur-lg rounded-xl p-6 border border-blue-400/30">
             <div className="text-blue-400 text-sm font-semibold mb-2">실시간 사용자</div>
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
               <span className="animate-pulse">●</span> {loading ? '--' : stats.realtimeUsers.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">지금 접속 중</div>
+            <div className="text-white/60 text-xs">지금 접속 중 (Supabase)</div>
           </div>
 
           <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-lg rounded-xl p-6 border border-green-400/30">
@@ -133,7 +162,23 @@ export default function AnalyticsPage() {
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
               {loading ? '--' : stats.todayVisits.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">총 세션</div>
+            <div className="text-white/60 text-xs">오늘 총 세션 (Supabase)</div>
+          </div>
+
+          <div className="bg-gradient-to-br from-teal-500/20 to-cyan-600/20 backdrop-blur-lg rounded-xl p-6 border border-teal-400/30">
+            <div className="text-teal-400 text-sm font-semibold mb-2">이번주 방문자</div>
+            <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
+              {loading ? '--' : stats.weeklyVisits.toLocaleString()}
+            </div>
+            <div className="text-white/60 text-xs">최근 7일 (Supabase)</div>
+          </div>
+
+          <div className="bg-gradient-to-br from-yellow-500/20 to-amber-600/20 backdrop-blur-lg rounded-xl p-6 border border-yellow-400/30">
+            <div className="text-yellow-400 text-sm font-semibold mb-2">한 달 방문자</div>
+            <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
+              {loading ? '--' : stats.monthlyVisits.toLocaleString()}
+            </div>
+            <div className="text-white/60 text-xs">최근 30일 (Supabase)</div>
           </div>
 
           <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-lg rounded-xl p-6 border border-purple-400/30">
@@ -141,7 +186,7 @@ export default function AnalyticsPage() {
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
               {loading ? '--' : stats.pageViews.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">총 조회수</div>
+            <div className="text-white/60 text-xs">오늘 조회수 (Supabase)</div>
           </div>
 
           <div className="bg-gradient-to-br from-pink-500/20 to-pink-600/20 backdrop-blur-lg rounded-xl p-6 border border-pink-400/30">
@@ -149,7 +194,7 @@ export default function AnalyticsPage() {
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
               {loading ? '--' : stats.avgDuration.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">분</div>
+            <div className="text-white/60 text-xs">분 (Supabase)</div>
           </div>
         </div>
 

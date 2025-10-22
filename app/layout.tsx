@@ -4,6 +4,7 @@ import { Navigation } from "./components/Navigation";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import GoogleAdSense from "./components/GoogleAdSense";
 import SupabaseProvider from "@/lib/supabase-provider";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 
 export const metadata: Metadata = {
   title: {
@@ -95,6 +96,7 @@ export default function RootLayout({
         <GoogleAdSense publisherId="ca-pub-4564769502264231" />
         
         <SupabaseProvider>
+          <AnalyticsTracker />
           <Navigation />
           {children}
         </SupabaseProvider>
