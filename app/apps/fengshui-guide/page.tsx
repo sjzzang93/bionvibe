@@ -33,7 +33,7 @@ export default function FengshuiGuidePage() {
           </div>
           <div className="text-center">
             <h1 className="text-base sm:text-2xl md:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
-              🏠 풍수지리 실전 도감
+              🏠 내집 풍수지리 보기
             </h1>
             <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 dark:text-gray-300">
               과학적 해석과 체크리스트로 배우는 현대 풍수 (2025년판)

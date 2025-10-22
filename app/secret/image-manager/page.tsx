@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { getBrowserSupabase } from '@/lib/supabase';
 
 interface App {
   id: string;
@@ -22,12 +23,36 @@ export default function ImageManagerPage() {
   const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('file');
   const uploadFormRef = useRef<HTMLDivElement>(null);
 
+  const loadApps = async () => {
+    try {
+      const supabase = getBrowserSupabase();
+      const { data, error } = await supabase
+        .from('apps')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Supabase error:', error);
+        return;
+      }
+
+      const appsData: App[] = (data || []).map((row: any) => ({
+        id: row.id,
+        name: row.name,
+        slug: row.slug,
+        icon: row.icon,
+        image: row.image || '',
+        description: row.description || '',
+      }));
+
+      setApps(appsData);
+    } catch (err) {
+      console.error('Error loading apps:', err);
+    }
+  };
+
   useEffect(() => {
-    // apps.json 데이터 가져오기
-    fetch('/data/apps.json')
-      .then(res => res.json())
-      .then(data => setApps(data.apps))
-      .catch(err => console.error('Error loading apps:', err));
+    loadApps();
   }, []);
 
   const filteredApps = apps.filter(app =>
@@ -92,20 +117,11 @@ export default function ImageManagerPage() {
       if (response.ok) {
         alert('✅ 이미지가 업데이트되었습니다!');
         
-        // 앱 목록 업데이트
-        setApps(prev =>
-          prev.map(app =>
-            app.slug === selectedApp.slug
-              ? { ...app, image: newImageUrl }
-              : app
-          )
-        );
+        // Supabase에서 최신 데이터 다시 가져오기
+        await loadApps();
         
         setSelectedApp(null);
         setNewImageUrl('');
-        
-        // 페이지 새로고침 (변경사항 반영)
-        window.location.reload();
       } else {
         alert(`❌ ${result.error}`);
       }

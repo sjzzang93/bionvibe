@@ -1,8 +1,5 @@
 import categoriesData from '@/data/categories.json';
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+import { getBrowserSupabase } from '@/lib/supabase';
 
 export interface Category {
   id: string;
@@ -35,14 +32,20 @@ let appsCache: App[] | null = null;
 let cacheTime = 0;
 const CACHE_DURATION = 60000; // 1분
 
+// 캐시 무효화 함수 (이미지 업데이트 후 호출)
+export function invalidateAppsCache() {
+  appsCache = null;
+  cacheTime = 0;
+}
+
 // Supabase에서 모든 앱 가져오기
-async function fetchAppsFromSupabase(): Promise<App[]> {
-  // 캐시 확인
-  if (appsCache && Date.now() - cacheTime < CACHE_DURATION) {
+async function fetchAppsFromSupabase(bypassCache = false): Promise<App[]> {
+  // 캐시 확인 (bypassCache가 true면 무시)
+  if (!bypassCache && appsCache && Date.now() - cacheTime < CACHE_DURATION) {
     return appsCache;
   }
 
-  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+  const supabase = getBrowserSupabase();
   
   const { data, error } = await supabase
     .from('apps')
@@ -88,8 +91,8 @@ export function getAllApps(includeHidden: boolean = false): App[] {
 }
 
 // 비동기 버전 (권장)
-export async function getAllAppsAsync(includeHidden: boolean = false): Promise<App[]> {
-  const apps = await fetchAppsFromSupabase();
+export async function getAllAppsAsync(includeHidden: boolean = false, bypassCache = false): Promise<App[]> {
+  const apps = await fetchAppsFromSupabase(bypassCache);
   if (includeHidden) {
     return apps;
   }

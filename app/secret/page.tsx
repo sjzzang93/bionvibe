@@ -141,7 +141,7 @@ export default function SecretPage() {
           <h2 className="text-3xl font-bold text-white mb-6 text-center">
             🛠️ 관리 도구
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/secret/contacts"
               className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-green-500/50 transition-all"
@@ -159,6 +159,12 @@ export default function SecretPage() {
               className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-purple-500/50 transition-all"
             >
               🖼️ 이미지 관리
+            </Link>
+            <Link
+              href="/secret/dev-glossary"
+              className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-orange-500/50 transition-all"
+            >
+              📖 개발자 용어 사전
             </Link>
           </div>
         </div>

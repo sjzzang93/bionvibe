@@ -1,291 +1,242 @@
 'use client';
 
-import { useState } from 'react';
-import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import React, { useMemo, useState } from 'react';
 import PremiumCard from '@/app/components/ui/PremiumCard';
-import PremiumHeader from '@/app/components/ui/PremiumHeader';
-import PremiumButton from '@/app/components/ui/PremiumButton';
-import RelatedApps from '@/app/components/RelatedApps';
-import { BREAKFAST_DATA } from '@/lib/group1-data';
 
-export default function BreakfastRecommend() {
-  const [timeAvailable, setTimeAvailable] = useState(15);
-  const [goal, setGoal] = useState('건강식');
-  const [difficulty, setDifficulty] = useState('쉬움');
-  const [result, setResult] = useState<any>(null);
+type MenuItem = {
+  name: string;
+  emoji: string;
+  category: '한식' | '양식' | '간편식' | '카페';
+  desc: string;
+  time: string;     // 예: "준비 시간: 5분" / "조리 시간: 10분"
+  kcal: number;     // 대략치
+};
 
-  const recommend = () => {
-    // 시간, 목표, 난이도에 맞는 레시피 필터링
-    const filtered = BREAKFAST_DATA.recipes.filter((recipe: any) => {
-      const totalTime = recipe.prepTime + recipe.cookTime;
-      return totalTime <= timeAvailable && 
-             recipe.category.includes(goal) && 
-             recipe.difficulty === difficulty;
-    });
+const MENU_DATA: MenuItem[] = [
+  // 한식 (10개)
+  { name: '김치찌개', emoji: '🥘', category: '한식', desc: '든든한 한 끼!', time: '조리 시간: 12분', kcal: 420 },
+  { name: '된장찌개', emoji: '🍲', category: '한식', desc: '구수하게 속을 데워요', time: '조리 시간: 12분', kcal: 380 },
+  { name: '계란말이', emoji: '🍳', category: '한식', desc: '단백질 보충 딱!', time: '조리 시간: 8분', kcal: 280 },
+  { name: '김밥', emoji: '🍙', category: '한식', desc: '손에 들고 뚝딱', time: '준비 시간: 5분', kcal: 350 },
+  { name: '주먹밥', emoji: '🍙', category: '한식', desc: '간단하지만 포만감 좋아요', time: '준비 시간: 4분', kcal: 320 },
+  { name: '토스트(한식 스타일)', emoji: '🍞', category: '한식', desc: '달걀+케찹 국민조합', time: '조리 시간: 5분', kcal: 330 },
+  { name: '삼각김밥', emoji: '🍙', category: '한식', desc: '출근길에 딱!', time: '구매: 1분', kcal: 220 },
+  { name: '떡볶이', emoji: '🍢', category: '한식', desc: '매콤하게 기상!', time: '조리 시간: 10분', kcal: 480 },
+  { name: '라면', emoji: '🍜', category: '한식', desc: '빠르고 든든', time: '조리 시간: 5분', kcal: 430 },
+  { name: '컵라면', emoji: '🥡', category: '한식', desc: '물만 부으면 OK', time: '조리 시간: 3분', kcal: 350 },
 
-    // 랜덤으로 3개 추천
-    const shuffled = filtered.sort(() => 0.5 - Math.random());
-    const recommended = shuffled.slice(0, 3);
+  // 양식 (10개)
+  { name: '시리얼', emoji: '🥣', category: '양식', desc: '아주 빠르고 가벼워요', time: '준비 시간: 1분', kcal: 220 },
+  { name: '오트밀', emoji: '🌾', category: '양식', desc: '포만감 좋은 건강 한 그릇', time: '조리 시간: 3분', kcal: 260 },
+  { name: '요거트', emoji: '🧉', category: '양식', desc: '상큼하게 시작', time: '준비 시간: 1분', kcal: 180 },
+  { name: '스크램블 에그', emoji: '🍳', category: '양식', desc: '부드럽고 고소해요', time: '조리 시간: 5분', kcal: 250 },
+  { name: '샌드위치', emoji: '🥪', category: '양식', desc: '잡고 먹기 편해요', time: '준비 시간: 5분', kcal: 360 },
+  { name: '베이글', emoji: '🥯', category: '양식', desc: '크림치즈 한 스푼', time: '준비 시간: 3분', kcal: 310 },
+  { name: '크루아상', emoji: '🥐', category: '양식', desc: '버터 향 가득', time: '준비 시간: 1분', kcal: 270 },
+  { name: '팬케이크', emoji: '🥞', category: '양식', desc: '달콤한 아침', time: '조리 시간: 10분', kcal: 420 },
+  { name: '와플', emoji: '🧇', category: '양식', desc: '겉바속촉의 행복', time: '조리 시간: 8분', kcal: 410 },
+  { name: '그래놀라', emoji: '🥣', category: '양식', desc: '우유/요거트와 찰떡', time: '준비 시간: 1분', kcal: 280 },
 
-    setResult(recommended);
+  // 간편식 (10개)
+  { name: '편의점 도시락', emoji: '🍱', category: '간편식', desc: '전자레인지로 뚝딱', time: '조리 시간: 3분', kcal: 600 },
+  { name: '삼각김밥(간편)', emoji: '🍙', category: '간편식', desc: '한 손에 착', time: '구매: 1분', kcal: 220 },
+  { name: '컵라면(간편)', emoji: '🥡', category: '간편식', desc: '따뜻하게 빠르게', time: '조리 시간: 3분', kcal: 350 },
+  { name: '빵+우유', emoji: '🥖', category: '간편식', desc: '정말 바쁠 때', time: '준비 시간: 1분', kcal: 300 },
+  { name: '에너지바', emoji: '🍫', category: '간편식', desc: '주머니 속 비상식', time: '준비 시간: 0분', kcal: 200 },
+  { name: '프로틴 쉐이크', emoji: '🥤', category: '간편식', desc: '단백질 든든 보충', time: '준비 시간: 1분', kcal: 220 },
+  { name: '바나나+우유', emoji: '🍌', category: '간편식', desc: '부드럽게 든든', time: '준비 시간: 1분', kcal: 240 },
+  { name: '사과', emoji: '🍎', category: '간편식', desc: '상큼하게 리프레시', time: '준비 시간: 0분', kcal: 95 },
+  { name: '초코파이', emoji: '🍪', category: '간편식', desc: '달달한 당충전', time: '준비 시간: 0분', kcal: 230 },
+  { name: '약과', emoji: '🧁', category: '간편식', desc: '고소하고 달달', time: '준비 시간: 0분', kcal: 210 },
+
+  // 카페 메뉴 (10개)
+  { name: '아메리카노+크루아상', emoji: '☕️🥐', category: '카페', desc: '카페 감성 충전', time: '준비 시간: 2분', kcal: 300 },
+  { name: '라떼+샌드위치', emoji: '☕️🥪', category: '카페', desc: '든든한 브런치 느낌', time: '준비 시간: 4분', kcal: 420 },
+  { name: '스무디', emoji: '🫐', category: '카페', desc: '과일로 상큼하게', time: '준비 시간: 3분', kcal: 250 },
+  { name: '에그 샌드위치', emoji: '🥪🍳', category: '카페', desc: '부드러운 식감', time: '준비 시간: 4분', kcal: 380 },
+  { name: '베이글 샌드위치', emoji: '🥯🥬', category: '카페', desc: '씹는 맛이 좋아요', time: '준비 시간: 5분', kcal: 420 },
+  { name: '아침 세트', emoji: '🍽️', category: '카페', desc: '커피+빵+계란 세트', time: '준비 시간: 5분', kcal: 500 },
+  { name: '그릭 요거트', emoji: '🥛🍓', category: '카페', desc: '담백하고 고소해요', time: '준비 시간: 2분', kcal: 220 },
+  { name: '아사이볼', emoji: '🫐🥣', category: '카페', desc: '슈퍼푸드로 상쾌하게', time: '준비 시간: 4분', kcal: 300 },
+  { name: '과일 샐러드', emoji: '🥗', category: '카페', desc: '가볍고 신선해요', time: '준비 시간: 3분', kcal: 200 },
+  { name: '모닝빵', emoji: '🥯', category: '카페', desc: '부드럽게 한입씩', time: '준비 시간: 1분', kcal: 260 },
+];
+
+function useRandomPicker(items: MenuItem[]) {
+  const [lastName, setLastName] = useState<string | null>(null);
+
+  const pick = () => {
+    if (items.length === 0) return null;
+    if (items.length === 1) return items[0];
+
+    // 연속 동일 메뉴 방지
+    let candidate: MenuItem | null = null;
+    for (let i = 0; i < 10; i++) {
+      const idx = Math.floor(Math.random() * items.length);
+      const tryItem = items[idx];
+      if (tryItem.name !== lastName) {
+        candidate = tryItem;
+        break;
+      }
+    }
+    if (!candidate) candidate = items[Math.floor(Math.random() * items.length)];
+    setLastName(candidate.name);
+    return candidate;
   };
 
+  return pick;
+}
+
+export default function BreakfastWhatToEatPage() {
+  const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [loading, setLoading] = useState(false);
+  const pickRandom = useRandomPicker(MENU_DATA);
+
+  const handleDraw = async () => {
+    setLoading(true);
+    // 0.5초 로딩 애니메이션
+    await new Promise((r) => setTimeout(r, 500));
+    const item = pickRandom();
+    setSelected(item);
+    setLoading(false);
+  };
+
+  const title = useMemo(() => '오늘 아침 뭐먹지? 🍳', []);
+  const subtitle = useMemo(() => '고민하지 말고 바로 결정!', []);
+
   return (
-    <PremiumLayout theme="orange">
-      <div className="py-8 px-2 sm:px-4 md:py-12">
-        <div className="max-w-4xl mx-auto">
-          <PremiumHeader 
-            icon="🍳"
-            title="아침식사 추천"
-            subtitle="시간과 목표에 맞는 완벽한 아침 메뉴"
-            gradient="from-orange-200 via-amber-200 to-yellow-200"
-          />
-
-          {!result ? (
-            <PremiumCard gradient className="animate-slideUp">
-              <div className="space-y-6">
-                <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">
-                    ⏰ 가능한 시간: {timeAvailable}분
-                  </label>
-                  <input
-                    type="range"
-                    min="5"
-                    max="60"
-                    value={timeAvailable}
-                    onChange={(e) => setTimeAvailable(Number(e.target.value))}
-                    className="w-full h-3 rounded-lg appearance-none cursor-pointer"
-                    style={{
-                      background: `linear-gradient(to right, #f59e0b 0%, #f59e0b ${(timeAvailable - 5) / 55 * 100}%, rgba(255,255,255,0.3) ${(timeAvailable - 5) / 55 * 100}%, rgba(255,255,255,0.3) 100%)`
-                    }}
-                  />
-                  <div className="flex justify-between text-sm text-white/80 mt-2">
-                    <span>5분</span>
-                    <span>30분</span>
-                    <span>60분</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">🎯 목표</label>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
-                    {['한식', '양식', '간편식', '건강식', '다이어트'].map((g) => (
-                      <button
-                        key={g}
-                        onClick={() => setGoal(g)}
-                        className={`py-4 rounded-xl font-bold transition-all ${
-                          goal === g
-                            ? 'bg-white text-orange-600 scale-105 shadow-xl'
-                            : 'bg-white/20 text-white hover:bg-white/30'
-                        }`}
-                      >
-                        {g}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">👨‍🍳 난이도</label>
-                  <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
-                    {['쉬움', '보통', '어려움'].map((d) => (
-                      <button
-                        key={d}
-                        onClick={() => setDifficulty(d)}
-                        className={`py-4 rounded-xl font-bold transition-all ${
-                          difficulty === d
-                            ? 'bg-white text-orange-600 scale-105 shadow-xl'
-                            : 'bg-white/20 text-white hover:bg-white/30'
-                        }`}
-                      >
-                        {d}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <PremiumButton
-                  onClick={recommend}
-                  variant="success"
-                  size="lg"
-                  icon="🍳"
-                  fullWidth
-                >
-                  추천받기
-                </PremiumButton>
-              </div>
-            </PremiumCard>
-          ) : (
-            <div className="space-y-6">
-              <div className="text-center mb-8">
-                <h2 className="text-4xl font-bold text-white mb-2">🎉 맞춤 추천 레시피</h2>
-                <p className="text-white/80">당신의 조건에 딱 맞는 아침 메뉴입니다</p>
-              </div>
-
-              {result.length > 0 ? (
-                <div className="grid gap-6">
-                  {result.map((recipe: any, index: number) => (
-                    <PremiumCard key={index} hover className="animate-fadeIn" style={{ animationDelay: `${index * 0.1}s` }}>
-                      <div className="flex justify-between items-start mb-4">
-                        <div className="flex-1">
-                          <h3 className="text-2xl font-bold text-white mb-2">{recipe.name}</h3>
-                          <div className="flex gap-2 flex-wrap">
-                            <span className="px-3 py-1 bg-orange-500 text-white rounded-full text-sm font-bold">
-                              {recipe.category}
-                            </span>
-                            <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-bold">
-                              {recipe.difficulty}
-                            </span>
-                            <span className="px-3 py-1 bg-green-500 text-white rounded-full text-sm font-bold">
-                              {recipe.servings}인분
-                            </span>
-                          </div>
-                        </div>
-                        <div className="text-right ml-4">
-                          <div className="text-4xl font-bold text-orange-300">
-                            {recipe.prepTime + recipe.cookTime}분
-                          </div>
-                          <div className="text-sm text-white/70">총 시간</div>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4 mb-4">
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-2 sm:p-3 md:p-4 border border-white/20">
-                          <h4 className="font-bold text-white mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
-                            📊 영양 정보
-                          </h4>
-                          <div className="grid grid-cols-3 gap-2 text-sm">
-                            <div className="text-white/90">칼로리: <span className="font-bold text-orange-300">{recipe.nutrition?.calories}kcal</span></div>
-                            <div className="text-white/90">단백질: <span className="font-bold text-blue-300">{recipe.nutrition?.protein}g</span></div>
-                            <div className="text-white/90">탄수화물: <span className="font-bold text-yellow-300">{recipe.nutrition?.carbs}g</span></div>
-                            <div className="text-white/90">지방: <span className="font-bold text-red-300">{recipe.nutrition?.fat}g</span></div>
-                          </div>
-                        </div>
-
-                        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-2 sm:p-3 md:p-4 border border-white/20">
-                          <h4 className="font-bold text-white mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
-                            💪 건강 효과
-                          </h4>
-                          <div className="space-y-1">
-                            {recipe.benefits?.slice(0, 3).map((benefit: string, i: number) => (
-                              <div key={i} className="text-sm text-white/90 flex items-start gap-2">
-                                <span className="text-green-400">✓</span>
-                                <span>{benefit}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-yellow-500/20 backdrop-blur-sm rounded-xl p-2 sm:p-3 md:p-4 border border-yellow-400/30">
-                        <h4 className="font-bold text-white mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
-                          🥘 필요한 재료
-                        </h4>
-                        <div className="grid grid-cols-3 gap-2">
-                          {recipe.ingredients?.slice(0, 6).map((ing: any, i: number) => (
-                            <div key={i} className="text-sm text-white/90">
-                              • {ing.name} <span className="text-yellow-300 font-bold">{ing.amount}</span>
-                            </div>
-                          ))}
-                          {recipe.ingredients?.length > 6 && (
-                            <div className="text-sm text-white/70 italic col-span-2">
-                              외 {recipe.ingredients.length - 6}개...
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {recipe.steps && recipe.steps.length > 0 && (
-                        <div className="mt-4 bg-white/10 backdrop-blur-sm rounded-xl p-2 sm:p-3 md:p-4 border border-white/20">
-                          <h4 className="font-bold text-white mb-0.5 sm:mb-1.5 md:mb-2 flex items-center gap-2">
-                            📝 조리 방법
-                          </h4>
-                          <div className="space-y-2">
-                            {recipe.steps.slice(0, 3).map((step: string, i: number) => (
-                              <div key={i} className="text-sm text-white/90 flex gap-2">
-                                <span className="font-bold text-orange-300">{i + 1}.</span>
-                                <span>{step}</span>
-                              </div>
-                            ))}
-                            {recipe.steps.length > 3 && (
-                              <div className="text-sm text-white/70 italic">
-                                외 {recipe.steps.length - 3}단계...
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </PremiumCard>
-                  ))}
-                </div>
-              ) : (
-                <PremiumCard className="text-center py-12">
-                  <div className="text-6xl mb-4 animate-float">😅</div>
-                  <p className="text-white text-xl font-bold mb-4">
-                    조건에 맞는 레시피가 없습니다
-                  </p>
-                  <p className="text-white/70">
-                    시간이나 난이도를 조정해보세요
-                  </p>
-                </PremiumCard>
-              )}
-
-              <PremiumButton
-                onClick={() => setResult(null)}
-                variant="secondary"
-                size="lg"
-                icon="🔄"
-                fullWidth
-              >
-                다시 추천받기
-              </PremiumButton>
-            </div>
-          )}
-
-          {/* Related Apps */}
-          <div className="mt-12 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-            <RelatedApps 
-              relatedAppIds={['calorie-calculator', 'water-intake', 'coffee-calculator', 'habit-tracker']} 
-              currentAppId="breakfast-what-to-eat" 
-            />
+    <div className="min-h-[100dvh] w-full bg-gradient-to-b from-orange-50 to-yellow-50 dark:from-zinc-900 dark:to-zinc-900 flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-md">
+        <PremiumCard className="relative rounded-3xl shadow-2xl [transform:translateZ(0)] bg-white/80 dark:bg-zinc-950/70 backdrop-blur-md border border-white/40 dark:border-white/10">
+          {/* 헤더 */}
+          <div className="text-center pt-6 px-6">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+              {title}
+            </h1>
+            <p className="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-300">
+              {subtitle}
+            </p>
           </div>
-        </div>
+
+          {/* 콘텐츠 */}
+          <div className="px-6 pb-6">
+            {/* 첫 화면: 큰 버튼 */}
+            {!selected && (
+              <div className="mt-8 flex flex-col items-center">
+                <button
+                  onClick={handleDraw}
+                  disabled={loading}
+                  className={`w-full h-14 sm:h-16 rounded-2xl text-lg sm:text-xl font-semibold transition-all
+                    bg-gradient-to-r from-amber-400 to-orange-400 text-zinc-900
+                    hover:scale-[1.02] active:scale-[0.98] shadow-lg
+                    disabled:opacity-70 disabled:cursor-not-allowed`}
+                >
+                  {loading ? (
+                    <span className="inline-flex items-center gap-2">
+                      <Spinner />
+                      뽑는 중...
+                    </span>
+                  ) : (
+                    '메뉴 뽑기'
+                  )}
+                </button>
+
+                <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-400">
+                  버튼을 누르면 랜덤으로 추천해드릴게요.
+                </p>
+              </div>
+            )}
+
+            {/* 결과 화면 */}
+            {selected && (
+              <div
+                key={selected.name}
+                className="mt-6 animate-fadeIn"
+                style={{
+                  animationDuration: '420ms',
+                  animationTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+                }}
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="text-6xl sm:text-7xl drop-shadow-sm">
+                    {selected.emoji}
+                  </div>
+                  <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white">
+                    {selected.name}
+                  </h2>
+                  <div className="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-300">
+                    {selected.desc}
+                  </div>
+
+                  <div className="mt-4 grid grid-cols-2 gap-3 w-full">
+                    <InfoPill label="시간" value={selected.time} />
+                    <InfoPill label="칼로리" value={`약 ${selected.kcal}kcal`} />
+                  </div>
+
+                  <button
+                    onClick={handleDraw}
+                    disabled={loading}
+                    className={`mt-6 w-full h-12 rounded-xl text-base font-semibold transition-all
+                      bg-zinc-900 text-white dark:bg-white dark:text-zinc-900
+                      hover:scale-[1.01] active:scale-[0.98] shadow-md
+                      disabled:opacity-70 disabled:cursor-not-allowed`}
+                  >
+                    {loading ? (
+                      <span className="inline-flex items-center gap-2">
+                        <Spinner />
+                        다시 뽑는 중...
+                      </span>
+                    ) : (
+                      '다시 뽑기'
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </PremiumCard>
       </div>
 
-      <style jsx>{`
+      {/* 페이드인 키프레임 (Tailwind 임베디드) */}
+      <style jsx global>{`
         @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(6px);
           }
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
         .animate-fadeIn {
-          animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        .animate-slideUp {
-          animation: slideUp 0.8s ease-out forwards;
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
+          animation-name: fadeIn;
         }
       `}</style>
-    </PremiumLayout>
+    </div>
+  );
+}
+
+/** 작은 정보 알약 컴포넌트 */
+function InfoPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="w-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/60 px-4 py-3 text-left">
+      <div className="text-[11px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        {label}
+      </div>
+      <div className="text-sm sm:text-base font-medium text-zinc-900 dark:text-white">
+        {value}
+      </div>
+    </div>
+  );
+}
+
+/** 0.5초 로딩에 쓰는 심플 스피너 */
+function Spinner() {
+  return (
+    <span
+      className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-zinc-900/30 border-t-zinc-900 dark:border-white/30 dark:border-t-white"
+      aria-hidden
+    />
   );
 }

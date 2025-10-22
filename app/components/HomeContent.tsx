@@ -15,10 +15,31 @@ export default function HomeContent() {
 
   // Supabase에서 앱 데이터 가져오기
   useEffect(() => {
-    getAllAppsAsync().then(apps => {
-      setAllApps(apps);
-      setLoading(false);
-    });
+    const loadApps = async () => {
+      try {
+        // 초기 로드 시 캐시 사용
+        const apps = await getAllAppsAsync(false, false);
+        setAllApps(apps);
+        setLoading(false);
+      } catch (error) {
+        console.error('Failed to load apps:', error);
+        setLoading(false);
+      }
+    };
+
+    loadApps();
+
+    // 5분마다 자동 갱신 (이미지 업데이트 반영)
+    const interval = setInterval(async () => {
+      try {
+        const apps = await getAllAppsAsync(false, true); // 캐시 우회
+        setAllApps(apps);
+      } catch (error) {
+        console.error('Failed to refresh apps:', error);
+      }
+    }, 5 * 60 * 1000); // 5분
+
+    return () => clearInterval(interval);
   }, []);
 
   // 클라이언트 마운트 확인
@@ -149,7 +170,7 @@ export default function HomeContent() {
                   </span>
                 </div>
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-4">
-                  {favoriteApps.map((app) => (
+                  {favoriteApps.map((app, index) => (
                     <Link
                       key={app.id}
                       href={app.url}
@@ -169,7 +190,8 @@ export default function HomeContent() {
                             fill
                             sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
                             className="object-cover group-hover:scale-110 transition-transform duration-300"
-                            loading="lazy"
+                            priority={index < 6}
+                            loading={index < 6 ? undefined : "lazy"}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                         </div>
@@ -187,7 +209,7 @@ export default function HomeContent() {
             )}
 
             {/* 카테고리별 앱 섹션 */}
-            {appsByCategory.map((category) => (
+            {appsByCategory.map((category, categoryIndex) => (
               <div key={category.id} className="mb-12">
                 <div className="sticky top-16 z-20 flex items-center gap-3 mb-6 py-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm">
                   <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-200">
@@ -198,7 +220,7 @@ export default function HomeContent() {
                   </span>
                 </div>
                 <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-4">
-                  {category.apps.map((app) => (
+                  {category.apps.map((app, appIndex) => (
                     <Link
                       key={app.id}
                       href={app.url}
@@ -218,7 +240,8 @@ export default function HomeContent() {
                             fill
                             sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
                             className="object-cover group-hover:scale-110 transition-transform duration-300"
-                            loading="lazy"
+                            priority={categoryIndex === 0 && appIndex < 6 && favoriteApps.length === 0}
+                            loading={categoryIndex === 0 && appIndex < 6 && favoriteApps.length === 0 ? undefined : "lazy"}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                         </div>

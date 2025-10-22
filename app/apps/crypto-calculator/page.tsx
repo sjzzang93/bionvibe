@@ -39,34 +39,25 @@ export default function CryptoKimchiPremium() {
   const fetchCryptoData = useCallback(async () => {
     setLoading(true);
     try {
-      // 1. 실시간 환율 조회
-      const exchangeResponse = await fetch(
-        'https://api.exchangerate-api.com/v4/latest/USD'
-      );
-      const exchangeData = await exchangeResponse.json();
-      const currentRate = exchangeData.rates.KRW;
-      setExchangeRate(currentRate);
-
-      // 2. 업비트 API - 한국 시장 가격 (KRW)
-      const upbitMarket = selectedCrypto.symbol === 'BTC' ? 'KRW-BTC' : 
-                         selectedCrypto.symbol === 'ETH' ? 'KRW-ETH' :
-                         selectedCrypto.symbol === 'XRP' ? 'KRW-XRP' :
-                         selectedCrypto.symbol === 'SOL' ? 'KRW-SOL' :
-                         'KRW-ADA';
+      // Next.js API 라우트를 통해 서버사이드에서 API 호출
+      const response = await fetch(`/api/crypto-price?symbol=${selectedCrypto.symbol}`);
       
-      const upbitResponse = await fetch(
-        `https://api.upbit.com/v1/ticker?markets=${upbitMarket}`
-      );
-      const upbitData = await upbitResponse.json();
-      const krwPrice = upbitData[0]?.trade_price || 0;
+      if (!response.ok) {
+        throw new Error('API 호출 실패');
+      }
 
-      // 3. 바이낸스 API - 글로벌 시장 가격 (USDT)
-      const binanceSymbol = `${selectedCrypto.symbol}USDT`;
-      const binanceResponse = await fetch(
-        `https://api.binance.com/api/v3/ticker/24hr?symbol=${binanceSymbol}`
-      );
-      const binanceData = await binanceResponse.json();
-      const usdPrice = parseFloat(binanceData.lastPrice || '0');
+      const result = await response.json();
+      
+      if (!result.success) {
+        throw new Error(result.error || 'API 호출 실패');
+      }
+
+      const { exchangeRate: currentRate, upbit, binance } = result.data;
+      
+      setExchangeRate(currentRate);
+      
+      const krwPrice = upbit?.trade_price || 0;
+      const usdPrice = parseFloat(binance?.lastPrice || '0');
       
       // 글로벌 평균 가격 (USD를 실시간 환율로 환산)
       const globalPriceKRW = usdPrice * currentRate;
@@ -75,41 +66,42 @@ export default function CryptoKimchiPremium() {
       const kimchi = ((krwPrice - globalPriceKRW) / globalPriceKRW) * 100;
 
       // 국내 거래소 (업비트 기준으로 약간의 변동)
+      const upbitVolume = upbit?.acc_trade_price_24h || 0;
       const koreanExchanges: ExchangePrice[] = [
         {
           name: '업비트',
           price: krwPrice,
-          volume: upbitData[0]?.acc_trade_price_24h || 0,
+          volume: upbitVolume,
           lastUpdate: new Date().toLocaleTimeString('ko-KR')
         },
         {
           name: '빗썸',
           price: krwPrice * (1 + (Math.random() * 0.003 - 0.0015)),
-          volume: (upbitData[0]?.acc_trade_price_24h || 0) * 0.85,
+          volume: upbitVolume * 0.85,
           lastUpdate: new Date().toLocaleTimeString('ko-KR')
         },
         {
           name: '코인원',
           price: krwPrice * (1 + (Math.random() * 0.004 - 0.002)),
-          volume: (upbitData[0]?.acc_trade_price_24h || 0) * 0.5,
+          volume: upbitVolume * 0.5,
           lastUpdate: new Date().toLocaleTimeString('ko-KR')
         },
         {
           name: '코빗',
           price: krwPrice * (1 + (Math.random() * 0.005 - 0.0025)),
-          volume: (upbitData[0]?.acc_trade_price_24h || 0) * 0.3,
+          volume: upbitVolume * 0.3,
           lastUpdate: new Date().toLocaleTimeString('ko-KR')
         },
         {
           name: '고팍스',
           price: krwPrice * (1 + (Math.random() * 0.006 - 0.003)),
-          volume: (upbitData[0]?.acc_trade_price_24h || 0) * 0.2,
+          volume: upbitVolume * 0.2,
           lastUpdate: new Date().toLocaleTimeString('ko-KR')
         }
       ];
 
       // 해외 거래소 (바이낸스 기준으로 KRW 환산)
-      const binanceVolume = parseFloat(binanceData.quoteVolume || '0') * currentRate;
+      const binanceVolume = parseFloat(binance?.quoteVolume || '0') * currentRate;
       const globalExchanges: ExchangePrice[] = [
         {
           name: '바이낸스',

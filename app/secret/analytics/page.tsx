@@ -2,9 +2,86 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { getBrowserSupabase } from '@/lib/supabase';
+
+interface AnalyticsStats {
+  todayVisits: number;
+  pageViews: number;
+  avgDuration: number;
+  realtimeUsers: number;
+}
 
 export default function AnalyticsPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [stats, setStats] = useState<AnalyticsStats>({
+    todayVisits: 0,
+    pageViews: 0,
+    avgDuration: 0,
+    realtimeUsers: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  // Supabase에서 실시간 통계 가져오기
+  useEffect(() => {
+    const supabase = getBrowserSupabase();
+    
+    const fetchAnalytics = async () => {
+      try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // 오늘 방문자 수
+        const { count: todayCount } = await supabase
+          .from('analytics')
+          .select('*', { count: 'exact', head: true })
+          .gte('created_at', today.toISOString());
+        
+        // 총 페이지뷰 (오늘)
+        const { data: pageViewData } = await supabase
+          .from('analytics')
+          .select('page_views')
+          .gte('created_at', today.toISOString());
+        
+        const totalPageViews = pageViewData?.reduce((sum, item) => sum + (item.page_views || 1), 0) || 0;
+        
+        // 평균 체류시간 (오늘)
+        const { data: durationData } = await supabase
+          .from('analytics')
+          .select('duration')
+          .gte('created_at', today.toISOString())
+          .not('duration', 'is', null);
+        
+        const avgDuration = durationData && durationData.length > 0
+          ? durationData.reduce((sum, item) => sum + (item.duration || 0), 0) / durationData.length / 60
+          : 0;
+        
+        // 실시간 사용자 (최근 5분)
+        const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+        const { count: realtimeCount } = await supabase
+          .from('analytics')
+          .select('*', { count: 'exact', head: true })
+          .gte('created_at', fiveMinutesAgo.toISOString());
+        
+        setStats({
+          todayVisits: todayCount || 0,
+          pageViews: totalPageViews,
+          avgDuration: Math.round(avgDuration * 10) / 10,
+          realtimeUsers: realtimeCount || 0,
+        });
+        setLoading(false);
+      } catch (error) {
+        console.error('Analytics fetch error:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchAnalytics();
+    
+    // 30초마다 갱신
+    const interval = setInterval(fetchAnalytics, 30000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -45,27 +122,33 @@ export default function AnalyticsPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 backdrop-blur-lg rounded-xl p-6 border border-blue-400/30">
             <div className="text-blue-400 text-sm font-semibold mb-2">실시간 사용자</div>
-            <div className="text-white text-4xl font-bold mb-1">
-              <span className="animate-pulse">●</span> --
+            <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
+              <span className="animate-pulse">●</span> {loading ? '--' : stats.realtimeUsers.toLocaleString()}
             </div>
             <div className="text-white/60 text-xs">지금 접속 중</div>
           </div>
 
           <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-lg rounded-xl p-6 border border-green-400/30">
             <div className="text-green-400 text-sm font-semibold mb-2">오늘 방문자</div>
-            <div className="text-white text-4xl font-bold mb-1">--</div>
+            <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
+              {loading ? '--' : stats.todayVisits.toLocaleString()}
+            </div>
             <div className="text-white/60 text-xs">총 세션</div>
           </div>
 
           <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-lg rounded-xl p-6 border border-purple-400/30">
             <div className="text-purple-400 text-sm font-semibold mb-2">페이지뷰</div>
-            <div className="text-white text-4xl font-bold mb-1">--</div>
+            <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
+              {loading ? '--' : stats.pageViews.toLocaleString()}
+            </div>
             <div className="text-white/60 text-xs">총 조회수</div>
           </div>
 
           <div className="bg-gradient-to-br from-pink-500/20 to-pink-600/20 backdrop-blur-lg rounded-xl p-6 border border-pink-400/30">
             <div className="text-pink-400 text-sm font-semibold mb-2">평균 체류시간</div>
-            <div className="text-white text-4xl font-bold mb-1">--</div>
+            <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
+              {loading ? '--' : stats.avgDuration.toLocaleString()}
+            </div>
             <div className="text-white/60 text-xs">분</div>
           </div>
         </div>
