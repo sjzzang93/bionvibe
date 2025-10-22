@@ -90,7 +90,7 @@ export function Navigation() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/70 dark:bg-black/90 backdrop-blur-xl border-b-2 border-black dark:border-gray-700 shadow-sm transition-colors">
+    <nav className="sticky top-0 z-50 bg-white dark:bg-black backdrop-blur-xl border-b-2 border-black dark:border-gray-700 shadow-sm transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <button 
