@@ -1,19 +1,22 @@
 -- 방명록 삭제 기능 수정
--- chat_messages 테이블의 DELETE 정책 추가/수정
+-- chat_messages 테이블의 DELETE 정책 수정
 
--- 기존 DELETE 정책 삭제
+-- 1단계: 기존 모든 DELETE 정책 삭제
+DROP POLICY IF EXISTS "Allow delete for everyone" ON public.chat_messages;
 DROP POLICY IF EXISTS "Anyone can delete messages" ON public.chat_messages;
 DROP POLICY IF EXISTS "Enable delete for all users" ON public.chat_messages;
 DROP POLICY IF EXISTS "Delete messages" ON public.chat_messages;
+DROP POLICY IF EXISTS "Enable delete access for all users" ON public.chat_messages;
+DROP POLICY IF EXISTS "Public can delete" ON public.chat_messages;
 
--- 새로운 DELETE 정책 생성 (모든 사용자가 삭제 가능)
-CREATE POLICY "Allow delete for everyone"
+-- 2단계: 새로운 DELETE 정책 생성 (모든 사용자가 삭제 가능)
+CREATE POLICY "chat_messages_delete_policy"
   ON public.chat_messages
   FOR DELETE
   TO public
   USING (true);
 
--- 정책 확인
+-- 3단계: 정책 확인
 SELECT 
   schemaname,
   tablename,
@@ -25,7 +28,7 @@ FROM pg_policies
 WHERE tablename = 'chat_messages'
 ORDER BY cmd, policyname;
 
--- RLS 활성화 상태 확인
+-- 4단계: RLS 활성화 상태 확인
 SELECT 
   schemaname,
   tablename,
@@ -33,3 +36,6 @@ SELECT
 FROM pg_tables
 WHERE tablename = 'chat_messages';
 
+-- 결과 확인:
+-- - DELETE 정책이 1개 있어야 함 (chat_messages_delete_policy)
+-- - rowsecurity = true 여야 함
