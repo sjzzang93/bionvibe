@@ -183,9 +183,9 @@ export default function CryptoKimchiPremium() {
         {/* 헤더 */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-2">
-            💎 암호화폐 김프 계산기
+            💎 가상화폐 실시간 시세
           </h1>
-          <p className="text-purple-200 text-lg">실시간 국내/해외 거래소 가격 비교</p>
+          <p className="text-purple-200 text-lg">비트코인, 이더리움 등 실시간 시세 조회</p>
           {lastUpdate && (
             <p className="text-purple-300 text-sm mt-2">
               마지막 업데이트: {lastUpdate.toLocaleTimeString('ko-KR')} (30초마다 자동 갱신)

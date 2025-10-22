@@ -98,10 +98,10 @@
     },
     {
       "id": "crypto-calculator",
-      "name": "암호화폐 김프 계산기",
+      "name": "가상화폐 실시간 시세",
       "slug": "crypto-calculator",
       "icon": "💎",
-      "description": "실시간 김치 프리미엄 계산",
+      "description": "비트코인, 이더리움 등 실시간 시세 조회",
       "categoryId": "money-calc",
       "url": "/apps/crypto-calculator",
       "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&auto=format&fit=crop",
