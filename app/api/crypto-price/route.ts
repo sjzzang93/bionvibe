@@ -57,26 +57,6 @@ export async function GET(request: NextRequest) {
 
     const upbitData = await upbitResponse.json();
 
-    // 3. 바이낸스 API - 글로벌 시장 가격
-    const binanceSymbol = `${symbol}USDT`;
-    const binanceResponse = await fetchWithTimeout(
-      `https://api.binance.com/api/v3/ticker/24hr?symbol=${binanceSymbol}`,
-      { 
-        cache: 'no-store',
-        headers: { 
-          'Accept': 'application/json',
-          'User-Agent': 'Mozilla/5.0'
-        }
-      }
-    );
-
-    if (!binanceResponse.ok) {
-      console.error('바이낸스 API 조회 실패:', binanceResponse.status, binanceResponse.statusText);
-      throw new Error(`바이낸스 API 조회 실패: ${binanceResponse.status}`);
-    }
-
-    const binanceData = await binanceResponse.json();
-
     // 응답 데이터 구성 (CORS 헤더 추가)
     return NextResponse.json(
       {
@@ -84,7 +64,6 @@ export async function GET(request: NextRequest) {
         data: {
           exchangeRate: currentRate,
           upbit: upbitData[0],
-          binance: binanceData,
           timestamp: new Date().toISOString()
         }
       },
