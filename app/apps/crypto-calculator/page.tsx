@@ -95,9 +95,9 @@ export default function BitcoinVsGold() {
               changePct24h: btcData.signed_change_rate * 100
             },
             gold: {
-              buy: goldResult.data.buy,
-              sell: goldResult.data.sell,
-              change: goldResult.data.changePrice,
+              buy: goldResult.data.buy * 3.75,  // 1g → 3.75g (한 돈)
+              sell: goldResult.data.sell * 3.75,  // 1g → 3.75g (한 돈)
+              change: goldResult.data.changePrice * 3.75,  // 1g → 3.75g (한 돈)
               changePct: goldResult.data.change
             },
             exchangeRate: btcResult.data.exchangeRate
@@ -181,7 +181,7 @@ export default function BitcoinVsGold() {
             ⚡💰
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-2 sm:mb-3 bg-gradient-to-r from-yellow-200 via-orange-200 to-amber-200 bg-clip-text text-transparent drop-shadow-2xl">
-            비트코인 vs 금
+            비트코인 vs 순금
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-white/90 mb-2">상승률 비교 & 투자 시뮬레이션</p>
           {lastUpdate && (
@@ -242,7 +242,7 @@ export default function BitcoinVsGold() {
 
                 <div className="text-center relative">
                   <div className="text-5xl sm:text-6xl mb-3">🏆</div>
-                  <h2 className="text-xl sm:text-2xl font-black text-white mb-2">금 (1g)</h2>
+                  <h2 className="text-xl sm:text-2xl font-black text-white mb-2">순금 (1돈)</h2>
                   <div className="text-3xl sm:text-4xl font-black text-white mb-2">
                     ₩{priceData.gold.buy.toLocaleString()}
                   </div>
@@ -332,11 +332,11 @@ export default function BitcoinVsGold() {
                   </div>
                 </div>
 
-                {/* 금 결과 */}
+                {/* 순금 결과 */}
                 <div className="bg-gradient-to-br from-yellow-600/50 to-amber-700/50 backdrop-blur-lg rounded-2xl p-5 sm:p-6 border-2 border-white/30">
                   <div className="text-center">
                     <div className="text-4xl mb-2">🏆</div>
-                    <h3 className="text-lg sm:text-xl font-black text-white mb-3">금 투자 시</h3>
+                    <h3 className="text-lg sm:text-xl font-black text-white mb-3">순금 투자 시</h3>
                     <div className="text-3xl sm:text-4xl font-black text-white mb-2">
                       ₩{calculateInvestment('gold').toLocaleString()}
                     </div>
@@ -358,7 +358,7 @@ export default function BitcoinVsGold() {
                   </div>
                 ) : (
                   <div className="text-2xl sm:text-3xl font-black text-white animate-pulse-slow">
-                    🏆 금 승리! (+{(getHistoricalReturn('gold', selectedPeriod) - getHistoricalReturn('bitcoin', selectedPeriod)).toFixed(1)}%p)
+                    🏆 순금 승리! (+{(getHistoricalReturn('gold', selectedPeriod) - getHistoricalReturn('bitcoin', selectedPeriod)).toFixed(1)}%p)
                   </div>
                 )}
               </div>
@@ -388,7 +388,7 @@ export default function BitcoinVsGold() {
                 </div>
 
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/30">
-                  <h3 className="text-lg font-black text-white mb-2">🏆 금의 장점</h3>
+                  <h3 className="text-lg font-black text-white mb-2">🏆 순금의 장점</h3>
                   <ul className="text-white/80 text-sm space-y-1">
                     <li>• 안정적인 가치 보존</li>
                     <li>• 인플레이션 헤지</li>
@@ -408,7 +408,7 @@ export default function BitcoinVsGold() {
                 </div>
 
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/30">
-                  <h3 className="text-lg font-black text-white mb-2">⚠️ 금 주의사항</h3>
+                  <h3 className="text-lg font-black text-white mb-2">⚠️ 순금 주의사항</h3>
                   <ul className="text-white/80 text-sm space-y-1">
                     <li>• 상대적으로 낮은 수익률</li>
                     <li>• 보관 비용 발생</li>

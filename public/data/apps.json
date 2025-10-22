@@ -98,7 +98,7 @@
     },
     {
       "id": "crypto-calculator",
-      "name": "비트코인 vs 금 비교",
+      "name": "비트코인 vs 순금",
       "slug": "crypto-calculator",
       "icon": "⚡",
       "description": "실시간 시세 & 투자 수익률 시뮬레이션",
