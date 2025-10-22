@@ -1,5 +1,5 @@
 import categoriesData from '@/data/categories.json';
-import { getBrowserSupabase } from '@/lib/supabase';
+import appsData from '@/data/apps.json';
 
 export interface Category {
   id: string;
@@ -38,37 +38,25 @@ export function invalidateAppsCache() {
   cacheTime = 0;
 }
 
-// Supabase에서 모든 앱 가져오기
-async function fetchAppsFromSupabase(bypassCache = false): Promise<App[]> {
+// JSON 파일에서 모든 앱 가져오기
+async function fetchAppsFromJSON(bypassCache = false): Promise<App[]> {
   // 캐시 확인 (bypassCache가 true면 무시)
   if (!bypassCache && appsCache && Date.now() - cacheTime < CACHE_DURATION) {
     return appsCache;
   }
 
-  const supabase = getBrowserSupabase();
-  
-  const { data, error } = await supabase
-    .from('apps')
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Supabase fetch error:', error);
-    return [];
-  }
-
-  // Supabase 데이터를 App 형식으로 변환
-  const apps: App[] = (data || []).map((row: any) => ({
-    id: row.id,
-    name: row.name,
-    slug: row.slug,
-    icon: row.icon,
-    description: row.description || '',
-    categoryId: row.category_id,
-    url: row.url,
-    image: row.image || '',
-    createdAt: row.created_at,
-    hidden: row.hidden || false,
+  // JSON 데이터를 App 형식으로 변환
+  const apps: App[] = (appsData.apps || []).map((app: any) => ({
+    id: app.id,
+    name: app.name,
+    slug: app.slug,
+    icon: app.icon,
+    description: app.description || '',
+    categoryId: app.categoryId,
+    url: app.url,
+    image: app.image || '',
+    createdAt: app.createdAt,
+    hidden: app.hidden || false,
   }));
 
   // 캐시 저장
@@ -92,7 +80,7 @@ export function getAllApps(includeHidden: boolean = false): App[] {
 
 // 비동기 버전 (권장)
 export async function getAllAppsAsync(includeHidden: boolean = false, bypassCache = false): Promise<App[]> {
-  const apps = await fetchAppsFromSupabase(bypassCache);
+  const apps = await fetchAppsFromJSON(bypassCache);
   if (includeHidden) {
     return apps;
   }
@@ -101,7 +89,7 @@ export async function getAllAppsAsync(includeHidden: boolean = false, bypassCach
 
 // 숨김 앱만 가져오기
 export async function getHiddenAppsAsync(): Promise<App[]> {
-  const apps = await fetchAppsFromSupabase();
+  const apps = await fetchAppsFromJSON();
   return apps.filter(app => app.hidden === true);
 }
 
