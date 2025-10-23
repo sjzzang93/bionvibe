@@ -196,14 +196,16 @@ export default function PastLifeHeroFinder() {
             <div className="space-y-4 sm:space-y-6">
               <PremiumCard hover className="bg-white/90 [transform:translateZ(10px)] hover:[transform:translateZ(25px)] transition-all duration-300">
                 <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">📅 출생년도</label>
-                <input
-                  type="number"
+                <select
                   value={birth.year}
                   onChange={(e) => setBirth({...birth, year: Number(e.target.value)})}
                   className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all"
-                  min="1900"
-                  max="2025"
-                />
+                >
+                  {Array.from({length: 126}, (_, i) => {
+                    const year = 2025 - i;
+                    return <option key={year} value={year}>{year}년</option>;
+                  })}
+                </select>
               </PremiumCard>
 
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
