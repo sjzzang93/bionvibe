@@ -1,0 +1,22 @@
+:root {
+  --eye-font: system-ui, -apple-system, "Pretendard", "Noto Sans KR", sans-serif;
+}
+
+.eye-font {
+  font-family: var(--eye-font);
+}
+
+.eye-touch {
+  min-height: 44px;
+}
+
+.eye-noselect {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.eye-center {
+  display: grid;
+  place-items: center;
+}
+
