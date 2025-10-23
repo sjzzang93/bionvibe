@@ -120,9 +120,6 @@ export default function PackingListPage() {
             🎉 모든 준비가 완료되었습니다! 즐거운 여행 되세요!
           </div>
         )}
-
-      {/* 제작자 서명 */}
-      <AppFooter />
       </div>
     </div>
   );

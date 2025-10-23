@@ -448,9 +448,6 @@ export default function WeatherOutfit() {
           </div>
         </section>
       </div>
-      {/* 제작자 서명 */}
-      <AppFooter />
-
     </main>
   );
 }
