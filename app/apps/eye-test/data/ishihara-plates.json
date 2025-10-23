@@ -1,0 +1,17 @@
+[
+  { "id": "p01", "answer": "12", "colors": ["#e74c3c", "#c0392b"], "bgColors": ["#2ecc71", "#27ae60"] },
+  { "id": "p02", "answer": "8", "colors": ["#f39c12", "#e67e22"], "bgColors": ["#3498db", "#2980b9"] },
+  { "id": "p03", "answer": "6", "colors": ["#9b59b6", "#8e44ad"], "bgColors": ["#1abc9c", "#16a085"] },
+  { "id": "p04", "answer": "29", "colors": ["#e67e22", "#d35400"], "bgColors": ["#95a5a6", "#7f8c8d"] },
+  { "id": "p05", "answer": "57", "colors": ["#c0392b", "#a93226"], "bgColors": ["#27ae60", "#229954"] },
+  { "id": "p06", "answer": "5", "colors": ["#2ecc71", "#27ae60"], "bgColors": ["#e74c3c", "#c0392b"] },
+  { "id": "p07", "answer": "3", "colors": ["#3498db", "#2980b9"], "bgColors": ["#f39c12", "#e67e22"] },
+  { "id": "p08", "answer": "15", "colors": ["#1abc9c", "#16a085"], "bgColors": ["#9b59b6", "#8e44ad"] },
+  { "id": "p09", "answer": "74", "colors": ["#95a5a6", "#7f8c8d"], "bgColors": ["#e67e22", "#d35400"] },
+  { "id": "p10", "answer": "45", "colors": ["#27ae60", "#229954"], "bgColors": ["#c0392b", "#a93226"] },
+  { "id": "p11", "answer": "26", "colors": ["#e74c3c", "#c0392b"], "bgColors": ["#2ecc71", "#27ae60"] },
+  { "id": "p12", "answer": "35", "colors": ["#f39c12", "#e67e22"], "bgColors": ["#3498db", "#2980b9"] },
+  { "id": "p13", "answer": "7", "colors": ["#9b59b6", "#8e44ad"], "bgColors": ["#1abc9c", "#16a085"] },
+  { "id": "p14", "answer": "16", "colors": ["#e67e22", "#d35400"], "bgColors": ["#95a5a6", "#7f8c8d"] }
+]
+

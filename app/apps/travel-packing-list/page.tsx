@@ -33,95 +33,113 @@ export default function PackingListPage() {
   const progress = (checkedItems.size / totalItems) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50 dark:from-teal-500 dark:via-green-500 dark:to-emerald-600 py-8 px-4 transition-colors">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">
-          🧳 여행 패킹 체크리스트
-        </h1>
-        <p className="text-center text-teal-100 mb-8">완벽한 여행 준비를 위한 체크리스트</p>
+    <PremiumLayout theme="green" showStars={true}>
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        {/* 헤더 */}
+        <div className="text-center mb-12 animate-fadeIn">
+          <h1 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300 mb-4 drop-shadow-2xl">
+            🧳 여행 패킹 체크리스트
+          </h1>
+          <p className="text-xl text-white/90 font-medium">완벽한 여행 준비를 위한 스마트 체크리스트</p>
+        </div>
 
         {/* 여행 정보 */}
-        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 mb-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <PremiumCard className="mb-8 [transform:translateZ(20px)]">
+          <h2 className="text-2xl font-bold text-white mb-6">📋 여행 정보</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="text-white font-bold mb-2 block">여행 유형</label>
+              <label className="text-white/90 font-semibold mb-3 block text-lg">여행 유형</label>
               <select
                 value={tripType}
                 onChange={(e) => setTripType(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg text-black"
+                className="w-full px-5 py-4 rounded-xl text-black font-medium text-lg bg-white/95 border-2 border-white/50 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/30 transition-all shadow-lg hover:shadow-xl"
                 style={{ fontSize: '16px' }}
               >
                 <option value="">선택하세요</option>
-                <option value="국내">국내 여행</option>
-                <option value="해외">해외 여행</option>
-                <option value="캠핑">캠핑</option>
-                <option value="출장">출장</option>
+                <option value="국내">🇰🇷 국내 여행</option>
+                <option value="해외">✈️ 해외 여행</option>
+                <option value="캠핑">⛺ 캠핑</option>
+                <option value="출장">💼 출장</option>
               </select>
             </div>
             <div>
-              <label className="text-white font-bold mb-2 block">여행 기간</label>
+              <label className="text-white/90 font-semibold mb-3 block text-lg">여행 기간</label>
               <input
                 type="number"
                 value={days}
                 onChange={(e) => setDays(e.target.value)}
                 placeholder="예: 3"
-                className="w-full px-4 py-3 rounded-lg text-black"
+                className="w-full px-5 py-4 rounded-xl text-black font-medium text-lg bg-white/95 border-2 border-white/50 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/30 transition-all shadow-lg hover:shadow-xl"
                 style={{ fontSize: '16px' }}
               />
             </div>
           </div>
-        </div>
+        </PremiumCard>
 
         {/* 진행률 */}
-        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 mb-6">
-          <div className="flex justify-between text-white mb-2">
-            <span className="font-bold">준비 진행률</span>
-            <span className="font-bold">{checkedItems.size}/{totalItems} ({Math.round(progress)}%)</span>
+        <PremiumCard className="mb-8 [transform:translateZ(30px)]">
+          <div className="flex justify-between items-center text-white mb-4">
+            <span className="text-2xl font-bold">📊 준비 진행률</span>
+            <span className="text-3xl font-black text-emerald-300">{checkedItems.size}/{totalItems}</span>
           </div>
-          <div className="w-full bg-white/20 rounded-full h-4 overflow-hidden">
+          <div className="relative w-full bg-black/30 rounded-full h-8 overflow-hidden shadow-inner">
             <div
-              className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 transition-all duration-500 shadow-lg relative overflow-hidden"
               style={{ width: `${progress}%` }}
-            />
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 animate-shimmer"></div>
+            </div>
           </div>
-        </div>
+          <p className="text-center text-white/80 font-bold text-xl mt-3">{Math.round(progress)}% 완료</p>
+        </PremiumCard>
 
         {/* 체크리스트 */}
-        <div className="space-y-4">
+        <div className="space-y-6">
           {Object.entries(packingCategories).map(([category, items]) => (
-            <div key={category} className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6">
-              <h3 className="text-2xl font-bold text-white mb-4">{category}</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
+            <PremiumCard key={category} className="[transform:translateZ(15px)] hover:[transform:translateZ(25px)] transition-transform duration-300">
+              <h3 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300 mb-6">
+                {category}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {items.map((item) => (
                   <label
                     key={item}
-                    className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
-                      checkedItems.has(item) ? 'bg-green-500/50 text-white' : 'bg-white/10 hover:bg-white/20 text-black'
+                    className={`flex items-center gap-3 p-4 rounded-xl cursor-pointer transition-all duration-300 border-2 shadow-lg hover:shadow-xl ${
+                      checkedItems.has(item) 
+                        ? 'bg-gradient-to-r from-emerald-500 to-teal-500 border-emerald-400 scale-105 shadow-emerald-500/50' 
+                        : 'bg-white/10 border-white/30 hover:bg-white/20 hover:scale-105 backdrop-blur-sm'
                     }`}
                   >
                     <input
                       type="checkbox"
                       checked={checkedItems.has(item)}
                       onChange={() => toggleItem(item)}
-                      className="w-5 h-5"
+                      className="w-6 h-6 rounded-lg accent-emerald-500 cursor-pointer"
                     />
-                    <span className={`font-medium ${checkedItems.has(item) ? 'line-through text-white' : 'text-black'}`}>
+                    <span className={`font-bold text-lg ${
+                      checkedItems.has(item) ? 'line-through text-white' : 'text-white'
+                    }`}>
                       {item}
                     </span>
                   </label>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
           ))}
         </div>
 
+        {/* 완료 메시지 */}
         {progress === 100 && (
-          <div className="mt-8 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center py-6 rounded sm:rounded-lg md:rounded-2xl text-2xl font-bold">
-            🎉 모든 준비가 완료되었습니다! 즐거운 여행 되세요!
-          </div>
+          <PremiumCard className="mt-8 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 [transform:translateZ(40px)] animate-bounce-slow">
+            <div className="text-center py-8">
+              <p className="text-5xl font-black text-white mb-4">🎉 완료!</p>
+              <p className="text-2xl font-bold text-white">모든 준비가 완료되었습니다!</p>
+              <p className="text-xl text-white/90 mt-2">즐거운 여행 되세요! ✈️</p>
+            </div>
+          </PremiumCard>
         )}
       </div>
-    </div>
+    </PremiumLayout>
   );
 }
 
