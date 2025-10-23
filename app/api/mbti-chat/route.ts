@@ -959,6 +959,218 @@ const MBTI_PROFILES: Record<string, {
   }
 };
 
+// 감정 분석 함수
+function analyzeEmotion(message: string): 'positive' | 'negative' | 'neutral' | 'question' | 'excited' {
+  const msg = message.toLowerCase();
+
+  // 질문 감지
+  if (msg.includes('?') || msg.includes('어떻게') || msg.includes('뭐') || msg.includes('무엇') ||
+      msg.includes('왜') || msg.includes('언제') || msg.includes('어디') || msg.includes('누가') ||
+      msg.includes('어떤') || msg.includes('할까') || msg.includes('어때')) {
+    return 'question';
+  }
+
+  // 부정적 감정
+  const negativeKeywords = [
+    '힘들', '우울', '슬프', '짜증', '화', '스트레스', '피곤', '지쳤',
+    '불안', '걱정', '무서', '두렵', '외로', '답답', '속상', '억울',
+    '실망', '후회', '미안', '죄송', '어렵', '힘들', '괴로', '고통',
+    '아프', '싫', '싫어', '최악', '끔찍', '절망', '망했'
+  ];
+
+  // 긍정적 감정
+  const positiveKeywords = [
+    '좋아', '행복', '기쁘', '즐거', '신나', '재밌', '재미있', '웃',
+    '사랑', '고마', '감사', '멋', '훌륭', '완벽', '최고', '대박',
+    '좋다', '기분좋', '만족', '평화', '편안', '설레', '뿌듯', '자랑'
+  ];
+
+  // 흥분/열정
+  const excitedKeywords = [
+    '완전', '진짜', '헐', '오', '와', '대박', '미쳤', '쩐다',
+    '개', '엄청', '너무', '초', '졸라', '존나', '개꿀', '꿀잼'
+  ];
+
+  for (const keyword of negativeKeywords) {
+    if (msg.includes(keyword)) return 'negative';
+  }
+
+  for (const keyword of excitedKeywords) {
+    if (msg.includes(keyword)) return 'excited';
+  }
+
+  for (const keyword of positiveKeywords) {
+    if (msg.includes(keyword)) return 'positive';
+  }
+
+  return 'neutral';
+}
+
+// 주제 감지 함수
+function detectTopic(message: string): string {
+  const msg = message.toLowerCase();
+
+  if (msg.includes('일') || msg.includes('업무') || msg.includes('직장') || msg.includes('회사') || msg.includes('상사')) {
+    return 'work';
+  }
+  if (msg.includes('연애') || msg.includes('사랑') || msg.includes('남친') || msg.includes('여친') || msg.includes('썸')) {
+    return 'love';
+  }
+  if (msg.includes('친구') || msg.includes('인간관계') || msg.includes('사람') || msg.includes('친구')) {
+    return 'relationship';
+  }
+  if (msg.includes('공부') || msg.includes('시험') || msg.includes('학교') || msg.includes('대학')) {
+    return 'study';
+  }
+  if (msg.includes('취미') || msg.includes('게임') || msg.includes('운동') || msg.includes('여행')) {
+    return 'hobby';
+  }
+  if (msg.includes('미래') || msg.includes('계획') || msg.includes('목표') || msg.includes('꿈')) {
+    return 'future';
+  }
+  if (msg.includes('고민') || msg.includes('결정') || msg.includes('선택')) {
+    return 'decision';
+  }
+
+  return 'general';
+}
+
+// 자연스러운 응답 생성
+function generateNaturalResponse(
+  profile: typeof MBTI_PROFILES[string],
+  emotion: string,
+  topic: string,
+  message: string
+): string {
+  const patterns = profile.response_patterns;
+  const phrases = profile.common_phrases;
+
+  // 랜덤 선택 헬퍼
+  const random = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+  const randomPhrase = random(phrases);
+  const randomEmoji = random(profile.emoji_usage);
+
+  let response = '';
+
+  // 감정별 응답 패턴
+  switch (emotion) {
+    case 'question':
+      const questionStart = random(patterns.question);
+      const thinkingPhrase = random(patterns.thinking);
+
+      if (topic === 'work') {
+        response = `${questionStart} ${thinkingPhrase}, 업무와 관련된 문제는 `;
+        if (profile.communication_style.includes('논리적')) {
+          response += `체계적으로 접근하는 게 중요해요. 우선순위를 정하고 하나씩 해결해 나가보세요.`;
+        } else if (profile.communication_style.includes('감성적')) {
+          response += `스트레스 받지 않는 선에서 천천히 진행하는 게 좋아요. 무리하지 마세요!`;
+        } else if (profile.communication_style.includes('직접적')) {
+          response += `바로 실행하는 게 답이에요. 생각만 하지 말고 해보세요!`;
+        } else {
+          response += `신중하게 계획을 세워서 진행하면 좋을 것 같아요.`;
+        }
+      } else if (topic === 'love') {
+        response = `${questionStart} 연애 문제는 참 복잡하죠... `;
+        if (profile.communication_style.includes('공감')) {
+          response += `마음이 많이 복잡하실 거예요. 솔직한 대화가 제일 중요해요. ${randomEmoji}`;
+        } else if (profile.communication_style.includes('논리적')) {
+          response += `감정도 중요하지만, 논리적으로 생각해보는 것도 필요해요. 장단점을 정리해보세요.`;
+        } else {
+          response += `진심을 담아 솔직하게 이야기해보세요. 그게 제일 중요해요!`;
+        }
+      } else if (topic === 'decision') {
+        const adviceStart = random(patterns.advice);
+        response = `${questionStart} 중요한 결정이네요. ${thinkingPhrase}, ${adviceStart} `;
+        response += `여러 선택지를 비교해보고, 본인에게 가장 의미 있는 것을 선택하는 게 좋아요.`;
+      } else {
+        response = `${questionStart} ${randomPhrase}, 더 자세히 말씀해주시면 함께 생각해볼게요! ${randomEmoji}`;
+      }
+      break;
+
+    case 'negative':
+      const empathyResponse = random(patterns.empathy);
+      const advicePhrase = random(patterns.advice);
+
+      response = `${empathyResponse} `;
+
+      if (topic === 'work') {
+        if (profile.communication_style.includes('체계적')) {
+          response += `업무 스트레스가 심하시군요. 잠시 휴식을 취하시고, 업무를 단계별로 나눠서 처리해보세요. `;
+        } else if (profile.communication_style.includes('공감')) {
+          response += `직장 생활 정말 힘들죠ㅠㅠ 충분히 쉬시고, 주변 사람들한테 도움 요청하는 것도 좋아요. `;
+        } else if (profile.communication_style.includes('직접적')) {
+          response += `힘들면 확실하게 휴식 취하세요. 번아웃 오면 더 큰 문제예요. `;
+        } else {
+          response += `많이 힘드시겠어요. 조금씩 해결해 나가면 괜찮아질 거예요. `;
+        }
+      } else if (topic === 'love' || topic === 'relationship') {
+        response += `인간관계는 정말 에너지 소모가 크죠. `;
+        if (profile.communication_style.includes('공감')) {
+          response += `당신의 감정이 가장 중요해요. 무리해서 맞추지 않아도 돼요. ${randomEmoji}`;
+        } else if (profile.communication_style.includes('논리적')) {
+          response += `객관적으로 상황을 분석해보고, 본인에게 이로운 선택을 하세요.`;
+        } else {
+          response += `솔직하게 대화해보시는 건 어떨까요?`;
+        }
+      } else {
+        response += `${advicePhrase} 하루하루 작은 것부터 시작해보세요. `;
+      }
+
+      response += `${randomEmoji} 저도 응원할게요!`;
+      break;
+
+    case 'positive':
+    case 'excited':
+      const excitedResponse = random(patterns.excited);
+      const casualResponse = random(patterns.casual);
+
+      if (emotion === 'excited') {
+        response = `${excitedResponse} ${randomEmoji} `;
+      } else {
+        response = `${excitedResponse} `;
+      }
+
+      if (profile.communication_style.includes('활발') || profile.communication_style.includes('열정')) {
+        response += `완전 신나는 일이네요!! 이 기분 그대로 쭉 가보세요! ${randomEmoji}`;
+      } else if (profile.communication_style.includes('조화') || profile.communication_style.includes('공감')) {
+        response += `정말 기쁜 소식이에요! 함께 기뻐요! ${randomEmoji}`;
+      } else if (profile.communication_style.includes('논리적')) {
+        response += `좋은 결과네요. 계속 이 방향으로 나아가시면 좋겠어요.`;
+      } else {
+        response += `${casualResponse} 축하드려요!`;
+      }
+
+      if (topic === 'work') {
+        response += ` 업무에서 좋은 성과 내신 거죠? 멋져요!`;
+      } else if (topic === 'love') {
+        response += ` 사랑은 정말 아름다운 거예요!`;
+      }
+      break;
+
+    case 'neutral':
+    default:
+      const casualStart = random(patterns.casual);
+      const thinkingStart = random(patterns.thinking);
+
+      response = `${casualStart} ${thinkingStart}, "${message.slice(0, 30)}${message.length > 30 ? '...' : ''}"에 대해서 `;
+
+      if (profile.communication_style.includes('사실 중심') || profile.communication_style.includes('논리적')) {
+        response += `좀 더 구체적인 정보가 있으면 더 정확한 답변을 드릴 수 있을 것 같아요.`;
+      } else if (profile.communication_style.includes('공감') || profile.communication_style.includes('따뜻')) {
+        response += `더 편하게 이야기 나눠볼까요? ${randomEmoji}`;
+      } else if (profile.communication_style.includes('직접적')) {
+        response += `더 구체적으로 말씀해주세요.`;
+      } else {
+        response += `흥미롭네요. 좀 더 자세히 얘기해주시겠어요?`;
+      }
+
+      response += ` ${randomPhrase}`;
+      break;
+  }
+
+  return response;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { message, mbti } = await req.json();
@@ -970,29 +1182,20 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const style = RESPONSE_STYLES[mbti] || RESPONSE_STYLES['INTJ'];
-    
-    // 간단한 응답 생성 (실제로는 OpenAI API 등을 사용할 수 있음)
-    const randomTone = style.tone[Math.floor(Math.random() * style.tone.length)];
-    
-    let response = '';
-    
-    // 질문/고민 감지
-    if (message.includes('?') || message.includes('어떻게') || message.includes('뭐')) {
-      response = `${style.prefix} "${message}"에 대해 말씀드리면, ${randomTone} 접근하시는 것이 좋겠습니다. ${style.suffix}`;
-    } 
-    // 감정 표현 감지
-    else if (message.includes('힘들') || message.includes('우울') || message.includes('슬프')) {
-      response = `${style.prefix} 지금 많이 힘드시군요. ${randomTone} 이 시간을 보내시길 바랍니다. ${style.suffix}`;
+    const profile = MBTI_PROFILES[mbti];
+    if (!profile) {
+      return NextResponse.json(
+        { error: '올바른 MBTI 유형이 아닙니다.' },
+        { status: 400 }
+      );
     }
-    // 긍정적 표현 감지
-    else if (message.includes('좋아') || message.includes('행복') || message.includes('기쁘')) {
-      response = `${style.prefix} 정말 멋진 소식이네요! ${randomTone} 그 에너지를 유지하세요. ${style.suffix}`;
-    }
-    // 일반 대화
-    else {
-      response = `${style.prefix} "${message}"라고 하셨네요. ${randomTone} 더 자세히 이야기해주시겠어요? ${style.suffix}`;
-    }
+
+    // 감정과 주제 분석
+    const emotion = analyzeEmotion(message);
+    const topic = detectTopic(message);
+
+    // 자연스러운 응답 생성
+    const response = generateNaturalResponse(profile, emotion, topic, message);
 
     return NextResponse.json({
       role: 'assistant',

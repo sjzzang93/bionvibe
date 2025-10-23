@@ -75,15 +75,11 @@ export async function GET(request: NextRequest) {
 
       // 총 자산 = 현금 잔액 + 포트폴리오 가치
       const totalAssets = user.balance + portfolioValue;
-      
-      // 실제 투자한 금액 (buy_amount 합계)
-      const investedAmount = userPortfolios.reduce((sum, p) => sum + (p.buy_amount || 0), 0);
-      
-      // 수익 = 포트폴리오 가치 - 실제 투자금
-      const profit = portfolioValue - investedAmount;
-      
-      // 수익률 = (포트폴리오 가치 - 투자금) / 투자금 * 100 (투자금이 0이면 0%)
-      const profitRate = investedAmount > 0 ? (profit / investedAmount) * 100 : 0;
+
+      // 초기 자본 1억원 대비 수익률 계산
+      const INITIAL_CAPITAL = 100000000; // 1억원
+      const profit = totalAssets - INITIAL_CAPITAL;
+      const profitRate = (profit / INITIAL_CAPITAL) * 100;
 
       return {
         nickname: user.nickname,

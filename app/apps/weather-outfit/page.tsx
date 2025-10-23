@@ -179,276 +179,187 @@ export default function WeatherOutfit() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 dark:from-sky-900 dark:via-blue-900 dark:to-indigo-900 text-black dark:text-white placeholder-gray-500 transition-colors">
-        <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          <div className="mb-4 text-black placeholder-gray-500">
-            
-          </div>
-
-          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
-            <header className="text-center mb-6 text-black placeholder-gray-500">
-              <h1 className="text-4xl mb-2 text-black placeholder-gray-500">{result.emoji}</h1>
-              <h2 className="text-2xl font-bold text-gray-800 text-black placeholder-gray-500">오늘의 옷차림</h2>
-              <p className="text-gray-600 mt-2 text-black placeholder-gray-500">
+      <PremiumLayout theme="blue" showStars={true}>
+        <div className="mx-auto max-w-[600px] px-4 py-6">
+          <PremiumCard gradient hover>
+            <div className="text-center mb-6">
+              <h1 className="text-5xl mb-3 drop-shadow-2xl animate-bounce-slow">{result.emoji}</h1>
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg">오늘의 옷차림</h2>
+              <p className="text-white/90 mt-2 drop-shadow-md text-lg">
                 {result.temp}°C · {result.weather} · {result.season}
               </p>
-            </header>
+            </div>
 
             {/* 겉옷 */}
             {result.outfit.outer.length > 0 && (
-              <div className="mb-5 text-black placeholder-gray-500">
-                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
-                  <span className="mr-2 text-black placeholder-gray-500">🧥</span> 겉옷
+              <div className="mb-5">
+                <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
+                  <span className="mr-2">🧥</span> 겉옷
                 </h3>
-                <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
+                <div className="grid grid-cols-3 gap-3">
                   {result.outfit.outer.map((item, i) => (
-                    <div key={i} className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-2 sm:p-3 border border-blue-200 text-center font-medium text-black text-black placeholder-gray-500">
-                      {item}
-                    </div>
+                    <PremiumCard key={i} hover className="bg-gradient-to-br from-blue-50 to-cyan-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
+                      <p className="p-3">{item}</p>
+                    </PremiumCard>
                   ))}
                 </div>
               </div>
             )}
 
             {/* 상의 */}
-            <div className="mb-5 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
-                <span className="mr-2 text-black placeholder-gray-500">👕</span> 상의
+            <div className="mb-5">
+              <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
+                <span className="mr-2">👕</span> 상의
               </h3>
-              <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3">
                 {result.outfit.top.map((item, i) => (
-                  <div key={i} className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-2 sm:p-3 border border-green-200 text-center font-medium text-black text-black placeholder-gray-500">
-                    {item}
-                  </div>
+                  <PremiumCard key={i} hover className="bg-gradient-to-br from-green-50 to-emerald-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
+                    <p className="p-3">{item}</p>
+                  </PremiumCard>
                 ))}
               </div>
             </div>
 
             {/* 하의 */}
-            <div className="mb-5 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
-                <span className="mr-2 text-black placeholder-gray-500">👖</span> 하의
+            <div className="mb-5">
+              <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
+                <span className="mr-2">👖</span> 하의
               </h3>
-              <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3">
                 {result.outfit.bottom.map((item, i) => (
-                  <div key={i} className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg p-2 sm:p-3 border border-purple-200 text-center font-medium text-black text-black placeholder-gray-500">
-                    {item}
-                  </div>
+                  <PremiumCard key={i} hover className="bg-gradient-to-br from-purple-50 to-blue-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
+                    <p className="p-3">{item}</p>
+                  </PremiumCard>
                 ))}
               </div>
             </div>
 
             {/* 악세서리 */}
-            <div className="mb-6 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 flex items-center text-black placeholder-gray-500">
-                <span className="mr-2 text-black placeholder-gray-500">🎒</span> 필수 아이템
+            <div className="mb-6">
+              <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
+                <span className="mr-2">🎒</span> 필수 아이템
               </h3>
-              <div className="grid grid-cols-3 gap-2 text-black placeholder-gray-500">
+              <div className="grid grid-cols-3 gap-3">
                 {result.outfit.accessories.map((item, i) => (
-                  <div key={i} className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-lg p-2 sm:p-3 border border-amber-200 text-center font-medium text-black text-black placeholder-gray-500">
-                    {item}
-                  </div>
+                  <PremiumCard key={i} hover className="bg-gradient-to-br from-amber-50 to-yellow-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
+                    <p className="p-3">{item}</p>
+                  </PremiumCard>
                 ))}
               </div>
             </div>
 
             {/* 스타일 팁 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">💡 스타일 팁</h3>
-              <div className="space-y-2 text-black placeholder-gray-500">
+            <PremiumCard className="mb-6 bg-gradient-to-r from-indigo-50 to-purple-50 [transform:translateZ(15px)]">
+              <h3 className="font-bold text-sm text-gray-800 mb-3">💡 스타일 팁</h3>
+              <div className="space-y-2">
                 {result.tips.map((tip, i) => (
-                  <div key={i} className="bg-white rounded p-3 text-sm text-gray-700 text-black placeholder-gray-500">
+                  <div key={i} className="bg-white/80 rounded-lg p-3 text-sm text-gray-700 shadow-sm">
                     • {tip}
                   </div>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
 
-            <button
-        type="button"
-              onClick={() => setResult(null)}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-            >
+            <PremiumButton onClick={() => setResult(null)} fullWidth>
               다시 추천받기
-            </button>
-          </section>
+            </PremiumButton>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
   return (
-    <main 
-      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-      style={{
-        background: seasonalStyle.background,
-        backgroundImage: seasonalStyle.backgroundImage,
-        backgroundAttachment: 'fixed'
-      }}
-    >
-      <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-        <div className="mb-4 text-black placeholder-gray-500">
-          
-        </div>
+    <PremiumLayout theme={season === 'spring' ? 'pink' : season === 'summer' ? 'blue' : season === 'fall' ? 'orange' : 'indigo'} showStars={true}>
+      <div className="mx-auto max-w-[600px] px-4 py-6">
+        <PremiumCard gradient hover>
+          <div className="text-center mb-6">
+            <h1 className="text-5xl font-bold mb-3 drop-shadow-2xl animate-bounce-slow">🌡️</h1>
+            <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">오늘의 옷차림 추천</h2>
+            <p className="text-white/90 drop-shadow-md">날씨에 딱 맞는 옷차림을 찾아드립니다</p>
+          </div>
 
-        <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-black placeholder-gray-500">
-          <header className="text-center mb-6 text-black placeholder-gray-500">
-            <h1 className="text-4xl font-bold text-black mb-2 text-black placeholder-gray-500">🌡️</h1>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">오늘의 옷차림 추천</h2>
-            <p className="text-gray-600 text-black placeholder-gray-500">날씨에 딱 맞는 옷차림을 찾아드립니다</p>
-          </header>
-
-          <div className="space-y-6 text-black placeholder-gray-500">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">
+          <div className="space-y-6">
+            <PremiumCard className="[transform:translateZ(10px)]">
+              <label className="block text-sm font-medium text-gray-800 mb-3">
                 기온 ({temp}°C)
               </label>
-              <div className="flex items-center gap-4 text-black placeholder-gray-500">
+              <div className="flex items-center gap-4">
                 <input
                   type="range"
                   min="-10"
                   max="40"
                   value={temp}
                   onChange={(e) => setTemp(Number(e.target.value))}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+                  className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
-                <div className="text-2xl font-bold text-black w-20 text-center text-black placeholder-gray-500">{temp}°C</div>
+                <div className="text-2xl font-bold text-gray-800 w-20 text-center">{temp}°C</div>
               </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-1 text-black placeholder-gray-500">
+              <div className="flex justify-between text-xs text-gray-500 mt-2">
                 <span>-10°C</span>
                 <span>40°C</span>
               </div>
-            </div>
+            </PremiumCard>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">날씨</label>
-              <div className="grid grid-cols-4 gap-2 text-black placeholder-gray-500">
-                <button
-        type="button"
-                  onClick={() => setWeather('sunny')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    weather === 'sunny'
-                      ? 'bg-yellow-500 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">☀️</div>
-                  <div className="text-xs text-black placeholder-gray-500">맑음</div>
-                </button>
-                <button
-        type="button"
-                  onClick={() => setWeather('cloudy')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    weather === 'cloudy'
-                      ? 'bg-gray-500 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">☁️</div>
-                  <div className="text-xs text-black placeholder-gray-500">흐림</div>
-                </button>
-                <button
-        type="button"
-                  onClick={() => setWeather('rainy')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    weather === 'rainy'
-                      ? 'bg-blue-500 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">🌧️</div>
-                  <div className="text-xs text-black placeholder-gray-500">비</div>
-                </button>
-                <button
-        type="button"
-                  onClick={() => setWeather('snowy')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    weather === 'snowy'
-                      ? 'bg-cyan-500 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">❄️</div>
-                  <div className="text-xs text-black placeholder-gray-500">눈</div>
-                </button>
+            <PremiumCard className="[transform:translateZ(10px)]">
+              <label className="block text-sm font-medium text-gray-800 mb-3">날씨</label>
+              <div className="grid grid-cols-4 gap-3">
+                {[
+                  { key: 'sunny', emoji: '☀️', label: '맑음', color: 'bg-yellow-500' },
+                  { key: 'cloudy', emoji: '☁️', label: '흐림', color: 'bg-gray-500' },
+                  { key: 'rainy', emoji: '🌧️', label: '비', color: 'bg-blue-500' },
+                  { key: 'snowy', emoji: '❄️', label: '눈', color: 'bg-cyan-500' }
+                ].map(w => (
+                  <div key={w.key} onClick={() => setWeather(w.key as any)}>
+                    <PremiumCard hover className={`text-center cursor-pointer ${weather === w.key ? w.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)]`}>
+                      <div className="p-3">
+                        <div className="text-2xl mb-1">{w.emoji}</div>
+                        <div className="text-xs font-semibold">{w.label}</div>
+                      </div>
+                    </PremiumCard>
+                  </div>
+                ))}
               </div>
-            </div>
+            </PremiumCard>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">계절</label>
-              <div className="grid grid-cols-4 gap-2 text-black placeholder-gray-500">
-                <button
-        type="button"
-                  onClick={() => setSeason('spring')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    season === 'spring'
-                      ? 'bg-blue-500 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">🌸</div>
-                  <div className="text-xs text-black placeholder-gray-500">봄</div>
-                </button>
-                <button
-        type="button"
-                  onClick={() => setSeason('summer')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    season === 'summer'
-                      ? 'bg-orange-500 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">🌻</div>
-                  <div className="text-xs text-black placeholder-gray-500">여름</div>
-                </button>
-                <button
-        type="button"
-                  onClick={() => setSeason('fall')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    season === 'fall'
-                      ? 'bg-amber-600 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">🍁</div>
-                  <div className="text-xs text-black placeholder-gray-500">가을</div>
-                </button>
-                <button
-        type="button"
-                  onClick={() => setSeason('winter')}
-                  className={`p-2 md:p-4 rounded-lg font-semibold transition-all ${
-                    season === 'winter'
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-1 text-black placeholder-gray-500">⛄</div>
-                  <div className="text-xs text-black placeholder-gray-500">겨울</div>
-                </button>
+            <PremiumCard className="[transform:translateZ(10px)]">
+              <label className="block text-sm font-medium text-gray-800 mb-3">계절</label>
+              <div className="grid grid-cols-4 gap-3">
+                {[
+                  { key: 'spring', emoji: '🌸', label: '봄', color: 'bg-pink-500' },
+                  { key: 'summer', emoji: '🌻', label: '여름', color: 'bg-orange-500' },
+                  { key: 'fall', emoji: '🍁', label: '가을', color: 'bg-amber-600' },
+                  { key: 'winter', emoji: '⛄', label: '겨울', color: 'bg-blue-600' }
+                ].map(s => (
+                  <div key={s.key} onClick={() => setSeason(s.key as any)}>
+                    <PremiumCard hover className={`text-center cursor-pointer ${season === s.key ? s.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)]`}>
+                      <div className="p-3">
+                        <div className="text-2xl mb-1">{s.emoji}</div>
+                        <div className="text-xs font-semibold">{s.label}</div>
+                      </div>
+                    </PremiumCard>
+                  </div>
+                ))}
               </div>
-            </div>
+            </PremiumCard>
 
-            <div className="p-4 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg border border-blue-300 text-black placeholder-gray-500">
-              <h3 className="font-bold text-black mb-2 text-black placeholder-gray-500">💡 똑똑한 옷차림</h3>
-              <ul className="text-sm text-black space-y-1 text-black placeholder-gray-500">
-                <li>• 온도별 최적 옷차림 추천</li>
-                <li>• 날씨, 계절 고려한 맞춤 스타일</li>
-                <li>• 겉옷, 상의, 하의, 악세서리 종합 제안</li>
-                <li>• 체감 온도와 일교차 고려</li>
+            <PremiumCard className="bg-gradient-to-r from-blue-100 to-indigo-100 [transform:translateZ(15px)]">
+              <h3 className="font-bold text-gray-800 mb-3">💡 똑똑한 옷차림</h3>
+              <ul className="text-sm text-gray-700 space-y-2">
+                <li className="bg-white/60 rounded-lg p-2">• 온도별 최적 옷차림 추천</li>
+                <li className="bg-white/60 rounded-lg p-2">• 날씨, 계절 고려한 맞춤 스타일</li>
+                <li className="bg-white/60 rounded-lg p-2">• 겉옷, 상의, 하의, 악세서리 종합 제안</li>
+                <li className="bg-white/60 rounded-lg p-2">• 체감 온도와 일교차 고려</li>
               </ul>
-            </div>
+            </PremiumCard>
 
-            <button
-        type="button"
-              onClick={getRecommendation}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-            >
+            <PremiumButton onClick={getRecommendation} fullWidth size="lg">
               옷차림 추천받기
-            </button>
+            </PremiumButton>
           </div>
-        </section>
+        </PremiumCard>
       </div>
-    </main>
+    </PremiumLayout>
   );
 }
 

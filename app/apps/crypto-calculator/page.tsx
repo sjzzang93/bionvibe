@@ -348,16 +348,12 @@ export default function InvestmentApp() {
     return (user?.balance || 0) + getPortfolioValue();
   };
 
-  // 수익률 (실제 투자금 대비)
+  // 수익률 (초기 자본 1억원 대비)
   const getProfitRate = () => {
-    // 실제 투자한 금액 = 포트폴리오의 buy_amount 합계
-    const investedAmount = portfolios.reduce((sum, p) => sum + p.buy_amount, 0);
-    if (investedAmount === 0) return 0;  // 투자 안 했으면 0%
-    
-    const portfolioValue = getPortfolioValue();  // 현재 포트폴리오 가치
-    const profit = portfolioValue - investedAmount;
-    
-    return (profit / investedAmount) * 100;
+    const INITIAL_CAPITAL = 100000000; // 1억원
+    const totalAssets = getTotalAssets();
+    const profit = totalAssets - INITIAL_CAPITAL;
+    return (profit / INITIAL_CAPITAL) * 100;
   };
 
   // 코인 필터링 & 정렬
@@ -412,6 +408,11 @@ export default function InvestmentApp() {
               <span className="px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm">
                 👤 {user.nickname}
               </span>
+              <button
+                onClick={fetchRankings}
+                className="px-6 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold rounded-full hover:scale-105 transition-all shadow-lg">
+                🏆 랭킹 보기
+              </button>
           </div>
           )}
           {lastUpdate && (

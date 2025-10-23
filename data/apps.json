@@ -755,6 +755,61 @@
         "dream-interpreter",
         "today-fortune"
       ]
+    },
+    {
+      "id": "nickname-generator",
+      "name": "이름/닉네임 생성기",
+      "slug": "nickname-generator",
+      "icon": "✨",
+      "description": "이름/닉네임 서비스",
+      "categoryId": "learning-tools",
+      "url": "/apps/nickname-generator",
+      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=80",
+      "createdAt": "2025-10-23"
+    },
+    {
+      "id": "color-finder-game",
+      "name": "색깔 찾기 게임",
+      "slug": "color-finder-game",
+      "icon": "🎨",
+      "description": "재미있는 게임",
+      "categoryId": "learning-tools",
+      "url": "/apps/color-finder-game",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+      "createdAt": "2025-10-23"
+    },
+    {
+      "id": "emotion-diary",
+      "name": "감정 일기",
+      "slug": "emotion-diary",
+      "icon": "🌈",
+      "description": "감정 서비스",
+      "categoryId": "fortune-mind",
+      "url": "/apps/emotion-diary",
+      "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&q=80",
+      "createdAt": "2025-10-23"
+    },
+    {
+      "id": "animal-face-match",
+      "name": "닮은 동물 찾기",
+      "slug": "animal-face-match",
+      "icon": "🐶",
+      "description": "닮은 서비스",
+      "categoryId": "fortune-mind",
+      "url": "/apps/animal-face-match",
+      "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=400&q=80",
+      "createdAt": "2025-10-23"
+    },
+    {
+      "id": "fridge-recipe",
+      "name": "냉장고 파먹기",
+      "slug": "fridge-recipe",
+      "icon": "🧊",
+      "description": "냉장고 서비스",
+      "categoryId": "family-life",
+      "url": "/apps/fridge-recipe",
+      "image": "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=400&q=80",
+      "createdAt": "2025-10-23"
     }
   ]
 }
