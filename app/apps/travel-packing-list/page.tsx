@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import AppFooter from '@/app/components/AppFooter';
 import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
