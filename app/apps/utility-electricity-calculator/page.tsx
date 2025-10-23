@@ -157,7 +157,7 @@ export default function ElectricityCalculator() {
                 <option value="kW">kW</option>
               </select>
             </div>
-            <p className="text-xs sm:text-sm text-amber-700 font-medium">
+            <p className="text-xs sm:text-sm text-gray-700 font-medium">
               💡 설명서의 정격 소비전력 값을 입력하세요
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function ElectricityCalculator() {
                            text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-400/50 
                            transition-all text-base sm:text-lg font-semibold outline-none"
                 />
-                <span className="text-2xl font-bold text-blue-600">×</span>
+                <span className="text-2xl font-bold text-gray-700">×</span>
                 <input
                   type="number"
                   inputMode="numeric"
@@ -248,7 +248,7 @@ export default function ElectricityCalculator() {
               <option value="agr">🌾 농업용</option>
             </select>
             <div className="flex justify-between items-center gap-2">
-              <p className="text-xs sm:text-sm text-green-700 font-medium">
+              <p className="text-xs sm:text-sm text-gray-700 font-medium">
                 현재 단가: {rates[category].toFixed(1)} 원/kWh
               </p>
               <button
@@ -284,7 +284,7 @@ export default function ElectricityCalculator() {
             >
               초기화
             </button>
-            <p className="text-xs sm:text-sm text-pink-700 font-medium text-center">
+            <p className="text-xs sm:text-sm text-gray-700 font-medium text-center">
               💡 결과는 아래 카드에 표시됩니다
             </p>
           </div>
@@ -305,7 +305,7 @@ export default function ElectricityCalculator() {
             <div className="text-5xl sm:text-6xl md:text-7xl font-black text-transparent bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 bg-clip-text mb-2 drop-shadow-lg" suppressHydrationWarning>
               {fmtKRW(result.price)}
             </div>
-            <p className="text-sm sm:text-base text-amber-800 font-semibold" suppressHydrationWarning>
+            <p className="text-sm sm:text-base text-gray-700 font-semibold" suppressHydrationWarning>
               단가: {rates[category].toFixed(1)} 원/kWh
             </p>
           </div>
@@ -313,14 +313,14 @@ export default function ElectricityCalculator() {
           {/* 상세 정보 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-white/60 backdrop-blur rounded-xl p-4 border-2 border-yellow-300">
-              <p className="text-xs sm:text-sm text-amber-700 font-semibold mb-1">사용전력량</p>
-              <p className="text-2xl sm:text-3xl font-black text-amber-900" suppressHydrationWarning>
+              <p className="text-xs sm:text-sm text-gray-700 font-semibold mb-1">사용전력량</p>
+              <p className="text-2xl sm:text-3xl font-black text-gray-900" suppressHydrationWarning>
                 {result.kWh.toFixed(2)} <span className="text-lg">kWh</span>
               </p>
             </div>
             <div className="bg-white/60 backdrop-blur rounded-xl p-4 border-2 border-yellow-300">
-              <p className="text-xs sm:text-sm text-amber-700 font-semibold mb-1">적용 단가</p>
-              <p className="text-2xl sm:text-3xl font-black text-amber-900" suppressHydrationWarning>
+              <p className="text-xs sm:text-sm text-gray-700 font-semibold mb-1">적용 단가</p>
+              <p className="text-2xl sm:text-3xl font-black text-gray-900" suppressHydrationWarning>
                 {result.unitPrice.toFixed(1)} <span className="text-lg">원/kWh</span>
               </p>
             </div>
@@ -328,7 +328,7 @@ export default function ElectricityCalculator() {
 
           {/* 계산식 */}
           <div className="bg-amber-100/60 backdrop-blur rounded-xl p-4 border-2 border-amber-300">
-            <p className="text-xs sm:text-sm text-amber-800 font-medium text-center" suppressHydrationWarning>
+            <p className="text-xs sm:text-sm text-gray-700 font-medium text-center" suppressHydrationWarning>
               💡 {result.kWh.toFixed(2)} kWh × {result.unitPrice.toFixed(1)} 원/kWh = {fmtKRW(result.price)}
             </p>
           </div>
@@ -337,7 +337,7 @@ export default function ElectricityCalculator() {
 
       {/* 안내 사항 */}
       <div className="mt-6 p-4 bg-yellow-50/80 backdrop-blur border-2 border-yellow-200 rounded-xl">
-        <p className="text-xs sm:text-sm text-amber-800 text-center leading-relaxed">
+        <p className="text-xs sm:text-sm text-gray-700 text-center leading-relaxed">
           ⚠️ 본 계산기는 평균 단가 기반의 간편 추정치입니다.<br />
           실제 고지서는 기본요금·누진제·부가세·전력산업기반기금 등으로 차이가 날 수 있어요.
         </p>

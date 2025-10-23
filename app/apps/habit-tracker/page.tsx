@@ -126,15 +126,16 @@ export default function HabitTrackerPage() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-teal-50 via-green-50 to-emerald-50 dark:from-teal-500 dark:via-green-500 dark:to-emerald-600 flex items-center justify-center px-4 transition-colors">
-        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-8 max-w-md w-full border-2 border-white/30">
-          <div className="text-center mb-8">
-            <div className="text-6xl mb-4">🎯</div>
-            <h1 className="text-4xl font-bold text-white mb-2">습관 트래커</h1>
-            <p className="text-white/80">{isLoginMode ? '로그인' : '회원가입'}</p>
-          </div>
+      <PremiumLayout theme="green" showStars={true}>
+        <div className="flex items-center justify-center min-h-screen px-4 py-8">
+          <PremiumCard hover className="max-w-md w-full">
+            <div className="text-center mb-8">
+              <div className="text-6xl mb-4 animate-bounce-slow">🎯</div>
+              <h1 className="text-4xl font-bold text-white mb-2 drop-shadow-lg">습관 트래커</h1>
+              <p className="text-white/90">{isLoginMode ? '로그인' : '회원가입'}</p>
+            </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-white font-bold mb-2 block">아이디</label>
               <input
@@ -186,8 +187,9 @@ export default function HabitTrackerPage() {
             </button>
           </form>
 
+          </PremiumCard>
         </div>
-      </div>
+      </PremiumLayout>
     );
   }
 
@@ -285,36 +287,38 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-500 via-green-500 to-emerald-600 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
+    <PremiumLayout theme="green" showStars={true}>
+      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8">
         {/* 헤더 */}
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-2">
-              🎯 습관 트래커
-            </h1>
-            <p className="text-white/90">👤 {userId}님의 습관 관리</p>
+        <PremiumCard hover gradient className="mb-8">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-2 drop-shadow-lg">
+                🎯 습관 트래커
+              </h1>
+              <p className="text-white/90 text-sm sm:text-base">👤 {userId}님의 습관 관리</p>
+            </div>
+            <PremiumButton
+              onClick={onLogout}
+              variant="secondary"
+              size="md"
+            >
+              로그아웃
+            </PremiumButton>
           </div>
-          <button
-        type="button"
-            onClick={onLogout}
-            className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-bold transition-all"
-            style={{ minHeight: '48px' }}
-          >
-            로그아웃
-          </button>
-        </div>
+        </PremiumCard>
 
         {/* 습관 추가 버튼 */}
         {!showAddForm && (
-          <button
-        type="button"
+          <PremiumButton
             onClick={() => setShowAddForm(true)}
-            className="w-full bg-white/20 hover:bg-white/30 text-white font-bold py-4 rounded sm:rounded-lg md:rounded-2xl mb-6 flex items-center justify-center gap-2 transition-all"
+            fullWidth
+            size="lg"
+            icon="➕"
+            className="mb-6"
           >
-            <span className="text-2xl">+</span>
-            <span>새 습관 추가</span>
-          </button>
+            새 습관 추가
+          </PremiumButton>
         )}
 
         {/* 습관 추가 폼 */}
@@ -503,7 +507,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
         )}
 
       </div>
-    </div>
+    </PremiumLayout>
   );
 }
 

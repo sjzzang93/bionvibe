@@ -454,26 +454,27 @@ export default function GiftFinderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <PremiumLayout theme="pink" showStars={true}>
+      <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8">
         {/* 헤더 */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-black mb-0.5 sm:mb-1.5 md:mb-2 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 dark:from-pink-400 dark:via-purple-400 dark:to-blue-400 bg-clip-text text-transparent">
-            🎁 선물 추천
+        <PremiumCard hover gradient className="text-center mb-6 sm:mb-8">
+          <div className="text-6xl sm:text-7xl mb-4 animate-bounce-slow">🎁</div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-2 sm:mb-3 text-white drop-shadow-lg">
+            선물 추천
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
+          <p className="text-base sm:text-lg text-white/90">
             200개 이상의 선물 데이터로 완벽한 선물을 찾아드려요
           </p>
-        </div>
+        </PremiumCard>
 
         {!showResult ? (
-          <div className="bg-white dark:bg-gray-800 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 md:p-8 space-y-6">
+          <PremiumCard className="space-y-4 sm:space-y-6">
             {/* 받는 사람 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
+              <label className="block text-sm sm:text-base font-bold text-gray-900 mb-2 sm:mb-3">
                 🎯 누구에게 선물하나요?
               </label>
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                 {[
                   { id: 'parents', label: '부모님', emoji: '👨‍👩‍👦' },
                   { id: 'grandparents', label: '조부모님', emoji: '👴' },
@@ -485,17 +486,17 @@ export default function GiftFinderPage() {
                   { id: 'other', label: '기타', emoji: '🙂' }
                 ].map(opt => (
                   <button
-        type="button"
+                    type="button"
                     key={opt.id}
                     onClick={() => setRecipient(opt.id)}
-                    className={`p-3 rounded-lg border-2 font-bold transition-all ${
+                    className={`p-3 sm:p-4 rounded-xl font-bold ${
                       recipient === opt.id
-                        ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
+                        ? 'bg-pink-500 text-white ring-4 ring-pink-300 scale-105'
+                        : 'bg-white/80 text-gray-900 hover:bg-white/90'
                     }`}
                   >
-                    <div className="text-2xl mb-1">{opt.emoji}</div>
-                    <div className="text-xs">{opt.label}</div>
+                    <div className="text-xl sm:text-2xl mb-1">{opt.emoji}</div>
+                    <div className="text-xs sm:text-sm">{opt.label}</div>
                   </button>
                 ))}
               </div>
@@ -503,10 +504,10 @@ export default function GiftFinderPage() {
 
             {/* 예산 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
+              <label className="block text-sm sm:text-base font-bold text-gray-900 mb-2 sm:mb-3">
                 💰 예산은 얼마나 되나요?
               </label>
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                 {[
                   { id: '10000', label: '1만원대' },
                   { id: '20000', label: '2만원대' },
@@ -518,13 +519,13 @@ export default function GiftFinderPage() {
                   { id: '500000', label: '50만원 이상' }
                 ].map(opt => (
                   <button
-        type="button"
+                    type="button"
                     key={opt.id}
                     onClick={() => setBudget(opt.id)}
-                    className={`p-3 rounded-lg border-2 font-bold transition-all ${
+                    className={`p-3 sm:p-4 rounded-xl font-bold text-xs sm:text-sm ${
                       budget === opt.id
-                        ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
+                        ? 'bg-pink-500 text-white ring-4 ring-pink-300 scale-105'
+                        : 'bg-white/80 text-gray-900 hover:bg-white/90'
                     }`}
                   >
                     {opt.label}
@@ -535,10 +536,10 @@ export default function GiftFinderPage() {
 
             {/* 상황 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
+              <label className="block text-sm sm:text-base font-bold text-gray-900 mb-2 sm:mb-3">
                 🎊 어떤 상황인가요?
               </label>
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                 {[
                   { id: 'birthday', label: '생일', emoji: '🎂' },
                   { id: 'anniversary', label: '기념일', emoji: '💝' },
@@ -550,17 +551,17 @@ export default function GiftFinderPage() {
                   { id: 'etc', label: '그냥', emoji: '💝' }
                 ].map(opt => (
                   <button
-        type="button"
+                    type="button"
                     key={opt.id}
                     onClick={() => setOccasion(opt.id)}
-                    className={`p-3 rounded-lg border-2 font-bold transition-all ${
+                    className={`p-3 sm:p-4 rounded-xl font-bold ${
                       occasion === opt.id
-                        ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
+                        ? 'bg-pink-500 text-white ring-4 ring-pink-300 scale-105'
+                        : 'bg-white/80 text-gray-900 hover:bg-white/90'
                     }`}
                   >
-                    <div className="text-2xl mb-1">{opt.emoji}</div>
-                    <div className="text-xs">{opt.label}</div>
+                    <div className="text-xl sm:text-2xl mb-1">{opt.emoji}</div>
+                    <div className="text-xs sm:text-sm">{opt.label}</div>
                   </button>
                 ))}
               </div>
@@ -568,91 +569,94 @@ export default function GiftFinderPage() {
 
             {/* 관심사 */}
             <div>
-              <label className="block text-sm font-bold text-gray-700 dark:text-gray-200 mb-0.5 sm:mb-1.5 md:mb-2">
+              <label className="block text-sm sm:text-base font-bold text-gray-900 mb-2 sm:mb-3">
                 ❤️ 관심사를 선택해주세요 (다중선택 가능)
               </label>
-              <div className="grid grid-cols-3 md:grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
                 {interestOptions.map(opt => (
                   <button
-        type="button"
+                    type="button"
                     key={opt.id}
                     onClick={() => toggleInterest(opt.id)}
-                    className={`p-3 rounded-lg border-2 font-bold transition-all ${
+                    className={`p-3 sm:p-4 rounded-xl font-bold text-xs sm:text-sm ${
                       interests.includes(opt.id)
-                        ? 'border-purple-500 bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
-                        : 'border-amber-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 bg-amber-50 dark:bg-gray-700 text-amber-900 dark:text-gray-200'
+                        ? 'bg-pink-500 text-white ring-4 ring-pink-300 scale-105'
+                        : 'bg-white/80 text-gray-900 hover:bg-white/90'
                     }`}
                   >
-                    <div className="text-xs">{opt.label}</div>
+                    {opt.label}
                   </button>
                 ))}
               </div>
             </div>
 
             {/* 추천 받기 버튼 */}
-            <button
-        type="button"
+            <PremiumButton
               onClick={generateSuggestions}
-              className="w-full py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white font-black text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
+              variant="success"
+              size="lg"
+              icon="🎁"
+              fullWidth
             >
-              🎁 선물 추천 받기
-            </button>
-          </div>
+              선물 추천 받기
+            </PremiumButton>
+          </PremiumCard>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* 결과 헤더 */}
-            <div className="bg-white dark:bg-gray-800 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 text-center">
-              <h2 className="text-2xl font-black text-gray-800 dark:text-gray-100 mb-2">
+            <PremiumCard hover className="text-center">
+              <h2 className="text-2xl sm:text-3xl font-black text-white mb-2">
                 🎉 추천 선물 {suggestions.length}개
               </h2>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-white/90 text-sm sm:text-base">
                 마음에 드는 선물을 골라보세요!
               </p>
-            </div>
+            </PremiumCard>
 
             {/* 추천 목록 */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {suggestions.map((gift: GiftSuggestion, index: number) => (
-                <div
+                <PremiumCard
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border-2 border-transparent hover:border-purple-300 dark:hover:border-purple-600"
+                  hover
+                  className="flex items-start gap-3 sm:gap-4"
                 >
-                  <div className="flex items-start gap-2">
-                    <div className="text-5xl">{gift.emoji}</div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-black text-gray-800 dark:text-gray-100 mb-2">
-                        {gift.name}
-                      </h3>
-                      <p className="text-purple-600 dark:text-purple-400 font-bold mb-2">
-                        {gift.price}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        {gift.reason}
-                      </p>
-                    </div>
+                  <div className="text-4xl sm:text-5xl flex-shrink-0">{gift.emoji}</div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base sm:text-lg font-black text-gray-900 mb-1 sm:mb-2 break-words">
+                      {gift.name}
+                    </h3>
+                    <p className="text-pink-600 font-bold mb-1 sm:mb-2 text-sm sm:text-base">
+                      {gift.price}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                      {gift.reason}
+                    </p>
                   </div>
-                </div>
+                </PremiumCard>
               ))}
             </div>
 
             {/* 다시 하기 버튼 */}
-            <button
-        type="button"
+            <PremiumButton
               onClick={reset}
-              className="w-full py-4 bg-gray-600 hover:bg-gray-700 dark:bg-gray-700 dark:hover:bg-gray-600 text-white font-black text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
+              variant="secondary"
+              size="lg"
+              icon="🔄"
+              fullWidth
             >
-              🔄 다시 추천 받기
-            </button>
+              다시 추천 받기
+            </PremiumButton>
           </div>
         )}
 
         {/* 안내 */}
-        <div className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400 space-y-2">
+        <div className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-white/70 space-y-1 sm:space-y-2">
           <p>💡 실제 구매 전 받는 분의 취향을 다시 한번 확인해보세요!</p>
-          <p className="text-xs">📊 200개 이상의 선물 데이터 기반 추천 시스템</p>
+          <p className="text-[10px] sm:text-xs">📊 200개 이상의 선물 데이터 기반 추천 시스템</p>
         </div>
 
       </div>
-    </div>
+    </PremiumLayout>
   );
 }

@@ -104,7 +104,7 @@ export default function QuitSmokingChallenge() {
                     type="datetime-local"
                     value={quitDate}
                     onChange={(e) => setQuitDate(e.target.value)}
-                    className="w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-gray-900 text-sm sm:text-base border-2 border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 focus:outline-none transition-all"
+                    className="w-full max-w-xs px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-gray-900 text-sm sm:text-base border-2 border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 focus:outline-none transition-all"
                   />
                 </div>
 

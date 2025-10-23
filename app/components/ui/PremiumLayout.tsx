@@ -1,7 +1,10 @@
 'use client';
 
 import { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import AppFooter from '@/app/components/AppFooter';
+
+const FloatingStars = dynamic(() => import('./FloatingStars'), { ssr: false });
 
 interface PremiumLayoutProps {
   children: ReactNode;
@@ -69,26 +72,7 @@ export default function PremiumLayout({
         </div>
 
         {/* Floating particles with 3D effect */}
-        {showStars && (
-          <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
-            {[...Array(50)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute bg-white rounded-full animate-float-3d"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  width: `${1 + Math.random() * 3}px`,
-                  height: `${1 + Math.random() * 3}px`,
-                  animationDelay: `${Math.random() * 5}s`,
-                  animationDuration: `${3 + Math.random() * 4}s`,
-                  transform: `translateZ(${Math.random() * 100}px)`,
-                  opacity: 0.3 + Math.random() * 0.7,
-                }}
-              />
-            ))}
-          </div>
-        )}
+        {showStars && <FloatingStars />}
       </div>
 
       {/* Content with parallax */}

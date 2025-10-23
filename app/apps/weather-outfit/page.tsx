@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
@@ -19,21 +19,24 @@ interface OutfitRecommendation {
 }
 
 export default function WeatherOutfit() {
-  // 현재 계절 자동 감지
-  const getCurrentSeason = (): 'spring' | 'summer' | 'fall' | 'winter' => {
-    const month = new Date().getMonth() + 1; // 1-12
-    if (month >= 3 && month <= 5) return 'spring';
-    if (month >= 6 && month <= 8) return 'summer';
-    if (month >= 9 && month <= 11) return 'fall';
-    return 'winter';
-  };
-
-  const currentSeason = getCurrentSeason();
-  
   const [temp, setTemp] = useState(20);
   const [weather, setWeather] = useState<'sunny' | 'cloudy' | 'rainy' | 'snowy'>('sunny');
-  const [season, setSeason] = useState<'spring' | 'summer' | 'fall' | 'winter'>(currentSeason);
+  const [season, setSeason] = useState<'spring' | 'summer' | 'fall' | 'winter'>('spring');
   const [result, setResult] = useState<OutfitRecommendation | null>(null);
+  const [currentSeason, setCurrentSeason] = useState<'spring' | 'summer' | 'fall' | 'winter'>('spring');
+
+  // 현재 계절 자동 감지 (클라이언트에서만 실행)
+  useEffect(() => {
+    const month = new Date().getMonth() + 1; // 1-12
+    let detectedSeason: 'spring' | 'summer' | 'fall' | 'winter' = 'spring';
+    if (month >= 3 && month <= 5) detectedSeason = 'spring';
+    else if (month >= 6 && month <= 8) detectedSeason = 'summer';
+    else if (month >= 9 && month <= 11) detectedSeason = 'fall';
+    else detectedSeason = 'winter';
+    
+    setCurrentSeason(detectedSeason);
+    setSeason(detectedSeason);
+  }, []);
 
   // 계절별 배경 스타일
   const getSeasonalStyle = () => {
@@ -307,19 +310,26 @@ export default function WeatherOutfit() {
               <label className="block text-base md:text-lg font-medium text-gray-800 mb-3">날씨</label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                 {[
-                  { key: 'sunny', emoji: '☀️', label: '맑음', color: 'bg-yellow-500' },
-                  { key: 'cloudy', emoji: '☁️', label: '흐림', color: 'bg-gray-500' },
-                  { key: 'rainy', emoji: '🌧️', label: '비', color: 'bg-blue-500' },
-                  { key: 'snowy', emoji: '❄️', label: '눈', color: 'bg-cyan-500' }
+                  { key: 'sunny', emoji: '☀️', label: '맑음' },
+                  { key: 'cloudy', emoji: '☁️', label: '흐림' },
+                  { key: 'rainy', emoji: '🌧️', label: '비' },
+                  { key: 'snowy', emoji: '❄️', label: '눈' }
                 ].map(w => (
-                  <div key={w.key} onClick={() => setWeather(w.key as any)}>
-                    <PremiumCard hover className={`text-center cursor-pointer ${weather === w.key ? w.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)] min-h-[56px] flex items-center justify-center`}>
-                      <div className="p-3 sm:p-4">
-                        <div className="text-3xl sm:text-2xl mb-1">{w.emoji}</div>
-                        <div className="text-xs sm:text-sm font-semibold">{w.label}</div>
-                      </div>
-                    </PremiumCard>
-                  </div>
+                  <button
+                    key={w.key}
+                    type="button"
+                    onClick={() => setWeather(w.key as any)}
+                    className={`text-center cursor-pointer rounded-xl min-h-[56px] ${
+                      weather === w.key 
+                        ? 'bg-yellow-500 text-white ring-4 ring-yellow-300' 
+                        : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                    }`}
+                  >
+                    <div className="p-3 sm:p-4">
+                      <div className="text-3xl sm:text-2xl mb-1">{w.emoji}</div>
+                      <div className="text-xs sm:text-sm font-semibold">{w.label}</div>
+                    </div>
+                  </button>
                 ))}
               </div>
             </PremiumCard>
@@ -328,19 +338,26 @@ export default function WeatherOutfit() {
               <label className="block text-base md:text-lg font-medium text-gray-800 mb-3">계절</label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                 {[
-                  { key: 'spring', emoji: '🌸', label: '봄', color: 'bg-pink-500' },
-                  { key: 'summer', emoji: '🌻', label: '여름', color: 'bg-orange-500' },
-                  { key: 'fall', emoji: '🍁', label: '가을', color: 'bg-amber-600' },
-                  { key: 'winter', emoji: '⛄', label: '겨울', color: 'bg-blue-600' }
+                  { key: 'spring', emoji: '🌸', label: '봄' },
+                  { key: 'summer', emoji: '🌻', label: '여름' },
+                  { key: 'fall', emoji: '🍁', label: '가을' },
+                  { key: 'winter', emoji: '⛄', label: '겨울' }
                 ].map(s => (
-                  <div key={s.key} onClick={() => setSeason(s.key as any)}>
-                    <PremiumCard hover className={`text-center cursor-pointer ${season === s.key ? s.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)] min-h-[56px] flex items-center justify-center`}>
-                      <div className="p-3 sm:p-4">
-                        <div className="text-3xl sm:text-2xl mb-1">{s.emoji}</div>
-                        <div className="text-xs sm:text-sm font-semibold">{s.label}</div>
-                      </div>
-                    </PremiumCard>
-                  </div>
+                  <button
+                    key={s.key}
+                    type="button"
+                    onClick={() => setSeason(s.key as any)}
+                    className={`text-center cursor-pointer rounded-xl min-h-[56px] ${
+                      season === s.key 
+                        ? 'bg-yellow-500 text-white ring-4 ring-yellow-300' 
+                        : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                    }`}
+                  >
+                    <div className="p-3 sm:p-4">
+                      <div className="text-3xl sm:text-2xl mb-1">{s.emoji}</div>
+                      <div className="text-xs sm:text-sm font-semibold">{s.label}</div>
+                    </div>
+                  </button>
                 ))}
               </div>
             </PremiumCard>

@@ -82,7 +82,7 @@
     },
     {
       "id": "coffee-calculator",
-      "name": "커피 카페인 계산기",
+      "name": "카페인 계산기",
       "slug": "coffee-calculator",
       "icon": "☕",
       "description": "카페인 섭취량 분석",
@@ -113,7 +113,7 @@
     },
     {
       "id": "crypto-calculator",
-      "name": "비트코인 vs 순금",
+      "name": "모의투자",
       "slug": "crypto-calculator",
       "icon": "⚡",
       "description": "실시간 시세 & 투자 수익률 시뮬레이션",
@@ -522,7 +522,7 @@
     },
     {
       "id": "past-life-job",
-      "name": "전생 직업",
+      "name": "전생 위인찾기",
       "slug": "past-life-job",
       "icon": "⏳",
       "description": "전생 서비스",
@@ -724,7 +724,7 @@
     },
     {
       "id": "fengshui-guide",
-      "name": "풍수지리 실전 도감",
+      "name": "풍수지리 점수",
       "slug": "fengshui-guide",
       "icon": "🏠",
       "description": "과학적 해석과 체크리스트로 배우는 현대 풍수",

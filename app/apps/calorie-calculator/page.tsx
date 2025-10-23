@@ -109,45 +109,56 @@ export default function CalorieCalculatorPage() {
       snackCal = Math.round(targetCalories * 0.10);
     }
 
-    // 아침 선택
+    // 아침 선택 (칼로리 기반 결정적 선택)
     let breakfast;
     if (breakfastCal < 450) {
-      breakfast = breakfastOptions.light[Math.floor(Math.random() * breakfastOptions.light.length)];
+      const index = Math.floor(targetCalories / 100) % breakfastOptions.light.length;
+      breakfast = breakfastOptions.light[index];
     } else {
-      breakfast = breakfastOptions.heavy[Math.floor(Math.random() * breakfastOptions.heavy.length)];
+      const index = Math.floor(targetCalories / 100) % breakfastOptions.heavy.length;
+      breakfast = breakfastOptions.heavy[index];
     }
 
-    // 점심 선택
+    // 점심 선택 (칼로리 기반 결정적 선택)
     let lunch;
     if (lunchCal < 700) {
-      lunch = lunchOptions.balanced[Math.floor(Math.random() * lunchOptions.balanced.length)];
+      const index = Math.floor(targetCalories / 150) % lunchOptions.balanced.length;
+      lunch = lunchOptions.balanced[index];
     } else {
-      lunch = lunchOptions.heavy[Math.floor(Math.random() * lunchOptions.heavy.length)];
+      const index = Math.floor(targetCalories / 150) % lunchOptions.heavy.length;
+      lunch = lunchOptions.heavy[index];
     }
 
-    // 저녁 선택
+    // 저녁 선택 (칼로리 기반 결정적 선택)
     let dinner;
     if (dinnerCal < 500) {
-      dinner = dinnerOptions.light[Math.floor(Math.random() * dinnerOptions.light.length)];
+      const index = Math.floor(targetCalories / 200) % dinnerOptions.light.length;
+      dinner = dinnerOptions.light[index];
     } else if (dinnerCal < 700) {
-      dinner = dinnerOptions.balanced[Math.floor(Math.random() * dinnerOptions.balanced.length)];
+      const index = Math.floor(targetCalories / 200) % dinnerOptions.balanced.length;
+      dinner = dinnerOptions.balanced[index];
     } else {
-      dinner = dinnerOptions.heavy[Math.floor(Math.random() * dinnerOptions.heavy.length)];
+      const index = Math.floor(targetCalories / 200) % dinnerOptions.heavy.length;
+      dinner = dinnerOptions.heavy[index];
     }
 
-    // 간식 선택
+    // 간식 선택 (칼로리 기반 결정적 선택)
     const snacks = [];
     let remainingSnackCal = snackCal;
+    let snackIndex = 0;
     
     while (remainingSnackCal > 100) {
       let snack;
       if (remainingSnackCal < 180) {
-        snack = snackOptions.light[Math.floor(Math.random() * snackOptions.light.length)];
+        const index = (Math.floor(targetCalories / 50) + snackIndex) % snackOptions.light.length;
+        snack = snackOptions.light[index];
       } else {
-        snack = snackOptions.medium[Math.floor(Math.random() * snackOptions.medium.length)];
+        const index = (Math.floor(targetCalories / 50) + snackIndex) % snackOptions.medium.length;
+        snack = snackOptions.medium[index];
       }
       snacks.push(snack);
       remainingSnackCal -= snack.calories;
+      snackIndex++;
       
       if (snacks.length >= 2) break; // 최대 2개 간식
     }
@@ -159,6 +170,12 @@ export default function CalorieCalculatorPage() {
     const ageNum = parseInt(age);
     const heightNum = parseFloat(height);
     const weightNum = parseFloat(weight);
+
+    // 유효성 검사
+    if (!ageNum || !heightNum || !weightNum || isNaN(ageNum) || isNaN(heightNum) || isNaN(weightNum)) {
+      alert('나이, 키, 체중을 모두 입력해주세요.');
+      return;
+    }
 
     // Harris-Benedict 공식으로 기초대사량(BMR) 계산
     let bmr = 0;
@@ -216,86 +233,88 @@ export default function CalorieCalculatorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-600 dark:via-emerald-600 dark:to-teal-600 py-8 px-4 transition-colors">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-center text-white mb-4">
-          칼로리 자동계산기
-        </h1>
-        <p className="text-center text-green-100 mb-8 text-[10px] sm:text-xs md:text-sm">과학적 공식으로 정확한 하루 칼로리 계산 + 맞춤 식단 추천</p>
+    <PremiumLayout theme="green" showStars={true}>
+      <div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
+        <PremiumCard gradient hover>
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-6xl sm:text-7xl font-bold mb-4 animate-bounce-slow drop-shadow-2xl">🍽️</h1>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 drop-shadow-lg">칼로리 자동계산기</h2>
+            <p className="text-base sm:text-lg text-white/90 drop-shadow-md">과학적 공식으로 정확한 하루 칼로리 계산 + 맞춤 식단 추천</p>
+          </div>
 
-        <div className="bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 space-y-4 md:space-y-6">
+        <div className="space-y-4 md:space-y-6">
           {/* 성별 */}
-          <div>
-            <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">성별</label>
-            <div className="grid grid-cols-3 gap-3 md:gap-2">
+          <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+            <label className="text-gray-800 font-bold mb-3 block text-sm sm:text-base">성별</label>
+            <div className="grid grid-cols-2 gap-3">
               <button
-        type="button"
+                type="button"
                 onClick={() => setGender('male')}
-                className={`py-3 md:py-4 rounded-xl font-bold transition-all text-[10px] sm:text-xs md:text-sm ${
-                  gender === 'male' ? 'bg-blue-500 text-white' : 'bg-white/20 text-white'
+                className={`py-3 md:py-4 rounded-xl font-bold text-sm sm:text-base ${
+                  gender === 'male' ? 'bg-blue-500 text-white ring-4 ring-blue-300' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 남성
               </button>
               <button
-        type="button"
+                type="button"
                 onClick={() => setGender('female')}
-                className={`py-3 md:py-4 rounded-xl font-bold transition-all text-[10px] sm:text-xs md:text-sm ${
-                  gender === 'female' ? 'bg-pink-500 text-white' : 'bg-white/20 text-white'
+                className={`py-3 md:py-4 rounded-xl font-bold text-sm sm:text-base ${
+                  gender === 'female' ? 'bg-pink-500 text-white ring-4 ring-pink-300' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 여성
               </button>
             </div>
-          </div>
+          </PremiumCard>
 
           {/* 나이, 키, 몸무게 */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-2">
-            <div>
-              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">나이</label>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="text-gray-800 font-bold mb-2 block text-sm">나이</label>
               <input
                 type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
                 placeholder="예: 30"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
-                style={{ fontSize: '16px', minHeight: '44px' }}
+                className="w-full px-4 py-3 rounded-lg text-gray-900 text-base border-2 border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 focus:outline-none"
+                style={{ fontSize: '16px', minHeight: '48px' }}
               />
-            </div>
-            <div>
-              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">키 (cm)</label>
+            </PremiumCard>
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="text-gray-800 font-bold mb-2 block text-sm">키 (cm)</label>
               <input
                 type="number"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
                 placeholder="예: 170"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
-                style={{ fontSize: '16px', minHeight: '44px' }}
+                className="w-full px-4 py-3 rounded-lg text-gray-900 text-base border-2 border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 focus:outline-none"
+                style={{ fontSize: '16px', minHeight: '48px' }}
               />
-            </div>
-            <div>
-              <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">체중 (kg)</label>
+            </PremiumCard>
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="text-gray-800 font-bold mb-2 block text-sm">체중 (kg)</label>
               <input
                 type="number"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
                 placeholder="예: 70"
-                className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
-                style={{ fontSize: '16px', minHeight: '44px' }}
+                className="w-full px-4 py-3 rounded-lg text-gray-900 text-base border-2 border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 focus:outline-none"
+                style={{ fontSize: '16px', minHeight: '48px' }}
               />
-            </div>
+            </PremiumCard>
           </div>
 
           {/* 활동량 */}
-          <div>
-            <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">활동량</label>
+          <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+            <label className="text-gray-800 font-bold mb-3 block text-sm sm:text-base">활동량</label>
             <select
               value={activity}
               onChange={(e) => setActivity(e.target.value)}
-              className="w-full px-3 md:px-4 py-3 rounded-lg text-black text-[10px] sm:text-xs md:text-sm"
-              style={{ fontSize: '16px', minHeight: '44px' }}
+              className="w-full px-4 py-3 rounded-lg text-gray-900 text-base border-2 border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 focus:outline-none font-semibold"
+              style={{ fontSize: '16px', minHeight: '48px' }}
             >
               <option value="sedentary">거의 운동 안함</option>
               <option value="light">가벼운 운동 (주 1-3일)</option>
@@ -303,86 +322,87 @@ export default function CalorieCalculatorPage() {
               <option value="active">격렬한 운동 (주 6-7일)</option>
               <option value="veryActive">매우 격렬한 운동 (하루 2회)</option>
             </select>
-          </div>
+          </PremiumCard>
 
           {/* 목표 */}
-          <div>
-            <label className="text-white font-bold mb-2 block text-[10px] sm:text-xs md:text-sm">목표</label>
-            <div className="grid grid-cols-3 gap-2 md:gap-0 sm:gap-1.5 md:gap-3">
+          <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+            <label className="text-gray-800 font-bold mb-3 block text-sm sm:text-base">목표</label>
+            <div className="grid grid-cols-3 gap-3">
               <button
-        type="button"
+                type="button"
                 onClick={() => setGoal('lose')}
-                className={`py-3 rounded-xl font-bold transition-all text-xs md:text-sm ${
-                  goal === 'lose' ? 'bg-red-500 text-white' : 'bg-white/20 text-white'
+                className={`py-3 rounded-xl font-bold text-sm sm:text-base ${
+                  goal === 'lose' ? 'bg-red-500 text-white ring-4 ring-red-300' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 감량
               </button>
               <button
-        type="button"
+                type="button"
                 onClick={() => setGoal('maintain')}
-                className={`py-3 rounded-xl font-bold transition-all text-xs md:text-sm ${
-                  goal === 'maintain' ? 'bg-green-500 text-white' : 'bg-white/20 text-white'
+                className={`py-3 rounded-xl font-bold text-sm sm:text-base ${
+                  goal === 'maintain' ? 'bg-green-500 text-white ring-4 ring-green-300' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 유지
               </button>
               <button
-        type="button"
+                type="button"
                 onClick={() => setGoal('gain')}
-                className={`py-3 rounded-xl font-bold transition-all text-xs md:text-sm ${
-                  goal === 'gain' ? 'bg-blue-500 text-white' : 'bg-white/20 text-white'
+                className={`py-3 rounded-xl font-bold text-sm sm:text-base ${
+                  goal === 'gain' ? 'bg-blue-500 text-white ring-4 ring-blue-300' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                 }`}
-                style={{ minHeight: '44px' }}
+                style={{ minHeight: '48px' }}
               >
                 증량
               </button>
             </div>
-          </div>
+          </PremiumCard>
 
-          <button
-        type="button"
+          <PremiumButton
             onClick={handleCalculate}
-            className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm md:text-xl hover:shadow-lg transition-all"
-            style={{ minHeight: '48px' }}
+            fullWidth
+            size="lg"
           >
             계산하기
-          </button>
+          </PremiumButton>
 
           {result && (
             <div className="space-y-4 pt-6">
               {/* 주요 수치 */}
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl p-6 text-center text-white">
-                <div className="text-5xl md:text-6xl mb-2">🎯</div>
-                <div className="text-[10px] sm:text-xs md:text-sm mb-2">하루 권장 칼로리</div>
-                <div className="text-4xl md:text-6xl font-bold mb-4">{result.targetCalories}</div>
-                <div className="text-xs md:text-sm">kcal</div>
-              </div>
+              <PremiumCard hover className="bg-gradient-to-r from-blue-500 to-cyan-500 [transform:translateZ(20px)] hover:[transform:translateZ(30px)]">
+                <div className="text-center text-white">
+                  <div className="text-6xl md:text-7xl mb-3">🎯</div>
+                  <div className="text-lg sm:text-xl mb-3">하루 권장 칼로리</div>
+                  <div className="text-6xl md:text-7xl font-bold mb-4">{result.targetCalories}</div>
+                  <div className="text-base sm:text-lg">kcal</div>
+                </div>
+              </PremiumCard>
 
               {/* 상세 정보 */}
-              <div className="bg-white rounded-xl p-4 md:p-6">
-                <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4">상세 분석</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
-                    <span className="text-gray-600">기초대사량 (BMR):</span>
+              <PremiumCard hover className="[transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">상세 분석</h3>
+                <div className="space-y-4">
+                  <div className="flex justify-between text-base sm:text-lg">
+                    <span className="text-gray-700">기초대사량 (BMR):</span>
                     <span className="font-bold text-blue-600">{result.bmr} kcal</span>
                   </div>
-                  <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
-                    <span className="text-gray-600">일일 소비 칼로리 (TDEE):</span>
+                  <div className="flex justify-between text-base sm:text-lg">
+                    <span className="text-gray-700">일일 소비 칼로리 (TDEE):</span>
                     <span className="font-bold text-green-600">{result.tdee} kcal</span>
                   </div>
                   {result.calorieDiff !== 0 && (
                     <>
-                      <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
-                        <span className="text-gray-600">칼로리 조정:</span>
+                      <div className="flex justify-between text-base sm:text-lg">
+                        <span className="text-gray-700">칼로리 조정:</span>
                         <span className={`font-bold ${result.calorieDiff > 0 ? 'text-blue-600' : 'text-red-600'}`}>
                           {result.calorieDiff > 0 ? '+' : ''}{result.calorieDiff} kcal
                         </span>
                       </div>
-                      <div className="flex justify-between text-[10px] sm:text-xs md:text-sm">
-                        <span className="text-gray-600">예상 체중 변화:</span>
+                      <div className="flex justify-between text-base sm:text-lg">
+                        <span className="text-gray-700">예상 체중 변화:</span>
                         <span className="font-bold text-purple-600">
                           주당 {result.expectedWeightChange > 0 ? '+' : ''}{result.expectedWeightChange}kg
                         </span>
@@ -390,45 +410,45 @@ export default function CalorieCalculatorPage() {
                     </>
                   )}
                 </div>
-              </div>
+              </PremiumCard>
 
               {/* 영양소 비율 */}
-              <div className="bg-white rounded-xl p-4 md:p-6">
-                <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-4">권장 영양소 (30:40:30)</h3>
-                <div className="space-y-4">
+              <PremiumCard hover className="[transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">권장 영양소 (30:40:30)</h3>
+                <div className="space-y-5">
                   <div>
-                    <div className="flex justify-between mb-2 text-[10px] sm:text-xs md:text-sm">
-                      <span className="text-gray-600">단백질</span>
+                    <div className="flex justify-between mb-3 text-base sm:text-lg">
+                      <span className="text-gray-700 font-medium">단백질</span>
                       <span className="font-bold text-red-600">{result.protein}g</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-gray-200 rounded-full h-4">
                       <div className="h-full bg-red-500 rounded-full" style={{ width: '30%' }} />
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between mb-2 text-[10px] sm:text-xs md:text-sm">
-                      <span className="text-gray-600">탄수화물</span>
+                    <div className="flex justify-between mb-3 text-base sm:text-lg">
+                      <span className="text-gray-700 font-medium">탄수화물</span>
                       <span className="font-bold text-yellow-600">{result.carbs}g</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-gray-200 rounded-full h-4">
                       <div className="h-full bg-yellow-500 rounded-full" style={{ width: '40%' }} />
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between mb-2 text-[10px] sm:text-xs md:text-sm">
-                      <span className="text-gray-600">지방</span>
+                    <div className="flex justify-between mb-3 text-base sm:text-lg">
+                      <span className="text-gray-700 font-medium">지방</span>
                       <span className="font-bold text-blue-600">{result.fat}g</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-gray-200 rounded-full h-4">
                       <div className="h-full bg-blue-500 rounded-full" style={{ width: '30%' }} />
                     </div>
                   </div>
                 </div>
-              </div>
+              </PremiumCard>
 
               {/* 맞춤 식단 추천 */}
               {mealPlan && (
-                <div className="bg-white rounded-xl p-4 md:p-6">
+                <PremiumCard hover className="[transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
                   <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 text-center">
                     🍽️ 오늘의 맞춤 식단
                   </h3>
@@ -524,7 +544,7 @@ export default function CalorieCalculatorPage() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </PremiumCard>
               )}
               
               {/* 관련 앱 추천 */}
@@ -536,11 +556,12 @@ export default function CalorieCalculatorPage() {
           )}
         </div>
 
-        <div className="mt-8 text-center text-white/80 text-xs md:text-sm px-4">
+        <div className="mt-8 text-center text-white/80 text-sm px-4">
           <p>본 계산기는 Harris-Benedict 공식을 사용합니다.</p>
           <p className="mt-2">식단은 일반적인 추천이며, 개인의 건강 상태를 고려하여 조정이 필요합니다.</p>
         </div>
+        </PremiumCard>
       </div>
-    </div>
+    </PremiumLayout>
   );
 }

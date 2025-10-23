@@ -119,9 +119,9 @@ export default function LottoGenerator() {
               variant="success"
               size="lg"
               icon="🎲"
-              fullWidth
+              className="flex-1 text-sm sm:text-base"
             >
-              {isGenerating ? '생성 중...' : '번호 생성하기'}
+              {isGenerating ? '생성 중...' : '번호생성'}
             </PremiumButton>
             
             <PremiumButton
@@ -129,8 +129,9 @@ export default function LottoGenerator() {
               variant="primary"
               size="lg"
               icon="⚡"
+              className="flex-shrink-0 text-sm sm:text-base whitespace-nowrap"
             >
-              자동 5개
+              자동5개
             </PremiumButton>
           </div>
         </PremiumCard>
@@ -141,14 +142,14 @@ export default function LottoGenerator() {
             <h3 className="text-white text-xl font-bold mb-6 text-center">🎯 생성된 번호 목록</h3>
             <div className="space-y-4">
               {history.map((nums, setIdx) => (
-                <div key={setIdx} className="bg-white/5 backdrop-blur-sm rounded sm:rounded-lg md:rounded-2xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <div className="flex items-center gap-0 sm:gap-1.5 md:gap-3">
-                    <div className="text-white/70 font-bold w-12">#{setIdx + 1}</div>
-                    <div className="flex gap-2 flex-wrap flex-1">
+                <div key={setIdx} className="bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <div className="flex items-center gap-2">
+                    <div className="text-white/70 font-bold text-sm w-8">#{setIdx + 1}</div>
+                    <div className="flex gap-1.5 sm:gap-2 flex-1 justify-between">
                       {nums.map((num, idx) => (
                         <div
                           key={idx}
-                          className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white font-bold text-[10px] sm:text-xs md:text-sm bg-gradient-to-br ${getNumberColor(num)} shadow-lg`}
+                          className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm md:text-base bg-gradient-to-br ${getNumberColor(num)} shadow-lg`}
                         >
                           {num}
                         </div>

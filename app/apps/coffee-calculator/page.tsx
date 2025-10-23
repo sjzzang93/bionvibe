@@ -455,20 +455,18 @@ export default function CoffeeCalculator() {
               <label className="block text-sm sm:text-base font-bold text-gray-800 mb-3">카페인 민감도</label>
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {(['low', 'normal', 'high'] as const).map(level => (
-                  <div key={level} onClick={() => setSensitivity(level)}>
-                    <PremiumCard
-                      hover
-                      className={`cursor-pointer text-center ${
-                        sensitivity === level
-                          ? 'bg-amber-600 text-white ring-4 ring-amber-300'
-                          : 'bg-gray-100 text-gray-700'
-                      } [transform:translateZ(5px)] hover:[transform:translateZ(15px)] min-h-[48px] flex items-center justify-center`}
-                    >
-                      <p className="font-bold text-sm sm:text-base">
-                        {level === 'low' ? '낮음' : level === 'normal' ? '보통' : '높음'}
-                      </p>
-                    </PremiumCard>
-                  </div>
+                  <button
+                    key={level}
+                    type="button"
+                    onClick={() => setSensitivity(level)}
+                    className={`cursor-pointer text-center rounded-xl px-4 py-3 font-bold text-sm sm:text-base transition-all duration-100 min-h-[48px] ${
+                      sensitivity === level
+                        ? 'bg-red-600 text-white ring-4 ring-red-300 scale-105'
+                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    }`}
+                  >
+                    {level === 'low' ? '낮음' : level === 'normal' ? '보통' : '높음'}
+                  </button>
                 ))}
               </div>
             </PremiumCard>
