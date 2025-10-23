@@ -163,12 +163,6 @@ export default function EyeTest() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <div className="mb-4">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-          </div>
-
           <section className="bg-white rounded-2xl shadow-xl p-6">
             <header className="text-center mb-6">
               <h1 className="text-3xl font-bold text-black mb-2">👁️</h1>
@@ -255,15 +249,6 @@ export default function EyeTest() {
               다른 검사하기
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -274,12 +259,6 @@ export default function EyeTest() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <div className="mb-4">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-          </div>
-
           <section className="bg-white rounded-2xl shadow-xl p-6">
             <header className="text-center mb-6">
               <h1 className="text-4xl font-bold text-black mb-2">👁️</h1>
@@ -338,15 +317,6 @@ export default function EyeTest() {
               </ul>
             </div>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -358,12 +328,6 @@ export default function EyeTest() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50">
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <div className="mb-4">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-          </div>
-
           <section className="bg-white rounded-2xl shadow-xl p-6">
             <div className="text-center mb-6">
               <div className="text-sm text-gray-600 mb-2">문제 {currentStep + 1} / {COLOR_BLIND_TESTS.length}</div>
@@ -402,15 +366,6 @@ export default function EyeTest() {
               처음으로
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -429,12 +384,6 @@ export default function EyeTest() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <div className="mb-4">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-          </div>
-
           <section className="bg-white rounded-2xl shadow-xl p-6">
             <div className="text-center mb-6">
               <div className="text-sm text-gray-600 mb-2">시력: {test.level}</div>
@@ -474,15 +423,6 @@ export default function EyeTest() {
               처음으로
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
@@ -494,12 +434,6 @@ export default function EyeTest() {
     return (
       <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <div className="mb-4">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-          </div>
-
           <section className="bg-white rounded-2xl shadow-xl p-6">
             <div className="text-center mb-6">
               <div className="text-sm text-gray-600 mb-2">문제 {currentStep + 1} / {PRESBYOPIA_TEXTS.length}</div>
@@ -544,15 +478,6 @@ export default function EyeTest() {
               처음으로
             </button>
           </section>
-
-          <footer className="mt-6 space-y-3 pb-8">
-            <a href="https://link.coupang.com/a/cWwQHX" target="_blank" referrerPolicy="unsafe-url">
-              <img src="https://ads-partners.coupang.com/banners/931156?subId=&traceId=V0-301-879dd1202e5c73b2-I931156&w=728&h=90" alt="" className="w-full h-auto rounded-lg" />
-            </a>
-            <p className="text-xs text-gray-500 text-center px-4">
-              이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
-            </p>
-          </footer>
         </div>
       </main>
     );
