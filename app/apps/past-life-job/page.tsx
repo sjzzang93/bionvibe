@@ -500,7 +500,7 @@ export default function PastLifeHeroFinder() {
                 <div className="space-y-3">
                   {result.major_achievements.slice(0, 5).map((achievement, i) => (
                     <PremiumCard key={i} hover className="bg-white shadow-md [transform:translateZ(10px)] hover:[transform:translateZ(20px)] transition-all">
-                      <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">• {achievement}</p>
+                      <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed text-center">• {achievement}</p>
                     </PremiumCard>
                   ))}
                 </div>
@@ -513,7 +513,7 @@ export default function PastLifeHeroFinder() {
                   성격 특징
                 </h3>
                 <PremiumCard className="bg-white/80 mb-4 shadow-inner [transform:translateZ(10px)]">
-                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">{result.personality_description}</p>
+                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed text-center">{result.personality_description}</p>
                 </PremiumCard>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {result.traits_keywords.map((trait, i) => (
@@ -544,7 +544,7 @@ export default function PastLifeHeroFinder() {
                   인생 교훈
                 </h3>
                 <PremiumCard className="bg-white shadow-inner [transform:translateZ(10px)]">
-                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">{result.life_lesson}</p>
+                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed text-center">{result.life_lesson}</p>
                 </PremiumCard>
               </PremiumCard>
 
@@ -555,7 +555,7 @@ export default function PastLifeHeroFinder() {
                   현대적 영향
                 </h3>
                 <PremiumCard className="bg-white shadow-inner [transform:translateZ(10px)]">
-                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">{result.modern_influence}</p>
+                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed text-center">{result.modern_influence}</p>
                 </PremiumCard>
               </PremiumCard>
 
