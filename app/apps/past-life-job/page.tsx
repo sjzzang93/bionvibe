@@ -199,11 +199,11 @@ export default function PastLifeHeroFinder() {
                 <select
                   value={birth.year}
                   onChange={(e) => setBirth({...birth, year: Number(e.target.value)})}
-                  className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all"
+                  className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all text-gray-900"
                 >
                   {Array.from({length: 126}, (_, i) => {
                     const year = 2025 - i;
-                    return <option key={year} value={year}>{year}년</option>;
+                    return <option key={year} value={year} className="text-gray-900">{year}년</option>;
                   })}
                 </select>
               </PremiumCard>
@@ -214,10 +214,10 @@ export default function PastLifeHeroFinder() {
                   <select
                     value={birth.month}
                     onChange={(e) => setBirth({...birth, month: Number(e.target.value)})}
-                    className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all"
+                    className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all text-gray-900"
                   >
                     {Array.from({length: 12}, (_, i) => (
-                      <option key={i+1} value={i+1}>{i+1}월</option>
+                      <option key={i+1} value={i+1} className="text-gray-900">{i+1}월</option>
                     ))}
                   </select>
                 </PremiumCard>
@@ -227,10 +227,10 @@ export default function PastLifeHeroFinder() {
                   <select
                     value={birth.day}
                     onChange={(e) => setBirth({...birth, day: Number(e.target.value)})}
-                    className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all"
+                    className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all text-gray-900"
                   >
                     {Array.from({length: 31}, (_, i) => (
-                      <option key={i+1} value={i+1}>{i+1}일</option>
+                      <option key={i+1} value={i+1} className="text-gray-900">{i+1}일</option>
                     ))}
                   </select>
                 </PremiumCard>
@@ -238,7 +238,7 @@ export default function PastLifeHeroFinder() {
 
               <PremiumCard hover className="bg-white/90 [transform:translateZ(10px)] hover:[transform:translateZ(25px)] transition-all duration-300">
                 <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
-                  ⏰ 출생 시간: <span className="text-purple-600 text-lg">{birth.hour}시</span>
+                  ⏰ 출생 시간: <span className="text-gray-900 text-lg">{birth.hour}시</span>
                 </label>
                 <input
                   type="range"
@@ -251,7 +251,7 @@ export default function PastLifeHeroFinder() {
                     background: `linear-gradient(to right, rgb(216 180 254) 0%, rgb(251 207 232) ${(birth.hour / 23) * 100}%, rgb(243 232 255) ${(birth.hour / 23) * 100}%, rgb(243 232 255) 100%)`
                   }}
                 />
-                <div className="flex justify-between text-xs sm:text-sm text-gray-600 mt-2 font-medium">
+                <div className="flex justify-between text-xs sm:text-sm text-gray-900 mt-2 font-medium">
                   <span>🌙 0시</span>
                   <span>☀️ 12시</span>
                   <span>🌙 23시</span>
