@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import historicalFiguresData from '@/data/historical_figures_100.json';
 import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
@@ -79,6 +79,7 @@ const calculateBirthElement = (birth: BirthInfo): string => {
 };
 
 export default function PastLifeHeroFinder() {
+  const [mounted, setMounted] = useState(false);
   const [step, setStep] = useState(1);
   const [birth, setBirth] = useState<BirthInfo>({
     year: 1990,
@@ -94,6 +95,10 @@ export default function PastLifeHeroFinder() {
   });
   const [result, setResult] = useState<HistoricalFigure | null>(null);
   const [matchScore, setMatchScore] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const findMatchingHero = () => {
     const figures = historicalFiguresData.historical_figures as HistoricalFigure[];
@@ -176,6 +181,22 @@ export default function PastLifeHeroFinder() {
   };
 
   const allAnswered = Object.values(personality).every(v => v !== null);
+
+  // 하이드레이션 에러 방지: 클라이언트에서만 렌더링
+  if (!mounted) {
+    return (
+      <PremiumLayout theme="purple" showStars={true}>
+        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+          <div className="h-screen flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-6xl mb-4 animate-pulse">⏳</div>
+              <p className="text-white/80">로딩 중...</p>
+            </div>
+          </div>
+        </div>
+      </PremiumLayout>
+    );
+  }
 
   // Step 1: 생년월일시 입력
   if (step === 1) {
