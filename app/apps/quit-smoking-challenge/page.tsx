@@ -8,6 +8,7 @@ import PremiumButton from '@/app/components/ui/PremiumButton';
 import { QUIT_SMOKING_DATA } from '@/lib/group1-data';
 
 export default function QuitSmokingChallenge() {
+  const [mounted, setMounted] = useState(false);
   const [quitDate, setQuitDate] = useState('');
   const [dailyCigarettes, setDailyCigarettes] = useState(10);
   const [pricePerPack, setPricePerPack] = useState(4500);
@@ -15,6 +16,10 @@ export default function QuitSmokingChallenge() {
   const [elapsedMinutes, setElapsedMinutes] = useState(0);
   const [moneySaved, setMoneySaved] = useState(0);
   const [cigarettesAvoided, setCigarettesAvoided] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const calculate = () => {
     if (!quitDate) {
@@ -60,6 +65,24 @@ export default function QuitSmokingChallenge() {
     const msg = QUIT_SMOKING_DATA.motivationalMessages.find(m => m.day === elapsedDays);
     return msg || QUIT_SMOKING_DATA.motivationalMessages[0];
   };
+
+  // 하이드레이션 에러 방지: 클라이언트에서만 렌더링
+  if (!mounted) {
+    return (
+      <PremiumLayout theme="green">
+        <div className="py-8 px-2 sm:px-4 md:py-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center justify-center min-h-[60vh]">
+              <div className="text-center">
+                <div className="text-6xl mb-4 animate-pulse">⏳</div>
+                <p className="text-white/80">로딩 중...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </PremiumLayout>
+    );
+  }
 
   return (
     <PremiumLayout theme="green">
