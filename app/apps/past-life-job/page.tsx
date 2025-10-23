@@ -571,7 +571,7 @@ export default function PastLifeHeroFinder() {
                       <div className="text-xs sm:text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
                         {element === 'wood' ? '목🌳' : element === 'fire' ? '화🔥' : element === 'earth' ? '토🏔️' : element === 'metal' ? '금⚔️' : '수💧'}
                       </div>
-                      <div className="text-xl sm:text-2xl font-bold bg-gradient-to-br from-purple-600 to-pink-600 bg-clip-text text-transparent">{score}</div>
+                      <div className="text-xl sm:text-2xl font-bold text-gray-900">{score}</div>
                     </PremiumCard>
                   ))}
                 </div>
