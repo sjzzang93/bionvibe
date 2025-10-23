@@ -180,26 +180,26 @@ export default function WeatherOutfit() {
   if (result) {
     return (
       <PremiumLayout theme="blue" showStars={true}>
-        <div className="mx-auto max-w-[600px] px-4 py-6">
+        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
           <PremiumCard gradient hover>
-            <div className="text-center mb-6">
-              <h1 className="text-5xl mb-3 drop-shadow-2xl animate-bounce-slow">{result.emoji}</h1>
-              <h2 className="text-3xl font-bold text-white drop-shadow-lg">오늘의 옷차림</h2>
-              <p className="text-white/90 mt-2 drop-shadow-md text-lg">
+            <div className="text-center mb-6 sm:mb-8">
+              <h1 className="text-6xl sm:text-5xl mb-4 drop-shadow-2xl animate-bounce-slow">{result.emoji}</h1>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg mb-2">오늘의 옷차림</h2>
+              <p className="text-white/90 mt-3 drop-shadow-md text-lg sm:text-xl font-semibold">
                 {result.temp}°C · {result.weather} · {result.season}
               </p>
             </div>
 
             {/* 겉옷 */}
             {result.outfit.outer.length > 0 && (
-              <div className="mb-5">
-                <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
-                  <span className="mr-2">🧥</span> 겉옷
+              <div className="mb-6">
+                <h3 className="font-bold text-base md:text-lg text-white/90 mb-3 flex items-center drop-shadow-md">
+                  <span className="mr-2 text-xl">🧥</span> 겉옷
                 </h3>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                   {result.outfit.outer.map((item, i) => (
                     <PremiumCard key={i} hover className="bg-gradient-to-br from-blue-50 to-cyan-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
-                      <p className="p-3">{item}</p>
+                      <p className="p-3 sm:p-4 text-sm sm:text-base min-h-[48px] flex items-center justify-center">{item}</p>
                     </PremiumCard>
                   ))}
                 </div>
@@ -207,28 +207,28 @@ export default function WeatherOutfit() {
             )}
 
             {/* 상의 */}
-            <div className="mb-5">
-              <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
-                <span className="mr-2">👕</span> 상의
+            <div className="mb-6">
+              <h3 className="font-bold text-base md:text-lg text-white/90 mb-3 flex items-center drop-shadow-md">
+                <span className="mr-2 text-xl">👕</span> 상의
               </h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                 {result.outfit.top.map((item, i) => (
                   <PremiumCard key={i} hover className="bg-gradient-to-br from-green-50 to-emerald-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
-                    <p className="p-3">{item}</p>
+                    <p className="p-3 sm:p-4 text-sm sm:text-base min-h-[48px] flex items-center justify-center">{item}</p>
                   </PremiumCard>
                 ))}
               </div>
             </div>
 
             {/* 하의 */}
-            <div className="mb-5">
-              <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
-                <span className="mr-2">👖</span> 하의
+            <div className="mb-6">
+              <h3 className="font-bold text-base md:text-lg text-white/90 mb-3 flex items-center drop-shadow-md">
+                <span className="mr-2 text-xl">👖</span> 하의
               </h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                 {result.outfit.bottom.map((item, i) => (
                   <PremiumCard key={i} hover className="bg-gradient-to-br from-purple-50 to-blue-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
-                    <p className="p-3">{item}</p>
+                    <p className="p-3 sm:p-4 text-sm sm:text-base min-h-[48px] flex items-center justify-center">{item}</p>
                   </PremiumCard>
                 ))}
               </div>
@@ -236,13 +236,13 @@ export default function WeatherOutfit() {
 
             {/* 악세서리 */}
             <div className="mb-6">
-              <h3 className="font-bold text-sm text-white/90 mb-3 flex items-center drop-shadow-md">
-                <span className="mr-2">🎒</span> 필수 아이템
+              <h3 className="font-bold text-base md:text-lg text-white/90 mb-3 flex items-center drop-shadow-md">
+                <span className="mr-2 text-xl">🎒</span> 필수 아이템
               </h3>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                 {result.outfit.accessories.map((item, i) => (
                   <PremiumCard key={i} hover className="bg-gradient-to-br from-amber-50 to-yellow-50 text-center font-medium text-black [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
-                    <p className="p-3">{item}</p>
+                    <p className="p-3 sm:p-4 text-sm sm:text-base min-h-[48px] flex items-center justify-center">{item}</p>
                   </PremiumCard>
                 ))}
               </div>
@@ -250,17 +250,19 @@ export default function WeatherOutfit() {
 
             {/* 스타일 팁 */}
             <PremiumCard className="mb-6 bg-gradient-to-r from-indigo-50 to-purple-50 [transform:translateZ(15px)]">
-              <h3 className="font-bold text-sm text-gray-800 mb-3">💡 스타일 팁</h3>
+              <h3 className="font-bold text-base md:text-lg text-gray-800 mb-3 flex items-center">
+                <span className="mr-2 text-xl">💡</span> 스타일 팁
+              </h3>
               <div className="space-y-2">
                 {result.tips.map((tip, i) => (
-                  <div key={i} className="bg-white/80 rounded-lg p-3 text-sm text-gray-700 shadow-sm">
+                  <div key={i} className="bg-white/80 rounded-lg p-3 sm:p-4 text-sm sm:text-base text-gray-700 shadow-sm leading-relaxed">
                     • {tip}
                   </div>
                 ))}
               </div>
             </PremiumCard>
 
-            <PremiumButton onClick={() => setResult(null)} fullWidth>
+            <PremiumButton onClick={() => setResult(null)} fullWidth size="lg">
               다시 추천받기
             </PremiumButton>
           </PremiumCard>
@@ -271,20 +273,20 @@ export default function WeatherOutfit() {
 
   return (
     <PremiumLayout theme={season === 'spring' ? 'pink' : season === 'summer' ? 'blue' : season === 'fall' ? 'orange' : 'indigo'} showStars={true}>
-      <div className="mx-auto max-w-[600px] px-4 py-6">
+      <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
         <PremiumCard gradient hover>
-          <div className="text-center mb-6">
-            <h1 className="text-5xl font-bold mb-3 drop-shadow-2xl animate-bounce-slow">🌡️</h1>
-            <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">오늘의 옷차림 추천</h2>
-            <p className="text-white/90 drop-shadow-md">날씨에 딱 맞는 옷차림을 찾아드립니다</p>
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-6xl sm:text-5xl font-bold mb-4 drop-shadow-2xl animate-bounce-slow">🌡️</h1>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg mb-3">오늘의 옷차림 추천</h2>
+            <p className="text-white/90 drop-shadow-md text-base sm:text-lg">날씨에 딱 맞는 옷차림을 찾아드립니다</p>
           </div>
 
           <div className="space-y-6">
             <PremiumCard className="[transform:translateZ(10px)]">
-              <label className="block text-sm font-medium text-gray-800 mb-3">
-                기온 ({temp}°C)
+              <label className="block text-base md:text-lg font-medium text-gray-800 mb-4">
+                기온
               </label>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <input
                   type="range"
                   min="-10"
@@ -293,17 +295,17 @@ export default function WeatherOutfit() {
                   onChange={(e) => setTemp(Number(e.target.value))}
                   className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
-                <div className="text-2xl font-bold text-gray-800 w-20 text-center">{temp}°C</div>
+                <div className="text-3xl sm:text-2xl font-bold text-blue-600 min-w-[80px] sm:min-w-[90px] text-center">{temp}°C</div>
               </div>
-              <div className="flex justify-between text-xs text-gray-500 mt-2">
-                <span>-10°C</span>
-                <span>40°C</span>
+              <div className="flex justify-between text-xs sm:text-sm text-gray-500 mt-3">
+                <span className="font-medium">-10°C</span>
+                <span className="font-medium">40°C</span>
               </div>
             </PremiumCard>
 
             <PremiumCard className="[transform:translateZ(10px)]">
-              <label className="block text-sm font-medium text-gray-800 mb-3">날씨</label>
-              <div className="grid grid-cols-4 gap-3">
+              <label className="block text-base md:text-lg font-medium text-gray-800 mb-3">날씨</label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                 {[
                   { key: 'sunny', emoji: '☀️', label: '맑음', color: 'bg-yellow-500' },
                   { key: 'cloudy', emoji: '☁️', label: '흐림', color: 'bg-gray-500' },
@@ -311,10 +313,10 @@ export default function WeatherOutfit() {
                   { key: 'snowy', emoji: '❄️', label: '눈', color: 'bg-cyan-500' }
                 ].map(w => (
                   <div key={w.key} onClick={() => setWeather(w.key as any)}>
-                    <PremiumCard hover className={`text-center cursor-pointer ${weather === w.key ? w.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)]`}>
-                      <div className="p-3">
-                        <div className="text-2xl mb-1">{w.emoji}</div>
-                        <div className="text-xs font-semibold">{w.label}</div>
+                    <PremiumCard hover className={`text-center cursor-pointer ${weather === w.key ? w.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)] min-h-[56px] flex items-center justify-center`}>
+                      <div className="p-3 sm:p-4">
+                        <div className="text-3xl sm:text-2xl mb-1">{w.emoji}</div>
+                        <div className="text-xs sm:text-sm font-semibold">{w.label}</div>
                       </div>
                     </PremiumCard>
                   </div>
@@ -323,8 +325,8 @@ export default function WeatherOutfit() {
             </PremiumCard>
 
             <PremiumCard className="[transform:translateZ(10px)]">
-              <label className="block text-sm font-medium text-gray-800 mb-3">계절</label>
-              <div className="grid grid-cols-4 gap-3">
+              <label className="block text-base md:text-lg font-medium text-gray-800 mb-3">계절</label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                 {[
                   { key: 'spring', emoji: '🌸', label: '봄', color: 'bg-pink-500' },
                   { key: 'summer', emoji: '🌻', label: '여름', color: 'bg-orange-500' },
@@ -332,10 +334,10 @@ export default function WeatherOutfit() {
                   { key: 'winter', emoji: '⛄', label: '겨울', color: 'bg-blue-600' }
                 ].map(s => (
                   <div key={s.key} onClick={() => setSeason(s.key as any)}>
-                    <PremiumCard hover className={`text-center cursor-pointer ${season === s.key ? s.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)]`}>
-                      <div className="p-3">
-                        <div className="text-2xl mb-1">{s.emoji}</div>
-                        <div className="text-xs font-semibold">{s.label}</div>
+                    <PremiumCard hover className={`text-center cursor-pointer ${season === s.key ? s.color + ' text-white' : 'bg-gray-200 text-gray-600'} [transform:translateZ(5px)] hover:[transform:translateZ(15px)] min-h-[56px] flex items-center justify-center`}>
+                      <div className="p-3 sm:p-4">
+                        <div className="text-3xl sm:text-2xl mb-1">{s.emoji}</div>
+                        <div className="text-xs sm:text-sm font-semibold">{s.label}</div>
                       </div>
                     </PremiumCard>
                   </div>
@@ -344,12 +346,14 @@ export default function WeatherOutfit() {
             </PremiumCard>
 
             <PremiumCard className="bg-gradient-to-r from-blue-100 to-indigo-100 [transform:translateZ(15px)]">
-              <h3 className="font-bold text-gray-800 mb-3">💡 똑똑한 옷차림</h3>
-              <ul className="text-sm text-gray-700 space-y-2">
-                <li className="bg-white/60 rounded-lg p-2">• 온도별 최적 옷차림 추천</li>
-                <li className="bg-white/60 rounded-lg p-2">• 날씨, 계절 고려한 맞춤 스타일</li>
-                <li className="bg-white/60 rounded-lg p-2">• 겉옷, 상의, 하의, 악세서리 종합 제안</li>
-                <li className="bg-white/60 rounded-lg p-2">• 체감 온도와 일교차 고려</li>
+              <h3 className="font-bold text-base md:text-lg text-gray-800 mb-3 flex items-center">
+                <span className="mr-2 text-xl">💡</span> 똑똑한 옷차림
+              </h3>
+              <ul className="text-sm sm:text-base text-gray-700 space-y-2">
+                <li className="bg-white/60 rounded-lg p-3 leading-relaxed">• 온도별 최적 옷차림 추천</li>
+                <li className="bg-white/60 rounded-lg p-3 leading-relaxed">• 날씨, 계절 고려한 맞춤 스타일</li>
+                <li className="bg-white/60 rounded-lg p-3 leading-relaxed">• 겉옷, 상의, 하의, 악세서리 종합 제안</li>
+                <li className="bg-white/60 rounded-lg p-3 leading-relaxed">• 체감 온도와 일교차 고려</li>
               </ul>
             </PremiumCard>
 
