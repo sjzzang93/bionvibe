@@ -22,6 +22,12 @@
         }
       ]
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/investment/price-history",
+      "schedule": "0 0 * * *"
+    }
   ]
 }
 

@@ -21,6 +21,7 @@ export default function ImageManagerPage() {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('file');
+  const [restoring, setRestoring] = useState(false);
   const uploadFormRef = useRef<HTMLDivElement>(null);
 
   const loadApps = async () => {
@@ -116,10 +117,10 @@ export default function ImageManagerPage() {
 
       if (response.ok) {
         alert('✅ 이미지가 업데이트되었습니다!');
-        
+
         // Supabase에서 최신 데이터 다시 가져오기
         await loadApps();
-        
+
         setSelectedApp(null);
         setNewImageUrl('');
       } else {
@@ -133,6 +134,36 @@ export default function ImageManagerPage() {
     setLoading(false);
   };
 
+  const handleRestoreImages = async () => {
+    if (!confirm('⚠️ apps.json에서 Supabase로 모든 이미지를 복원하시겠습니까?')) {
+      return;
+    }
+
+    setRestoring(true);
+
+    try {
+      const response = await fetch('/api/restore-images', {
+        method: 'POST',
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(`✅ ${result.message}`);
+
+        // Supabase에서 최신 데이터 다시 가져오기
+        await loadApps();
+      } else {
+        alert(`❌ ${result.error}`);
+      }
+    } catch (error) {
+      alert('❌ 복원 중 오류가 발생했습니다.');
+      console.error(error);
+    }
+
+    setRestoring(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -144,6 +175,21 @@ export default function ImageManagerPage() {
           </h1>
           <p className="text-gray-300 text-lg">
             모든 웹앱의 이미지를 관리할 수 있습니다
+          </p>
+        </div>
+
+        {/* Restore Button */}
+        <div className="mb-6">
+          <button
+            type="button"
+            onClick={handleRestoreImages}
+            disabled={restoring}
+            className="w-full bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {restoring ? '⏳ 복원 중...' : '🔄 apps.json에서 이미지 복원하기'}
+          </button>
+          <p className="text-yellow-300 text-sm mt-2 text-center">
+            ⚠️ 사라진 이미지를 apps.json에서 Supabase로 복원합니다
           </p>
         </div>
 

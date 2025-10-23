@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getAllAppsAsync, getAllCategories, type App } from '@/lib/getApps';
+import { getBrowserSupabase } from '@/lib/supabase';
 import Link from 'next/link';
 import Image from 'next/image';
 import FavoriteButton from './FavoriteButton';
@@ -14,8 +15,10 @@ export default function HomeContent() {
   const [favoritesLoaded, setFavoritesLoaded] = useState(false);
   const categories = getAllCategories();
 
-  // Supabase에서 앱 데이터 가져오기
+  // Supabase에서 앱 데이터 가져오기 + 실시간 구독
   useEffect(() => {
+    const supabase = getBrowserSupabase();
+
     const loadApps = async () => {
       try {
         // 초기 로드 시 캐시 사용
@@ -30,7 +33,34 @@ export default function HomeContent() {
 
     loadApps();
 
-    // 5분마다 자동 갱신 (이미지 업데이트 반영)
+    // 🔥 Supabase Realtime 구독 - 이미지 업데이트 즉시 반영
+    const channel = supabase
+      .channel('apps-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*', // INSERT, UPDATE, DELETE 모두 감지
+          schema: 'public',
+          table: 'apps'
+        },
+        async (payload) => {
+          console.log('🔄 실시간 변경 감지:', payload);
+
+          // 데이터 다시 불러오기 (캐시 우회)
+          try {
+            const apps = await getAllAppsAsync(false, true);
+            setAllApps(apps);
+            console.log('✅ 앱 데이터 실시간 업데이트 완료!');
+          } catch (error) {
+            console.error('❌ 실시간 업데이트 실패:', error);
+          }
+        }
+      )
+      .subscribe((status) => {
+        console.log('📡 Realtime 연결 상태:', status);
+      });
+
+    // 백업: 5분마다 자동 갱신 (Realtime이 실패할 경우 대비)
     const interval = setInterval(async () => {
       try {
         const apps = await getAllAppsAsync(false, true); // 캐시 우회
@@ -40,7 +70,10 @@ export default function HomeContent() {
       }
     }, 5 * 60 * 1000); // 5분
 
-    return () => clearInterval(interval);
+    return () => {
+      supabase.removeChannel(channel);
+      clearInterval(interval);
+    };
   }, []);
 
   // 클라이언트 마운트 확인

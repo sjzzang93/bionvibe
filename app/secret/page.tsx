@@ -195,6 +195,12 @@ export default function SecretPage() {
             >
               📝 방명록 관리
             </Link>
+            <Link
+              href="/secret/gold-price-manager"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-center hover:shadow-lg hover:shadow-yellow-500/50 transition-all"
+            >
+              💰 금 시세 관리
+            </Link>
           </div>
         </div>
 
