@@ -293,7 +293,7 @@ export default function PastLifeHeroFinder() {
             <div className="space-y-4 sm:space-y-6">
               {/* 질문 1 */}
               <PremiumCard hover className="bg-gradient-to-br from-white/95 to-purple-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
-                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                <label className="block text-base sm:text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
                   💭 사람들과의 관계에서...
                 </label>
                 <div className="grid grid-cols-2 gap-3">
@@ -303,11 +303,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.introvert === true
                           ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white ring-4 ring-purple-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-purple-50 hover:to-purple-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-purple-50 hover:to-purple-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">🏠</span>
-                      <p className="text-sm font-bold">혼자 있는 게 편함</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">🏠</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">혼자 있는 게 편함</p>
                     </PremiumCard>
                   </div>
                   <div onClick={() => handlePersonality('introvert', false)}>
@@ -316,11 +316,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.introvert === false
                           ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white ring-4 ring-blue-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-blue-50 hover:to-blue-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-blue-50 hover:to-blue-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">👥</span>
-                      <p className="text-sm font-bold">사람들과 어울리기 좋아함</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">👥</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">사람들과 어울리기 좋아함</p>
                     </PremiumCard>
                   </div>
                 </div>
@@ -328,7 +328,7 @@ export default function PastLifeHeroFinder() {
 
               {/* 질문 2 */}
               <PremiumCard hover className="bg-gradient-to-br from-white/95 to-cyan-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
-                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-cyan-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                <label className="block text-base sm:text-lg font-bold bg-gradient-to-r from-cyan-600 to-pink-600 bg-clip-text text-transparent mb-3">
                   🤔 문제를 해결할 때...
                 </label>
                 <div className="grid grid-cols-2 gap-3">
@@ -338,11 +338,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.logical === true
                           ? 'bg-gradient-to-br from-cyan-500 to-cyan-600 text-white ring-4 ring-cyan-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-cyan-50 hover:to-cyan-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-cyan-50 hover:to-cyan-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">🧮</span>
-                      <p className="text-sm font-bold">논리적으로 분석</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">🧮</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">논리적으로 분석</p>
                     </PremiumCard>
                   </div>
                   <div onClick={() => handlePersonality('logical', false)}>
@@ -351,11 +351,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.logical === false
                           ? 'bg-gradient-to-br from-pink-500 to-pink-600 text-white ring-4 ring-pink-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-pink-50 hover:to-pink-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-pink-50 hover:to-pink-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">💫</span>
-                      <p className="text-sm font-bold">직감으로 결정</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">💫</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">직감으로 결정</p>
                     </PremiumCard>
                   </div>
                 </div>
@@ -363,7 +363,7 @@ export default function PastLifeHeroFinder() {
 
               {/* 질문 3 */}
               <PremiumCard hover className="bg-gradient-to-br from-white/95 to-orange-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
-                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent mb-3">
+                <label className="block text-base sm:text-lg font-bold bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent mb-3">
                   ✨ 새로운 것에 대해...
                 </label>
                 <div className="grid grid-cols-2 gap-3">
@@ -373,11 +373,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.adventurous === true
                           ? 'bg-gradient-to-br from-orange-500 to-orange-600 text-white ring-4 ring-orange-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-orange-50 hover:to-orange-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-orange-50 hover:to-orange-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">🗺️</span>
-                      <p className="text-sm font-bold">도전적이고 모험 좋아함</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">🗺️</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">도전적이고 모험 좋아함</p>
                     </PremiumCard>
                   </div>
                   <div onClick={() => handlePersonality('adventurous', false)}>
@@ -386,11 +386,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.adventurous === false
                           ? 'bg-gradient-to-br from-green-500 to-green-600 text-white ring-4 ring-green-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-green-50 hover:to-green-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-green-50 hover:to-green-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">🏡</span>
-                      <p className="text-sm font-bold">안정적인 것 선호</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">🏡</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">안정적인 것 선호</p>
                     </PremiumCard>
                   </div>
                 </div>
@@ -398,7 +398,7 @@ export default function PastLifeHeroFinder() {
 
               {/* 질문 4 */}
               <PremiumCard hover className="bg-gradient-to-br from-white/95 to-indigo-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
-                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-teal-600 bg-clip-text text-transparent mb-3">
+                <label className="block text-base sm:text-lg font-bold bg-gradient-to-r from-purple-600 to-teal-600 bg-clip-text text-transparent mb-3">
                   💼 일할 때...
                 </label>
                 <div className="grid grid-cols-2 gap-3">
@@ -408,11 +408,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.creative === true
                           ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white ring-4 ring-purple-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-purple-50 hover:to-purple-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-purple-50 hover:to-purple-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">🎨</span>
-                      <p className="text-sm font-bold">창의적 작업 선호</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">🎨</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">창의적 작업 선호</p>
                     </PremiumCard>
                   </div>
                   <div onClick={() => handlePersonality('creative', false)}>
@@ -421,11 +421,11 @@ export default function PastLifeHeroFinder() {
                       className={`cursor-pointer text-center transition-all duration-300 ${
                         personality.creative === false
                           ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white ring-4 ring-teal-300 scale-105 shadow-2xl'
-                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-teal-50 hover:to-teal-100'
-                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-teal-50 hover:to-teal-100 text-gray-900'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[90px] sm:min-h-[100px] flex flex-col items-center justify-center px-2`}
                     >
-                      <span className="text-3xl mb-2 drop-shadow-lg">📋</span>
-                      <p className="text-sm font-bold">체계적 업무 선호</p>
+                      <span className="text-3xl sm:text-4xl mb-2 drop-shadow-lg">📋</span>
+                      <p className="text-xs sm:text-sm font-bold leading-tight">체계적 업무 선호</p>
                     </PremiumCard>
                   </div>
                 </div>
@@ -462,16 +462,16 @@ export default function PastLifeHeroFinder() {
       <PremiumLayout theme="purple" showStars={true}>
         <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
           <PremiumCard gradient hover>
-            <header className="text-center mb-6 sm:mb-8 [transform:translateZ(40px)]">
-              <h1 className="text-7xl sm:text-8xl mb-4 animate-bounce-slow drop-shadow-2xl [transform:translateZ(60px)]">
+            <header className="text-center mb-4 sm:mb-6 [transform:translateZ(40px)]">
+              <h1 className="text-5xl sm:text-6xl mb-3 animate-bounce-slow drop-shadow-2xl [transform:translateZ(60px)]">
                 {result.image_emoji}
               </h1>
-              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-yellow-200 via-amber-200 to-orange-200 bg-clip-text text-transparent mb-2 drop-shadow-lg [text-shadow:_0_4px_16px_rgba(255,215,0,0.6)]">
+              <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-yellow-200 via-amber-200 to-orange-200 bg-clip-text text-transparent mb-2 drop-shadow-lg [text-shadow:_0_4px_16px_rgba(255,215,0,0.6)]">
                 당신과 닮은 전생 위인
               </h2>
-              <PremiumCard hover gradient className="inline-block mt-3 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] animate-pulse-slow">
-                <p className="text-white font-bold text-xl drop-shadow-lg">
-                  ✨ 매칭도: <span className="text-2xl text-yellow-200">{matchScore}점</span>
+              <PremiumCard hover gradient className="inline-block mt-2 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] animate-pulse-slow">
+                <p className="text-white font-bold text-base sm:text-lg drop-shadow-lg">
+                  ✨ 매칭도: <span className="text-lg sm:text-xl text-yellow-200">{matchScore}점</span>
                 </p>
               </PremiumCard>
             </header>
