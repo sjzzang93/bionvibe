@@ -76,18 +76,18 @@ export default function QuitSmokingChallenge() {
             <PremiumCard className="max-w-2xl mx-auto" gradient>
               <div className="space-y-6">
                 <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">📅 금연 시작일</label>
+                  <label className="text-white font-bold mb-2 block text-base sm:text-lg">📅 금연 시작일</label>
                   <input
                     type="datetime-local"
                     value={quitDate}
                     onChange={(e) => setQuitDate(e.target.value)}
-                    className="w-full px-6 py-4 rounded-xl text-black text-lg border-2 border-green-200 focus:border-green-400 transition-all"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-gray-900 text-sm sm:text-base border-2 border-green-200 focus:border-green-400 focus:ring-2 focus:ring-green-200 focus:outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">
-                    🚬 하루 평균 흡연량: {dailyCigarettes}개비
+                  <label className="text-white font-bold mb-2 block text-base sm:text-lg">
+                    🚬 하루 평균 흡연량: <span className="text-green-200">{dailyCigarettes}개비</span>
                   </label>
                   <input
                     type="range"
@@ -95,13 +95,17 @@ export default function QuitSmokingChallenge() {
                     max="40"
                     value={dailyCigarettes}
                     onChange={(e) => setDailyCigarettes(Number(e.target.value))}
-                    className="w-full"
+                    className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-green-400"
                   />
+                  <div className="flex justify-between text-white/60 text-xs mt-1">
+                    <span>1개비</span>
+                    <span>40개비</span>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 block text-lg">
-                    💰 담배 한 갑 가격: {pricePerPack.toLocaleString()}원
+                  <label className="text-white font-bold mb-2 block text-base sm:text-lg">
+                    💰 담배 한 갑 가격: <span className="text-green-200">{pricePerPack.toLocaleString()}원</span>
                   </label>
                   <input
                     type="range"
@@ -110,8 +114,12 @@ export default function QuitSmokingChallenge() {
                     step="500"
                     value={pricePerPack}
                     onChange={(e) => setPricePerPack(Number(e.target.value))}
-                    className="w-full"
+                    className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-green-400"
                   />
+                  <div className="flex justify-between text-white/60 text-xs mt-1">
+                    <span>3,000원</span>
+                    <span>6,000원</span>
+                  </div>
                 </div>
 
                 <PremiumButton
