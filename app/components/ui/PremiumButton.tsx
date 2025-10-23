@@ -60,15 +60,16 @@ export default function PremiumButton({
         bg-gradient-to-r ${variants[variant]} 
         text-white font-bold rounded-xl
         transition-all duration-300 
-        hover:scale-105 active:scale-95
+        hover:scale-110 active:scale-95
         shadow-lg hover:shadow-2xl
         ${sizes[size]}
         ${fullWidth ? 'w-full' : ''}
         ${className}
       `}
       style={{
-        transform: 'translateZ(0)',
-        boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 5px 15px -5px rgba(0, 0, 0, 0.4)',
+        transform: 'perspective(1000px) translateZ(20px)',
+        boxShadow: '0 15px 40px -10px rgba(0, 0, 0, 0.6), 0 8px 20px -5px rgba(0, 0, 0, 0.5), inset 0 -2px 10px rgba(0,0,0,0.3)',
+        willChange: 'transform',
       }}
     >
       {/* Shine effect */}
