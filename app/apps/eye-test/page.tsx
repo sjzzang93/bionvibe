@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from 'react';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 // 이시하라 색맹 검사 데이터 (숫자가 보이면 정상)
 const COLOR_BLIND_TESTS = [
@@ -51,7 +54,6 @@ export default function EyeTest() {
     setAnswers(newAnswers);
 
     if (currentStep + 1 >= COLOR_BLIND_TESTS.length) {
-      // 결과 계산
       const correctCount = newAnswers.filter((ans, idx) => ans === COLOR_BLIND_TESTS[idx].number).length;
       const percentage = Math.round((correctCount / COLOR_BLIND_TESTS.length) * 100);
 
@@ -90,7 +92,6 @@ export default function EyeTest() {
     const isCorrect = answer === currentTest.direction;
 
     if (!isCorrect || currentStep + 1 >= VISION_TESTS.length) {
-      // 결과 계산
       const lastCorrectIndex = newAnswers.findIndex((ans, idx) => ans !== VISION_TESTS[idx].direction);
       const visionLevel = lastCorrectIndex === -1 ? VISION_TESTS[VISION_TESTS.length - 1].level : VISION_TESTS[Math.max(0, lastCorrectIndex - 1)].level;
 
@@ -128,7 +129,6 @@ export default function EyeTest() {
     setAnswers(newAnswers);
 
     if (currentStep + 1 >= PRESBYOPIA_TEXTS.length) {
-      // 결과 계산
       const yesCount = newAnswers.filter(ans => ans === 'yes').length;
       const noCount = newAnswers.filter(ans => ans === 'no').length;
 
@@ -161,153 +161,158 @@ export default function EyeTest() {
   // 결과 화면
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
+      <PremiumLayout theme="blue" showStars={true}>
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-white rounded-2xl shadow-xl p-6">
-            <header className="text-center mb-6">
-              <h1 className="text-3xl font-bold text-black mb-2">👁️</h1>
-              <h2 className="text-2xl font-bold text-gray-800">
+          <PremiumCard gradient hover>
+            <div className="text-center mb-6">
+              <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-xl">👁️</h1>
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg">
                 {result.type === 'colorblind' ? '색맹 검사 결과' :
                  result.type === 'vision' ? '시력 검사 결과' :
                  '노안 검사 결과'}
               </h2>
-            </header>
-
-            <div className={`mb-6 p-6 rounded-xl text-center border-4 ${
-              result.diagnosis.includes('정상') ? 'bg-green-50 border-green-400' :
-              result.diagnosis.includes('경미') ? 'bg-yellow-50 border-yellow-400' :
-              'bg-orange-50 border-orange-400'
-            }`}>
-              <div className="text-5xl font-bold mb-3" style={{
-                background: result.diagnosis.includes('정상') ? 'linear-gradient(135deg, #10b981, #059669)' :
-                           result.diagnosis.includes('경미') ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
-                           'linear-gradient(135deg, #f97316, #ea580c)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>
-                {result.diagnosis}
-              </div>
-
-              {result.type === 'colorblind' && (
-                <div className="text-lg text-gray-700 mb-2">
-                  정답: {result.correct} / {result.total} ({result.score}%)
-                </div>
-              )}
-
-              {result.type === 'vision' && (
-                <div className="text-4xl font-bold text-black my-3">
-                  시력: {result.visionLevel}
-                </div>
-              )}
-
-              <p className="text-gray-700 mt-3">{result.advice}</p>
             </div>
 
-            <div className="mb-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
+            <PremiumCard className="mb-6 [transform:translateZ(20px)]">
+              <div className={`p-6 rounded-xl text-center border-4 ${
+                result.diagnosis.includes('정상') ? 'bg-green-50 border-green-400' :
+                result.diagnosis.includes('경미') ? 'bg-yellow-50 border-yellow-400' :
+                'bg-orange-50 border-orange-400'
+              }`}>
+                <div className="text-5xl font-bold mb-3" style={{
+                  background: result.diagnosis.includes('정상') ? 'linear-gradient(135deg, #10b981, #059669)' :
+                             result.diagnosis.includes('경미') ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
+                             'linear-gradient(135deg, #f97316, #ea580c)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}>
+                  {result.diagnosis}
+                </div>
+
+                {result.type === 'colorblind' && (
+                  <div className="text-lg text-gray-700 mb-2">
+                    정답: {result.correct} / {result.total} ({result.score}%)
+                  </div>
+                )}
+
+                {result.type === 'vision' && (
+                  <div className="text-4xl font-bold text-black my-3">
+                    시력: {result.visionLevel}
+                  </div>
+                )}
+
+                <p className="text-gray-700 mt-3">{result.advice}</p>
+              </div>
+            </PremiumCard>
+
+            <PremiumCard className="mb-6 bg-gradient-to-r from-red-50 to-orange-50 [transform:translateZ(15px)]">
               <h3 className="font-bold text-lg text-gray-800 mb-3">⚠️ 주의사항</h3>
               <div className="space-y-2 text-sm text-gray-700">
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   • 이 검사는 간이 검사로 참고용입니다
                 </div>
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   • 정확한 진단은 안과 전문의 검진 필요
                 </div>
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   • 모니터 밝기와 거리를 적절히 조정하세요
                 </div>
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   • 정기적인 안과 검진 권장 (1년 1회)
                 </div>
               </div>
-            </div>
+            </PremiumCard>
 
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+            <PremiumCard className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 [transform:translateZ(15px)]">
               <h3 className="font-bold text-lg text-gray-800 mb-3">💡 눈 건강 관리법</h3>
               <div className="space-y-2 text-sm text-gray-700">
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   🥕 비타민 A 풍부한 식품: 당근, 블루베리
                 </div>
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   💧 충분한 수분 섭취와 눈 깜빡임
                 </div>
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   📱 20-20-20 규칙: 20분마다 20초간 20피트(6m) 먼 곳 보기
                 </div>
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   🕶️ 자외선 차단: 선글라스 착용
                 </div>
-                <div className="bg-white rounded p-3">
+                <div className="bg-white rounded p-3 shadow-sm">
                   😴 충분한 수면: 하루 7-8시간
                 </div>
               </div>
-            </div>
+            </PremiumCard>
 
-            <button
-              onClick={resetTest}
-              className="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
-            >
+            <PremiumButton onClick={resetTest} fullWidth>
               다른 검사하기
-            </button>
-          </section>
+            </PremiumButton>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
   // 메인 메뉴
   if (testType === 'menu') {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
+      <PremiumLayout theme="blue" showStars={true}>
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-white rounded-2xl shadow-xl p-6">
-            <header className="text-center mb-6">
-              <h1 className="text-4xl font-bold text-black mb-2">👁️</h1>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">눈 건강 종합 검사</h2>
-              <p className="text-gray-600">검사할 항목을 선택하세요</p>
-            </header>
-
-            <div className="space-y-4 mb-6">
-              <button
-                onClick={() => { setTestType('colorblind'); setCurrentStep(0); setAnswers([]); }}
-                className="w-full p-6 bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-xl hover:shadow-lg transition-all text-left"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">🎨 색맹 검사 (이시하라)</h3>
-                    <p className="text-sm text-gray-600">색을 구분하는 능력 검사 (5문항)</p>
-                  </div>
-                  <div className="text-3xl">→</div>
-                </div>
-              </button>
-
-              <button
-                onClick={() => { setTestType('vision'); setCurrentStep(0); setAnswers([]); }}
-                className="w-full p-6 bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-300 rounded-xl hover:shadow-lg transition-all text-left"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">👓 시력 검사 (스넬렌)</h3>
-                    <p className="text-sm text-gray-600">E자 방향으로 시력 측정</p>
-                  </div>
-                  <div className="text-3xl">→</div>
-                </div>
-              </button>
-
-              <button
-                onClick={() => { setTestType('presbyopia'); setCurrentStep(0); setAnswers([]); }}
-                className="w-full p-6 bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-300 rounded-xl hover:shadow-lg transition-all text-left"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">📖 노안 검사</h3>
-                    <p className="text-sm text-gray-600">근거리 시력 저하 확인 (5문항)</p>
-                  </div>
-                  <div className="text-3xl">→</div>
-                </div>
-              </button>
+          <PremiumCard gradient hover>
+            <div className="text-center mb-6">
+              <h1 className="text-5xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-xl animate-pulse">👁️</h1>
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg mb-2">눈 건강 종합 검사</h2>
+              <p className="text-white/80 drop-shadow-md">검사할 항목을 선택하세요</p>
             </div>
 
-            <div className="p-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg border border-yellow-200">
+            <div className="space-y-4 mb-6">
+              <div onClick={() => { setTestType('colorblind'); setCurrentStep(0); setAnswers([]); }}>
+                <PremiumCard 
+                  hover 
+                  className="bg-gradient-to-r from-red-50 to-orange-50 cursor-pointer [transform:translateZ(10px)] hover:[transform:translateZ(25px)]"
+                >
+                  <div className="flex items-center justify-between p-2">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">🎨 색맹 검사 (이시하라)</h3>
+                      <p className="text-sm text-gray-600">색을 구분하는 능력 검사 (5문항)</p>
+                    </div>
+                    <div className="text-3xl text-gray-800">→</div>
+                  </div>
+                </PremiumCard>
+              </div>
+
+              <div onClick={() => { setTestType('vision'); setCurrentStep(0); setAnswers([]); }}>
+                <PremiumCard 
+                  hover 
+                  className="bg-gradient-to-r from-blue-50 to-cyan-50 cursor-pointer [transform:translateZ(10px)] hover:[transform:translateZ(25px)]"
+                >
+                  <div className="flex items-center justify-between p-2">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">👓 시력 검사 (스넬렌)</h3>
+                      <p className="text-sm text-gray-600">E자 방향으로 시력 측정</p>
+                    </div>
+                    <div className="text-3xl text-gray-800">→</div>
+                  </div>
+                </PremiumCard>
+              </div>
+
+              <div onClick={() => { setTestType('presbyopia'); setCurrentStep(0); setAnswers([]); }}>
+                <PremiumCard 
+                  hover 
+                  className="bg-gradient-to-r from-purple-50 to-blue-50 cursor-pointer [transform:translateZ(10px)] hover:[transform:translateZ(25px)]"
+                >
+                  <div className="flex items-center justify-between p-2">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-2">📖 노안 검사</h3>
+                      <p className="text-sm text-gray-600">근거리 시력 저하 확인 (5문항)</p>
+                    </div>
+                    <div className="text-3xl text-gray-800">→</div>
+                  </div>
+                </PremiumCard>
+              </div>
+            </div>
+
+            <PremiumCard className="bg-gradient-to-r from-yellow-50 to-amber-50 [transform:translateZ(15px)]">
               <h3 className="font-bold text-black mb-2">⚠️ 검사 전 확인사항</h3>
               <ul className="text-sm text-black space-y-1">
                 <li>• 모니터와 30-40cm 거리 유지</li>
@@ -315,10 +320,10 @@ export default function EyeTest() {
                 <li>• 안경/렌즈 착용 상태로 검사</li>
                 <li>• 피로하지 않을 때 검사</li>
               </ul>
-            </div>
-          </section>
+            </PremiumCard>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
@@ -326,48 +331,46 @@ export default function EyeTest() {
   if (testType === 'colorblind') {
     const test = COLOR_BLIND_TESTS[currentStep];
     return (
-      <main className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50">
+      <PremiumLayout theme="orange" showStars={true}>
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-white rounded-2xl shadow-xl p-6">
+          <PremiumCard gradient hover>
             <div className="text-center mb-6">
-              <div className="text-sm text-gray-600 mb-2">문제 {currentStep + 1} / {COLOR_BLIND_TESTS.length}</div>
-              <h2 className="text-2xl font-bold text-gray-800">이 원 안의 숫자는?</h2>
+              <div className="text-sm text-white/80 mb-2 drop-shadow-md">문제 {currentStep + 1} / {COLOR_BLIND_TESTS.length}</div>
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg">이 원 안의 숫자는?</h2>
             </div>
 
-            {/* 색맹 검사 이미지 시뮬레이션 */}
-            <div className="mb-6 flex justify-center">
-              <div className="relative w-64 h-64 rounded-full overflow-hidden" style={{
-                background: `radial-gradient(circle, ${test.colors[0]} 0%, ${test.colors[1]} 100%)`
-              }}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-8xl font-bold opacity-30" style={{ color: test.colors[0] }}>
-                    {test.number}
+            <PremiumCard className="mb-6 [transform:translateZ(20px)] hover:[transform:translateZ(30px)]">
+              <div className="flex justify-center py-4">
+                <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl" style={{
+                  background: `radial-gradient(circle, ${test.colors[0]} 0%, ${test.colors[1]} 100%)`
+                }}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-8xl font-bold opacity-30" style={{ color: test.colors[0] }}>
+                      {test.number}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </PremiumCard>
 
             <div className="grid grid-cols-3 gap-3 mb-6">
               {['12', '8', '6', '29', '5', '74', '안보임'].map(num => (
-                <button
+                <PremiumButton
                   key={num}
                   onClick={() => handleColorBlindAnswer(num)}
-                  className="py-4 bg-gray-100 hover:bg-blue-100 border-2 border-gray-300 hover:border-blue-500 rounded-lg font-bold text-gray-800 transition-all"
+                  className="py-4"
                 >
                   {num}
-                </button>
+                </PremiumButton>
               ))}
             </div>
 
-            <button
-              onClick={resetTest}
-              className="w-full py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300"
-            >
+            <PremiumButton onClick={resetTest} fullWidth variant="secondary">
               처음으로
-            </button>
-          </section>
+            </PremiumButton>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
@@ -382,49 +385,48 @@ export default function EyeTest() {
     };
 
     return (
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50">
+      <PremiumLayout theme="blue" showStars={true}>
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-white rounded-2xl shadow-xl p-6">
+          <PremiumCard gradient hover>
             <div className="text-center mb-6">
-              <div className="text-sm text-gray-600 mb-2">시력: {test.level}</div>
-              <h2 className="text-2xl font-bold text-gray-800">E자가 가리키는 방향은?</h2>
+              <div className="text-sm text-white/80 mb-2 drop-shadow-md">시력: {test.level}</div>
+              <h2 className="text-3xl font-bold text-white drop-shadow-lg">E자가 가리키는 방향은?</h2>
             </div>
 
-            <div className="mb-8 flex justify-center">
-              <div 
-                className="font-bold text-black"
-                style={{ 
-                  fontSize: `${test.size}px`,
-                  transform: rotations[test.direction as keyof typeof rotations],
-                  fontFamily: 'monospace',
-                  fontWeight: 'bold'
-                }}
-              >
-                E
+            <PremiumCard className="mb-8 [transform:translateZ(30px)]">
+              <div className="flex justify-center py-8">
+                <div 
+                  className="font-bold text-black drop-shadow-2xl"
+                  style={{ 
+                    fontSize: `${test.size}px`,
+                    transform: rotations[test.direction as keyof typeof rotations],
+                    fontFamily: 'monospace',
+                    fontWeight: 'bold'
+                  }}
+                >
+                  E
+                </div>
               </div>
-            </div>
+            </PremiumCard>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
               {(['up', 'down', 'left', 'right'] as const).map(dir => (
-                <button
+                <PremiumButton
                   key={dir}
                   onClick={() => handleVisionAnswer(dir)}
-                  className="py-6 bg-blue-100 hover:bg-blue-200 border-2 border-blue-300 hover:border-blue-500 rounded-lg font-bold text-gray-800 transition-all"
+                  className="py-6"
                 >
                   {dir === 'up' ? '↑ 위' : dir === 'down' ? '↓ 아래' : dir === 'left' ? '← 왼쪽' : '→ 오른쪽'}
-                </button>
+                </PremiumButton>
               ))}
             </div>
 
-            <button
-              onClick={resetTest}
-              className="w-full py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300"
-            >
+            <PremiumButton onClick={resetTest} fullWidth variant="secondary">
               처음으로
-            </button>
-          </section>
+            </PremiumButton>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
@@ -432,57 +434,55 @@ export default function EyeTest() {
   if (testType === 'presbyopia') {
     const test = PRESBYOPIA_TEXTS[currentStep];
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <PremiumLayout theme="purple" showStars={true}>
         <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-white rounded-2xl shadow-xl p-6">
+          <PremiumCard gradient hover>
             <div className="text-center mb-6">
-              <div className="text-sm text-gray-600 mb-2">문제 {currentStep + 1} / {PRESBYOPIA_TEXTS.length}</div>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">
+              <div className="text-sm text-white/80 mb-2 drop-shadow-md">문제 {currentStep + 1} / {PRESBYOPIA_TEXTS.length}</div>
+              <h2 className="text-2xl font-bold text-white drop-shadow-lg mb-2">
                 화면에서 {test.distance} 떨어져서 보세요
               </h2>
             </div>
 
-            <div className="mb-8 p-8 bg-gray-50 rounded-lg text-center">
-              <p 
-                className="text-black leading-relaxed"
-                style={{ fontSize: `${test.size}px` }}
-              >
-                {test.text}
-              </p>
-            </div>
+            <PremiumCard className="mb-8 bg-white [transform:translateZ(20px)]">
+              <div className="p-8 text-center">
+                <p 
+                  className="text-black leading-relaxed font-medium"
+                  style={{ fontSize: `${test.size}px` }}
+                >
+                  {test.text}
+                </p>
+              </div>
+            </PremiumCard>
 
             <div className="text-center mb-6">
-              <p className="text-lg font-semibold text-gray-800 mb-4">
+              <p className="text-lg font-semibold text-white drop-shadow-md mb-4">
                 위 글자가 선명하게 보이나요?
               </p>
               <div className="grid grid-cols-2 gap-4">
-                <button
+                <PremiumButton
                   onClick={() => handlePresbiopiaAnswer(true)}
-                  className="py-6 bg-green-100 hover:bg-green-200 border-2 border-green-300 hover:border-green-500 rounded-lg font-bold text-black transition-all"
+                  className="py-6 bg-green-100 hover:bg-green-200 text-black"
                 >
                   ✓ 예, 잘 보여요
-                </button>
-                <button
+                </PremiumButton>
+                <PremiumButton
                   onClick={() => handlePresbiopiaAnswer(false)}
-                  className="py-6 bg-red-100 hover:bg-red-200 border-2 border-red-300 hover:border-red-500 rounded-lg font-bold text-black transition-all"
+                  className="py-6 bg-red-100 hover:bg-red-200 text-black"
                 >
                   ✗ 아니오, 흐려요
-                </button>
+                </PremiumButton>
               </div>
             </div>
 
-            <button
-              onClick={resetTest}
-              className="w-full py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300"
-            >
+            <PremiumButton onClick={resetTest} fullWidth variant="secondary">
               처음으로
-            </button>
-          </section>
+            </PremiumButton>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
   return null;
 }
-
