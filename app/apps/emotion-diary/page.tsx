@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import PremiumLayout from '@/app/components/ui/PremiumLayout';
+import PremiumCard from '@/app/components/ui/PremiumCard';
+import PremiumButton from '@/app/components/ui/PremiumButton';
 
 interface User {
   id: string;
@@ -236,39 +239,34 @@ export default function EmotionDiaryPage() {
   };
 
   if (!mounted) {
-    return <div className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400"></div>;
+    return <PremiumLayout theme="pink" showStars={true}><div className="h-screen"></div></PremiumLayout>;
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 relative overflow-hidden">
-      {/* 배경 효과 */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-white/30 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-yellow-200/30 rounded-full blur-3xl animate-float delay-2000"></div>
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-12">
+    <PremiumLayout theme="pink" showStars={true}>
+      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8">
         {/* 헤더 */}
         <header className="text-center mb-8">
-          <div className="text-6xl sm:text-7xl mb-4 animate-bounce">
+          <div className="text-7xl sm:text-8xl mb-4 animate-bounce-slow drop-shadow-2xl">
             🌈💭✨
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-3 bg-gradient-to-r from-white via-pink-100 to-purple-100 bg-clip-text text-transparent drop-shadow-2xl">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-3 text-white drop-shadow-2xl">
             감정 일기
           </h1>
-          <p className="text-lg sm:text-xl text-white mb-2">
+          <p className="text-lg sm:text-xl text-white/90 mb-2 drop-shadow-lg">
             오늘의 감정을 색깔과 날씨로 표현해보세요
           </p>
           {user && (
-            <div className="flex items-center justify-center gap-4 mt-4">
-              <span className="px-4 py-2 bg-white/20 rounded-full backdrop-blur-sm text-white font-bold">
-                👤 {user.nickname}
-              </span>
-              <button
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 flex-wrap">
+              <PremiumCard className="px-4 sm:px-5 py-2 sm:py-3 bg-white/20 backdrop-blur-sm inline-flex items-center gap-2 [transform:translateZ(10px)]">
+                <span className="text-xl sm:text-2xl">👤</span>
+                <span className="text-white font-bold text-base sm:text-lg">{user.nickname}</span>
+              </PremiumCard>
+              <PremiumButton
                 onClick={handleLogout}
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white text-sm transition-all">
+                className="px-4 sm:px-5 py-2 sm:py-3 text-sm sm:text-base">
                 로그아웃
-              </button>
+              </PremiumButton>
             </div>
           )}
         </header>
@@ -281,131 +279,146 @@ export default function EmotionDiaryPage() {
         ) : user ? (
           <>
             {/* 버튼 그룹 */}
-            <div className="flex gap-3 justify-center mb-8 flex-wrap">
-              <button
+            <div className="flex gap-3 sm:gap-4 justify-center mb-8 flex-wrap">
+              <PremiumButton
                 onClick={() => setIsWriting(true)}
-                className="px-6 py-3 bg-white/90 hover:bg-white rounded-2xl text-purple-600 font-bold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 touch-manipulation"
+                size="lg"
+                className="min-w-[140px] sm:min-w-[160px]"
               >
-                ✍️ 새 일기 쓰기
-              </button>
-              <button
+                <span className="text-xl mr-2">✍️</span>
+                새 일기 쓰기
+              </PremiumButton>
+              <PremiumButton
                 onClick={() => setViewMode('calendar')}
-                className={`px-6 py-3 rounded-2xl font-bold transition-all duration-300 touch-manipulation ${
+                size="lg"
+                className={`min-w-[120px] sm:min-w-[140px] ${
                   viewMode === 'calendar'
-                    ? 'bg-white text-purple-600'
-                    : 'bg-white/30 text-white hover:bg-white/50'
+                    ? ''
+                    : 'opacity-70 hover:opacity-100'
                 }`}
               >
-                📅 목록 보기
-              </button>
-              <button
+                <span className="text-xl mr-2">📅</span>
+                목록 보기
+              </PremiumButton>
+              <PremiumButton
                 onClick={() => setViewMode('stats')}
-                className={`px-6 py-3 rounded-2xl font-bold transition-all duration-300 touch-manipulation ${
+                size="lg"
+                className={`min-w-[120px] sm:min-w-[140px] ${
                   viewMode === 'stats'
-                    ? 'bg-white text-purple-600'
-                    : 'bg-white/30 text-white hover:bg-white/50'
+                    ? ''
+                    : 'opacity-70 hover:opacity-100'
                 }`}
               >
-                📊 통계 보기
-              </button>
+                <span className="text-xl mr-2">📊</span>
+                통계 보기
+              </PremiumButton>
             </div>
 
             {/* 새 일기 작성 모달 */}
             {isWriting && (
               <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                  <h2 className="text-3xl font-bold mb-6 text-purple-600">오늘의 감정</h2>
+                <PremiumCard gradient className="p-6 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto [transform:translateZ(50px)]">
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white drop-shadow-lg flex items-center gap-3">
+                    <span className="text-4xl sm:text-5xl">✨</span>
+                    오늘의 감정
+                  </h2>
 
                   {/* 감정 선택 */}
                   <div className="mb-6">
-                    <h3 className="text-lg font-bold mb-3">어떤 감정이신가요?</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    <h3 className="text-base sm:text-lg font-bold mb-3 text-white/90 drop-shadow-md">어떤 감정이신가요?</h3>
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
                       {EMOTIONS.map((emotion) => (
-                        <button
-                          key={emotion.id}
-                          onClick={() => setSelectedEmotion(emotion.id)}
-                          className={`p-4 rounded-xl border-2 transition-all duration-300 ${
-                            selectedEmotion === emotion.id
-                              ? 'border-purple-600 bg-purple-50 scale-105'
-                              : 'border-gray-200 hover:border-purple-300'
-                          }`}
-                          style={{
-                            backgroundColor: selectedEmotion === emotion.id ? `${emotion.color}20` : undefined,
-                          }}
-                        >
-                          <div className="text-3xl mb-1">{emotion.emoji}</div>
-                          <div className="text-xs font-medium">{emotion.name}</div>
-                        </button>
+                        <div key={emotion.id} onClick={() => setSelectedEmotion(emotion.id)}>
+                          <PremiumCard
+                            hover
+                            className={`cursor-pointer text-center ${
+                              selectedEmotion === emotion.id
+                                ? 'ring-4 ring-white/50'
+                                : ''
+                            } [transform:translateZ(10px)] hover:[transform:translateZ(20px)] min-h-[72px] sm:min-h-[80px] flex flex-col items-center justify-center`}
+                            style={{
+                              backgroundColor: selectedEmotion === emotion.id ? `${emotion.color}40` : 'rgba(255,255,255,0.9)',
+                            }}
+                          >
+                            <div className="text-3xl sm:text-4xl mb-1">{emotion.emoji}</div>
+                            <div className="text-xs sm:text-sm font-semibold text-gray-800">{emotion.name}</div>
+                          </PremiumCard>
+                        </div>
                       ))}
                     </div>
                   </div>
 
                   {/* 날씨 선택 */}
                   <div className="mb-6">
-                    <h3 className="text-lg font-bold mb-3">오늘 마음의 날씨는?</h3>
-                    <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+                    <h3 className="text-base sm:text-lg font-bold mb-3 text-white/90 drop-shadow-md">오늘 마음의 날씨는?</h3>
+                    <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3">
                       {WEATHERS.map((weather) => (
-                        <button
-                          key={weather.id}
-                          onClick={() => setSelectedWeather(weather.id)}
-                          className={`p-4 rounded-xl border-2 transition-all duration-300 ${
-                            selectedWeather === weather.id
-                              ? 'border-purple-600 bg-purple-50 scale-105'
-                              : 'border-gray-200 hover:border-purple-300'
-                          }`}
-                        >
-                          <div className="text-3xl mb-1">{weather.emoji}</div>
-                          <div className="text-xs font-medium">{weather.name}</div>
-                        </button>
+                        <div key={weather.id} onClick={() => setSelectedWeather(weather.id)}>
+                          <PremiumCard
+                            hover
+                            className={`cursor-pointer text-center ${
+                              selectedWeather === weather.id
+                                ? 'ring-4 ring-white/50 bg-white'
+                                : 'bg-white/90'
+                            } [transform:translateZ(10px)] hover:[transform:translateZ(20px)] min-h-[72px] sm:min-h-[80px] flex flex-col items-center justify-center`}
+                          >
+                            <div className="text-3xl sm:text-4xl mb-1">{weather.emoji}</div>
+                            <div className="text-xs sm:text-sm font-semibold text-gray-800">{weather.name}</div>
+                          </PremiumCard>
+                        </div>
                       ))}
                     </div>
                   </div>
 
                   {/* 감정 강도 */}
-                  <div className="mb-6">
-                    <h3 className="text-lg font-bold mb-3">감정 강도: {intensity}/5</h3>
+                  <PremiumCard className="mb-6 bg-white/90 [transform:translateZ(15px)]">
+                    <h3 className="text-base sm:text-lg font-bold mb-3 text-gray-800">감정 강도: <span className="text-purple-600">{intensity}/5</span></h3>
                     <input
                       type="range"
                       min="1"
                       max="5"
                       value={intensity}
                       onChange={(e) => setIntensity(parseInt(e.target.value))}
-                      className="w-full"
+                      className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
                     />
-                    <div className="flex justify-between text-sm text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs sm:text-sm text-gray-600 mt-2 font-medium">
                       <span>약함</span>
                       <span>강함</span>
                     </div>
-                  </div>
+                  </PremiumCard>
 
                   {/* 메모 */}
-                  <div className="mb-6">
-                    <h3 className="text-lg font-bold mb-3">오늘의 한마디 (선택)</h3>
+                  <PremiumCard className="mb-6 bg-white/90 [transform:translateZ(15px)]">
+                    <h3 className="text-base sm:text-lg font-bold mb-3 text-gray-800">오늘의 한마디 <span className="text-gray-500 text-sm">(선택)</span></h3>
                     <textarea
                       value={note}
                       onChange={(e) => setNote(e.target.value)}
                       placeholder="오늘 하루는 어땠나요?"
-                      className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-400 focus:outline-none resize-none"
+                      className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-400 focus:outline-none resize-none bg-white text-base leading-relaxed"
                       rows={4}
                     />
-                  </div>
+                  </PremiumCard>
 
                   {/* 버튼 */}
-                  <div className="flex gap-3">
-                    <button
+                  <div className="flex gap-3 sm:gap-4">
+                    <PremiumButton
                       onClick={saveEntry}
-                      className="flex-1 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl text-white font-bold transition-all duration-300"
+                      fullWidth
+                      size="lg"
+                      className="flex-1"
                     >
-                      💾 저장하기
-                    </button>
-                    <button
+                      <span className="text-xl mr-2">💾</span>
+                      저장하기
+                    </PremiumButton>
+                    <PremiumButton
                       onClick={() => setIsWriting(false)}
-                      className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-xl text-gray-700 font-bold transition-all duration-300"
+                      size="lg"
+                      className="px-6 bg-gray-600 hover:bg-gray-700"
                     >
                       취소
-                    </button>
+                    </PremiumButton>
                   </div>
-                </div>
+                </PremiumCard>
               </div>
             )}
 
@@ -413,29 +426,30 @@ export default function EmotionDiaryPage() {
             {viewMode === 'calendar' && (
               <div className="space-y-4">
                 {entries.length === 0 ? (
-                  <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-12 text-center border border-white/40">
-                    <div className="text-6xl mb-4">📝</div>
-                    <p className="text-xl text-gray-600">아직 일기가 없어요</p>
-                    <p className="text-gray-500">첫 번째 감정을 기록해보세요!</p>
-                  </div>
+                  <PremiumCard gradient className="p-8 sm:p-12 text-center [transform:translateZ(20px)]">
+                    <div className="text-6xl sm:text-7xl mb-4 animate-bounce-slow">📝</div>
+                    <p className="text-xl sm:text-2xl text-white font-bold mb-2 drop-shadow-lg">아직 일기가 없어요</p>
+                    <p className="text-white/80 drop-shadow-md">첫 번째 감정을 기록해보세요!</p>
+                  </PremiumCard>
                 ) : (
                   entries.map((entry) => {
                     const emotion = EMOTIONS.find((e) => e.id === entry.emotion)!;
                     const weather = WEATHERS.find((w) => w.id === entry.weather)!;
                     return (
-                      <div
+                      <PremiumCard
                         key={entry.id}
-                        className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 border-l-8 shadow-xl hover:shadow-2xl transition-all duration-300"
+                        hover
+                        className="border-l-8 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]"
                         style={{ borderLeftColor: entry.color }}
                       >
-                        <div className="flex items-start justify-between">
+                        <div className="flex items-start justify-between gap-3 sm:gap-4">
                           <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-3">
-                              <span className="text-4xl">{emotion.emoji}</span>
-                              <span className="text-3xl">{weather.emoji}</span>
+                            <div className="flex items-center gap-3 mb-3 flex-wrap">
+                              <span className="text-4xl sm:text-5xl">{emotion.emoji}</span>
+                              <span className="text-3xl sm:text-4xl">{weather.emoji}</span>
                               <div>
-                                <h3 className="text-xl font-bold text-gray-800">{emotion.name}</h3>
-                                <p className="text-sm text-gray-500">
+                                <h3 className="text-lg sm:text-xl font-bold text-gray-800">{emotion.name}</h3>
+                                <p className="text-xs sm:text-sm text-gray-500">
                                   {new Date(entry.date).toLocaleDateString('ko-KR', {
                                     year: 'numeric',
                                     month: 'long',
@@ -446,25 +460,27 @@ export default function EmotionDiaryPage() {
                               </div>
                             </div>
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-sm text-gray-600">강도:</span>
+                              <span className="text-xs sm:text-sm text-gray-600 font-medium">강도:</span>
                               {Array.from({ length: 5 }).map((_, i) => (
-                                <span key={i} className={i < entry.intensity ? 'text-yellow-400' : 'text-gray-300'}>
+                                <span key={i} className={`text-lg sm:text-xl ${i < entry.intensity ? 'text-yellow-400' : 'text-gray-300'}`}>
                                   ⭐
                                 </span>
                               ))}
                             </div>
                             {entry.note && (
-                              <p className="text-gray-700 bg-gray-50 p-3 rounded-lg">{entry.note}</p>
+                              <PremiumCard className="bg-gray-50 mt-3 [transform:translateZ(5px)]">
+                                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">{entry.note}</p>
+                              </PremiumCard>
                             )}
                           </div>
                           <button
                             onClick={() => deleteEntry(entry.id)}
-                            className="text-red-500 hover:text-red-700 text-2xl"
+                            className="text-red-500 hover:text-red-700 text-2xl sm:text-3xl hover:scale-110 transition-transform flex-shrink-0"
                           >
                             🗑️
                           </button>
                         </div>
-                      </div>
+                      </PremiumCard>
                     );
                   })
                 )}
@@ -474,51 +490,56 @@ export default function EmotionDiaryPage() {
             {/* 통계 보기 */}
             {viewMode === 'stats' && (
               <div className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                  <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 text-center shadow-xl">
-                    <div className="text-4xl mb-2">📊</div>
-                    <div className="text-3xl font-bold text-purple-600">{entries.length}</div>
-                    <div className="text-gray-600">총 일기 수</div>
-                  </div>
-                  <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 text-center shadow-xl">
-                    <div className="text-4xl mb-2">⭐</div>
-                    <div className="text-3xl font-bold text-pink-600">{getAverageIntensity()}</div>
-                    <div className="text-gray-600">평균 감정 강도</div>
-                  </div>
-                  <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 text-center shadow-xl">
-                    <div className="text-4xl mb-2">📅</div>
-                    <div className="text-3xl font-bold text-indigo-600">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                  <PremiumCard hover gradient className="text-center [transform:translateZ(20px)] hover:[transform:translateZ(30px)]">
+                    <div className="text-5xl sm:text-6xl mb-3 animate-bounce-slow">📊</div>
+                    <div className="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg">{entries.length}</div>
+                    <div className="text-white/90 drop-shadow-md font-medium">총 일기 수</div>
+                  </PremiumCard>
+                  <PremiumCard hover gradient className="text-center [transform:translateZ(20px)] hover:[transform:translateZ(30px)]">
+                    <div className="text-5xl sm:text-6xl mb-3 animate-bounce-slow">⭐</div>
+                    <div className="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg">{getAverageIntensity()}</div>
+                    <div className="text-white/90 drop-shadow-md font-medium">평균 감정 강도</div>
+                  </PremiumCard>
+                  <PremiumCard hover gradient className="text-center [transform:translateZ(20px)] hover:[transform:translateZ(30px)]">
+                    <div className="text-5xl sm:text-6xl mb-3 animate-bounce-slow">📅</div>
+                    <div className="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg">
                       {entries.length > 0 ? Math.floor((Date.now() - new Date(entries[entries.length - 1].date).getTime()) / (1000 * 60 * 60 * 24)) : 0}
                     </div>
-                    <div className="text-gray-600">기록 일수</div>
-                  </div>
+                    <div className="text-white/90 drop-shadow-md font-medium">기록 일수</div>
+                  </PremiumCard>
                 </div>
 
-                <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-6 shadow-xl">
-                  <h3 className="text-2xl font-bold mb-4 text-gray-800">감정 분포</h3>
-                  <div className="space-y-3">
+                <PremiumCard className="[transform:translateZ(15px)]">
+                  <h3 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800 flex items-center gap-3">
+                    <span className="text-3xl sm:text-4xl">📈</span>
+                    감정 분포
+                  </h3>
+                  <div className="space-y-4">
                     {getEmotionStats().map(({ emotion, count }) => (
-                      <div key={emotion.id} className="flex items-center gap-3">
-                        <span className="text-3xl">{emotion.emoji}</span>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="font-medium">{emotion.name}</span>
-                            <span className="text-sm text-gray-500">{count}회</span>
-                          </div>
-                          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                            <div
-                              className="h-full rounded-full transition-all duration-500"
-                              style={{
-                                width: `${(count / entries.length) * 100}%`,
-                                backgroundColor: emotion.color,
-                              }}
-                            />
+                      <PremiumCard key={emotion.id} hover className="bg-gray-50 [transform:translateZ(5px)] hover:[transform:translateZ(15px)]">
+                        <div className="flex items-center gap-3 sm:gap-4">
+                          <span className="text-4xl sm:text-5xl flex-shrink-0">{emotion.emoji}</span>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="font-bold text-base sm:text-lg text-gray-800">{emotion.name}</span>
+                              <span className="text-sm sm:text-base text-gray-600 font-semibold">{count}회</span>
+                            </div>
+                            <div className="h-3 sm:h-4 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+                              <div
+                                className="h-full rounded-full transition-all duration-500"
+                                style={{
+                                  width: `${(count / entries.length) * 100}%`,
+                                  backgroundColor: emotion.color,
+                                }}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </PremiumCard>
                     ))}
                   </div>
-                </div>
+                </PremiumCard>
               </div>
             )}
           </>
@@ -528,47 +549,41 @@ export default function EmotionDiaryPage() {
       {/* 로그인 모달 */}
       {showLoginModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+          <PremiumCard gradient className="p-8 max-w-md w-full [transform:translateZ(50px)]">
             <div className="text-center mb-6">
-              <div className="text-6xl mb-4">🌈</div>
-              <h3 className="text-3xl font-black mb-2 text-purple-600">환영합니다!</h3>
-              <p className="text-gray-600">닉네임을 입력하고 감정 일기를 시작하세요</p>
-              <p className="text-sm text-gray-500 mt-2">
-                💾 서버에 자동 백업되어 언제 어디서나 볼 수 있어요
-              </p>
+              <div className="text-7xl sm:text-8xl mb-4 animate-bounce-slow drop-shadow-2xl">🌈</div>
+              <h3 className="text-3xl sm:text-4xl font-black mb-3 text-white drop-shadow-lg">환영합니다!</h3>
+              <p className="text-white/90 mb-2 drop-shadow-md text-base sm:text-lg">닉네임을 입력하고 감정 일기를 시작하세요</p>
+              <PremiumCard className="bg-white/20 backdrop-blur-sm mt-4 inline-block">
+                <p className="text-sm sm:text-base text-white/90 font-medium">
+                  💾 서버에 자동 백업되어 언제 어디서나 볼 수 있어요
+                </p>
+              </PremiumCard>
             </div>
 
-            <input
-              type="text"
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-              placeholder="닉네임 입력 (2~20자)"
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl mb-4 focus:border-purple-400 focus:outline-none"
-              maxLength={20}
-              onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
-            />
+            <PremiumCard className="bg-white/90 mb-4 [transform:translateZ(15px)]">
+              <input
+                type="text"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder="닉네임 입력 (2~20자)"
+                className="w-full px-4 py-3 border-2 border-transparent rounded-xl focus:border-purple-400 focus:outline-none bg-transparent text-base"
+                maxLength={20}
+                onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
+              />
+            </PremiumCard>
 
-            <button
+            <PremiumButton
               onClick={handleLogin}
-              className="w-full px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+              fullWidth
+              size="lg"
+            >
+              <span className="text-xl mr-2">🚀</span>
               시작하기
-            </button>
-          </div>
+            </PremiumButton>
+          </PremiumCard>
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
-    </main>
+    </PremiumLayout>
   );
 }

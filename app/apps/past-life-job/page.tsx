@@ -1,657 +1,605 @@
 "use client";
 
 import { useState } from 'react';
-import AppFooter from '@/app/components/AppFooter';
+import historicalFiguresData from '@/data/historical_figures_100.json';
 import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
-interface PastLifeData {
-  birthYear: number;
-  birthMonth: number;
-  birthDay: number;
-  personality: {
-    introvert: boolean | null;
-    logical: boolean | null;
-    adventurous: boolean | null;
-    creative: boolean | null;
-  };
+
+interface BirthInfo {
+  year: number;
+  month: number;
+  day: number;
+  hour: number; // 0-23
 }
 
-// 전생 직업 데이터베이스 (시대 × 직업)
-const PAST_LIFE_JOBS = {
-  // 조선시대
-  joseon: [
-    { 
-      job: '양반 학자', 
-      desc: '한양에서 학문을 연구하고 후학을 양성하던 선비',
-      trait: '지적 호기심이 많고 원칙을 중시',
-      karma: '현생에서도 배움과 가르침에 인연',
-      element: '목',
-      score: 95
-    },
-    { 
-      job: '의녀', 
-      desc: '궁중에서 왕실의 건강을 책임지던 여의사',
-      trait: '치유와 돌봄에 천부적 재능',
-      karma: '의료, 간호, 상담 분야 적성',
-      element: '수',
-      score: 92
-    },
-    { 
-      job: '대장장이', 
-      desc: '최고의 칼과 농기구를 만들던 장인',
-      trait: '손재주가 뛰어나고 집중력 강함',
-      karma: '기술직, 제조업 천직',
-      element: '금',
-      score: 90
-    },
-    { 
-      job: '기생', 
-      desc: '시와 노래로 사람들을 매료시키던 예인',
-      trait: '예술적 감각과 표현력 탁월',
-      karma: '예술, 공연, 방송 분야 재능',
-      element: '화',
-      score: 93
-    },
-    { 
-      job: '상인', 
-      desc: '전국을 다니며 무역하던 거상',
-      trait: '사업 수완과 인맥 관리 능력',
-      karma: '영업, 무역, 사업가 기질',
-      element: '토',
-      score: 88
-    }
-  ],
-  
-  // 고려시대
-  goryeo: [
-    { 
-      job: '고려 장군', 
-      desc: '외적을 물리치고 나라를 지키던 무장',
-      trait: '용맹하고 결단력 있음',
-      karma: '리더십, 위기관리 능력',
-      element: '금',
-      score: 94
-    },
-    { 
-      job: '불교 승려', 
-      desc: '산사에서 수행하며 중생을 제도하던 스님',
-      trait: '영적 통찰력과 평온한 마음',
-      karma: '상담, 힐링, 교육 분야',
-      element: '수',
-      score: 91
-    },
-    { 
-      job: '청자 도공', 
-      desc: '비색 청자를 빚던 최고의 장인',
-      trait: '예술성과 완벽주의',
-      karma: '디자인, 예술, 공예 재능',
-      element: '토',
-      score: 89
-    }
-  ],
-  
-  // 삼국시대
-  threekingdoms: [
-    { 
-      job: '화랑', 
-      desc: '신라의 청년 엘리트 전사',
-      trait: '충의와 명예를 중시',
-      karma: '리더십과 교육 능력',
-      element: '목',
-      score: 92
-    },
-    { 
-      job: '고구려 철기병', 
-      desc: '철갑 기병으로 전장을 누비던 전사',
-      trait: '강인함과 돌파력',
-      karma: '영업, 스포츠, 경쟁 직종',
-      element: '금',
-      score: 90
-    },
-    { 
-      job: '백제 건축가', 
-      desc: '아름다운 사찰과 궁궐을 설계하던 장인',
-      trait: '공간 감각과 미적 안목',
-      karma: '건축, 인테리어, 디자인',
-      element: '토',
-      score: 87
-    }
-  ],
-  
-  // 중국 고대
-  china: [
-    { 
-      job: '황제의 책사', 
-      desc: '제갈량처럼 전략을 짜던 군사',
-      trait: '전략적 사고와 통찰력',
-      karma: '기획, 전략, 컨설팅',
-      element: '수',
-      score: 96
-    },
-    { 
-      job: '도교 도사', 
-      desc: '산속에서 도를 닦던 신선',
-      trait: '초월적 지혜',
-      karma: '철학, 영성, 대체의학',
-      element: '목',
-      score: 91
-    },
-    { 
-      job: '실크로드 상인', 
-      desc: '동서양을 오가며 무역하던 대상',
-      trait: '모험심과 사업 수완',
-      karma: '글로벌 비즈니스, 무역',
-      element: '화',
-      score: 89
-    }
-  ],
-  
-  // 유럽 중세
-  europe: [
-    { 
-      job: '기사', 
-      desc: '명예와 충성을 지키던 중세 기사',
-      trait: '정의감과 용기',
-      karma: '법조인, 경찰, 군인',
-      element: '금',
-      score: 93
-    },
-    { 
-      job: '연금술사', 
-      desc: '비밀 실험실에서 연구하던 과학자',
-      trait: '탐구심과 실험정신',
-      karma: '과학자, 연구원, 개발자',
-      element: '수',
-      score: 90
-    },
-    { 
-      job: '음유시인', 
-      desc: '노래와 시로 사랑을 전하던 예술가',
-      trait: '낭만과 감성',
-      karma: '작가, 음악가, 시인',
-      element: '화',
-      score: 88
-    }
-  ],
-  
-  // 이집트
-  egypt: [
-    { 
-      job: '파라오의 서기관', 
-      desc: '히에로글리프를 기록하던 고위 관리',
-      trait: '기록과 문서 관리 능력',
-      karma: '행정, 기록, 법무',
-      element: '토',
-      score: 91
-    },
-    { 
-      job: '신전의 사제', 
-      desc: '신과 소통하며 제사를 주관',
-      trait: '영적 능력과 카리스마',
-      karma: '종교, 상담, 힐링',
-      element: '수',
-      score: 94
-    }
-  ]
+interface PersonalityTraits {
+  introvert: boolean | null;
+  logical: boolean | null;
+  adventurous: boolean | null;
+  creative: boolean | null;
+}
+
+interface HistoricalFigure {
+  id: number;
+  name_kr: string;
+  name_en: string;
+  birth_year: number;
+  death_year: number | null;
+  era: string;
+  region: string;
+  country: string;
+  field: string;
+  major_achievements: string[];
+  personality: PersonalityTraits;
+  personality_description: string;
+  traits_keywords: string[];
+  element: string;
+  saju_compatibility: {
+    wood: number;
+    fire: number;
+    earth: number;
+    metal: number;
+    water: number;
+  };
+  famous_quote: string;
+  life_lesson: string;
+  modern_influence: string;
+  compatibility_base_score: number;
+  image_emoji: string;
+}
+
+// 시간대별 오행 (子丑寅卯辰巳午未申酉戌亥)
+const getHourElement = (hour: number): string => {
+  const hourBranch = [
+    '水', '土', '木', '木', '土', '火', // 23-05
+    '火', '土', '金', '金', '土', '水'  // 06-11
+  ];
+  const index = Math.floor(((hour + 1) % 24) / 2);
+  return hourBranch[index];
 };
 
-export default function PastLifeJob() {
+// 오행 영문 변환
+const elementToEnglish = (element: string): keyof HistoricalFigure['saju_compatibility'] => {
+  const map: Record<string, keyof HistoricalFigure['saju_compatibility']> = {
+    '木': 'wood',
+    '火': 'fire',
+    '土': 'earth',
+    '金': 'metal',
+    '水': 'water'
+  };
+  return map[element] || 'water';
+};
+
+// 생년월일로 오행 계산 (간단한 버전)
+const calculateBirthElement = (birth: BirthInfo): string => {
+  const yearRemainder = birth.year % 5;
+  const elements = ['금', '수', '목', '화', '토'];
+  return elements[yearRemainder];
+};
+
+export default function PastLifeHeroFinder() {
   const [step, setStep] = useState(1);
-  const [data, setData] = useState<PastLifeData>({
-    birthYear: 1990,
-    birthMonth: 1,
-    birthDay: 1,
-    personality: {
-      introvert: null,
-      logical: null,
-      adventurous: null,
-      creative: null
-    }
+  const [birth, setBirth] = useState<BirthInfo>({
+    year: 1990,
+    month: 1,
+    day: 1,
+    hour: 12
   });
-  const [result, setResult] = useState<any>(null);
+  const [personality, setPersonality] = useState<PersonalityTraits>({
+    introvert: null,
+    logical: null,
+    adventurous: null,
+    creative: null
+  });
+  const [result, setResult] = useState<HistoricalFigure | null>(null);
+  const [matchScore, setMatchScore] = useState(0);
 
-  const analyzePastLife = () => {
-    // 생년월일로 시대 결정
-    const yearSum = String(data.birthYear).split('').reduce((a, b) => a + parseInt(b), 0);
-    const monthDaySum = data.birthMonth + data.birthDay;
-    const totalSum = yearSum + monthDaySum;
-
-    // 시대 선택
-    const eras = ['joseon', 'goryeo', 'threekingdoms', 'china', 'europe', 'egypt'];
-    const eraIndex = totalSum % eras.length;
-    const selectedEra = eras[eraIndex];
-    const eraJobs = PAST_LIFE_JOBS[selectedEra as keyof typeof PAST_LIFE_JOBS];
-
-    // 성향으로 직업 필터링
-    const jobScores = eraJobs.map(job => {
-      let score = job.score;
+  const findMatchingHero = () => {
+    const figures = historicalFiguresData.historical_figures as HistoricalFigure[];
+    
+    // 각 위인과의 매칭 점수 계산
+    const scoredFigures = figures.map(figure => {
+      let score = figure.compatibility_base_score || 80;
       
-      // 성향에 맞게 점수 조정
-      if (data.personality.introvert === true && ['학자', '승려', '연금술사', '서기관', '사제'].some(k => job.job.includes(k))) {
-        score += 10;
-      }
-      if (data.personality.introvert === false && ['장군', '상인', '기사', '기생'].some(k => job.job.includes(k))) {
-        score += 10;
-      }
-      if (data.personality.logical === true && ['책사', '학자', '연금술사'].some(k => job.job.includes(k))) {
-        score += 8;
-      }
-      if (data.personality.creative === true && ['도공', '시인', '기생', '건축가'].some(k => job.job.includes(k))) {
-        score += 8;
-      }
-      if (data.personality.adventurous === true && ['장군', '상인', '기사'].some(k => job.job.includes(k))) {
-        score += 8;
-      }
+      // 1. 성향 매칭 (각 8점, 총 32점)
+      if (personality.introvert === figure.personality.introvert) score += 8;
+      if (personality.logical === figure.personality.logical) score += 8;
+      if (personality.adventurous === figure.personality.adventurous) score += 8;
+      if (personality.creative === figure.personality.creative) score += 8;
       
-      return { ...job, finalScore: score };
+      // 2. 생년 오행 매칭 (15점)
+      const birthElement = calculateBirthElement(birth);
+      const birthElementEn = elementToEnglish(birthElement === '목' ? '木' : birthElement === '화' ? '火' : birthElement === '토' ? '土' : birthElement === '금' ? '金' : '水');
+      const sajuScore = figure.saju_compatibility[birthElementEn] || 5;
+      score += sajuScore * 1.5;
+      
+      // 3. 시간 오행 매칭 (8점)
+      const hourElement = getHourElement(birth.hour);
+      const hourElementEn = elementToEnglish(hourElement);
+      const hourScore = figure.saju_compatibility[hourElementEn] || 5;
+      score += hourScore * 0.8;
+      
+      // 4. 생일 숫자 매칭 (8점)
+      const daySum = birth.day % 10;
+      const figureIdSum = figure.id % 10;
+      if (daySum === figureIdSum) score += 8;
+      
+      // 5. 월별 가중치 (7점)
+      const monthBonus = (birth.month + figure.id) % 12 === 0 ? 7 : 0;
+      score += monthBonus;
+      
+      // 6. 랜덤 보너스 (최대 10점) - 다양성 추가
+      const randomBonus = Math.random() * 10;
+      score += randomBonus;
+      
+      // 7. 지역/시대 다양성 보너스 (5점)
+      const regionBonus = Math.random() * 5;
+      score += regionBonus;
+      
+      return {
+        ...figure,
+        finalScore: Math.min(100, Math.round(score))
+      };
     });
-
-    // 점수 순 정렬
-    jobScores.sort((a, b) => b.finalScore - a.finalScore);
-    const topJob = jobScores[0];
-
-    // 시대명 한글화
-    const eraNames: Record<string, string> = {
-      'joseon': '조선시대',
-      'goryeo': '고려시대',
-      'threekingdoms': '삼국시대',
-      'china': '중국 고대',
-      'europe': '유럽 중세',
-      'egypt': '고대 이집트'
-    };
-
-    // 전생 인연
-    const connections = [
-      `현재의 ${data.personality.creative ? '창의적' : '논리적'} 성향은 전생에서 이어진 것입니다.`,
-      `${topJob.job}로 살았던 기억이 무의식에 남아있습니다.`,
-      `당시 ${topJob.element} 기운이 강했던 영향이 현생에도 미칩니다.`
-    ];
-
-    setResult({
-      era: eraNames[selectedEra],
-      job: topJob,
-      connections,
-      presentCareer: getPresentCareer(topJob.karma),
-      luckyItem: getLuckyItem(topJob.element)
-    });
-
+    
+    // 점수 순으로 정렬하고 상위 8명 중에서 랜덤 선택
+    scoredFigures.sort((a, b) => b.finalScore - a.finalScore);
+    const topCandidates = scoredFigures.slice(0, 8);
+    
+    // 가중치 랜덤 선택 (점수가 높을수록 선택될 확률 높음)
+    const weights = topCandidates.map((f, i) => Math.pow(8 - i, 2)); // 1위는 64, 2위는 49, 3위는 36...
+    const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+    let random = Math.random() * totalWeight;
+    
+    let selectedIndex = 0;
+    for (let i = 0; i < weights.length; i++) {
+      random -= weights[i];
+      if (random <= 0) {
+        selectedIndex = i;
+        break;
+      }
+    }
+    
+    const topFigure = topCandidates[selectedIndex];
+    
+    setResult(topFigure);
+    setMatchScore(topFigure.finalScore);
     setStep(3);
   };
 
-  const getPresentCareer = (karma: string): string[] => {
-    if (karma.includes('의료')) return ['의사', '간호사', '약사', '물리치료사'];
-    if (karma.includes('예술')) return ['디자이너', '예술가', '방송인', '크리에이터'];
-    if (karma.includes('사업')) return ['CEO', '창업가', '영업 전문가', '마케터'];
-    if (karma.includes('기술')) return ['엔지니어', '개발자', '기술자', '연구원'];
-    if (karma.includes('교육')) return ['교사', '교수', '강사', '교육 기획자'];
-    return ['전문직', '관리직', '자영업'];
-  };
-
-  const getLuckyItem = (element: string): string => {
-    const items: Record<string, string> = {
-      '목': '나무 소품, 식물, 녹색 아이템',
-      '화': '붉은색 액세서리, 캔들, 조명',
-      '토': '도자기, 황토 제품, 노란색 소품',
-      '금': '금속 액세서리, 시계, 흰색 아이템',
-      '수': '분수, 어항, 검은색/파란색 소품'
-    };
-    return items[element] || '자연석';
-  };
-
-  const handlePersonality = (key: keyof PastLifeData['personality'], value: boolean) => {
-    setData({
-      ...data,
-      personality: {
-        ...data.personality,
-        [key]: value
-      }
+  const handlePersonality = (key: keyof PersonalityTraits, value: boolean) => {
+    setPersonality({
+      ...personality,
+      [key]: value
     });
   };
 
-  // Step 1: 생년월일
+  const allAnswered = Object.values(personality).every(v => v !== null);
+
+  // Step 1: 생년월일시 입력
   if (step === 1) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 dark:from-purple-900 dark:via-indigo-900 dark:to-violet-900 transition-colors" style={{
-        backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.2) 0%, transparent 50%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
-        backgroundAttachment: 'fixed'
-      }}>
-        <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          {/* 상단 배너 제거됨 */}
-
-          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
-            <header className="text-center mb-6 text-black placeholder-gray-500">
-              <h1 className="text-4xl font-bold text-black mb-2 text-black placeholder-gray-500">⏳</h1>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">나의 전생 직업 찾기</h2>
-              <p className="text-gray-600 text-black placeholder-gray-500">생년월일로 전생의 인연을 찾습니다</p>
+      <PremiumLayout theme="purple" showStars={true}>
+        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+          <PremiumCard gradient hover>
+            <header className="text-center mb-6 sm:mb-8 [transform:translateZ(40px)]">
+              <h1 className="text-6xl sm:text-7xl mb-4 animate-bounce-slow drop-shadow-2xl [transform:translateZ(50px)]">⭐</h1>
+              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-yellow-200 via-pink-200 to-purple-200 bg-clip-text text-transparent mb-3 drop-shadow-lg [text-shadow:_0_4px_12px_rgba(255,255,255,0.5)]">
+                나의 전생 위인 찾기
+              </h2>
+              <p className="text-base sm:text-lg text-white/90 drop-shadow-md [transform:translateZ(20px)]">
+                생년월일시와 사주로 닮은 위인을 찾습니다
+              </p>
             </header>
 
-            <div className="space-y-6 text-black placeholder-gray-500">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">출생년도</label>
+            <div className="space-y-4 sm:space-y-6">
+              <PremiumCard hover className="bg-white/90 [transform:translateZ(10px)] hover:[transform:translateZ(25px)] transition-all duration-300">
+                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">📅 출생년도</label>
                 <input
                   type="number"
-                  value={data.birthYear}
-                  onChange={(e) => setData({...data, birthYear: Number(e.target.value)})}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-                  min="1950"
+                  value={birth.year}
+                  onChange={(e) => setBirth({...birth, year: Number(e.target.value)})}
+                  className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all"
+                  min="1900"
                   max="2025"
                 />
-              </div>
+              </PremiumCard>
 
-              <div className="grid grid-cols-3 gap-4 text-black placeholder-gray-500">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">출생월</label>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <PremiumCard hover className="bg-white/90 [transform:translateZ(10px)] hover:[transform:translateZ(25px)] transition-all duration-300">
+                  <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">🗓️ 출생월</label>
                   <select
-                    value={data.birthMonth}
-                    onChange={(e) => setData({...data, birthMonth: Number(e.target.value)})}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+                    value={birth.month}
+                    onChange={(e) => setBirth({...birth, month: Number(e.target.value)})}
+                    className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all"
                   >
                     {Array.from({length: 12}, (_, i) => (
                       <option key={i+1} value={i+1}>{i+1}월</option>
                     ))}
                   </select>
-                </div>
+                </PremiumCard>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2 text-black placeholder-gray-500">출생일</label>
+                <PremiumCard hover className="bg-white/90 [transform:translateZ(10px)] hover:[transform:translateZ(25px)] transition-all duration-300">
+                  <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">📆 출생일</label>
                   <select
-                    value={data.birthDay}
-                    onChange={(e) => setData({...data, birthDay: Number(e.target.value)})}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+                    value={birth.day}
+                    onChange={(e) => setBirth({...birth, day: Number(e.target.value)})}
+                    className="w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:ring-4 focus:ring-purple-300/50 focus:outline-none text-base bg-white shadow-lg transition-all"
                   >
                     {Array.from({length: 31}, (_, i) => (
                       <option key={i+1} value={i+1}>{i+1}일</option>
                     ))}
                   </select>
-                </div>
+                </PremiumCard>
               </div>
 
-              <button
-        type="button"
-                onClick={() => setStep(2)}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-              >
-                다음 단계
-              </button>
+              <PremiumCard hover className="bg-white/90 [transform:translateZ(10px)] hover:[transform:translateZ(25px)] transition-all duration-300">
+                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                  ⏰ 출생 시간: <span className="text-purple-600 text-lg">{birth.hour}시</span>
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="23"
+                  value={birth.hour}
+                  onChange={(e) => setBirth({...birth, hour: Number(e.target.value)})}
+                  className="w-full h-4 bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg appearance-none cursor-pointer accent-purple-600 shadow-inner"
+                  style={{
+                    background: `linear-gradient(to right, rgb(216 180 254) 0%, rgb(251 207 232) ${(birth.hour / 23) * 100}%, rgb(243 232 255) ${(birth.hour / 23) * 100}%, rgb(243 232 255) 100%)`
+                  }}
+                />
+                <div className="flex justify-between text-xs sm:text-sm text-gray-600 mt-2 font-medium">
+                  <span>🌙 0시</span>
+                  <span>☀️ 12시</span>
+                  <span>🌙 23시</span>
+                </div>
+              </PremiumCard>
+
+              <div className="[transform:translateZ(30px)]">
+                <PremiumButton
+                  onClick={() => setStep(2)}
+                  fullWidth
+                  size="lg"
+                >
+                  다음 단계 ✨
+                </PremiumButton>
+              </div>
             </div>
-          </section>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
   // Step 2: 성향 테스트
   if (step === 2) {
-    const allAnswered = Object.values(data.personality).every(v => v !== null);
-    
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 dark:from-purple-900 dark:via-indigo-900 dark:to-violet-900 transition-colors" style={{
-        backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.2) 0%, transparent 50%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
-        backgroundAttachment: 'fixed'
-      }}>
-        <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          {/* 상단 배너 제거됨 */}
-
-          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
-            <header className="text-center mb-6 text-black placeholder-gray-500">
-              <h1 className="text-3xl font-bold text-black mb-2 text-black placeholder-gray-500">🔮</h1>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">성향 테스트</h2>
-              <p className="text-gray-600 text-black placeholder-gray-500">전생의 기억을 찾기 위한 질문</p>
+      <PremiumLayout theme="purple" showStars={true}>
+        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+          <PremiumCard gradient hover>
+            <header className="text-center mb-6 sm:mb-8 [transform:translateZ(40px)]">
+              <h1 className="text-6xl sm:text-7xl mb-4 animate-bounce-slow drop-shadow-2xl [transform:translateZ(50px)]">🔮</h1>
+              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-200 via-purple-200 to-pink-200 bg-clip-text text-transparent mb-3 drop-shadow-lg [text-shadow:_0_4px_12px_rgba(255,255,255,0.5)]">
+                성향 테스트
+              </h2>
+              <p className="text-base sm:text-lg text-white/90 drop-shadow-md [transform:translateZ(20px)]">
+                닮은 위인을 찾기 위한 질문
+              </p>
             </header>
 
-            <div className="space-y-6 text-black placeholder-gray-500">
+            <div className="space-y-4 sm:space-y-6">
               {/* 질문 1 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
-                  사람들과의 관계에서...
+              <PremiumCard hover className="bg-gradient-to-br from-white/95 to-purple-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
+                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                  💭 사람들과의 관계에서...
                 </label>
-                <div className="flex gap-3 text-black placeholder-gray-500">
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('introvert', true)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.introvert === true
-                        ? 'border-purple-500 bg-purple-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    혼자 있는 게 편함 🏠
-                    {data.personality.introvert === true && ' ✓'}
-                  </button>
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('introvert', false)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.introvert === false
-                        ? 'border-blue-500 bg-blue-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    사람들과 어울리기 좋아함 👥
-                    {data.personality.introvert === false && ' ✓'}
-                  </button>
+                <div className="grid grid-cols-2 gap-3">
+                  <div onClick={() => handlePersonality('introvert', true)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.introvert === true
+                          ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white ring-4 ring-purple-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-purple-50 hover:to-purple-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">🏠</span>
+                      <p className="text-sm font-bold">혼자 있는 게 편함</p>
+                    </PremiumCard>
+                  </div>
+                  <div onClick={() => handlePersonality('introvert', false)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.introvert === false
+                          ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white ring-4 ring-blue-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-blue-50 hover:to-blue-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">👥</span>
+                      <p className="text-sm font-bold">사람들과 어울리기 좋아함</p>
+                    </PremiumCard>
+                  </div>
                 </div>
-              </div>
+              </PremiumCard>
 
               {/* 질문 2 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
-                  문제를 해결할 때...
+              <PremiumCard hover className="bg-gradient-to-br from-white/95 to-cyan-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
+                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-cyan-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                  🤔 문제를 해결할 때...
                 </label>
-                <div className="flex gap-3 text-black placeholder-gray-500">
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('logical', true)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.logical === true
-                        ? 'border-cyan-500 bg-cyan-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    논리적으로 분석 🧮
-                    {data.personality.logical === true && ' ✓'}
-                  </button>
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('logical', false)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.logical === false
-                        ? 'border-blue-500 bg-blue-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    직감으로 결정 💫
-                    {data.personality.logical === false && ' ✓'}
-                  </button>
+                <div className="grid grid-cols-2 gap-3">
+                  <div onClick={() => handlePersonality('logical', true)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.logical === true
+                          ? 'bg-gradient-to-br from-cyan-500 to-cyan-600 text-white ring-4 ring-cyan-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-cyan-50 hover:to-cyan-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">🧮</span>
+                      <p className="text-sm font-bold">논리적으로 분석</p>
+                    </PremiumCard>
+                  </div>
+                  <div onClick={() => handlePersonality('logical', false)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.logical === false
+                          ? 'bg-gradient-to-br from-pink-500 to-pink-600 text-white ring-4 ring-pink-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-pink-50 hover:to-pink-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">💫</span>
+                      <p className="text-sm font-bold">직감으로 결정</p>
+                    </PremiumCard>
+                  </div>
                 </div>
-              </div>
+              </PremiumCard>
 
               {/* 질문 3 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
-                  새로운 것에 대해...
+              <PremiumCard hover className="bg-gradient-to-br from-white/95 to-orange-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
+                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-orange-600 to-green-600 bg-clip-text text-transparent mb-3">
+                  ✨ 새로운 것에 대해...
                 </label>
-                <div className="flex gap-3 text-black placeholder-gray-500">
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('adventurous', true)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.adventurous === true
-                        ? 'border-orange-500 bg-orange-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    도전적이고 모험 좋아함 🗺️
-                    {data.personality.adventurous === true && ' ✓'}
-                  </button>
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('adventurous', false)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.adventurous === false
-                        ? 'border-green-500 bg-green-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    안정적인 것 선호 🏡
-                    {data.personality.adventurous === false && ' ✓'}
-                  </button>
+                <div className="grid grid-cols-2 gap-3">
+                  <div onClick={() => handlePersonality('adventurous', true)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.adventurous === true
+                          ? 'bg-gradient-to-br from-orange-500 to-orange-600 text-white ring-4 ring-orange-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-orange-50 hover:to-orange-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">🗺️</span>
+                      <p className="text-sm font-bold">도전적이고 모험 좋아함</p>
+                    </PremiumCard>
+                  </div>
+                  <div onClick={() => handlePersonality('adventurous', false)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.adventurous === false
+                          ? 'bg-gradient-to-br from-green-500 to-green-600 text-white ring-4 ring-green-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-green-50 hover:to-green-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">🏡</span>
+                      <p className="text-sm font-bold">안정적인 것 선호</p>
+                    </PremiumCard>
+                  </div>
                 </div>
-              </div>
+              </PremiumCard>
 
               {/* 질문 4 */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">
-                  일할 때...
+              <PremiumCard hover className="bg-gradient-to-br from-white/95 to-indigo-50/90 [transform:translateZ(15px)] hover:[transform:translateZ(30px)] transition-all duration-300">
+                <label className="block text-sm sm:text-base font-bold bg-gradient-to-r from-purple-600 to-teal-600 bg-clip-text text-transparent mb-3">
+                  💼 일할 때...
                 </label>
-                <div className="flex gap-3 text-black placeholder-gray-500">
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('creative', true)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.creative === true
-                        ? 'border-purple-500 bg-purple-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    창의적 작업 선호 🎨
-                    {data.personality.creative === true && ' ✓'}
-                  </button>
-                  <button
-        type="button"
-                    onClick={() => handlePersonality('creative', false)}
-                    className={`flex-1 py-4 rounded-lg border-2 transition-all ${
-                      data.personality.creative === false
-                        ? 'border-teal-500 bg-teal-50 font-semibold shadow-md'
-                        : 'border-gray-300 bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    체계적 업무 선호 📋
-                    {data.personality.creative === false && ' ✓'}
-                  </button>
+                <div className="grid grid-cols-2 gap-3">
+                  <div onClick={() => handlePersonality('creative', true)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.creative === true
+                          ? 'bg-gradient-to-br from-purple-500 to-purple-600 text-white ring-4 ring-purple-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-purple-50 hover:to-purple-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">🎨</span>
+                      <p className="text-sm font-bold">창의적 작업 선호</p>
+                    </PremiumCard>
+                  </div>
+                  <div onClick={() => handlePersonality('creative', false)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center transition-all duration-300 ${
+                        personality.creative === false
+                          ? 'bg-gradient-to-br from-teal-500 to-teal-600 text-white ring-4 ring-teal-300 scale-105 shadow-2xl'
+                          : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-teal-50 hover:to-teal-100'
+                      } [transform:translateZ(10px)] hover:[transform:translateZ(25px)] min-h-[80px] flex flex-col items-center justify-center`}
+                    >
+                      <span className="text-3xl mb-2 drop-shadow-lg">📋</span>
+                      <p className="text-sm font-bold">체계적 업무 선호</p>
+                    </PremiumCard>
+                  </div>
                 </div>
-              </div>
+              </PremiumCard>
 
-              <div className="flex gap-3 text-black placeholder-gray-500">
-                <button
-        type="button"
+              <div className="flex gap-3 sm:gap-4 [transform:translateZ(30px)]">
+                <PremiumButton
                   onClick={() => setStep(1)}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+                  size="lg"
+                  className="bg-gradient-to-br from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 flex-shrink-0 shadow-xl"
                 >
-                  이전
-                </button>
-                <button
-        type="button"
-                  onClick={analyzePastLife}
+                  ⬅️ 이전
+                </PremiumButton>
+                <PremiumButton
+                  onClick={findMatchingHero}
                   disabled={!allAnswered}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
+                  fullWidth
+                  size="lg"
+                  className={!allAnswered ? 'opacity-50 cursor-not-allowed' : 'shadow-2xl'}
                 >
-                  전생 확인하기
-                </button>
+                  ✨ 위인 찾기
+                </PremiumButton>
               </div>
             </div>
-          </section>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
   // Step 3: 결과
   if (step === 3 && result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-violet-50 dark:from-purple-900 dark:via-indigo-900 dark:to-violet-900 transition-colors" style={{
-        backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(124, 58, 237, 0.2) 0%, transparent 50%), linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%)',
-        backgroundAttachment: 'fixed'
-      }}>
-        <div className="mx-auto max-w-[600px] px-4 py-6 text-black placeholder-gray-500">
-          {/* 상단 배너 제거됨 */}
-
-          <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-amber-200 text-black placeholder-gray-500">
-            <header className="text-center mb-6 text-black placeholder-gray-500">
-              <h1 className="text-3xl font-bold text-black mb-2 text-black placeholder-gray-500">✨</h1>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2 text-black placeholder-gray-500">당신의 전생</h2>
+      <PremiumLayout theme="purple" showStars={true}>
+        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+          <PremiumCard gradient hover>
+            <header className="text-center mb-6 sm:mb-8 [transform:translateZ(40px)]">
+              <h1 className="text-7xl sm:text-8xl mb-4 animate-bounce-slow drop-shadow-2xl [transform:translateZ(60px)]">
+                {result.image_emoji}
+              </h1>
+              <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-yellow-200 via-amber-200 to-orange-200 bg-clip-text text-transparent mb-2 drop-shadow-lg [text-shadow:_0_4px_16px_rgba(255,215,0,0.6)]">
+                당신과 닮은 전생 위인
+              </h2>
+              <PremiumCard hover gradient className="inline-block mt-3 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] animate-pulse-slow">
+                <p className="text-white font-bold text-xl drop-shadow-lg">
+                  ✨ 매칭도: <span className="text-2xl text-yellow-200">{matchScore}점</span>
+                </p>
+              </PremiumCard>
             </header>
 
-            {/* 전생 직업 */}
-            <div className="mb-6 p-6 bg-gradient-to-r from-amber-100 to-yellow-100 rounded-xl border-2 border-amber-400 text-center text-black placeholder-gray-500">
-              <div className="text-sm text-black mb-2 text-black placeholder-gray-500">{result.era}</div>
-              <div className="text-3xl font-bold text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">{result.job.job}</div>
-              <div className="text-lg text-gray-700 mb-4 text-black placeholder-gray-500">{result.job.desc}</div>
-              <div className="inline-block bg-amber-200 px-4 py-2 rounded-full text-black placeholder-gray-500">
-                <span className="font-semibold text-black text-black placeholder-gray-500">적합도: {result.job.finalScore}점</span>
+            <div className="space-y-4 sm:space-y-6">
+              {/* 위인 정보 */}
+              <PremiumCard hover gradient className="text-center [transform:translateZ(25px)] hover:[transform:translateZ(40px)] transition-all duration-500 shadow-2xl">
+                <div className="text-base font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">
+                  {result.era} · {result.country}
+                </div>
+                <div className="text-5xl font-bold bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-700 bg-clip-text text-transparent mb-3 drop-shadow-lg">
+                  {result.name_kr}
+                </div>
+                <div className="text-xl text-white/90 mb-2 font-semibold drop-shadow-md">{result.name_en}</div>
+                <div className="text-sm text-white/80 font-medium">
+                  {result.birth_year}년 ~ {result.death_year || '현재'}년 · {result.field}
+                </div>
+              </PremiumCard>
+
+              {/* 주요 업적 */}
+              <PremiumCard hover className="bg-gradient-to-br from-amber-50 to-yellow-50 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] transition-all duration-300">
+                <h3 className="font-bold text-lg sm:text-xl bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-2 [transform:translateZ(10px)]">
+                  <span className="text-3xl drop-shadow-lg">🏆</span>
+                  주요 업적
+                </h3>
+                <div className="space-y-3">
+                  {result.major_achievements.slice(0, 5).map((achievement, i) => (
+                    <PremiumCard key={i} hover className="bg-white shadow-md [transform:translateZ(10px)] hover:[transform:translateZ(20px)] transition-all">
+                      <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">• {achievement}</p>
+                    </PremiumCard>
+                  ))}
+                </div>
+              </PremiumCard>
+
+              {/* 성격 특징 */}
+              <PremiumCard hover className="bg-gradient-to-br from-purple-50 to-pink-50 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] transition-all duration-300">
+                <h3 className="font-bold text-lg sm:text-xl bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-2 [transform:translateZ(10px)]">
+                  <span className="text-3xl drop-shadow-lg">🎭</span>
+                  성격 특징
+                </h3>
+                <PremiumCard className="bg-white/80 mb-4 shadow-inner [transform:translateZ(10px)]">
+                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">{result.personality_description}</p>
+                </PremiumCard>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {result.traits_keywords.map((trait, i) => (
+                    <span key={i} className="bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 px-4 py-2 rounded-full text-sm font-bold shadow-md hover:shadow-lg hover:scale-110 transition-all [transform:translateZ(5px)]">
+                      {trait}
+                    </span>
+                  ))}
+                </div>
+              </PremiumCard>
+
+              {/* 명언 */}
+              <PremiumCard hover gradient className="[transform:translateZ(25px)] hover:[transform:translateZ(40px)] transition-all duration-500 shadow-2xl">
+                <h3 className="font-bold text-lg sm:text-xl text-white mb-4 text-center drop-shadow-lg flex items-center justify-center gap-2 [transform:translateZ(10px)]">
+                  <span className="text-3xl drop-shadow-2xl">💬</span>
+                  명언
+                </h3>
+                <PremiumCard className="bg-white/20 backdrop-blur-sm [transform:translateZ(15px)] shadow-inner">
+                  <p className="text-white text-sm sm:text-lg italic leading-relaxed font-semibold text-center drop-shadow-md">
+                    "{result.famous_quote}"
+                  </p>
+                </PremiumCard>
+              </PremiumCard>
+
+              {/* 인생 교훈 */}
+              <PremiumCard hover className="bg-gradient-to-br from-blue-50 to-cyan-50 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] transition-all duration-300">
+                <h3 className="font-bold text-lg sm:text-xl bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-2 [transform:translateZ(10px)]">
+                  <span className="text-3xl drop-shadow-lg">📖</span>
+                  인생 교훈
+                </h3>
+                <PremiumCard className="bg-white shadow-inner [transform:translateZ(10px)]">
+                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">{result.life_lesson}</p>
+                </PremiumCard>
+              </PremiumCard>
+
+              {/* 현대적 영향 */}
+              <PremiumCard hover className="bg-gradient-to-br from-green-50 to-emerald-50 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] transition-all duration-300">
+                <h3 className="font-bold text-lg sm:text-xl bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-2 [transform:translateZ(10px)]">
+                  <span className="text-3xl drop-shadow-lg">🌍</span>
+                  현대적 영향
+                </h3>
+                <PremiumCard className="bg-white shadow-inner [transform:translateZ(10px)]">
+                  <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">{result.modern_influence}</p>
+                </PremiumCard>
+              </PremiumCard>
+
+              {/* 사주 오행 */}
+              <PremiumCard hover className="bg-gradient-to-br from-indigo-50 to-purple-50 [transform:translateZ(20px)] hover:[transform:translateZ(35px)] transition-all duration-300">
+                <h3 className="font-bold text-lg sm:text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-2 [transform:translateZ(10px)]">
+                  <span className="text-3xl drop-shadow-lg">☯️</span>
+                  오행 궁합
+                </h3>
+                <div className="grid grid-cols-5 gap-2 sm:gap-3">
+                  {Object.entries(result.saju_compatibility).map(([element, score]) => (
+                    <PremiumCard key={element} hover className="text-center bg-white shadow-md [transform:translateZ(10px)] hover:[transform:translateZ(20px)] transition-all">
+                      <div className="text-xs sm:text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                        {element === 'wood' ? '목🌳' : element === 'fire' ? '화🔥' : element === 'earth' ? '토🏔️' : element === 'metal' ? '금⚔️' : '수💧'}
+                      </div>
+                      <div className="text-xl sm:text-2xl font-bold bg-gradient-to-br from-purple-600 to-pink-600 bg-clip-text text-transparent">{score}</div>
+                    </PremiumCard>
+                  ))}
+                </div>
+              </PremiumCard>
+
+              <div className="[transform:translateZ(30px)]">
+                <PremiumButton
+                  onClick={() => {
+                    setStep(1);
+                    setResult(null);
+                    setPersonality({
+                      introvert: null,
+                      logical: null,
+                      adventurous: null,
+                      creative: null
+                    });
+                  }}
+                  fullWidth
+                  size="lg"
+                  className="shadow-2xl"
+                >
+                  🔄 다시 찾기
+                </PremiumButton>
               </div>
             </div>
-
-            {/* 전생 성격 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">🎭 전생의 성격</h3>
-              <p className="text-gray-700 mb-2 text-black placeholder-gray-500">{result.job.trait}</p>
-              <p className="text-sm text-black text-black placeholder-gray-500">오행: <span className="font-bold text-black placeholder-gray-500">{result.job.element}</span></p>
-            </div>
-
-            {/* 전생 인연 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">🔗 전생과의 인연</h3>
-              <div className="space-y-2 text-black placeholder-gray-500">
-                {result.connections.map((conn: string, i: number) => (
-                  <div key={i} className="bg-white rounded p-3 text-sm text-gray-700 text-black placeholder-gray-500">
-                    • {conn}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 현생 적성 직업 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">💼 현생 적성 직업</h3>
-              <p className="text-sm text-black mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">{result.job.karma}</p>
-              <div className="flex flex-wrap gap-2 text-black placeholder-gray-500">
-                {result.presentCareer.map((career: string, i: number) => (
-                  <span key={i} className="bg-green-100 text-black px-3 py-1 rounded-full text-sm font-semibold border border-green-300 text-black placeholder-gray-500">
-                    {career}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* 행운 아이템 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg border border-yellow-200 text-black placeholder-gray-500">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2 text-black placeholder-gray-500">🍀 행운 아이템</h3>
-              <p className="text-gray-700 text-black placeholder-gray-500">{result.luckyItem}</p>
-              <p className="text-sm text-black mt-2 text-black placeholder-gray-500">
-                {result.job.element} 기운을 강화하는 아이템을 가까이 두세요
-              </p>
-            </div>
-
-            <button
-        type="button"
-              onClick={() => {
-                setStep(1);
-                setResult(null);
-                setData({
-                  ...data,
-                  personality: {
-                    introvert: null,
-                    logical: null,
-                    adventurous: null,
-                    creative: null
-                  }
-                });
-              }}
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-black"
-            >
-              다시 분석하기
-            </button>
-          </section>
+          </PremiumCard>
         </div>
-        {/* 제작자 서명 */}
-        <AppFooter />
-
-      </main>
+      </PremiumLayout>
     );
   }
 
   return null;
 }
-

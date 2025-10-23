@@ -1,0 +1,911 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "total_figures": 100,
+    "included_count": 20,
+    "created_date": "2025-10-23",
+    "description": "역사적 위인 100명 데이터베이스 Part 4 (ID 61–80)"
+  },
+  "historical_figures": [
+    {
+      "id": 61,
+      "name_kr": "빌 게이츠",
+      "name_en": "Bill Gates",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "Microsoft 창업",
+        "PC 소프트웨어 표준화",
+        "재단 통한 공중보건",
+        "오픈 지식 확산",
+        "교육·백신 투자"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Success is a lousy teacher.",
+      "life_lesson": "지속 가능한 임팩트는 시스템에서 온다.",
+      "modern_influence": "소프트웨어 산업·글로벌 헬스",
+      "compatibility_base_score": 90,
+      "image_emoji": "🪟💊"
+    },
+    {
+      "id": 62,
+      "name_kr": "일론 머스크",
+      "name_en": "Elon Musk",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "SpaceX 재사용 로켓",
+        "Tesla 전기차",
+        "Starlink 위성망",
+        "PayPal 성장",
+        "에너지·교통 혁신"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "When something is important enough, you do it even if the odds are not in your favor.",
+      "life_lesson": "위험 감수는 기술의 속도를 높인다.",
+      "modern_influence": "우주·EV·인프라 혁신",
+      "compatibility_base_score": 90,
+      "image_emoji": "🚀⚙️"
+    },
+    {
+      "id": 63,
+      "name_kr": "마크 저커버그",
+      "name_en": "Mark Zuckerberg",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "Facebook 설립",
+        "소셜 네트워크 대중화",
+        "Meta 전환",
+        "오픈소스 기여",
+        "인터넷 연결성 확대"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Move fast and break things.",
+      "life_lesson": "속도는 학습의 가속기다.",
+      "modern_influence": "소셜·커뮤니티 플랫폼",
+      "compatibility_base_score": 90,
+      "image_emoji": "👥🌐"
+    },
+    {
+      "id": 64,
+      "name_kr": "제프 베조스",
+      "name_en": "Jeff Bezos",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "Amazon 전자상거래",
+        "프라임·물류 혁신",
+        "AWS 클라우드",
+        "블루 오리진",
+        "고객 집착 전략"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "It's always Day 1.",
+      "life_lesson": "장기·고객집착이 경쟁우위다.",
+      "modern_influence": "e커머스·클라우드·물류",
+      "compatibility_base_score": 90,
+      "image_emoji": "📦☁️"
+    },
+    {
+      "id": 65,
+      "name_kr": "워렌 버핏",
+      "name_en": "Warren Buffett",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "가치투자 철학",
+        "バー크셔 해서웨이",
+        "장기 복리 모델",
+        "기부 서약",
+        "투자자 교육"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Price is what you pay. Value is what you get.",
+      "life_lesson": "규율은 복리를 돕는다.",
+      "modern_influence": "투자·기업지배구조 문화",
+      "compatibility_base_score": 90,
+      "image_emoji": "📈🏦"
+    },
+    {
+      "id": 66,
+      "name_kr": "마윈",
+      "name_en": "Jack Ma",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "중국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "알리바바 창업",
+        "전자상거래 생태계",
+        "알리페이 핀테크",
+        "중소상공인 디지털화",
+        "국제 무역 온라인화"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Today is hard, tomorrow will be worse, but the day after tomorrow will be sunshine.",
+      "life_lesson": "낙관은 기업가의 연료다.",
+      "modern_influence": "아시아 e커머스·핀테크",
+      "compatibility_base_score": 90,
+      "image_emoji": "🐜🛒"
+    },
+    {
+      "id": 67,
+      "name_kr": "손정의",
+      "name_en": "Masayoshi Son",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "일본",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "소프트뱅크 그룹",
+        "비전펀드",
+        "통신·투자 융합",
+        "인터넷 생태계 투자",
+        "장기 테크 비전"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "전략은 미래를 앞당기는 설계도다.",
+      "life_lesson": "리스크는 포트폴리오로 관리한다.",
+      "modern_influence": "벤처투자·통신·AI",
+      "compatibility_base_score": 90,
+      "image_emoji": "📶💼"
+    },
+    {
+      "id": 68,
+      "name_kr": "이건희",
+      "name_en": "Lee Kun-hee",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "대한민국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "삼성 반도체 도약",
+        "질 경영 선언",
+        "글로벌 브랜드화",
+        "디자인 혁신",
+        "지배구조 개선 시도"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "금",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "마누라와 자식 빼고 다 바꿔라.",
+      "life_lesson": "변화는 생존의 조건이다.",
+      "modern_influence": "한국 제조·브랜드 업그레이드",
+      "compatibility_base_score": 90,
+      "image_emoji": "🔷📱"
+    },
+    {
+      "id": 69,
+      "name_kr": "정주영",
+      "name_en": "Chung Ju-yung",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "대한민국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "현대그룹 창업",
+        "조선·건설 세계화",
+        "불가능 신화 타파",
+        "인재 중시",
+        "사회공헌"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "해봤어?",
+      "life_lesson": "실행은 불가능을 가능으로 만든다.",
+      "modern_influence": "한국 산업화·인프라",
+      "compatibility_base_score": 90,
+      "image_emoji": "🚢🏗️"
+    },
+    {
+      "id": 70,
+      "name_kr": "래리 페이지",
+      "name_en": "Larry Page",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "Google 공동창업",
+        "PageRank 검색",
+        "문서 디지털화",
+        "X문샷 R&D",
+        "AI·클라우드"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Always deliver more than expected.",
+      "life_lesson": "정보의 질이 혁신을 이끈다.",
+      "modern_influence": "검색·AI·클라우드",
+      "compatibility_base_score": 90,
+      "image_emoji": "🔎🤖"
+    },
+    {
+      "id": 71,
+      "name_kr": "세르게이 브린",
+      "name_en": "Sergey Brin",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "경제/비즈니스",
+      "major_achievements": [
+        "Google 공동창업",
+        "검색 알고리즘",
+        "문샷 프로젝트",
+        "안경형 컴퓨팅 시도",
+        "데이터 생태계"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Passion and purpose lead to progress.",
+      "life_lesson": "문제를 사랑하면 해법이 보인다.",
+      "modern_influence": "검색·데이터·문샷",
+      "compatibility_base_score": 90,
+      "image_emoji": "🧪🛰️"
+    },
+    {
+      "id": 72,
+      "name_kr": "버락 오바마",
+      "name_en": "Barack Obama",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "정치/사회",
+      "major_achievements": [
+        "미국 대통령(44대)",
+        "오바마케어",
+        "외교 다자주의",
+        "인권·다양성 옹호",
+        "노벨 평화상"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Yes we can.",
+      "life_lesson": "포용은 국가의 힘이다.",
+      "modern_influence": "다양성·보건·외교",
+      "compatibility_base_score": 90,
+      "image_emoji": "🇺🇸🕊️"
+    },
+    {
+      "id": 73,
+      "name_kr": "앙겔라 메르켈",
+      "name_en": "Angela Merkel",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "독일",
+      "field": "정치",
+      "major_achievements": [
+        "독일 총리 16년",
+        "유럽 재정위기 대응",
+        "난민 정책 조정",
+        "과학자 출신 리더십",
+        "EU 통합 기여"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "For me, it’s always important that I go through all the facts.",
+      "life_lesson": "침착함은 리더의 미덕이다.",
+      "modern_influence": "유럽 거버넌스·위기관리",
+      "compatibility_base_score": 90,
+      "image_emoji": "🇩🇪🧪"
+    },
+    {
+      "id": 74,
+      "name_kr": "미하일 고르바초프",
+      "name_en": "Mikhail Gorbachev",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "러시아",
+      "field": "정치",
+      "major_achievements": [
+        "페레스트로이카",
+        "글라스노스트",
+        "냉전 종식 기여",
+        "핵 군축 협정",
+        "노벨 평화상"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "We need to rebuild the house we all live in.",
+      "life_lesson": "개방은 위험이 아닌 기회다.",
+      "modern_influence": "국제정치·민주화",
+      "compatibility_base_score": 90,
+      "image_emoji": "🕊️🌍"
+    },
+    {
+      "id": 75,
+      "name_kr": "아웅산 수치",
+      "name_en": "Aung San Suu Kyi",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미얀마",
+      "field": "정치/인권",
+      "major_achievements": [
+        "민주화 상징",
+        "비폭력 저항",
+        "노벨 평화상",
+        "국제 연대",
+        "정치 개혁 촉구"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Use your freedom to promote ours.",
+      "life_lesson": "자유는 나눌수록 커진다.",
+      "modern_influence": "민주화·시민운동",
+      "compatibility_base_score": 90,
+      "image_emoji": "🌼🕊️"
+    },
+    {
+      "id": 76,
+      "name_kr": "코피 아난",
+      "name_en": "Kofi Annan",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "가나",
+      "field": "정치/외교",
+      "major_achievements": [
+        "UN 사무총장",
+        "밀레니엄 개발목표",
+        "평화유지 강화",
+        "인권 중심 개혁",
+        "노벨 평화상"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "You are never too young to lead and never too old to learn.",
+      "life_lesson": "세계는 협력으로 움직인다.",
+      "modern_influence": "다자주의·개발협력",
+      "compatibility_base_score": 90,
+      "image_emoji": "🇺🇳🤝"
+    },
+    {
+      "id": 77,
+      "name_kr": "교황 요한 바오로 2세",
+      "name_en": "Pope John Paul II",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "바티칸/폴란드",
+      "field": "종교/사회",
+      "major_achievements": [
+        "폴란드 민주화 영감",
+        "세계 청년대회",
+        "종교 간 대화",
+        "가톨릭 현대화 노력",
+        "인권 옹호"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Do not be afraid.",
+      "life_lesson": "신념은 두려움을 몰아낸다.",
+      "modern_influence": "종교·인권·문화 대화",
+      "compatibility_base_score": 90,
+      "image_emoji": "✝️🌍"
+    },
+    {
+      "id": 78,
+      "name_kr": "달라이 라마 14세",
+      "name_en": "Dalai Lama XIV",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "티베트",
+      "field": "종교/철학",
+      "major_achievements": [
+        "티베트 불교 지도",
+        "비폭력·자비 설파",
+        "망명정부 지도",
+        "세계 평화 연설",
+        "노벨 평화상"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "My religion is very simple. My religion is kindness.",
+      "life_lesson": "자비는 가장 강한 힘이다.",
+      "modern_influence": "명상·평화·심리학",
+      "compatibility_base_score": 90,
+      "image_emoji": "🪷😊"
+    },
+    {
+      "id": 79,
+      "name_kr": "말랄라 유사프자이",
+      "name_en": "Malala Yousafzai",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "파키스탄",
+      "field": "사회운동/교육",
+      "major_achievements": [
+        "여성 교육 권리 옹호",
+        "말랄라 기금",
+        "노벨 평화상 최연소",
+        "국제 연설 활동",
+        "교육 접근성 확대"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "One child, one teacher, one book, one pen can change the world.",
+      "life_lesson": "교육은 가장 강력한 사다리다.",
+      "modern_influence": "여성·아동 교육 권리",
+      "compatibility_base_score": 90,
+      "image_emoji": "📚✒️"
+    },
+    {
+      "id": 80,
+      "name_kr": "그레타 툰베리",
+      "name_en": "Greta Thunberg",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "스웨덴",
+      "field": "사회운동/환경",
+      "major_achievements": [
+        "기후 파업 촉발",
+        "청년 기후운동 상징",
+        "국제 연설",
+        "정책 변화 촉구",
+        "ESG 담론 확산"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "How dare you!",
+      "life_lesson": "미래 세대의 목소리가 기준을 바꾼다.",
+      "modern_influence": "기후정책·청년운동",
+      "compatibility_base_score": 90,
+      "image_emoji": "🌍🌱"
+    }
+  ]
+}

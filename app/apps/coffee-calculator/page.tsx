@@ -234,20 +234,23 @@ export default function CoffeeCalculator() {
 
   if (result) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-900 dark:via-orange-900 dark:to-yellow-900 transition-colors">
-        <div className="mx-auto max-w-[600px] px-4 py-6">
-          <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border-4 border-amber-800">
-            <header className="text-center mb-6">
-              <h1 className="text-3xl font-bold mb-2">☕</h1>
-              <h2 className="text-2xl font-bold text-gray-800">카페인 섭취 분석</h2>
+      <PremiumLayout theme="orange" showStars={true}>
+        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+          <PremiumCard gradient hover>
+            <header className="text-center mb-6 sm:mb-8">
+              <h1 className="text-6xl sm:text-7xl font-bold mb-4 animate-bounce-slow drop-shadow-2xl">☕</h1>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg">카페인 섭취 분석</h2>
             </header>
 
             {/* 종합 현황 */}
-            <div className="mb-6 p-1 sm:p-2.5 md:p-5 rounded-xl text-center border-4" style={{
-              backgroundColor: result.percentage <= 70 ? '#f0fdf4' : result.percentage <= 100 ? '#fffbeb' : '#fef2f2',
-              borderColor: result.percentage <= 70 ? '#86efac' : result.percentage <= 100 ? '#fcd34d' : '#fca5a5'
-            }}>
-              <div className="text-6xl font-bold mb-2" style={{
+            <PremiumCard 
+              hover 
+              className="mb-6 text-center [transform:translateZ(20px)] hover:[transform:translateZ(30px)]" 
+              style={{
+                backgroundColor: result.percentage <= 70 ? '#f0fdf4' : result.percentage <= 100 ? '#fffbeb' : '#fef2f2'
+              }}
+            >
+              <div className="text-6xl sm:text-7xl font-bold mb-3 drop-shadow-lg" style={{
                 background: result.percentage <= 70 ? 'linear-gradient(135deg, #10b981, #059669)' :
                            result.percentage <= 100 ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
                            'linear-gradient(135deg, #ef4444, #dc2626)',
@@ -256,207 +259,240 @@ export default function CoffeeCalculator() {
               }}>
                 {result.percentage}%
               </div>
-              <div className="text-lg font-semibold text-gray-700 mb-2">
+              <div className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                 {result.totalCaffeine}mg / {result.maxCaffeine}mg
               </div>
-              <div className="text-sm text-gray-600">
+              <div className="text-base sm:text-lg font-semibold text-gray-700">
                 {result.percentage <= 70 ? '✅ 안전한 수준' :
                  result.percentage <= 100 ? '⚠️ 주의 필요' :
                  '🚨 과다 섭취'}
               </div>
-            </div>
+            </PremiumCard>
 
             {/* 현재 활성 카페인 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">🔄 현재 체내 활성 카페인</h3>
+            <PremiumCard hover className="mb-6 bg-gradient-to-r from-blue-50 to-cyan-50 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+              <h3 className="font-bold text-base sm:text-lg text-gray-800 mb-3 flex items-center gap-2 justify-center">
+                <span className="text-xl sm:text-2xl">🔄</span>
+                현재 체내 활성 카페인
+              </h3>
               <div className="text-center">
-                <div className="text-4xl font-bold mb-2">{result.activeCaffeine}mg</div>
-                <div className="text-sm text-gray-600">반감기 고려 현재 수준</div>
+                <div className="text-4xl sm:text-5xl font-bold mb-2 text-blue-600 drop-shadow-md">{result.activeCaffeine}mg</div>
+                <div className="text-sm sm:text-base text-gray-600 font-medium">반감기 고려 현재 수준</div>
               </div>
-            </div>
+            </PremiumCard>
 
             {/* 섭취 내역 */}
             {intakes.length > 0 && (
-              <div className="mb-6">
-                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">📋 오늘의 섭취 내역</h3>
-                <div className="space-y-2">
+              <PremiumCard className="mb-6 [transform:translateZ(10px)]">
+                <h3 className="font-bold text-base sm:text-lg text-gray-800 mb-4 flex items-center gap-2">
+                  <span className="text-xl sm:text-2xl">📋</span>
+                  오늘의 섭취 내역
+                </h3>
+                <div className="space-y-2 sm:space-y-3">
                   {intakes.map((intake, i) => (
-                    <div key={i} className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg p-2 sm:p-3 border border-amber-200">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <div className="font-semibold text-gray-800">{intake.item}</div>
-                          <div className="text-sm text-gray-600">
+                    <PremiumCard key={i} hover className="bg-gradient-to-r from-amber-50 to-yellow-50 [transform:translateZ(5px)] hover:[transform:translateZ(15px)]">
+                      <div className="flex justify-between items-center gap-3">
+                        <div className="flex-1">
+                          <div className="font-bold text-base sm:text-lg text-gray-800">{intake.item}</div>
+                          <div className="text-xs sm:text-sm text-gray-600 font-medium">
                             {intake.time} · {intake.amount}개 · {intake.caffeine * intake.amount}mg
                           </div>
                         </div>
-                        <div className="font-bold">
+                        <div className="font-bold text-lg sm:text-xl text-amber-700 flex-shrink-0">
                           ☕ {intake.caffeine}mg
                         </div>
                       </div>
-                    </div>
+                    </PremiumCard>
                   ))}
                 </div>
-              </div>
+              </PremiumCard>
             )}
 
             {/* 24시간 카페인 그래프 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">📊 24시간 카페인 농도 변화</h3>
-              <div className="space-y-1 max-h-40 overflow-y-auto">
+            <PremiumCard hover className="mb-6 bg-gradient-to-r from-purple-50 to-blue-50 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+              <h3 className="font-bold text-base sm:text-lg text-gray-800 mb-4 flex items-center gap-2">
+                <span className="text-xl sm:text-2xl">📊</span>
+                24시간 카페인 농도 변화
+              </h3>
+              <div className="space-y-2 max-h-64 overflow-y-auto pr-2">
                 {result.effectTimeline.filter((_: any, i: number) => i % 2 === 0).map((item: any, i: number) => (
-                  <div key={i} className="flex items-center gap-2 text-xs">
-                    <span className="w-12 text-gray-600">{item.hour}</span>
-                    <div className="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                  <div key={i} className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm">
+                    <span className="w-12 sm:w-14 text-gray-700 font-semibold">{item.hour}</span>
+                    <div className="flex-1 bg-gray-200 rounded-full h-5 sm:h-6 overflow-hidden shadow-inner">
                       <div 
-                        className="bg-gradient-to-r from-purple-500 to-blue-500 h-full rounded-full transition-all"
+                        className="bg-gradient-to-r from-purple-500 to-blue-500 h-full rounded-full transition-all duration-300"
                         style={{ width: `${Math.min(100, (item.level / result.maxCaffeine) * 100)}%` }}
                       ></div>
                     </div>
-                    <span className="w-12 text-right font-semibold">{item.level}mg</span>
+                    <span className="w-14 sm:w-16 text-right font-bold text-gray-800">{item.level}mg</span>
                   </div>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
 
             {/* 다음 섭취 가능 시간 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">⏰ 다음 커피 가능 시간</h3>
-              <div className="text-2xl font-bold text-center">{result.nextCoffeeTime}</div>
-              <div className="text-sm text-gray-600 text-center mt-1">남은 권장량: {result.remainingQuota}mg</div>
-              <div className="text-center mt-3 p-3 bg-white rounded-lg border-2 border-amber-300">
-                <div className="text-sm text-gray-600 mb-1">아메리카노 1샷 기준</div>
-                <div className="text-3xl font-bold text-amber-700">
+            <PremiumCard hover className="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+              <h3 className="font-bold text-base sm:text-lg text-gray-800 mb-3 flex items-center gap-2 justify-center">
+                <span className="text-xl sm:text-2xl">⏰</span>
+                다음 커피 가능 시간
+              </h3>
+              <div className="text-2xl sm:text-3xl font-bold text-center text-green-700 mb-2">{result.nextCoffeeTime}</div>
+              <div className="text-sm sm:text-base text-gray-600 text-center font-medium mb-4">남은 권장량: {result.remainingQuota}mg</div>
+              <PremiumCard className="text-center bg-white [transform:translateZ(10px)]">
+                <div className="text-xs sm:text-sm text-gray-600 mb-2 font-medium">아메리카노 1샷 기준</div>
+                <div className="text-4xl sm:text-5xl font-bold text-amber-700 mb-2">
                   ☕ {Math.floor(result.remainingQuota / 75)}잔
                 </div>
-                <div className="text-xs text-gray-500 mt-1">(에스프레소 1샷 = 75mg)</div>
-              </div>
-            </div>
+                <div className="text-xs sm:text-sm text-gray-500">(에스프레소 1샷 = 75mg)</div>
+              </PremiumCard>
+            </PremiumCard>
 
             {/* 현재 섭취량 아메리카노 환산 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-lg border border-amber-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-2">📊 현재 섭취량</h3>
-              <div className="text-center p-3 bg-white rounded-lg">
-                <div className="text-sm text-gray-600 mb-1">아메리카노로 환산하면</div>
-                <div className="text-4xl font-bold text-orange-600">
+            <PremiumCard hover className="mb-6 bg-gradient-to-r from-amber-50 to-yellow-50 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+              <h3 className="font-bold text-base sm:text-lg text-gray-800 mb-4 flex items-center gap-2 justify-center">
+                <span className="text-xl sm:text-2xl">📊</span>
+                현재 섭취량
+              </h3>
+              <PremiumCard className="text-center bg-white [transform:translateZ(10px)]">
+                <div className="text-sm sm:text-base text-gray-600 mb-2 font-medium">아메리카노로 환산하면</div>
+                <div className="text-4xl sm:text-5xl font-bold text-orange-600 mb-2">
                   ☕ {(result.totalCaffeine / 75).toFixed(1)}잔
                 </div>
-                <div className="text-xs text-gray-500 mt-1">총 {result.totalCaffeine}mg 섭취</div>
-              </div>
-            </div>
+                <div className="text-xs sm:text-sm text-gray-500">총 {result.totalCaffeine}mg 섭취</div>
+              </PremiumCard>
+            </PremiumCard>
 
             {/* 부작용 경고 */}
             {result.sideEffects.length > 0 && (
-              <div className="mb-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-300">
-                <h3 className="font-bold text-[10px] sm:text-xs md:text-sm mb-0.5 sm:mb-1.5 md:mb-2">⚠️ 주의사항</h3>
-                <div className="space-y-2">
+              <PremiumCard hover className="mb-6 bg-gradient-to-r from-red-50 to-orange-50 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+                <h3 className="font-bold text-base sm:text-lg mb-4 flex items-center gap-2">
+                  <span className="text-xl sm:text-2xl">⚠️</span>
+                  주의사항
+                </h3>
+                <div className="space-y-2 sm:space-y-3">
                   {result.sideEffects.map((effect: string, i: number) => (
-                    <div key={i} className="bg-white rounded p-3 text-sm font-medium">
-                      {effect}
-                    </div>
+                    <PremiumCard key={i} className="bg-white [transform:translateZ(5px)]">
+                      <p className="text-sm sm:text-base font-semibold text-gray-800">{effect}</p>
+                    </PremiumCard>
                   ))}
                 </div>
-              </div>
+              </PremiumCard>
             )}
 
             {/* 권장사항 */}
-            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">💡 권장사항</h3>
-              <div className="space-y-2">
+            <PremiumCard hover className="mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+              <h3 className="font-bold text-base sm:text-lg text-gray-800 mb-4 flex items-center gap-2">
+                <span className="text-xl sm:text-2xl">💡</span>
+                권장사항
+              </h3>
+              <div className="space-y-2 sm:space-y-3">
                 {result.recommendations.map((rec: string, i: number) => (
-                  <div key={i} className="bg-white rounded p-3 text-sm text-gray-700">
-                    • {rec}
-                  </div>
+                  <PremiumCard key={i} className="bg-white [transform:translateZ(5px)]">
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">• {rec}</p>
+                  </PremiumCard>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
 
-            <button
-        type="button"
+            <PremiumButton
               onClick={() => setResult(null)}
-              className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
+              fullWidth
+              size="lg"
             >
               다시 계산하기
-            </button>
-          </section>
+            </PremiumButton>
+          </PremiumCard>
         </div>
-      </main>
+      </PremiumLayout>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
-      <div className="mx-auto max-w-[600px] px-4 py-6">
-        <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border-4 border-amber-800">
-          <header className="text-center mb-6">
-            <h1 className="text-4xl font-bold mb-2">☕</h1>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">커피 하루 권장량 계산기</h2>
-            <p className="text-gray-600">과학적 데이터 기반 카페인 섭취 분석</p>
+    <PremiumLayout theme="orange" showStars={true}>
+      <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+        <PremiumCard gradient hover>
+          <header className="text-center mb-6 sm:mb-8">
+            <h1 className="text-6xl sm:text-7xl font-bold mb-4 animate-bounce-slow drop-shadow-2xl">☕</h1>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3 drop-shadow-lg">커피 하루 권장량 계산기</h2>
+            <p className="text-base sm:text-lg text-white/90 drop-shadow-md">과학적 데이터 기반 카페인 섭취 분석</p>
           </header>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* 기본 정보 */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">체중 ({weight}kg)</label>
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="block text-sm sm:text-base font-bold text-gray-800 mb-3">체중: <span className="text-amber-600">{weight}kg</span></label>
               <input
                 type="range"
                 min="40"
                 max="150"
                 value={weight}
                 onChange={(e) => setWeight(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-600"
               />
-            </div>
+              <div className="flex justify-between text-xs sm:text-sm text-gray-600 mt-2 font-medium">
+                <span>40kg</span>
+                <span>150kg</span>
+              </div>
+            </PremiumCard>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">나이 ({age}세)</label>
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="block text-sm sm:text-base font-bold text-gray-800 mb-3">나이: <span className="text-amber-600">{age}세</span></label>
               <input
                 type="range"
                 min="15"
                 max="80"
                 value={age}
                 onChange={(e) => setAge(Number(e.target.value))}
-                className="w-full"
+                className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-amber-600"
               />
-            </div>
+              <div className="flex justify-between text-xs sm:text-sm text-gray-600 mt-2 font-medium">
+                <span>15세</span>
+                <span>80세</span>
+              </div>
+            </PremiumCard>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">카페인 민감도</label>
-              <div className="grid grid-cols-3 gap-2">
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="block text-sm sm:text-base font-bold text-gray-800 mb-3">카페인 민감도</label>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {(['low', 'normal', 'high'] as const).map(level => (
-                  <button
-        type="button"
-                    key={level}
-                    onClick={() => setSensitivity(level)}
-                    className={`p-3 rounded-lg font-semibold transition-all ${
-                      sensitivity === level
-                        ? 'bg-amber-600 text-white shadow-lg'
-                        : 'bg-gray-200 text-gray-600'
-                    }`}
-                  >
-                    {level === 'low' ? '낮음' : level === 'normal' ? '보통' : '높음'}
-                  </button>
+                  <div key={level} onClick={() => setSensitivity(level)}>
+                    <PremiumCard
+                      hover
+                      className={`cursor-pointer text-center ${
+                        sensitivity === level
+                          ? 'bg-amber-600 text-white ring-4 ring-amber-300'
+                          : 'bg-gray-100 text-gray-700'
+                      } [transform:translateZ(5px)] hover:[transform:translateZ(15px)] min-h-[48px] flex items-center justify-center`}
+                    >
+                      <p className="font-bold text-sm sm:text-base">
+                        {level === 'low' ? '낮음' : level === 'normal' ? '보통' : '높음'}
+                      </p>
+                    </PremiumCard>
+                  </div>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
 
-            <div className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                id="pregnant"
-                checked={pregnant}
-                onChange={(e) => setPregnant(e.target.checked)}
-                className="w-5 h-5"
-              />
-              <label htmlFor="pregnant" className="text-sm font-medium text-gray-700">
-                임신 중이거나 수유 중입니다
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  id="pregnant"
+                  checked={pregnant}
+                  onChange={(e) => setPregnant(e.target.checked)}
+                  className="w-5 h-5 accent-amber-600"
+                />
+                <span className="text-sm sm:text-base font-medium text-gray-700">
+                  임신 중이거나 수유 중입니다
+                </span>
               </label>
-            </div>
+            </PremiumCard>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">건강 상태 (해당사항 선택)</label>
+            <PremiumCard className="bg-white/90 [transform:translateZ(10px)]">
+              <label className="block text-sm sm:text-base font-bold text-gray-800 mb-3">건강 상태 (해당사항 선택)</label>
               <div className="space-y-2">
                 {healthConditions.map(condition => (
-                  <label key={condition.id} className="flex items-center gap-2 p-2 bg-amber-100 rounded border border-amber-300">
+                  <label key={condition.id} className="flex items-center gap-3 p-3 bg-amber-50 rounded-lg border-2 border-amber-200 hover:border-amber-400 cursor-pointer transition-all">
                     <input
                       type="checkbox"
                       checked={health.includes(condition.id)}
@@ -467,75 +503,79 @@ export default function CoffeeCalculator() {
                           setHealth(health.filter(h => h !== condition.id));
                         }
                       }}
-                      className="w-4 h-4"
+                      className="w-5 h-5 accent-amber-600"
                     />
-                    <span className="text-sm text-gray-700">{condition.label}</span>
+                    <span className="text-sm sm:text-base text-gray-800 font-medium">{condition.label}</span>
                   </label>
                 ))}
               </div>
-            </div>
+            </PremiumCard>
 
             {/* 카페인 섭취 기록 */}
-            <div className="border-t pt-5">
-              <div className="flex justify-between items-center mb-0.5 sm:mb-1.5 md:mb-2">
-                <h3 className="font-bold text-gray-800">오늘 마신 음료</h3>
-                <button
-        type="button"
+            <PremiumCard className="bg-white/80 border-t-4 border-white/50 [transform:translateZ(15px)]">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="font-bold text-lg sm:text-xl text-gray-800 flex items-center gap-2">
+                  <span className="text-xl sm:text-2xl">📋</span>
+                  오늘 마신 음료
+                </h3>
+                <PremiumButton
                   onClick={() => setShowAddForm(!showAddForm)}
-                  className="px-4 py-2 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-all"
+                  className="px-4 py-2 text-sm sm:text-base"
                 >
                   + 추가
-                </button>
+                </PremiumButton>
               </div>
 
               {intakes.length > 0 && (
-                <div className="mb-4 space-y-2">
+                <div className="mb-4 space-y-2 sm:space-y-3">
                   {intakes.map((intake, i) => (
-                    <div key={i} className="flex justify-between items-center p-3 bg-amber-50 rounded-lg border border-amber-200">
-                      <div>
-                        <div className="font-semibold text-gray-800">{intake.item}</div>
-                        <div className="text-sm text-gray-600">
-                          {intake.time} · {intake.amount}개 · {intake.caffeine * intake.amount}mg
+                    <PremiumCard key={i} hover className="bg-amber-50 [transform:translateZ(5px)] hover:[transform:translateZ(15px)]">
+                      <div className="flex justify-between items-center gap-3">
+                        <div className="flex-1">
+                          <div className="font-bold text-base sm:text-lg text-gray-800">{intake.item}</div>
+                          <div className="text-xs sm:text-sm text-gray-600 font-medium">
+                            {intake.time} · {intake.amount}개 · {intake.caffeine * intake.amount}mg
+                          </div>
                         </div>
+                        <button
+                          type="button"
+                          onClick={() => removeIntake(i)}
+                          className="text-2xl font-bold hover:text-red-600 hover:scale-110 transition-transform flex-shrink-0"
+                        >
+                          ✕
+                        </button>
                       </div>
-                      <button
-        type="button"
-                        onClick={() => removeIntake(i)}
-                        className="font-bold hover:text-red-600"
-                      >
-                        ✕
-                      </button>
-                    </div>
+                    </PremiumCard>
                   ))}
                 </div>
               )}
 
               {showAddForm && (
-                <div className="p-4 bg-amber-50 rounded-lg border-2 border-amber-700 space-y-3">
+                <PremiumCard className="bg-amber-50 border-2 border-amber-300 space-y-3 [transform:translateZ(10px)]">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">카테고리</label>
+                    <label className="block text-sm sm:text-base font-bold text-gray-800 mb-2">카테고리</label>
                     <select
                       value={selectedCategory}
                       onChange={(e) => {
                         setSelectedCategory(e.target.value);
                         setSelectedItem(0);
                       }}
-                      className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
+                      className="w-full px-4 py-3 border-2 border-amber-400 rounded-lg bg-white font-semibold text-base focus:border-amber-600 focus:outline-none"
                     >
-                      <option value="coffee">커피</option>
-                      <option value="tea">차</option>
-                      <option value="energy">에너지 드링크</option>
-                      <option value="soda">탄산음료</option>
-                      <option value="chocolate">초콜릿</option>
+                      <option value="coffee">☕ 커피</option>
+                      <option value="tea">🍵 차</option>
+                      <option value="energy">⚡ 에너지 드링크</option>
+                      <option value="soda">🥤 탄산음료</option>
+                      <option value="chocolate">🍫 초콜릿</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">음료/식품</label>
+                    <label className="block text-sm sm:text-base font-bold text-gray-800 mb-2">음료/식품</label>
                     <select
                       value={selectedItem}
                       onChange={(e) => setSelectedItem(Number(e.target.value))}
-                      className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
+                      className="w-full px-4 py-3 border-2 border-amber-400 rounded-lg bg-white font-semibold text-base focus:border-amber-600 focus:outline-none"
                     >
                       {CAFFEINE_DB[selectedCategory as keyof typeof CAFFEINE_DB].map((item, i) => (
                         <option key={i} value={i}>{item.name} ({item.caffeine}mg)</option>
@@ -543,63 +583,67 @@ export default function CoffeeCalculator() {
                     </select>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
+                  <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">개수</label>
+                      <label className="block text-sm sm:text-base font-bold text-gray-800 mb-2">개수</label>
                       <input
                         type="number"
                         min="1"
                         max="10"
                         value={amount}
                         onChange={(e) => setAmount(Number(e.target.value))}
-                        className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
+                        className="w-full px-4 py-3 border-2 border-amber-400 rounded-lg bg-white font-semibold text-base focus:border-amber-600 focus:outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">시간</label>
+                      <label className="block text-sm sm:text-base font-bold text-gray-800 mb-2">시간</label>
                       <input
                         type="time"
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
-                        className="w-full px-4 py-2 border-2 border-amber-600 rounded-lg bg-amber-100 font-semibold"
+                        className="w-full px-4 py-3 border-2 border-amber-400 rounded-lg bg-white font-semibold text-base focus:border-amber-600 focus:outline-none"
                       />
                     </div>
                   </div>
 
-                  <button
-        type="button"
+                  <PremiumButton
                     onClick={addIntake}
-                    className="w-full py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+                    fullWidth
+                    size="lg"
+                    className="bg-green-600 hover:bg-green-700"
                   >
                     추가하기
-                  </button>
-                </div>
+                  </PremiumButton>
+                </PremiumCard>
               )}
-            </div>
+            </PremiumCard>
 
-            <div className="p-4 bg-gradient-to-r from-amber-100 to-orange-100 rounded-lg border border-amber-300">
-              <h3 className="font-bold mb-2">📚 카페인 상식</h3>
-              <ul className="text-sm space-y-1">
-                <li>• FDA 권장: 성인 하루 400mg 이하</li>
-                <li>• 임산부: 200mg 이하</li>
-                <li>• 카페인 반감기: 약 5시간</li>
-                <li>• 오후 3시 이후 섭취는 수면 방해</li>
-                <li>• 개인차: 체중, 나이, 건강상태 고려</li>
+            <PremiumCard hover className="bg-gradient-to-r from-amber-100 to-orange-100 [transform:translateZ(10px)] hover:[transform:translateZ(20px)]">
+              <h3 className="font-bold text-base sm:text-lg mb-3 text-gray-800 flex items-center gap-2">
+                <span className="text-xl sm:text-2xl">📚</span>
+                카페인 상식
+              </h3>
+              <ul className="text-sm sm:text-base space-y-2 text-gray-700">
+                <li className="bg-white/60 rounded-lg p-2 font-medium">• FDA 권장: 성인 하루 400mg 이하</li>
+                <li className="bg-white/60 rounded-lg p-2 font-medium">• 임산부: 200mg 이하</li>
+                <li className="bg-white/60 rounded-lg p-2 font-medium">• 카페인 반감기: 약 5시간</li>
+                <li className="bg-white/60 rounded-lg p-2 font-medium">• 오후 3시 이후 섭취는 수면 방해</li>
+                <li className="bg-white/60 rounded-lg p-2 font-medium">• 개인차: 체중, 나이, 건강상태 고려</li>
               </ul>
-            </div>
+            </PremiumCard>
 
-            <button
-        type="button"
+            <PremiumButton
               onClick={calculate}
-              className="w-full py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
+              fullWidth
+              size="lg"
             >
               카페인 섭취량 분석하기
-            </button>
+            </PremiumButton>
           </div>
-        </section>
+        </PremiumCard>
 
       </div>
-    </main>
+    </PremiumLayout>
   );
 }
 

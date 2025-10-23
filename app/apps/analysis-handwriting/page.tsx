@@ -235,49 +235,53 @@ export default function HandwritingAnalysisPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-red-50 dark:from-purple-600 dark:via-pink-600 dark:to-red-600 py-8 px-4 transition-colors">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 dark:text-white mb-4">
-          ✍️ 손글씨 성향 분석
-        </h1>
-        <p className="text-center text-purple-900 dark:text-purple-100 mb-8 text-[10px] sm:text-xs md:text-sm">당신의 필체로 성격을 분석합니다</p>
+    <PremiumLayout theme="purple" showStars={true}>
+      <div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
+        <header className="text-center mb-6 sm:mb-8">
+          <h1 className="text-6xl sm:text-7xl mb-4 animate-bounce-slow drop-shadow-2xl">
+            ✍️
+          </h1>
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-3 drop-shadow-lg">
+            손글씨 성향 분석
+          </h2>
+          <p className="text-base sm:text-lg text-white/90 drop-shadow-md">당신의 필체로 성격을 분석합니다</p>
+        </header>
 
-        <div className="bg-white/80 dark:bg-white/10 backdrop-blur-lg rounded sm:rounded-lg md:rounded-2xl p-6 md:p-8 space-y-6">
+        <PremiumCard gradient hover>
+          <div className="space-y-4 sm:space-y-6">
           {/* 입력 방식 선택 */}
-          <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
-            <button
-        type="button"
-              onClick={() => {
-                setInputMethod('draw');
-                clearCanvas();
-              }}
-              className={`py-3 rounded-xl font-bold transition-all ${
-                inputMethod === 'draw'
-                  ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white'
-                  : 'bg-gray-200 dark:bg-white/20 text-gray-900 dark:text-white'
-              }`}
-            >
-              ✍️ 직접 쓰기
-            </button>
-            <button
-        type="button"
-              onClick={() => {
-                setInputMethod('upload');
-                clearCanvas();
-              }}
-              className={`py-3 rounded-xl font-bold transition-all ${
-                inputMethod === 'upload'
-                  ? 'bg-gradient-to-r from-blue-400 to-cyan-500 text-white'
-                  : 'bg-gray-200 dark:bg-white/20 text-gray-900 dark:text-white'
-              }`}
-            >
-              📤 이미지 업로드
-            </button>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div onClick={() => { setInputMethod('draw'); clearCanvas(); }}>
+              <PremiumCard
+                hover
+                className={`cursor-pointer text-center ${
+                  inputMethod === 'draw'
+                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white ring-4 ring-yellow-300'
+                    : 'bg-white/90 text-gray-800'
+                } [transform:translateZ(10px)] hover:[transform:translateZ(20px)] min-h-[56px] flex flex-col items-center justify-center`}
+              >
+                <span className="text-2xl sm:text-3xl mb-1">✍️</span>
+                <p className="font-bold text-sm sm:text-base">직접 쓰기</p>
+              </PremiumCard>
+            </div>
+            <div onClick={() => { setInputMethod('upload'); clearCanvas(); }}>
+              <PremiumCard
+                hover
+                className={`cursor-pointer text-center ${
+                  inputMethod === 'upload'
+                    ? 'bg-gradient-to-r from-blue-400 to-cyan-500 text-white ring-4 ring-blue-300'
+                    : 'bg-white/90 text-gray-800'
+                } [transform:translateZ(10px)] hover:[transform:translateZ(20px)] min-h-[56px] flex flex-col items-center justify-center`}
+              >
+                <span className="text-2xl sm:text-3xl mb-1">📤</span>
+                <p className="font-bold text-sm sm:text-base">이미지 업로드</p>
+              </PremiumCard>
+            </div>
           </div>
 
           {/* 캔버스 */}
-          <div>
-            <p className="text-gray-900 dark:text-white font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-center text-[10px] sm:text-xs md:text-sm">
+          <PremiumCard className="bg-white/90 [transform:translateZ(15px)]">
+            <p className="text-gray-800 font-bold mb-3 text-center text-sm sm:text-base">
               {inputMethod === 'draw' 
                 ? '아래 캔버스에 자유롭게 글씨를 써주세요'
                 : '손글씨 이미지를 업로드해주세요'}
@@ -287,7 +291,7 @@ export default function HandwritingAnalysisPage() {
                 ref={canvasRef}
                 width={800}
                 height={500}
-                className="w-full bg-white rounded-xl cursor-crosshair touch-none"
+                className="w-full bg-white rounded-xl cursor-crosshair touch-none shadow-lg"
                 onMouseDown={inputMethod === 'draw' ? startDrawing : undefined}
                 onMouseMove={inputMethod === 'draw' ? draw : undefined}
                 onMouseUp={inputMethod === 'draw' ? stopDrawing : undefined}
@@ -300,13 +304,13 @@ export default function HandwritingAnalysisPage() {
               {inputMethod === 'upload' && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <div className="text-gray-400 text-center">
-                    <div className="text-base sm:text-2xl md:text-4xl mb-2">📷</div>
-                    <p className="text-sm">이미지를 업로드하세요</p>
+                    <div className="text-4xl sm:text-5xl mb-2">📷</div>
+                    <p className="text-sm sm:text-base font-medium">이미지를 업로드하세요</p>
                   </div>
                 </div>
               )}
             </div>
-          </div>
+          </PremiumCard>
 
           {/* 업로드 버튼 (업로드 모드일 때만) */}
           {inputMethod === 'upload' && (
@@ -318,102 +322,119 @@ export default function HandwritingAnalysisPage() {
                 onChange={handleImageUpload}
                 className="hidden"
               />
-              <button
-        type="button"
+              <PremiumButton
                 onClick={() => fileInputRef.current?.click()}
-                className="w-full bg-gradient-to-r from-blue-400 to-cyan-500 text-white px-6 py-4 rounded-xl font-bold text-base md:text-lg hover:shadow-lg transition-all"
+                fullWidth
+                size="lg"
+                className="bg-gradient-to-r from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600"
               >
-                📤 이미지 선택하기
-              </button>
+                <span className="text-xl mr-2">📤</span>
+                이미지 선택하기
+              </PremiumButton>
             </div>
           )}
 
           {/* 버튼 */}
-          <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
-            <button
-        type="button"
+          <div className="flex gap-3 sm:gap-4">
+            <PremiumButton
               onClick={clearCanvas}
-              className="bg-gray-200 dark:bg-white/20 text-gray-900 dark:text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:bg-gray-300 dark:hover:bg-white/30 transition-all"
+              size="lg"
+              className="bg-gray-600 hover:bg-gray-700 flex-shrink-0"
             >
-              🗑️ 지우기
-            </button>
-            <button
-        type="button"
+              <span className="text-xl mr-2">🗑️</span>
+              지우기
+            </PremiumButton>
+            <PremiumButton
               onClick={analyze}
-              className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
+              fullWidth
+              size="lg"
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600"
             >
-              🔍 분석하기
-            </button>
+              <span className="text-xl mr-2">🔍</span>
+              분석하기
+            </PremiumButton>
           </div>
 
           {result && (
-            <div className="space-y-4 pt-4">
+            <div className="space-y-4 sm:space-y-6 pt-4">
               {/* 종합 평가 */}
-              <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-6 text-white text-center">
-                <div className="text-base sm:text-2xl md:text-4xl mb-0.5 sm:mb-1.5 md:mb-2">✨</div>
-                <h3 className="text-xl md:text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">종합 평가</h3>
-                <p className="text-base md:text-lg">{result.overall}</p>
-              </div>
+              <PremiumCard hover gradient className="text-center [transform:translateZ(20px)] hover:[transform:translateZ(30px)]">
+                <div className="text-5xl sm:text-6xl mb-3 animate-bounce-slow drop-shadow-2xl">✨</div>
+                <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-white drop-shadow-lg">종합 평가</h3>
+                <p className="text-base sm:text-lg text-white/90 drop-shadow-md leading-relaxed">{result.overall}</p>
+              </PremiumCard>
 
               {/* 성격 분석 */}
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
-                <h3 className="text-xl md:text-2xl font-bold text-gray-800 dark:text-white mb-4 text-center">
-                  🎯 성격 특성
+              <PremiumCard hover className="bg-white/95 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center flex items-center justify-center gap-2">
+                  <span className="text-3xl sm:text-4xl">🎯</span>
+                  성격 특성
                 </h3>
-                <div className="space-y-4">
+                <div className="space-y-4 sm:space-y-5">
                   {result.personalities.map((item: any, idx: number) => (
-                    <div key={idx}>
-                      <div className="flex justify-between items-start mb-2">
+                    <PremiumCard key={idx} className="bg-gradient-to-r from-purple-50 to-pink-50 [transform:translateZ(5px)]">
+                      <div className="flex justify-between items-start mb-3 gap-3">
                         <div className="flex-1">
-                          <span className="font-bold text-gray-800 dark:text-white text-[10px] sm:text-xs md:text-sm">{item.trait}</span>
-                          <p className="text-xs md:text-sm text-gray-600 dark:text-gray-300 mt-1">{item.description}</p>
+                          <span className="font-bold text-gray-800 text-base sm:text-lg">{item.trait}</span>
+                          <p className="text-sm sm:text-base text-gray-600 mt-1 leading-relaxed">{item.description}</p>
                         </div>
-                        <span className="font-bold text-purple-600 dark:text-purple-400 text-lg ml-3">{item.score}%</span>
+                        <span className="font-bold text-purple-600 text-xl sm:text-2xl flex-shrink-0">{item.score}%</span>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                      <div className="w-full bg-gray-200 rounded-full h-4 sm:h-5 shadow-inner">
                         <div
                           className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-1000"
                           style={{ width: `${item.score}%` }}
                         />
                       </div>
-                    </div>
+                    </PremiumCard>
                   ))}
                 </div>
-              </div>
+              </PremiumCard>
 
               {/* 필적 특징 */}
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6">
-                <h4 className="font-bold text-gray-800 dark:text-white mb-4 text-lg md:text-xl">📝 필적 특징</h4>
-                <ul className="space-y-3">
+              <PremiumCard hover className="bg-white/95 [transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+                <h4 className="font-bold text-gray-800 mb-6 text-xl sm:text-2xl flex items-center justify-center gap-2 text-center">
+                  <span className="text-2xl sm:text-3xl">📝</span>
+                  필적 특징
+                </h4>
+                <div className="space-y-2 sm:space-y-3">
                   {result.characteristics.map((char: string, idx: number) => (
-                    <li key={idx} className="flex items-start gap-0 sm:gap-1.5 md:gap-3">
-                      <span className="text-purple-600 dark:text-purple-400 text-lg">✓</span>
-                      <span className="text-gray-700 dark:text-gray-300 text-[10px] sm:text-xs md:text-sm flex-1">{char}</span>
-                    </li>
+                    <PremiumCard key={idx} className="bg-purple-50 [transform:translateZ(5px)]">
+                      <div className="flex items-start gap-3">
+                        <span className="text-purple-600 text-xl sm:text-2xl flex-shrink-0">✓</span>
+                        <span className="text-gray-700 text-sm sm:text-base flex-1 leading-relaxed">{char}</span>
+                      </div>
+                    </PremiumCard>
                   ))}
-                </ul>
-              </div>
+                </div>
+              </PremiumCard>
 
               {/* 개선 조언 */}
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl p-6 text-white">
-                <h4 className="font-bold mb-0.5 sm:mb-1.5 md:mb-2 text-lg md:text-xl">💬 개선 팁</h4>
-                <ul className="space-y-2 text-[10px] sm:text-xs md:text-sm">
+              <PremiumCard hover gradient className="[transform:translateZ(15px)] hover:[transform:translateZ(25px)]">
+                <h4 className="font-bold mb-4 text-xl sm:text-2xl text-white flex items-center justify-center gap-2 text-center drop-shadow-lg">
+                  <span className="text-2xl sm:text-3xl">💬</span>
+                  개선 팁
+                </h4>
+                <div className="space-y-2 sm:space-y-3">
                   {result.advice.map((tip: string, idx: number) => (
-                    <li key={idx}>{tip}</li>
+                    <PremiumCard key={idx} className="bg-white/20 backdrop-blur-sm [transform:translateZ(5px)]">
+                      <p className="text-sm sm:text-base text-white font-medium leading-relaxed">{tip}</p>
+                    </PremiumCard>
                   ))}
-                </ul>
-              </div>
+                </div>
+              </PremiumCard>
 
               {/* 안내 */}
-              <div className="bg-yellow-500/20 border-2 border-yellow-400/50 rounded-xl p-4 text-gray-900 dark:text-white">
-                <p className="text-xs md:text-sm text-center">
+              <PremiumCard className="bg-yellow-100 border-2 border-yellow-400 [transform:translateZ(10px)]">
+                <p className="text-sm sm:text-base text-center text-gray-800 font-medium leading-relaxed">
                   ⚠️ 이 분석은 엔터테인먼트 목적이며 과학적 근거는 제한적입니다.
                 </p>
-              </div>
+              </PremiumCard>
             </div>
           )}
-        </div>
+          </div>
+        </PremiumCard>
       </div>
-    </div>
+    </PremiumLayout>
   );
 }

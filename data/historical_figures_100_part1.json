@@ -1,0 +1,911 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "total_figures": 100,
+    "included_count": 20,
+    "created_date": "2025-10-23",
+    "description": "역사적 위인 100명의 상세 데이터베이스 (Part 1: ID 1–20)"
+  },
+  "historical_figures": [
+    {
+      "id": 1,
+      "name_kr": "세종대왕",
+      "name_en": "King Sejong the Great",
+      "birth_year": 1397,
+      "death_year": 1450,
+      "era": "조선시대",
+      "region": "동양",
+      "country": "조선(한국)",
+      "field": "정치/문화",
+      "major_achievements": [
+        "훈민정음 창제 및 반포",
+        "집현전 설치로 학문 진흥",
+        "과학기술 진흥(측우기·앙부일구·자격루 등)",
+        "4군 6진 개척으로 영토 확장",
+        "음률·의학·농서 편찬 장려"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "지적이고 창의적이며 민본주의를 실천한 개혁 군주. 실용적 학문과 기술을 장려해 국가 경쟁력을 높였다.",
+      "traits_keywords": [
+        "학자형",
+        "개혁가",
+        "창의적",
+        "민본주의",
+        "결단력"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 8,
+        "fire": 6,
+        "earth": 7,
+        "metal": 5,
+        "water": 9
+      },
+      "famous_quote": "나라의 말이 중국과 달라 한문과 서로 통하지 아니하므로… 새로 스물여덟 글자를 만들었노라.",
+      "life_lesson": "지식과 기술은 약자를 돕기 위해 쓰일 때 가장 빛난다.",
+      "modern_influence": "문해력 향상, 과학기술 진흥 정책, 문화 민주화의 기초",
+      "compatibility_base_score": 95,
+      "image_emoji": "👑📚"
+    },
+    {
+      "id": 2,
+      "name_kr": "이순신",
+      "name_en": "Admiral Yi Sun-sin",
+      "birth_year": 1545,
+      "death_year": 1598,
+      "era": "조선시대",
+      "region": "동양",
+      "country": "조선(한국)",
+      "field": "군사/정치",
+      "major_achievements": [
+        "임진왜란에서 연전연승 기록",
+        "명량해전 12척으로 대함선 격파",
+        "거북선 운용 및 해전 혁신",
+        "조선 수군 재건과 사기 진작",
+        "국가적 위기에서 해상 주도권 회복"
+      ],
+      "personality": {
+        "introvert": false,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "강인한 의지와 치밀한 계산을 겸비한 전략가. 절망적 상황에서도 병사들의 신뢰를 얻어 전세를 뒤집었다.",
+      "traits_keywords": [
+        "전략가",
+        "불굴",
+        "리더십",
+        "청렴",
+        "혁신"
+      ],
+      "element": "금",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 9,
+        "earth": 6,
+        "metal": 10,
+        "water": 8
+      },
+      "famous_quote": "必死則生 必生則死 (죽고자 하면 살 것이요, 살고자 하면 죽을 것이다)",
+      "life_lesson": "두려움보다 책임을 앞세우면 길이 열린다.",
+      "modern_influence": "위기관리 리더십, 해양 전략 연구, 공공 리더십 교본",
+      "compatibility_base_score": 98,
+      "image_emoji": "⚔️🛡️"
+    },
+    {
+      "id": 3,
+      "name_kr": "정약용",
+      "name_en": "Jeong Yak-yong (Dasan)",
+      "birth_year": 1762,
+      "death_year": 1836,
+      "era": "조선 후기",
+      "region": "동양",
+      "country": "조선(한국)",
+      "field": "철학/정치/학문",
+      "major_achievements": [
+        "『목민심서』, 『경세유표』 저술",
+        "거중기 등 과학기술 응용과 실학 확산",
+        "행정·법제·토목 개혁론 제시",
+        "백성 중심의 통치 이념 제시",
+        "자주적 학문 체계 수립"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "현실 문제 해결을 중시한 실사구시 사상가. 학문을 백성의 삶에 연결한 실천적 지식인.",
+      "traits_keywords": [
+        "실용",
+        "개혁",
+        "학자형",
+        "현실주의",
+        "인문기술"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 9,
+        "fire": 6,
+        "earth": 7,
+        "metal": 5,
+        "water": 8
+      },
+      "famous_quote": "백성이 근본이요, 백성을 편안케 함이 정치의 대강이다.",
+      "life_lesson": "지식은 삶을 바꾸는 공학이어야 한다.",
+      "modern_influence": "공공행정·도시정책·사회혁신 담론의 근간",
+      "compatibility_base_score": 92,
+      "image_emoji": "📖⚙️"
+    },
+    {
+      "id": 4,
+      "name_kr": "김구",
+      "name_en": "Kim Gu",
+      "birth_year": 1876,
+      "death_year": 1949,
+      "era": "근현대",
+      "region": "동양",
+      "country": "대한민국",
+      "field": "정치/사회운동",
+      "major_achievements": [
+        "대한민국 임시정부 주석",
+        "독립운동 통합과 대외 외교",
+        "백범일지 집필로 민족 정신 고취",
+        "광복 이후 통일국가 비전 제시",
+        "문화 강국 지향 철학 제시"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "도덕과 문화의 힘을 믿은 지도자. 강한 의지와 따뜻한 휴머니즘으로 대중을 이끌었다.",
+      "traits_keywords": [
+        "이상주의",
+        "결단",
+        "통합",
+        "휴머니즘",
+        "비전"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 8,
+        "fire": 9,
+        "earth": 7,
+        "metal": 5,
+        "water": 6
+      },
+      "famous_quote": "내가 원하는 우리나라는, 높은 문화의 힘을 가진 나라다.",
+      "life_lesson": "힘보다 가치와 문화가 역사를 움직인다.",
+      "modern_influence": "시민교육, 평화·통일 담론, 인권 가치 확산",
+      "compatibility_base_score": 93,
+      "image_emoji": "🕊️📜"
+    },
+    {
+      "id": 5,
+      "name_kr": "유관순",
+      "name_en": "Yu Gwan-sun",
+      "birth_year": 1902,
+      "death_year": 1920,
+      "era": "근현대",
+      "region": "동양",
+      "country": "대한민국",
+      "field": "사회운동/인권",
+      "major_achievements": [
+        "3·1 운동 독립만세 시위 주도",
+        "아우내 장터 만세운동",
+        "옥중에서도 독립 의지 고취",
+        "여성 청년 독립운동 상징",
+        "민족 저항 정신 확산"
+      ],
+      "personality": {
+        "introvert": false,
+        "logical": true,
+        "adventurous": true,
+        "creative": false
+      },
+      "personality_description": "두려움보다 자유를 선택한 청년 운동가. 확신과 용기로 군중을 움직였다.",
+      "traits_keywords": [
+        "용기",
+        "헌신",
+        "리더십",
+        "정의감",
+        "희생"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 9,
+        "earth": 6,
+        "metal": 6,
+        "water": 5
+      },
+      "famous_quote": "대한독립 만세!",
+      "life_lesson": "자유의 씨앗은 한 사람의 용기에서 시작된다.",
+      "modern_influence": "시민저항, 청년·여성 리더십 상징",
+      "compatibility_base_score": 91,
+      "image_emoji": "🇰🇷✊"
+    },
+    {
+      "id": 6,
+      "name_kr": "신사임당",
+      "name_en": "Shin Saimdang",
+      "birth_year": 1504,
+      "death_year": 1551,
+      "era": "조선 중기",
+      "region": "동양",
+      "country": "조선(한국)",
+      "field": "예술/교육",
+      "major_achievements": [
+        "초충도 등 회화 예술",
+        "시·서·화에 두각",
+        "유학적 가정교육의 모범 제시",
+        "율곡 이이 교육",
+        "여성 예술가·교육자의 상징"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "절제와 품격 속에서 창의성을 꽃피운 예술가. 가정과 학문을 조화시킨 교육자.",
+      "traits_keywords": [
+        "절제",
+        "창의",
+        "교양",
+        "가정교육",
+        "품격"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 6,
+        "earth": 9,
+        "metal": 6,
+        "water": 5
+      },
+      "famous_quote": "학문을 닦아 가문을 세우라(수신제가).",
+      "life_lesson": "품격과 창의성은 일상의 단정함에서 자란다.",
+      "modern_influence": "여성 교육 롤모델, 교양교육 담론",
+      "compatibility_base_score": 90,
+      "image_emoji": "🖌️🌿"
+    },
+    {
+      "id": 7,
+      "name_kr": "장영실",
+      "name_en": "Jang Yeong-sil",
+      "birth_year": 1390,
+      "death_year": 1450,
+      "era": "조선 전기",
+      "region": "동양",
+      "country": "조선(한국)",
+      "field": "과학/기술",
+      "major_achievements": [
+        "자격루(자동 물시계) 제작",
+        "앙부일구·측우기 등 과학기기 개발",
+        "과학기술 행정 시스템화 기여",
+        "천문 관측 시스템 개선",
+        "실용 기술의 국가적 활용"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "관측과 제작을 결합한 엔지니어형 인재. 기술을 사회 문제 해결에 연결했다.",
+      "traits_keywords": [
+        "엔지니어",
+        "실용",
+        "창의",
+        "문제해결",
+        "탐구"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 9,
+        "fire": 6,
+        "earth": 7,
+        "metal": 6,
+        "water": 7
+      },
+      "famous_quote": "하늘의 이치를 백성을 위해 쓰다.",
+      "life_lesson": "좋은 기술은 더 많은 사람을 돕는다.",
+      "modern_influence": "STEM 교육, 공공기술 혁신의 상징",
+      "compatibility_base_score": 92,
+      "image_emoji": "⚙️🌙"
+    },
+    {
+      "id": 8,
+      "name_kr": "안중근",
+      "name_en": "Ahn Jung-geun",
+      "birth_year": 1879,
+      "death_year": 1910,
+      "era": "근현대",
+      "region": "동양",
+      "country": "대한민국",
+      "field": "사회운동/독립",
+      "major_achievements": [
+        "하얼빈 의거",
+        "동양 평화론 집필",
+        "의병 활동과 계몽",
+        "옥중 신앙과 신념의 실천",
+        "민족 저항의 상징"
+      ],
+      "personality": {
+        "introvert": false,
+        "logical": true,
+        "adventurous": true,
+        "creative": false
+      },
+      "personality_description": "강한 신념과 국제정세 인식으로 행동한 결단형 리더. 동아시아 평화를 지향했다.",
+      "traits_keywords": [
+        "신념",
+        "결단",
+        "평화",
+        "희생",
+        "정의"
+      ],
+      "element": "금",
+      "saju_compatibility": {
+        "wood": 6,
+        "fire": 8,
+        "earth": 6,
+        "metal": 9,
+        "water": 6
+      },
+      "famous_quote": "대한의 독립을 위해 한 목숨 다할 뿐이다.",
+      "life_lesson": "가치에 뿌리내린 행동은 시대를 바꾼다.",
+      "modern_influence": "평화·인권 담론, 국제연대 상징",
+      "compatibility_base_score": 94,
+      "image_emoji": "✍️🕊️"
+    },
+    {
+      "id": 9,
+      "name_kr": "윤동주",
+      "name_en": "Yun Dong-ju",
+      "birth_year": 1917,
+      "death_year": 1945,
+      "era": "근현대",
+      "region": "동양",
+      "country": "대한민국",
+      "field": "문학/예술",
+      "major_achievements": [
+        "시집 『하늘과 바람과 별과 시』",
+        "저항과 성찰의 서정시",
+        "식민지 청년의 양심과 언어",
+        "문학을 통한 자아 성찰",
+        "한국 현대시의 지평 확장"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "맑은 언어로 시대의 어둠을 비춘 시인. 내면의 윤리를 끝까지 지키려 했다.",
+      "traits_keywords": [
+        "성찰",
+        "순수",
+        "양심",
+        "서정",
+        "저항"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 8,
+        "fire": 5,
+        "earth": 6,
+        "metal": 5,
+        "water": 9
+      },
+      "famous_quote": "하늘을 우러러 한 점 부끄럼이 없기를.",
+      "life_lesson": "양심을 지키는 언어가 가장 강하다.",
+      "modern_influence": "인문교육, 청년 윤리·문학 감수성",
+      "compatibility_base_score": 90,
+      "image_emoji": "⭐📜"
+    },
+    {
+      "id": 10,
+      "name_kr": "허준",
+      "name_en": "Heo Jun",
+      "birth_year": 1539,
+      "death_year": 1615,
+      "era": "조선 중기",
+      "region": "동양",
+      "country": "조선(한국)",
+      "field": "의학",
+      "major_achievements": [
+        "『동의보감』 편찬",
+        "예방의학·공공의료적 관점 제시",
+        "한의 진단·치료 체계화",
+        "약재 분류와 표준화",
+        "의학의 대중 접근성 확대"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "환자 중심의 의술을 강조한 임상의·편찬자. 체계와 실용을 결합했다.",
+      "traits_keywords": [
+        "임상",
+        "체계화",
+        "공공성",
+        "실용",
+        "성실"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 6,
+        "earth": 9,
+        "metal": 6,
+        "water": 6
+      },
+      "famous_quote": "의술은 인술(仁術)이다.",
+      "life_lesson": "전문성은 타인을 살리는 책임에서 완성된다.",
+      "modern_influence": "공중보건, 의학 표준화 담론",
+      "compatibility_base_score": 91,
+      "image_emoji": "⚕️📚"
+    },
+    {
+      "id": 11,
+      "name_kr": "알베르트 아인슈타인",
+      "name_en": "Albert Einstein",
+      "birth_year": 1879,
+      "death_year": 1955,
+      "era": "근현대",
+      "region": "서양",
+      "country": "독일/미국",
+      "field": "과학/물리",
+      "major_achievements": [
+        "특수·일반 상대성이론",
+        "광전효과 설명(노벨 물리학상 1921)",
+        "브라운 운동 이론화",
+        "우주론·양자 논쟁 기여",
+        "과학 평화주의 옹호"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "상상력과 수학적 통찰을 결합한 이론가. 권위에 얽매이지 않는 자유로운 사상가였다.",
+      "traits_keywords": [
+        "창의",
+        "통찰",
+        "비판적 사고",
+        "호기심",
+        "평화주의"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 8,
+        "fire": 5,
+        "earth": 7,
+        "metal": 6,
+        "water": 9
+      },
+      "famous_quote": "Imagination is more important than knowledge.",
+      "life_lesson": "틀 밖의 질문이 패러다임을 바꾼다.",
+      "modern_influence": "현대 물리학·우주론, 과학 문화",
+      "compatibility_base_score": 97,
+      "image_emoji": "🧠✨"
+    },
+    {
+      "id": 12,
+      "name_kr": "아이작 뉴턴",
+      "name_en": "Isaac Newton",
+      "birth_year": 1642,
+      "death_year": 1727,
+      "era": "근세",
+      "region": "서양",
+      "country": "영국",
+      "field": "과학/수학/물리",
+      "major_achievements": [
+        "만유인력의 법칙·운동법칙",
+        "미적분학 기초",
+        "프리즘 실험과 광학",
+        "『프린키피아』 저술",
+        "왕립학회 주도"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "극도의 집중력으로 자연의 보편 법칙을 정식화한 과학 혁명가.",
+      "traits_keywords": [
+        "분석",
+        "집중",
+        "체계",
+        "천재성",
+        "발견"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 9,
+        "fire": 5,
+        "earth": 8,
+        "metal": 6,
+        "water": 7
+      },
+      "famous_quote": "If I have seen further it is by standing on the shoulders of giants.",
+      "life_lesson": "지식은 축적과 겸손 위에서 자란다.",
+      "modern_influence": "고전역학·공학의 기초",
+      "compatibility_base_score": 96,
+      "image_emoji": "🍎📐"
+    },
+    {
+      "id": 13,
+      "name_kr": "마리 퀴리",
+      "name_en": "Marie Curie",
+      "birth_year": 1867,
+      "death_year": 1934,
+      "era": "근현대",
+      "region": "서양",
+      "country": "폴란드/프랑스",
+      "field": "과학/화학/물리",
+      "major_achievements": [
+        "라듐·폴로늄 발견",
+        "방사능 연구 개척",
+        "노벨상 2회 수상(물리·화학)",
+        "방사선 의학의 토대 마련",
+        "여성 과학자 롤모델"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "끈기와 정밀함으로 미지의 영역을 개척한 선구자. 과학을 인류 복지와 연결했다.",
+      "traits_keywords": [
+        "끈기",
+        "정밀",
+        "선구",
+        "헌신",
+        "용기"
+      ],
+      "element": "금",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 9,
+        "water": 6
+      },
+      "famous_quote": "Nothing in life is to be feared, it is only to be understood.",
+      "life_lesson": "두려움을 호기심으로 바꾸면 길이 열린다.",
+      "modern_influence": "의학·재료과학·여성 STEM",
+      "compatibility_base_score": 95,
+      "image_emoji": "🔬⚗️"
+    },
+    {
+      "id": 14,
+      "name_kr": "찰스 다윈",
+      "name_en": "Charles Darwin",
+      "birth_year": 1809,
+      "death_year": 1882,
+      "era": "근대",
+      "region": "서양",
+      "country": "영국",
+      "field": "과학/생물학",
+      "major_achievements": [
+        "자연 선택에 의한 진화론",
+        "『종의 기원』 저술",
+        "비글호 항해 연구",
+        "인류 기원 논의 촉발",
+        "생물다양성 이해 확장"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "방대한 관찰과 기록으로 자연의 변화를 설명한 경험적 이론가.",
+      "traits_keywords": [
+        "관찰",
+        "인내",
+        "분석",
+        "호기심",
+        "혁신"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 9,
+        "fire": 5,
+        "earth": 8,
+        "metal": 6,
+        "water": 7
+      },
+      "famous_quote": "It is not the strongest of the species that survives, but the one most responsive to change.",
+      "life_lesson": "적응이 곧 생존이다.",
+      "modern_influence": "현대 생물학·의학·생태학",
+      "compatibility_base_score": 94,
+      "image_emoji": "🦋📗"
+    },
+    {
+      "id": 15,
+      "name_kr": "갈릴레오 갈릴레이",
+      "name_en": "Galileo Galilei",
+      "birth_year": 1564,
+      "death_year": 1642,
+      "era": "근세",
+      "region": "서양",
+      "country": "이탈리아",
+      "field": "과학/천문학",
+      "major_achievements": [
+        "망원경 관측(목성 위성 등)",
+        "지동설 옹호",
+        "운동 법칙의 기초",
+        "과학적 방법론 확립",
+        "실험물리학 선구"
+      ],
+      "personality": {
+        "introvert": false,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "관측과 실험으로 권위를 넘어선 과학 혁명가. 진실을 위해 불편을 감수했다.",
+      "traits_keywords": [
+        "실험",
+        "담대",
+        "비판정신",
+        "통찰",
+        "혁신"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 9,
+        "earth": 7,
+        "metal": 6,
+        "water": 5
+      },
+      "famous_quote": "E pur si muove.",
+      "life_lesson": "관찰된 사실은 권위를 이긴다.",
+      "modern_influence": "실험과학·관측천문학의 초석",
+      "compatibility_base_score": 93,
+      "image_emoji": "🔭🌍"
+    },
+    {
+      "id": 16,
+      "name_kr": "에이브러햄 링컨",
+      "name_en": "Abraham Lincoln",
+      "birth_year": 1809,
+      "death_year": 1865,
+      "era": "근대",
+      "region": "서양",
+      "country": "미국",
+      "field": "정치/법",
+      "major_achievements": [
+        "노예해방 선언",
+        "남북전쟁 지도와 연방 보전",
+        "게티즈버그 연설",
+        "국가 통합과 재건 비전",
+        "평등의 원칙 확립"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": false
+      },
+      "personality_description": "겸손과 원칙으로 분열의 시대를 이끈 지도자. 공감과 결단을 겸비했다.",
+      "traits_keywords": [
+        "원칙",
+        "공감",
+        "결단",
+        "겸손",
+        "통합"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 9,
+        "metal": 6,
+        "water": 6
+      },
+      "famous_quote": "Government of the people, by the people, for the people.",
+      "life_lesson": "권력의 목적은 사람을 위한 봉사다.",
+      "modern_influence": "인권·헌정 질서의 상징",
+      "compatibility_base_score": 95,
+      "image_emoji": "🎩📜"
+    },
+    {
+      "id": 17,
+      "name_kr": "윈스턴 처칠",
+      "name_en": "Winston Churchill",
+      "birth_year": 1874,
+      "death_year": 1965,
+      "era": "근현대",
+      "region": "서양",
+      "country": "영국",
+      "field": "정치/군사",
+      "major_achievements": [
+        "제2차 세계대전 영국 지도",
+        "불굴의 연설로 국민 결집",
+        "전후 유럽 질서에 기여",
+        "노벨 문학상 수상",
+        "철의 장막 연설로 냉전 구도 조망"
+      ],
+      "personality": {
+        "introvert": false,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "언어와 의지로 절망을 돌파한 지도자. 복합적 기질을 전략으로 승화했다.",
+      "traits_keywords": [
+        "담대",
+        "언변",
+        "전략",
+        "회복탄력",
+        "비전"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 6,
+        "fire": 9,
+        "earth": 7,
+        "metal": 7,
+        "water": 5
+      },
+      "famous_quote": "Never, never, never give up.",
+      "life_lesson": "희망은 행동에서 만들어진다.",
+      "modern_influence": "위기 커뮤니케이션, 민주국가 리더십",
+      "compatibility_base_score": 92,
+      "image_emoji": "🗣️🛡️"
+    },
+    {
+      "id": 18,
+      "name_kr": "레오나르도 다 빈치",
+      "name_en": "Leonardo da Vinci",
+      "birth_year": 1452,
+      "death_year": 1519,
+      "era": "르네상스",
+      "region": "서양",
+      "country": "이탈리아",
+      "field": "예술/과학",
+      "major_achievements": [
+        "모나리자·최후의 만찬",
+        "해부학·공학 스케치",
+        "자연철학적 탐구",
+        "원근법·구성 혁신",
+        "다학제 융합의 상징"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "호기심으로 경계를 허문 만능형 창조자. 예술과 과학을 한 몸처럼 다뤘다.",
+      "traits_keywords": [
+        "융합",
+        "창의",
+        "탐구",
+        "세밀",
+        "상상"
+      ],
+      "element": "수",
+      "saju_compatibility": {
+        "wood": 8,
+        "fire": 6,
+        "earth": 7,
+        "metal": 6,
+        "water": 9
+      },
+      "famous_quote": "Simplicity is the ultimate sophistication.",
+      "life_lesson": "경계를 넘나드는 호기심이 혁신을 낳는다.",
+      "modern_influence": "디자인 씽킹, STEAM 교육 상징",
+      "compatibility_base_score": 96,
+      "image_emoji": "🎨🛠️"
+    },
+    {
+      "id": 19,
+      "name_kr": "마하트마 간디",
+      "name_en": "Mahatma Gandhi",
+      "birth_year": 1869,
+      "death_year": 1948,
+      "era": "근현대",
+      "region": "동양",
+      "country": "인도",
+      "field": "사회운동/정치",
+      "major_achievements": [
+        "비폭력·불복종 운동",
+        "인도 독립운동 지도",
+        "소금행진 등 대중운동",
+        "스와데시 자립운동",
+        "세계 평화운동 영감"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": false
+      },
+      "personality_description": "비폭력 원칙으로 제국에 맞선 도덕적 리더. 일상과 정치의 일치를 추구했다.",
+      "traits_keywords": [
+        "비폭력",
+        "도덕",
+        "헌신",
+        "절제",
+        "영감"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 6,
+        "earth": 9,
+        "metal": 6,
+        "water": 6
+      },
+      "famous_quote": "Be the change that you wish to see in the world.",
+      "life_lesson": "수양된 일상이 세상을 바꾼다.",
+      "modern_influence": "인권·평화운동, 시민저항 이론",
+      "compatibility_base_score": 94,
+      "image_emoji": "🕊️🧵"
+    },
+    {
+      "id": 20,
+      "name_kr": "넬슨 만델라",
+      "name_en": "Nelson Mandela",
+      "birth_year": 1918,
+      "death_year": 2013,
+      "era": "근현대",
+      "region": "서양",
+      "country": "남아프리카공화국",
+      "field": "정치/인권",
+      "major_achievements": [
+        "아파르트헤이트 종식에 기여",
+        "남아공 첫 흑인 대통령",
+        "진실화해위원회 설립",
+        "화해와 통합의 리더십",
+        "노벨 평화상 수상(1993)"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "용서와 화해로 분열을 치유한 지도자. 단호함과 온정을 병행했다.",
+      "traits_keywords": [
+        "화해",
+        "용기",
+        "인내",
+        "통합",
+        "비전"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 9,
+        "earth": 7,
+        "metal": 6,
+        "water": 6
+      },
+      "famous_quote": "It always seems impossible until it's done.",
+      "life_lesson": "가장 어려운 일은 시작과 끝을 책임지는 것이다.",
+      "modern_influence": "과도기 정의, 갈등해결, 인권 리더십",
+      "compatibility_base_score": 96,
+      "image_emoji": "🤝🌍"
+    }
+  ]
+}

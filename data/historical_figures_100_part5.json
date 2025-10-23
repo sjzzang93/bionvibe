@@ -1,0 +1,911 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "total_figures": 100,
+    "included_count": 20,
+    "created_date": "2025-10-23",
+    "description": "역사적 위인 100명 데이터베이스 Part 5 (ID 81–100)"
+  },
+  "historical_figures": [
+    {
+      "id": 81,
+      "name_kr": "에디트 피아프",
+      "name_en": "Édith Piaf",
+      "birth_year": null,
+      "death_year": null,
+      "era": "근현대",
+      "region": "현대",
+      "country": "프랑스",
+      "field": "예술/음악",
+      "major_achievements": [
+        "La Vie en rose",
+        "샹송 세계화",
+        "감성 보컬 스타일",
+        "전후 문화 위로",
+        "여성 아티스트 롤모델"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Non, je ne regrette rien.",
+      "life_lesson": "진정성은 가장 큰 악기다.",
+      "modern_influence": "대중음악·보컬 미학",
+      "compatibility_base_score": 90,
+      "image_emoji": "🎤🌹"
+    },
+    {
+      "id": 82,
+      "name_kr": "오프라 윈프리",
+      "name_en": "Oprah Winfrey",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "문화/비즈니스",
+      "major_achievements": [
+        "토크쇼 제국",
+        "북클럽 독서 확산",
+        "미디어 자선 활동",
+        "여성·흑인 리더십",
+        "영감 스토리텔링"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Turn your wounds into wisdom.",
+      "life_lesson": "이야기는 치유의 힘이 있다.",
+      "modern_influence": "미디어·자기계발 문화",
+      "compatibility_base_score": 90,
+      "image_emoji": "📺💬"
+    },
+    {
+      "id": 83,
+      "name_kr": "스티븐 스필버그",
+      "name_en": "Steven Spielberg",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "예술/영화",
+      "major_achievements": [
+        "죠스·E.T.·쥬라기공원",
+        "현대 블록버스터 모델",
+        "드림웍스 설립",
+        "서사·영상언어 혁신",
+        "사회문제 다룬 작품"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Every time I go to a movie, it's magic.",
+      "life_lesson": "감탄은 기술을 넘어선다.",
+      "modern_influence": "영화 산업·스토리텔링",
+      "compatibility_base_score": 90,
+      "image_emoji": "🎥✨"
+    },
+    {
+      "id": 84,
+      "name_kr": "마이클 조던",
+      "name_en": "Michael Jordan",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "문화/스포츠",
+      "major_achievements": [
+        "NBA 6회 우승",
+        "글로벌 스포츠 마케팅",
+        "경쟁·훈련 문화",
+        "에어 조던 브랜드",
+        "올림픽 금메달"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "I've failed over and over and over again in my life and that is why I succeed.",
+      "life_lesson": "실패의 누적이 곧 경쟁력이다.",
+      "modern_influence": "스포츠·브랜드·리더십",
+      "compatibility_base_score": 90,
+      "image_emoji": "🏀👟"
+    },
+    {
+      "id": 85,
+      "name_kr": "무함마드 알리",
+      "name_en": "Muhammad Ali",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "미국",
+      "field": "문화/스포츠",
+      "major_achievements": [
+        "헤비급 챔피언",
+        "시민권·반전 목소리",
+        "스타일·시적 언변",
+        "사회 정의 상징",
+        "스포츠 외 영향"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Float like a butterfly, sting like a bee.",
+      "life_lesson": "정체성과 신념은 힘이 된다.",
+      "modern_influence": "스포츠·사회정의",
+      "compatibility_base_score": 90,
+      "image_emoji": "🥊🦋"
+    },
+    {
+      "id": 86,
+      "name_kr": "펠레",
+      "name_en": "Pelé",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "브라질",
+      "field": "문화/스포츠",
+      "major_achievements": [
+        "월드컵 3회 우승",
+        "축구 글로벌화",
+        "브라질 이미지 제고",
+        "스포츠 외교",
+        "청소년 스포츠 확산"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "화",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Success is no accident.",
+      "life_lesson": "재능 위에 훈련이 쌓인다.",
+      "modern_influence": "축구 문화·글로벌 스포츠",
+      "compatibility_base_score": 90,
+      "image_emoji": "⚽⭐"
+    },
+    {
+      "id": 87,
+      "name_kr": "미야자키 하야오",
+      "name_en": "Hayao Miyazaki",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "일본",
+      "field": "예술/애니메이션",
+      "major_achievements": [
+        "지브리 스튜디오",
+        "이웃집 토토로·센과 치히로",
+        "수작업 미학",
+        "환경·평화 주제",
+        "세계 애니메이션 영향"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Many of my movies have strong female leads — brave, self-sufficient girls.",
+      "life_lesson": "상상력은 섬세함에서 자란다.",
+      "modern_influence": "애니메이션·서사 미학",
+      "compatibility_base_score": 90,
+      "image_emoji": "🪄🍃"
+    },
+    {
+      "id": 88,
+      "name_kr": "유엔 평화유지군",
+      "name_en": "United Nations Peacekeeping",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "국제",
+      "field": "사회/국제기구",
+      "major_achievements": [
+        "분쟁지역 평화유지",
+        "민간 보호",
+        "선거 지원",
+        "재건 협력",
+        "국제 안보 기여"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Protecting peace, one mission at a time.",
+      "life_lesson": "평화는 함께 지키는 공공재다.",
+      "modern_influence": "국제 안보·평화구축",
+      "compatibility_base_score": 90,
+      "image_emoji": "🕊️🪖"
+    },
+    {
+      "id": 89,
+      "name_kr": "국경없는의사회",
+      "name_en": "Médecins Sans Frontières (MSF)",
+      "birth_year": null,
+      "death_year": null,
+      "era": "현대",
+      "region": "현대",
+      "country": "국제",
+      "field": "사회/국제구호",
+      "major_achievements": [
+        "분쟁·재난 의료 지원",
+        "감염병 대응",
+        "증언 활동",
+        "의료 접근성 옹호",
+        "국제 인도주의"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "토",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Wherever it hurts, we go.",
+      "life_lesson": "중립은 생명을 구하는 기술이다.",
+      "modern_influence": "인도주의·국제보건",
+      "compatibility_base_score": 90,
+      "image_emoji": "🏥🌍"
+    },
+    {
+      "id": 90,
+      "name_kr": "알베르트 아인슈타인",
+      "name_en": "Albert Einstein",
+      "birth_year": null,
+      "death_year": null,
+      "era": "근현대",
+      "region": "서양",
+      "country": "독일/미국",
+      "field": "과학/물리",
+      "major_achievements": [
+        "상대성이론",
+        "광전효과",
+        "브라운운동",
+        "우주론",
+        "과학 평화주의"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Life is like riding a bicycle. To keep your balance you must keep moving.",
+      "life_lesson": "지속성은 발견으로 이어진다.",
+      "modern_influence": "과학문화",
+      "compatibility_base_score": 90,
+      "image_emoji": "🧠🔭"
+    },
+    {
+      "id": 91,
+      "name_kr": "아이작 뉴턴",
+      "name_en": "Isaac Newton",
+      "birth_year": null,
+      "death_year": null,
+      "era": "근세",
+      "region": "서양",
+      "country": "영국",
+      "field": "과학/수학",
+      "major_achievements": [
+        "만유인력",
+        "운동법칙",
+        "광학",
+        "미적분 기초",
+        "왕립학회"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "If I have done the public any service, it is due to my patient thought.",
+      "life_lesson": "인내는 통찰을 만든다.",
+      "modern_influence": "자연과학 방법",
+      "compatibility_base_score": 90,
+      "image_emoji": "📐🍏"
+    },
+    {
+      "id": 92,
+      "name_kr": "갈릴레오 갈릴레이",
+      "name_en": "Galileo Galilei",
+      "birth_year": null,
+      "death_year": null,
+      "era": "근세",
+      "region": "서양",
+      "country": "이탈리아",
+      "field": "과학/천문",
+      "major_achievements": [
+        "망원경 관측",
+        "지동설 옹호",
+        "실험 방법",
+        "운동 연구",
+        "과학 커뮤니케이션"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "You cannot teach a man anything; you can only help him find it within himself.",
+      "life_lesson": "탐구심은 내면에서 자란다.",
+      "modern_influence": "과학 교육",
+      "compatibility_base_score": 90,
+      "image_emoji": "🔭📚"
+    },
+    {
+      "id": 93,
+      "name_kr": "찰스 다윈",
+      "name_en": "Charles Darwin",
+      "birth_year": null,
+      "death_year": null,
+      "era": "근대",
+      "region": "서양",
+      "country": "영국",
+      "field": "과학/생물",
+      "major_achievements": [
+        "진화론",
+        "종의 기원",
+        "자연선택",
+        "생태 관찰",
+        "과학 글쓰기"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "A man who dares to waste one hour of time has not discovered the value of life.",
+      "life_lesson": "시간의 가치는 생명의 가치다.",
+      "modern_influence": "생물학·생태",
+      "compatibility_base_score": 90,
+      "image_emoji": "🦋📖"
+    },
+    {
+      "id": 94,
+      "name_kr": "마리 퀴리",
+      "name_en": "Marie Curie",
+      "birth_year": null,
+      "death_year": null,
+      "era": "근현대",
+      "region": "서양",
+      "country": "폴란드/프랑스",
+      "field": "과학/화학",
+      "major_achievements": [
+        "라듐",
+        "폴로늄",
+        "방사능",
+        "노벨상 2회",
+        "방사선 의학"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Be less curious about people and more curious about ideas.",
+      "life_lesson": "호기심의 방향이 성과를 만든다.",
+      "modern_influence": "여성 STEM",
+      "compatibility_base_score": 90,
+      "image_emoji": "⚗️🔬"
+    },
+    {
+      "id": 95,
+      "name_kr": "레오나르도 다 빈치",
+      "name_en": "Leonardo da Vinci",
+      "birth_year": null,
+      "death_year": null,
+      "era": "르네상스",
+      "region": "서양",
+      "country": "이탈리아",
+      "field": "예술/과학",
+      "major_achievements": [
+        "예술 걸작",
+        "공학 스케치",
+        "해부학",
+        "자연관찰",
+        "발명 구상"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Art is never finished, only abandoned.",
+      "life_lesson": "완벽주의는 과정의 다른 이름.",
+      "modern_influence": "디자인·STEAM",
+      "compatibility_base_score": 90,
+      "image_emoji": "🖌️⚙️"
+    },
+    {
+      "id": 96,
+      "name_kr": "소크라테스",
+      "name_en": "Socrates",
+      "birth_year": null,
+      "death_year": null,
+      "era": "고대",
+      "region": "서양",
+      "country": "그리스",
+      "field": "철학",
+      "major_achievements": [
+        "대화법",
+        "윤리",
+        "시민 덕",
+        "비판적 사고",
+        "변증법"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Know thyself.",
+      "life_lesson": "자기이해가 지혜의 출발점.",
+      "modern_influence": "철학 교육",
+      "compatibility_base_score": 90,
+      "image_emoji": "🧩🗣️"
+    },
+    {
+      "id": 97,
+      "name_kr": "플라톤",
+      "name_en": "Plato",
+      "birth_year": null,
+      "death_year": null,
+      "era": "고대",
+      "region": "서양",
+      "country": "그리스",
+      "field": "철학",
+      "major_achievements": [
+        "이데아",
+        "변증법",
+        "국가론",
+        "아카데메이아",
+        "형이상학"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Good people do not need laws to tell them to act responsibly.",
+      "life_lesson": "덕은 제도보다 앞선다.",
+      "modern_influence": "정치철학",
+      "compatibility_base_score": 90,
+      "image_emoji": "🏛️📗"
+    },
+    {
+      "id": 98,
+      "name_kr": "아리스토텔레스",
+      "name_en": "Aristotle",
+      "birth_year": null,
+      "death_year": null,
+      "era": "고대",
+      "region": "서양",
+      "country": "그리스",
+      "field": "철학/과학",
+      "major_achievements": [
+        "논리학",
+        "윤리학",
+        "자연학",
+        "정치학",
+        "시학"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "The whole is greater than the sum of its parts.",
+      "life_lesson": "전체는 부분의 합을 넘는다.",
+      "modern_influence": "체계적 사고",
+      "compatibility_base_score": 90,
+      "image_emoji": "📚🔎"
+    },
+    {
+      "id": 99,
+      "name_kr": "프리드리히 니체",
+      "name_en": "Friedrich Nietzsche",
+      "birth_year": null,
+      "death_year": null,
+      "era": "근현대",
+      "region": "서양",
+      "country": "독일",
+      "field": "철학",
+      "major_achievements": [
+        "도덕 비판",
+        "영원회귀",
+        "권력의 의지",
+        "문학 영향",
+        "예술 철학"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": false,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "Become who you are.",
+      "life_lesson": "자기 창조가 최고의 윤리.",
+      "modern_influence": "현대 사상",
+      "compatibility_base_score": 90,
+      "image_emoji": "🗡️🎭"
+    },
+    {
+      "id": 100,
+      "name_kr": "잔 다르크",
+      "name_en": "Joan of Arc",
+      "birth_year": null,
+      "death_year": null,
+      "era": "중세",
+      "region": "서양",
+      "country": "프랑스",
+      "field": "군사/신앙",
+      "major_achievements": [
+        "오를레앙 해방",
+        "백년전쟁 전환",
+        "신앙·용기",
+        "국가 정체성",
+        "성녀 시성"
+      ],
+      "personality": {
+        "introvert": true,
+        "logical": true,
+        "adventurous": true,
+        "creative": true
+      },
+      "personality_description": "역사 기록을 바탕으로 재구성된 성향 요약.",
+      "traits_keywords": [
+        "리더십",
+        "통찰",
+        "헌신",
+        "창의",
+        "지식"
+      ],
+      "element": "목",
+      "saju_compatibility": {
+        "wood": 7,
+        "fire": 7,
+        "earth": 7,
+        "metal": 7,
+        "water": 7
+      },
+      "famous_quote": "One life is all we have and we live it as we believe in living it.",
+      "life_lesson": "믿음은 실천으로 증명된다.",
+      "modern_influence": "여성 리더십",
+      "compatibility_base_score": 90,
+      "image_emoji": "🔥🛡️"
+    }
+  ]
+}
