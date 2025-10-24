@@ -781,6 +781,22 @@
       "url": "/apps/fridge-recipe",
       "image": "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=400&q=80",
       "createdAt": "2025-10-23"
+    },
+    {
+      "id": "nonsense-escape",
+      "name": "넌센스 퀴즈 탈출",
+      "slug": "nonsense-escape",
+      "icon": "🧪",
+      "description": "웃기지만 은근 어려운 넌센스 미션! 5문제 연속 정답으로 실험실 탈출하기",
+      "categoryId": "learning-tools",
+      "url": "/apps/nonsense-escape",
+      "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80",
+      "createdAt": "2025-10-24",
+      "relatedApps": [
+        "dev-vocab",
+        "color-finder-game",
+        "iq-test"
+      ]
     }
   ]
 }

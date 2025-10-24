@@ -136,3 +136,30 @@ CREATE POLICY "누구나 디데이 삭제"
 -- 완료!
 -- ============================================
 
+-- 6. 넌센스 탈출 일일 참여 제한 및 당첨 기록 테이블
+CREATE TABLE IF NOT EXISTS nonsense_escape_attempts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  ip TEXT NOT NULL,
+  play_date DATE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE (ip, play_date)
+);
+
+CREATE TABLE IF NOT EXISTS nonsense_escape_rewards (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  screenshot_url TEXT NOT NULL,
+  ip TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 스토리지 버킷 생성 예시 (public 업로드용)
+-- SELECT storage.create_bucket('nonsense-escape-proofs', public := true);
+
+-- 7. 방명록 하트 카운터 (누적)
+CREATE TABLE IF NOT EXISTS guestbook_hearts (
+  id BIGSERIAL PRIMARY KEY,
+  count INTEGER NOT NULL DEFAULT 0,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);

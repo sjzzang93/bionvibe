@@ -100,8 +100,8 @@ export async function getAllAppsAsync(includeHidden: boolean = false, bypassCach
 }
 
 // 숨김 앱만 가져오기
-export async function getHiddenAppsAsync(): Promise<App[]> {
-  const apps = await fetchAppsFromSupabase();
+export async function getHiddenAppsAsync(bypassCache = false): Promise<App[]> {
+  const apps = await fetchAppsFromSupabase(bypassCache);
   return apps.filter(app => app.hidden === true);
 }
 

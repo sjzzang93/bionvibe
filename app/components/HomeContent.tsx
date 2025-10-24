@@ -7,6 +7,43 @@ import Link from 'next/link';
 import Image from 'next/image';
 import FavoriteButton from './FavoriteButton';
 
+const CURATED_NONSENSE_APP: App = {
+  id: "nonsense-escape",
+  name: "넌센스 탈출 연구소",
+  slug: "nonsense-escape",
+  icon: "🧪",
+  description: "웃음 터지는 실험실에서 5연속 정답 미션에 도전하세요!",
+  categoryId: "learning-tools",
+  url: "/apps/nonsense-escape",
+  image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&auto=format&fit=crop",
+  createdAt: "2025-01-25T00:00:00.000Z",
+  hidden: false
+};
+
+// 히든 앱 slug 리스트 (Supabase에서 hidden 필드가 제대로 설정되지 않은 경우 대비)
+const HIDDEN_APP_SLUGS = ['study-cursor-prompts', 'dev-vocab-old'];
+
+const applyCuratedApps = (apps: App[]): App[] => {
+  // 히든 앱 필터링 (추가 보안)
+  const filteredApps = apps.filter(app => !HIDDEN_APP_SLUGS.includes(app.slug));
+  
+  const exists = filteredApps.find((app) => app.slug === CURATED_NONSENSE_APP.slug);
+  if (exists) {
+    return filteredApps.map((app) => {
+      if (app.slug !== CURATED_NONSENSE_APP.slug) return app;
+      return {
+        ...app,
+        name: CURATED_NONSENSE_APP.name,
+        description: CURATED_NONSENSE_APP.description,
+        icon: CURATED_NONSENSE_APP.icon,
+        image: app.image || CURATED_NONSENSE_APP.image,
+        hidden: false
+      };
+    });
+  }
+  return [CURATED_NONSENSE_APP, ...filteredApps];
+};
+
 export default function HomeContent() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -23,7 +60,7 @@ export default function HomeContent() {
       try {
         // 초기 로드 시 캐시 사용
         const apps = await getAllAppsAsync(false, false);
-        setAllApps(apps);
+        setAllApps(applyCuratedApps(apps));
         setLoading(false);
       } catch (error) {
         console.error('Failed to load apps:', error);
@@ -49,7 +86,7 @@ export default function HomeContent() {
           // 데이터 다시 불러오기 (캐시 우회)
           try {
             const apps = await getAllAppsAsync(false, true);
-            setAllApps(apps);
+            setAllApps(applyCuratedApps(apps));
             console.log('✅ 앱 데이터 실시간 업데이트 완료!');
           } catch (error) {
             console.error('❌ 실시간 업데이트 실패:', error);
@@ -64,7 +101,7 @@ export default function HomeContent() {
     const interval = setInterval(async () => {
       try {
         const apps = await getAllAppsAsync(false, true); // 캐시 우회
-        setAllApps(apps);
+        setAllApps(applyCuratedApps(apps));
       } catch (error) {
         console.error('Failed to refresh apps:', error);
       }

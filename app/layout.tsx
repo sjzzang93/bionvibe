@@ -5,6 +5,7 @@ import GoogleAnalytics from "./components/GoogleAnalytics";
 import GoogleAdSense from "./components/GoogleAdSense";
 import SupabaseProvider from "@/lib/supabase-provider";
 import AnalyticsTracker from "./components/AnalyticsTracker";
+import TranslateButton from "./components/TranslateButton";
 import appsData from "@/data/apps.json";
 
 // 자동 카운트: apps.json에서 실제 앱 개수 계산
@@ -103,6 +104,7 @@ export default function RootLayout({
           <AnalyticsTracker />
           <Navigation />
           {children}
+          <TranslateButton />
         </SupabaseProvider>
       </body>
     </html>

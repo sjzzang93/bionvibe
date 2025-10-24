@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSupabase } from '@/lib/supabase-provider';
 import Image from 'next/image';
 import type { RealtimeChannel } from '@supabase/supabase-js';
+import { generateAutoReply, BION_BOT_NICKNAME } from '@/lib/bion-auto-reply';
 
 interface Message {
   id: number;
@@ -201,6 +202,18 @@ export default function MainChat() {
         const exists = filtered.some(m => m.id === data[0].id);
         return exists ? filtered : [...filtered, data[0] as Message];
       });
+      
+      // 🤖 비온이 자동응답 (3초 후)
+      setTimeout(async () => {
+        const autoReply = generateAutoReply(filteredMessage);
+        
+        await supabase
+          .from('chat_messages')
+          .insert({
+            nickname: BION_BOT_NICKNAME,
+            message: autoReply
+          });
+      }, 3000);
     }
   };
 

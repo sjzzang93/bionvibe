@@ -10,6 +10,11 @@ const MainChat = dynamic(() => import('./components/MainChat'), {
   loading: () => null
 });
 
+const GuestbookHeart = dynamic(() => import('./components/GuestbookHeart'), {
+  ssr: false,
+  loading: () => null
+});
+
 const HomeContent = dynamic(() => import('./components/HomeContent'), {
   ssr: false,
   loading: () => (
@@ -29,8 +34,20 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors" suppressHydrationWarning>
-      {/* 비온 방명록 */}
-      <MainChat />
+      {/* 히어로 섹션: 방명록 + 하트 */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div className="flex flex-col gap-4 items-center">
+          {/* 비온 방명록 */}
+          <div className="w-full">
+            <MainChat />
+          </div>
+          
+          {/* 하트 카운터 - 방명록 하단 */}
+          <div className="flex justify-center">
+            <GuestbookHeart />
+          </div>
+        </div>
+      </section>
 
       {/* Apps Grid */}
       <HomeContent />

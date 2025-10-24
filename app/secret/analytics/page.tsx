@@ -71,16 +71,9 @@ export default function AnalyticsPage() {
         
         const totalPageViews = pageViewData?.reduce((sum, item) => sum + (item.page_views || 1), 0) || 0;
         
-        // 평균 체류시간 (오늘)
-        const { data: durationData } = await supabase
-          .from('analytics')
-          .select('duration')
-          .gte('created_at', today.toISOString())
-          .not('duration', 'is', null);
-        
-        const avgDuration = durationData && durationData.length > 0
-          ? durationData.reduce((sum, item) => sum + (item.duration || 0), 0) / durationData.length / 60
-          : 0;
+        // 평균 체류시간 - 테이블에 duration 컬럼이 없으면 비활성화
+        let avgDuration = 0;
+        // duration 컬럼이 없어서 임시 비활성화 (Supabase 테이블 수정 필요)
         
         // 실시간 사용자 (최근 5분, created_at 기준)
         const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);

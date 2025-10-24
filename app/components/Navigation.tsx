@@ -7,7 +7,7 @@ import Image from 'next/image';
 export function Navigation() {
   const router = useRouter();
   const [clickCount, setClickCount] = useState(0);
-  const [logoClicked7Times, setLogoClicked7Times] = useState(false);
+  const [logoClicked5Times, setLogoClicked5Times] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const clickTimerRef = useRef<NodeJS.Timeout | null>(null);
   const secretTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -37,9 +37,9 @@ export function Navigation() {
   const handleLogoClick = () => {
     const newCount = clickCount + 1;
     
-    // 7번 클릭 완료 시
-    if (newCount >= 7) {
-      setLogoClicked7Times(true);
+    // 5번 클릭 완료 시
+    if (newCount >= 5) {
+      setLogoClicked5Times(true);
       setClickCount(0);
       
       if (clickTimerRef.current) {
@@ -48,7 +48,7 @@ export function Navigation() {
       
       // 3초 후 초기화
       secretTimerRef.current = setTimeout(() => {
-        setLogoClicked7Times(false);
+        setLogoClicked5Times(false);
       }, 3000);
       
       // 홈으로 이동
@@ -56,7 +56,7 @@ export function Navigation() {
       return;
     }
     
-    // 7번 미만: 즉시 홈으로 이동
+    // 5번 미만: 즉시 홈으로 이동
     router.push('/');
     
     // 클릭 카운트 증가
@@ -74,10 +74,10 @@ export function Navigation() {
   };
 
   const handleContactClick = (e: React.MouseEvent) => {
-    // 로고 7번 클릭 완료된 상태에서 이벤트 신청 클릭 시 Secret 페이지로
-    if (logoClicked7Times) {
+    // 로고 5번 클릭 완료된 상태에서 이벤트 신청 클릭 시 Secret 페이지로
+    if (logoClicked5Times) {
       e.preventDefault();
-      setLogoClicked7Times(false);
+      setLogoClicked5Times(false);
       if (secretTimerRef.current) {
         clearTimeout(secretTimerRef.current);
       }
@@ -98,24 +98,16 @@ export function Navigation() {
             onClick={handleLogoClick}
             className="flex items-center gap-0.5 hover:opacity-80 transition-opacity cursor-pointer"
           >
-            {/* BION 로고 */}
-            <div className="relative w-14 h-14 bg-transparent dark:bg-black rounded-lg p-1 flex items-center justify-center transition-colors">
+            {/* BION 로고 - 전구 */}
+            <div className="relative w-12 h-12 bg-transparent rounded-lg p-1 flex items-center justify-center transition-colors">
               <Image
                 src="/logo.png"
                 alt="BION Logo"
-                width={52}
-                height={52}
-                className="dark:hidden animate-bounce"
+                width={40}
+                height={40}
+                className="animate-bounce"
                 style={{ animationDuration: '2s' }}
                 priority
-              />
-              <video
-                src="/logo-dark.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="hidden dark:block w-[40px] h-[40px] object-cover"
               />
             </div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
@@ -174,8 +166,8 @@ export function Navigation() {
             
             <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
               <span className="relative inline-block w-2 h-2">
-                <span className={`absolute inset-0 ${logoClicked7Times ? 'bg-red-400' : 'bg-amber-400'} rounded-full animate-ping`}></span>
-                <span className={`relative inline-block w-2 h-2 ${logoClicked7Times ? 'bg-red-500 shadow-red-500/50' : 'bg-amber-500 shadow-amber-500/50'} rounded-full shadow-lg`}></span>
+                <span className={`absolute inset-0 ${logoClicked5Times ? 'bg-red-400' : 'bg-amber-400'} rounded-full animate-ping`}></span>
+                <span className={`relative inline-block w-2 h-2 ${logoClicked5Times ? 'bg-red-500 shadow-red-500/50' : 'bg-amber-500 shadow-amber-500/50'} rounded-full shadow-lg`}></span>
               </span>
               <span className="font-medium">Life On</span>
             </div>
