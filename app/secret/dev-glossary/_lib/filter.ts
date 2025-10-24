@@ -9,8 +9,11 @@ export function matches(term: DevTerm, q: string) {
   const n = normalize(q);
   return (
     normalize(term.term).includes(n) ||
-    normalize(term.easyExplanation).includes(n) ||
-    normalize(term.realExplanation).includes(n)
+    (term.easyExplanation && normalize(term.easyExplanation).includes(n)) ||
+    (term.simpleExplanation && normalize(term.simpleExplanation).includes(n)) ||
+    (term.realExplanation && normalize(term.realExplanation).includes(n)) ||
+    (term.generalExplanation && normalize(term.generalExplanation).includes(n)) ||
+    (term.korean && normalize(term.korean).includes(n))
   );
 }
 
