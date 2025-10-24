@@ -12,7 +12,7 @@ const getClientIp = (req: NextRequest) => {
   const realIp = req.headers.get("x-real-ip");
   if (realIp) return realIp;
   // fallback for local 개발 환경 (127.0.0.1 등)
-  return req.ip ?? "local-dev";
+  return "local-dev";
 };
 
 export async function POST(req: NextRequest) {
