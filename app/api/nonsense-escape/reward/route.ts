@@ -16,7 +16,7 @@ const getClientIp = (req: NextRequest) => {
   }
   const realIp = req.headers.get("x-real-ip");
   if (realIp) return realIp;
-  return req.ip ?? "local-dev";
+  return "local-dev";
 };
 
 export async function POST(request: NextRequest) {
