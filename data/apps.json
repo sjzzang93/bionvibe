@@ -793,9 +793,9 @@
       "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80",
       "createdAt": "2025-10-24",
       "relatedApps": [
-        "dev-vocab",
         "color-finder-game",
-        "iq-test"
+        "iq-test",
+        "arcade-mini-games"
       ]
     }
   ]
