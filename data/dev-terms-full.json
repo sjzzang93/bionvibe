@@ -1,0 +1,3227 @@
+{
+  "terms": [
+    {
+      "id": "flutter",
+      "term": "Flutter (플러터)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK",
+        "Android Studio",
+        "VS Code",
+        "Xcode"
+      ],
+      "simpleExplanation": "프랜차이즈 본점 레시피처럼 한 번 정하면 모든 플랫폼에서 같은 맛(화면)을 내요.",
+      "usedForSimple": "iOS·Android·웹을 한 코드로 만들 때 사용.",
+      "usedForReal": "단일 코드베이스, 위젯 기반 선언적 UI, AOT 컴파일로 고성능 구현.",
+      "generalExplanation": "Google의 오픈소스 UI 프레임워크.",
+      "example": "flutter create my_app && flutter run",
+      "relatedTerms": [
+        "Dart",
+        "Widget",
+        "Hot Reload"
+      ]
+    },
+    {
+      "id": "dart",
+      "term": "Dart (다트)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Dart SDK",
+        "Flutter SDK",
+        "VS Code"
+      ],
+      "simpleExplanation": "플러터의 주력 언어, 안전벨트 달린 JS 느낌.",
+      "usedForSimple": "플러터 앱 로직·UI 제작.",
+      "usedForReal": "JIT/AOT·Null-safety·비동기 지원.",
+      "generalExplanation": "Google이 만든 범용 언어.",
+      "example": "dart run bin/main.dart",
+      "relatedTerms": [
+        "Flutter",
+        "Null Safety",
+        "Async/Await"
+      ]
+    },
+    {
+      "id": "widget",
+      "term": "Widget (위젯)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "레고 블록 한 조각처럼 화면을 이루는 단위.",
+      "usedForSimple": "버튼/텍스트/이미지 등 화면 요소 구성.",
+      "usedForReal": "Stateless/Stateful로 상태에 따라 렌더링.",
+      "generalExplanation": "플러터 UI의 최소 구성 단위.",
+      "example": "class MyButton extends StatelessWidget { /* ... */ }",
+      "relatedTerms": [
+        "StatelessWidget",
+        "StatefulWidget",
+        "BuildContext"
+      ]
+    },
+    {
+      "id": "hot-reload",
+      "term": "Hot Reload (핫 리로드)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK",
+        "VS Code",
+        "Android Studio"
+      ],
+      "simpleExplanation": "저장 즉시 앱이 새로고침되는 기능.",
+      "usedForSimple": "UI 실험과 피드백 속도 향상.",
+      "usedForReal": "VM에 변경분 주입, 상태 유지 갱신.",
+      "generalExplanation": "개발 속도를 크게 올리는 플러터 기능.",
+      "example": "⌘S 후 Hot Reload",
+      "relatedTerms": [
+        "Hot Restart",
+        "DevTools"
+      ]
+    },
+    {
+      "id": "statelesswidget",
+      "term": "StatelessWidget (불변 위젯)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "항상 같은 모습의 레고 조각.",
+      "usedForSimple": "변하지 않는 UI에 사용.",
+      "usedForReal": "내부 상태 없음, 입력 값 변화시에만 리빌드.",
+      "generalExplanation": "외부 props에 의해 빌드.",
+      "example": "class TitleText extends StatelessWidget {}",
+      "relatedTerms": [
+        "StatefulWidget",
+        "Build",
+        "Rebuild"
+      ]
+    },
+    {
+      "id": "statefulwidget",
+      "term": "StatefulWidget (가변 위젯)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "기분 따라 변하는 레고 조각.",
+      "usedForSimple": "클릭·입력 등 변화가 있는 UI.",
+      "usedForReal": "State로 수명주기 관리, setState로 갱신.",
+      "generalExplanation": "상태 변화에 따라 재렌더링.",
+      "example": "class Counter extends StatefulWidget {}",
+      "relatedTerms": [
+        "setState",
+        "Lifecycle",
+        "State Management"
+      ]
+    },
+    {
+      "id": "pub",
+      "term": "pub (패키지 매니저)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK",
+        "Dart SDK"
+      ],
+      "simpleExplanation": "필요한 부품(패키지)을 가져오는 마트.",
+      "usedForSimple": "http/provider 등 의존성 추가.",
+      "usedForReal": "pubspec.yaml로 의존성 선언·관리.",
+      "generalExplanation": "Dart/Flutter 표준 패키지 관리자.",
+      "example": "flutter pub add http",
+      "relatedTerms": [
+        "pubspec.yaml",
+        "Dependency"
+      ]
+    },
+    {
+      "id": "buildcontext",
+      "term": "BuildContext (빌드 컨텍스트)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "현재 위젯의 주소표.",
+      "usedForSimple": "Theme/Navigator 등 상위 정보 접근.",
+      "usedForReal": "트리 위치 기반 Inherited 데이터 조회.",
+      "generalExplanation": "Element 트리 핸들.",
+      "example": "Theme.of(context).textTheme",
+      "relatedTerms": [
+        "Element",
+        "InheritedWidget",
+        "Navigator"
+      ]
+    },
+    {
+      "id": "material-design",
+      "term": "Material Design (머티리얼 디자인)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart",
+        "CSS"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "구글 표준 디자인 규칙.",
+      "usedForSimple": "안드로이드스러운 UI 빠르게 구성.",
+      "usedForReal": "Theme·컴포넌트·동작 지침 제공.",
+      "generalExplanation": "구글의 시각/모션/인터랙션 시스템.",
+      "example": "MaterialApp(theme: ThemeData(...))",
+      "relatedTerms": [
+        "Cupertino",
+        "Theme",
+        "Accessibility"
+      ]
+    },
+    {
+      "id": "cupertino",
+      "term": "Cupertino (쿠퍼티노)",
+      "category": "전체 용어",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "iOS 느낌의 구성요소 세트.",
+      "usedForSimple": "iOS 스타일 스위치·탭바 구현.",
+      "usedForReal": "CupertinoApp/위젯군 제공.",
+      "generalExplanation": "iOS 디자인 언어 위젯 라이브러리.",
+      "example": "CupertinoPageScaffold(...)",
+      "relatedTerms": [
+        "Material",
+        "HIG",
+        "Platform Adaptive UI"
+      ]
+    },
+    {
+      "id": "react",
+      "term": "React (리액트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "programs": [
+        "VS Code",
+        "Next.js",
+        "Vite"
+      ],
+      "simpleExplanation": "레고처럼 UI를 조립하는 도구.",
+      "usedForSimple": "재사용 가능한 컴포넌트 기반 개발.",
+      "usedForReal": "가상 DOM·선언적 렌더링.",
+      "generalExplanation": "Meta가 만든 UI 라이브러리.",
+      "example": "npx create-react-app my-app",
+      "relatedTerms": [
+        "Component",
+        "Virtual DOM",
+        "Next.js"
+      ]
+    },
+    {
+      "id": "next-js",
+      "term": "Next.js (넥스트)",
+      "category": "전체 용어",
+      "languages": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "programs": [
+        "Vercel",
+        "VS Code"
+      ],
+      "simpleExplanation": "리액트에 서버 날개 달기.",
+      "usedForSimple": "SSR/SSG/ISR 등 렌더링 전략.",
+      "usedForReal": "API Routes·App Router 제공.",
+      "generalExplanation": "React 기반 풀스택 프레임워크.",
+      "example": "npx create-next-app@latest",
+      "relatedTerms": [
+        "SSR",
+        "API Route",
+        "Vercel"
+      ]
+    },
+    {
+      "id": "typescript",
+      "term": "TypeScript (타입스크립트)",
+      "category": "전체 용어",
+      "languages": [
+        "TypeScript"
+      ],
+      "programs": [
+        "VS Code",
+        "Node.js"
+      ],
+      "simpleExplanation": "JS에 안전벨트 달기.",
+      "usedForSimple": "오류를 미리 잡는 정적 타입.",
+      "usedForReal": "대규모 유지보수 향상.",
+      "generalExplanation": "MS가 만든 타입 추가 JS 상위 언어.",
+      "example": "tsc main.ts",
+      "relatedTerms": [
+        "JavaScript",
+        "Interface",
+        "Typing"
+      ]
+    },
+    {
+      "id": "tailwind-css",
+      "term": "Tailwind CSS (테일윈드)",
+      "category": "전체 용어",
+      "languages": [
+        "CSS"
+      ],
+      "programs": [
+        "VS Code",
+        "Next.js"
+      ],
+      "simpleExplanation": "필요한 스타일 조각을 바로 입히는 옷장.",
+      "usedForSimple": "유틸리티 클래스 기반 스타일.",
+      "usedForReal": "일관성·생산성 향상.",
+      "generalExplanation": "Utility-first CSS 프레임워크.",
+      "example": "npm i -D tailwindcss && npx tailwindcss init -p",
+      "relatedTerms": [
+        "CSS",
+        "Responsive Design"
+      ]
+    },
+    {
+      "id": "vercel",
+      "term": "Vercel (버셀)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "programs": [
+        "Vercel CLI",
+        "GitHub"
+      ],
+      "simpleExplanation": "원클릭 전세계 배포.",
+      "usedForSimple": "Next.js와 밀접 통합.",
+      "usedForReal": "CDN·Edge Functions 제공.",
+      "generalExplanation": "Jamstack 글로벌 배포 플랫폼.",
+      "example": "vercel --prod",
+      "relatedTerms": [
+        "Deployment",
+        "CDN",
+        "Next.js"
+      ]
+    },
+    {
+      "id": "supabase",
+      "term": "Supabase (수파베이스)",
+      "category": "전체 용어",
+      "languages": [
+        "SQL",
+        "JavaScript"
+      ],
+      "programs": [
+        "Supabase Studio",
+        "VS Code"
+      ],
+      "simpleExplanation": "오픈소스 Firebase 느낌.",
+      "usedForSimple": "인증·DB·스토리지 빠른 구현.",
+      "usedForReal": "PostgreSQL 기반 BaaS.",
+      "generalExplanation": "REST·Realtime·Auth 제공.",
+      "example": "npm i @supabase/supabase-js",
+      "relatedTerms": [
+        "Database",
+        "Auth",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "id": "node-js",
+      "term": "Node.js (노드)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "npm",
+        "VS Code"
+      ],
+      "simpleExplanation": "브라우저 밖 JS 엔진.",
+      "usedForSimple": "서버·CLI·자동화에 활용.",
+      "usedForReal": "비동기 이벤트 기반.",
+      "generalExplanation": "V8 기반 런타임.",
+      "example": "node server.js",
+      "relatedTerms": [
+        "npm",
+        "Express",
+        "Backend"
+      ]
+    },
+    {
+      "id": "api",
+      "term": "API (에이피아이)",
+      "category": "전체 용어",
+      "languages": [
+        "HTTP",
+        "JavaScript"
+      ],
+      "programs": [
+        "Postman",
+        "Next.js"
+      ],
+      "simpleExplanation": "앱 사이의 주문서.",
+      "usedForSimple": "데이터 요청/응답 통신.",
+      "usedForReal": "표준화된 인터페이스.",
+      "generalExplanation": "Application Programming Interface.",
+      "example": "fetch('/api/user')",
+      "relatedTerms": [
+        "REST",
+        "Endpoint",
+        "HTTP"
+      ]
+    },
+    {
+      "id": "json",
+      "term": "JSON (제이슨)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "VS Code",
+        "Postman"
+      ],
+      "simpleExplanation": "데이터 도시락통.",
+      "usedForSimple": "키-값 쌍으로 데이터 교환.",
+      "usedForReal": "가독성·파싱 용이.",
+      "generalExplanation": "경량 데이터 교환 포맷.",
+      "example": "{ \"name\": \"BION\" }",
+      "relatedTerms": [
+        "API",
+        "Data",
+        "Object"
+      ]
+    },
+    {
+      "id": "github",
+      "term": "GitHub (깃허브)",
+      "category": "전체 용어",
+      "languages": [
+        "Git"
+      ],
+      "programs": [
+        "GitHub Desktop",
+        "VS Code",
+        "CLI"
+      ],
+      "simpleExplanation": "코드 타임머신+공유창고.",
+      "usedForSimple": "PR·이슈·액션으로 협업.",
+      "usedForReal": "원격 저장소 서비스.",
+      "generalExplanation": "Git 기반 협업 플랫폼.",
+      "example": "git add . && git commit -m 'msg' && git push",
+      "relatedTerms": [
+        "Git",
+        "Branch",
+        "Commit"
+      ]
+    },
+    {
+      "id": "ai",
+      "term": "AI (인공지능)",
+      "category": "전체 용어",
+      "languages": [
+        "Python",
+        "R"
+      ],
+      "programs": [
+        "TensorFlow",
+        "PyTorch",
+        "Jupyter"
+      ],
+      "simpleExplanation": "사람처럼 배우는 컴퓨터 두뇌.",
+      "usedForSimple": "추천·음성비서·이미지 인식.",
+      "usedForReal": "데이터 학습해 패턴 인식.",
+      "generalExplanation": "지능적 행동을 모방하는 분야.",
+      "example": "import torch as t",
+      "relatedTerms": [
+        "Machine Learning",
+        "Deep Learning"
+      ]
+    },
+    {
+      "id": "machine-learning",
+      "term": "Machine Learning (머신러닝)",
+      "category": "전체 용어",
+      "languages": [
+        "Python"
+      ],
+      "programs": [
+        "scikit-learn",
+        "TensorFlow"
+      ],
+      "simpleExplanation": "데이터로 스스로 공부.",
+      "usedForSimple": "스팸 분류·예측 모델.",
+      "usedForReal": "지도/비지도/강화 학습.",
+      "generalExplanation": "데이터 패턴 학습·예측.",
+      "example": "from sklearn.linear_model import LinearRegression",
+      "relatedTerms": [
+        "AI",
+        "Supervised",
+        "Unsupervised"
+      ]
+    },
+    {
+      "id": "deep-learning",
+      "term": "Deep Learning (딥러닝)",
+      "category": "전체 용어",
+      "languages": [
+        "Python"
+      ],
+      "programs": [
+        "PyTorch",
+        "TensorFlow"
+      ],
+      "simpleExplanation": "신경망으로 배우는 컴퓨터.",
+      "usedForSimple": "자율주행·음성·이미지 생성.",
+      "usedForReal": "다층 신경망 학습.",
+      "generalExplanation": "복잡 데이터의 표현 학습.",
+      "example": "model = tf.keras.Sequential([...])",
+      "relatedTerms": [
+        "Neural Network",
+        "CNN",
+        "RNN"
+      ]
+    },
+    {
+      "id": "security",
+      "term": "Security (보안)",
+      "category": "전체 용어",
+      "languages": [
+        "Python",
+        "JavaScript"
+      ],
+      "programs": [
+        "OWASP ZAP",
+        "Burp Suite"
+      ],
+      "simpleExplanation": "서비스 문단속.",
+      "usedForSimple": "데이터·시스템 보호.",
+      "usedForReal": "인증·암호화·접근제어.",
+      "generalExplanation": "CIA(기밀성·무결성·가용성) 보장.",
+      "example": "import hashlib",
+      "relatedTerms": [
+        "Encryption",
+        "Authentication",
+        "Authorization"
+      ]
+    },
+    {
+      "id": "encryption",
+      "term": "Encryption (암호화)",
+      "category": "전체 용어",
+      "languages": [
+        "Python",
+        "C++"
+      ],
+      "programs": [
+        "OpenSSL"
+      ],
+      "simpleExplanation": "비밀 편지 자물쇠.",
+      "usedForSimple": "민감정보 보호.",
+      "usedForReal": "대칭/비대칭 암호화.",
+      "generalExplanation": "데이터 기밀성 보장.",
+      "example": "openssl enc -aes-256-cbc -in a -out b",
+      "relatedTerms": [
+        "Decryption",
+        "Hashing",
+        "TLS"
+      ]
+    },
+    {
+      "id": "authentication",
+      "term": "Authentication (인증)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Supabase Auth",
+        "OAuth"
+      ],
+      "simpleExplanation": "넌 누구야? 확인.",
+      "usedForSimple": "로그인 신원 검증.",
+      "usedForReal": "비밀번호·OTP·토큰.",
+      "generalExplanation": "사용자 신원 확인 절차.",
+      "example": "await supabase.auth.signInWithPassword(...)",
+      "relatedTerms": [
+        "Authorization",
+        "Token",
+        "JWT"
+      ]
+    },
+    {
+      "id": "authorization",
+      "term": "Authorization (인가)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Supabase",
+        "OAuth"
+      ],
+      "simpleExplanation": "넌 어디까지 가능?",
+      "usedForSimple": "권한에 따른 접근 허용.",
+      "usedForReal": "RBAC·정책 기반 제어.",
+      "generalExplanation": "리소스 접근 권한 부여.",
+      "example": "if (user.role==='admin') {...}",
+      "relatedTerms": [
+        "Authentication",
+        "Access Control",
+        "RBAC"
+      ]
+    },
+    {
+      "id": "database",
+      "term": "Database (데이터베이스)",
+      "category": "전체 용어",
+      "languages": [
+        "SQL"
+      ],
+      "programs": [
+        "MySQL",
+        "PostgreSQL",
+        "Supabase"
+      ],
+      "simpleExplanation": "정리된 서류 캐비닛.",
+      "usedForSimple": "회원·주문 등 영구 저장.",
+      "usedForReal": "CRUD·트랜잭션.",
+      "generalExplanation": "정형 데이터 관리 시스템.",
+      "example": "SELECT * FROM users;",
+      "relatedTerms": [
+        "SQL",
+        "Table",
+        "Index"
+      ]
+    },
+    {
+      "id": "sql",
+      "term": "SQL (에스큐엘)",
+      "category": "전체 용어",
+      "languages": [
+        "SQL"
+      ],
+      "programs": [
+        "MySQL",
+        "Supabase"
+      ],
+      "simpleExplanation": "데이터와 대화하는 언어.",
+      "usedForSimple": "조회·추가·수정·삭제.",
+      "usedForReal": "구조적 질의 언어.",
+      "generalExplanation": "CRUD와 트랜잭션 제어.",
+      "example": "INSERT INTO users(name) VALUES('Bion');",
+      "relatedTerms": [
+        "Database",
+        "Query",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "id": "nosql",
+      "term": "NoSQL (노에스큐엘)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript",
+        "Python"
+      ],
+      "programs": [
+        "MongoDB",
+        "Firebase",
+        "DynamoDB"
+      ],
+      "simpleExplanation": "자유로운 캐비닛.",
+      "usedForSimple": "문서형·키값형 저장.",
+      "usedForReal": "스키마 유연·수평 확장.",
+      "generalExplanation": "비관계형 데이터베이스.",
+      "example": "db.users.insertOne({...})",
+      "relatedTerms": [
+        "MongoDB",
+        "Document DB",
+        "Scalability"
+      ]
+    },
+    {
+      "id": "docker",
+      "term": "Docker (도커)",
+      "category": "전체 용어",
+      "languages": [
+        "Shell",
+        "YAML"
+      ],
+      "programs": [
+        "Docker",
+        "Docker Desktop"
+      ],
+      "simpleExplanation": "앱을 컨테이너에 담는 이동식 박스.",
+      "usedForSimple": "환경 차이 없이 실행.",
+      "usedForReal": "이미지/컨테이너로 배포 일관성 제공.",
+      "generalExplanation": "컨테이너화 플랫폼.",
+      "example": "docker build -t app .",
+      "relatedTerms": [
+        "Kubernetes",
+        "Container",
+        "Image"
+      ]
+    },
+    {
+      "id": "kubernetes",
+      "term": "Kubernetes (쿠버네티스)",
+      "category": "전체 용어",
+      "languages": [
+        "YAML"
+      ],
+      "programs": [
+        "kubectl",
+        "GKE",
+        "EKS"
+      ],
+      "simpleExplanation": "수많은 컨테이너를 자동으로 관리하는 관제탑.",
+      "usedForSimple": "스케일링·롤아웃·셀프힐링.",
+      "usedForReal": "오케스트레이션 시스템.",
+      "generalExplanation": "컨테이너 클러스터 관리.",
+      "example": "kubectl apply -f deploy.yaml",
+      "relatedTerms": [
+        "Docker",
+        "Ingress",
+        "Helm"
+      ]
+    },
+    {
+      "id": "ci-cd",
+      "term": "CI/CD (지아이/씨디)",
+      "category": "전체 용어",
+      "languages": [
+        "YAML"
+      ],
+      "programs": [
+        "GitHub Actions",
+        "GitLab CI",
+        "CircleCI"
+      ],
+      "simpleExplanation": "자동으로 빌드하고 배포하는 공장 라인.",
+      "usedForSimple": "푸시하면 테스트→배포.",
+      "usedForReal": "지속적 통합·배포.",
+      "generalExplanation": "파이프라인 자동화.",
+      "example": "on: push",
+      "relatedTerms": [
+        "Pipeline",
+        "Automation",
+        "DevOps"
+      ]
+    },
+    {
+      "id": "git",
+      "term": "Git (깃)",
+      "category": "전체 용어",
+      "languages": [
+        "Shell"
+      ],
+      "programs": [
+        "Git CLI",
+        "GitHub"
+      ],
+      "simpleExplanation": "코드 시간여행 도구.",
+      "usedForSimple": "브랜치로 실험하고 되돌리기.",
+      "usedForReal": "분산 버전 관리.",
+      "generalExplanation": "스냅샷 기반 추적.",
+      "example": "git checkout -b feature/x",
+      "relatedTerms": [
+        "Branch",
+        "Merge",
+        "Rebase"
+      ]
+    },
+    {
+      "id": "git-flow",
+      "term": "Git Flow (깃 플로우)",
+      "category": "전체 용어",
+      "languages": [
+        "Shell"
+      ],
+      "programs": [
+        "Git"
+      ],
+      "simpleExplanation": "브랜치 운용 표준 절차.",
+      "usedForSimple": "feature/develop/release 전략.",
+      "usedForReal": "릴리즈 관리 체계.",
+      "generalExplanation": "명명 규칙과 프로세스.",
+      "example": "git flow init",
+      "relatedTerms": [
+        "Branching",
+        "Release",
+        "Hotfix"
+      ]
+    },
+    {
+      "id": "github-actions",
+      "term": "GitHub Actions (깃허브 액션)",
+      "category": "전체 용어",
+      "languages": [
+        "YAML"
+      ],
+      "programs": [
+        "GitHub"
+      ],
+      "simpleExplanation": "리포지토리 안의 자동화 로봇.",
+      "usedForSimple": "테스트·빌드·배포 자동 실행.",
+      "usedForReal": "워크플로우 as 코드.",
+      "generalExplanation": "CI/CD 워크플로우 실행.",
+      "example": ".github/workflows/ci.yml",
+      "relatedTerms": [
+        "CI/CD",
+        "Pipeline",
+        "Marketplace"
+      ]
+    },
+    {
+      "id": "aws",
+      "term": "AWS (아마존 웹 서비스)",
+      "category": "전체 용어",
+      "languages": [
+        "Various"
+      ],
+      "programs": [
+        "AWS Console",
+        "CLI"
+      ],
+      "simpleExplanation": "클라우드 만능 공구함.",
+      "usedForSimple": "EC2·S3·RDS 등 인프라 제공.",
+      "usedForReal": "유연한 과금·확장성.",
+      "generalExplanation": "IaaS/PaaS/SaaS 서비스 모음.",
+      "example": "aws s3 cp a s3://b/",
+      "relatedTerms": [
+        "EC2",
+        "S3",
+        "RDS"
+      ]
+    },
+    {
+      "id": "gcp",
+      "term": "GCP (구글 클라우드)",
+      "category": "전체 용어",
+      "languages": [
+        "Various"
+      ],
+      "programs": [
+        "GCP Console",
+        "gcloud"
+      ],
+      "simpleExplanation": "구글 인프라 클라우드.",
+      "usedForSimple": "GKE·Cloud Run·BigQuery.",
+      "usedForReal": "데이터/AI 강점.",
+      "generalExplanation": "클라우드 서비스 스위트.",
+      "example": "gcloud run deploy",
+      "relatedTerms": [
+        "GKE",
+        "Cloud Run",
+        "BigQuery"
+      ]
+    },
+    {
+      "id": "azure",
+      "term": "Azure (애저)",
+      "category": "전체 용어",
+      "languages": [
+        "Various"
+      ],
+      "programs": [
+        "Azure Portal",
+        "CLI"
+      ],
+      "simpleExplanation": "MS의 클라우드 풀세트.",
+      "usedForSimple": "App Service·AKS·Cosmos DB.",
+      "usedForReal": "엔터프라이즈 통합 강점.",
+      "generalExplanation": "기업 친화 클라우드.",
+      "example": "az webapp up",
+      "relatedTerms": [
+        "AKS",
+        "Cosmos DB",
+        "AD"
+      ]
+    },
+    {
+      "id": "cloudflare",
+      "term": "Cloudflare (클라우드플레어)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Cloudflare Dashboard"
+      ],
+      "simpleExplanation": "빠르고 튼튼한 인터넷 방패+가속기.",
+      "usedForSimple": "CDN·DNS·WAF·Workers.",
+      "usedForReal": "엣지 컴퓨팅·보안.",
+      "generalExplanation": "네트워크 경계 서비스.",
+      "example": "wrangler deploy",
+      "relatedTerms": [
+        "CDN",
+        "DNS",
+        "WAF"
+      ]
+    },
+    {
+      "id": "rest",
+      "term": "REST (레스트)",
+      "category": "전체 용어",
+      "languages": [
+        "HTTP"
+      ],
+      "programs": [
+        "Postman",
+        "Insomnia"
+      ],
+      "simpleExplanation": "HTTP 규칙을 잘 지키는 API 스타일.",
+      "usedForSimple": "리소스·메서드·표현.",
+      "usedForReal": "무상태·캐시 가능.",
+      "generalExplanation": "Representational State Transfer.",
+      "example": "GET /users/1",
+      "relatedTerms": [
+        "Resource",
+        "Verb",
+        "Status Code"
+      ]
+    },
+    {
+      "id": "graphql",
+      "term": "GraphQL (그래프큐엘)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Apollo",
+        "GraphQL Yoga"
+      ],
+      "simpleExplanation": "필요한 데이터만 정확히 쿼리.",
+      "usedForSimple": "Over/Under-fetch 해결.",
+      "usedForReal": "스키마 중심 API.",
+      "generalExplanation": "페이스북이 만든 쿼리 언어.",
+      "example": "query { user(id:1){name} }",
+      "relatedTerms": [
+        "Schema",
+        "Resolver",
+        "Query/Mutation"
+      ]
+    },
+    {
+      "id": "grpc",
+      "term": "gRPC (지알피씨)",
+      "category": "전체 용어",
+      "languages": [
+        "Proto"
+      ],
+      "programs": [
+        "protoc"
+      ],
+      "simpleExplanation": "초고속 서비스-서비스 통신.",
+      "usedForSimple": "바이너리 프로토콜·스트리밍.",
+      "usedForReal": "IDL 기반 계약.",
+      "generalExplanation": "HTTP/2 + Protobuf RPC 프레임워크.",
+      "example": "rpc GetUser(UserReq) returns (UserRes)",
+      "relatedTerms": [
+        "Protobuf",
+        "Unary",
+        "Stream"
+      ]
+    },
+    {
+      "id": "websocket",
+      "term": "WebSocket (웹소켓)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Socket.IO"
+      ],
+      "simpleExplanation": "실시간 양방향 대화 채널.",
+      "usedForSimple": "채팅·주가·알림.",
+      "usedForReal": "연결 유지·푸시.",
+      "generalExplanation": "TCP 위의 지속 연결.",
+      "example": "ws://example.com",
+      "relatedTerms": [
+        "Pub/Sub",
+        "SSE",
+        "Long Polling"
+      ]
+    },
+    {
+      "id": "caching",
+      "term": "Caching (캐싱)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Redis",
+        "Varnish"
+      ],
+      "simpleExplanation": "자주 쓰는 걸 가까이 두는 메모.",
+      "usedForSimple": "응답 가속·부하 감소.",
+      "usedForReal": "TTL·무효화 전략.",
+      "generalExplanation": "데이터 임시 저장 최적화.",
+      "example": "Cache-Control: max-age=3600",
+      "relatedTerms": [
+        "Redis",
+        "Memoization",
+        "CDN Cache"
+      ]
+    },
+    {
+      "id": "redis",
+      "term": "Redis (레디스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Redis CLI"
+      ],
+      "simpleExplanation": "초고속 인메모리 저장소.",
+      "usedForSimple": "세션·캐시·큐.",
+      "usedForReal": "키-값 구조·TTL.",
+      "generalExplanation": "인메모리 데이터 구조 서버.",
+      "example": "SET key value EX 60",
+      "relatedTerms": [
+        "Pub/Sub",
+        "Sorted Set",
+        "Stream"
+      ]
+    },
+    {
+      "id": "rabbitmq",
+      "term": "RabbitMQ (래빗엠큐)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "RabbitMQ"
+      ],
+      "simpleExplanation": "메시지를 안전하게 전달하는 우편 집배원.",
+      "usedForSimple": "비동기 작업 분산.",
+      "usedForReal": "Exchange·Queue·Binding.",
+      "generalExplanation": "AMQP 기반 메시지 브로커.",
+      "example": "Basic.Publish / Consume",
+      "relatedTerms": [
+        "Kafka",
+        "AMQP",
+        "Queue"
+      ]
+    },
+    {
+      "id": "kafka",
+      "term": "Kafka (카프카)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Kafka"
+      ],
+      "simpleExplanation": "고속 컨베이어벨트 같은 로그 스트림.",
+      "usedForSimple": "이벤트 스트리밍·로그 처리.",
+      "usedForReal": "파티션·오프셋.",
+      "generalExplanation": "분산 스트리밍 플랫폼.",
+      "example": "kafka-console-consumer ...",
+      "relatedTerms": [
+        "Topic",
+        "Partition",
+        "Consumer Group"
+      ]
+    },
+    {
+      "id": "microservices",
+      "term": "Microservices (마이크로서비스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Docker",
+        "Kubernetes"
+      ],
+      "simpleExplanation": "작은 서비스들의 협업 합주.",
+      "usedForSimple": "독립 배포·스케일.",
+      "usedForReal": "폴리글랏 아키.",
+      "generalExplanation": "작게 쪼개진 서비스 아키텍처.",
+      "example": "Order/Payment/Auth 서비스 분리",
+      "relatedTerms": [
+        "Monolith",
+        "Service Mesh",
+        "API Gateway"
+      ]
+    },
+    {
+      "id": "monolith",
+      "term": "Monolith (모놀리식)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "하나로 뭉친 큰 덩어리 앱.",
+      "usedForSimple": "단순 배포·초기 빠름.",
+      "usedForReal": "규모 커지면 변경 어려움.",
+      "generalExplanation": "단일 코드베이스 아키텍처.",
+      "example": "app.jar",
+      "relatedTerms": [
+        "Microservices",
+        "Modularization",
+        "Refactoring"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "term": "Accessibility (접근성(A11y))",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Chrome DevTools"
+      ],
+      "simpleExplanation": "모두가 쓰기 쉬운 디자인.",
+      "usedForSimple": "스크린리더·키보드 내비게이션.",
+      "usedForReal": "ARIA·명도 대비.",
+      "generalExplanation": "장애 유무 관계없는 사용성.",
+      "example": "aria-label=\"...\"",
+      "relatedTerms": [
+        "WCAG",
+        "ARIA",
+        "Keyboard Nav"
+      ]
+    },
+    {
+      "id": "design-system",
+      "term": "Design System (디자인 시스템)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Figma"
+      ],
+      "simpleExplanation": "디자인의 공통 언어·부품 창고.",
+      "usedForSimple": "일관성·재사용성 향상.",
+      "usedForReal": "토큰·컴포넌트·가이드.",
+      "generalExplanation": "조직의 UI 표준 세트.",
+      "example": "Button / Typography / Color",
+      "relatedTerms": [
+        "Style Guide",
+        "Component",
+        "Token"
+      ]
+    },
+    {
+      "id": "figma",
+      "term": "Figma (피그마)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Figma"
+      ],
+      "simpleExplanation": "협업형 UI 설계 도구.",
+      "usedForSimple": "와이어·프로토타입 제작.",
+      "usedForReal": "멀티플레이 편집.",
+      "generalExplanation": "클라우드 기반 디자인 툴.",
+      "example": "Auto Layout",
+      "relatedTerms": [
+        "Sketch",
+        "XD",
+        "Prototype"
+      ]
+    },
+    {
+      "id": "wireframe",
+      "term": "Wireframe (와이어프레임)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Figma",
+        "Balsamiq"
+      ],
+      "simpleExplanation": "뼈대만 그린 화면 설계도.",
+      "usedForSimple": "기능·흐름 정리.",
+      "usedForReal": "저충실도 모델.",
+      "generalExplanation": "UI 구조 초안.",
+      "example": "흑백 박스·텍스트",
+      "relatedTerms": [
+        "Prototype",
+        "User Flow",
+        "Mockup"
+      ]
+    },
+    {
+      "id": "prototype",
+      "term": "Prototype (프로토타입)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Figma",
+        "ProtoPie"
+      ],
+      "simpleExplanation": "클릭해보는 가짜 앱.",
+      "usedForSimple": "사용성 테스트.",
+      "usedForReal": "상호작용·전환 연출.",
+      "generalExplanation": "고충실도 인터랙션 모델.",
+      "example": "Click-through prototype",
+      "relatedTerms": [
+        "Wireframe",
+        "Usability Test",
+        "Handoff"
+      ]
+    },
+    {
+      "id": "usability",
+      "term": "Usability (사용성)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Hotjar",
+        "GA"
+      ],
+      "simpleExplanation": "쉽고 빠르게 쓸 수 있는지.",
+      "usedForSimple": "학습·효율·만족도.",
+      "usedForReal": "히스토그·히트맵 분석.",
+      "generalExplanation": "정량·정성 평가 지표.",
+      "example": "SUS 설문",
+      "relatedTerms": [
+        "Heuristics",
+        "UX Metrics",
+        "NPS"
+      ]
+    },
+    {
+      "id": "heuristics",
+      "term": "Heuristics (휴리스틱 평가)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Checklist"
+      ],
+      "simpleExplanation": "경험 법칙으로 빠른 UX 진단.",
+      "usedForSimple": "닐슨 10원칙 기반 점검.",
+      "usedForReal": "일관성·가시성·피드백.",
+      "generalExplanation": "전문가 감리 방식 평가.",
+      "example": "Nielsen's 10 Heuristics",
+      "relatedTerms": [
+        "Usability",
+        "UX Audit",
+        "Best Practices"
+      ]
+    },
+    {
+      "id": "responsive-design",
+      "term": "Responsive Design (반응형 디자인)",
+      "category": "전체 용어",
+      "languages": [
+        "CSS"
+      ],
+      "programs": [
+        "Chrome DevTools"
+      ],
+      "simpleExplanation": "화면 크기 따라 유연하게.",
+      "usedForSimple": "모바일·태블릿·데스크톱 대응.",
+      "usedForReal": "그리드·브레이크포인트.",
+      "generalExplanation": "다중 해상도 최적화.",
+      "example": "@media (min-width: 768px)",
+      "relatedTerms": [
+        "Flexbox",
+        "Grid",
+        "Mobile-first"
+      ]
+    },
+    {
+      "id": "grid-system",
+      "term": "Grid System (그리드 시스템)",
+      "category": "전체 용어",
+      "languages": [
+        "CSS"
+      ],
+      "programs": [
+        "Figma",
+        "CSS"
+      ],
+      "simpleExplanation": "정돈된 격자 배치 규칙.",
+      "usedForSimple": "열/간격으로 정렬·질서.",
+      "usedForReal": "12-column 그리드.",
+      "generalExplanation": "레이아웃 기본 문법.",
+      "example": "display: grid",
+      "relatedTerms": [
+        "Responsive",
+        "Baseline",
+        "Layout"
+      ]
+    },
+    {
+      "id": "color-theory",
+      "term": "Color Theory (색채학)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Figma"
+      ],
+      "simpleExplanation": "색의 조합과 의미.",
+      "usedForSimple": "브랜딩·가독성·감정.",
+      "usedForReal": "명도·채도·보색.",
+      "generalExplanation": "시각 심리 기반 설계.",
+      "example": "HSL(색상·채도·명도)",
+      "relatedTerms": [
+        "Contrast",
+        "Palette",
+        "Branding"
+      ]
+    },
+    {
+      "id": "big-o",
+      "term": "Big O (빅오 표기)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Whiteboard"
+      ],
+      "simpleExplanation": "알고리즘의 시간/공간 복잡도 언어.",
+      "usedForSimple": "O(1), O(n), O(n log n) 등.",
+      "usedForReal": "상한선 기준 성능.",
+      "generalExplanation": "성능 분석 표기법.",
+      "example": "O(n log n)",
+      "relatedTerms": [
+        "Complexity",
+        "Asymptotic",
+        "Performance"
+      ]
+    },
+    {
+      "id": "recursion",
+      "term": "Recursion (재귀)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "자기 자신을 부르는 함수.",
+      "usedForSimple": "분할정복·트리 순회.",
+      "usedForReal": "베이스·재귀 단계.",
+      "generalExplanation": "함수 호출 스택 활용.",
+      "example": "factorial(n)",
+      "relatedTerms": [
+        "Iteration",
+        "Stack",
+        "Tail Recursion"
+      ]
+    },
+    {
+      "id": "sorting",
+      "term": "Sorting (정렬)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "데이터를 순서대로 배열.",
+      "usedForSimple": "퀵/병합/힙 정렬.",
+      "usedForReal": "평균/최악 복잡도.",
+      "generalExplanation": "비교 기반/비비교 기반.",
+      "example": "quickSort(arr)",
+      "relatedTerms": [
+        "Merge Sort",
+        "Heap Sort",
+        "TimSort"
+      ]
+    },
+    {
+      "id": "hash-table",
+      "term": "Hash Table (해시 테이블)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "키를 빠르게 찾는 사전.",
+      "usedForSimple": "충돌·체이닝 처리.",
+      "usedForReal": "평균 O(1) 접근.",
+      "generalExplanation": "해시 함수·버킷 구조.",
+      "example": "map.set(k,v)",
+      "relatedTerms": [
+        "Hash Function",
+        "Collision",
+        "Map"
+      ]
+    },
+    {
+      "id": "binary-tree",
+      "term": "Binary Tree (이진 트리)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "노드가 최대 두 자식인 트리.",
+      "usedForSimple": "탐색·힙·구조 표현.",
+      "usedForReal": "순회(중/전/후).",
+      "generalExplanation": "계층적 데이터 구조.",
+      "example": "inorder(node)",
+      "relatedTerms": [
+        "BST",
+        "Heap",
+        "AVL"
+      ]
+    },
+    {
+      "id": "graph",
+      "term": "Graph (그래프)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "정점과 간선의 관계망.",
+      "usedForSimple": "SNS·도로·링크 모델링.",
+      "usedForReal": "유향/무향·가중 그래프.",
+      "generalExplanation": "네트워크 자료구조.",
+      "example": "adjacency list",
+      "relatedTerms": [
+        "BFS",
+        "DFS",
+        "Shortest Path"
+      ]
+    },
+    {
+      "id": "dynamic-programming",
+      "term": "Dynamic Programming (동적 계획법)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "겹치는 하위 문제를 메모해 최적화.",
+      "usedForSimple": "피보나치·배낭 문제.",
+      "usedForReal": "탑다운/바텀업.",
+      "generalExplanation": "서브프로블럼·중복 계산 제거.",
+      "example": "dp[i] = ...",
+      "relatedTerms": [
+        "Memoization",
+        "Tabulation",
+        "Optimal Substructure"
+      ]
+    },
+    {
+      "id": "greedy",
+      "term": "Greedy (그리디)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "순간의 최선 선택으로 전체 최적 시도.",
+      "usedForSimple": "거스름돈·스케줄링.",
+      "usedForReal": "최적 부분 구조 필요.",
+      "generalExplanation": "근시안적 선택 기법.",
+      "example": "choose locally optimal",
+      "relatedTerms": [
+        "DP",
+        "Approximation",
+        "Matroid"
+      ]
+    },
+    {
+      "id": "bfs",
+      "term": "BFS (너비 우선 탐색)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "이웃부터 차례로 확장.",
+      "usedForSimple": "최단거리·레벨별 탐색.",
+      "usedForReal": "큐 사용.",
+      "generalExplanation": "그래프 레벨 순회.",
+      "example": "queue.push(start)",
+      "relatedTerms": [
+        "Queue",
+        "Shortest Path",
+        "Graph"
+      ]
+    },
+    {
+      "id": "dfs",
+      "term": "DFS (깊이 우선 탐색)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "끝까지 파고들어가며 탐색.",
+      "usedForSimple": "백트래킹·사이클 탐지.",
+      "usedForReal": "스택/재귀.",
+      "generalExplanation": "그래프 깊이 순회.",
+      "example": "dfs(node)",
+      "relatedTerms": [
+        "Stack",
+        "Recursion",
+        "Backtracking"
+      ]
+    },
+    {
+      "id": "android",
+      "term": "Android (안드로이드)",
+      "category": "전체 용어",
+      "languages": [
+        "Kotlin",
+        "Java"
+      ],
+      "programs": [
+        "Android Studio"
+      ],
+      "simpleExplanation": "구글 모바일 OS 생태계.",
+      "usedForSimple": "네이티브 앱 개발.",
+      "usedForReal": "Jetpack·Compose.",
+      "generalExplanation": "모바일 운영체제·SDK.",
+      "example": "gradlew assembleRelease",
+      "relatedTerms": [
+        "APK",
+        "AAB",
+        "Play Store"
+      ]
+    },
+    {
+      "id": "ios",
+      "term": "iOS (아이오에스)",
+      "category": "전체 용어",
+      "languages": [
+        "Swift"
+      ],
+      "programs": [
+        "Xcode"
+      ],
+      "simpleExplanation": "애플 모바일 OS 생태계.",
+      "usedForSimple": "네이티브 앱 개발.",
+      "usedForReal": "SwiftUI·UIKit.",
+      "generalExplanation": "모바일 운영체제·SDK.",
+      "example": "xcodebuild -scheme ...",
+      "relatedTerms": [
+        "App Store",
+        "Provisioning",
+        "TestFlight"
+      ]
+    },
+    {
+      "id": "swift",
+      "term": "Swift (스위프트)",
+      "category": "전체 용어",
+      "languages": [
+        "Swift"
+      ],
+      "programs": [
+        "Xcode"
+      ],
+      "simpleExplanation": "애플의 최신 언어.",
+      "usedForSimple": "안전·성능·현대 문법.",
+      "usedForReal": "옵셔널·프로토콜 지향.",
+      "generalExplanation": "iOS/macOS 앱 개발 언어.",
+      "example": "struct View: View { ... }",
+      "relatedTerms": [
+        "SwiftUI",
+        "Protocol",
+        "Optional"
+      ]
+    },
+    {
+      "id": "kotlin",
+      "term": "Kotlin (코틀린)",
+      "category": "전체 용어",
+      "languages": [
+        "Kotlin"
+      ],
+      "programs": [
+        "Android Studio"
+      ],
+      "simpleExplanation": "안전하고 간결한 JVM 언어.",
+      "usedForSimple": "안드로이드 1급 시민.",
+      "usedForReal": "널 안전·코루틴.",
+      "generalExplanation": "JetBrains 개발 언어.",
+      "example": "suspend fun ...",
+      "relatedTerms": [
+        "Coroutine",
+        "JVM",
+        "Android"
+      ]
+    },
+    {
+      "id": "react-native",
+      "term": "React Native (리액트 네이티브)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "programs": [
+        "Metro",
+        "VS Code"
+      ],
+      "simpleExplanation": "리액트로 네이티브 앱 제작.",
+      "usedForSimple": "iOS/Android 공용 코드.",
+      "usedForReal": "브릿지·네이티브 모듈.",
+      "generalExplanation": "크로스 플랫폼 프레임워크.",
+      "example": "npx react-native init App",
+      "relatedTerms": [
+        "Expo",
+        "Bridge",
+        "Native Module"
+      ]
+    },
+    {
+      "id": "capacitor",
+      "term": "Capacitor (카파시터)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Capacitor CLI"
+      ],
+      "simpleExplanation": "웹앱을 네이티브 껍데기에 담기.",
+      "usedForSimple": "웹 기술로 앱 스토어 배포.",
+      "usedForReal": "플러그인으로 디바이스 기능.",
+      "generalExplanation": "Ionic 팀의 크로스 플랫폼 레이어.",
+      "example": "npx cap add ios",
+      "relatedTerms": [
+        "Cordova",
+        "Ionic",
+        "Hybrid"
+      ]
+    },
+    {
+      "id": "pwa",
+      "term": "PWA (피더블유에이)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Lighthouse"
+      ],
+      "simpleExplanation": "앱처럼 설치되는 웹앱.",
+      "usedForSimple": "오프라인·푸시·홈화면.",
+      "usedForReal": "서비스워커·매니페스트.",
+      "generalExplanation": "프로그레시브 웹 앱.",
+      "example": "Add to Home Screen",
+      "relatedTerms": [
+        "Service Worker",
+        "Manifest",
+        "Cache"
+      ]
+    },
+    {
+      "id": "service-worker",
+      "term": "Service Worker (서비스 워커)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Chrome DevTools"
+      ],
+      "simpleExplanation": "브라우저 뒤에서 일하는 비서.",
+      "usedForSimple": "오프라인 캐시·푸시.",
+      "usedForReal": "백그라운드 스크립트.",
+      "generalExplanation": "PWA 핵심 기술.",
+      "example": "self.addEventListener('fetch', ...)",
+      "relatedTerms": [
+        "Cache API",
+        "Push",
+        "Background Sync"
+      ]
+    },
+    {
+      "id": "web-app-manifest",
+      "term": "Web App Manifest (웹 앱 매니페스트)",
+      "category": "전체 용어",
+      "languages": [
+        "JSON"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "PWA의 신분증 파일.",
+      "usedForSimple": "아이콘·이름·시작화면 정의.",
+      "usedForReal": "설치 경험 제어.",
+      "generalExplanation": "JSON 기반 메타데이터.",
+      "example": "manifest.webmanifest",
+      "relatedTerms": [
+        "Icons",
+        "Name",
+        "Start URL"
+      ]
+    },
+    {
+      "id": "cordova",
+      "term": "Cordova (코르도바)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Cordova CLI"
+      ],
+      "simpleExplanation": "웹뷰 기반 하이브리드 앱.",
+      "usedForSimple": "간단한 네이티브 래퍼.",
+      "usedForReal": "플러그인으로 센서 접근.",
+      "generalExplanation": "하이브리드 앱 프레임워크.",
+      "example": "cordova build android",
+      "relatedTerms": [
+        "Capacitor",
+        "Hybrid",
+        "Plugin"
+      ]
+    },
+    {
+      "id": "prompt-engineering",
+      "term": "Prompt Engineering (프롬프트 엔지니어링)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "AI에게 잘 물어보는 기술.",
+      "usedForSimple": "역할·맥락·제약 명시.",
+      "usedForReal": "체인·Few-shot.",
+      "generalExplanation": "LLM 성능을 끌어내는 설계.",
+      "example": "You are ...",
+      "relatedTerms": [
+        "System Prompt",
+        "Few-shot",
+        "Chain of Thought"
+      ]
+    },
+    {
+      "id": "vector-db",
+      "term": "Vector DB (벡터 데이터베이스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Pinecone",
+        "Weaviate",
+        "FAISS"
+      ],
+      "simpleExplanation": "의미로 검색하는 DB.",
+      "usedForSimple": "문장 유사도 기반 검색.",
+      "usedForReal": "Embedding 인덱스.",
+      "generalExplanation": "RAG의 검색 저장소.",
+      "example": "index.query(vector)",
+      "relatedTerms": [
+        "Embedding",
+        "Similarity",
+        "ANN"
+      ]
+    },
+    {
+      "id": "embeddings",
+      "term": "Embeddings (임베딩)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "텍스트/이미지를 숫자 벡터로.",
+      "usedForSimple": "유사도 계산·클러스터링.",
+      "usedForReal": "차원 축소 표현.",
+      "generalExplanation": "의미 기반 표현 학습.",
+      "example": "[0.12, -0.03, ...]",
+      "relatedTerms": [
+        "Vector",
+        "RAG",
+        "Similarity"
+      ]
+    },
+    {
+      "id": "rag",
+      "term": "RAG (지식보강생성)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "검색으로 지식을 보강해 생성.",
+      "usedForSimple": "사내 문서 답변 등.",
+      "usedForReal": "Retriever + Generator.",
+      "generalExplanation": "검색-생성 결합 아키텍처.",
+      "example": "retrieve() -> generate()",
+      "relatedTerms": [
+        "Vector DB",
+        "Embedding",
+        "LLM"
+      ]
+    },
+    {
+      "id": "tokenization",
+      "term": "Tokenization (토크나이징)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "문장을 토큰 조각으로 쪼개기.",
+      "usedForSimple": "문자/바이트 단위 분절.",
+      "usedForReal": "BPE·SentencePiece.",
+      "generalExplanation": "LLM 입력 전처리.",
+      "example": "encode('안녕')",
+      "relatedTerms": [
+        "BPE",
+        "SPM",
+        "Tokenizer"
+      ]
+    },
+    {
+      "id": "temperature",
+      "term": "Temperature (온도)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "창의성 조절 다이얼.",
+      "usedForSimple": "낮으면 보수적, 높으면 다양.",
+      "usedForReal": "샘플링 확률 분산 제어.",
+      "generalExplanation": "텍스트 생성 무작위성 파라미터.",
+      "example": "temperature=0.7",
+      "relatedTerms": [
+        "Top-p",
+        "Top-k",
+        "Sampling"
+      ]
+    },
+    {
+      "id": "system-prompt",
+      "term": "System Prompt (시스템 프롬프트)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "AI의 성격·규칙을 정하는 선언.",
+      "usedForSimple": "말투·제한·목표 설정.",
+      "usedForReal": "상위 지침 우선.",
+      "generalExplanation": "LLM 동작의 최상단 규칙.",
+      "example": "You are ChatGPT ...",
+      "relatedTerms": [
+        "Instruction",
+        "Policy",
+        "Role"
+      ]
+    },
+    {
+      "id": "fine-tuning",
+      "term": "Fine-tuning (파인튜닝)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "모델을 특정 업무에 맞게 재학습.",
+      "usedForSimple": "도메인 적합도 향상.",
+      "usedForReal": "소량 데이터로 보정.",
+      "generalExplanation": "사전학습 모델의 후속 학습.",
+      "example": "train()",
+      "relatedTerms": [
+        "LoRA",
+        "PEFT",
+        "SFT"
+      ]
+    },
+    {
+      "id": "quantization",
+      "term": "Quantization (양자화)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "무거운 뇌를 가볍게 압축.",
+      "usedForSimple": "4bit/8bit로 추론 가속.",
+      "usedForReal": "정확도-속도 절충.",
+      "generalExplanation": "가중치 비트폭 축소.",
+      "example": "int8 model",
+      "relatedTerms": [
+        "Pruning",
+        "Distillation",
+        "Latency"
+      ]
+    },
+    {
+      "id": "transformers",
+      "term": "Transformers (트랜스포머)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "주의(attention)로 문맥을 읽는 뇌 구조.",
+      "usedForSimple": "병렬 학습·긴 문맥.",
+      "usedForReal": "Encoder/Decoder 블록.",
+      "generalExplanation": "현대 LLM의 표준 아키텍처.",
+      "example": "Multi-Head Attention",
+      "relatedTerms": [
+        "Attention",
+        "BERT",
+        "GPT"
+      ]
+    },
+    {
+      "id": "python",
+      "term": "Python (파이썬)",
+      "category": "전체 용어",
+      "languages": [
+        "Python"
+      ],
+      "programs": [
+        "pip",
+        "Jupyter"
+      ],
+      "simpleExplanation": "쉬운 문법의 만능 언어.",
+      "usedForSimple": "데이터·웹·자동화.",
+      "usedForReal": "풍부한 라이브러리.",
+      "generalExplanation": "범용 스크립트 언어.",
+      "example": "pip install requests",
+      "relatedTerms": [
+        "Pandas",
+        "Django",
+        "Flask"
+      ]
+    },
+    {
+      "id": "javascript",
+      "term": "JavaScript (자바스크립트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "npm",
+        "Node.js"
+      ],
+      "simpleExplanation": "웹의 공용어.",
+      "usedForSimple": "브라우저·서버 모두.",
+      "usedForReal": "이벤트 중심.",
+      "generalExplanation": "동적·멀티 패러다임 언어.",
+      "example": "document.querySelector()",
+      "relatedTerms": [
+        "ES6",
+        "TypeScript",
+        "Node.js"
+      ]
+    },
+    {
+      "id": "java",
+      "term": "Java (자바)",
+      "category": "전체 용어",
+      "languages": [
+        "Java"
+      ],
+      "programs": [
+        "Maven",
+        "Gradle"
+      ],
+      "simpleExplanation": "한 번 작성, 어디서나 실행.",
+      "usedForSimple": "엔터프라이즈 표준.",
+      "usedForReal": "JVM 기반.",
+      "generalExplanation": "객체지향 대표 언어.",
+      "example": "public static void main",
+      "relatedTerms": [
+        "Spring",
+        "JVM",
+        "GC"
+      ]
+    },
+    {
+      "id": "c",
+      "term": "C# (씨샵)",
+      "category": "전체 용어",
+      "languages": [
+        "C#"
+      ],
+      "programs": [
+        "Visual Studio",
+        ".NET"
+      ],
+      "simpleExplanation": "MS 생태계 주력 언어.",
+      "usedForSimple": "윈도우·서버·게임.",
+      "usedForReal": ".NET 런타임.",
+      "generalExplanation": "현대적 객체지향 언어.",
+      "example": "using System;",
+      "relatedTerms": [
+        "ASP.NET",
+        "Unity",
+        "LINQ"
+      ]
+    },
+    {
+      "id": "go",
+      "term": "Go (고)",
+      "category": "전체 용어",
+      "languages": [
+        "Go"
+      ],
+      "programs": [
+        "Go Toolchain"
+      ],
+      "simpleExplanation": "간결하고 빠른 서버 언어.",
+      "usedForSimple": "동시성·단일 바이너리.",
+      "usedForReal": "Goroutine·Channel.",
+      "generalExplanation": "구글이 만든 시스템 언어.",
+      "example": "go build",
+      "relatedTerms": [
+        "Goroutine",
+        "Channel",
+        "Stdlib"
+      ]
+    },
+    {
+      "id": "rust",
+      "term": "Rust (러스트)",
+      "category": "전체 용어",
+      "languages": [
+        "Rust"
+      ],
+      "programs": [
+        "Cargo"
+      ],
+      "simpleExplanation": "메모리 안전과 성능의 조화.",
+      "usedForSimple": "시스템·웹어셈블리.",
+      "usedForReal": "소유권/대여 검사.",
+      "generalExplanation": "안전한 시스템 프로그래밍 언어.",
+      "example": "cargo build --release",
+      "relatedTerms": [
+        "Ownership",
+        "Borrowing",
+        "Zero-cost"
+      ]
+    },
+    {
+      "id": "php",
+      "term": "PHP (피에이치피)",
+      "category": "전체 용어",
+      "languages": [
+        "PHP"
+      ],
+      "programs": [
+        "Composer"
+      ],
+      "simpleExplanation": "웹 서버 스크립트의 원로.",
+      "usedForSimple": "워드프레스 생태계.",
+      "usedForReal": "빠른 CRUD 개발.",
+      "generalExplanation": "서버 사이드 스크립팅 언어.",
+      "example": "composer install",
+      "relatedTerms": [
+        "Laravel",
+        "WordPress",
+        "Symfony"
+      ]
+    },
+    {
+      "id": "ruby",
+      "term": "Ruby (루비)",
+      "category": "전체 용어",
+      "languages": [
+        "Ruby"
+      ],
+      "programs": [
+        "Bundler"
+      ],
+      "simpleExplanation": "개발자가 행복한 언어.",
+      "usedForSimple": "Rails로 빠른 웹 개발.",
+      "usedForReal": "표현력 좋은 문법.",
+      "generalExplanation": "객체지향 스크립트 언어.",
+      "example": "bundle exec rails s",
+      "relatedTerms": [
+        "Rails",
+        "Gem",
+        "ActiveRecord"
+      ]
+    },
+    {
+      "id": "html",
+      "term": "HTML (에이치티엠엘)",
+      "category": "전체 용어",
+      "languages": [
+        "HTML"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "웹 문서의 뼈대.",
+      "usedForSimple": "콘텐츠 구조 정의.",
+      "usedForReal": "태그·요소.",
+      "generalExplanation": "하이퍼텍스트 마크업 언어.",
+      "example": "<div>...</div>",
+      "relatedTerms": [
+        "CSS",
+        "JS",
+        "DOM"
+      ]
+    },
+    {
+      "id": "css",
+      "term": "CSS (씨에스에스)",
+      "category": "전체 용어",
+      "languages": [
+        "CSS"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "웹의 옷.",
+      "usedForSimple": "색·크기·배치.",
+      "usedForReal": "박스 모델·선택자.",
+      "generalExplanation": "스타일시트 언어.",
+      "example": "display: flex;",
+      "relatedTerms": [
+        "Sass",
+        "Tailwind",
+        "Responsive"
+      ]
+    },
+    {
+      "id": "sass",
+      "term": "Sass (사스)",
+      "category": "전체 용어",
+      "languages": [
+        "CSS"
+      ],
+      "programs": [
+        "Sass"
+      ],
+      "simpleExplanation": "CSS 확장 문법 전처리기.",
+      "usedForSimple": "중첩·변수·믹스인.",
+      "usedForReal": "코드 재사용성 향상.",
+      "generalExplanation": "CSS 전처리기.",
+      "example": "$primary: #00f;",
+      "relatedTerms": [
+        "CSS",
+        "Less",
+        "PostCSS"
+      ]
+    },
+    {
+      "id": "webpack",
+      "term": "Webpack (웹팩)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Webpack"
+      ],
+      "simpleExplanation": "모듈을 하나로 묶는 번들러.",
+      "usedForSimple": "코드 스플리팅·로더.",
+      "usedForReal": "번들 최적화.",
+      "generalExplanation": "프론트엔드 빌드 도구.",
+      "example": "webpack --mode production",
+      "relatedTerms": [
+        "Babel",
+        "Vite",
+        "Rollup"
+      ]
+    },
+    {
+      "id": "vite",
+      "term": "Vite (바이트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Vite"
+      ],
+      "simpleExplanation": "초고속 프론트엔드 빌더.",
+      "usedForSimple": "ESM 기반 개발 서버.",
+      "usedForReal": "번들 최소화.",
+      "generalExplanation": "현대적 빌드 툴.",
+      "example": "vite build",
+      "relatedTerms": [
+        "Rollup",
+        "ESBuild",
+        "HMR"
+      ]
+    },
+    {
+      "id": "babel",
+      "term": "Babel (바벨)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Babel"
+      ],
+      "simpleExplanation": "최신 JS를 구형 브라우저도 이해하게 변환.",
+      "usedForSimple": "트랜스파일링.",
+      "usedForReal": "폴리필 적용.",
+      "generalExplanation": "JS 컴파일러.",
+      "example": "@babel/preset-env",
+      "relatedTerms": [
+        "ES6",
+        "Transpile",
+        "Polyfill"
+      ]
+    },
+    {
+      "id": "eslint",
+      "term": "ESLint (이에스린트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "ESLint"
+      ],
+      "simpleExplanation": "코드 문법/스타일 검사기.",
+      "usedForSimple": "버그 예방·일관성.",
+      "usedForReal": "규칙 기반 분석.",
+      "generalExplanation": "정적 코드 분석 도구.",
+      "example": "eslint .",
+      "relatedTerms": [
+        "Prettier",
+        "Lint",
+        "Rule"
+      ]
+    },
+    {
+      "id": "prettier",
+      "term": "Prettier (프리티어)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Prettier"
+      ],
+      "simpleExplanation": "자동 코드 포매터.",
+      "usedForSimple": "스타일 통일.",
+      "usedForReal": "팀 컨벤션 최소화.",
+      "generalExplanation": "일관된 코드 스타일러.",
+      "example": "prettier --write .",
+      "relatedTerms": [
+        "ESLint",
+        "Format",
+        "Style"
+      ]
+    },
+    {
+      "id": "owasp-top-10",
+      "term": "OWASP Top 10 (오와스프 톱10)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "OWASP"
+      ],
+      "simpleExplanation": "웹 취약점 10대 목록.",
+      "usedForSimple": "XSS/SQLi/인증오류 등.",
+      "usedForReal": "보안 점검 체크리스트.",
+      "generalExplanation": "OWASP 커뮤니티 표준.",
+      "example": "A1..A10",
+      "relatedTerms": [
+        "XSS",
+        "CSRF",
+        "SQL Injection"
+      ]
+    },
+    {
+      "id": "csrf",
+      "term": "CSRF (크로스사이트 요청 위조)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "사용자 의도와 다른 요청을 강제로 실행.",
+      "usedForSimple": "쿠키 세션 악용.",
+      "usedForReal": "토큰/SameSite 쿠키로 방어.",
+      "generalExplanation": "상태 변경 요청 보호 이슈.",
+      "example": "CSRF Token",
+      "relatedTerms": [
+        "XSS",
+        "CORS",
+        "Origin"
+      ]
+    },
+    {
+      "id": "xss",
+      "term": "XSS (크로스사이트 스크립팅)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "악성 스크립트 주입 공격.",
+      "usedForSimple": "쿠키 탈취·피싱.",
+      "usedForReal": "인코딩·CSP로 방어.",
+      "generalExplanation": "입력 검증·출력 인코딩 필수.",
+      "example": "<script>alert(1)</script>",
+      "relatedTerms": [
+        "CSP",
+        "Sanitization",
+        "Escape"
+      ]
+    },
+    {
+      "id": "cors",
+      "term": "CORS (코어스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "출처 다른 리소스 접근 제어.",
+      "usedForSimple": "프리플라이트·헤더 규칙.",
+      "usedForReal": "보안/편의 절충.",
+      "generalExplanation": "브라우저의 동일출처 정책 완화.",
+      "example": "Access-Control-Allow-Origin",
+      "relatedTerms": [
+        "SameSite",
+        "Origin",
+        "Preflight"
+      ]
+    },
+    {
+      "id": "https-tls",
+      "term": "HTTPS/TLS (HTTPS/TLS)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "OpenSSL"
+      ],
+      "simpleExplanation": "통신 내용 암호화 표준.",
+      "usedForSimple": "도청·변조 방지.",
+      "usedForReal": "인증서·핸드셰이크.",
+      "generalExplanation": "전송 계층 보안 프로토콜.",
+      "example": "Let's Encrypt",
+      "relatedTerms": [
+        "SSL",
+        "Certificate",
+        "Cipher"
+      ]
+    },
+    {
+      "id": "oauth-2-0",
+      "term": "OAuth 2.0 (오스2.0)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "권한 위임 표준.",
+      "usedForSimple": "구글 로그인 같은 서드파티 접근 허용.",
+      "usedForReal": "권한 범위·승인 코드 플로우.",
+      "generalExplanation": "리소스 접근 토큰 발급.",
+      "example": "authorization_code",
+      "relatedTerms": [
+        "OpenID Connect",
+        "JWT",
+        "Scope"
+      ]
+    },
+    {
+      "id": "openid-connect",
+      "term": "OpenID Connect (오픈아이디 커넥트)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "OAuth2 위에 신원 계층 추가.",
+      "usedForSimple": "ID 토큰으로 사용자 확인.",
+      "usedForReal": "소셜 로그인 표준.",
+      "generalExplanation": "인증 상호운용성.",
+      "example": "id_token",
+      "relatedTerms": [
+        "OAuth 2.0",
+        "JWT",
+        "Claims"
+      ]
+    },
+    {
+      "id": "jwt",
+      "term": "JWT (제이더블유티)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "JSON 포맷의 서명 토큰.",
+      "usedForSimple": "무상태 인증 세션.",
+      "usedForReal": "서명·만료·클레임.",
+      "generalExplanation": "API 인증·권한에 널리 사용.",
+      "example": "Authorization: Bearer ...",
+      "relatedTerms": [
+        "JWS",
+        "JWE",
+        "Claims"
+      ]
+    },
+    {
+      "id": "sso",
+      "term": "SSO (에스에스오)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "한 번 로그인으로 여러 시스템 접근.",
+      "usedForSimple": "편의성과 보안 동시 확보.",
+      "usedForReal": "SAML/OIDC 기반.",
+      "generalExplanation": "엔터프라이즈 통합 로그인.",
+      "example": "Single Sign-On",
+      "relatedTerms": [
+        "SAML",
+        "OIDC",
+        "Federation"
+      ]
+    },
+    {
+      "id": "rate-limiting",
+      "term": "Rate Limiting (요율 제한)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "과도한 요청을 제한.",
+      "usedForSimple": "봇/남용 방지.",
+      "usedForReal": "토큰 버킷·슬라이딩 윈도우.",
+      "generalExplanation": "API 보호 기법.",
+      "example": "429 Too Many Requests",
+      "relatedTerms": [
+        "WAF",
+        "Quota",
+        "Backoff"
+      ]
+    },
+    {
+      "id": "waf",
+      "term": "WAF (웹 방화벽)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "웹 공격을 앞단에서 차단.",
+      "usedForSimple": "패턴 기반 탐지.",
+      "usedForReal": "OWASP 룰셋 활용.",
+      "generalExplanation": "L7 보안 장비/서비스.",
+      "example": "mod_security",
+      "relatedTerms": [
+        "CDN",
+        "Rule",
+        "Signature"
+      ]
+    },
+    {
+      "id": "iac",
+      "term": "IaC (아이에이씨)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Terraform",
+        "Pulumi"
+      ],
+      "simpleExplanation": "인프라를 코드처럼 관리.",
+      "usedForSimple": "형상관리·리뷰 가능.",
+      "usedForReal": "재현성/일관성 향상.",
+      "generalExplanation": "코드로 선언하는 인프라.",
+      "example": "resource \"aws_s3_bucket\"",
+      "relatedTerms": [
+        "Terraform",
+        "Ansible",
+        "GitOps"
+      ]
+    },
+    {
+      "id": "terraform",
+      "term": "Terraform (테라폼)",
+      "category": "전체 용어",
+      "languages": [
+        "HCL"
+      ],
+      "programs": [
+        "Terraform"
+      ],
+      "simpleExplanation": "클라우드 자원을 선언적으로 구성.",
+      "usedForSimple": "멀티클라우드 지원.",
+      "usedForReal": "Plan/Apply.",
+      "generalExplanation": "IaC 대표 도구.",
+      "example": "terraform apply",
+      "relatedTerms": [
+        "HCL",
+        "Module",
+        "State"
+      ]
+    },
+    {
+      "id": "ansible",
+      "term": "Ansible (앤서블)",
+      "category": "전체 용어",
+      "languages": [
+        "YAML"
+      ],
+      "programs": [
+        "Ansible"
+      ],
+      "simpleExplanation": "서버 설정을 자동으로 맞추는 요리 레시피.",
+      "usedForSimple": "에이전트리스 SSH.",
+      "usedForReal": "Playbook 기반.",
+      "generalExplanation": "구성 관리/프로비저닝 도구.",
+      "example": "ansible-playbook site.yml",
+      "relatedTerms": [
+        "Inventory",
+        "Role",
+        "Idempotent"
+      ]
+    },
+    {
+      "id": "serverless",
+      "term": "Serverless (서버리스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "AWS Lambda",
+        "Cloud Functions"
+      ],
+      "simpleExplanation": "서버 관리 없이 함수 실행.",
+      "usedForSimple": "자동 스케일·과금 효율.",
+      "usedForReal": "이벤트 드리븐.",
+      "generalExplanation": "FaaS 아키텍처.",
+      "example": "handler(event, ctx)",
+      "relatedTerms": [
+        "Lambda",
+        "Cloud Functions",
+        "Edge"
+      ]
+    },
+    {
+      "id": "lambda",
+      "term": "Lambda (람다)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "AWS Lambda"
+      ],
+      "simpleExplanation": "이벤트에 반응하는 AWS 함수 실행 환경.",
+      "usedForSimple": "크론/HTTP/큐 트리거.",
+      "usedForReal": "초 단위 과금.",
+      "generalExplanation": "서버 관리 없는 함수형 실행.",
+      "example": "exports.handler=async(e)=>{}",
+      "relatedTerms": [
+        "Serverless",
+        "Event",
+        "Trigger"
+      ]
+    },
+    {
+      "id": "edge-functions",
+      "term": "Edge Functions (엣지 펑션)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Vercel",
+        "Cloudflare Workers"
+      ],
+      "simpleExplanation": "사용자와 가까운 곳에서 실행.",
+      "usedForSimple": "레이턴시↓ 성능↑.",
+      "usedForReal": "엣지 위치 코드 실행.",
+      "generalExplanation": "CDN 엣지 컴퓨팅.",
+      "example": "export const runtime='edge'",
+      "relatedTerms": [
+        "CDN",
+        "Latency",
+        "Geo"
+      ]
+    },
+    {
+      "id": "cdn",
+      "term": "CDN (씨디엔)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "가까운 서버에서 파일 전달.",
+      "usedForSimple": "속도 향상·부하 분산.",
+      "usedForReal": "캐시 만료 정책.",
+      "generalExplanation": "콘텐츠 전송 네트워크.",
+      "example": "Cache-Control",
+      "relatedTerms": [
+        "Edge",
+        "POP",
+        "TTL"
+      ]
+    },
+    {
+      "id": "dns",
+      "term": "DNS (디엔에스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "도메인→IP 주소 변환 전화번호부.",
+      "usedForSimple": "브라우저 첫걸음.",
+      "usedForReal": "A/AAAA/CNAME/NS.",
+      "generalExplanation": "도메인 이름 시스템.",
+      "example": "dig bionvibe.com",
+      "relatedTerms": [
+        "Resolver",
+        "Zone",
+        "Record"
+      ]
+    },
+    {
+      "id": "load-balancer",
+      "term": "Load Balancer (로드 밸런서)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "트래픽을 여러 서버로 배분.",
+      "usedForSimple": "가용성·확장성 확보.",
+      "usedForReal": "L4/L7 방식.",
+      "generalExplanation": "부하 분산 장치.",
+      "example": "round-robin",
+      "relatedTerms": [
+        "HAProxy",
+        "ALB",
+        "Nginx"
+      ]
+    },
+    {
+      "id": "auto-scaling",
+      "term": "Auto Scaling (오토 스케일링)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "트래픽에 맞춰 서버 수 자동 조절.",
+      "usedForSimple": "비용 최적화.",
+      "usedForReal": "규칙 기반/예측 기반.",
+      "generalExplanation": "수요 탄력 대응.",
+      "example": "scale out/in",
+      "relatedTerms": [
+        "ASG",
+        "HPA",
+        "Schedule"
+      ]
+    },
+    {
+      "id": "unit-test",
+      "term": "Unit Test (단위 테스트)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Jest",
+        "JUnit",
+        "pytest"
+      ],
+      "simpleExplanation": "작은 함수/모듈을 검증.",
+      "usedForSimple": "빠르고 고립된 테스트.",
+      "usedForReal": "목·스텁 활용.",
+      "generalExplanation": "품질의 첫 관문.",
+      "example": "assert add(1,2)==3",
+      "relatedTerms": [
+        "Mock",
+        "Coverage",
+        "CI"
+      ]
+    },
+    {
+      "id": "integration-test",
+      "term": "Integration Test (통합 테스트)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "모듈 간 연결을 검증.",
+      "usedForSimple": "DB/네트워크 포함.",
+      "usedForReal": "시스템 상호작용.",
+      "generalExplanation": "하위 시스템 결합 검증.",
+      "example": "end-to-end 전 단계.",
+      "relatedTerms": [
+        "Unit Test",
+        "E2E",
+        "Fixture"
+      ]
+    },
+    {
+      "id": "e2e-test",
+      "term": "E2E Test (엔드투엔드 테스트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Cypress",
+        "Playwright"
+      ],
+      "simpleExplanation": "사용자 시나리오 그대로 검증.",
+      "usedForSimple": "브라우저 자동 조작.",
+      "usedForReal": "회귀 버그 방지.",
+      "generalExplanation": "끝단부터 끝단까지 테스트.",
+      "example": "cy.visit('/login')",
+      "relatedTerms": [
+        "Cypress",
+        "Playwright",
+        "Selenium"
+      ]
+    },
+    {
+      "id": "tdd",
+      "term": "TDD (테스트 주도 개발)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "테스트를 먼저 쓰고 코드 작성.",
+      "usedForSimple": "RED→GREEN→REFACTOR.",
+      "usedForReal": "디자인 개선·품질 향상.",
+      "generalExplanation": "버그 예방 개발 방식.",
+      "example": "write test first",
+      "relatedTerms": [
+        "BDD",
+        "Refactor",
+        "Spec"
+      ]
+    },
+    {
+      "id": "bdd",
+      "term": "BDD (행위 주도 개발)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Cucumber"
+      ],
+      "simpleExplanation": "사람 문장으로 시나리오 작성.",
+      "usedForSimple": "Given-When-Then.",
+      "usedForReal": "도메인 공통 언어.",
+      "generalExplanation": "협업 친화 개발 방식.",
+      "example": "Feature: Login",
+      "relatedTerms": [
+        "Gherkin",
+        "Spec",
+        "TDD"
+      ]
+    },
+    {
+      "id": "jest",
+      "term": "Jest (제스트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Jest"
+      ],
+      "simpleExplanation": "프론트엔드 단위 테스트 프레임워크.",
+      "usedForSimple": "스냅샷 테스트 지원.",
+      "usedForReal": "빠른 실행.",
+      "generalExplanation": "메타가 만든 JS 테스팅.",
+      "example": "jest --watch",
+      "relatedTerms": [
+        "Testing Library",
+        "Mock",
+        "Coverage"
+      ]
+    },
+    {
+      "id": "cypress",
+      "term": "Cypress (사이프레스)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Cypress"
+      ],
+      "simpleExplanation": "브라우저 E2E 테스트 도구.",
+      "usedForSimple": "DOM 상호작용 자동화.",
+      "usedForReal": "실행·디버그 쉬움.",
+      "generalExplanation": "프론트엔드 E2E 표준.",
+      "example": "cy.get('button').click()",
+      "relatedTerms": [
+        "Playwright",
+        "Selenium",
+        "E2E"
+      ]
+    },
+    {
+      "id": "playwright",
+      "term": "Playwright (플레이라이트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Playwright"
+      ],
+      "simpleExplanation": "멀티 브라우저 자동화 E2E.",
+      "usedForSimple": "비동기 안정성·트레이싱.",
+      "usedForReal": "코드 스냅샷.",
+      "generalExplanation": "MS가 만든 E2E 도구.",
+      "example": "await page.click('text=Login')",
+      "relatedTerms": [
+        "Cypress",
+        "Puppeteer",
+        "Trace"
+      ]
+    },
+    {
+      "id": "vitest",
+      "term": "Vitest (바이테스트)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Vitest"
+      ],
+      "simpleExplanation": "Vite 네이티브 단위 테스트.",
+      "usedForSimple": "빠른 스타트업.",
+      "usedForReal": "ESM 친화.",
+      "generalExplanation": "경량 테스트 러너.",
+      "example": "vite와 궁합 최고.",
+      "relatedTerms": [
+        "Jest",
+        "Vite",
+        "ESM"
+      ]
+    },
+    {
+      "id": "mocking",
+      "term": "Mocking (모킹)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "진짜 대신 가짜로 시뮬레이션.",
+      "usedForSimple": "외부 의존성 대체.",
+      "usedForReal": "테스트 고립·재현성.",
+      "generalExplanation": "목 객체·스텁.",
+      "example": [
+        "Stub",
+        "Spy",
+        "Fake"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "memoization",
+      "term": "Memoization (메모이제이션)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "결과를 저장해 재사용.",
+      "usedForSimple": "중복 계산 제거.",
+      "usedForReal": "속도 향상.",
+      "generalExplanation": "입력-출력 캐시.",
+      "example": [
+        "Cache",
+        "DP",
+        "Optimization"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "debounce",
+      "term": "Debounce (디바운스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "입력이 멈출 때까지 기다렸다 실행.",
+      "usedForSimple": "불필요한 호출 감소.",
+      "usedForReal": "검색창 최적화.",
+      "generalExplanation": "지연 실행.",
+      "example": [
+        "Throttle",
+        "Rate Limit",
+        "Input"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "throttle",
+      "term": "Throttle (스로틀)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "주기적으로 최대 1회만 실행.",
+      "usedForSimple": "스크롤/리사이즈 최적화.",
+      "usedForReal": "과부하 방지.",
+      "generalExplanation": "주기 제한.",
+      "example": [
+        "Debounce",
+        "FPS",
+        "Scheduler"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "lazy-loading",
+      "term": "Lazy Loading (지연 로딩)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "필요할 때만 로딩.",
+      "usedForSimple": "초기 속도 개선.",
+      "usedForReal": "이미지/코드 지연 로드.",
+      "generalExplanation": "퍼포먼스 최적화.",
+      "example": [
+        "Code Splitting",
+        "IntersectionObserver",
+        "Performance"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "code-splitting",
+      "term": "Code Splitting (코드 스플리팅)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Webpack",
+        "Vite"
+      ],
+      "simpleExplanation": "코드를 조각내 필요한 순간만 로드.",
+      "usedForSimple": "초기 번들 크기↓.",
+      "usedForReal": "라우트 기반 분할.",
+      "generalExplanation": "동적 import.",
+      "example": [
+        "Tree Shaking",
+        "Lazy Loading",
+        "Chunk"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "tree-shaking",
+      "term": "Tree Shaking (트리 셰이킹)",
+      "category": "전체 용어",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "Webpack",
+        "Rollup"
+      ],
+      "simpleExplanation": "안 쓰는 코드를 제거.",
+      "usedForSimple": "번들 최소화.",
+      "usedForReal": "정적 분석 기반 제거.",
+      "generalExplanation": "Dead code 제거.",
+      "example": [
+        "ESM",
+        "DCE",
+        "Minify"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "http-2",
+      "term": "HTTP/2 (에이치티티피2)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "멀티플렉싱으로 다중 전송.",
+      "usedForSimple": "헤더 압축.",
+      "usedForReal": "서버푸시.",
+      "generalExplanation": "HTTP 1.1 개선.",
+      "example": [
+        "HTTP/3",
+        "SPDY",
+        "h2"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "http-3",
+      "term": "HTTP/3 (에이치티티피3/QUIC)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "UDP 기반 지연 최소화.",
+      "usedForSimple": "핸드셰이크 간소화.",
+      "usedForReal": "혼잡 제어 향상.",
+      "generalExplanation": "차세대 전송.",
+      "example": [
+        "QUIC",
+        "TLS 1.3",
+        "h3"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "web-vitals",
+      "term": "Web Vitals (웹 바이탈)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Lighthouse"
+      ],
+      "simpleExplanation": "LCP/CLS/INP 등 핵심 품질 지표.",
+      "usedForSimple": "사용자 체감 성능 측정.",
+      "usedForReal": "측정·개선 사이클.",
+      "generalExplanation": "웹 품질 KPI.",
+      "example": "lighthouse",
+      "relatedTerms": [
+        "Core Web Vitals",
+        "Perf",
+        "UX"
+      ]
+    },
+    {
+      "id": "acid",
+      "term": "ACID (에이시드)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "트랜잭션의 4특성: 원자성·일관성·격리성·지속성.",
+      "usedForSimple": "DB 신뢰성 핵심.",
+      "usedForReal": "롤백·격리 수준.",
+      "generalExplanation": "트랜잭션 일관성 원칙.",
+      "example": "BEGIN/COMMIT",
+      "relatedTerms": [
+        "Transaction",
+        "Isolation",
+        "Durability"
+      ]
+    },
+    {
+      "id": "transaction",
+      "term": "Transaction (트랜잭션)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "한 덩어리 작업 단위.",
+      "usedForSimple": "성공/실패 원자적 처리.",
+      "usedForReal": "격리 수준 조절.",
+      "generalExplanation": "일관성 보장.",
+      "example": [
+        "Rollback",
+        "Commit",
+        "Lock"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "index",
+      "term": "Index (인덱스)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "검색을 빠르게 하는 목차.",
+      "usedForSimple": "읽기 성능 향상.",
+      "usedForReal": "쓰기 비용 증가.",
+      "generalExplanation": "B-Tree/Hash 인덱스.",
+      "example": [
+        "Query Plan",
+        "Scan",
+        "Selectivity"
+      ],
+      "relatedTerms": []
+    },
+    {
+      "id": "normalization",
+      "term": "Normalization (정규화)",
+      "category": "전체 용어",
+      "languages": [
+        "Any"
+      ],
+      "programs": [
+        "Any"
+      ],
+      "simpleExplanation": "중복을 줄이고 무결성 높이기.",
+      "usedForSimple": "1~3정규형·BCNF.",
+      "usedForReal": "설계 규칙.",
+      "generalExplanation": "스키마 설계 기법.",
+      "example": [
+        "Denormalization",
+        "Key",
+        "Dependency"
+      ],
+      "relatedTerms": []
+    }
+  ]
+}

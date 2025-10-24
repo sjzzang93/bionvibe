@@ -4,7 +4,7 @@ export const DEV_TERMS: DevTerm[] = [
   {
     id: 'react',
     term: 'React',
-    category: 'Frontend',
+    category: '기본용어',
     easyExplanation:
       '레고 블록처럼 UI를 조립하는 기술이에요. 버튼·카드 같은 조각을 모아 페이지를 만듭니다.',
     realExplanation:
@@ -16,7 +16,7 @@ export const DEV_TERMS: DevTerm[] = [
   {
     id: 'api',
     term: 'API',
-    category: 'Backend',
+    category: '기본용어',
     easyExplanation:
       '식당 주문서처럼, 프론트가 백엔드에 "이 데이터 주세요!"라고 전달하는 통로예요.',
     realExplanation:
@@ -25,7 +25,7 @@ export const DEV_TERMS: DevTerm[] = [
   {
     id: 'database',
     term: 'Database',
-    category: 'Backend',
+    category: '기본용어',
     easyExplanation:
       '도서관 책장처럼 정보를 정리해 보관하는 창고예요.',
     realExplanation:
@@ -34,7 +34,7 @@ export const DEV_TERMS: DevTerm[] = [
   {
     id: 'migration',
     term: 'Migration',
-    category: 'Infra',
+    category: '기본용어',
     easyExplanation:
       '이삿짐 옮기기와 같아요. 데이터를 새 집(DB/서버)으로 옮기고 배치도 새로 맞춰요.',
     realExplanation:
@@ -45,7 +45,7 @@ npx prisma migrate dev --name add_user_table`
   {
     id: 'typescript',
     term: 'TypeScript',
-    category: 'Frontend',
+    category: '기본용어',
     easyExplanation:
       'JavaScript에 타입 체크를 추가한 언어. 오타나 실수를 미리 잡아줘요.',
     realExplanation:
@@ -60,7 +60,7 @@ const user: User = { name: 'Kim', age: 30 };`
   {
     id: 'nextjs',
     term: 'Next.js',
-    category: 'Frontend',
+    category: '기본용어',
     easyExplanation:
       'React로 만든 웹사이트를 더 빠르고 SEO에 강하게 만들어주는 프레임워크예요.',
     realExplanation:
@@ -73,7 +73,7 @@ export default function Home() {
   {
     id: 'git',
     term: 'Git',
-    category: 'DevOps',
+    category: '기본용어',
     easyExplanation:
       '작업한 코드의 타임머신이에요. 언제든 과거로 돌아가거나 여러 버전을 관리할 수 있어요.',
     realExplanation:
@@ -85,7 +85,7 @@ git push origin main`
   {
     id: 'docker',
     term: 'Docker',
-    category: 'DevOps',
+    category: '기본용어',
     easyExplanation:
       '앱을 컨테이너 상자에 담아 어디서든 똑같이 실행되게 해줘요.',
     realExplanation:
@@ -100,7 +100,7 @@ CMD ["npm", "start"]`
   {
     id: 'rest',
     term: 'REST API',
-    category: 'Backend',
+    category: '기본용어',
     easyExplanation:
       'URL 주소로 데이터를 주고받는 규칙이에요. GET은 가져오기, POST는 보내기 같은 식으로요.',
     realExplanation:
@@ -113,7 +113,7 @@ fetch('/api/users')
   {
     id: 'graphql',
     term: 'GraphQL',
-    category: 'Backend',
+    category: '기본용어',
     easyExplanation:
       '필요한 데이터만 딱 골라서 요청할 수 있는 똑똑한 API예요.',
     realExplanation:
@@ -128,7 +128,7 @@ fetch('/api/users')
   {
     id: 'redux',
     term: 'Redux',
-    category: 'Frontend',
+    category: '기본용어',
     easyExplanation:
       '앱 전체의 상태를 한 곳에 모아 관리하는 창고예요.',
     realExplanation:
@@ -145,7 +145,7 @@ fetch('/api/users')
   {
     id: 'css',
     term: 'CSS',
-    category: 'Frontend',
+    category: '기본용어',
     easyExplanation:
       '웹페이지의 옷과 화장이에요. 색상, 크기, 위치를 예쁘게 꾸며줍니다.',
     realExplanation:
@@ -160,7 +160,7 @@ fetch('/api/users')
   {
     id: 'tailwind',
     term: 'Tailwind CSS',
-    category: 'Frontend',
+    category: '기본용어',
     easyExplanation:
       'CSS를 클래스 이름으로 빠르게 작성할 수 있는 도구예요. "text-red-500" 이런 식으로요.',
     realExplanation:
@@ -172,7 +172,7 @@ fetch('/api/users')
   {
     id: 'webpack',
     term: 'Webpack',
-    category: 'DevOps',
+    category: '기본용어',
     easyExplanation:
       '여러 파일을 하나로 묶어주는 짐 싸는 도구예요.',
     realExplanation:
@@ -181,7 +181,7 @@ fetch('/api/users')
   {
     id: 'npm',
     term: 'npm',
-    category: 'DevOps',
+    category: '기본용어',
     easyExplanation:
       '다른 사람이 만든 코드(패키지)를 쉽게 다운받아 쓸 수 있는 마켓이에요.',
     realExplanation:
@@ -192,7 +192,7 @@ npm run dev`
   {
     id: 'jwt',
     term: 'JWT',
-    category: 'Backend',
+    category: '기본용어',
     easyExplanation:
       '신분증처럼, 사용자가 누군지 증명하는 토큰이에요.',
     realExplanation:
@@ -203,7 +203,7 @@ const token = jwt.sign({ userId: 123 }, 'secret', { expiresIn: '1h' });`
   {
     id: 'cicd',
     term: 'CI/CD',
-    category: 'DevOps',
+    category: '기본용어',
     easyExplanation:
       '코드를 자동으로 테스트하고 배포까지 해주는 자동화 시스템이에요.',
     realExplanation:
@@ -212,7 +212,7 @@ const token = jwt.sign({ userId: 123 }, 'secret', { expiresIn: '1h' });`
   {
     id: 'kubernetes',
     term: 'Kubernetes',
-    category: 'Infra',
+    category: '기본용어',
     easyExplanation:
       '여러 컨테이너를 자동으로 관리하고 배치하는 오케스트라 지휘자예요.',
     realExplanation:
@@ -221,7 +221,7 @@ const token = jwt.sign({ userId: 123 }, 'secret', { expiresIn: '1h' });`
   {
     id: 'mongodb',
     term: 'MongoDB',
-    category: 'Backend',
+    category: '기본용어',
     easyExplanation:
       'JSON처럼 자유로운 형식으로 데이터를 저장하는 DB예요.',
     realExplanation:
@@ -236,7 +236,7 @@ db.users.insertOne({
   {
     id: 'oauth',
     term: 'OAuth',
-    category: 'Backend',
+    category: '기본용어',
     easyExplanation:
       '"구글 계정으로 로그인" 같은 기능이에요. 비밀번호 안 줘도 로그인 가능.',
     realExplanation:

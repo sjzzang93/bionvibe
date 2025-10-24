@@ -1,0 +1,18 @@
+{
+  "terms": [
+    {
+      "id": "flutter",
+      "term": "Flutter",
+      "korean": "플러터",
+      "category": "Flutter",
+      "languages": ["Dart"],
+      "programs": ["Flutter SDK", "Android Studio", "VS Code", "Xcode"],
+      "simpleExplanation": "프랜차이즈 본점 레시피처럼 한 번 정하면, 모든 지점(아이폰·안드로이드·웹)에서 같은 맛(화면)을 내요.",
+      "usedForSimple": "핸드폰·컴퓨터에서 똑같이 보이는 앱을 빨리 만들 때 써요.",
+      "usedForReal": "단일 코드베이스로 iOS, Android, Web, Desktop 앱을 개발·빌드.",
+      "generalExplanation": "Google의 오픈소스 UI 프레임워크로, 위젯 기반 선언적 UI·Hot Reload·AOT 컴파일을 제공하며 다중 플랫폼 타깃을 지원한다.",
+      "example": "flutter create my_app && cd my_app && flutter run",
+      "relatedTerms": ["Dart", "Widget", "Hot Reload"]
+    }
+  ]
+}

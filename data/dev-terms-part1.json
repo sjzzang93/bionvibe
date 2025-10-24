@@ -1,0 +1,223 @@
+{
+  "terms": [
+    {
+      "id": "flutter",
+      "term": "Flutter (플러터)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK",
+        "Android Studio",
+        "VS Code",
+        "Xcode"
+      ],
+      "simpleExplanation": "프랜차이즈 본점 레시피처럼 한 번 정하면, 모든 지점(아이폰·안드로이드·웹)에서 같은 맛(화면)을 내요.",
+      "usedForSimple": "핸드폰·컴퓨터에서 똑같이 보이는 앱을 빨리 만들 때 써요.",
+      "usedForReal": "단일 코드베이스로 iOS, Android, Web, Desktop 앱을 개발·빌드.",
+      "generalExplanation": "Google의 오픈소스 UI 프레임워크로, 위젯 기반 선언적 UI·Hot Reload·AOT 컴파일을 제공하며 다중 플랫폼 타깃을 지원한다.",
+      "example": "flutter create my_app && cd my_app && flutter run",
+      "relatedTerms": [
+        "Dart (다트)",
+        "Widget (위젯)",
+        "Hot Reload (핫 리로드)"
+      ]
+    },
+    {
+      "id": "dart",
+      "term": "Dart (다트)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Dart SDK",
+        "VS Code",
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "플러터가 쓰는 주력 언어예요. 리액트의 자바스크립트처럼 ‘기본 언어’ 역할!",
+      "usedForSimple": "플러터 앱 로직과 화면을 만드는 데 써요.",
+      "usedForReal": "JIT/ AOT 컴파일을 모두 지원하며, 강타입·비동기 지원으로 모바일·웹·서버 개발에 적합.",
+      "generalExplanation": "Google이 개발한 범용 프로그래밍 언어로, Null-safety와 비동기(Async/await)를 지원한다.",
+      "example": "dart run bin/main.dart",
+      "relatedTerms": [
+        "Flutter (플러터)",
+        "Null Safety",
+        "Async/Await"
+      ]
+    },
+    {
+      "id": "widget",
+      "term": "Widget (위젯)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "레고 블록 한 조각처럼 화면을 이루는 기본 단위예요.",
+      "usedForSimple": "버튼, 글자, 이미지 같은 화면 요소를 만들 때 써요.",
+      "usedForReal": "불변(Stateless)·가변(Stateful) 위젯으로 UI와 상태를 분리해 선언적으로 구성.",
+      "generalExplanation": "플러터 UI의 최소 구성 단위로, build()를 통해 트리 구조로 렌더링된다.",
+      "example": "class MyButton extends StatelessWidget { /* ... */ }",
+      "relatedTerms": [
+        "StatelessWidget",
+        "StatefulWidget",
+        "BuildContext"
+      ]
+    },
+    {
+      "id": "hot-reload",
+      "term": "Hot Reload (핫 리로드)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK",
+        "VS Code",
+        "Android Studio"
+      ],
+      "simpleExplanation": "코드를 저장하면 앱이 거의 즉시 새로고침돼요—앱을 다시 켤 필요가 없어요!",
+      "usedForSimple": "UI를 빠르게 수정·실험할 때 써요.",
+      "usedForReal": "VM에 코드 변경분을 주입해 상태를 유지한 채 UI를 갱신.",
+      "generalExplanation": "플러터 개발 워크플로에서 변경 사항을 즉시 반영해 개발 속도를 크게 높이는 기능.",
+      "example": "Flutter: Save (⌘S) → Hot Reload",
+      "relatedTerms": [
+        "Hot Restart",
+        "Stateful Hot Reload",
+        "DevTools"
+      ]
+    },
+    {
+      "id": "stateless-widget",
+      "term": "StatelessWidget (불변 위젯)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "항상 같은 모습의 레고 조각이에요—생성 후 스스로는 안 변해요.",
+      "usedForSimple": "정적인 텍스트·아이콘 등 변하지 않는 UI에 사용.",
+      "usedForReal": "내부 상태가 없고, 입력 값(프로퍼티)이 바뀔 때만 다시 그려진다.",
+      "generalExplanation": "build 메서드만 구현하며, 외부에서 주어진 값에 의해 재빌드된다.",
+      "example": "class TitleText extends StatelessWidget { /* ... */ }",
+      "relatedTerms": [
+        "StatefulWidget",
+        "Build",
+        "Rebuild"
+      ]
+    },
+    {
+      "id": "stateful-widget",
+      "term": "StatefulWidget (가변 위젯)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "기분 따라 모습이 달라지는 레고 조각! 버튼을 누르면 색이 바뀌는 그런 애예요.",
+      "usedForSimple": "버튼 클릭, 폼 입력처럼 ‘변화’가 있는 화면에 사용.",
+      "usedForReal": "State 객체를 통해 수명주기와 상태를 관리하며 setState로 UI를 갱신.",
+      "generalExplanation": "createState()로 State를 생성하고, 상태 변경 시 프레임워크가 재빌드를 트리거.",
+      "example": "class Counter extends StatefulWidget { /* ... */ }",
+      "relatedTerms": [
+        "setState",
+        "Lifecycle",
+        "State Management"
+      ]
+    },
+    {
+      "id": "pub",
+      "term": "pub (패키지 매니저)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK",
+        "Dart SDK"
+      ],
+      "simpleExplanation": "앱에 필요한 부품(패키지)을 가져오는 마트예요.",
+      "usedForSimple": "http, provider 같은 패키지를 추가할 때 써요.",
+      "usedForReal": "pubspec.yaml로 의존성을 선언하고 pub.dev에서 패키지를 검색·설치.",
+      "generalExplanation": "Dart/Flutter의 표준 패키지 관리자이자 레지스트리(pub.dev).",
+      "example": "flutter pub add http && flutter pub get",
+      "relatedTerms": [
+        "pubspec.yaml",
+        "Dependency",
+        "Semantic Versioning"
+      ]
+    },
+    {
+      "id": "build-context",
+      "term": "BuildContext (빌드 컨텍스트)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "현재 위젯이 트리에서 어디 있는지 알려주는 주소표예요.",
+      "usedForSimple": "Theme, Navigator 같은 상위 정보를 가져올 때 써요.",
+      "usedForReal": "위젯 트리 위치·상하위 관계를 참조해 InheritedWidget 데이터 접근.",
+      "generalExplanation": "Element 트리의 핸들로, build·Navigator·Theme 등 프레임워크 리소스 조회에 사용.",
+      "example": "Theme.of(context).textTheme",
+      "relatedTerms": [
+        "Element",
+        "InheritedWidget",
+        "Navigator"
+      ]
+    },
+    {
+      "id": "material-design",
+      "term": "Material Design (머티리얼 디자인)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart",
+        "CSS"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "구글 표준 디자인 가이드예요—버튼·색·그림자 규칙이 정갈해요.",
+      "usedForSimple": "앱을 ‘안드로이드스럽게’ 빠르게 꾸밀 때 사용.",
+      "usedForReal": "MaterialApp/Theme을 통해 일관된 UI 구성, 접근성·반응형 규칙을 제공.",
+      "generalExplanation": "구글이 제안한 시각·모션·인터랙션 디자인 시스템.",
+      "example": "MaterialApp(theme: ThemeData(colorSchemeSeed: Colors.blue))",
+      "relatedTerms": [
+        "Cupertino",
+        "Theme",
+        "Accessibility"
+      ]
+    },
+    {
+      "id": "cupertino",
+      "term": "Cupertino (쿠퍼티노 위젯)",
+      "category": "Flutter 기본",
+      "languages": [
+        "Dart"
+      ],
+      "programs": [
+        "Flutter SDK"
+      ],
+      "simpleExplanation": "아이폰 느낌 나는 디자인 세트예요—iOS 스타일 구성요소 모음.",
+      "usedForSimple": "iOS 분위기의 스위치·탭바·네비게이션을 만들 때 사용.",
+      "usedForReal": "CupertinoApp/위젯군으로 iOS 네이티브 룩앤필 구현.",
+      "generalExplanation": "iOS 디자인 언어를 따르는 플러터 위젯 라이브러리.",
+      "example": "CupertinoApp(home: CupertinoPageScaffold(/*...*/))",
+      "relatedTerms": [
+        "Material",
+        "iOS Human Interface Guidelines",
+        "Platform Adaptive UI"
+      ]
+    }
+  ]
+}

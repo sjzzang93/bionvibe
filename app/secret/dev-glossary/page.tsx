@@ -75,12 +75,12 @@ export default function DevGlossaryPage() {
         </Link>
 
         {/* 페이지 타이틀 */}
-        <header className="mb-4">
-          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
+        <header className="mb-4 sm:mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white">
             📖 개발자 용어 사전
           </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-            비유 + 실제 설명을 한 번에. 초등학생도 이해하는 개발 용어.
+          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-2">
+            비유 + 실제 설명을 한 번에. 초등학생도 이해하는 개발 용어 + Flutter 특화
           </p>
         </header>
 

@@ -1,0 +1,231 @@
+{
+  "terms": [
+    {
+      "id": "react",
+      "term": "React (리액트)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "programs": [
+        "VS Code",
+        "Next.js",
+        "Vite"
+      ],
+      "simpleExplanation": "레고 블록처럼 화면을 조각조각 쪼개서 조립하듯 만드는 도구예요.",
+      "usedForSimple": "웹페이지를 빠르고 재사용 가능하게 만들 때 써요.",
+      "usedForReal": "UI를 컴포넌트 단위로 관리하고, 가상 DOM을 통해 효율적으로 렌더링한다.",
+      "generalExplanation": "Meta(전 Facebook)가 개발한 오픈소스 자바스크립트 라이브러리로, 선언적 UI와 상태 기반 렌더링을 지원한다.",
+      "example": "npx create-react-app my-app",
+      "relatedTerms": [
+        "Component (컴포넌트)",
+        "Virtual DOM (가상 돔)",
+        "Next.js (넥스트)"
+      ]
+    },
+    {
+      "id": "nextjs",
+      "term": "Next.js (넥스트)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "programs": [
+        "Vercel",
+        "VS Code"
+      ],
+      "simpleExplanation": "리액트에 날개 달아주는 ‘비행모듈’이에요 — 서버와 프론트를 동시에 관리하죠.",
+      "usedForSimple": "로그인, 게시글 등 서버가 필요한 웹사이트 만들 때 써요.",
+      "usedForReal": "React 기반 풀스택 프레임워크로, SSR·SSG·ISR 등 다양한 렌더링 전략을 지원한다.",
+      "generalExplanation": "서버사이드 렌더링(SSR), 정적 사이트 생성(SSG), API Routes 등을 제공하는 React 확장 프레임워크.",
+      "example": "npx create-next-app@latest my-app",
+      "relatedTerms": [
+        "SSR (서버사이드렌더링)",
+        "API Route",
+        "Vercel (버셀)"
+      ]
+    },
+    {
+      "id": "typescript",
+      "term": "TypeScript (타입스크립트)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "TypeScript"
+      ],
+      "programs": [
+        "VS Code",
+        "Node.js"
+      ],
+      "simpleExplanation": "‘자바스크립트에 안전벨트를 단 버전’이에요. 실수하기 어렵게 지켜줘요.",
+      "usedForSimple": "코드 짤 때 오류를 미리 막고 싶을 때 써요.",
+      "usedForReal": "정적 타입 시스템을 통해 코드의 안전성과 가독성을 높인다.",
+      "generalExplanation": "Microsoft에서 만든 오픈소스 언어로, JavaScript에 타입을 추가해 대규모 프로젝트의 유지보수를 용이하게 한다.",
+      "example": "tsc main.ts",
+      "relatedTerms": [
+        "JavaScript (자바스크립트)",
+        "Interface (인터페이스)",
+        "Typing (타이핑)"
+      ]
+    },
+    {
+      "id": "tailwind",
+      "term": "Tailwind CSS (테일윈드)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "CSS"
+      ],
+      "programs": [
+        "VS Code",
+        "Next.js"
+      ],
+      "simpleExplanation": "‘레고 옷장’처럼 필요한 스타일 조각을 바로 입히는 옷장이에요.",
+      "usedForSimple": "버튼 색, 글자 크기 등을 빠르게 바꾸고 싶을 때 써요.",
+      "usedForReal": "유틸리티 클래스 기반의 CSS 프레임워크로, 디자인 일관성과 생산성을 높인다.",
+      "generalExplanation": "디자인 시스템 없이도 반응형·테마 스타일을 효율적으로 구현할 수 있는 CSS 프레임워크.",
+      "example": "npm install -D tailwindcss postcss autoprefixer && npx tailwindcss init -p",
+      "relatedTerms": [
+        "CSS",
+        "Utility-first",
+        "Responsive Design (반응형 디자인)"
+      ]
+    },
+    {
+      "id": "vercel",
+      "term": "Vercel (버셀)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "programs": [
+        "Vercel CLI",
+        "GitHub"
+      ],
+      "simpleExplanation": "‘한 번 클릭으로 웹을 세상에 공개’해주는 마법의 버튼이에요.",
+      "usedForSimple": "Next.js로 만든 웹앱을 인터넷에 올릴 때 써요.",
+      "usedForReal": "Git 기반 CI/CD, CDN 캐싱, Edge Functions를 제공하는 클라우드 배포 플랫폼.",
+      "generalExplanation": "Jamstack 아키텍처를 위한 글로벌 배포 플랫폼으로, Next.js와 밀접하게 통합되어 있다.",
+      "example": "vercel --prod",
+      "relatedTerms": [
+        "Deployment (배포)",
+        "CDN",
+        "Next.js"
+      ]
+    },
+    {
+      "id": "supabase",
+      "term": "Supabase (수파베이스)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "SQL",
+        "JavaScript"
+      ],
+      "programs": [
+        "Supabase Studio",
+        "VS Code"
+      ],
+      "simpleExplanation": "‘오픈소스 Firebase’예요. 데이터 저장·로그인 다 해줘요.",
+      "usedForSimple": "회원가입이나 데이터 저장 기능을 쉽게 넣고 싶을 때 써요.",
+      "usedForReal": "PostgreSQL 기반 오픈소스 백엔드 서비스로, 인증·스토리지·실시간 데이터베이스를 제공한다.",
+      "generalExplanation": "BaaS(Backend as a Service) 형태로, RESTful API와 Realtime 기능을 포함한 완전한 서버 대체 솔루션.",
+      "example": "npm install @supabase/supabase-js",
+      "relatedTerms": [
+        "Database (데이터베이스)",
+        "Auth (인증)",
+        "PostgreSQL (포스트그레SQL)"
+      ]
+    },
+    {
+      "id": "nodejs",
+      "term": "Node.js (노드)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "npm",
+        "VS Code"
+      ],
+      "simpleExplanation": "‘브라우저 밖에서도 자바스크립트가 일하게 하는 마법의 엔진’이에요.",
+      "usedForSimple": "웹 서버 만들 때나 파일을 자동으로 처리할 때 써요.",
+      "usedForReal": "Chrome V8 엔진 기반의 런타임으로, 서버 사이드 자바스크립트를 가능하게 한다.",
+      "generalExplanation": "비동기 이벤트 기반의 런타임 환경으로, 네트워크 애플리케이션 개발에 적합하다.",
+      "example": "node server.js",
+      "relatedTerms": [
+        "npm",
+        "Express",
+        "Backend (백엔드)"
+      ]
+    },
+    {
+      "id": "api",
+      "term": "API (에이피아이)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "HTTP",
+        "JavaScript"
+      ],
+      "programs": [
+        "Postman",
+        "Next.js"
+      ],
+      "simpleExplanation": "‘식당 주방 문틈’이에요 — 안에 직접 못 들어가도, 주문서로 요청할 수 있죠.",
+      "usedForSimple": "앱끼리 데이터 주고받을 때 써요.",
+      "usedForReal": "응용 프로그램 간의 데이터 교환을 위한 인터페이스 역할을 수행한다.",
+      "generalExplanation": "Application Programming Interface의 약자로, 클라이언트-서버 간 표준화된 데이터 교환 규약이다.",
+      "example": "fetch('/api/user')",
+      "relatedTerms": [
+        "REST",
+        "Endpoint",
+        "HTTP"
+      ]
+    },
+    {
+      "id": "json",
+      "term": "JSON (제이슨)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "JavaScript"
+      ],
+      "programs": [
+        "VS Code",
+        "Postman"
+      ],
+      "simpleExplanation": "‘데이터를 담는 도시락통’이에요 — 이름표와 내용물이 한 쌍이에요.",
+      "usedForSimple": "서버와 주고받을 정보를 깔끔히 정리할 때 써요.",
+      "usedForReal": "JavaScript Object 표기법을 기반으로 한 경량 데이터 교환 포맷.",
+      "generalExplanation": "사람이 읽기 쉽고 기계가 파싱하기 쉬운 데이터 구조로, 대부분의 API 응답 형식으로 사용된다.",
+      "example": "{ \"name\": \"BION\", \"type\": \"project\" }",
+      "relatedTerms": [
+        "API",
+        "Data (데이터)",
+        "Object (객체)"
+      ]
+    },
+    {
+      "id": "github",
+      "term": "GitHub (깃허브)",
+      "category": "웹 프론트엔드",
+      "languages": [
+        "Git"
+      ],
+      "programs": [
+        "GitHub Desktop",
+        "VS Code",
+        "CLI"
+      ],
+      "simpleExplanation": "‘코드의 타임머신이자 공유창고’예요.",
+      "usedForSimple": "팀이 같이 코드 작업할 때 충돌 없이 관리해요.",
+      "usedForReal": "분산 버전 관리 시스템 Git을 기반으로 한 협업 플랫폼.",
+      "generalExplanation": "코드 버전 관리와 협업을 위한 원격 저장소 서비스로, PR, Issue, CI/CD 기능을 제공한다.",
+      "example": "git add . && git commit -m 'update' && git push origin main",
+      "relatedTerms": [
+        "Git",
+        "Branch",
+        "Commit"
+      ]
+    }
+  ]
+}

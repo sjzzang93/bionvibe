@@ -28,7 +28,7 @@ export default function SecretPage() {
   }, []);
 
   const handleUnlock = () => {
-    if (password === '123!8314') {
+    if (password === '8314') {
       setUnlocked(true);
       // 세션 저장 (30분 유효)
       localStorage.setItem('secret_session', JSON.stringify({
