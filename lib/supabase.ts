@@ -2,35 +2,49 @@
 // App Router, CSR 전용 브라우저 클라이언트 (HMR-안전)
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+let warnedMissingConfig = false;
+
+const warnIfMissingConfig = () => {
+  if (warnedMissingConfig) return;
+  if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    console.warn(
+      '[Supabase] 환경변수가 설정되지 않아 실시간/저장 기능이 비활성화됩니다. NEXT_PUBLIC_SUPABASE_URL 및 NEXT_PUBLIC_SUPABASE_ANON_KEY를 확인해주세요.',
+    );
+  }
+  warnedMissingConfig = true;
+};
 
 // ★ 도메인/프로젝트별로 절대 겹치지 않게 바꾸세요
 const STORAGE_KEY = 'sb-bionvibe-main-auth-v1';
 
 declare global {
   // eslint-disable-next-line no-var
-  var __SB__: SupabaseClient | undefined;
+  var __SB__: SupabaseClient | null | undefined;
   var __SB_COUNT__: number | undefined;
 }
 
-export function getBrowserSupabase(): SupabaseClient {
-  // SSR 단계에서는 임시 클라이언트 반환 (실제 사용 안 됨)
+export function getBrowserSupabase(): SupabaseClient | null {
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    warnIfMissingConfig();
+    return null;
+  }
+
   if (typeof window === 'undefined') {
-    return createClient(URL, KEY, {
-      auth: { 
+    return createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: {
         persistSession: false,
         autoRefreshToken: false,
         detectSessionInUrl: false,
       },
     });
   }
-  
-  // 브라우저에서만 싱글톤 인스턴스 사용
+
   if (!globalThis.__SB__) {
-    globalThis.__SB__ = createClient(URL, KEY, {
-      auth: { 
-        persistSession: true, 
+    globalThis.__SB__ = createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: {
+        persistSession: true,
         storageKey: STORAGE_KEY,
         autoRefreshToken: true,
         detectSessionInUrl: true,
@@ -47,7 +61,7 @@ export function getBrowserSupabase(): SupabaseClient {
       console.debug('[Supabase] Browser client created x', globalThis.__SB_COUNT__);
     }
   }
-  return globalThis.__SB__!;
+  return globalThis.__SB__ ?? null;
 }
 
 // 타입 정의

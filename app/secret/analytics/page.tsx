@@ -111,6 +111,15 @@ export default function AnalyticsPage() {
     return () => clearInterval(timer);
   }, []);
 
+  if (!supabase) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black py-20 px-6 text-center text-white/80">
+        <p className="text-lg font-medium">Supabase 설정이 없어 통계 대시보드를 불러올 수 없습니다.</p>
+        <p className="mt-2 text-sm text-white/60">환경변수 NEXT_PUBLIC_SUPABASE_URL 및 NEXT_PUBLIC_SUPABASE_ANON_KEY를 설정한 뒤 다시 시도해주세요.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black py-12 px-4">
       <div className="max-w-7xl mx-auto">

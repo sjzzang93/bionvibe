@@ -25,9 +25,12 @@ export default function ContactsManagement() {
 
   // 문의 불러오기
   const loadContacts = async () => {
+    const client = supabase;
+    if (!client) return;
+
     setLoading(true);
     try {
-      let query = supabase
+      let query = client
         .from('contacts')
         .select('*')
         .order('created_at', { ascending: false });
@@ -52,7 +55,10 @@ export default function ContactsManagement() {
 
   // 상태 변경
   const updateStatus = async (id: number, status: Contact['status']) => {
-    const { error } = await supabase
+    const client = supabase;
+    if (!client) return;
+
+    const { error } = await client
       .from('contacts')
       .update({ status })
       .eq('id', id);
@@ -68,7 +74,10 @@ export default function ContactsManagement() {
   const saveReply = async () => {
     if (!selectedContact || !selectedContact.id) return;
 
-    const { error } = await supabase
+    const client = supabase;
+    if (!client) return;
+
+    const { error } = await client
       .from('contacts')
       .update({
         admin_reply: replyText,
@@ -89,11 +98,14 @@ export default function ContactsManagement() {
 
   useEffect(() => {
     loadContacts();
-  }, [filter]);
+  }, [filter, supabase]);
 
   // 실시간 업데이트 구독
   useEffect(() => {
-    const channel = supabase
+    const client = supabase;
+    if (!client) return;
+
+    const channel = client
       .channel('contacts_changes')
       .on('postgres_changes', {
         event: '*',
@@ -105,9 +117,9 @@ export default function ContactsManagement() {
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel);
+      client.removeChannel(channel);
     };
-  }, [filter]);
+  }, [filter, supabase]);
 
   const getStatusBadge = (status: string) => {
     const badges = {
@@ -293,4 +305,3 @@ export default function ContactsManagement() {
     </div>
   );
 }
-

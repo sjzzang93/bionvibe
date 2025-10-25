@@ -46,7 +46,11 @@ async function fetchAppsFromSupabase(bypassCache = false): Promise<App[]> {
   }
 
   const supabase = getBrowserSupabase();
-  
+
+  if (!supabase) {
+    return [];
+  }
+
   const { data, error } = await supabase
     .from('apps')
     .select('*')

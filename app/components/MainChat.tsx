@@ -52,8 +52,8 @@ export default function MainChat() {
 
   // 메시지 로드 및 실시간 구독
   useEffect(() => {
-    
-    // 모든 메시지 로드
+    if (!supabase) return;
+
     const loadMessages = async () => {
       const { data, error } = await supabase
         .from('chat_messages')
@@ -71,10 +71,8 @@ export default function MainChat() {
       }
     };
 
-    // 메시지 로드
     loadMessages();
 
-    // 실시간 구독
     const channel = supabase
       .channel('bion-main-chat', {
         config: {
@@ -91,17 +89,9 @@ export default function MainChat() {
       })
       .on('presence', { event: 'sync' }, () => {
         const state = channel.presenceState();
-        setOnlineCount(Object.keys(state).length);
+        setOnlineCount(Object.keys(state).length || 1);
       })
       .subscribe(async (status) => {
-        // SUBSCRIBED만 조용히 로그 (개발/프로덕션 모두)
-        if (status === 'SUBSCRIBED') {
-          if (process.env.NODE_ENV !== 'production') {
-            console.log('📝 방명록 연결됨');
-          }
-        }
-        // CHANNEL_ERROR는 Fast Refresh나 일시적 연결 끊김이므로 무시
-        
         if (status === 'SUBSCRIBED' && isNicknameSet) {
           await channel.track({
             user: nickname,
@@ -115,7 +105,7 @@ export default function MainChat() {
     return () => {
       channel.unsubscribe();
     };
-  }, []);
+  }, [supabase, isNicknameSet, nickname]);
 
   // 닉네임 설정되면 presence 업데이트
   useEffect(() => {
@@ -158,7 +148,7 @@ export default function MainChat() {
   };
 
   const sendMessage = async () => {
-    if (!message.trim()) return;
+    if (!message.trim() || !supabase) return;
 
     // 욕설 필터링
     const filteredMessage = filterBadWords(message.trim());
@@ -207,12 +197,14 @@ export default function MainChat() {
       setTimeout(async () => {
         const autoReply = generateAutoReply(filteredMessage);
         
-        await supabase
-          .from('chat_messages')
-          .insert({
-            nickname: BION_BOT_NICKNAME,
-            message: autoReply
-          });
+        if (supabase) {
+          await supabase
+            .from('chat_messages')
+            .insert({
+              nickname: BION_BOT_NICKNAME,
+              message: autoReply
+            });
+        }
       }, 3000);
     }
   };
@@ -227,6 +219,19 @@ export default function MainChat() {
       return '00:00';
     }
   };
+
+  if (!supabase) {
+    return (
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-md dark:border-gray-800 dark:bg-gray-900">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">
+          방명록 준비 중입니다
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          실시간 방명록 기능을 사용하려면 Supabase 환경변수를 설정해주세요.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <section className="py-8 px-4 bg-gradient-to-br from-gray-50 via-slate-50 to-zinc-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900">
@@ -446,4 +451,3 @@ export default function MainChat() {
     </section>
   );
 }
-

@@ -1,33 +1,11 @@
-'use client';
-
-import { getTotalAppsCountAsync } from '@/lib/getApps';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+import MainChat from './components/MainChat';
+import GuestbookHeart from './components/GuestbookHeart';
+import HomeContent from './components/HomeContent';
+import AdSlot from './components/AdSlot';
 
-// 클라이언트 전용 컴포넌트들
-const MainChat = dynamic(() => import('./components/MainChat'), {
-  ssr: false,
-  loading: () => null
-});
-
-const GuestbookHeart = dynamic(() => import('./components/GuestbookHeart'), {
-  ssr: false,
-  loading: () => null
-});
-
-const HomeContent = dynamic(() => import('./components/HomeContent'), {
-  ssr: false,
-  loading: () => (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-      <div className="w-[85.7%] mx-auto">
-        <div className="text-center py-20">
-          <div className="text-6xl mb-6 animate-pulse">⏳</div>
-          <p className="text-gray-500 dark:text-gray-400">로딩 중...</p>
-        </div>
-      </div>
-    </section>
-  )
-});
+const HOME_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP;
 
 export default function Home() {
   // totalApps는 HomeContent 내부에서 동적으로 계산됨
@@ -39,15 +17,23 @@ export default function Home() {
         <div className="flex flex-col gap-4 items-center">
           {/* 비온 방명록 */}
           <div className="w-full">
-            <MainChat />
+            <Suspense fallback={null}>
+              <MainChat />
+            </Suspense>
           </div>
           
           {/* 하트 카운터 - 방명록 하단 */}
           <div className="flex justify-center">
-            <GuestbookHeart />
+            <Suspense fallback={null}>
+              <GuestbookHeart />
+            </Suspense>
           </div>
         </div>
       </section>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-12">
+        <AdSlot slotId={HOME_TOP_AD_SLOT} label="홈 상단 스폰서" minHeight={280} />
+      </div>
 
       {/* Apps Grid */}
       <HomeContent />

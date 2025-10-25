@@ -18,6 +18,10 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!supabase) {
+      setError('현재 문의 접수가 잠시 중단되어 있습니다. 관리자에게 직접 연락해 주세요.');
+      return;
+    }
     setSending(true);
     setError('');
 
@@ -248,4 +252,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

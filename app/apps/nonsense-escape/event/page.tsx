@@ -36,6 +36,12 @@ export default function RewardEventPage() {
     setFormState("submitting");
     setMessage(null);
 
+    if (!supabase) {
+      setMessage("Supabase 연결이 필요합니다. 환경변수를 확인해주세요.");
+      setFormState("idle");
+      return;
+    }
+
     try {
       const fileExt = file.name.split(".").pop();
       const sanitizedName = file.name.replace(/[^a-zA-Z0-9.\-]/g, "_");

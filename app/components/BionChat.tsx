@@ -22,6 +22,8 @@ export default function BionChat() {
 
   // 메시지 불러오기
   const loadMessages = async () => {
+    if (!supabase) return;
+
     const { data } = await supabase
       .from('chat_messages')
       .select('*')
@@ -35,7 +37,7 @@ export default function BionChat() {
 
   // 실시간 구독
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !supabase) return;
 
     loadMessages();
 
@@ -53,7 +55,7 @@ export default function BionChat() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [isOpen]);
+  }, [isOpen, supabase]);
 
   // 자동 스크롤
   useEffect(() => {
@@ -63,6 +65,8 @@ export default function BionChat() {
   // 메시지 전송
   const sendMessage = async () => {
     if (!message.trim() || !nickname) return;
+
+    if (!supabase) return;
 
     await supabase
       .from('chat_messages')
@@ -258,4 +262,3 @@ export default function BionChat() {
     </div>
   );
 }
-

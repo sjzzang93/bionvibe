@@ -18,6 +18,8 @@ export default function GuestbookManager() {
   const supabase = useSupabase();
 
   const loadMessages = async () => {
+    if (!supabase) return;
+    
     setLoading(true);
     const { data, error } = await supabase
       .from('chat_messages')
@@ -39,6 +41,7 @@ export default function GuestbookManager() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('이 메시지를 삭제하시겠습니까?')) return;
+    if (!supabase) return;
 
     setDeleting(id);
     const { error } = await supabase
@@ -59,6 +62,7 @@ export default function GuestbookManager() {
   const handleDeleteAll = async () => {
     if (!confirm('⚠️ 모든 방명록 메시지를 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다!')) return;
     if (!confirm('정말로 삭제하시겠습니까? 한 번 더 확인합니다.')) return;
+    if (!supabase) return;
 
     setLoading(true);
     const { error } = await supabase

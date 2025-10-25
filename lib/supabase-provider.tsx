@@ -7,11 +7,7 @@ import { getBrowserSupabase } from './supabase';
 
 const SupabaseCtx = createContext<SupabaseClient | null>(null);
 
-export const useSupabase = () => {
-  const c = useContext(SupabaseCtx);
-  if (!c) throw new Error('useSupabase must be used within <SupabaseProvider>');
-  return c;
-};
+export const useSupabase = () => useContext(SupabaseCtx);
 
 export default function SupabaseProvider({ children }: { children: React.ReactNode }) {
   const supabase = useMemo(() => getBrowserSupabase(), []);

@@ -61,6 +61,8 @@ export default function AnalyticsTracker() {
 
   // 페이지 방문 기록
   useEffect(() => {
+    if (!supabase) return;
+
     const sessionId = getOrCreateSessionId();
     const { browser, os, deviceType } = getBrowserInfo();
     pageViewsRef.current += 1;

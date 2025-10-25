@@ -66,19 +66,36 @@ export default function SecretPage() {
     };
   }, [supabase]);
 
-  const handleUnlock = () => {
-    if (password === "8314") {
-      setUnlocked(true);
-      // 세션 저장 (30분 유효)
-      localStorage.setItem(
-        "secret_session",
-        JSON.stringify({
-          timestamp: Date.now()
-        })
-      );
-    } else {
-      alert("❌ 비밀번호가 틀렸습니다!");
-      setPassword("");
+  const handleUnlock = async () => {
+    try {
+      // 서버 API로 비밀번호 검증
+      const response = await fetch('/api/secret/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setUnlocked(true);
+        // 세션 저장 (30분 유효) - 서버에서 받은 토큰 포함
+        localStorage.setItem(
+          "secret_session",
+          JSON.stringify({
+            timestamp: Date.now(),
+            token: data.token
+          })
+        );
+      } else {
+        alert("❌ " + (data.message || "비밀번호가 틀렸습니다!"));
+        setPassword("");
+      }
+    } catch (error) {
+      alert("❌ 인증 중 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error('Auth error:', error);
     }
   };
 
