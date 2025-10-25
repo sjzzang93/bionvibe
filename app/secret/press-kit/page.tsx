@@ -114,7 +114,7 @@ export default function PressKitPage() {
 
               {"files" in group ? (
                 <div className="mt-5 space-y-3">
-                  {group.files.map((file) => (
+                  {group.files?.map((file) => (
                     <a
                       key={file.label}
                       href={file.href}
