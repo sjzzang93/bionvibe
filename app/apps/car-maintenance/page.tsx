@@ -106,10 +106,7 @@ export default function CarWarningLightsPage() {
 
           {/* Related Apps */}
           <div className="mt-12 animate-fadeIn">
-            <RelatedApps 
-              relatedAppIds={['compass', 'weather-outfit', 'air-quality', 'travel-packing-list']} 
-              currentAppId="car-maintenance" 
-            />
+            <RelatedApps currentAppSlug="car-maintenance" className="mt-8" />
           </div>
         </div>
       </div>

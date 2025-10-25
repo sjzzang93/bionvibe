@@ -907,10 +907,7 @@ export default function SajuMBTIJobs() {
             </button>
             
             {/* 관련 앱 추천 */}
-            <RelatedApps 
-              relatedAppIds={['mbti-test', 'face-shape', 'today-fortune', 'past-life-job']}
-              currentAppId="saju-mbti-jobs"
-            />
+            <RelatedApps currentAppSlug="saju-mbti-jobs" className="mt-8" />
           </section>
 
         </div>

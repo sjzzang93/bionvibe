@@ -703,10 +703,7 @@ export default function ColorPsychology() {
 
           {/* Related Apps */}
           <div className="animate-fadeIn" style={{ animationDelay: '0.8s' }}>
-            <RelatedApps 
-              relatedAppIds={['mbti-test', 'today-fortune', 'dream-interpreter', 'voice-fortune']} 
-              currentAppId="color-psychology" 
-            />
+            <RelatedApps currentAppSlug="color-psychology" className="mt-8" />
           </div>
         </div>
 

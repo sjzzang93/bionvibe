@@ -222,10 +222,7 @@ export default function CompassPage() {
 
         {/* Related Apps */}
         <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-          <RelatedApps 
-            relatedAppIds={['weather-outfit', 'travel-packing-list', 'air-quality', 'focus-timer']} 
-            currentAppId="compass" 
-          />
+          <RelatedApps currentAppSlug="compass" className="mt-8" />
         </div>
       </div>
 

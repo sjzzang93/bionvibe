@@ -402,10 +402,7 @@ export default function ParentsTimeCalculator() {
 
             {/* Related Apps */}
             <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-              <RelatedApps 
-                relatedAppIds={['dday-counter', 'today-fortune', 'habit-tracker', 'gift-finder']} 
-                currentAppId="parents-time" 
-              />
+              <RelatedApps currentAppSlug="parents-time" className="mt-8" />
             </div>
           </div>
         )}

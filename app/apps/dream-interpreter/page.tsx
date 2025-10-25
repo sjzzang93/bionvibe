@@ -248,10 +248,7 @@ export default function DreamInterpreterPage() {
 
             {/* Related Apps */}
             <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-              <RelatedApps
-                relatedAppIds={['today-fortune', 'color-psychology', 'mbti-test', 'voice-fortune']}
-                currentAppId="dream-interpreter"
-              />
+              <RelatedApps currentAppSlug="dream-interpreter" className="mt-8" />
             </div>
           </div>
         )}

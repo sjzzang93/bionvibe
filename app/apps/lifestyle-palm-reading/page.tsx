@@ -648,10 +648,7 @@ export default function PalmReading() {
 
               {/* 관련 앱 */}
               <div className="animate-fadeIn" style={{ animationDelay: '1.4s' }}>
-                <RelatedApps 
-                  relatedAppIds={['lifestyle-face-fortune', 'face-shape', 'saju-mbti-jobs', 'today-fortune']} 
-                  currentAppId="lifestyle-palm-reading" 
-                />
+                <RelatedApps currentAppSlug="lifestyle-palm-reading" className="mt-8" />
               </div>
             </div>
           )}

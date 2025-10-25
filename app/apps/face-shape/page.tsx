@@ -456,10 +456,7 @@ export default function FaceShapeAnalysisPage() {
 
               {/* 관련 앱 */}
               <div className="animate-fadeIn" style={{ animationDelay: '0.9s' }}>
-                <RelatedApps 
-                  relatedAppIds={['lifestyle-face-fortune', 'voice-fortune', 'analysis-handwriting', 'mbti-test']} 
-                  currentAppId="face-shape" 
-                />
+                <RelatedApps currentAppSlug="face-shape" className="mt-8" />
               </div>
             </div>
           )}

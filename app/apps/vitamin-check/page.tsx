@@ -335,10 +335,7 @@ export default function VitaminCheckPage() {
 
             {/* Related Apps */}
             <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-              <RelatedApps
-                relatedAppIds={['calorie-calculator', 'water-intake', 'sleep-analyzer', 'habit-tracker']}
-                currentAppId="vitamin-check"
-              />
+              <RelatedApps currentAppSlug="vitamin-check" className="mt-8" />
             </div>
           </div>
         )}

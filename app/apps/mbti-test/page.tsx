@@ -602,10 +602,7 @@ export default function MBTI32() {
 
           {/* Related Apps */}
           <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-            <RelatedApps 
-              relatedAppIds={['today-fortune', 'color-psychology', 'saju-mbti-jobs', 'past-life-job']} 
-              currentAppId="mbti-test" 
-            />
+            <RelatedApps currentAppSlug="mbti-test" className="mt-8" />
           </div>
         </div>
 

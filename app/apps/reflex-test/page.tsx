@@ -264,10 +264,7 @@ export default function ReflexTest() {
 
             {/* Related Apps */}
             <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-              <RelatedApps 
-                relatedAppIds={['typing-speed-test', 'eye-test', 'iq-test', 'focus-timer']} 
-                currentAppId="reflex-test" 
-              />
+              <RelatedApps currentAppSlug="reflex-test" className="mt-8" />
             </div>
           </div>
         )}

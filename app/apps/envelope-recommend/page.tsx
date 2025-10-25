@@ -261,10 +261,7 @@ export default function EnvelopeRecommendPage() {
 
             {/* Related Apps */}
             <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-              <RelatedApps
-                relatedAppIds={['gift-finder', 'dday-counter', 'parents-time', 'salary-divider']}
-                currentAppId="envelope-recommend"
-              />
+              <RelatedApps currentAppSlug="envelope-recommend" className="mt-8" />
             </div>
           </div>
         )}

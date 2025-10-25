@@ -412,10 +412,7 @@ export default function FaceFortune() {
               </button>
 
               {/* 관련 앱 추천 */}
-              <RelatedApps 
-                relatedAppIds={['saju-mbti-jobs', 'mbti-test', 'voice-fortune', 'analysis-handwriting']} 
-                currentAppId="lifestyle-face-fortune" 
-              />
+              <RelatedApps currentAppSlug="lifestyle-face-fortune" className="mt-8" />
             </div>
           )}
 

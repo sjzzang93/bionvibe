@@ -548,10 +548,7 @@ export default function CalorieCalculatorPage() {
               )}
               
               {/* 관련 앱 추천 */}
-              <RelatedApps 
-                relatedAppIds={['water-intake', 'coffee-calculator', 'sleep-analyzer']}
-                currentAppId="calorie-calculator"
-              />
+              <RelatedApps currentAppSlug="calorie-calculator" className="mt-8" />
             </div>
           )}
         </div>

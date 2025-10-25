@@ -190,10 +190,7 @@ export default function LottoGenerator() {
 
         {/* Related Apps */}
         <div className="mt-8 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-          <RelatedApps 
-            relatedAppIds={['today-fortune', 'dream-interpreter', 'saju-mbti-jobs', 'past-life-job']} 
-            currentAppId="lotto-generator" 
-          />
+          <RelatedApps currentAppSlug="lotto-generator" className="mt-8" />
         </div>
       </div>
 

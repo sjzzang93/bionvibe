@@ -376,10 +376,7 @@ export default function IQTest() {
 
           {/* 연관 웹앱 추천 */}
           <div className="mt-8 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
-            <RelatedApps 
-              relatedAppIds={['mbti-test', 'eq-test', 'memory-game', 'brain-teaser', 'concentration-test']} 
-              currentAppId="iq-test" 
-            />
+            <RelatedApps currentAppSlug="iq-test" className="mt-8" />
           </div>
         </div>
 

@@ -433,10 +433,7 @@ export default function TravelDestinationsPage() {
 
             {/* Related Apps */}
             <div className="animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-              <RelatedApps
-                relatedAppIds={['weather-outfit', 'dday-counter', 'parents-time', 'gift-finder']}
-                currentAppId="travel-destinations"
-              />
+              <RelatedApps currentAppSlug="travel-destinations" className="mt-8" />
             </div>
           </div>
         )}

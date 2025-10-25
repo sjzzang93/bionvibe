@@ -234,10 +234,7 @@ export default function MoodCheerUpPage() {
 
           {/* Related Apps */}
           <div className="mt-12 animate-fadeIn" style={{ animationDelay: '0.5s' }}>
-            <RelatedApps 
-              relatedAppIds={['quote-generator', 'focus-timer', 'habit-tracker', 'sleep-analyzer']} 
-              currentAppId="mood-cheer-up" 
-            />
+            <RelatedApps currentAppSlug="mood-cheer-up" className="mt-8" />
           </div>
         </div>
       </div>

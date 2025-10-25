@@ -286,10 +286,7 @@ export default function HealthSupplementRecommend() {
 
           {/* Related Apps */}
           <div className="mt-12 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-            <RelatedApps 
-              relatedAppIds={['vitamin-check', 'sleep-analyzer', 'water-intake', 'habit-tracker']} 
-              currentAppId="health-supplement-recommend" 
-            />
+            <RelatedApps currentAppSlug="health-supplement-recommend" className="mt-8" />
           </div>
         </div>
       </div>
