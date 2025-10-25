@@ -161,7 +161,7 @@ const GuestbookHeart = () => {
       .on(
         "postgres_changes",
         { event: "*", schema: "public", table: "guestbook_hearts" },
-        (payload) => {
+        (payload: any) => {
           console.log("[❤️ 하트] Realtime 이벤트 수신:", payload);
           const next = Number(payload.new?.count);
           console.log("[❤️ 하트] Realtime count:", next);
