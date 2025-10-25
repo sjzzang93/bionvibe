@@ -246,7 +246,7 @@ const GuestbookHeart = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center gap-2">
       {/* 하트 버튼 */}
       <button
         type="button"
@@ -255,12 +255,12 @@ const GuestbookHeart = () => {
         className={`group relative transition-all duration-300 ${highlight ? 'animate-bounce' : ''}`}
         aria-label="방명록 하트 누르기"
       >
-        <div className="relative w-24 h-24">
+        <div className="relative w-24 h-24 flex items-center justify-center">
           {/* 글로우 효과 */}
           {highlight && (
-            <div className="absolute inset-0 animate-ping opacity-50">
+            <div className="absolute inset-0 flex items-center justify-center animate-ping opacity-50">
               <Image
-                src="/heart-logo.png"
+                src="/heart-bulb.png"
                 alt="하트"
                 width={96}
                 height={96}
@@ -271,9 +271,9 @@ const GuestbookHeart = () => {
           {/* 메인 하트 */}
           <div className={`relative transition-all duration-200 ${
             loading ? 'grayscale' : 'group-hover:scale-110 group-active:scale-95'
-          } ${highlight ? 'drop-shadow-[0_0_20px_rgba(244,63,94,0.9)]' : 'drop-shadow-lg'}`}>
+          } ${highlight ? 'drop-shadow-[0_0_20px_rgba(234,179,8,0.9)]' : 'drop-shadow-lg'}`}>
             <Image
-              src="/heart-logo.png"
+              src="/heart-bulb.png"
               alt="하트"
               width={96}
               height={96}
@@ -285,9 +285,9 @@ const GuestbookHeart = () => {
       </button>
 
       {/* 카운터 */}
-      <div className="text-center">
-        <p className={`text-2xl font-bold min-w-[4ch] tabular-nums transition-colors ${
-          highlight ? 'text-rose-600 dark:text-rose-400' : 'text-rose-500 dark:text-rose-300'
+      <div className="flex items-center justify-center w-full">
+        <p className={`text-3xl font-bold tabular-nums transition-colors ${
+          highlight ? 'text-yellow-600 dark:text-yellow-400' : 'text-yellow-500 dark:text-yellow-300'
         }`}>
           {loading ? '...' : displayCount.toLocaleString()}
         </p>
@@ -304,8 +304,8 @@ const GuestbookHeart = () => {
             <span className="text-lg animation-delay-200">🎁</span>
           </div>
           <p className="text-[11px] leading-tight text-amber-700 dark:text-amber-200">
-            하트 카운터가 <span className="font-bold text-rose-600 dark:text-rose-400">홀수 포커 숫자</span>로
-            떨어지는 순간을 캡처해서 DM이나 메일로 보내주세요. 숫자마다 <span className="font-bold text-rose-600 dark:text-rose-400">각 1분</span>께
+            하트 카운터가 <span className="font-bold text-yellow-600 dark:text-yellow-400">홀수 포커 숫자</span>로
+            떨어지는 순간을 캡처해서 DM이나 메일로 보내주세요. 숫자마다 <span className="font-bold text-yellow-600 dark:text-yellow-400">각 1분</span>께
             <span className="font-semibold text-orange-600 dark:text-orange-200"> 5,000원 구글 기프티카드</span>를 드립니다.
           </p>
           <div className="mt-3">
@@ -316,7 +316,7 @@ const GuestbookHeart = () => {
               {["777", "999", "1111", "1313"].map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] px-2 py-0.5 bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-200 rounded-full font-mono font-bold shadow-sm"
+                  className="text-[10px] px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-200 rounded-full font-mono font-bold shadow-sm"
                 >
                   {tag}
                 </span>
@@ -331,7 +331,7 @@ const GuestbookHeart = () => {
 
       {/* 에러 메시지 */}
       {error && (
-        <p className="text-[10px] text-rose-500 dark:text-rose-400 text-center max-w-[120px]">
+        <p className="text-[10px] text-yellow-600 dark:text-yellow-400 text-center max-w-[120px]">
           {error}
         </p>
       )}

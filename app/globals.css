@@ -55,3 +55,17 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #dc2626, #e11d48);
 }
+
+/* 둥둥 떠다니는 애니메이션 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}

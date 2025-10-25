@@ -79,7 +79,7 @@
 │   │       └── PremiumButton.tsx # 3D 버튼
 │   │
 │   └── secret/                   # 히든페이지 (관리자 도구)
-│       ├── page.tsx              # 비밀 금고 (비밀번호: 123!8314)
+│       ├── page.tsx              # 비밀 금고 (비밀번호는 환경변수 참조)
 │       ├── analytics/            # 방문자 통계
 │       ├── contacts/             # 문의 관리
 │       ├── guestbook/            # 방명록 관리
@@ -227,7 +227,7 @@ https://bionvibe.vercel.app/apps/[앱이름]
 
 ### **8단계: 모니터링** 📈
 ```
-1. /secret 페이지 접속 (비밀번호: 123!8314)
+1. /secret 페이지 접속 (비밀번호는 배포 환경 변수 참조)
 2. 📊 방문자 통계 확인
 3. 📧 문의 관리
 4. 🖼️ 이미지 관리
@@ -292,6 +292,10 @@ fetch('/api/crypto-price?symbol=BTC');
 NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJxxx...
 
+# Secret Vault Password
+# ⚠️ 보안: 실제 비밀번호는 .env.local 및 Vercel 환경변수에만 설정
+SECRET_VAULT_PASSWORD=배포_환경_변수_참조
+
 # EmailJS
 NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_xxx
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_xxx
@@ -300,6 +304,11 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=xxx
 # Google AdSense
 NEXT_PUBLIC_ADSENSE_ID=ca-pub-xxx
 ```
+
+### 🔒 보안 주의사항
+- ⚠️ `.env.local` 파일은 절대 Git에 커밋하지 마세요 (`.gitignore`에 포함됨)
+- ⚠️ Vercel 배포 시: Project Settings > Environment Variables에 `SECRET_VAULT_PASSWORD` 설정 필요
+- ⚠️ 공개 문서에는 실제 비밀번호를 기재하지 마세요
 
 ---
 
@@ -432,4 +441,3 @@ gold_prices 테이블 생성하고 API 수정해줘"
 이 문서는 BIONVIBE 프로젝트의 완전한 워크플로우입니다.
 GPT-5가 이 문서를 읽으면 프로젝트 구조와 개발 프로세스를 
 완벽하게 이해할 수 있습니다. 🚀
-

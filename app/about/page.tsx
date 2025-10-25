@@ -1,11 +1,12 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "BION 소개 - 48개 무료 웹앱을 만든 이야기",
-  description: "일상에 빛을 더하는 BION의 철학과 비전. 계산기, 운세, 게임 등 48개 웹앱을 무료로 제공하는 이유와 만든 사람을 소개합니다.",
+  title: "BION 소개 - 100개 무료 웹앱을 만든 이야기",
+  description: "일상에 빛을 더하는 BION의 철학과 비전. 계산기, 운세, 게임 등 100개 웹앱을 무료로 제공하는 이유와 만든 사람을 소개합니다.",
   openGraph: {
-    title: "BION 소개 - 48개 무료 웹앱을 만든 이야기",
+    title: "BION 소개 - 100개 무료 웹앱을 만든 이야기",
     description: "일상에 빛을 더하는 BION의 철학과 비전",
     url: 'https://bionvibe.com/about',
   },
@@ -28,12 +29,20 @@ export default function AboutPage() {
 
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              🌟 BION이란?
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="BION 전구 로고"
+                width={28}
+                height={28}
+              />
+              <span>BION이란?</span>
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              BION은 <strong>"Creating light for everyday life"</strong>라는 철학 아래, 
-              일상 속에서 빛을 만들어가는 웹 플랫폼입니다.
+              BION은 회사 이름 <strong>"Bright ON"</strong>의 머리글자를 딴 브랜드로,
+              한국어로는 <strong>"빛이 온다, 빛을 켠다"</strong>는 이중적인 의미를 담고 있습니다.
+              희망과 실용성을 모두 비추는 작은 스위치를 떠올리면 됩니다.
+              메인 로고 역시 전구를 형상화해 밝음과 실용성을 상징합니다.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
               복잡한 기술이 아닌, <strong>사람을 위한 공간</strong>을 만들어 
@@ -48,7 +57,7 @@ export default function AboutPage() {
             <ul className="space-y-3 text-gray-700 dark:text-gray-300">
               <li className="flex items-start">
                 <span className="text-red-600 dark:text-red-400 mr-2">✓</span>
-                <span>일상에 필요한 <strong>48개 이상의 실용적인 웹앱</strong> 제공</span>
+                <span>일상에 필요한 <strong>100개 이상의 실용적인 웹앱</strong> 제공</span>
               </li>
               <li className="flex items-start">
                 <span className="text-red-600 dark:text-red-400 mr-2">✓</span>
@@ -60,7 +69,7 @@ export default function AboutPage() {
               </li>
               <li className="flex items-start">
                 <span className="text-red-600 dark:text-red-400 mr-2">✓</span>
-                <span><strong>광고 없는 깔끔한 환경</strong> (일부 페이지 제외)</span>
+                <span><strong>애드센스 정책을 준수하는</strong> 안전한 광고 운영</span>
               </li>
             </ul>
           </section>
@@ -134,4 +143,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

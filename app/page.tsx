@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MainChat from './components/MainChat';
-import GuestbookHeart from './components/GuestbookHeart';
 import HomeContent from './components/HomeContent';
 import AdSlot from './components/AdSlot';
 
@@ -12,8 +11,16 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors" suppressHydrationWarning>
-      {/* 히어로 섹션: 방명록 + 하트 */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      {/* 상단 광고 */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12">
+        <AdSlot slotId={HOME_TOP_AD_SLOT} label="홈 상단 스폰서" minHeight={280} />
+      </div>
+
+      {/* Apps Grid */}
+      <HomeContent />
+
+      {/* 방명록 섹션 - 맨 아래 */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col gap-4 items-center">
           {/* 비온 방명록 */}
           <div className="w-full">
@@ -21,22 +28,8 @@ export default function Home() {
               <MainChat />
             </Suspense>
           </div>
-          
-          {/* 하트 카운터 - 방명록 하단 */}
-          <div className="flex justify-center">
-            <Suspense fallback={null}>
-              <GuestbookHeart />
-            </Suspense>
-          </div>
         </div>
       </section>
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 mb-12">
-        <AdSlot slotId={HOME_TOP_AD_SLOT} label="홈 상단 스폰서" minHeight={280} />
-      </div>
-
-      {/* Apps Grid */}
-      <HomeContent />
 
       {/* Footer */}
       <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-6 px-4">
@@ -51,19 +44,19 @@ export default function Home() {
           {/* Footer Links */}
           <div className="flex justify-center gap-4 mb-4 text-sm flex-wrap">
             <Link href="/about" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
-              About
+              소개
             </Link>
             <span className="text-gray-300 dark:text-gray-700">|</span>
             <Link href="/privacy" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
-              Privacy Policy
+              개인정보 처리방침
             </Link>
             <span className="text-gray-300 dark:text-gray-700">|</span>
             <Link href="/terms" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
-              Terms of Service
+              이용약관
             </Link>
             <span className="text-gray-300 dark:text-gray-700">|</span>
             <Link href="/contact" className="text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
-              Contact
+              문의하기
             </Link>
           </div>
           

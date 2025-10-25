@@ -169,7 +169,7 @@ export function Navigation() {
                 <span className={`absolute inset-0 ${logoClicked5Times ? 'bg-red-400' : 'bg-amber-400'} rounded-full animate-ping`}></span>
                 <span className={`relative inline-block w-2 h-2 ${logoClicked5Times ? 'bg-red-500 shadow-red-500/50' : 'bg-amber-500 shadow-amber-500/50'} rounded-full shadow-lg`}></span>
               </span>
-              <span className="font-medium">Life On</span>
+              <span className="font-medium">Bright ON</span>
             </div>
           </div>
         </div>

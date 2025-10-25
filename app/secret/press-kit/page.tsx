@@ -40,7 +40,7 @@ const messaging = [
   },
   {
     title: "확장 슬로건",
-    copy: "Creating light for everyday life — 더 빠르게, 더 가볍게, 더 따뜻하게."
+    copy: "Bright ON, 줄여서 BION — 더 빠르게, 더 가볍게, 더 따뜻하게."
   },
   {
     title: "핵심 메시지",

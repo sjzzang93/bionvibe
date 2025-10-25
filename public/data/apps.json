@@ -11,6 +11,7 @@
       "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/today-fortune-1761161065680.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
+        "mbti-zodiac-compat",
         "saju-mbti-jobs",
         "lotto-generator",
         "dream-interpreter"
@@ -27,8 +28,8 @@
       "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mbti-test-1761161269054.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
+        "mbti-zodiac-compat",
         "saju-mbti-jobs",
-        "face-shape",
         "color-psychology"
       ]
     },
@@ -44,8 +45,24 @@
       "createdAt": "2025-01-22",
       "relatedApps": [
         "mbti-test",
-        "saju-mbti-jobs",
-        "color-psychology"
+        "mbti-zodiac-compat",
+        "saju-mbti-jobs"
+      ]
+    },
+    {
+      "id": "mbti-zodiac-compat",
+      "name": "MBTI+띠 궁합",
+      "slug": "mbti-zodiac-compat",
+      "icon": "🌌",
+      "description": "16 유형 × 12띠 맞춤 궁합 리포트",
+      "categoryId": "fortune-mind",
+      "url": "/apps/mbti-zodiac-compat",
+      "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?w=960&auto=format&fit=crop",
+      "createdAt": "2025-10-26",
+      "relatedApps": [
+        "mbti-test",
+        "today-fortune",
+        "saju-mbti-jobs"
       ]
     },
     {

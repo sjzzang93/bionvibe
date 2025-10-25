@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,21 +10,22 @@ import { useSupabase } from '@/lib/supabase-provider';
 import { applyCuratedApps } from './homeContentUtils';
 import FavoriteButton from './FavoriteButton';
 import AdSlot from './AdSlot';
+import GuestbookHeart from './GuestbookHeart';
 
 const HOME_CONTENT_MID_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID;
 const RECENT_UPDATES = [
   {
-    date: '2025-01-24',
+    date: '2025-10-26',
     title: '광고 안전성 점검',
     description: '애드센스 재심사를 위해 홈 구조와 광고 슬롯을 전면 개편했어요.',
   },
   {
-    date: '2025-01-19',
+    date: '2025-10-19',
     title: '운세·금융 추천 강화',
     description: '오늘의 운세, 전기요금 등 인기 앱에 가이드와 FAQ를 추가했습니다.',
   },
   {
-    date: '2025-01-12',
+    date: '2025-10-12',
     title: '홈 즐겨찾기 출시',
     description: '즐겨찾기 보관함과 다크모드를 정식 오픈했습니다.',
   },
@@ -212,12 +213,24 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
       <div className="w-[85.7%] mx-auto space-y-12">
         <div className="rounded-3xl bg-gradient-to-r from-rose-50 via-white to-amber-50 p-8 shadow-lg dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:shadow-none">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">
-            일상에 비온을 더해보세요 ☀️
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3 flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="BION 비온 로고"
+              width={32}
+              height={32}
+              className="h-8 w-8 drop-shadow-md"
+            />
+            <span>BION 비온</span>
           </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
+            일상에 비온을 더해보세요
+          </p>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            금융, 건강, 운세, 미니 게임 그리고 생산성 도구까지. 필요한 기능을 즐겨찾기에 담아두면
-            언제든 빠르게 찾아 사용할 수 있어요.
+            신뢰할 수 있는 일상 정보와 검증된 유틸리티를 한곳에서 만나세요. 깔끔한 레이아웃과 사용자 취향에 맞춘 콘텐츠로 안전한 광고 환경을 지향합니다. 하루에도 여러 번 콘텐츠 품질과 노출 위치를 점검해 광고주 정책과 이용자 기대에 모두 부합하도록 관리하고 있어요.
+          </p>
+          <p className="mt-3 text-gray-700 dark:text-gray-300 leading-relaxed">
+            즐겨찾기와 맞춤 큐레이션 기능으로 필요한 도구를 바로 찾고, 방해받지 않는 광고 경험을 유지하세요. 비온 팀은 투명한 공지와 빠른 업데이트로 믿을 수 있는 라이프스타일 허브를 만들어 가고 있습니다.
           </p>
         </div>
 
@@ -309,6 +322,17 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
 
             {appsByCategory.map((category, categoryIndex) => (
               <div key={category.id} className="mb-12">
+                {/* 운세마음 카테고리 앞에 하트 표시 */}
+                {category.id === 'fortune-mind' && (
+                  <div className="flex justify-center mb-12">
+                    <div className="animate-float">
+                      <Suspense fallback={null}>
+                        <GuestbookHeart />
+                      </Suspense>
+                    </div>
+                  </div>
+                )}
+                
                 <div className="sticky top-16 z-20 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 mb-6 py-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm">
                   <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-200">{category.name}</h3>
                   <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">

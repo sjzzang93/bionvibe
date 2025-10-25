@@ -11,6 +11,7 @@
       "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/today-fortune-1761161065680.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
+        "mbti-zodiac-compat",
         "saju-mbti-jobs",
         "lotto-generator",
         "dream-interpreter"
@@ -27,8 +28,8 @@
       "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mbti-test-1761161269054.webp",
       "createdAt": "2025-01-20",
       "relatedApps": [
+        "mbti-zodiac-compat",
         "saju-mbti-jobs",
-        "face-shape",
         "color-psychology"
       ]
     },
@@ -40,12 +41,28 @@
       "description": "내 MBTI 유형과 대화하기",
       "categoryId": "fortune-mind",
       "url": "/apps/mbti-ai-chat",
-      "image": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mbti-ai-chat-1761423324154.webp",
       "createdAt": "2025-01-22",
       "relatedApps": [
         "mbti-test",
-        "saju-mbti-jobs",
-        "color-psychology"
+        "mbti-zodiac-compat",
+        "saju-mbti-jobs"
+      ]
+    },
+    {
+      "id": "mbti-zodiac-compat",
+      "name": "MBTI+띠 궁합",
+      "slug": "mbti-zodiac-compat",
+      "icon": "🌌",
+      "description": "16 유형 × 12띠 맞춤 궁합 리포트",
+      "categoryId": "fortune-mind",
+      "url": "/apps/mbti-zodiac-compat",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mbti-zodiac-compat-1761423325431.webp",
+      "createdAt": "2025-10-26",
+      "relatedApps": [
+        "mbti-test",
+        "today-fortune",
+        "saju-mbti-jobs"
       ]
     },
     {
@@ -197,7 +214,7 @@
       "description": "여자어 · 남자어 신조어 3D 퀴즈",
       "categoryId": "learning-tools",
       "url": "/apps/gender-language-quiz",
-      "image": "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/gender-language-quiz-1761423326169.webp",
       "createdAt": "2025-02-07",
       "relatedApps": [
         "flashcard",
@@ -356,7 +373,7 @@
       "description": "상세 분석 결과",
       "categoryId": "fortune-mind",
       "url": "/apps/analysis-handwriting",
-      "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/analysis-handwriting-1761423326838.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "face-shape",
@@ -483,7 +500,7 @@
       "description": "날씨별 서비스",
       "categoryId": "health-routine",
       "url": "/apps/weather-outfit",
-      "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/weather-outfit-1761423327499.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "air-quality",
@@ -515,7 +532,7 @@
       "description": "전생 서비스",
       "categoryId": "fortune-mind",
       "url": "/apps/past-life-job",
-      "image": "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/past-life-job-1761423328201.webp",
       "createdAt": "2025-10-20",
       "relatedApps": [
         "saju-mbti-jobs",
@@ -531,7 +548,7 @@
       "description": "맞춤 추천",
       "categoryId": "money-calc",
       "url": "/apps/envelope-recommend",
-      "image": "https://images.unsplash.com/photo-1520350094754-f0fdcac35c1c?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/envelope-recommend-1761423328894.webp",
       "createdAt": "2025-10-20"
     },
     {
@@ -634,7 +651,7 @@
       "description": "맞춤 추천",
       "categoryId": "money-calc",
       "url": "/apps/travel-destinations",
-      "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/travel-destinations-1761423329593.webp",
       "createdAt": "2025-10-20"
     },
     {
@@ -672,7 +689,7 @@
       "description": "빠른 계산",
       "categoryId": "money-calc",
       "url": "/apps/utility-electricity-calculator",
-      "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/utility-electricity-calculator-1761423330276.webp",
       "createdAt": "2025-10-20",
       "relatedApps": []
     },
@@ -751,7 +768,7 @@
       "description": "이름/닉네임 서비스",
       "categoryId": "learning-tools",
       "url": "/apps/nickname-generator",
-      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&q=80",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/nickname-generator-1761423330943.webp",
       "createdAt": "2025-10-23"
     },
     {
@@ -762,7 +779,7 @@
       "description": "재미있는 게임",
       "categoryId": "learning-tools",
       "url": "/apps/color-finder-game",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/color-finder-game-1761423331614.webp",
       "createdAt": "2025-10-23"
     },
     {
@@ -773,7 +790,7 @@
       "description": "감정 서비스",
       "categoryId": "fortune-mind",
       "url": "/apps/emotion-diary",
-      "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&q=80",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/emotion-diary-1761423332269.webp",
       "createdAt": "2025-10-23"
     },
     {
@@ -784,7 +801,7 @@
       "description": "닮은 서비스",
       "categoryId": "fortune-mind",
       "url": "/apps/animal-face-match",
-      "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=400&q=80",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/animal-face-match-1761423332974.webp",
       "createdAt": "2025-10-23"
     },
     {
@@ -795,7 +812,7 @@
       "description": "냉장고 서비스",
       "categoryId": "family-life",
       "url": "/apps/fridge-recipe",
-      "image": "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=400&q=80",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/fridge-recipe-1761423333603.webp",
       "createdAt": "2025-10-23"
     },
     {
@@ -806,12 +823,28 @@
       "description": "웃기지만 은근 어려운 넌센스 미션! 5문제 연속 정답으로 실험실 탈출하기",
       "categoryId": "learning-tools",
       "url": "/apps/nonsense-escape",
-      "image": "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/nonsense-escape-1761423334239.webp",
       "createdAt": "2025-10-24",
       "relatedApps": [
         "color-finder-game",
         "iq-test",
         "arcade-mini-games"
+      ]
+    },
+    {
+      "id": "lotto-generator",
+      "name": "로또 번호 생성기",
+      "slug": "lotto-generator",
+      "icon": "🍀",
+      "description": "AI가 생성하는 행운의 번호",
+      "categoryId": "money-calc",
+      "url": "/apps/lotto-generator",
+      "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-26",
+      "relatedApps": [
+        "today-fortune",
+        "crypto-calculator",
+        "dday-counter"
       ]
     }
   ]
