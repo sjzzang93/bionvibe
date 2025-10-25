@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import AppFooter from "@/app/components/AppFooter";
+import RelatedApps from '@/app/components/RelatedApps';
 interface SleepData {
   bedTime: string;
   wakeTime: string;
@@ -826,6 +827,11 @@ export default function SleepAnalyzer() {
         </section>
       </div>
       {/* 제작자 서명 */}
+      {/* 관련 앱 추천 */}
+
+      <RelatedApps currentAppSlug="sleep-analyzer" className="mt-8 mb-8" />
+
+
       <AppFooter />
 
       <style jsx>{`

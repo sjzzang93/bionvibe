@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
+import RelatedApps from '@/app/components/RelatedApps';
 interface OutfitRecommendation {
   temp: number;
   weather: string;

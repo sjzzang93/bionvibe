@@ -7,6 +7,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import Link from 'next/link';
 
 
+import RelatedApps from '@/app/components/RelatedApps';
 const DEFAULT_RATES = { res: 172, comm: 175, agr: 70 };
 const LS_KEY = 'electricity_rates_v1';
 
@@ -356,6 +357,11 @@ export default function ElectricityCalculator() {
       </div>
 
       {/* 제작자 서명 */}
+      {/* 관련 앱 추천 */}
+
+      <RelatedApps currentAppSlug="utility-electricity-calculator" className="mt-8 mb-8" />
+
+
       <AppFooter />
 
       {/* 단가 편집 모달 */}

@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
-import { getBrowserSupabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 
 interface App {
   id: string;
@@ -23,10 +23,11 @@ export default function ImageManagerPage() {
   const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('file');
   const [restoring, setRestoring] = useState(false);
   const uploadFormRef = useRef<HTMLDivElement>(null);
+  const supabase = useSupabase();
 
-  const loadApps = async () => {
+  const loadApps = useCallback(async () => {
+    if (!supabase) return;
     try {
-      const supabase = getBrowserSupabase();
       const { data, error } = await supabase
         .from('apps')
         .select('*')
@@ -50,15 +51,70 @@ export default function ImageManagerPage() {
     } catch (err) {
       console.error('Error loading apps:', err);
     }
-  };
+  }, [supabase]);
 
   useEffect(() => {
     loadApps();
-  }, []);
+  }, [loadApps]);
 
   const filteredApps = apps.filter(app =>
     app.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     app.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const saveImageToApp = useCallback(
+    async (imageUrl: string, options: { silent?: boolean; keepSelection?: boolean } = {}) => {
+      if (!selectedApp) {
+        if (!options.silent) {
+          alert('⚠️ 먼저 앱을 선택해 주세요!');
+        }
+        return false;
+      }
+
+      const targetApp = selectedApp;
+      setLoading(true);
+
+      try {
+        const response = await fetch('/api/update-images', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            slug: targetApp.slug,
+            imageUrl,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || '이미지 업데이트에 실패했습니다.');
+        }
+
+        await loadApps();
+
+        if (!options.keepSelection) {
+          setSelectedApp(null);
+          setNewImageUrl('');
+        }
+
+        if (!options.silent) {
+          alert('✅ 이미지가 업데이트되었습니다!');
+        }
+
+        return true;
+      } catch (error: any) {
+        console.error('❌ 업데이트 중 오류:', error);
+        if (!options.silent) {
+          alert(error?.message || '❌ 업데이트 중 오류가 발생했습니다.');
+        }
+        return false;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [selectedApp, loadApps]
   );
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +137,10 @@ export default function ImageManagerPage() {
 
       if (response.ok) {
         setNewImageUrl(result.imageUrl);
-        alert('✅ 파일이 업로드되었습니다!');
+        const success = await saveImageToApp(result.imageUrl, { silent: true, keepSelection: true });
+        if (success) {
+          alert('✅ 파일이 업로드되어 자동으로 저장되었습니다!');
+        }
       } else {
         alert(`❌ ${result.error}`);
       }
@@ -99,39 +158,7 @@ export default function ImageManagerPage() {
       return;
     }
 
-    setLoading(true);
-
-    try {
-      const response = await fetch('/api/update-images', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          slug: selectedApp.slug,
-          imageUrl: newImageUrl,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        alert('✅ 이미지가 업데이트되었습니다!');
-
-        // Supabase에서 최신 데이터 다시 가져오기
-        await loadApps();
-
-        setSelectedApp(null);
-        setNewImageUrl('');
-      } else {
-        alert(`❌ ${result.error}`);
-      }
-    } catch (error) {
-      alert('❌ 업데이트 중 오류가 발생했습니다.');
-      console.error(error);
-    }
-
-    setLoading(false);
+    await saveImageToApp(newImageUrl);
   };
 
   const handleRestoreImages = async () => {

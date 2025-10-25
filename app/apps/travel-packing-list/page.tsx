@@ -5,6 +5,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 const packingCategories = {
   '의류': ['상의', '하의', '속옷', '양말', '잠옷', '외투', '신발', '슬리퍼', '모자', '선글라스'],
   '세면도구': ['칫솔', '치약', '샴푸', '린스', '바디워시', '로션', '선크림', '면도기', '빗', '수건'],

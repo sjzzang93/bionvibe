@@ -5,6 +5,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 // 이시하라 색맹 검사 데이터 (숫자가 보이면 정상)
 const COLOR_BLIND_TESTS = [
   { id: 1, number: '12', type: '적록색맹', colors: ['#e74c3c', '#27ae60'] },

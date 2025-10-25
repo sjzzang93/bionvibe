@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getBrowserSupabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 import Link from 'next/link';
 
 interface Message {
@@ -15,7 +15,7 @@ export default function GuestbookManager() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<number | null>(null);
-  const supabase = getBrowserSupabase();
+  const supabase = useSupabase();
 
   const loadMessages = async () => {
     setLoading(true);
@@ -179,4 +179,3 @@ export default function GuestbookManager() {
     </div>
   );
 }
-

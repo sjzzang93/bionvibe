@@ -7,6 +7,7 @@ import PremiumButton from '@/app/components/ui/PremiumButton';
 import dynamic from 'next/dynamic';
 
 
+import RelatedApps from '@/app/components/RelatedApps';
 export default function PuzzleGamesPage() {
   const [currentGame, setCurrentGame] = useState<'home' | 'sliding' | 'sudoku' | '2048'>('home');
 
@@ -541,6 +542,9 @@ function Game2048({ onBack }: { onBack: () => void }) {
           새 게임
         </button>
       </div>
-    </div>
+          {/* 관련 앱 추천 */}
+      <RelatedApps currentAppSlug="games-puzzle" className="mt-8 mb-8" />
+
+</div>
   );
 }

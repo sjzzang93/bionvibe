@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 
 import AppFooter from "@/app/components/AppFooter";
+import RelatedApps from '@/app/components/RelatedApps';
 export default function VoiceAge() {
   // Add CSS animations
   if (typeof document !== 'undefined') {
@@ -523,6 +524,11 @@ export default function VoiceAge() {
         </section>
       </div>
       {/* 제작자 서명 */}
+      {/* 관련 앱 추천 */}
+
+      <RelatedApps currentAppSlug="voice-age" className="mt-8 mb-8" />
+
+
       <AppFooter />
 
     </main>

@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 
 import AppFooter from "@/app/components/AppFooter";
+import RelatedApps from '@/app/components/RelatedApps';
 interface VoiceAnalysis {
   frequency: number; // 평균 주파수 (Hz)
   volume: number; // 평균 볼륨
@@ -503,6 +504,11 @@ export default function VoiceFortune() {
         </section>
       </div>
       {/* 제작자 서명 */}
+      {/* 관련 앱 추천 */}
+
+      <RelatedApps currentAppSlug="voice-fortune" className="mt-8 mb-8" />
+
+
       <AppFooter />
 
     </main>

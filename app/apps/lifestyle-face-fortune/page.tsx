@@ -102,130 +102,116 @@ export default function FaceFortune() {
   };
 
   return (
-    <main className="min-h-screen" style={{
-      background: 'linear-gradient(135deg, #3d2817 0%, #5c3d2e 50%, #3d2817 100%)',
-      backgroundImage: `
-        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.6) 0%, transparent 50%),
-        repeating-radial-gradient(circle at 50% 50%, transparent 0%, transparent 2%, rgba(139, 90, 43, 0.1) 2%, rgba(139, 90, 43, 0.1) 4%),
-        linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, transparent 100%)
-      `,
-      backgroundAttachment: 'fixed'
-    }}>
-      <div className="mx-auto max-w-[700px] px-4 py-6">
-        <section className="rounded sm:rounded-lg md:rounded-2xl shadow-2xl p-6 border-2" style={{
-          background: 'linear-gradient(145deg, #2d1f14 0%, #1a1108 100%)',
-          borderColor: 'rgba(139, 90, 43, 0.5)',
-          boxShadow: '0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(139, 90, 43, 0.1)'
-        }}>
-          <header className="text-center mb-6">
-            {/* 음양 태극 심볼 */}
-            <div className="inline-block relative mb-4" style={{
-              width: '100px',
-              height: '100px',
-              background: 'radial-gradient(circle, #f4e4c1 0%, #d4b896 100%)',
-              borderRadius: '50%',
-              border: '3px solid rgba(139, 90, 43, 0.6)',
-              boxShadow: '0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.3)'
-            }}>
-              <div style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '70px',
-                height: '70px'
-              }}>
-                <svg viewBox="0 0 100 100" width="70" height="70">
-                  <circle cx="50" cy="50" r="50" fill="#000"/>
-                  <path d="M50 0 A50 50 0 0 1 50 100 A25 25 0 0 1 50 50 A25 25 0 0 0 50 0" fill="#fff"/>
-                  <circle cx="50" cy="25" r="8" fill="#000"/>
-                  <circle cx="50" cy="75" r="8" fill="#fff"/>
-                </svg>
-              </div>
-            </div>
-            <h1 className="text-3xl font-bold mb-2" style={{
-              background: 'linear-gradient(135deg, #d4af37, #ffd700, #d4af37)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              textShadow: '0 0 10px rgba(212, 175, 55, 0.3)',
-              fontFamily: 'serif',
-              letterSpacing: '2px'
-            }}>
-              觀相占術 (관상점술)
-            </h1>
-            <p className="text-amber-200 text-sm mb-1" style={{fontFamily: 'serif'}}>三停論 · 五官論 · 十二宮論 · 五行觀相</p>
-            <p className="text-amber-300 text-xs opacity-80 mb-2" style={{fontFamily: 'serif'}}>전통 관상학 + AI 정밀 분석 (정확도 90%)</p>
-            
-            {/* 생색내기 배너 */}
-            <div className="mt-3 bg-gradient-to-r from-purple-900/60 to-pink-900/60 rounded-xl p-3 border-2 border-purple-400/50">
-              <p className="text-sm font-bold text-amber-200 leading-relaxed mb-1">
-                🎯 정확도 85~90% | 왠만한 철학관 10만원보다 정확
-              </p>
-              <div className="bg-gradient-to-r from-purple-100/20 to-pink-100/20 rounded-lg p-2 border border-purple-300/30">
-                <p className="text-xs text-purple-200 font-bold mb-1">✨ AI 정밀 분석 시스템</p>
-                <p className="text-xs text-purple-100 leading-relaxed">
-                  27개 패턴 × 15개 항목 = 405개 데이터 포인트 분석<br/>
-                  무료 · 즉시 · 무제한 재분석 가능
-                </p>
-              </div>
-            </div>
-          </header>
+    <main className="relative min-h-screen overflow-hidden bg-[#0a0502] text-amber-100">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,208,128,0.15),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(255,160,76,0.15),transparent_50%),radial-gradient(circle_at_50%_95%,rgba(120,60,20,0.4),transparent_60%)]" />
+      <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#2a1609] via-transparent to-transparent opacity-70" />
+      <div className="absolute inset-x-0 bottom-0 h-[320px] bg-gradient-to-t from-[#1b0f07] via-[#120804] to-transparent" />
 
-          {/* 프라이버시 메시지 */}
-          <div className="mb-6 p-3 bg-gradient-to-r from-green-900/40 to-emerald-900/40 rounded-xl border border-green-500/30">
-            <p className="text-green-200 text-sm text-center flex items-center justify-center gap-2">
-              <span className="text-lg">🔒</span>
-              <span className="font-semibold">이미지는 어느 서버에도 저장되지 않습니다</span>
-            </p>
-          </div>
+      <div className="relative z-10 mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="relative">
+          <div className="absolute inset-x-20 -top-10 h-20 rounded-t-[40px] bg-gradient-to-b from-[#3a2010] to-transparent blur-2xl opacity-70" />
+          <div className="absolute inset-x-16 -bottom-16 h-28 rounded-b-[32px] bg-gradient-to-t from-black/60 via-[#251408] to-transparent blur-2xl opacity-80" />
+          <div className="absolute -left-10 top-24 hidden h-40 w-16 rounded-full bg-gradient-to-b from-amber-200 via-amber-500 to-red-600 shadow-[0_0_35px_rgba(255,128,64,0.6)] lg:block" />
+          <div className="absolute -right-10 top-24 hidden h-40 w-16 rounded-full bg-gradient-to-b from-amber-200 via-amber-500 to-red-600 shadow-[0_0_35px_rgba(255,128,64,0.6)] lg:block" />
 
-          {!imagePreview && !result && (
-            <div className="mb-6">
-              <div className="border-2 border-dashed border-amber-500/50 rounded-xl p-6 md:p-8 text-center bg-gradient-to-br from-amber-950/30 to-yellow-950/30">
-                <div className="text-5xl md:text-6xl mb-4">📸</div>
-                <p className="text-amber-100 mb-0.5 sm:mb-1.5 md:mb-2 text-base md:text-lg font-semibold">얼굴 사진을 업로드하세요</p>
-                <p className="text-amber-300 text-xs md:text-sm mb-6">정면 얼굴이 선명한 사진이 정확합니다</p>
-                
-                <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch">
-                  {/* 카메라로 촬영하기 */}
-                  <label className="flex-1 sm:flex-initial bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 text-base rounded-lg font-bold cursor-pointer hover:shadow-lg transition-all hover:from-blue-500 hover:to-cyan-500 active:scale-95 touch-manipulation flex items-center justify-center gap-2">
-                    📷 카메라로 촬영
-                    <input
-                      ref={cameraInputRef}
-                      type="file"
-                      accept="image/*"
-                      capture="environment"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                  </label>
-                  
-                  {/* 갤러리에서 선택 */}
-                  <label className="flex-1 sm:flex-initial bg-gradient-to-r from-amber-600 to-yellow-600 text-white px-8 py-4 text-base rounded-lg font-bold cursor-pointer hover:shadow-lg transition-all hover:from-amber-500 hover:to-yellow-500 active:scale-95 touch-manipulation flex items-center justify-center gap-2">
-                    🖼️ 갤러리에서 선택
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="hidden"
-                    />
-                  </label>
+          <section className="relative overflow-hidden rounded-[36px] border border-amber-400/30 bg-[#1a0f07]/95 shadow-[0_45px_140px_-50px_rgba(0,0,0,0.75)] backdrop-blur-xl">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,213,128,0.16),transparent_60%),radial-gradient(circle_at_bottom,rgba(120,60,20,0.35),transparent_45%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-24 translate-y-12 bg-gradient-to-t from-black/30 via-transparent to-transparent blur-xl" />
+
+            <div className="relative p-6 sm:p-8">
+              <header className="mb-8 text-center">
+                <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full border-4 border-amber-400/40 bg-gradient-to-br from-amber-200/80 to-amber-500/80 shadow-[0_0_25px_rgba(255,200,120,0.4)]">
+                  <svg viewBox="0 0 100 100" width="64" height="64">
+                    <circle cx="50" cy="50" r="50" fill="#120904" />
+                    <path d="M50 0 A50 50 0 0 1 50 100 A25 25 0 0 1 50 50 A25 25 0 0 0 50 0" fill="#f5e6c8" />
+                    <circle cx="50" cy="25" r="7" fill="#120904" />
+                    <circle cx="50" cy="75" r="7" fill="#f5e6c8" />
+                  </svg>
                 </div>
-                
-                <p className="text-amber-400 text-xs mt-4">💡 모바일: 카메라 촬영 또는 갤러리 선택 | PC: 파일 선택</p>
-              </div>
-            </div>
-          )}
+                <h1 className="text-3xl font-extrabold tracking-[0.3em] text-transparent sm:text-4xl" style={{background: 'linear-gradient(135deg,#f6d77e,#ffe9a8 45%,#f6d77e)', WebkitBackgroundClip: 'text'}}>
+                  觀相占術
+                </h1>
+                <p className="mt-2 text-sm font-semibold text-amber-200/90">三停論 · 五官論 · 十二宮論 · 五行觀相</p>
+                <p className="text-xs text-amber-300/80">전통 관상학 + AI 정밀 분석 (정확도 90%)</p>
 
-          {analyzing && (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin text-6xl mb-4">🔮</div>
-              <p className="text-amber-200 text-xl font-bold mb-2">전문가급 관상 분석 중...</p>
-              <p className="text-amber-400 text-sm mb-1">삼정론(三停論) · 오관론(五官論) · 십이궁론(十二宮論) 분석</p>
-              <p className="text-amber-500 text-xs">오행관상론(五行觀相論) 조화 및 종합 운세 판독 중</p>
-            </div>
-          )}
+                <div className="mt-5 rounded-2xl border border-purple-400/40 bg-gradient-to-r from-purple-900/50 to-pink-900/50 p-4 shadow-[0_0_30px_rgba(128,90,255,0.25)]">
+                  <p className="text-sm font-bold text-amber-100">🎯 정확도 85~90% | 왠만한 철학관 10만원보다 정확</p>
+                  <div className="mt-2 rounded-xl border border-purple-200/20 bg-white/5 p-3 text-left text-xs text-purple-100">
+                    <p className="font-semibold text-purple-200">✨ AI 정밀 분석 시스템</p>
+                    <p className="mt-1 leading-relaxed">
+                      27개 패턴 × 15개 항목 = 405개 데이터 포인트 분석<br />
+                      무료 · 즉시 · 무제한 재분석 가능
+                    </p>
+                  </div>
+                </div>
+              </header>
+
+              <div className="mb-7 rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-900/30 to-green-900/20 p-4 text-sm text-emerald-100 shadow-inner">
+                <div className="flex items-center justify-center gap-3 text-center">
+                  <span className="text-lg">🔒</span>
+                  <span className="font-semibold">이미지는 브라우저에서만 처리되고, 서버에 저장되지 않습니다.</span>
+                </div>
+              </div>
+
+              {!imagePreview && !result && (
+                <div className="mb-6">
+                  <div className="rounded-[24px] border border-amber-500/35 bg-[#201007]/80 p-6 text-center shadow-[0_35px_80px_-45px_rgba(0,0,0,0.85)] sm:p-8">
+                    <div className="mb-4 text-5xl md:text-6xl">📸</div>
+                    <p className="text-base font-semibold text-amber-50 sm:text-lg">얼굴 사진을 업로드하세요</p>
+                    <p className="mt-1 text-xs text-amber-300/80 md:text-sm">
+                      정면 얼굴이 선명한 사진이 정확합니다
+                    </p>
+
+                    <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
+                      <label className="flex-1 cursor-pointer rounded-xl bg-gradient-to-r from-[#b4772a] via-[#cf9451] to-[#e9be7c] px-8 py-4 text-base font-bold text-[#2a1406] transition-all duration-200 hover:from-[#a96b21] hover:via-[#c0843f] hover:to-[#d9aa63] hover:shadow-lg active:scale-95 sm:flex-initial sm:min-w-[220px] sm:px-10 sm:text-lg">
+                        <span className="flex items-center justify-center gap-2">
+                          📷 카메라로 촬영
+                        </span>
+                        <input
+                          ref={cameraInputRef}
+                          type="file"
+                          accept="image/*"
+                          capture="environment"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                      </label>
+
+                      <label className="flex-1 cursor-pointer rounded-xl bg-gradient-to-r from-[#8b5a2b] via-[#a2693a] to-[#c88851] px-8 py-4 text-base font-bold text-amber-50 transition-all duration-200 hover:from-[#7d4f23] hover:via-[#925c33] hover:to-[#b67946] hover:shadow-lg active:scale-95 sm:flex-initial sm:min-w-[220px] sm:px-10 sm:text-lg">
+                        <span className="flex items-center justify-center gap-2">
+                          🖼️ 갤러리에서 선택
+                        </span>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                      </label>
+                    </div>
+
+                    <p className="mt-4 text-xs text-amber-400 sm:text-sm">
+                      💡 모바일: 카메라 촬영 또는 갤러리 선택 | PC: 파일 선택
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {analyzing && (
+                <div className="py-12 text-center">
+                  <div className="mx-auto max-w-md rounded-2xl border border-purple-500/30 bg-[#1a0f07]/80 p-8 shadow-[0_35px_90px_-40px_rgba(48,22,12,0.9)]">
+                    <div className="mb-5 inline-flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-4xl shadow-[0_0_25px_rgba(168,96,255,0.5)]">
+                      🔮
+                    </div>
+                    <p className="text-xl font-bold text-amber-100">전문가급 관상 분석 중...</p>
+                    <p className="mt-2 text-sm text-amber-300">
+                      삼정론(三停論) · 오관론(五官論) · 십이궁론(十二宮論) 분석
+                    </p>
+                    <p className="mt-1 text-xs text-amber-400">오행관상론(五行觀相論) 조화 및 종합 운세 판독 중</p>
+                  </div>
+                </div>
+              )}
 
           {result && imagePreview && (
             <div className="space-y-6">
@@ -445,11 +431,13 @@ export default function FaceFortune() {
 
           {/* 제작자 서명 */}
           <AppFooter />
-        </section>
-
-        {/* Canvas (숨김) */}
-        <canvas ref={canvasRef} className="hidden" />
+        </div>
+      </section>
       </div>
+
+      {/* Canvas (숨김) */}
+      <canvas ref={canvasRef} className="hidden" />
+    </div>
     </main>
   );
 }

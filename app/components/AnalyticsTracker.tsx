@@ -2,11 +2,11 @@
 
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import { getBrowserSupabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 
 export default function AnalyticsTracker() {
   const pathname = usePathname();
-  const supabase = getBrowserSupabase();
+  const supabase = useSupabase();
   const sessionIdRef = useRef<string | null>(null);
   const startTimeRef = useRef<number>(Date.now());
   const pageViewsRef = useRef<number>(0);
@@ -141,8 +141,7 @@ export default function AnalyticsTracker() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [pathname]);
+  }, [pathname, supabase]);
 
   return null; // UI 없음
 }
-

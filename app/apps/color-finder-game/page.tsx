@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
+import RelatedApps from '@/app/components/RelatedApps';
 interface GameState {
   level: number;
   score: number;

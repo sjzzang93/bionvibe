@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 
+import RelatedApps from '@/app/components/RelatedApps';
 type MenuItem = {
   name: string;
   emoji: string;
@@ -229,7 +230,10 @@ function InfoPill({ label, value }: { label: string; value: string }) {
       <div className="text-sm sm:text-base font-medium text-zinc-900 dark:text-white">
         {value}
       </div>
-    </div>
+          {/* 관련 앱 추천 */}
+      <RelatedApps currentAppSlug="breakfast-what-to-eat" className="mt-8 mb-8" />
+
+</div>
   );
 }
 

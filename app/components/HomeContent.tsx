@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getAllAppsAsync, getAllCategories, type App } from '@/lib/getApps';
-import { getBrowserSupabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 import Link from 'next/link';
 import Image from 'next/image';
 import FavoriteButton from './FavoriteButton';
@@ -51,11 +51,10 @@ export default function HomeContent() {
   const [loading, setLoading] = useState(true);
   const [favoritesLoaded, setFavoritesLoaded] = useState(false);
   const categories = getAllCategories();
+  const supabase = useSupabase();
 
   // Supabase에서 앱 데이터 가져오기 + 실시간 구독
   useEffect(() => {
-    const supabase = getBrowserSupabase();
-
     const loadApps = async () => {
       try {
         // 초기 로드 시 캐시 사용
@@ -111,7 +110,7 @@ export default function HomeContent() {
       supabase.removeChannel(channel);
       clearInterval(interval);
     };
-  }, []);
+  }, [supabase]);
 
   // 클라이언트 마운트 확인
   useEffect(() => {

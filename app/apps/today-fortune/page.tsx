@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import AppFooter from '@/app/components/AppFooter';
+import RelatedApps from '@/app/components/RelatedApps';
 
 interface FortuneResult {
   zodiac: string;
@@ -365,6 +366,9 @@ export default function TodayFortunePage() {
                 </div>
               </div>
             </div>
+
+            {/* 관련 앱 추천 */}
+            <RelatedApps currentAppSlug="today-fortune" className="mt-8" />
           </div>
         )}
       </div>

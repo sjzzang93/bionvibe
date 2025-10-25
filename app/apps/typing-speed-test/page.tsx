@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 const koreanTexts = [
   '빠른 갈색 여우가 게으른 개를 뛰어넘습니다',
   '삶이 있는 한 희망은 있다',

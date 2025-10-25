@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import RelatedApps from '@/app/components/RelatedApps';
 interface Recipe {
   id: string;
   name: string;

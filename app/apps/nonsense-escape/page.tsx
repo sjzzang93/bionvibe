@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParallax } from "./lib/use-parallax";
 
+import RelatedApps from '@/app/components/RelatedApps';
 export default function NonsenseEscapeLanding() {
   const { mousePos, enabled: parallaxEnabled } = useParallax({ maxOffset: 20 });
 
@@ -298,6 +299,9 @@ export default function NonsenseEscapeLanding() {
           50% { transform: translateY(-10px) translateZ(10px); }
         }
       `}</style>
-    </div>
+          {/* 관련 앱 추천 */}
+      <RelatedApps currentAppSlug="nonsense-escape" className="mt-8 mb-8" />
+
+</div>
   );
 }

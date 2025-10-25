@@ -1,7 +1,7 @@
 "use client";
 
 import { getHiddenAppsAsync, type App } from "@/lib/getApps";
-import { getBrowserSupabase } from "@/lib/supabase";
+import { useSupabase } from "@/lib/supabase-provider";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -10,6 +10,7 @@ export default function SecretPage() {
   const [password, setPassword] = useState("");
   const [hiddenApps, setHiddenApps] = useState<App[]>([]);
   const [loadingHidden, setLoadingHidden] = useState(true);
+  const supabase = useSupabase();
 
   // 페이지 로드 시 세션 확인
   useEffect(() => {
@@ -30,8 +31,7 @@ export default function SecretPage() {
   }, []);
 
   useEffect(() => {
-    const supabase = getBrowserSupabase();
-
+    if (!supabase) return;
     const loadHiddenApps = async (bypass = false, showSpinner = false) => {
       if (showSpinner) {
         setLoadingHidden(true);
@@ -64,7 +64,7 @@ export default function SecretPage() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [supabase]);
 
   const handleUnlock = () => {
     if (password === "8314") {

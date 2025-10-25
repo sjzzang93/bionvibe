@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { getBrowserSupabase } from "@/lib/supabase";
+import { useSupabase } from "@/lib/supabase-provider";
 
 type FormState = "idle" | "submitting" | "done";
 
 export default function RewardEventPage() {
-  const supabase = getBrowserSupabase();
+  const supabase = useSupabase();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [file, setFile] = useState<File | null>(null);

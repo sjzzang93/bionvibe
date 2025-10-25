@@ -5,6 +5,7 @@ import AppFooter from "@/app/components/AppFooter";
 import Link from 'next/link';
 import { ChevronLeft, Home, CheckSquare, BookOpen, MapPin, Building2, Lightbulb, FileText, Compass, RotateCw, Trash2 } from 'lucide-react';
 
+import RelatedApps from '@/app/components/RelatedApps';
 export default function FengshuiGuidePage() {
   const [activeTab, setActiveTab] = useState<'theory' | 'practice' | 'checklist' | 'cases' | 'tools' | 'faq' | 'designer'>('designer');
   const [checklistScores, setChecklistScores] = useState<Record<string, boolean>>({});
@@ -65,6 +66,11 @@ export default function FengshuiGuidePage() {
         {activeTab === 'tools' && <ToolsSection checklistScores={checklistScores} toggleCheck={toggleCheck} />}
         {activeTab === 'faq' && <FAQSection />}
         {/* 제작자 서명 */}
+        {/* 관련 앱 추천 */}
+
+        <RelatedApps currentAppSlug="fengshui-guide" className="mt-8 mb-8" />
+
+
         <AppFooter />
 
       </main>

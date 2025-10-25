@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { getBrowserSupabase } from '@/lib/supabase';
+import { useSupabase } from '@/lib/supabase-provider';
 
 interface AnalyticsStats {
   todayVisits: number;
@@ -24,10 +24,11 @@ export default function AnalyticsPage() {
     realtimeUsers: 0,
   });
   const [loading, setLoading] = useState(true);
+  const supabase = useSupabase();
 
   // Supabase에서 실시간 통계 가져오기
   useEffect(() => {
-    const supabase = getBrowserSupabase();
+    if (!supabase) return;
     
     const fetchAnalytics = async () => {
       try {
@@ -103,7 +104,7 @@ export default function AnalyticsPage() {
     const interval = setInterval(fetchAnalytics, 30000);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -346,4 +347,3 @@ export default function AnalyticsPage() {
     </div>
   );
 }
-

@@ -190,6 +190,22 @@
       ]
     },
     {
+      "id": "gender-language-quiz",
+      "name": "여자어 남자어 맞추기",
+      "slug": "gender-language-quiz",
+      "icon": "💬",
+      "description": "여자어 · 남자어 신조어 3D 퀴즈",
+      "categoryId": "learning-tools",
+      "url": "/apps/gender-language-quiz",
+      "image": "https://images.unsplash.com/photo-1516321165247-4aa89a48be28?w=800&auto=format&fit=crop",
+      "createdAt": "2025-02-07",
+      "relatedApps": [
+        "flashcard",
+        "typing-speed-test",
+        "mbti-ai-chat"
+      ]
+    },
+    {
       "id": "reflex-test",
       "name": "반사신경 테스트",
       "slug": "reflex-test",

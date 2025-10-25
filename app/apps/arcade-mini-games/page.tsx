@@ -5,6 +5,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 type GameType = 'home' | 'tictactoe' | 'memory' | 'snake';
 
 export default function MiniArcadePage() {
@@ -445,6 +446,9 @@ function SnakeGame({ onBack }: { onBack: () => void }) {
           💡 키보드 방향키 또는 버튼으로 조작
         </p>
       </div>
-    </div>
+          {/* 관련 앱 추천 */}
+      <RelatedApps currentAppSlug="arcade-mini-games" className="mt-8 mb-8" />
+
+</div>
   );
 }

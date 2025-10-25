@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 interface DDay {
   title: string;
   date: string;

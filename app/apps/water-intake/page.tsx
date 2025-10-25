@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 export default function WaterIntakePage() {
   const [weight, setWeight] = useState('');
   const [activity, setActivity] = useState('medium');

@@ -5,6 +5,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 // MBTI 페르소나 데이터 (확장 버전)
 const MBTI_PERSONAS = {
   'ISTJ': {

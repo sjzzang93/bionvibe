@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 
+import RelatedApps from '@/app/components/RelatedApps';
 interface Animal {
   id: string;
   name: string;

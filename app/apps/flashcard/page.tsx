@@ -5,6 +5,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
+import RelatedApps from '@/app/components/RelatedApps';
 const wordSets = {
   '초급 (300단어)': [
     { en: 'apple', ko: '사과' }, { en: 'book', ko: '책' }, { en: 'cat', ko: '고양이' }, { en: 'dog', ko: '개' },
@@ -213,7 +214,10 @@ export default function FlashcardPage() {
           </div>
         </div>
       </div>
-    </div>
+          {/* 관련 앱 추천 */}
+      <RelatedApps currentAppSlug="flashcard" className="mt-8 mb-8" />
+
+</div>
   );
 }
 
