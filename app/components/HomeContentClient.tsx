@@ -12,6 +12,23 @@ import FavoriteButton from './FavoriteButton';
 import AdSlot from './AdSlot';
 
 const HOME_CONTENT_MID_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID;
+const RECENT_UPDATES = [
+  {
+    date: '2025-01-24',
+    title: '광고 안전성 점검',
+    description: '애드센스 재심사를 위해 홈 구조와 광고 슬롯을 전면 개편했어요.',
+  },
+  {
+    date: '2025-01-19',
+    title: '운세·금융 추천 강화',
+    description: '오늘의 운세, 전기요금 등 인기 앱에 가이드와 FAQ를 추가했습니다.',
+  },
+  {
+    date: '2025-01-12',
+    title: '홈 즐겨찾기 출시',
+    description: '즐겨찾기 보관함과 다크모드를 정식 오픈했습니다.',
+  },
+];
 
 type HomeContentClientProps = {
   initialApps: App[];
@@ -202,6 +219,24 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
             금융, 건강, 운세, 미니 게임 그리고 생산성 도구까지. 필요한 기능을 즐겨찾기에 담아두면
             언제든 빠르게 찾아 사용할 수 있어요.
           </p>
+        </div>
+
+        <div className="rounded-3xl border border-gray-200 bg-white/80 p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900/60">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            최근 업데이트
+          </h3>
+          <ol className="space-y-4">
+            {RECENT_UPDATES.map((item) => (
+              <li key={item.date} className="relative pl-6 text-sm text-gray-700 dark:text-gray-300">
+                <span className="absolute left-0 top-1 h-2 w-2 rounded-full bg-red-500 dark:bg-red-400" />
+                <p className="font-semibold text-gray-900 dark:text-gray-100">
+                  {item.title}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{item.date}</p>
+                <p>{item.description}</p>
+              </li>
+            ))}
+          </ol>
         </div>
 
         <AdSlot

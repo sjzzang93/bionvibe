@@ -8,6 +8,9 @@ import AnalyticsTracker from "./components/AnalyticsTracker";
 import TranslateButton from "./components/TranslateButton";
 import appsData from "@/data/apps.json";
 
+const ADSENSE_PUBLISHER_ID =
+  process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID || "ca-pub-4564769502264231";
+
 // 자동 카운트: apps.json에서 실제 앱 개수 계산
 const APP_COUNT = appsData.apps.length;
 
@@ -72,7 +75,7 @@ export const metadata: Metadata = {
     google: 'google-site-verification-code', // Google Search Console에서 받은 코드로 교체
   },
   other: {
-    "google-adsense-account": "ca-pub-4564769502264231",
+    "google-adsense-account": ADSENSE_PUBLISHER_ID,
   },
 };
 
@@ -98,7 +101,7 @@ export default function RootLayout({
         <GoogleAnalytics gaId={GA_ID} />
         
         {/* Google AdSense */}
-        <GoogleAdSense publisherId="ca-pub-4564769502264231" />
+        <GoogleAdSense publisherId={ADSENSE_PUBLISHER_ID} />
         
         <SupabaseProvider>
           <AnalyticsTracker />

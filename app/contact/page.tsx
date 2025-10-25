@@ -82,9 +82,13 @@ export default function ContactPage() {
           ← 홈으로 돌아가기
         </Link>
 
-        <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
-          🎉 이벤트 신청
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
+          🎉 이벤트 & 문의
         </h1>
+        <p className="text-gray-600 dark:text-gray-300 mb-10 leading-relaxed">
+          새로운 기능 요청부터 일반적인 문의까지 언제든 환영합니다. 아래 양식으로 신청하거나, 하단의
+          연락처로 직접 메일을 보내주셔도 됩니다.
+        </p>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Contact Form */}
@@ -94,6 +98,22 @@ export default function ContactPage() {
               방명록을 남기신 후 아래 양식으로 신청하시면<br />
               원하시는 기능을 개발해드립니다. 🎯
             </p>
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 mb-6 shadow-sm">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                📩 일반 문의 전용
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                서비스 이용 관련 질문이나 제휴·협업 문의는{' '}
+                <a
+                  href="mailto:wa8106@naver.com"
+                  className="font-semibold text-red-600 dark:text-red-400 underline"
+                >
+                  wa8106@naver.com
+                </a>
+                으로 직접 메일을 보내주셔도 빠르게 답변드릴 수 있어요.
+              </p>
+            </div>
+
             <div className="bg-orange-50 dark:bg-orange-900/20 border-2 border-orange-300 dark:border-orange-700 rounded-xl p-4 mb-6">
               <p className="text-sm text-orange-800 dark:text-orange-200 leading-relaxed">
                 💡 <strong>예시:</strong> 코인자동매매 프로그램, 주식 분석 도구, 식당 이벤트용 QR, 와이파이 QR, 네이버리뷰 QR 등
