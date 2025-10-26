@@ -50,6 +50,22 @@
       ]
     },
     {
+      "id": "hobby-finder",
+      "name": "성향별 취미 찾기",
+      "slug": "hobby-finder",
+      "icon": "🎯",
+      "description": "35문항 테스트로 당신에게 딱 맞는 취미 추천",
+      "categoryId": "fortune-mind",
+      "url": "/apps/hobby-finder",
+      "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop",
+      "createdAt": "2025-01-26",
+      "relatedApps": [
+        "mbti-test",
+        "color-psychology",
+        "mbti-zodiac-compat"
+      ]
+    },
+    {
       "id": "mbti-zodiac-compat",
       "name": "MBTI+띠 궁합",
       "slug": "mbti-zodiac-compat",

@@ -1,16 +1,33 @@
 "use client";
 
-import { getHiddenAppsAsync, type App } from "@/lib/getApps";
+import { getAllAppsAsync, type App } from "@/lib/getApps";
 import { useSupabase } from "@/lib/supabase-provider";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function SecretPage() {
   const [unlocked, setUnlocked] = useState(false);
   const [password, setPassword] = useState("");
-  const [hiddenApps, setHiddenApps] = useState<App[]>([]);
-  const [loadingHidden, setLoadingHidden] = useState(true);
+  const [apps, setApps] = useState<App[]>([]);
+  const [loadingApps, setLoadingApps] = useState(true);
   const supabase = useSupabase();
+  const [editingAppId, setEditingAppId] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState('');
+  const [renaming, setRenaming] = useState(false);
+  const [renameSearch, setRenameSearch] = useState('');
+
+  const hiddenApps = useMemo(() => apps.filter((app) => app.hidden), [apps]);
+  const filteredApps = useMemo(() => {
+    const keyword = renameSearch.trim().toLowerCase();
+    if (!keyword) return apps;
+    return apps.filter((app) => {
+      return (
+        app.name.toLowerCase().includes(keyword) ||
+        app.id.toLowerCase().includes(keyword) ||
+        (app.slug && app.slug.toLowerCase().includes(keyword))
+      );
+    });
+  }, [apps, renameSearch]);
 
   // 페이지 로드 시 세션 확인
   useEffect(() => {
@@ -32,21 +49,21 @@ export default function SecretPage() {
 
   useEffect(() => {
     if (!supabase) return;
-    const loadHiddenApps = async (bypass = false, showSpinner = false) => {
+    const loadApps = async (bypass = false, showSpinner = false) => {
       if (showSpinner) {
-        setLoadingHidden(true);
+        setLoadingApps(true);
       }
       try {
-        const apps = await getHiddenAppsAsync(bypass);
-        setHiddenApps(apps);
+        const fetched = await getAllAppsAsync(true, bypass);
+        setApps(fetched);
       } catch (error) {
-        console.error("Failed to load hidden apps", error);
+        console.error("Failed to load apps", error);
       } finally {
-        setLoadingHidden(false);
+        setLoadingApps(false);
       }
     };
 
-    loadHiddenApps(true, true);
+    loadApps(true, true);
 
     const channel = supabase
       .channel("hidden-apps-watch")
@@ -57,7 +74,7 @@ export default function SecretPage() {
           schema: "public",
           table: "apps"
         },
-        () => loadHiddenApps(true)
+        () => loadApps(true)
       )
       .subscribe();
 
@@ -65,6 +82,59 @@ export default function SecretPage() {
       supabase.removeChannel(channel);
     };
   }, [supabase]);
+
+  const startRename = (app: App) => {
+    setEditingAppId(app.id);
+    setRenameValue(app.name);
+  };
+
+  const cancelRename = () => {
+    setEditingAppId(null);
+    setRenameValue('');
+  };
+
+  const submitRename = async (appId: string) => {
+    const nextName = renameValue.trim();
+    if (!nextName) {
+      alert('새 이름을 입력해주세요.');
+      return;
+    }
+
+    const targetApp = apps.find((app) => app.id === appId);
+    if (targetApp && targetApp.name === nextName) {
+      alert('변경된 내용이 없습니다.');
+      return;
+    }
+
+    try {
+      setRenaming(true);
+      const response = await fetch('/api/secret/apps/rename', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ appId, newName: nextName }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.message || '업데이트에 실패했습니다.');
+      }
+
+      setApps((prev) =>
+        prev.map((app) => (app.id === appId ? { ...app, name: nextName } : app)),
+      );
+      setEditingAppId(null);
+      setRenameValue('');
+      alert('✅ 이름이 업데이트되었습니다.');
+    } catch (error) {
+      const message = error instanceof Error ? error.message : '업데이트 중 오류가 발생했습니다.';
+      alert(`❌ ${message}`);
+    } finally {
+      setRenaming(false);
+    }
+  };
 
   const handleUnlock = async () => {
     try {
@@ -157,7 +227,7 @@ export default function SecretPage() {
         </div>
 
         {/* Hidden Apps Grid */}
-        {loadingHidden ? (
+        {loadingApps ? (
           <div className="py-20 text-center">
             <div className="mb-6 text-6xl animate-spin">🧪</div>
             <p className="text-gray-400">비밀 웹앱 목록을 불러오는 중...</p>
@@ -170,42 +240,204 @@ export default function SecretPage() {
           </div>
         ) : (
           <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-            {hiddenApps.map((app) => (
-              <Link
-                key={app.id}
-                href={app.url}
-                className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/50 backdrop-blur-lg"
-              >
-                {/* App Image */}
-                {app.image && (
-                  <div className="relative h-32 overflow-hidden">
-                    <img
-                      src={app.image}
-                      alt={app.name}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                    <div className="absolute top-2 right-2">
-                      <span className="rounded-full bg-purple-500 px-2 py-1 text-xs font-bold text-white">
-                        SECRET
-                      </span>
-                    </div>
-                  </div>
-                )}
+            {hiddenApps.map((app) => {
+              const isEditing = editingAppId === app.id;
 
-                {/* App Info */}
-                <div className="p-4">
-                  <div className="mb-2 flex items-center gap-2">
-                    <span className="text-3xl">{app.icon}</span>
-                    <h3 className="truncate text-sm font-bold text-white">{app.name}</h3>
+              return (
+                <div
+                  key={app.id}
+                  className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/50 backdrop-blur-lg"
+                >
+                  <Link href={app.url} className="block">
+                    {app.image && (
+                      <div className="relative h-32 overflow-hidden">
+                        <img
+                          src={app.image}
+                          alt={app.name}
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                        <div className="absolute top-2 right-2">
+                          <span className="rounded-full bg-purple-500 px-2 py-1 text-xs font-bold text-white">
+                            SECRET
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="p-4">
+                      <div className="mb-2 flex items-center gap-2">
+                        <span className="text-3xl">{app.icon}</span>
+                        <span className="text-xs text-white/60">{app.id}</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-white">
+                        {isEditing ? renameValue : app.name}
+                      </h3>
+                      <p className="mt-2 line-clamp-2 text-sm text-white/70">{app.description}</p>
+                      <div className="mt-3 text-xs text-purple-200/60">
+                        <p>카테고리: {app.categoryId}</p>
+                        <p>경로: {app.url}</p>
+                      </div>
+                    </div>
+                  </Link>
+
+                  <div className="border-t border-white/10 bg-black/30 p-3">
+                    {isEditing ? (
+                      <div className="space-y-3">
+                        <input
+                          type="text"
+                          value={renameValue}
+                          onChange={(e) => setRenameValue(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                              submitRename(app.id);
+                            }
+                          }}
+                          className="w-full rounded-lg border border-purple-400/40 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-purple-300 focus:ring-2 focus:ring-purple-400/30"
+                          placeholder="새 이름을 입력하세요"
+                          autoFocus
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => submitRename(app.id)}
+                            disabled={renaming}
+                            className="flex-1 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            {renaming ? '저장 중...' : '💾 저장'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={cancelRename}
+                            disabled={renaming}
+                            className="flex-1 rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            취소
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => startRename(app)}
+                        className="w-full rounded-lg border border-purple-400/50 px-3 py-2 text-sm font-semibold text-purple-100 transition hover:bg-purple-500/20"
+                      >
+                        ✏️ 이름 변경
+                      </button>
+                    )}
                   </div>
-                  <p className="line-clamp-2 text-xs text-gray-300">{app.description}</p>
                 </div>
-              </Link>
-            ))}
+              );
+            })}
           </div>
         )}
+
+        {/* Rename Manager */}
+        <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-white">📝 웹앱 이름 관리</h2>
+              <p className="text-sm text-purple-100/70">
+                전체 앱 {apps.length}개 · 숨김 {hiddenApps.length}개
+              </p>
+            </div>
+            <div className="w-full sm:w-72">
+              <input
+                type="search"
+                value={renameSearch}
+                onChange={(e) => setRenameSearch(e.target.value)}
+                placeholder="이름, ID, 슬러그 검색"
+                className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-2 text-sm text-white outline-none transition focus:border-purple-300 focus:ring-2 focus:ring-purple-400/40"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4 max-h-[420px] overflow-y-auto divide-y divide-white/10">
+            {filteredApps.map((app) => {
+              const isEditing = editingAppId === app.id;
+              return (
+                <div
+                  key={app.id}
+                  className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+                    <div>
+                      <p className="text-sm font-semibold text-white">
+                        {isEditing ? renameValue : app.name}{' '}
+                        {app.hidden ? (
+                          <span className="ml-2 rounded-full bg-purple-500/40 px-2 py-0.5 text-[11px] font-semibold text-purple-100">
+                            HIDDEN
+                          </span>
+                        ) : null}
+                      </p>
+                      <p className="text-xs text-purple-100/60">ID: {app.id}</p>
+                      <p className="text-xs text-purple-100/60">Slug: {app.slug}</p>
+                    </div>
+                    <div className="text-xs text-purple-100/60 sm:text-right">
+                      <p>카테고리: {app.categoryId}</p>
+                      <p>URL: {app.url}</p>
+                    </div>
+                  </div>
+
+                  <div className="sm:w-64">
+                    {isEditing ? (
+                      <div className="flex flex-col gap-2 sm:flex-row">
+                        <input
+                          type="text"
+                          value={renameValue}
+                          onChange={(e) => setRenameValue(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                              submitRename(app.id);
+                            }
+                          }}
+                          className="w-full rounded-lg border border-purple-400/40 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-purple-300 focus:ring-2 focus:ring-purple-400/30"
+                          placeholder="새 이름 입력"
+                          autoFocus
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => submitRename(app.id)}
+                            disabled={renaming}
+                            className="flex-1 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            {renaming ? '저장 중...' : '저장'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={cancelRename}
+                            disabled={renaming}
+                            className="flex-1 rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+                          >
+                            취소
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => startRename(app)}
+                        className="w-full rounded-lg border border-purple-400/50 px-3 py-2 text-sm font-semibold text-purple-100 transition hover:bg-purple-500/20"
+                      >
+                        ✏️ 이름 변경
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+
+            {filteredApps.length === 0 && (
+              <div className="py-8 text-center text-sm text-purple-100/60">
+                검색 결과가 없습니다.
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* Admin Tools */}
         <div className="mb-12 rounded-2xl border-2 border-white/10 bg-white/5 p-8 backdrop-blur-lg">

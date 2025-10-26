@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="160" viewBox="0 0 320 160" fill="none">
+  <defs>
+    <radialGradient id="glow-amber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 48) rotate(45) scale(96 64)">
+      <stop offset="0" stop-color="#f97316" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#fb923c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-rose" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 112) rotate(-40) scale(110 74)">
+      <stop offset="0" stop-color="#f97316" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#fb7185" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-gold" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(168 24) rotate(15) scale(80 56)">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="160" fill="url(#glow-amber)"/>
+  <rect width="320" height="160" fill="url(#glow-rose)"/>
+  <rect width="320" height="160" fill="url(#glow-gold)"/>
+  <g opacity="0.15" stroke="#b45309" stroke-width="1.5" stroke-linecap="round">
+    <path d="M36 134c10-12 22-22 36-28-4 16-12 28-24 36"/>
+    <path d="M132 62c8-10 17-17 28-22-3 12-9 21-19 28"/>
+    <path d="M206 116c9-10 20-18 32-24-4 14-11 24-22 32"/>
+    <path d="M276 48c7-8 15-14 24-18-3 10-8 18-16 24"/>
+  </g>
+</svg>

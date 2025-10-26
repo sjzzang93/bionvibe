@@ -63,9 +63,14 @@ export type LuckyGuide = {
   ritual: string;
 };
 
-export type CompatibilityResult = {
+type CompatibilityPair = {
   mbti: MbtiProfile;
   zodiac: ZodiacProfile;
+};
+
+export type CompatibilityResult = {
+  my: CompatibilityPair;
+  partner: CompatibilityPair;
   score: number;
   tier: 'S' | 'A' | 'B+' | 'B' | 'C';
   headline: string;
@@ -153,6 +158,13 @@ const TIER_HEADLINES: Record<CompatibilityResult['tier'], string[]> = {
   'B+': ['유연한 파트너', '균형 맞추기 좋은 관계', '서로를 성장시키는 궁합'],
   B: ['연습하면 좋아지는 궁합', '배려를 통해 안정되는 조합', '리듬을 맞춰 가야 할 관계'],
   C: ['시간을 두고 다듬을 궁합', '천천히 속도를 맞춰야 하는 조합', '서로의 차이를 존중해야 할 관계'],
+};
+
+const GROUP_PAIR_SCORE: Record<MbtiGroup, Record<MbtiGroup, number>> = {
+  Analyst: { Analyst: 5, Diplomat: 6, Sentinel: 4, Explorer: 3 },
+  Diplomat: { Analyst: 6, Diplomat: 5, Sentinel: 5, Explorer: 4 },
+  Sentinel: { Analyst: 4, Diplomat: 5, Sentinel: 5, Explorer: 6 },
+  Explorer: { Analyst: 3, Diplomat: 4, Sentinel: 6, Explorer: 5 },
 };
 
 const MBTI_PROFILES: Record<string, MbtiProfile> = {
@@ -621,146 +633,254 @@ function calculateTier(score: number): CompatibilityResult['tier'] {
   return 'C';
 }
 
+function elementRelationshipScore(source: Element, target: Element): number {
+  const synergy = ELEMENT_SYNERGY[source];
+  if (synergy.harmony.includes(target)) {
+    return 4;
+  }
+  if (synergy.supportive.includes(target)) {
+    return 3;
+  }
+  if (synergy.tension.includes(target)) {
+    return -3;
+  }
+  if (synergy.drain.includes(target)) {
+    return -2;
+  }
+  return 1;
+}
+
+function mbtiElementAffinity(mbti: MbtiProfile, zodiac: ZodiacProfile): number {
+  if (mbti.bestElements.includes(zodiac.element)) {
+    return 4;
+  }
+  if (mbti.growthElements.includes(zodiac.element)) {
+    return 2;
+  }
+  if (mbti.cautionElements.includes(zodiac.element)) {
+    return -3;
+  }
+  return 0;
+}
+
+function calculateLetterHarmonyScore(a: MbtiProfile, b: MbtiProfile): number {
+  const weights = [3, 3, 3, 3];
+  let score = 0;
+  let shared = 0;
+
+  for (let i = 0; i < 4; i += 1) {
+    if (a.type[i] === b.type[i]) {
+      score += weights[i] + 1;
+      shared += 1;
+    } else {
+      score += weights[i];
+    }
+  }
+
+  if (shared === 4) {
+    score += 2;
+  } else if (shared <= 1) {
+    score -= 2;
+  }
+
+  if (a.type[1] === b.type[1]) {
+    score += 1;
+  }
+
+  if ((a.type[2] === 'F' && b.type[2] === 'T') || (a.type[2] === 'T' && b.type[2] === 'F')) {
+    score += 1;
+  }
+
+  if ((a.type[0] === 'E' && b.type[0] === 'I') || (a.type[0] === 'I' && b.type[0] === 'E')) {
+    score += 1;
+  }
+
+  return score;
+}
+
+function yinYangPairingBonus(my: CompatibilityPair, partner: CompatibilityPair): number {
+  let bonus = my.zodiac.yinYang === partner.zodiac.yinYang ? 2 : 1;
+
+  bonus += my.mbti.type.startsWith('E')
+    ? partner.zodiac.yinYang === '양'
+      ? 1
+      : 0
+    : partner.zodiac.yinYang === '음'
+      ? 1
+      : 0;
+
+  bonus += partner.mbti.type.startsWith('E')
+    ? my.zodiac.yinYang === '양'
+      ? 1
+      : 0
+    : my.zodiac.yinYang === '음'
+      ? 1
+      : 0;
+
+  return bonus;
+}
+
+function calculatePairScore(my: CompatibilityPair, partner: CompatibilityPair, seed: number): number {
+  let score = 58;
+
+  score += GROUP_PAIR_SCORE[my.mbti.group][partner.mbti.group];
+
+  score += calculateLetterHarmonyScore(my.mbti, partner.mbti);
+
+  score += mbtiElementAffinity(my.mbti, partner.zodiac);
+  score += mbtiElementAffinity(partner.mbti, my.zodiac);
+
+  const elementScore =
+    elementRelationshipScore(my.zodiac.element, partner.zodiac.element) +
+    elementRelationshipScore(partner.zodiac.element, my.zodiac.element);
+  score += Math.round(elementScore * 0.8);
+
+  if (my.mbti.primaryElement === partner.zodiac.element) {
+    score += 2;
+  }
+  if (partner.mbti.primaryElement === my.zodiac.element) {
+    score += 2;
+  }
+
+  score += yinYangPairingBonus(my, partner);
+
+  score += (seed % 7) - 3;
+
+  return clamp(score, 52, 96);
+}
+
 function buildSynergyHighlights(
-  mbti: MbtiProfile,
-  zodiac: ZodiacProfile,
+  my: CompatibilityPair,
+  partner: CompatibilityPair,
   tier: CompatibilityResult['tier'],
   seed: number,
 ): string[] {
   const tone =
     tier === 'S' || tier === 'A'
-      ? ['즉각적인 공명', '깊은 신뢰 형성', '강력한 추진력']
+      ? ['즉각적인 공명', '주도적인 파트너십', '빛나는 추진력']
       : tier === 'B+' || tier === 'B'
-        ? ['유연한 균형', '보완적인 파트너십', '성장을 위한 발판']
-        : ['차이를 이해하는 시간', '속도 조절을 통한 안정', '의도적인 신뢰 구축'];
+        ? ['차분한 균형', '보완적인 팀워크', '서로를 성장시키는 연결']
+        : ['속도를 맞춰 가는 연습', '의도적인 호흡 조절', '경계를 배우는 시간'];
 
   return [
-    `${mbti.nickname}의 ${pickFrom(mbti.keywords, seed, 3)} 에너지와 ${zodiac.name}의 ${pickFrom(
-      zodiac.keywords,
-      seed,
-      5,
-    )} 기질이 만나 ${pickFrom(tone, seed, 7)}을(를) 만들어냅니다.`,
-    `${zodiac.relationshipStyle}라는 ${zodiac.name}의 관계 리듬이 ${mbti.loveStyle}을 중시하는 ${mbti.nickname}에게 ${
-      tier === 'C' ? '새로운 연습이' : '탄탄한 안전감을'
-    } 제공합니다.`,
-    `함께하면 ${zodiac.luckyFocus}와(과) 같은 실천이 ${mbti.highlight}에 힘을 더해 ${
-      tier === 'S' ? '빛나는 결과' : '꾸준한 성장'
-    }을 이끌어냅니다.`,
+    `${my.mbti.nickname}(${my.mbti.type})의 ${pickFrom(my.mbti.keywords, seed, 3)} 기질과 ${partner.mbti.nickname}(${partner.mbti.type})의 ${pickFrom(partner.mbti.keywords, seed, 5)} 감각이 만나 ${pickFrom(tone, seed, 7)}을(를) 형성합니다.`,
+    `${my.zodiac.name}의 ${pickFrom(my.zodiac.keywords, seed, 9)} 리듬과 ${partner.zodiac.name}의 ${pickFrom(partner.zodiac.keywords, seed, 11)} 흐름이 결합해 ${
+      tier === 'C' ? '차분하지만 단단한 신뢰를 만드는 연습이' : '안정적인 감정 교환이'
+    } 가능해집니다.`,
+    `함께 ${my.zodiac.luckyFocus}를 즐기고 ${partner.zodiac.luckyFocus}로 이어 가면 ${my.mbti.highlight}과 ${partner.mbti.highlight} 모두에 시너지가 생깁니다.`,
   ];
 }
 
 function buildGrowthTips(
-  mbti: MbtiProfile,
-  zodiac: ZodiacProfile,
+  my: CompatibilityPair,
+  partner: CompatibilityPair,
   tier: CompatibilityResult['tier'],
   seed: number,
 ): string[] {
   const empathyCue =
     tier === 'C'
-      ? '차이를 관찰하고 존중하는 워밍업이 필요해요.'
-      : '서로의 페이스를 미리 공유하면 갈등을 줄일 수 있어요.';
+      ? '속도를 조절하면서 서로의 경계를 세심하게 살펴보세요.'
+      : '대화를 시작하기 전 오늘의 에너지 상태를 공유하면 갈등이 줄어듭니다.';
+
   return [
-    `${zodiac.growthCue}`,
-    `${mbti.stressors[0]} 상황이 오면 ${pickFrom(RESET_TIPS, seed, 11)}`,
-    `정기적으로 ${zodiac.luckyFocus}를 함께하면 ${mbti.supportNeed}을(를) 채우는 데 도움이 됩니다. ${empathyCue}`,
+    `${partner.zodiac.relationshipStyle} 리듬을 존중하면 ${partner.mbti.nickname}의 ${partner.mbti.loveStyle} 감각을 이해하기 쉬워집니다.`,
+    `${my.mbti.nickname}이(가) '${my.mbti.stressors[0]}' 신호를 느끼면 ${pickFrom(RESET_TIPS, seed, 13)} 후에 이야기를 이어가 보세요.`,
+    `${my.zodiac.luckyFocus}와 ${partner.zodiac.luckyFocus}를 번갈아 실천하면 ${my.mbti.supportNeed}·${partner.mbti.supportNeed}을(를) 동시에 채울 수 있어요. ${empathyCue}`,
   ];
 }
 
 function buildDailyAdvice(
-  mbti: MbtiProfile,
-  zodiac: ZodiacProfile,
+  my: CompatibilityPair,
+  partner: CompatibilityPair,
+  tier: CompatibilityResult['tier'],
   seed: number,
 ): DailyAdvice {
+  const cautionTail =
+    tier === 'C'
+      ? '호흡을 가다듬고 속도를 낮추는 것이 핵심이에요.'
+      : '초반에 감정을 투명하게 나누면 오해가 줄어듭니다.';
+
   return {
-    focus: `${zodiac.tagline}의 감각을 빌려 ${mbti.highlight}을(를) 강화해 보세요. 오늘은 ${zodiac.luckyFocus}에 집중하면 좋아요.`,
-    caution: `${mbti.stressors[1] ?? mbti.stressors[0]}이(가) 감지되면 ${zodiac.growthCue}`,
-    reset: pickFrom(RESET_TIPS, seed, 13),
+    focus: `${my.mbti.nickname}의 ${my.mbti.highlight}과 ${partner.mbti.nickname}의 ${partner.mbti.highlight}을 살리도록 ${my.zodiac.luckyFocus} → ${partner.zodiac.luckyFocus} 순서로 하루 루틴을 설계해 보세요.`,
+    caution: `${my.mbti.stressors[1] ?? my.mbti.stressors[0]}이나 ${partner.mbti.stressors[1] ?? partner.mbti.stressors[0]} 기류가 감지되면 ${partner.zodiac.growthCue}를 참고해 부드럽게 말을 건네 보세요. ${cautionTail}`,
+    reset: `${pickFrom(RESET_TIPS, seed, 17)} 서로 번갈아 실천한 뒤, ${my.zodiac.tagline} 감각으로 마무리하면 리셋에 도움이 됩니다.`,
   };
 }
 
 function buildLuckyGuide(
-  zodiac: ZodiacProfile,
+  my: CompatibilityPair,
+  partner: CompatibilityPair,
   seed: number,
 ): LuckyGuide {
-  const colors = LUCKY_COLORS_BY_ELEMENT[zodiac.element];
+  const myColors = LUCKY_COLORS_BY_ELEMENT[my.zodiac.element];
+  const partnerColors = LUCKY_COLORS_BY_ELEMENT[partner.zodiac.element];
+
   return {
-    color: pickFrom(colors, seed, 17),
-    day: DAYS_BY_ELEMENT[zodiac.element],
-    ritual: pickFrom(LUCKY_RITUALS, seed, 19),
+    color: `${pickFrom(myColors, seed, 19)} × ${pickFrom(partnerColors, seed, 23)}`,
+    day: `${DAYS_BY_ELEMENT[my.zodiac.element]} · ${DAYS_BY_ELEMENT[partner.zodiac.element]}`,
+    ritual: `${pickFrom(LUCKY_RITUALS, seed, 29)} & ${pickFrom(LUCKY_RITUALS, seed, 31)}`,
   };
 }
 
 function calculateIndexes(score: number, seed: number): CompatibilityIndexes {
   return {
-    love: clamp(score + ((seed % 7) - 3), 55, 99),
-    teamwork: clamp(score - 4 + (((seed >> 3) % 9) - 3), 52, 95),
-    communication: clamp(score - 2 + (((seed >> 5) % 7) - 2), 50, 93),
+    love: clamp(score + (((seed >> 1) % 9) - 4), 55, 98),
+    teamwork: clamp(score - 5 + (((seed >> 3) % 9) - 3), 52, 95),
+    communication: clamp(score - 4 + (((seed >> 5) % 7) - 2), 50, 93),
   };
 }
 
-function calculateScore(mbti: MbtiProfile, zodiac: ZodiacProfile, seed: number): number {
-  let score = 65;
-
-  if (mbti.bestElements.includes(zodiac.element)) {
-    score += 14;
-  } else if (mbti.growthElements.includes(zodiac.element)) {
-    score += 7;
-  } else if (mbti.cautionElements.includes(zodiac.element)) {
-    score -= 8;
-  }
-
-  const synergy = ELEMENT_SYNERGY[mbti.primaryElement];
-  if (synergy.harmony.includes(zodiac.element)) {
-    score += 6;
-  } else if (synergy.supportive.includes(zodiac.element)) {
-    score += 4;
-  } else if (synergy.tension.includes(zodiac.element)) {
-    score -= 4;
-  } else if (synergy.drain.includes(zodiac.element)) {
-    score -= 3;
-  }
-
-  const isExtrovert = mbti.type.startsWith('E');
-  score += isExtrovert ? (zodiac.yinYang === '양' ? 5 : 2) : zodiac.yinYang === '음' ? 5 : 1;
-
-  score += (seed % 6) - 3;
-
-  return clamp(score, 52, 98);
-}
-
 function buildReferenceNotes(tier: CompatibilityResult['tier']): string[] {
+  const [, ...restNotes] = REFERENCE_NOTE_LIBRARY;
   const tierNote =
     tier === 'S' || tier === 'A'
-      ? '※ 좋은 흐름일수록 서로의 경계를 존중하고 과신을 피하세요.'
-      : '※ 점수가 낮아도 꾸준한 대화와 배려가 있다면 충분히 시너지를 만들 수 있습니다.';
-  return [...REFERENCE_NOTE_LIBRARY, tierNote];
+      ? '※ 좋은 흐름일수록 서로의 속도와 경계를 주기적으로 확인하세요.'
+      : '※ 점수가 낮아도 페이스 맞추기와 진솔한 대화 습관이 있으면 충분히 시너지를 만들 수 있습니다.';
+  const baseNote =
+    '※ 본 리포트는 두 사람의 MBTI 심리 경향과 12띠 페르소나 데이터를 교차 분석한 엔터테인먼트 콘텐츠입니다.';
+  return [baseNote, ...restNotes, tierNote];
 }
 
-export function getCompatibility(mbtiType: string, zodiacId: string): CompatibilityResult {
+export function getCompatibility(
+  myMbtiType: string,
+  myZodiacId: string,
+  partnerMbtiType: string,
+  partnerZodiacId: string,
+): CompatibilityResult {
   const fallbackMbti = MBTI_PROFILES[MBTI_OPTIONS[0]?.type ?? 'ENFP'];
   const fallbackZodiac = ZODIAC_BY_ID[ZODIAC_OPTIONS[0]?.id ?? 'rat'];
 
-  const mbti = MBTI_PROFILES[mbtiType] ?? fallbackMbti;
-  const zodiac = ZODIAC_BY_ID[zodiacId] ?? fallbackZodiac;
-  const seed = createSeed(`${mbti.type}-${zodiac.id}`);
+  const my: CompatibilityPair = {
+    mbti: MBTI_PROFILES[myMbtiType] ?? fallbackMbti,
+    zodiac: ZODIAC_BY_ID[myZodiacId] ?? fallbackZodiac,
+  };
 
-  const score = calculateScore(mbti, zodiac, seed);
+  const partner: CompatibilityPair = {
+    mbti: MBTI_PROFILES[partnerMbtiType] ?? fallbackMbti,
+    zodiac: ZODIAC_BY_ID[partnerZodiacId] ?? fallbackZodiac,
+  };
+
+  const seed = createSeed(
+    `${my.mbti.type}-${my.zodiac.id}-${partner.mbti.type}-${partner.zodiac.id}`,
+  );
+
+  const score = calculatePairScore(my, partner, seed);
   const tier = calculateTier(score);
-  const headline = pickFrom(TIER_HEADLINES[tier], seed, 23);
-  const intro = `${mbti.nickname}(${mbti.type})와 ${zodiac.name}(${zodiac.englishName})의 조합은 ${score}점으로 ${headline} 영역에 속합니다.`;
+  const headline = pickFrom(TIER_HEADLINES[tier], seed, 37);
+  const intro = `${my.mbti.nickname}(${my.mbti.type})·${my.zodiac.name}와 ${partner.mbti.nickname}(${partner.mbti.type})·${partner.zodiac.name} 조합은 ${score}점으로 ${headline} 영역에 속합니다.`;
 
   return {
-    mbti,
-    zodiac,
+    my,
+    partner,
     score,
     tier,
     headline,
     intro,
-    synergyHighlights: buildSynergyHighlights(mbti, zodiac, tier, seed),
-    growthTips: buildGrowthTips(mbti, zodiac, tier, seed),
+    synergyHighlights: buildSynergyHighlights(my, partner, tier, seed),
+    growthTips: buildGrowthTips(my, partner, tier, seed),
     indexes: calculateIndexes(score, seed),
-    dailyAdvice: buildDailyAdvice(mbti, zodiac, seed),
-    luckyGuide: buildLuckyGuide(zodiac, seed),
+    dailyAdvice: buildDailyAdvice(my, partner, tier, seed),
+    luckyGuide: buildLuckyGuide(my, partner, seed),
     referenceNotes: buildReferenceNotes(tier),
   };
 }

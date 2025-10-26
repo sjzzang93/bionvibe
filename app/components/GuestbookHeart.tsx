@@ -255,30 +255,29 @@ const GuestbookHeart = () => {
         className={`group relative transition-all duration-300 ${highlight ? 'animate-bounce' : ''}`}
         aria-label="방명록 하트 누르기"
       >
-        <div className="relative w-24 h-24 flex items-center justify-center">
+        <div className="relative flex h-24 w-24 items-center justify-center">
           {/* 글로우 효과 */}
           {highlight && (
-            <div className="absolute inset-0 flex items-center justify-center animate-ping opacity-50">
+            <div className="absolute inset-0 flex h-full w-full items-center justify-center animate-ping opacity-50">
               <Image
                 src="/heart-bulb.png"
                 alt="하트"
-                width={96}
-                height={96}
+                fill
+                sizes="96px"
                 className="object-contain"
               />
             </div>
           )}
           {/* 메인 하트 */}
-          <div className={`relative transition-all duration-200 ${
+          <div className={`relative h-full w-full transition-all duration-200 ${
             loading ? 'grayscale' : 'group-hover:scale-110 group-active:scale-95'
           } ${highlight ? 'drop-shadow-[0_0_20px_rgba(234,179,8,0.9)]' : 'drop-shadow-lg'}`}>
             <Image
               src="/heart-bulb.png"
               alt="하트"
-              width={96}
-              height={96}
+              fill
+              sizes="96px"
               className="object-contain"
-              priority
             />
           </div>
         </div>
