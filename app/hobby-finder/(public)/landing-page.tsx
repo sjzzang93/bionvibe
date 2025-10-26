@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Sparkles, Target, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useProgress } from './(public)/progress-context';
+import { useProgress } from './progress-context';
 import { clearState, getState } from '@/lib/hobby-storage';
 
 const FEATURES = [
