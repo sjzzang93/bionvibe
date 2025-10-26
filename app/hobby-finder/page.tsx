@@ -34,8 +34,8 @@ export default function HobbyFinderLanding() {
   useEffect(() => {
     const stored = getState();
     if (stored) {
-      setProgress(Math.min(stored.step / 5, 1));
-      setHasProgress(stored.step > 1 || Object.keys(stored.answers ?? {}).length > 0);
+      setProgress(Math.min(stored.currentStep / 5, 1));
+      setHasProgress(stored.currentStep > 1 || Object.keys(stored.answers ?? {}).length > 0);
     } else {
       setProgress(0);
     }
