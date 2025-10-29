@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `BION - ${APP_COUNT}개 무료 웹앱 모음`,
-    description: "일상에 필요한 모든 도구를 한 곳에! 계산기, 운세, 게임, 건강 관리 등",
+    description: '일상에 필요한 모든 도구를 한 곳에! 계산기, 운세, 게임, 건강 관리 등',
     url: 'https://bionvibe.com',
     siteName: 'BION',
     locale: 'ko_KR',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `BION - ${APP_COUNT}개 무료 웹앱 모음`,
-    description: "일상에 필요한 모든 도구를 한 곳에!",
+    description: '일상에 필요한 모든 도구를 한 곳에!',
     images: ['/og-image.png'],
   },
   robots: {
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     google: 'tfJ_MlkJzW1RV9d1gPMmUEF87G-PZyJlDliYT640Hn4',
   },
   other: {
-    "google-adsense-account": ADSENSE_PUBLISHER_ID,
+    'google-adsense-account': ADSENSE_PUBLISHER_ID,
   },
 };
 

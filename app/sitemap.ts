@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import { getAllApps } from '@/lib/getApps';
+import { getAllAppsAsync } from '@/lib/getApps';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const apps = getAllApps();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const apps = await getAllAppsAsync();
   const baseUrl = 'https://bionvibe.com';
 
   // 정적 페이지들
