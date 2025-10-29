@@ -139,6 +139,34 @@ export default function DailyLedgerPage() {
     saveDayEntry(emptyEntry)
   }
 
+  const handleCreateTestData = () => {
+    if (!confirm('최근 7일의 테스트 데이터를 생성하시겠습니까?')) {
+      return
+    }
+
+    const today = new Date()
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today)
+      date.setDate(date.getDate() - i)
+      const dateStr = date.toISOString().split('T')[0]
+
+      const testEntry: DayEntry = {
+        date: dateStr,
+        tableCount: Math.floor(Math.random() * 20) + 10,
+        lines: [
+          { itemId: 'pork-belly', qty: Math.floor(Math.random() * 10) + 5 },
+          { itemId: 'pork-neck', qty: Math.floor(Math.random() * 8) + 3 },
+          { itemId: 'beef-sirloin', qty: Math.floor(Math.random() * 5) + 2 },
+        ]
+      }
+
+      saveDayEntry(testEntry)
+    }
+
+    alert('✅ 최근 7일 테스트 데이터가 생성되었습니다!')
+    window.location.reload()
+  }
+
   if (!mounted || !settings) {
     return (
       <div className="container mx-auto py-8 px-4 max-w-7xl">
@@ -179,6 +207,7 @@ export default function DailyLedgerPage() {
         onExportCSV={handleExportCSV}
         onExportJSON={handleExportJSON}
         onPrint={handlePrint}
+        onCreateTestData={handleCreateTestData}
       />
 
       {/* 요약 카드 */}

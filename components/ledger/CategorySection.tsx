@@ -83,8 +83,8 @@ export function CategorySection({
 
   return (
     <Card>
-      <CardHeader className="pb-3 pt-4 px-4 sm:pb-6 sm:pt-6 sm:px-6">
-        <CardTitle className="text-lg sm:text-xl font-bold">{title}</CardTitle>
+      <CardHeader className="pb-3 pt-4 px-4 sm:pb-4 sm:pt-4 sm:px-6">
+        <CardTitle className="text-xl sm:text-lg font-bold">{title}</CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <div className="space-y-2 sm:space-y-3">
@@ -95,33 +95,35 @@ export function CategorySection({
             return (
               <div
                 key={item.id}
-                className={`p-3 sm:p-4 rounded-lg hover:bg-muted/50 border border-muted ${
+                className={`p-4 rounded-lg border-2 border-muted bg-white ${
                   qty === 0 ? "print:hidden" : ""
                 }`}
               >
                 {/* 상품명과 가격 */}
-                <div className="mb-3">
-                  <div className="font-medium text-base sm:text-lg">{item.name}</div>
-                  <div className="text-sm text-muted-foreground">
+                <div className="mb-4 pb-3 border-b border-muted">
+                  <div className="font-bold text-lg leading-tight mb-1">{item.name}</div>
+                  <div className="text-base text-muted-foreground font-medium">
                     {fmtWon(item.price)}
                     {item.gramsPerPortion && ` / ${item.gramsPerPortion}g`}
                   </div>
                 </div>
 
-                {/* 수량 조절 (모바일 터치 최적화) */}
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-2">
-                  <div className="flex items-center gap-3">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-11 w-11 sm:h-10 sm:w-10 print:hidden touch-manipulation p-0"
-                      onClick={() => decrement(item.id)}
-                      disabled={qty === 0}
-                    >
-                      <Minus className="h-5 w-5" />
-                    </Button>
+                {/* 수량 조절 */}
+                <div className="space-y-3">
+                  {/* 수량 */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-gray-700 w-16">수량</span>
+                    <div className="flex items-center gap-2 flex-1">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-12 w-12 sm:h-10 sm:w-10 print:hidden p-0 active:scale-95 transition-transform flex-shrink-0"
+                        onClick={() => decrement(item.id)}
+                        disabled={qty === 0}
+                      >
+                        <Minus className="h-5 w-5" />
+                      </Button>
 
-                    <div className="flex items-center gap-2">
                       <Input
                         type="number"
                         value={qty || ""}
@@ -129,24 +131,27 @@ export function CategorySection({
                           const val = parseInt(e.target.value) || 0
                           updateQty(item.id, Math.max(0, val))
                         }}
-                        className="w-20 h-11 sm:h-10 text-center text-lg sm:text-base print:border-none touch-manipulation"
+                        className="w-24 h-12 sm:w-20 sm:h-10 text-center text-2xl font-bold border-2 !px-1 !py-0"
+                        style={{ lineHeight: '1.2' }}
                         min="0"
                       />
-                      <span className="text-sm text-muted-foreground hidden print:inline">개</span>
+
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-12 w-12 sm:h-10 sm:w-10 print:hidden p-0 active:scale-95 transition-transform flex-shrink-0"
+                        onClick={() => increment(item.id)}
+                      >
+                        <Plus className="h-5 w-5" />
+                      </Button>
                     </div>
+                  </div>
 
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="h-11 w-11 sm:h-10 sm:w-10 print:hidden touch-manipulation p-0"
-                      onClick={() => increment(item.id)}
-                    >
-                      <Plus className="h-5 w-5" />
-                    </Button>
-
-                    {/* 육류는 그램수 조정 가능 */}
-                    {item.gramsPerPortion && (
-                      <div className="flex items-center gap-1 px-3 py-1 bg-muted/30 rounded print:bg-transparent print:px-0">
+                  {/* 그램수 (육류만) */}
+                  {item.gramsPerPortion && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-gray-700 w-16">그램수</span>
+                      <div className="flex items-center gap-2">
                         <Input
                           type="number"
                           value={getLineGrams(item.id, item.gramsPerPortion)}
@@ -154,17 +159,21 @@ export function CategorySection({
                             const val = parseInt(e.target.value) || 0
                             updateGrams(item.id, Math.max(0, val))
                           }}
-                          className="w-16 h-9 sm:w-14 sm:h-8 text-center text-base sm:text-sm print:border-none print:w-auto touch-manipulation"
+                          className="w-24 h-12 sm:w-20 sm:h-10 text-center text-xl font-bold border-2 !px-1 !py-0"
+                          style={{ lineHeight: '1.2' }}
                           min="0"
                         />
-                        <span className="text-sm text-muted-foreground">g</span>
+                        <span className="text-lg font-medium text-gray-600">g</span>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
                   {/* 매출액 */}
-                  <div className="font-bold text-xl sm:text-lg sm:ml-auto text-blue-600">
-                    {qty > 0 ? fmtWon(revenue) : "-"}
+                  <div className="flex items-center justify-between pt-2 border-t border-muted">
+                    <span className="text-base font-bold text-gray-700">매출액</span>
+                    <div className="text-2xl font-bold text-blue-600">
+                      {qty > 0 ? fmtWon(revenue) : "-"}
+                    </div>
                   </div>
                 </div>
               </div>

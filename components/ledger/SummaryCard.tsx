@@ -28,11 +28,16 @@ export function SummaryCard({ summary, settings, daysInMonth }: SummaryCardProps
       <Card className="border-2">
         <CardHeader className="pb-3 pt-4 px-4">
           <CardTitle className="text-sm font-medium text-muted-foreground">
-            매출 & 원가
+            매출 & 원가 {isPeriodView ? '(기간 합계)' : '(일일)'}
           </CardTitle>
           {isPeriodView && (
             <p className="text-xs text-muted-foreground mt-1">
               {fmtDate(summary.startDate!)} ~ {fmtDate(summary.endDate!)} ({summary.days}일)
+            </p>
+          )}
+          {isPeriodView && summary.revenue === 0 && (
+            <p className="text-xs text-red-500 mt-1">
+              ⚠️ 기간 내 데이터 없음
             </p>
           )}
         </CardHeader>

@@ -494,49 +494,49 @@ function VocabTab() {
       </div>
 
       {/* 단어 카드 목록 */}
-      <div className="grid gap-3 sm:gap-4">
+      <div className="grid gap-2 sm:gap-3">
         {filteredVocabs.map(vocab => (
-          <div key={vocab.id} className="bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 rounded-lg p-3 sm:p-4 md:p-6 hover:border-blue-400 hover:shadow-lg transition-all">
-            <div className="flex items-start justify-between mb-3 sm:mb-4">
+          <div key={vocab.id} className="bg-gradient-to-br from-white to-blue-50 border border-blue-200 rounded-lg p-2 sm:p-3 hover:border-blue-400 hover:shadow-md transition-all">
+            <div className="flex items-start justify-between mb-2">
               <div className="flex-1">
-                <div className="flex items-baseline gap-2 mb-1">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-blue-700">{vocab.term}</h3>
-                  <span className="text-xs sm:text-sm text-gray-500 font-mono">({vocab.pronunciation})</span>
+                <div className="flex items-baseline gap-1 mb-0.5">
+                  <h3 className="text-sm sm:text-lg font-bold text-blue-700">{vocab.term}</h3>
+                  <span className="text-[10px] sm:text-xs text-gray-500 font-mono">({vocab.pronunciation})</span>
                 </div>
-                <p className="text-sm sm:text-base text-blue-600 font-medium">{vocab.korean}</p>
-                <div className="flex gap-2 mt-2">
-                  <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                <p className="text-xs sm:text-sm text-blue-600 font-medium mb-1">{vocab.korean}</p>
+                <div className="flex gap-1">
+                  <span className="px-1.5 py-0.5 bg-blue-100 text-blue-700 text-[10px] rounded">
                     {levelLabels[vocab.level as keyof typeof levelLabels]}
                   </span>
-                  <span className="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs rounded">
+                  <span className="px-1.5 py-0.5 bg-cyan-100 text-cyan-700 text-[10px] rounded">
                     {vocab.category}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="space-y-3 sm:space-y-4">
-              <div className="bg-white border-l-4 border-blue-400 p-3 sm:p-4 rounded">
-                <p className="font-semibold text-blue-700 mb-2 text-sm sm:text-base">📖 정의</p>
-                <p className="text-gray-900 text-sm sm:text-base">{vocab.definition}</p>
+            <div className="space-y-1.5 sm:space-y-2">
+              <div className="bg-white border-l-2 border-blue-400 p-1.5 sm:p-2 rounded">
+                <p className="font-semibold text-blue-700 mb-0.5 text-[10px] sm:text-xs">📖 정의</p>
+                <p className="text-gray-900 text-xs sm:text-sm">{vocab.definition}</p>
               </div>
 
-              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-orange-400 p-3 sm:p-4 rounded">
-                <p className="font-semibold text-orange-700 mb-2 text-sm sm:text-base">🎯 실생활 비유</p>
-                <p className="text-gray-900 text-sm sm:text-base">{vocab.analogy}</p>
+              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-l-2 border-orange-400 p-1.5 sm:p-2 rounded">
+                <p className="font-semibold text-orange-700 mb-0.5 text-[10px] sm:text-xs">🎯 실생활 비유</p>
+                <p className="text-gray-900 text-xs sm:text-sm">{vocab.analogy}</p>
               </div>
 
-              <div className="bg-white border-l-4 border-green-400 p-3 sm:p-4 rounded">
-                <p className="font-semibold text-green-700 mb-2 text-sm sm:text-base">💡 실제 예시</p>
-                <p className="text-gray-900 text-sm sm:text-base">{vocab.example}</p>
+              <div className="bg-white border-l-2 border-green-400 p-1.5 sm:p-2 rounded">
+                <p className="font-semibold text-green-700 mb-0.5 text-[10px] sm:text-xs">💡 실제 예시</p>
+                <p className="text-gray-900 text-xs sm:text-sm">{vocab.example}</p>
               </div>
 
-              <div className="bg-gray-50 p-3 sm:p-4 rounded">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="font-semibold text-gray-900 text-sm sm:text-base">💻 코드 예시</p>
+              <div className="bg-gray-50 p-1.5 sm:p-2 rounded">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="font-semibold text-gray-900 text-[10px] sm:text-xs">💻 코드 예시</p>
                   <CopyButton text={vocab.usage} />
                 </div>
-                <pre className="text-xs sm:text-sm overflow-x-auto bg-gray-900 text-white p-2 sm:p-3 rounded">
+                <pre className="text-[10px] sm:text-xs overflow-x-auto bg-gray-900 text-white p-1.5 rounded">
                   <code>{vocab.usage}</code>
                 </pre>
               </div>
