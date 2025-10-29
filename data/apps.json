@@ -891,6 +891,23 @@
         "crypto-calculator",
         "dday-counter"
       ]
+    },
+    {
+      "id": "study-dev-vocab",
+      "name": "개발자 언어 단어장",
+      "slug": "study-dev-vocab",
+      "icon": "💻",
+      "description": "프로그래밍 핵심 용어를 쉬운 비유로 학습하세요. 초등학생도 이해할 수 있는 설명과 실전 코드 예시를 제공합니다.",
+      "categoryId": "learning-tools",
+      "url": "/apps/study-dev-vocab",
+      "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-30",
+      "hidden": true,
+      "relatedApps": [
+        "study-cursor-prompts",
+        "flashcard",
+        "typing-speed-test"
+      ]
     }
   ]
 }
