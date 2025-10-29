@@ -1,10 +1,12 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import type { DailySummary } from "@/lib/ledger/types"
+import type { DailySummary, Settings } from "@/lib/ledger/types"
 
 interface SummaryCardProps {
   summary: DailySummary
+  settings: Settings
+  daysInMonth: number
 }
 
 const fmtWon = (n: number) => {
@@ -12,7 +14,7 @@ const fmtWon = (n: number) => {
   return `₩${Math.round(n).toLocaleString("ko-KR")}`
 }
 
-export function SummaryCard({ summary }: SummaryCardProps) {
+export function SummaryCard({ summary, settings, daysInMonth }: SummaryCardProps) {
   return (
     <div className="grid gap-3 sm:gap-4 md:grid-cols-3">
       {/* 매출 & 원가 */}
@@ -62,9 +64,21 @@ export function SummaryCard({ summary }: SummaryCardProps) {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-sm sm:text-sm">고정+변동+대출</span>
-            <span className="font-semibold text-base sm:text-base">{fmtWon(summary.opex)}</span>
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>고정비 ({fmtWon(settings.monthlyFixed)}/월)</span>
+            <span>{fmtWon(settings.monthlyFixed / daysInMonth)}</span>
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>변동비 ({fmtWon(settings.monthlyVariable)}/월)</span>
+            <span>{fmtWon(settings.monthlyVariable / daysInMonth)}</span>
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>대출 ({fmtWon(settings.monthlyLoan)}/월)</span>
+            <span>{fmtWon(settings.monthlyLoan / daysInMonth)}</span>
+          </div>
+          <div className="flex justify-between border-t pt-2">
+            <span className="font-semibold text-base">합계</span>
+            <span className="font-bold text-lg text-red-600">{fmtWon(summary.opex)}</span>
           </div>
         </CardContent>
       </Card>

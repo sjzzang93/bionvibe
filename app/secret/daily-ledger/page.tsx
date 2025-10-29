@@ -110,7 +110,7 @@ export default function DailyLedgerPage() {
       <div className="mb-4 sm:mb-6">
         <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
           <Link href="/secret" className="print:hidden">
-            <Button variant="outline" size="icon" className="shrink-0 h-11 w-11 sm:h-10 sm:w-10 touch-manipulation">
+            <Button variant="outline" size="sm" className="shrink-0 h-11 w-11 sm:h-10 sm:w-10 touch-manipulation p-0">
               <ArrowLeft className="h-5 w-5 sm:h-4 sm:w-4" />
             </Button>
           </Link>
@@ -136,9 +136,15 @@ export default function DailyLedgerPage() {
       />
 
       {/* 요약 카드 */}
-      {summary && (
+      {summary && settings && (
         <div className="mb-4 sm:mb-6">
-          <SummaryCard summary={summary} />
+          <SummaryCard
+            summary={summary}
+            settings={settings}
+            daysInMonth={getDaysInMonth(
+              ...selectedDate.split("-").map(Number) as [number, number]
+            )}
+          />
         </div>
       )}
 
