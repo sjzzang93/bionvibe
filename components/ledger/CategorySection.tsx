@@ -113,8 +113,8 @@ export function CategorySection({
                   <div className="flex items-center gap-3">
                     <Button
                       variant="outline"
-                      size="icon"
-                      className="h-11 w-11 sm:h-10 sm:w-10 print:hidden touch-manipulation"
+                      size="sm"
+                      className="h-11 w-11 sm:h-10 sm:w-10 print:hidden touch-manipulation p-0"
                       onClick={() => decrement(item.id)}
                       disabled={qty === 0}
                     >
@@ -137,8 +137,8 @@ export function CategorySection({
 
                     <Button
                       variant="outline"
-                      size="icon"
-                      className="h-11 w-11 sm:h-10 sm:w-10 print:hidden touch-manipulation"
+                      size="sm"
+                      className="h-11 w-11 sm:h-10 sm:w-10 print:hidden touch-manipulation p-0"
                       onClick={() => increment(item.id)}
                     >
                       <Plus className="h-5 w-5" />
