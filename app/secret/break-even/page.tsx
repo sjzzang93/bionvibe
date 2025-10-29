@@ -5,9 +5,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Info, TrendingUp, Target } from "lucide-react"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { Info, TrendingUp, AlertTriangle } from "lucide-react"
+import Link from "next/link"
+import { calc } from "@/lib/profit/calc"
+import type { Inputs, Outputs } from "@/lib/profit/types"
 
 // ============================================================================
 // 포맷 유틸리티
@@ -15,17 +17,12 @@ import { Button } from "@/components/ui/button"
 
 const fmtWon = (n: number) => {
   if (!isFinite(n)) return "-"
-  return `${Math.round(n).toLocaleString("ko-KR")}원`
+  return `₩${Math.round(n).toLocaleString("ko-KR")}`
 }
 
-const fmtPct = (n: number) => {
+const fmtNum = (n: number, decimals = 2) => {
   if (!isFinite(n)) return "-"
-  return `${(n * 100).toFixed(1)}%`
-}
-
-const fmtTable = (n: number) => {
-  if (!isFinite(n)) return "-"
-  return `${Math.ceil(n).toLocaleString("ko-KR")} 테이블`
+  return n.toFixed(decimals)
 }
 
 // ============================================================================
@@ -35,80 +32,117 @@ const fmtTable = (n: number) => {
 export default function BreakEvenPage() {
   const [mounted, setMounted] = useState(false)
 
-  // 입력값
-  const [asp, setAsp] = useState(56000) // 평균 테이블 단가 (Average Selling Price)
-  const [varRate, setVarRate] = useState(50) // 팔 때마다 드는 비용 비율 (%)
-  const [fixedMonth, setFixedMonth] = useState(12000000) // 한달 고정비
-  const [targetProfitMonth, setTargetProfitMonth] = useState(0) // 한달 목표 이익
-  const [tablesHint, setTablesHint] = useState(20) // 예상 테이블 수
-  const [note, setNote] = useState("") // 비고
+  // 입력값 (원가율 기준 기본값: 식사 20%, 음료·주류 50%)
+  const [P, setP] = useState(16000) // 판매가/인분
+  const [M, setM] = useState(10000) // 원육 단가/kg (원가율 20% 맞춤)
+  const [g, setG] = useState(200) // 1인분 그램수
+  const [B, setB] = useState(1200) // 부자재/인분 원가
+  const [s_sold, setS_sold] = useState(3.5) // 테이블당 유상 판매 인분
+  const [s_free, setS_free] = useState(0.2) // 테이블당 서비스 인분
+  const [L_pct, setL_pct] = useState(10) // 로스율 (%), UI용
+  const [V_misc, setV_misc] = useState(1000) // 기타 변동비/테이블
+  const [D_profit, setD_profit] = useState(3000) // 음료·주류 순이익/테이블 (매출 6000원 × 원가율 50% = 순이익 3000원)
+  const [fixedMonth, setFixedMonth] = useState(12000000) // 월 고정비
+  const [goalProfitDay, setGoalProfitDay] = useState(0) // 하루 목표이익
+  const [targetTables, setTargetTables] = useState(10) // 목표 테이블 수
+  const [showTargetPrice, setShowTargetPrice] = useState(false) // 역산 판매가 표시 여부
 
   // localStorage 연동
   useEffect(() => {
     setMounted(true)
-    const saved = localStorage.getItem("breakEvenData")
+    const saved = localStorage.getItem("breakEvenProfitData")
     if (saved) {
       try {
         const data = JSON.parse(saved)
-        setAsp(data.asp ?? 56000)
-        setVarRate(data.varRate ?? 50)
-        setFixedMonth(data.fixedMonth ?? 12000000)
-        setTargetProfitMonth(data.targetProfitMonth ?? 0)
-        setTablesHint(data.tablesHint ?? 20)
-        setNote(data.note ?? "")
+        if (data.P !== undefined) setP(data.P)
+        if (data.M !== undefined) setM(data.M)
+        if (data.g !== undefined) setG(data.g)
+        if (data.B !== undefined) setB(data.B)
+        if (data.s_sold !== undefined) setS_sold(data.s_sold)
+        if (data.s_free !== undefined) setS_free(data.s_free)
+        if (data.L_pct !== undefined) setL_pct(data.L_pct)
+        if (data.V_misc !== undefined) setV_misc(data.V_misc)
+        if (data.D_profit !== undefined) setD_profit(data.D_profit)
+        if (data.fixedMonth !== undefined) setFixedMonth(data.fixedMonth)
+        if (data.goalProfitDay !== undefined) setGoalProfitDay(data.goalProfitDay)
+        if (data.targetTables !== undefined) setTargetTables(data.targetTables)
       } catch (e) {
-        console.error("Failed to load data", e)
+        console.error("localStorage 파싱 실패:", e)
       }
     }
   }, [])
 
   useEffect(() => {
     if (!mounted) return
-    const data = { asp, varRate, fixedMonth, targetProfitMonth, tablesHint, note }
-    localStorage.setItem("breakEvenData", JSON.stringify(data))
-  }, [mounted, asp, varRate, fixedMonth, targetProfitMonth, tablesHint, note])
+    const data = {
+      P,
+      M,
+      g,
+      B,
+      s_sold,
+      s_free,
+      L_pct,
+      V_misc,
+      D_profit,
+      fixedMonth,
+      goalProfitDay,
+      targetTables,
+    }
+    localStorage.setItem("breakEvenProfitData", JSON.stringify(data))
+  }, [mounted, P, M, g, B, s_sold, s_free, L_pct, V_misc, D_profit, fixedMonth, goalProfitDay, targetTables])
 
   // 계산
-  const result = useMemo(() => {
-    const fixedDay = fixedMonth / 30 // 한달 고정비를 30일로 나눔
-    const targetProfitDay = targetProfitMonth / 30 // 한달 목표 이익을 30일로 나눔
-    const varRateDecimal = Math.min(99.9, Math.max(0, varRate)) / 100
-    const cmr = 1 - varRateDecimal // 남는 비율 (팔 때마다 남는 돈의 비율)
-
-    const bepRevenue = cmr > 0 ? fixedDay / cmr : NaN // 손익분기 매출
-    const bepTables = asp > 0 ? bepRevenue / asp : NaN // 손익분기 테이블 수
-
-    const needRevenue = cmr > 0 ? (fixedDay + targetProfitDay) / cmr : NaN // 목표 이익 달성 필요 매출
-    const needTables = asp > 0 ? needRevenue / asp : NaN // 목표 이익 달성 필요 테이블
-
-    const currentRevenue = asp * tablesHint // 현재 예상 매출
-    const currentProfit = currentRevenue * cmr - fixedDay // 현재 예상 이익
-
-    return {
-      fixedDay,
-      targetProfitDay,
-      cmr,
-      bepRevenue,
-      bepTables,
-      needRevenue,
-      needTables,
-      currentRevenue,
-      currentProfit,
+  const result = useMemo<{ outputs?: Outputs; error?: string }>(() => {
+    try {
+      const inputs: Inputs = {
+        P,
+        M,
+        g,
+        B,
+        s_sold,
+        s_free,
+        L: L_pct / 100, // % → 0~1 변환
+        V_misc,
+        D_profit,
+        fixedMonth,
+        goalProfitDay,
+        targetTables: showTargetPrice ? targetTables : undefined,
+      }
+      const outputs = calc(inputs)
+      return { outputs }
+    } catch (e: any) {
+      return { error: e.message }
     }
-  }, [asp, varRate, fixedMonth, targetProfitMonth, tablesHint])
+  }, [P, M, g, B, s_sold, s_free, L_pct, V_misc, D_profit, fixedMonth, goalProfitDay, targetTables, showTargetPrice])
+
+  // 경고 조건
+  const warnings = useMemo(() => {
+    const w: string[] = []
+    if (L_pct >= 20) w.push("로스율 20% 이상 – 재고관리 점검 권장")
+    if (g < 150 || g > 250) w.push("1인분 그램수가 업계 평균 범위(150~250g)를 벗어났습니다")
+    if (result.outputs && result.outputs.CM_table < 5000)
+      w.push("테이블 기여이익이 매우 낮습니다 – 수익성 점검 필요")
+    return w
+  }, [L_pct, g, result.outputs])
 
   if (!mounted) {
-    return <div className="min-h-screen flex items-center justify-center">로딩 중...</div>
+    return (
+      <div className="container mx-auto py-8 px-4 max-w-7xl">
+        <p className="text-muted-foreground">로딩 중...</p>
+      </div>
+    )
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-4xl">
+    <div className="container mx-auto py-8 px-4 max-w-7xl">
       {/* 헤더 */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-3xl font-bold mb-2">하루 손익분기 계산기</h1>
-            <p className="text-muted-foreground">재료비와 고정비를 반영한 손익분기점 분석</p>
+            <h1 className="text-3xl font-bold mb-2">하루 손익분기 계산기 (인분 기준)</h1>
+            <p className="text-muted-foreground">
+              원가·로스·서비스 인분을 반영한 정밀 손익분기 분석
+            </p>
           </div>
           <Link href="/">
             <Button variant="outline">홈으로</Button>
@@ -117,218 +151,338 @@ export default function BreakEvenPage() {
 
         <Alert className="mb-6">
           <Info className="h-4 w-4" />
-          <AlertTitle>쉬운 설명</AlertTitle>
+          <AlertTitle>사용 안내</AlertTitle>
           <AlertDescription className="text-sm space-y-1">
-            <p>
-              <strong>팔 때마다 드는 비용</strong> = 고기값, 반찬값 등 손님 한 팀이 올 때마다 나가는 돈
-            </p>
-            <p>
-              <strong>고정비</strong> = 손님이 와도 안 와도 매달 똑같이 나가는 돈 (임대료, 기본 인건비 등)
-            </p>
-            <p>
-              <strong>손익분기점</strong> = 손해도 이익도 아닌 딱 본전이 되는 지점
-            </p>
-            <p>
-              <strong>남는 비율</strong> = 손님한테 받은 돈에서 재료비 빼고 실제로 남는 돈의 비율
-            </p>
+            <p>• 1인분 단위로 원육 그램수(g), 부자재 원가, 로스율, 서비스 인분을 입력하세요</p>
+            <p>• 음료·주류 순이익은 매출-원가 (마이너스 가능)</p>
+            <p>• 하루 손익분기 테이블 수와 매출이 자동 계산됩니다</p>
           </AlertDescription>
         </Alert>
       </div>
 
-      {/* 입력 카드 */}
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>1) 입력</CardTitle>
-          <CardDescription>비용 구조 및 목표 설정</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="asp">평균 테이블 단가 (원)</Label>
-              <Input
-                id="asp"
-                type="number"
-                value={asp}
-                onChange={(e) => setAsp(parseFloat(e.target.value) || 0)}
-                placeholder="56000"
-              />
-              <p className="text-xs text-muted-foreground">한 테이블이 하루에 쓰는 평균 결제 금액</p>
-            </div>
+      {/* 에러 표시 */}
+      {result.error && (
+        <Alert variant="destructive" className="mb-6">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertTitle>계산 오류</AlertTitle>
+          <AlertDescription>{result.error}</AlertDescription>
+        </Alert>
+      )}
 
-            <div className="space-y-2">
-              <Label htmlFor="varRate">팔 때마다 드는 비용 비율 (%)</Label>
-              <Input
-                id="varRate"
-                type="number"
-                value={varRate}
-                onChange={(e) => setVarRate(parseFloat(e.target.value) || 0)}
-                min="0"
-                max="99.9"
-                step="0.1"
-                placeholder="50"
-              />
-              <p className="text-xs text-muted-foreground">
-                💡 <strong>쉽게 말하면:</strong> 손님이 56,000원 내면 → 고기값·반찬값으로 28,000원 나감 = 50%
-                <br />
-                (삼겹살 팔 때 재료비, 음료 팔 때 음료값 등 손님 수에 따라 달라지는 모든 비용)
-              </p>
-            </div>
+      {/* 경고 표시 */}
+      {warnings.length > 0 && (
+        <Alert className="mb-6 border-amber-500 bg-amber-50 dark:bg-amber-950">
+          <AlertTriangle className="h-4 w-4 text-amber-600" />
+          <AlertTitle className="text-amber-600">주의사항</AlertTitle>
+          <AlertDescription className="text-sm space-y-1">
+            {warnings.map((w, i) => (
+              <p key={i}>• {w}</p>
+            ))}
+          </AlertDescription>
+        </Alert>
+      )}
 
-            <div className="space-y-2">
-              <Label htmlFor="fixedMonth">한 달 고정비 (원)</Label>
-              <Input
-                id="fixedMonth"
-                type="number"
-                value={fixedMonth}
-                onChange={(e) => setFixedMonth(parseFloat(e.target.value) || 0)}
-                placeholder="12000000"
-              />
-              <p className="text-xs text-muted-foreground">
-                임대료, 인건비 등 매달 고정으로 나가는 비용 → 자동으로 하루 {fmtWon(result.fixedDay || 0)}로 계산됨
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="targetProfitMonth">한 달 목표 이익 (원)</Label>
-              <Input
-                id="targetProfitMonth"
-                type="number"
-                value={targetProfitMonth}
-                onChange={(e) => setTargetProfitMonth(parseFloat(e.target.value) || 0)}
-                placeholder="0"
-              />
-              <p className="text-xs text-muted-foreground">
-                선택 항목, 목표 이익까지 달성하려면? → 자동으로 하루 {fmtWon(result.targetProfitDay || 0)}로 계산됨
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="tablesHint">예상 테이블 수 (참고용)</Label>
-              <Input
-                id="tablesHint"
-                type="number"
-                value={tablesHint}
-                onChange={(e) => setTablesHint(parseFloat(e.target.value) || 0)}
-                placeholder="20"
-              />
-              <p className="text-xs text-muted-foreground">현재 운영 중인 예상 테이블 수</p>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="note">메모 (선택)</Label>
-              <Input
-                id="note"
-                type="text"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-                placeholder="예: 돼지 11,500원/kg, 반찬·쌈 포함"
-              />
-              <p className="text-xs text-muted-foreground">원가 메모</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 결과 카드 */}
-      <Card className="mb-6">
-        <CardHeader>
-          <CardTitle>2) 결과</CardTitle>
-          <CardDescription>손익분기점 및 목표 달성 분석</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          {/* 공헌이익률 */}
-          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="h-5 w-5 text-blue-600" />
-              <span className="font-semibold text-blue-900">공헌이익률 (CMR)</span>
-            </div>
-            <p className="text-3xl font-bold text-blue-600">{fmtPct(result.cmr)}</p>
-            <p className="text-sm text-blue-700 mt-1">
-              매출에서 변동비를 제외한 후 남는 비율 (고정비 충당 + 이익)
-            </p>
-          </div>
-
-          {/* 손익분기점 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
-              <p className="text-sm text-orange-700 mb-1">손익분기 매출 (BEP 매출)</p>
-              <p className="text-2xl font-bold text-orange-600">{fmtWon(result.bepRevenue)}</p>
-            </div>
-            <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
-              <p className="text-sm text-orange-700 mb-1">손익분기 테이블 수 (BEP 테이블)</p>
-              <p className="text-2xl font-bold text-orange-600">{fmtTable(result.bepTables)}</p>
-            </div>
-          </div>
-
-          {/* 목표 이익 달성 */}
-          {targetProfitMonth > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                <div className="flex items-center gap-2 mb-1">
-                  <Target className="h-4 w-4 text-green-600" />
-                  <p className="text-sm text-green-700">목표 이익 달성 필요 매출</p>
-                </div>
-                <p className="text-2xl font-bold text-green-600">{fmtWon(result.needRevenue)}</p>
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* 입력 섹션 */}
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>판매 정보</CardTitle>
+              <CardDescription>인분당 판매가와 테이블당 인분 수</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="P">판매가/인분 (원)</Label>
+                <Input
+                  id="P"
+                  type="number"
+                  value={P}
+                  onChange={(e) => setP(Number(e.target.value))}
+                  min={0}
+                />
               </div>
-              <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                <div className="flex items-center gap-2 mb-1">
-                  <Target className="h-4 w-4 text-green-600" />
-                  <p className="text-sm text-green-700">목표 이익 달성 필요 테이블</p>
-                </div>
-                <p className="text-2xl font-bold text-green-600">{fmtTable(result.needTables)}</p>
+              <div className="space-y-2">
+                <Label htmlFor="s_sold">테이블당 유상 판매 인분 (인분)</Label>
+                <Input
+                  id="s_sold"
+                  type="number"
+                  value={s_sold}
+                  onChange={(e) => setS_sold(Number(e.target.value))}
+                  step={0.1}
+                  min={0}
+                />
               </div>
-            </div>
+              <div className="space-y-2">
+                <Label htmlFor="s_free">테이블당 서비스 인분 (인분)</Label>
+                <Input
+                  id="s_free"
+                  type="number"
+                  value={s_free}
+                  onChange={(e) => setS_free(Number(e.target.value))}
+                  step={0.1}
+                  min={0}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>원가 정보</CardTitle>
+              <CardDescription>원육 단가, 1인분 그램수, 부자재 원가</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="M">원육 단가/kg (원/kg)</Label>
+                <Input
+                  id="M"
+                  type="number"
+                  value={M}
+                  onChange={(e) => setM(Number(e.target.value))}
+                  min={0}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="g">1인분 그램수 (g)</Label>
+                <Input
+                  id="g"
+                  type="number"
+                  value={g}
+                  onChange={(e) => setG(Number(e.target.value))}
+                  min={0}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="B">부자재/인분 원가 (원)</Label>
+                <Input
+                  id="B"
+                  type="number"
+                  value={B}
+                  onChange={(e) => setB(Number(e.target.value))}
+                  min={0}
+                />
+                <p className="text-xs text-muted-foreground">쌈·반찬·소스·숯 일부 등</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>변동비 및 기타</CardTitle>
+              <CardDescription>로스율, 테이블당 기타 비용, 음주 순이익</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="L_pct">로스율 (%)</Label>
+                <Input
+                  id="L_pct"
+                  type="range"
+                  value={L_pct}
+                  onChange={(e) => setL_pct(Number(e.target.value))}
+                  min={0}
+                  max={30}
+                  step={1}
+                />
+                <p className="text-sm text-muted-foreground">{L_pct}% (손실/폐기/시식 포함)</p>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="V_misc">기타 변동비/테이블 (원)</Label>
+                <Input
+                  id="V_misc"
+                  type="number"
+                  value={V_misc}
+                  onChange={(e) => setV_misc(Number(e.target.value))}
+                  min={0}
+                />
+                <p className="text-xs text-muted-foreground">숯·가스·물티슈 등</p>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="D_profit">음료·주류 순이익/테이블 (원)</Label>
+                <Input
+                  id="D_profit"
+                  type="number"
+                  value={D_profit}
+                  onChange={(e) => setD_profit(Number(e.target.value))}
+                />
+                <p className="text-xs text-muted-foreground">매출-원가 (마이너스 가능)</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>고정비 및 목표</CardTitle>
+              <CardDescription>월 고정비, 하루 목표이익</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="fixedMonth">월 고정비 (원)</Label>
+                <Input
+                  id="fixedMonth"
+                  type="number"
+                  value={fixedMonth}
+                  onChange={(e) => setFixedMonth(Number(e.target.value))}
+                  min={0}
+                />
+                <p className="text-xs text-muted-foreground">임대료·인건비·관리비 등</p>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="goalProfitDay">하루 목표이익 (원)</Label>
+                <Input
+                  id="goalProfitDay"
+                  type="number"
+                  value={goalProfitDay}
+                  onChange={(e) => setGoalProfitDay(Number(e.target.value))}
+                  min={0}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>역산 판매가 (선택)</CardTitle>
+              <CardDescription>목표 테이블 수 달성 위한 필요 판매가</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  id="showTargetPrice"
+                  checked={showTargetPrice}
+                  onChange={(e) => setShowTargetPrice(e.target.checked)}
+                  className="h-4 w-4"
+                />
+                <Label htmlFor="showTargetPrice">역산 판매가 계산하기</Label>
+              </div>
+              {showTargetPrice && (
+                <div className="space-y-2">
+                  <Label htmlFor="targetTables">목표 테이블 수 (하루)</Label>
+                  <Input
+                    id="targetTables"
+                    type="number"
+                    value={targetTables}
+                    onChange={(e) => setTargetTables(Number(e.target.value))}
+                    min={1}
+                  />
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* 출력 섹션 */}
+        <div className="space-y-6">
+          {result.outputs && (
+            <>
+              <Card>
+                <CardHeader>
+                  <CardTitle>원가 분석</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">원가/인분 (C)</span>
+                    <span className="font-medium">{fmtWon(result.outputs.C)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">소비 인분 (실제)</span>
+                    <span className="font-medium">{fmtNum(result.outputs.consumed, 2)} 인분</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>테이블 손익</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">테이블 매출</span>
+                    <span className="font-medium">{fmtWon(result.outputs.revTable)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">테이블 원가</span>
+                    <span className="font-medium">{fmtWon(result.outputs.costTable)}</span>
+                  </div>
+                  <div className="flex justify-between border-t pt-2">
+                    <span className="text-muted-foreground font-semibold">테이블 기여이익</span>
+                    <span className="font-bold text-green-600">
+                      {fmtWon(result.outputs.CM_table)}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-blue-500">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-blue-600" />
+                    손익분기 분석
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">하루 고정비</span>
+                    <span className="font-medium">{fmtWon(result.outputs.fixedDay)}</span>
+                  </div>
+                  <div className="flex justify-between border-t pt-2">
+                    <span className="text-muted-foreground font-semibold">
+                      손익분기 테이블 수
+                    </span>
+                    <span className="font-bold text-blue-600 text-xl">
+                      {fmtNum(result.outputs.beTables, 2)} 테이블
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground font-semibold">손익분기 하루 매출</span>
+                    <span className="font-bold text-blue-600 text-xl">
+                      {fmtWon(result.outputs.beSalesDay)}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {showTargetPrice && result.outputs.P_required !== undefined && (
+                <Card className="border-2 border-amber-500">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-amber-600">
+                      <TrendingUp className="h-5 w-5" />
+                      역산 판매가
+                    </CardTitle>
+                    <CardDescription>
+                      하루 {targetTables}테이블로 목표 달성 시 필요한 판매가
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground font-semibold">
+                        필요 판매가/인분
+                      </span>
+                      <span className="font-bold text-amber-600 text-xl">
+                        {fmtWon(result.outputs.P_required)}
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              <Alert>
+                <Info className="h-4 w-4" />
+                <AlertTitle>해석 가이드</AlertTitle>
+                <AlertDescription className="text-sm space-y-1">
+                  <p>
+                    • 손익분기 테이블 수: 하루 이 정도 테이블을 받으면 고정비를 회수합니다
+                  </p>
+                  <p>• 손익분기 매출: 위 테이블 수 달성 시 예상 매출입니다</p>
+                  <p>
+                    • 역산 판매가: 목표 테이블로 본전을 맞추려면 이 가격이 필요합니다
+                  </p>
+                </AlertDescription>
+              </Alert>
+            </>
           )}
-
-          {/* 현재 예상 */}
-          <div className="border-t pt-4">
-            <h3 className="font-semibold mb-3">참고) 현재 예상 테이블 수 기준</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                <p className="text-sm text-gray-700 mb-1">현재 예상 매출</p>
-                <p className="text-xl font-bold text-gray-900">{fmtWon(result.currentRevenue)}</p>
-              </div>
-              <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                <p className="text-sm text-gray-700 mb-1">현재 예상 이익 (추정)</p>
-                <p
-                  className={`text-xl font-bold ${
-                    result.currentProfit >= 0 ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {fmtWon(result.currentProfit)}
-                </p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 공식 요약 */}
-      <Card>
-        <CardHeader>
-          <CardTitle>공식 요약</CardTitle>
-          <CardDescription>손익분기 계산 공식</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 space-y-2 text-sm">
-            <div>
-              <strong>공헌이익률 (CMR)</strong> = 1 − 변동비율
-            </div>
-            <div>
-              <strong>BEP 매출</strong> = 하루 고정비 ÷ CMR
-            </div>
-            <div>
-              <strong>BEP 테이블</strong> = BEP 매출 ÷ 평균 테이블 단가
-            </div>
-            <div>
-              <strong>목표 이익 포함 필요 매출</strong> = (하루 고정비 + 목표 이익) ÷ CMR
-            </div>
-            <div className="pt-2 border-t border-yellow-300 mt-2">
-              <strong>현재 예상 이익</strong> = (현재 매출 × CMR) − 하루 고정비
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

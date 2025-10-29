@@ -1,0 +1,205 @@
+"use client"
+
+import { useState, useEffect, useMemo } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { ArrowLeft } from "lucide-react"
+import { Toolbar } from "@/components/ledger/Toolbar"
+import { CategorySection } from "@/components/ledger/CategorySection"
+import { SummaryCard } from "@/components/ledger/SummaryCard"
+import { SettingsDialog } from "@/components/ledger/SettingsDialog"
+import {
+  loadSettings,
+  saveSettings,
+  loadMenu,
+  loadDayEntry,
+  saveDayEntry,
+  exportToCSV,
+  exportToJSON,
+} from "@/lib/ledger/store"
+import { calculateDailySummary, getDaysInMonth } from "@/lib/ledger/math"
+import type { DayEntry, MenuItem, Settings } from "@/lib/ledger/types"
+
+export default function DailyLedgerPage() {
+  const [mounted, setMounted] = useState(false)
+  const [selectedDate, setSelectedDate] = useState("")
+  const [settings, setSettings] = useState<Settings | null>(null)
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([])
+  const [entry, setEntry] = useState<DayEntry>({ date: "", lines: [] })
+  const [settingsOpen, setSettingsOpen] = useState(false)
+
+  // 초기화
+  useEffect(() => {
+    setMounted(true)
+    const today = new Date().toISOString().split("T")[0]
+    setSelectedDate(today)
+    setSettings(loadSettings())
+    setMenuItems(loadMenu())
+  }, [])
+
+  // 날짜 변경 시 데이터 로드
+  useEffect(() => {
+    if (!mounted || !selectedDate) return
+    const dayEntry = loadDayEntry(selectedDate)
+    setEntry(dayEntry)
+  }, [mounted, selectedDate])
+
+  // 데이터 변경 시 자동 저장
+  useEffect(() => {
+    if (!mounted || !selectedDate) return
+    saveDayEntry(entry)
+  }, [mounted, selectedDate, entry])
+
+  // 계산
+  const summary = useMemo(() => {
+    if (!settings) return null
+    const [year, month] = selectedDate.split("-").map(Number)
+    const daysInMonth = getDaysInMonth(year, month)
+    return calculateDailySummary(
+      entry.lines,
+      menuItems,
+      settings,
+      daysInMonth,
+      entry.tableCount || 0
+    )
+  }, [entry.lines, menuItems, settings, selectedDate, entry.tableCount])
+
+  // 핸들러
+  const handleSettingsSave = (newSettings: Settings) => {
+    setSettings(newSettings)
+    saveSettings(newSettings)
+  }
+
+  const handleExportCSV = () => {
+    const csv = exportToCSV(entry, menuItems)
+    const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `ledger-${selectedDate}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const handleExportJSON = () => {
+    const json = exportToJSON(entry, menuItems)
+    const blob = new Blob([json], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `ledger-${selectedDate}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const handlePrint = () => {
+    window.print()
+  }
+
+  if (!mounted || !settings) {
+    return (
+      <div className="container mx-auto py-8 px-4 max-w-7xl">
+        <p className="text-muted-foreground">로딩 중...</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="container mx-auto py-4 sm:py-8 px-3 sm:px-4 max-w-7xl">
+      {/* 헤더 */}
+      <div className="mb-4 sm:mb-6">
+        <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+          <Link href="/secret" className="print:hidden">
+            <Button variant="outline" size="icon" className="shrink-0 h-11 w-11 sm:h-10 sm:w-10 touch-manipulation">
+              <ArrowLeft className="h-5 w-5 sm:h-4 sm:w-4" />
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold">일일 가계부</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              오늘의 매출과 손익을 기록하세요
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* 툴바 */}
+      <Toolbar
+        selectedDate={selectedDate}
+        onDateChange={setSelectedDate}
+        tableCount={entry.tableCount || 0}
+        onTableCountChange={(count) => setEntry({ ...entry, tableCount: count })}
+        onSettingsClick={() => setSettingsOpen(true)}
+        onExportCSV={handleExportCSV}
+        onExportJSON={handleExportJSON}
+        onPrint={handlePrint}
+      />
+
+      {/* 요약 카드 */}
+      {summary && (
+        <div className="mb-4 sm:mb-6">
+          <SummaryCard summary={summary} />
+        </div>
+      )}
+
+      {/* 카테고리별 입력 */}
+      <div className="space-y-3 sm:space-y-4">
+        <CategorySection
+          title="🐷 돼지고기"
+          category="pork"
+          items={menuItems}
+          lines={entry.lines}
+          onChange={(lines) => setEntry({ ...entry, lines })}
+        />
+
+        <CategorySection
+          title="🐮 소고기"
+          category="beef"
+          items={menuItems}
+          lines={entry.lines}
+          onChange={(lines) => setEntry({ ...entry, lines })}
+        />
+
+        <CategorySection
+          title="🍚 식사류"
+          category="meal"
+          items={menuItems}
+          lines={entry.lines}
+          onChange={(lines) => setEntry({ ...entry, lines })}
+        />
+
+        <CategorySection
+          title="🥗 샐러드바"
+          category="saladbar"
+          items={menuItems}
+          lines={entry.lines}
+          onChange={(lines) => setEntry({ ...entry, lines })}
+        />
+
+        <CategorySection
+          title="🍺 주류"
+          category="alcohol"
+          items={menuItems}
+          lines={entry.lines}
+          onChange={(lines) => setEntry({ ...entry, lines })}
+        />
+
+        <CategorySection
+          title="🥤 음료"
+          category="drink"
+          items={menuItems}
+          lines={entry.lines}
+          onChange={(lines) => setEntry({ ...entry, lines })}
+        />
+      </div>
+
+      {/* 설정 다이얼로그 */}
+      <SettingsDialog
+        open={settingsOpen}
+        onOpenChange={setSettingsOpen}
+        settings={settings}
+        onSave={handleSettingsSave}
+      />
+    </div>
+  )
+}

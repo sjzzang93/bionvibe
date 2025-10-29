@@ -226,6 +226,27 @@ export default function SecretPage() {
           <p className="text-lg text-gray-300">특별한 웹앱들이 여기 숨어있어요 👀</p>
         </div>
 
+        {/* Local Tools Section */}
+        <div className="mb-12">
+          <h2 className="mb-6 text-3xl font-bold text-white">📊 로컬 도구</h2>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            <Link
+              href="/secret/daily-ledger"
+              className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/50 backdrop-blur-lg"
+            >
+              <div className="p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-3xl">📊</span>
+                </div>
+                <h3 className="text-lg font-bold text-white">일일 가계부</h3>
+                <p className="mt-2 line-clamp-2 text-sm text-white/70">
+                  오늘의 매출과 손익을 기록하세요
+                </p>
+              </div>
+            </Link>
+          </div>
+        </div>
+
         {/* Hidden Apps Grid */}
         {loadingApps ? (
           <div className="py-20 text-center">
@@ -239,8 +260,10 @@ export default function SecretPage() {
             <p className="text-gray-400">곧 특별한 기능들이 추가될 예정입니다!</p>
           </div>
         ) : (
-          <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-            {hiddenApps.map((app) => {
+          <>
+            <h2 className="mb-6 text-3xl font-bold text-white">🔐 히든 웹앱</h2>
+            <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+              {hiddenApps.map((app) => {
               const isEditing = editingAppId === app.id;
 
               return (
@@ -331,7 +354,8 @@ export default function SecretPage() {
                 </div>
               );
             })}
-          </div>
+            </div>
+          </>
         )}
 
         {/* Rename Manager */}

@@ -1,5 +1,5 @@
 -- ============================================
--- 🔐 비온바이브 시크릿 앱 추가 (4개)
+-- 🔐 비온바이브 시크릿 앱 추가 (5개)
 -- Supabase SQL Editor에 복사-붙여넣기 후 실행
 -- ============================================
 
@@ -10,7 +10,7 @@ ALTER TABLE apps ADD COLUMN IF NOT EXISTS hidden BOOLEAN DEFAULT false;
 CREATE INDEX IF NOT EXISTS idx_apps_hidden ON apps(hidden);
 
 -- ============================================
--- 시크릿 앱 4개 추가
+-- 시크릿 앱 5개 추가
 -- ============================================
 
 -- 1. 고깃집 가격 시뮬레이터
@@ -109,7 +109,31 @@ ON CONFLICT (id) DO UPDATE SET
   image = EXCLUDED.image,
   hidden = EXCLUDED.hidden;
 
+-- 5. BBQ 올인원 계산기 (4개 통합)
+INSERT INTO apps (id, name, slug, icon, description, category_id, url, image, created_at, hidden)
+VALUES (
+  'bbq-all-in-one',
+  'BBQ 올인원 계산기',
+  'bbq-all-in-one',
+  '🍖',
+  '가격 시뮬레이터와 손익분기 계산을 한 곳에서 (기본/고급 모드)',
+  'money-calc',
+  '/secret/bbq-all-in-one',
+  'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop',
+  NOW(),
+  true
+)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  slug = EXCLUDED.slug,
+  icon = EXCLUDED.icon,
+  description = EXCLUDED.description,
+  category_id = EXCLUDED.category_id,
+  url = EXCLUDED.url,
+  image = EXCLUDED.image,
+  hidden = EXCLUDED.hidden;
+
 -- ============================================
--- 완료! 4개 시크릿 앱 추가됨
+-- 완료! 5개 시크릿 앱 추가됨
 -- /secret 페이지에서 확인하세요
 -- ============================================
