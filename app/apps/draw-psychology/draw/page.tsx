@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Eraser, Palette, Trash2, Check, Undo2 } from "lucide-react"
-import { Button } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 function DrawCanvas() {
   const searchParams = useSearchParams()
