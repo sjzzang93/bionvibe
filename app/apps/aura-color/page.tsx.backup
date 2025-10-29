@@ -1,0 +1,176 @@
+"use client";
+import { useMemo, useState, useEffect } from "react";
+import Controls from "@/components/aura/Controls";
+import AuraCanvas from "@/components/aura/AuraCanvas";
+import HistoryChart from "@/components/aura/HistoryChart";
+import { computeAura, AuraInputs } from "@/lib/aura/engine";
+import { toCssHsl } from "@/lib/aura/palette";
+import { getJSON, setJSON, isBrowser } from "@/lib/client/storage";
+import { buildComments } from "@/lib/aura/comments";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+type LogItem = {
+  ts: number; // epoch ms
+  inputs: AuraInputs;
+  score: number;
+  color: string;
+};
+
+const KEY = "bion:aura:logs";
+
+export default function Page(){
+  const [result, setResult] = useState<null | ReturnType<typeof computeAura>>(null);
+  const [inputs, setInputs] = useState<null | AuraInputs>(null);
+  const [logs, setLogs] = useState<LogItem[]>([]);
+
+  useEffect(()=>{
+    const items = getJSON<LogItem[]>(KEY, []);
+    setLogs(items);
+  },[]);
+
+  const onCalc = ({ inputs, output }: { inputs: AuraInputs; output: ReturnType<typeof computeAura> }) => {
+    setInputs(inputs);
+    setResult(output);
+    const item: LogItem = {
+      ts: Date.now(),
+      inputs,
+      score: output.score,
+      color: toCssHsl(output.color)
+    };
+    const next = [item, ...logs].slice(0, 60); // 최근 60개
+    setLogs(next);
+    setJSON(KEY, next);
+  };
+
+  const chartData = useMemo(()=> logs.slice().reverse().map(it=>({
+    t: new Date(it.ts).toLocaleDateString(),
+    score: it.score
+  })), [logs]);
+
+  const summary = useMemo(()=>{
+    if(!result || !inputs) return null;
+    return buildComments(result.score, inputs.mood);
+  },[result, inputs]);
+
+  const reset = () => {
+    setLogs([]);
+    setJSON(KEY, []);
+  };
+
+  // 초기 디폴트(첫 방문 즉시 프리뷰)
+  useEffect(()=>{
+    if (!isBrowser) return;
+    if (!result) {
+      const initInputs: AuraInputs = { mood: "행복", weather: "맑음", person: "나홀로", sleepHours: 7, energy: 70, stress: 30 };
+      const out = computeAura(initInputs);
+      setInputs(initInputs);
+      setResult(out);
+    }
+  },[result]);
+
+  return (
+    <main className="min-h-[100dvh] w-full bg-gradient-to-b from-indigo-900 via-slate-900 to-black text-white">
+      <div className="mx-auto max-w-5xl px-4 py-8 space-y-8">
+        <header className="space-y-2">
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">나의 기운색 테스트</h1>
+          <p className="text-white/70">선택 몇 가지로 오늘의 오라 색상을 시각화하고, 감정 히스토리를 기록합니다.</p>
+        </header>
+
+        <Card className="bg-white/5 border-white/10">
+          <CardHeader>
+            <CardTitle>입력</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Controls onResult={onCalc}/>
+          </CardContent>
+        </Card>
+
+        {result && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="bg-white/5 border-white/10">
+              <CardHeader>
+                <CardTitle>오늘의 오라</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <AuraCanvas primary={result.color} secondary={result.secondary}/>
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <div className="text-white/60">메인 컬러</div>
+                    <div className="font-mono">{toCssHsl(result.color)}</div>
+                  </div>
+                  <div>
+                    <div className="text-white/60">보조 컬러</div>
+                    <div className="font-mono">{toCssHsl(result.secondary)}</div>
+                  </div>
+                  <div>
+                    <div className="text-white/60">기운 점수</div>
+                    <div className="text-lg font-semibold">{result.score} / 100</div>
+                  </div>
+                  <div>
+                    <div className="text-white/60">태그</div>
+                    <div className="text-xs">{result.tags.join(" · ")}</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/5 border-white/10">
+              <CardHeader>
+                <CardTitle>성격 코멘트</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {summary ? (
+                  <>
+                    <div className="text-lg">{summary.oneLiner}</div>
+                    <div className="text-white/80 text-sm">키워드: {summary.keywords.join(", ")}</div>
+                    <div className="text-white/70 text-sm">톤: {summary.tone}</div>
+                    <div className="text-white/90">{summary.advice}</div>
+                  </>
+                ) : (
+                  <div className="text-white/60">입력을 완료하면 코멘트가 표시됩니다.</div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        <Card className="bg-white/5 border-white/10">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle>기운 히스토리</CardTitle>
+            <Button variant="secondary" className="bg-white/10 hover:bg-white/20" onClick={reset}>히스토리 초기화</Button>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {logs.length > 0 ? (
+              <>
+                <HistoryChart data={chartData}/>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {logs.slice(0,6).map((it,idx)=>(
+                    <div key={idx} className="rounded-xl p-3 bg-white/5 border border-white/10">
+                      <div className="text-xs text-white/60">{new Date(it.ts).toLocaleString()}</div>
+                      <div className="mt-1 flex items-center gap-2">
+                        <span className="inline-block size-4 rounded-full" style={{background: it.color}}/>
+                        <span className="font-mono text-xs">{it.color}</span>
+                      </div>
+                      <div className="mt-1 text-sm">점수: <b>{it.score}</b></div>
+                      <div className="text-xs text-white/70">
+                        {it.inputs.mood} · {it.inputs.weather} · {it.inputs.person}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="text-white/60">아직 기록이 없습니다. 오늘의 기운색을 먼저 생성해보세요.</div>
+            )}
+          </CardContent>
+        </Card>
+
+        <footer className="pt-6 pb-10 text-center text-white/40 text-xs">
+          BION VIBE • Aura Color Test — 광고 없음 · 프리미엄 3D 톤
+        </footer>
+      </div>
+    </main>
+  );
+}
+

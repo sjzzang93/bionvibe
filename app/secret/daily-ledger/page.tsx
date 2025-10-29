@@ -17,15 +17,23 @@ import {
   exportToCSV,
   exportToJSON,
 } from "@/lib/ledger/store"
-import { calculateDailySummary, getDaysInMonth } from "@/lib/ledger/math"
-import type { DayEntry, MenuItem, Settings } from "@/lib/ledger/types"
+import {
+  calculateDailySummary,
+  getDaysInMonth,
+  getDateRange,
+  getDateArray,
+  calculatePeriodSummary,
+} from "@/lib/ledger/math"
+import type { DayEntry, MenuItem, Settings, DailySummary, PeriodSummary } from "@/lib/ledger/types"
 
 export default function DailyLedgerPage() {
   const [mounted, setMounted] = useState(false)
   const [selectedDate, setSelectedDate] = useState("")
+  const [viewMode, setViewMode] = useState<'day' | 'month'>('day')
   const [settings, setSettings] = useState<Settings | null>(null)
   const [menuItems, setMenuItems] = useState<MenuItem[]>([])
   const [entry, setEntry] = useState<DayEntry>({ date: "", lines: [] })
+  const [periodEntries, setPeriodEntries] = useState<DayEntry[]>([])
   const [settingsOpen, setSettingsOpen] = useState(false)
 
   // 초기화
@@ -44,6 +52,15 @@ export default function DailyLedgerPage() {
     setEntry(dayEntry)
   }, [mounted, selectedDate])
 
+  // 뷰모드 변경 시 기간 데이터 로드 (month 뷰용)
+  useEffect(() => {
+    if (!mounted || !selectedDate || viewMode !== 'month') return
+    const { startDate, endDate } = getDateRange(selectedDate, 'month')
+    const dates = getDateArray(startDate, endDate)
+    const entries = dates.map(date => loadDayEntry(date))
+    setPeriodEntries(entries)
+  }, [mounted, selectedDate, viewMode])
+
   // 데이터 변경 시 자동 저장
   useEffect(() => {
     if (!mounted || !selectedDate) return
@@ -51,18 +68,31 @@ export default function DailyLedgerPage() {
   }, [mounted, selectedDate, entry])
 
   // 계산
-  const summary = useMemo(() => {
+  const summary = useMemo((): (DailySummary & { startDate?: string; endDate?: string; days?: number }) | null => {
     if (!settings) return null
-    const [year, month] = selectedDate.split("-").map(Number)
-    const daysInMonth = getDaysInMonth(year, month)
-    return calculateDailySummary(
-      entry.lines,
-      menuItems,
-      settings,
-      daysInMonth,
-      entry.tableCount || 0
-    )
-  }, [entry.lines, menuItems, settings, selectedDate, entry.tableCount])
+
+    if (viewMode === 'day') {
+      const [year, month] = selectedDate.split("-").map(Number)
+      const daysInMonth = getDaysInMonth(year, month)
+      return calculateDailySummary(
+        entry.lines,
+        menuItems,
+        settings,
+        daysInMonth,
+        entry.tableCount || 0
+      )
+    } else {
+      // month view
+      const { startDate, endDate } = getDateRange(selectedDate, 'month')
+      return calculatePeriodSummary(
+        periodEntries,
+        menuItems,
+        settings,
+        startDate,
+        endDate
+      )
+    }
+  }, [entry.lines, menuItems, settings, selectedDate, entry.tableCount, viewMode, periodEntries])
 
   // 핸들러
   const handleSettingsSave = (newSettings: Settings) => {
@@ -96,6 +126,19 @@ export default function DailyLedgerPage() {
     window.print()
   }
 
+  const handleReset = () => {
+    if (!confirm('정말로 입력을 초기화하시겠습니까?\n모든 수량과 테이블 수가 0으로 초기화됩니다.')) {
+      return
+    }
+    const emptyEntry: DayEntry = {
+      date: selectedDate,
+      lines: [],
+      tableCount: 0
+    }
+    setEntry(emptyEntry)
+    saveDayEntry(emptyEntry)
+  }
+
   if (!mounted || !settings) {
     return (
       <div className="container mx-auto py-8 px-4 max-w-7xl">
@@ -105,10 +148,10 @@ export default function DailyLedgerPage() {
   }
 
   return (
-    <div className="container mx-auto py-4 sm:py-8 px-3 sm:px-4 max-w-7xl">
+    <div className="container mx-auto py-4 sm:py-8 px-4 sm:px-6 max-w-7xl">
       {/* 헤더 */}
       <div className="mb-4 sm:mb-6">
-        <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+        <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
           <Link href="/secret" className="print:hidden">
             <Button variant="outline" size="sm" className="shrink-0 h-11 w-11 sm:h-10 sm:w-10 touch-manipulation p-0">
               <ArrowLeft className="h-5 w-5 sm:h-4 sm:w-4" />
@@ -127,9 +170,12 @@ export default function DailyLedgerPage() {
       <Toolbar
         selectedDate={selectedDate}
         onDateChange={setSelectedDate}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
         tableCount={entry.tableCount || 0}
         onTableCountChange={(count) => setEntry({ ...entry, tableCount: count })}
         onSettingsClick={() => setSettingsOpen(true)}
+        onReset={handleReset}
         onExportCSV={handleExportCSV}
         onExportJSON={handleExportJSON}
         onPrint={handlePrint}

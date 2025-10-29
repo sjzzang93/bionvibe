@@ -50,3 +50,11 @@ export interface DailySummary {
   tableCount: number // 총 테이블 수
   avgPerTable: number // 평균 테이블 단가
 }
+
+export type ViewMode = 'day' | 'week' | 'month'
+
+export interface PeriodSummary extends DailySummary {
+  startDate: string
+  endDate: string
+  days: number
+}

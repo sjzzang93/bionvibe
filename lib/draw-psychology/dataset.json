@@ -1,0 +1,355 @@
+{
+  "house": [
+    {
+      "feature": "창문이 작다",
+      "meaning": "자기표현에 소극적이며, 내면을 숨기려는 경향",
+      "emotion": "불안, 위축",
+      "traits": ["내향적", "방어적", "신중함"],
+      "stress_level": "중간",
+      "interpretation": "창문이 작은 집은 외부 세계와의 단절감을 나타내며, 현재 스트레스가 내면화된 상태일 가능성이 높습니다.",
+      "recommendation": "자신을 표현할 수 있는 일기나 대화 활동이 도움이 됩니다."
+    },
+    {
+      "feature": "창문이 크다",
+      "meaning": "개방적이고 표현력이 풍부한 성격",
+      "emotion": "친화적, 외향적",
+      "traits": ["사교적", "활발함", "개방적"],
+      "stress_level": "낮음",
+      "interpretation": "큰 창문은 외부와의 소통을 중시하며, 타인과의 관계에서 긍정적 에너지를 얻는 사람입니다.",
+      "recommendation": "사회활동을 통해 더욱 성장할 수 있습니다."
+    },
+    {
+      "feature": "문이 없거나 매우 작다",
+      "meaning": "타인과의 접촉을 회피하려는 경향",
+      "emotion": "고립감, 두려움",
+      "traits": ["회피적", "방어적", "신중함"],
+      "stress_level": "높음",
+      "interpretation": "문이 없는 집은 외부 세계에 대한 두려움과 고립감을 나타냅니다.",
+      "recommendation": "신뢰할 수 있는 소수의 사람들과 관계를 만들어가세요."
+    },
+    {
+      "feature": "문이 크고 명확하다",
+      "meaning": "새로운 경험과 관계에 적극적",
+      "emotion": "긍정적, 호기심",
+      "traits": ["외향적", "모험적", "적극적"],
+      "stress_level": "낮음",
+      "interpretation": "큰 문은 새로운 기회를 받아들일 준비가 되어있음을 의미합니다.",
+      "recommendation": "다양한 경험을 통해 성장하세요."
+    },
+    {
+      "feature": "굴뚝에서 연기가 많이 난다",
+      "meaning": "가정 내 긴장감이나 갈등 존재",
+      "emotion": "스트레스, 긴장",
+      "traits": ["민감함", "예민함", "불안정"],
+      "stress_level": "높음",
+      "interpretation": "과도한 연기는 가정이나 대인관계에서의 스트레스를 나타냅니다.",
+      "recommendation": "갈등 해결을 위한 대화 시간을 가져보세요."
+    },
+    {
+      "feature": "굴뚝이 없다",
+      "meaning": "정서적 냉담함 또는 가족관계의 단절",
+      "emotion": "무기력, 공허함",
+      "traits": ["독립적", "거리두기", "냉정함"],
+      "stress_level": "중간",
+      "interpretation": "굴뚝 없는 집은 정서적 온기의 부재를 나타낼 수 있습니다.",
+      "recommendation": "따뜻한 관계 형성에 노력해보세요."
+    },
+    {
+      "feature": "지붕이 뾰족하다",
+      "meaning": "이상주의적이고 꿈을 중시하는 성향",
+      "emotion": "희망적, 상상력 풍부",
+      "traits": ["이상주의자", "창의적", "야망"],
+      "stress_level": "낮음",
+      "interpretation": "뾰족한 지붕은 높은 목표와 이상을 추구하는 사람입니다.",
+      "recommendation": "현실과 균형을 맞추며 목표를 향해 나아가세요."
+    },
+    {
+      "feature": "지붕이 평평하다",
+      "meaning": "현실적이고 실용적인 사고방식",
+      "emotion": "안정감, 차분함",
+      "traits": ["현실주의자", "실용적", "침착함"],
+      "stress_level": "낮음",
+      "interpretation": "평평한 지붕은 발을 땅에 디디고 사는 현실적인 사람입니다.",
+      "recommendation": "때로는 꿈을 꾸는 시간도 가져보세요."
+    },
+    {
+      "feature": "집이 왼쪽에 치우쳐 있다",
+      "meaning": "과거에 집착하거나 과거 지향적",
+      "emotion": "향수, 미련",
+      "traits": ["과거지향", "보수적", "신중함"],
+      "stress_level": "중간",
+      "interpretation": "왼쪽 배치는 과거의 경험이나 기억에 머물러 있을 수 있습니다.",
+      "recommendation": "현재와 미래에 집중하는 연습이 필요합니다."
+    },
+    {
+      "feature": "집이 오른쪽에 치우쳐 있다",
+      "meaning": "미래 지향적이고 앞을 향해 나아가는 성향",
+      "emotion": "희망적, 적극적",
+      "traits": ["미래지향", "진취적", "낙관적"],
+      "stress_level": "낮음",
+      "interpretation": "오른쪽 배치는 미래에 대한 기대와 계획이 있는 사람입니다.",
+      "recommendation": "현재의 소중함도 잊지 마세요."
+    }
+  ],
+  "tree": [
+    {
+      "feature": "뿌리가 명확하게 그려짐",
+      "meaning": "현실 감각이 뛰어나고 자기 이해도가 높음",
+      "emotion": "안정감, 자신감",
+      "traits": ["현실적", "안정적", "자기이해"],
+      "stress_level": "낮음",
+      "interpretation": "뿌리는 자신의 기반과 정체성을 나타냅니다. 명확한 뿌리는 삶의 기반이 튼튼함을 의미합니다.",
+      "recommendation": "이 안정감을 바탕으로 새로운 도전을 해보세요."
+    },
+    {
+      "feature": "뿌리가 없거나 희미함",
+      "meaning": "불안정하고 방황하는 상태",
+      "emotion": "불안, 혼란",
+      "traits": ["불안정", "방황", "혼란스러움"],
+      "stress_level": "높음",
+      "interpretation": "뿌리 없는 나무는 정체성의 혼란이나 삶의 방향성 상실을 나타냅니다.",
+      "recommendation": "자신의 가치관을 정리하고 기반을 다지는 시간이 필요합니다."
+    },
+    {
+      "feature": "줄기가 굵고 튼튼함",
+      "meaning": "강한 의지력과 자아 강도",
+      "emotion": "자신감, 강인함",
+      "traits": ["의지력", "강인함", "결단력"],
+      "stress_level": "낮음",
+      "interpretation": "굵은 줄기는 강한 자아와 역경을 이겨낼 힘을 가진 사람입니다.",
+      "recommendation": "이 힘을 타인을 돕는데도 사용해보세요."
+    },
+    {
+      "feature": "줄기가 가늘고 약함",
+      "meaning": "자존감이 낮고 의지가 약한 상태",
+      "emotion": "불안, 취약함",
+      "traits": ["취약함", "우유부단", "의존적"],
+      "stress_level": "높음",
+      "interpretation": "가느다란 줄기는 심리적 취약성과 스트레스에 대한 낮은 저항력을 나타냅니다.",
+      "recommendation": "작은 성공 경험을 쌓아 자신감을 키워나가세요."
+    },
+    {
+      "feature": "가지가 위로 뻗어있음",
+      "meaning": "긍정적이고 낙관적인 성향",
+      "emotion": "희망, 긍정",
+      "traits": ["낙관적", "희망적", "밝음"],
+      "stress_level": "낮음",
+      "interpretation": "위로 뻗은 가지는 미래에 대한 희망과 긍정적 에너지를 나타냅니다.",
+      "recommendation": "이 긍정성을 주변에도 나눠주세요."
+    },
+    {
+      "feature": "가지가 아래로 처짐",
+      "meaning": "우울하거나 무기력한 상태",
+      "emotion": "우울, 무기력",
+      "traits": ["우울함", "소극적", "피로"],
+      "stress_level": "높음",
+      "interpretation": "처진 가지는 심리적 에너지 고갈과 우울감을 나타냅니다.",
+      "recommendation": "휴식과 전문가의 도움이 필요할 수 있습니다."
+    },
+    {
+      "feature": "잎이 풍성함",
+      "meaning": "에너지가 충만하고 생명력이 넘침",
+      "emotion": "활력, 생동감",
+      "traits": ["활발함", "에너지", "열정"],
+      "stress_level": "낮음",
+      "interpretation": "풍성한 잎은 현재 좋은 컨디션과 삶의 활력을 나타냅니다.",
+      "recommendation": "이 에너지를 의미있는 일에 투자하세요."
+    },
+    {
+      "feature": "잎이 거의 없음",
+      "meaning": "에너지 부족, 소진 상태",
+      "emotion": "피로, 무기력",
+      "traits": ["지침", "무력감", "소극적"],
+      "stress_level": "높음",
+      "interpretation": "잎이 없는 나무는 심각한 에너지 고갈 상태를 의미합니다.",
+      "recommendation": "충분한 휴식과 자기 돌봄이 시급합니다."
+    },
+    {
+      "feature": "나무 전체가 크게 그려짐",
+      "meaning": "자신감이 높고 존재감을 드러내고 싶은 욕구",
+      "emotion": "자신감, 당당함",
+      "traits": ["자신감", "리더십", "존재감"],
+      "stress_level": "낮음",
+      "interpretation": "큰 나무는 높은 자존감과 자기 존중감을 나타냅니다.",
+      "recommendation": "타인의 공간도 존중하는 균형이 필요합니다."
+    },
+    {
+      "feature": "나무가 매우 작게 그려짐",
+      "meaning": "자신감 부족, 위축된 상태",
+      "emotion": "불안, 위축",
+      "traits": ["소심함", "자신감 부족", "회피적"],
+      "stress_level": "높음",
+      "interpretation": "작은 나무는 낮은 자존감과 위축된 심리 상태를 나타냅니다.",
+      "recommendation": "자신의 강점을 발견하고 인정하는 연습이 필요합니다."
+    }
+  ],
+  "person": [
+    {
+      "feature": "머리가 크게 그려짐",
+      "meaning": "지적 활동을 중시하고 사고가 활발함",
+      "emotion": "사색적, 집중",
+      "traits": ["지적", "사색적", "분석적"],
+      "stress_level": "중간",
+      "interpretation": "큰 머리는 지적 능력에 대한 자부심이나 과도한 생각을 나타냅니다.",
+      "recommendation": "감정과 신체의 균형도 중요합니다."
+    },
+    {
+      "feature": "머리가 작게 그려짐",
+      "meaning": "지적 자신감 부족, 사고력 위축",
+      "emotion": "불안, 열등감",
+      "traits": ["자신감 부족", "위축", "소극적"],
+      "stress_level": "높음",
+      "interpretation": "작은 머리는 지적 열등감이나 판단력에 대한 불안을 나타냅니다.",
+      "recommendation": "자신의 생각을 소중히 여기는 연습이 필요합니다."
+    },
+    {
+      "feature": "눈이 크고 명확함",
+      "meaning": "호기심이 많고 주변을 관찰하는 성향",
+      "emotion": "호기심, 경계",
+      "traits": ["관찰력", "민감함", "호기심"],
+      "stress_level": "중간",
+      "interpretation": "큰 눈은 외부 환경에 대한 높은 민감성과 경계심을 나타냅니다.",
+      "recommendation": "과도한 경계보다는 신뢰를 배워보세요."
+    },
+    {
+      "feature": "눈을 그리지 않음",
+      "meaning": "세상을 회피하거나 보기 싫은 심리",
+      "emotion": "회피, 두려움",
+      "traits": ["회피적", "방어적", "폐쇄적"],
+      "stress_level": "높음",
+      "interpretation": "눈 없는 사람은 현실 회피나 대인기피 성향을 나타냅니다.",
+      "recommendation": "천천히 세상과 연결되는 연습이 필요합니다."
+    },
+    {
+      "feature": "입이 크고 강조됨",
+      "meaning": "표현 욕구가 강하거나 말이 많은 성격",
+      "emotion": "표현적, 수다스러움",
+      "traits": ["표현력", "사교적", "활발함"],
+      "stress_level": "낮음",
+      "interpretation": "큰 입은 강한 의사소통 욕구와 표현력을 나타냅니다.",
+      "recommendation": "듣는 능력도 함께 키워보세요."
+    },
+    {
+      "feature": "입이 없거나 작음",
+      "meaning": "표현을 억제하거나 소통에 어려움",
+      "emotion": "억압, 고립",
+      "traits": ["내향적", "소극적", "억압적"],
+      "stress_level": "높음",
+      "interpretation": "작은 입은 감정 표현의 억제와 소통의 어려움을 나타냅니다.",
+      "recommendation": "신뢰할 수 있는 사람과 조금씩 대화를 시작해보세요."
+    },
+    {
+      "feature": "손이 크고 명확함",
+      "meaning": "행동력이 강하고 자기주장이 뚜렷함",
+      "emotion": "적극적, 능동적",
+      "traits": ["행동력", "적극성", "주장력"],
+      "stress_level": "낮음",
+      "interpretation": "큰 손은 환경을 통제하고 변화시키려는 욕구를 나타냅니다.",
+      "recommendation": "타인의 의견도 존중하는 균형이 필요합니다."
+    },
+    {
+      "feature": "손이 없거나 숨겨짐",
+      "meaning": "무력감, 환경에 대한 통제력 상실",
+      "emotion": "무력감, 좌절",
+      "traits": ["수동적", "무력함", "회피적"],
+      "stress_level": "높음",
+      "interpretation": "손 없는 사람은 환경에 대한 무력감과 좌절을 나타냅니다.",
+      "recommendation": "작은 성취부터 시작해 통제감을 회복하세요."
+    },
+    {
+      "feature": "발이 크고 안정적",
+      "meaning": "현실 감각이 뛰어나고 안정적",
+      "emotion": "안정감, 자신감",
+      "traits": ["안정적", "현실적", "근면함"],
+      "stress_level": "낮음",
+      "interpretation": "큰 발은 삶의 기반이 튼튼하고 현실 감각이 있음을 나타냅니다.",
+      "recommendation": "이 안정성을 바탕으로 새로운 도전을 해보세요."
+    },
+    {
+      "feature": "발이 없거나 불안정",
+      "meaning": "불안정하고 방향성을 잃은 상태",
+      "emotion": "불안, 혼란",
+      "traits": ["불안정", "방황", "혼란"],
+      "stress_level": "높음",
+      "interpretation": "발 없는 사람은 삶의 방향성 상실과 불안정성을 나타냅니다.",
+      "recommendation": "구체적인 목표를 세우고 단계적으로 실행해보세요."
+    },
+    {
+      "feature": "몸통이 크고 풍만함",
+      "meaning": "감정이 풍부하고 욕구가 강함",
+      "emotion": "풍부함, 욕구",
+      "traits": ["감정적", "욕구 표현", "에너지"],
+      "stress_level": "중간",
+      "interpretation": "큰 몸통은 강한 욕구와 풍부한 감정을 나타냅니다.",
+      "recommendation": "감정을 건강하게 표현하는 방법을 익히세요."
+    },
+    {
+      "feature": "몸통이 작거나 왜곡됨",
+      "meaning": "자기 이미지 왜곡, 신체 불만족",
+      "emotion": "불만족, 왜곡",
+      "traits": ["불안정", "자기비하", "왜곡"],
+      "stress_level": "높음",
+      "interpretation": "작은 몸통은 신체 이미지나 자아상의 문제를 나타냅니다.",
+      "recommendation": "자신의 몸과 마음을 있는 그대로 받아들이는 연습이 필요합니다."
+    }
+  ],
+  "emotions": {
+    "red": {
+      "meaning": "분노, 열정, 강렬함",
+      "traits": ["열정적", "충동적", "강렬함"],
+      "stress_level": "높음"
+    },
+    "blue": {
+      "meaning": "안정, 평온, 때로는 우울",
+      "traits": ["침착함", "안정적", "내성적"],
+      "stress_level": "낮음"
+    },
+    "green": {
+      "meaning": "회복, 균형, 성장",
+      "traits": ["균형적", "치유", "성장"],
+      "stress_level": "낮음"
+    },
+    "yellow": {
+      "meaning": "낙관, 밝음, 주의 필요",
+      "traits": ["밝음", "낙관적", "활발함"],
+      "stress_level": "낮음"
+    },
+    "black": {
+      "meaning": "스트레스, 우울, 폐쇄성",
+      "traits": ["우울", "폐쇄적", "스트레스"],
+      "stress_level": "높음"
+    },
+    "purple": {
+      "meaning": "창의성, 영성, 민감함",
+      "traits": ["창의적", "감수성", "독특함"],
+      "stress_level": "중간"
+    },
+    "orange": {
+      "meaning": "사교성, 활력, 외향성",
+      "traits": ["사교적", "활발함", "에너지"],
+      "stress_level": "낮음"
+    },
+    "brown": {
+      "meaning": "안정, 현실성, 때로는 우울",
+      "traits": ["현실적", "안정", "보수적"],
+      "stress_level": "중간"
+    }
+  },
+  "pressure": {
+    "heavy": {
+      "meaning": "강한 필압은 억압, 분노, 완벽주의",
+      "traits": ["강박적", "완벽주의", "긴장"],
+      "stress_level": "높음"
+    },
+    "light": {
+      "meaning": "약한 필압은 에너지 부족, 무기력",
+      "traits": ["무기력", "피로", "소극적"],
+      "stress_level": "높음"
+    },
+    "medium": {
+      "meaning": "적절한 필압은 균형잡힌 상태",
+      "traits": ["균형", "안정", "적절함"],
+      "stress_level": "낮음"
+    }
+  }
+}

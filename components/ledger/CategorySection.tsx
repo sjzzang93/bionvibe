@@ -83,10 +83,10 @@ export function CategorySection({
 
   return (
     <Card>
-      <CardHeader className="pb-3 sm:pb-6">
+      <CardHeader className="pb-3 pt-4 px-4 sm:pb-6 sm:pt-6 sm:px-6">
         <CardTitle className="text-lg sm:text-xl font-bold">{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
         <div className="space-y-2 sm:space-y-3">
           {categoryItems.map((item) => {
             const qty = getLineQty(item.id)
