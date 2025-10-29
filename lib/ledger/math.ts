@@ -2,7 +2,7 @@
  * 일일 가계부 계산 로직
  */
 
-import type { MenuItem, DayEntryLine, Settings, DailySummary } from './types'
+import type { MenuItem, DayEntryLine, Settings, DailySummary, DayEntry } from './types'
 
 export const perGram = (perKg: number) => perKg / 1000
 
