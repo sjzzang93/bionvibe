@@ -8,18 +8,23 @@ export function Navigation() {
   const router = useRouter();
   const [clickCount, setClickCount] = useState(0);
   const [logoClicked5Times, setLogoClicked5Times] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    // SSR 중에는 false 반환
+    if (typeof window === 'undefined') return false;
+    // 클라이언트에서는 즉시 localStorage 읽기
+    return localStorage.getItem('darkMode') === 'true';
+  });
   const clickTimerRef = useRef<NodeJS.Timeout | null>(null);
   const secretTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // 다크모드 초기화
+  // 다크모드 클래스 적용
   useEffect(() => {
-    const darkMode = localStorage.getItem('darkMode') === 'true';
-    setIsDark(darkMode);
-    if (darkMode) {
+    if (isDark) {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
-  }, []);
+  }, [isDark]);
 
   // 다크모드 토글
   const toggleDarkMode = () => {

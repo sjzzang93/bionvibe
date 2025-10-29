@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'google-site-verification-code', // Google Search Console에서 받은 코드로 교체
+    google: 'tfJ_MlkJzW1RV9d1gPMmUEF87G-PZyJlDliYT640Hn4',
   },
   other: {
     "google-adsense-account": ADSENSE_PUBLISHER_ID,
