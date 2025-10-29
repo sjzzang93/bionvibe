@@ -31,7 +31,8 @@ function ResultContent() {
     // Simulate AI analysis
     setTimeout(() => {
       const results = dataset[type as keyof typeof dataset]
-      const randomResults = [...results].sort(() => Math.random() - 0.5).slice(0, 3)
+      const resultsArray = Array.isArray(results) ? results : []
+      const randomResults = [...resultsArray].sort(() => Math.random() - 0.5).slice(0, 3)
 
       const emotions = dataset.emotions
       const emotionKeys = Object.keys(emotions)
