@@ -42,14 +42,14 @@ export function Toolbar({
         />
         <div className="flex gap-2 print:hidden">
           <Button
-            variant={viewMode === 'month' ? 'default' : 'outline'}
+            variant={viewMode === 'month' ? 'primary' : 'outline'}
             className="flex-1 sm:flex-none h-11 sm:h-10 px-6 text-base sm:text-sm touch-manipulation"
             onClick={() => onViewModeChange('day')}
           >
             1일치
           </Button>
           <Button
-            variant={viewMode === 'day' ? 'default' : 'outline'}
+            variant={viewMode === 'day' ? 'primary' : 'outline'}
             className="flex-1 sm:flex-none h-11 sm:h-10 px-6 text-base sm:text-sm touch-manipulation"
             onClick={() => onViewModeChange('month')}
           >
