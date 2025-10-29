@@ -7,7 +7,7 @@ import { defaultMenu } from './seed'
 import { defaultSettings } from './defaultSettings'
 
 const STORAGE_PREFIX = 'ledger:'
-const SETTINGS_KEY = `${STORAGE_PREFIX}settings_v2` // v2: 로스율 20% 적용
+const SETTINGS_KEY = `${STORAGE_PREFIX}settings_v6` // v6: 월비용(고정500/변동150/대출500) + 로스율10%
 const MENU_KEY = `${STORAGE_PREFIX}menu`
 
 export const getDayKey = (date: string) => `${STORAGE_PREFIX}${date}`
