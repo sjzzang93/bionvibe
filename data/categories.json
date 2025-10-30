@@ -2,10 +2,10 @@
   "categories": [
     {
       "id": "fortune-mind",
-      "name": "운세 & 마음",
-      "description": "Fortune & Mind",
+      "name": "운세&마음&정보",
+      "description": "Fortune & Mind & Info",
       "icon": "🔮",
-      "bgImage": "https://images.unsplash.com/photo-1518796745738-41048802f99a?w=800&q=80",
+      "bgImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=90",
       "order": 1
     },
     {

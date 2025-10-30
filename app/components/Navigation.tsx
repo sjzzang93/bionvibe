@@ -79,7 +79,7 @@ export function Navigation() {
   };
 
   const handleContactClick = (e: React.MouseEvent) => {
-    // 로고 5번 클릭 완료된 상태에서 이벤트 신청 클릭 시 Secret 페이지로
+    // 로고 5번 클릭 완료된 상태에서 문의하기 클릭 시 Secret 페이지로
     if (logoClicked5Times) {
       e.preventDefault();
       setLogoClicked5Times(false);
@@ -88,7 +88,7 @@ export function Navigation() {
       }
       router.push('/secret');
     } else {
-      // 일반적인 경우 이벤트 신청 페이지로 (contact 페이지 활용)
+      // 일반적인 경우 문의 페이지로 (contact 페이지 활용)
       e.preventDefault();
       router.push('/contact');
     }
@@ -120,7 +120,7 @@ export function Navigation() {
             </h1>
           </button>
           <div className="flex items-center gap-2 sm:gap-4">
-            {/* 이벤트 버튼 */}
+            {/* 문의하기 버튼 */}
             <button
         type="button"
               onClick={handleContactClick}
@@ -128,11 +128,11 @@ export function Navigation() {
             >
               {/* 반짝반짝 효과 */}
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine"></span>
-              
+
               <svg className="w-4 h-4 relative z-10 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
               </svg>
-              <span className="relative z-10">Event</span>
+              <span className="relative z-10">문의하기</span>
             </button>
             
             <style jsx>{`

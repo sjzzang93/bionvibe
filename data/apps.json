@@ -908,6 +908,55 @@
         "flashcard",
         "typing-speed-test"
       ]
+    },
+    {
+      "id": "news-briefing",
+      "name": "3분 뉴스 브리핑",
+      "slug": "news-briefing",
+      "icon": "📰",
+      "description": "매일 아침 업데이트되는 최신 뉴스를 3분 안에 빠르게 확인하세요. 정치, 경제, 사회, IT/과학 등 주요 카테고리별로 정리된 뉴스를 한눈에!",
+      "categoryId": "fortune-mind",
+      "url": "/apps/news-briefing",
+      "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-30",
+      "relatedApps": [
+        "aura-color",
+        "mbti-test",
+        "tarot"
+      ]
+    },
+    {
+      "id": "divorce-prevention",
+      "name": "이혼 예방 사전진단",
+      "slug": "divorce-prevention",
+      "icon": "❤️‍🩹",
+      "description": "결혼 생활의 위험 신호를 조기에 발견하세요. 의사소통, 재정, 정서적 안전 등 13개 영역을 점검하고 맞춤 솔루션을 제공합니다.",
+      "categoryId": "family-life",
+      "url": "/apps/divorce-prevention",
+      "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-30",
+      "relatedApps": [
+        "mbti-test",
+        "color-psychology",
+        "emotion-diary"
+      ]
+    },
+    {
+      "id": "inner-dialog",
+      "name": "자신과 대화하기",
+      "slug": "inner-dialog",
+      "icon": "🧘",
+      "description": "3D 비주얼로 자기 인식을 탐험하세요. 15개 영역(가치관, 행복, 강점, 몰입, 에너지 등)을 분석하고, 당신의 마음 상태를 입체적인 오라로 시각화합니다.",
+      "categoryId": "fortune-mind",
+      "url": "/apps/inner-dialog",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-30",
+      "relatedApps": [
+        "aura-color",
+        "mbti-test",
+        "color-psychology",
+        "emotion-diary"
+      ]
     }
   ]
 }

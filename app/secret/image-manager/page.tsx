@@ -13,6 +13,8 @@ interface App {
   description: string;
 }
 
+type TabType = 'background' | 'icon';
+
 export default function ImageManagerPage() {
   const [apps, setApps] = useState<App[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,6 +24,7 @@ export default function ImageManagerPage() {
   const [uploading, setUploading] = useState(false);
   const [uploadMethod, setUploadMethod] = useState<'url' | 'file'>('file');
   const [restoring, setRestoring] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabType>('background');
   const uploadFormRef = useRef<HTMLDivElement>(null);
   const supabase = useSupabase();
 
@@ -117,6 +120,61 @@ export default function ImageManagerPage() {
     [selectedApp, loadApps]
   );
 
+  const saveIconToApp = useCallback(
+    async (iconUrl: string, options: { silent?: boolean; keepSelection?: boolean } = {}) => {
+      if (!selectedApp) {
+        if (!options.silent) {
+          alert('⚠️ 먼저 앱을 선택해 주세요!');
+        }
+        return false;
+      }
+
+      const targetApp = selectedApp;
+      setLoading(true);
+
+      try {
+        const response = await fetch('/api/update-icon', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            slug: targetApp.slug,
+            iconUrl,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || '아이콘 업데이트에 실패했습니다.');
+        }
+
+        await loadApps();
+
+        if (!options.keepSelection) {
+          setSelectedApp(null);
+          setNewImageUrl('');
+        }
+
+        if (!options.silent) {
+          alert('✅ 아이콘이 업데이트되었습니다!');
+        }
+
+        return true;
+      } catch (error: any) {
+        console.error('❌ 업데이트 중 오류:', error);
+        if (!options.silent) {
+          alert(error?.message || '❌ 업데이트 중 오류가 발생했습니다.');
+        }
+        return false;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [selectedApp, loadApps]
+  );
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file || !selectedApp) return;
@@ -128,7 +186,9 @@ export default function ImageManagerPage() {
       formData.append('file', file);
       formData.append('slug', selectedApp.slug);
 
-      const response = await fetch('/api/upload-image', {
+      const endpoint = activeTab === 'icon' ? '/api/upload-icon' : '/api/upload-image';
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         body: formData,
       });
@@ -136,10 +196,18 @@ export default function ImageManagerPage() {
       const result = await response.json();
 
       if (response.ok) {
-        setNewImageUrl(result.imageUrl);
-        const success = await saveImageToApp(result.imageUrl, { silent: true, keepSelection: true });
-        if (success) {
-          alert('✅ 파일이 업로드되어 자동으로 저장되었습니다!');
+        setNewImageUrl(result.imageUrl || result.iconUrl);
+
+        if (activeTab === 'icon') {
+          const success = await saveIconToApp(result.iconUrl, { silent: true, keepSelection: true });
+          if (success) {
+            alert('✅ 아이콘이 업로드되어 자동으로 저장되었습니다!');
+          }
+        } else {
+          const success = await saveImageToApp(result.imageUrl, { silent: true, keepSelection: true });
+          if (success) {
+            alert('✅ 파일이 업로드되어 자동으로 저장되었습니다!');
+          }
         }
       } else {
         alert(`❌ ${result.error}`);
@@ -158,7 +226,11 @@ export default function ImageManagerPage() {
       return;
     }
 
-    await saveImageToApp(newImageUrl);
+    if (activeTab === 'icon') {
+      await saveIconToApp(newImageUrl);
+    } else {
+      await saveImageToApp(newImageUrl);
+    }
   };
 
   const handleRestoreImages = async () => {
@@ -177,8 +249,6 @@ export default function ImageManagerPage() {
 
       if (response.ok) {
         alert(`✅ ${result.message}`);
-
-        // Supabase에서 최신 데이터 다시 가져오기
         await loadApps();
       } else {
         alert(`❌ ${result.error}`);
@@ -191,6 +261,10 @@ export default function ImageManagerPage() {
     setRestoring(false);
   };
 
+  const isEmojiIcon = (icon: string) => {
+    return icon && icon.length <= 4 && /\p{Emoji}/u.test(icon);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black py-12 px-4">
       <div className="max-w-6xl mx-auto">
@@ -201,24 +275,62 @@ export default function ImageManagerPage() {
             이미지 관리 도구
           </h1>
           <p className="text-gray-300 text-lg">
-            모든 웹앱의 이미지를 관리할 수 있습니다
+            모든 웹앱의 이미지와 아이콘을 관리할 수 있습니다
           </p>
         </div>
 
-        {/* Restore Button */}
-        <div className="mb-6">
-          <button
-            type="button"
-            onClick={handleRestoreImages}
-            disabled={restoring}
-            className="w-full bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {restoring ? '⏳ 복원 중...' : '🔄 apps.json에서 이미지 복원하기'}
-          </button>
-          <p className="text-yellow-300 text-sm mt-2 text-center">
-            ⚠️ 사라진 이미지를 apps.json에서 Supabase로 복원합니다
-          </p>
+        {/* Tab Selector */}
+        <div className="mb-8">
+          <div className="flex gap-4 justify-center">
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('background');
+                setSelectedApp(null);
+                setNewImageUrl('');
+              }}
+              className={`px-8 py-4 rounded-xl font-bold text-lg transition-all ${
+                activeTab === 'background'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                  : 'bg-white/10 text-white/70 hover:bg-white/20'
+              }`}
+            >
+              🖼️ 카드 배경 이미지
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveTab('icon');
+                setSelectedApp(null);
+                setNewImageUrl('');
+              }}
+              className={`px-8 py-4 rounded-xl font-bold text-lg transition-all ${
+                activeTab === 'icon'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                  : 'bg-white/10 text-white/70 hover:bg-white/20'
+              }`}
+            >
+              ✨ 아이콘 이미지
+            </button>
+          </div>
         </div>
+
+        {/* Restore Button - Background Tab Only */}
+        {activeTab === 'background' && (
+          <div className="mb-6">
+            <button
+              type="button"
+              onClick={handleRestoreImages}
+              disabled={restoring}
+              className="w-full bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {restoring ? '⏳ 복원 중...' : '🔄 apps.json에서 이미지 복원하기'}
+            </button>
+            <p className="text-yellow-300 text-sm mt-2 text-center">
+              ⚠️ 사라진 이미지를 apps.json에서 Supabase로 복원합니다
+            </p>
+          </div>
+        )}
 
         {/* Search Bar */}
         <div className="mb-8">
@@ -235,16 +347,15 @@ export default function ImageManagerPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-12">
           {filteredApps.map((app) => (
             <button
-        type="button"
+              type="button"
               key={app.id}
               onClick={() => {
                 setSelectedApp(app);
-                setNewImageUrl(app.image);
-                // 업로드 폼으로 스크롤
+                setNewImageUrl(activeTab === 'icon' ? app.icon : app.image);
                 setTimeout(() => {
-                  uploadFormRef.current?.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
+                  uploadFormRef.current?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                   });
                 }, 100);
               }}
@@ -255,13 +366,29 @@ export default function ImageManagerPage() {
               }`}
             >
               <div className="text-white text-sm font-bold truncate mb-2">{app.name}</div>
-              {app.image && (
+
+              {activeTab === 'background' && app.image && (
                 <img
                   src={app.image}
                   alt={app.name}
                   className="w-full h-20 object-cover rounded-lg"
                   loading="lazy"
                 />
+              )}
+
+              {activeTab === 'icon' && (
+                <div className="flex items-center justify-center h-20">
+                  {isEmojiIcon(app.icon) ? (
+                    <span className="text-5xl">{app.icon}</span>
+                  ) : (
+                    <img
+                      src={app.icon}
+                      alt={app.name}
+                      className="w-16 h-16 object-contain rounded-lg"
+                      loading="lazy"
+                    />
+                  )}
+                </div>
               )}
             </button>
           ))}
@@ -271,19 +398,34 @@ export default function ImageManagerPage() {
         {selectedApp && (
           <div ref={uploadFormRef} className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border-2 border-white/20">
             <h2 className="text-3xl font-bold text-white mb-6">
-              🖼️ {selectedApp.name} 이미지 변경
+              {activeTab === 'icon' ? '✨' : '🖼️'} {selectedApp.name} {activeTab === 'icon' ? '아이콘' : '이미지'} 변경
             </h2>
 
             <div className="space-y-6">
-              {/* Current Image */}
+              {/* Current Image/Icon */}
               <div>
-                <label className="block text-white font-bold mb-2">현재 이미지</label>
-                {selectedApp.image && (
+                <label className="block text-white font-bold mb-2">
+                  현재 {activeTab === 'icon' ? '아이콘' : '이미지'}
+                </label>
+                {activeTab === 'background' && selectedApp.image && (
                   <img
                     src={selectedApp.image}
                     alt={selectedApp.name}
                     className="w-full max-w-md h-48 object-cover rounded-lg border-2 border-white/30"
                   />
+                )}
+                {activeTab === 'icon' && (
+                  <div className="flex items-center justify-center w-32 h-32 bg-white/5 rounded-lg border-2 border-white/30">
+                    {isEmojiIcon(selectedApp.icon) ? (
+                      <span className="text-6xl">{selectedApp.icon}</span>
+                    ) : (
+                      <img
+                        src={selectedApp.icon}
+                        alt={selectedApp.name}
+                        className="w-full h-full object-contain p-2"
+                      />
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -292,7 +434,7 @@ export default function ImageManagerPage() {
                 <label className="block text-white font-bold mb-3">업로드 방식</label>
                 <div className="flex gap-4">
                   <button
-        type="button"
+                    type="button"
                     onClick={() => setUploadMethod('file')}
                     className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
                       uploadMethod === 'file'
@@ -303,7 +445,7 @@ export default function ImageManagerPage() {
                     📁 파일 업로드
                   </button>
                   <button
-        type="button"
+                    type="button"
                     onClick={() => setUploadMethod('url')}
                     className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
                       uploadMethod === 'url'
@@ -319,29 +461,44 @@ export default function ImageManagerPage() {
               {/* File Upload */}
               {uploadMethod === 'file' && (
                 <div>
-                  <label className="block text-white font-bold mb-2">이미지 파일 선택</label>
+                  <label className="block text-white font-bold mb-2">
+                    {activeTab === 'icon' ? '아이콘' : '이미지'} 파일 선택
+                  </label>
                   <input
                     type="file"
-                    accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/heic,image/heif"
+                    accept="image/jpeg,image/jpg,image/png,image/webp,image/gif,image/heic,image/heif,image/svg+xml"
                     onChange={handleFileUpload}
                     disabled={uploading}
                     className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-500 file:text-white file:font-bold hover:file:bg-purple-600 cursor-pointer disabled:opacity-50"
                   />
-                  <p className="text-white/50 text-sm mt-2">
-                    📌 JPG, PNG, WebP, GIF, HEIC 지원 (최대 10MB)
-                  </p>
-                  <p className="text-yellow-300 text-sm mt-1">
-                    📱 아이폰 HEIC 이미지 자동 변환 지원!
-                  </p>
-                  <p className="text-green-300 text-sm mt-1">
-                    ✨ 자동 최적화: 800x600 WebP 고품질로 변환됩니다!
-                  </p>
+                  {activeTab === 'icon' ? (
+                    <>
+                      <p className="text-white/50 text-sm mt-2">
+                        📌 PNG, SVG 권장 (정사각형, 512x512 또는 256x256)
+                      </p>
+                      <p className="text-green-300 text-sm mt-1">
+                        ✨ 자동 최적화: 512x512 PNG로 변환됩니다!
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-white/50 text-sm mt-2">
+                        📌 JPG, PNG, WebP, GIF, HEIC 지원 (최대 10MB)
+                      </p>
+                      <p className="text-yellow-300 text-sm mt-1">
+                        📱 아이폰 HEIC 이미지 자동 변환 지원!
+                      </p>
+                      <p className="text-green-300 text-sm mt-1">
+                        ✨ 자동 최적화: 800x600 WebP 고품질로 변환됩니다!
+                      </p>
+                    </>
+                  )}
                   <p className="text-blue-300 text-sm mt-1">
                     🌍 Supabase Storage CDN: 전세계 모든 사용자가 빠르게 접근!
                   </p>
                   {uploading && (
                     <div className="mt-3 text-yellow-300 font-bold animate-pulse">
-                      ⏳ 이미지 최적화 중...
+                      ⏳ {activeTab === 'icon' ? '아이콘' : '이미지'} 최적화 중...
                     </div>
                   )}
                 </div>
@@ -350,48 +507,77 @@ export default function ImageManagerPage() {
               {/* URL Input */}
               {uploadMethod === 'url' && (
                 <div>
-                  <label className="block text-white font-bold mb-2">새 이미지 URL</label>
+                  <label className="block text-white font-bold mb-2">
+                    새 {activeTab === 'icon' ? '아이콘' : '이미지'} URL
+                  </label>
                   <input
                     type="text"
                     value={newImageUrl}
                     onChange={(e) => setNewImageUrl(e.target.value)}
-                    placeholder="https://images.unsplash.com/photo-..."
+                    placeholder={
+                      activeTab === 'icon'
+                        ? '/images/app-icons/aura-color.png'
+                        : 'https://images.unsplash.com/photo-...'
+                    }
                     className="w-full px-4 py-3 rounded-xl bg-white/20 border-2 border-white/30 text-white placeholder-white/50 focus:outline-none focus:border-purple-400"
                   />
-                  <p className="text-white/50 text-sm mt-2">
-                    💡 Unsplash: <code className="bg-white/10 px-2 py-1 rounded">?w=800&auto=format&fit=crop</code> 추가 권장
-                  </p>
+                  {activeTab === 'background' && (
+                    <p className="text-white/50 text-sm mt-2">
+                      💡 Unsplash: <code className="bg-white/10 px-2 py-1 rounded">?w=800&auto=format&fit=crop</code> 추가 권장
+                    </p>
+                  )}
                 </div>
               )}
 
               {/* Preview */}
-              {newImageUrl && newImageUrl !== selectedApp.image && (
+              {newImageUrl && newImageUrl !== (activeTab === 'icon' ? selectedApp.icon : selectedApp.image) && (
                 <div>
                   <label className="block text-white font-bold mb-2">미리보기</label>
-                  <img
-                    src={newImageUrl}
-                    alt="Preview"
-                    className="w-full max-w-md h-48 object-cover rounded-lg border-2 border-green-400"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '';
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
+                  {activeTab === 'icon' ? (
+                    <div className="flex items-center justify-center w-32 h-32 bg-white/5 rounded-lg border-2 border-green-400 p-4">
+                      {isEmojiIcon(newImageUrl) ? (
+                        <span className="text-6xl">{newImageUrl}</span>
+                      ) : (
+                        <img
+                          src={newImageUrl}
+                          alt="Preview"
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                      )}
+                    </div>
+                  ) : (
+                    <img
+                      src={newImageUrl}
+                      alt="Preview"
+                      className="w-full max-w-md h-48 object-cover rounded-lg border-2 border-green-400"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '';
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  )}
                 </div>
               )}
 
               {/* Buttons */}
               <div className="flex gap-4">
                 <button
-        type="button"
+                  type="button"
                   onClick={handleUpdateImage}
-                  disabled={loading || !newImageUrl || newImageUrl === selectedApp.image}
+                  disabled={
+                    loading ||
+                    !newImageUrl ||
+                    newImageUrl === (activeTab === 'icon' ? selectedApp.icon : selectedApp.image)
+                  }
                   className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loading ? '⏳ 업데이트 중...' : '✅ 이미지 업데이트'}
+                  {loading ? '⏳ 업데이트 중...' : `✅ ${activeTab === 'icon' ? '아이콘' : '이미지'} 업데이트`}
                 </button>
                 <button
-        type="button"
+                  type="button"
                   onClick={() => {
                     setSelectedApp(null);
                     setNewImageUrl('');

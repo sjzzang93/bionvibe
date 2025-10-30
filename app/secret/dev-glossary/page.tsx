@@ -123,13 +123,10 @@ export default function DevGlossaryPage() {
         {/* 모달 */}
         <TermModal open={open} term={current} onClose={onClose} />
 
-        {/* 푸터 고지(쿠팡 고지 포함) */}
-        <footer className="mt-10 border-t border-gray-200 dark:border-gray-700 pt-6 
+        {/* 푸터 */}
+        <footer className="mt-10 border-t border-gray-200 dark:border-gray-700 pt-6
                            text-center text-xs text-gray-500 dark:text-gray-400">
           <p>© 2025 BION VIBE. All rights reserved.</p>
-          <p className="mt-1">
-            본 페이지는 쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 받을 수 있습니다.
-          </p>
         </footer>
       </div>
     </main>

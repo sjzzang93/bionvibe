@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { CategoryWithApps } from '@/lib/getApps';
+import TrackedAppCard from './TrackedAppCard';
 
 export function CategoryCard({ category }: { category: CategoryWithApps }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -46,16 +47,16 @@ export function CategoryCard({ category }: { category: CategoryWithApps }) {
           isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
           {category.apps.slice(0, 3).map((app, idx) => (
-            <Link
+            <TrackedAppCard
               key={idx}
+              appId={app.id}
               href={app.url}
-              onClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 
+              className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2
                        hover:bg-white/25 transition-all duration-300 border border-white/20
                        hover:border-white/40 hover:scale-105"
             >
-              <span className="text-white text-sm font-medium">{app.name}</span>
-            </Link>
+              <span onClick={(e) => e.stopPropagation()} className="text-white text-sm font-medium">{app.name}</span>
+            </TrackedAppCard>
           ))}
           {category.apps.length > 3 && (
             <div className="text-center text-white/60 text-xs mt-1">

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "sync-apps": "ts-node --transpile-only scripts/sync-apps-json-to-supabase.ts",
+    "crawl-news": "python3 scripts/crawl-news.py",
     "sanitize:no-ads": "ts-node --transpile-only scripts/sanitize-no-ads.ts",
     "guard:no-ads": "vitest run scripts/guard-no-ads.test.ts"
   },

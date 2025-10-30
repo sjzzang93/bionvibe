@@ -31,7 +31,7 @@ export default function AppFooter() {
             href="/contact"
             className="text-gray-400 hover:text-gray-300 transition-colors"
           >
-            Contact
+            문의하기
           </Link>
         </div>
 

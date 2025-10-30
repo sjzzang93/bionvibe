@@ -83,11 +83,11 @@ export default function ContactPage() {
         </Link>
 
         <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
-          🎉 이벤트 & 문의
+          💬 문의하기
         </h1>
         <p className="text-gray-600 dark:text-gray-300 mb-10 leading-relaxed">
-          새로운 기능 요청부터 일반적인 문의까지 언제든 환영합니다. 아래 양식으로 신청하거나, 하단의
-          연락처로 직접 메일을 보내주셔도 됩니다.
+          새로운 기능 요청, 서비스 이용 관련 질문, 제휴·협업 문의 등 언제든 환영합니다.
+          아래 양식으로 문의하시거나, 하단의 연락처로 직접 메일을 보내주셔도 됩니다.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8">

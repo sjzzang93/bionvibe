@@ -31,7 +31,7 @@
     },
     {
       "id": "today-fortune",
-      "name": "별자리 운세",
+      "name": "오늘의 운세",
       "slug": "today-fortune",
       "icon": "🌟",
       "description": "오늘 하루 어떨까?",
@@ -48,7 +48,7 @@
     },
     {
       "id": "mbti-test",
-      "name": "32문항 MBTI 테스트",
+      "name": "MBTI 테스트",
       "slug": "mbti-test",
       "icon": "🎭",
       "description": "32문항으로 알아보는 정확한 성격 유형",
@@ -64,7 +64,7 @@
     },
     {
       "id": "mbti-ai-chat",
-      "name": "MBTI+AI 채팅",
+      "name": "MBTI AI 채팅",
       "slug": "mbti-ai-chat",
       "icon": "💬",
       "description": "내 MBTI 유형과 대화하기",
@@ -112,7 +112,7 @@
     },
     {
       "id": "water-intake",
-      "name": "내몸에 필요한 수분",
+      "name": "물 섭취량 계산기",
       "slug": "water-intake",
       "icon": "💧",
       "description": "하루 물 섭취량 계산",
@@ -175,7 +175,7 @@
     },
     {
       "id": "crypto-calculator",
-      "name": "비트코인vs순금",
+      "name": "모의투자",
       "slug": "crypto-calculator",
       "icon": "⚡",
       "description": "실시간 시세 & 투자 수익률 시뮬레이션",
@@ -189,7 +189,7 @@
     },
     {
       "id": "parents-time",
-      "name": "부모님과 남은시간",
+      "name": "부모님과 시간 계산기",
       "slug": "parents-time",
       "icon": "💕",
       "description": "부모님과 남은 시간 계산",
@@ -205,7 +205,7 @@
     },
     {
       "id": "flashcard",
-      "name": "영어 단어장",
+      "name": "영어 플래시카드",
       "slug": "flashcard",
       "icon": "📚",
       "description": "레벨별 영어 단어 암기",
@@ -221,7 +221,7 @@
     },
     {
       "id": "air-quality",
-      "name": "현위치 공기측정기",
+      "name": "공기질 측정기",
       "slug": "air-quality",
       "icon": "🌫️",
       "description": "실시간 미세먼지 측정",
@@ -300,7 +300,7 @@
     },
     {
       "id": "quote-generator",
-      "name": "동기부여 명언",
+      "name": "명언 생성기",
       "slug": "quote-generator",
       "icon": "💭",
       "description": "매일 새로운 명언",
@@ -364,7 +364,7 @@
     },
     {
       "id": "vitamin-check",
-      "name": "비타민 신호",
+      "name": "비타민 체크",
       "slug": "vitamin-check",
       "icon": "💊",
       "description": "필요한 영양소 진단",
@@ -380,7 +380,7 @@
     },
     {
       "id": "color-psychology",
-      "name": "색상 심리테스트",
+      "name": "색상 심리",
       "slug": "color-psychology",
       "icon": "🎨",
       "description": "심리 분석",
@@ -412,7 +412,7 @@
     },
     {
       "id": "analysis-handwriting",
-      "name": "손글씨 성격분석",
+      "name": "필적 분석",
       "slug": "analysis-handwriting",
       "icon": "✍️",
       "description": "상세 분석 결과",
@@ -455,7 +455,7 @@
     },
     {
       "id": "car-maintenance",
-      "name": "차량 경고등관리",
+      "name": "차량 관리",
       "slug": "car-maintenance",
       "icon": "🚗",
       "description": "69개 경고등의 의미와 대처법을 한눈에",
@@ -506,7 +506,7 @@
     },
     {
       "id": "lifestyle-face-fortune",
-      "name": "관상보기 정확도90%",
+      "name": "관상 분석",
       "slug": "lifestyle-face-fortune",
       "icon": "👁️",
       "description": "상세 분석 결과",
@@ -522,7 +522,7 @@
     },
     {
       "id": "lifestyle-palm-reading",
-      "name": "손금 정확도90%",
+      "name": "손금 보기",
       "slug": "lifestyle-palm-reading",
       "icon": "👋",
       "description": "전통 수상학 기반 AI 분석! 7대 손금선 정밀 분석 + 27가지 패턴 분류",
@@ -587,7 +587,7 @@
     },
     {
       "id": "envelope-recommend",
-      "name": "상황별 봉투추천",
+      "name": "봉투 추천",
       "slug": "envelope-recommend",
       "icon": "✉️",
       "description": "맞춤 추천",
@@ -609,7 +609,7 @@
     },
     {
       "id": "mood-cheer-up",
-      "name": "기분전환이 필요해",
+      "name": "기분 전환",
       "slug": "mood-cheer-up",
       "icon": "😊",
       "description": "기분을 분석하고 맞춤 활동을 추천합니다",
@@ -626,7 +626,7 @@
     },
     {
       "id": "voice-age",
-      "name": "내 목소리는 몇살?",
+      "name": "목소리 나이",
       "slug": "voice-age",
       "icon": "🗣️",
       "description": "목소리 서비스",
@@ -728,7 +728,7 @@
     },
     {
       "id": "utility-electricity-calculator",
-      "name": "히터 전기계산기",
+      "name": "전기요금 계산기",
       "slug": "utility-electricity-calculator",
       "icon": "⚡",
       "description": "빠른 계산",
@@ -773,7 +773,7 @@
     },
     {
       "id": "fengshui-guide",
-      "name": "우리집 풍수지리 점수",
+      "name": "풍수지리 점수",
       "slug": "fengshui-guide",
       "icon": "🏠",
       "description": "과학적 해석과 체크리스트로 배우는 현대 풍수",
@@ -851,7 +851,7 @@
     },
     {
       "id": "fridge-recipe",
-      "name": "냉장고 레시피",
+      "name": "냉장고 파먹기",
       "slug": "fridge-recipe",
       "icon": "🧊",
       "description": "냉장고 서비스",
@@ -874,22 +874,6 @@
         "color-finder-game",
         "iq-test",
         "arcade-mini-games"
-      ]
-    },
-    {
-      "id": "smartphone-addiction-test",
-      "name": "스마트폰 중독 자가진단",
-      "slug": "smartphone-addiction-test",
-      "icon": "📱",
-      "description": "13문항 스마트폰 사용 습관 점검으로 위험도를 확인하세요.",
-      "categoryId": "fortune-mind",
-      "url": "/apps/smartphone-addiction-test",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&auto=format&fit=crop",
-      "createdAt": "2025-10-31",
-      "relatedApps": [
-        "today-fortune",
-        "mbti-zodiac-compat",
-        "dream-interpreter"
       ]
     },
     {
@@ -923,6 +907,22 @@
         "study-cursor-prompts",
         "flashcard",
         "typing-speed-test"
+      ]
+    },
+    {
+      "id": "news-briefing",
+      "name": "3분 뉴스 브리핑",
+      "slug": "news-briefing",
+      "icon": "📰",
+      "description": "매일 아침 업데이트되는 최신 뉴스를 3분 안에 빠르게 확인하세요. 정치, 경제, 사회, IT/과학 등 주요 카테고리별로 정리된 뉴스를 한눈에!",
+      "categoryId": "fortune-mind",
+      "url": "/apps/news-briefing",
+      "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop",
+      "createdAt": "2025-10-30",
+      "relatedApps": [
+        "aura-color",
+        "mbti-test",
+        "tarot"
       ]
     }
   ]

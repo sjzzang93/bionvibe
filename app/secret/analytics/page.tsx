@@ -5,22 +5,20 @@ import { useEffect, useState } from 'react';
 import { useSupabase } from '@/lib/supabase-provider';
 
 interface AnalyticsStats {
-  todayVisits: number;
-  weeklyVisits: number;
-  monthlyVisits: number;
-  pageViews: number;
-  avgDuration: number;
-  realtimeUsers: number;
+  todayVisitors: number;      // 오늘 방문자 (unique IP)
+  weeklyVisitors: number;     // 이번주 방문자
+  monthlyVisitors: number;    // 한 달 방문자
+  totalEvents: number;        // 총 이벤트 (앱 조회 + 페이지 방문)
+  realtimeUsers: number;      // 실시간 사용자
 }
 
 export default function AnalyticsPage() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [stats, setStats] = useState<AnalyticsStats>({
-    todayVisits: 0,
-    weeklyVisits: 0,
-    monthlyVisits: 0,
-    pageViews: 0,
-    avgDuration: 0,
+    todayVisitors: 0,
+    weeklyVisitors: 0,
+    monthlyVisitors: 0,
+    totalEvents: 0,
     realtimeUsers: 0,
   });
   const [loading, setLoading] = useState(true);
@@ -29,67 +27,88 @@ export default function AnalyticsPage() {
   // Supabase에서 실시간 통계 가져오기
   useEffect(() => {
     if (!supabase) return;
-    
+
     const fetchAnalytics = async () => {
       try {
+        // 오늘 날짜 (KST 기준 00시부터)
         const now = new Date();
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        
+        now.setHours(now.getHours() + 9); // KST
+        const today = now.toISOString().split('T')[0];
+
         // 일주일 전
         const oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-        oneWeekAgo.setHours(0, 0, 0, 0);
-        
+        oneWeekAgo.setHours(oneWeekAgo.getHours() + 9);
+        const weekAgoStr = oneWeekAgo.toISOString().split('T')[0];
+
         // 한 달 전
         const oneMonthAgo = new Date();
         oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-        oneMonthAgo.setHours(0, 0, 0, 0);
-        
-        // 오늘 방문자 수
-        const { count: todayCount } = await supabase
-          .from('analytics')
-          .select('*', { count: 'exact', head: true })
-          .gte('created_at', today.toISOString());
-        
-        // 이번주 방문자 수
-        const { count: weeklyCount } = await supabase
-          .from('analytics')
-          .select('*', { count: 'exact', head: true })
-          .gte('created_at', oneWeekAgo.toISOString());
-        
-        // 한 달 방문자 수
-        const { count: monthlyCount } = await supabase
-          .from('analytics')
-          .select('*', { count: 'exact', head: true })
-          .gte('created_at', oneMonthAgo.toISOString());
-        
-        // 총 페이지뷰 (오늘)
-        const { data: pageViewData } = await supabase
-          .from('analytics')
-          .select('page_views')
-          .gte('created_at', today.toISOString());
-        
-        const totalPageViews = pageViewData?.reduce((sum, item) => sum + (item.page_views || 1), 0) || 0;
-        
-        // 평균 체류시간 - 테이블에 duration 컬럼이 없으면 비활성화
-        let avgDuration = 0;
-        // duration 컬럼이 없어서 임시 비활성화 (Supabase 테이블 수정 필요)
-        
-        // 실시간 사용자 (최근 5분, created_at 기준)
+        oneMonthAgo.setHours(oneMonthAgo.getHours() + 9);
+        const monthAgoStr = oneMonthAgo.toISOString().split('T')[0];
+
+        // ========== page_views 테이블 기반 통계 ==========
+
+        // 오늘 방문자 (unique IP)
+        const { data: todayData } = await supabase
+          .from('page_views')
+          .select('visitor_ip')
+          .eq('date', today);
+        const todayVisitors = new Set(todayData?.map(v => v.visitor_ip) || []).size;
+
+        // 이번주 방문자 (unique IP per date)
+        const { data: weekData } = await supabase
+          .from('page_views')
+          .select('visitor_ip, date')
+          .gte('date', weekAgoStr);
+        const weeklyUniqueSet = new Set<string>();
+        weekData?.forEach((v: any) => weeklyUniqueSet.add(`${v.visitor_ip}_${v.date}`));
+        const weeklyVisitors = weeklyUniqueSet.size;
+
+        // 한 달 방문자 (unique IP per date)
+        const { data: monthData } = await supabase
+          .from('page_views')
+          .select('visitor_ip, date')
+          .gte('date', monthAgoStr);
+        const monthlyUniqueSet = new Set<string>();
+        monthData?.forEach((v: any) => monthlyUniqueSet.add(`${v.visitor_ip}_${v.date}`));
+        const monthlyVisitors = monthlyUniqueSet.size;
+
+        // 전체 방문자 수
+        const { data: allPageViews } = await supabase
+          .from('page_views')
+          .select('visitor_ip, date');
+        const totalPageVisitors = new Set(
+          allPageViews?.map((v: any) => `${v.visitor_ip}_${v.date}`) || []
+        ).size;
+
+        // ========== app_views 테이블 기반 통계 ==========
+
+        const { data: appViewsData } = await supabase
+          .from('app_views')
+          .select('view_count');
+        const totalAppViews = appViewsData?.reduce((sum, app) => sum + (app.view_count || 0), 0) || 0;
+
+        // ========== 실시간 사용자 (최근 5분) ==========
+
         const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-        const { count: realtimeCount } = await supabase
-          .from('analytics')
-          .select('*', { count: 'exact', head: true })
-          .gte('created_at', fiveMinutesAgo.toISOString());
-        
+        fiveMinutesAgo.setHours(fiveMinutesAgo.getHours() + 9); // KST
+        const { data: realtimeData } = await supabase
+          .from('page_views')
+          .select('visitor_ip')
+          .gte('visited_at', fiveMinutesAgo.toISOString());
+        const realtimeUsers = new Set(realtimeData?.map(v => v.visitor_ip) || []).size;
+
+        // ========== 총 이벤트 수 ==========
+
+        const totalEvents = totalPageVisitors + totalAppViews;
+
         setStats({
-          todayVisits: todayCount || 0,
-          weeklyVisits: weeklyCount || 0,
-          monthlyVisits: monthlyCount || 0,
-          pageViews: totalPageViews,
-          avgDuration: Math.round(avgDuration * 10) / 10,
-          realtimeUsers: realtimeCount || 0,
+          todayVisitors,
+          weeklyVisitors,
+          monthlyVisitors,
+          totalEvents,
+          realtimeUsers,
         });
         setLoading(false);
       } catch (error) {
@@ -99,10 +118,10 @@ export default function AnalyticsPage() {
     };
 
     fetchAnalytics();
-    
+
     // 30초마다 갱신
     const interval = setInterval(fetchAnalytics, 30000);
-    
+
     return () => clearInterval(interval);
   }, [supabase]);
 
@@ -157,47 +176,39 @@ export default function AnalyticsPage() {
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
               <span className="animate-pulse">●</span> {loading ? '--' : stats.realtimeUsers.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">지금 접속 중 (Supabase)</div>
+            <div className="text-white/60 text-xs">최근 5분 (page_views)</div>
           </div>
 
           <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 backdrop-blur-lg rounded-xl p-6 border border-green-400/30">
-            <div className="text-green-400 text-sm font-semibold mb-2">오늘 방문자</div>
+            <div className="text-green-400 text-sm font-semibold mb-2">오늘 활성 사용자</div>
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
-              {loading ? '--' : stats.todayVisits.toLocaleString()}
+              {loading ? '--' : stats.todayVisitors.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">오늘 총 세션 (Supabase)</div>
+            <div className="text-white/60 text-xs">재방문 포함 (Active Users)</div>
           </div>
 
           <div className="bg-gradient-to-br from-teal-500/20 to-cyan-600/20 backdrop-blur-lg rounded-xl p-6 border border-teal-400/30">
-            <div className="text-teal-400 text-sm font-semibold mb-2">이번주 방문자</div>
+            <div className="text-teal-400 text-sm font-semibold mb-2">이번주 활성 사용자</div>
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
-              {loading ? '--' : stats.weeklyVisits.toLocaleString()}
+              {loading ? '--' : stats.weeklyVisitors.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">최근 7일 (Supabase)</div>
+            <div className="text-white/60 text-xs">최근 7일 (재방문 포함)</div>
           </div>
 
           <div className="bg-gradient-to-br from-yellow-500/20 to-amber-600/20 backdrop-blur-lg rounded-xl p-6 border border-yellow-400/30">
-            <div className="text-yellow-400 text-sm font-semibold mb-2">한 달 방문자</div>
+            <div className="text-yellow-400 text-sm font-semibold mb-2">한 달 활성 사용자</div>
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
-              {loading ? '--' : stats.monthlyVisits.toLocaleString()}
+              {loading ? '--' : stats.monthlyVisitors.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">최근 30일 (Supabase)</div>
+            <div className="text-white/60 text-xs">최근 30일 (재방문 포함)</div>
           </div>
 
           <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-lg rounded-xl p-6 border border-purple-400/30">
-            <div className="text-purple-400 text-sm font-semibold mb-2">페이지뷰</div>
+            <div className="text-purple-400 text-sm font-semibold mb-2">누적 조회</div>
             <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
-              {loading ? '--' : stats.pageViews.toLocaleString()}
+              {loading ? '--' : stats.totalEvents.toLocaleString()}
             </div>
-            <div className="text-white/60 text-xs">오늘 조회수 (Supabase)</div>
-          </div>
-
-          <div className="bg-gradient-to-br from-pink-500/20 to-pink-600/20 backdrop-blur-lg rounded-xl p-6 border border-pink-400/30">
-            <div className="text-pink-400 text-sm font-semibold mb-2">평균 체류시간</div>
-            <div className="text-white text-4xl font-bold mb-1" suppressHydrationWarning>
-              {loading ? '--' : stats.avgDuration.toLocaleString()}
-            </div>
-            <div className="text-white/60 text-xs">분 (Supabase)</div>
+            <div className="text-white/60 text-xs">앱 조회 + 페이지 방문</div>
           </div>
         </div>
 
