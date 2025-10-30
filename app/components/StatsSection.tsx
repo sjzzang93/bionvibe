@@ -12,17 +12,9 @@ export default function StatsSection({ totalApps }: StatsSectionProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. 메인 페이지 방문 추적 (백그라운드)
-    fetch('/api/track-page-view', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pagePath: '/' }),
-    }).catch(() => {});
-
-    // 2. 통계 조회
     const fetchStats = async () => {
       try {
-        // 방문자 통계 (page_views)
+        // 방문자 통계 조회
         const visitResponse = await fetch('/api/track-page-view');
         const visitResult = await visitResponse.json();
 
