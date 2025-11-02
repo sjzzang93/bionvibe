@@ -6,6 +6,9 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 
+// 로컬 스토리지 키
+const STORAGE_KEY = 'balance-game-progress';
+
 interface Question {
   id: number;
   category: string;
@@ -334,6 +337,7 @@ export default function BalanceGamePage() {
   const [showResult, setShowResult] = useState(false);
   const [answered, setAnswered] = useState<number[]>([]);
   const [category, setCategory] = useState<string>('전체');
+  const [userAnswers, setUserAnswers] = useState<{[key: number]: 'A' | 'B'}>({});
 
   const categories = ['전체', '돈', '연애', '능력', '음식', '일상', '취미'];
 
@@ -343,11 +347,55 @@ export default function BalanceGamePage() {
 
   const currentQuestion = filteredQuestions[currentIndex];
 
+  // 로컬 스토리지에서 진행 상황 불러오기
   useEffect(() => {
-    setCurrentIndex(0);
-    setSelectedOption(null);
-    setShowResult(false);
-    setAnswered([]);
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (data.category === category && data.currentIndex < filteredQuestions.length) {
+        if (confirm('이전 진행 상황을 이어서 하시겠습니까?')) {
+          setCurrentIndex(data.currentIndex);
+          setAnswered(data.answered);
+          setUserAnswers(data.userAnswers || {});
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
+    }
+  }, []);
+
+  // 진행 상황 저장
+  useEffect(() => {
+    if (answered.length > 0) {
+      const data = {
+        category,
+        currentIndex,
+        answered,
+        userAnswers,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+  }, [currentIndex, answered, userAnswers, category]);
+
+  // 카테고리 변경 시 경고
+  useEffect(() => {
+    if (answered.length > 0 && answered.length < filteredQuestions.length) {
+      if (confirm('카테고리를 변경하면 진행 상황이 초기화됩니다. 계속하시겠습니까?')) {
+        setCurrentIndex(0);
+        setSelectedOption(null);
+        setShowResult(false);
+        setAnswered([]);
+        setUserAnswers({});
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    } else {
+      setCurrentIndex(0);
+      setSelectedOption(null);
+      setShowResult(false);
+      setAnswered([]);
+      setUserAnswers({});
+    }
   }, [category]);
 
   const handleSelect = (option: 'A' | 'B') => {
@@ -356,6 +404,7 @@ export default function BalanceGamePage() {
     setSelectedOption(option);
     setShowResult(true);
     setAnswered([...answered, currentQuestion.id]);
+    setUserAnswers({...userAnswers, [currentQuestion.id]: option});
   };
 
   const handleNext = () => {
@@ -364,11 +413,15 @@ export default function BalanceGamePage() {
       setSelectedOption(null);
       setShowResult(false);
     } else {
-      // 마지막 질문
-      setCurrentIndex(0);
-      setSelectedOption(null);
-      setShowResult(false);
-      setAnswered([]);
+      // 마지막 질문일 때 확인 메시지
+      if (confirm('모든 질문을 완료했습니다! 처음부터 다시 시작하시겠습니까?')) {
+        setCurrentIndex(0);
+        setSelectedOption(null);
+        setShowResult(false);
+        setAnswered([]);
+        setUserAnswers({});
+        localStorage.removeItem(STORAGE_KEY);
+      }
     }
   };
 

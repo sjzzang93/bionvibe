@@ -957,6 +957,193 @@
         "color-psychology",
         "emotion-diary"
       ]
+    },
+    {
+      "id": "birthday-rarity",
+      "name": "내 생일은 몇번째?",
+      "slug": "birthday-rarity",
+      "icon": "🎂",
+      "description": "전세계에서 당신의 생일 희귀도를 확인하세요. 생일별 출생 통계 분석과 동일 생일을 가진 사람 수 계산",
+      "categoryId": "fortune-mind",
+      "url": "/apps/birthday-rarity",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/today-fortune-1761161065680.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "life-stats",
+        "name-rarity",
+        "age-gap-calculator",
+        "today-fortune"
+      ]
+    },
+    {
+      "id": "life-stats",
+      "name": "내 인생 통계",
+      "slug": "life-stats",
+      "icon": "📊",
+      "description": "태어난 순간부터 지금까지 모든 것을 숫자로. 심장박동, 수면시간, 걸은 걸음 수 등 인생의 모든 통계를 확인하세요",
+      "categoryId": "fortune-mind",
+      "url": "/apps/life-stats",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/habit-tracker-1761161813047.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "birthday-rarity",
+        "parents-time",
+        "dday-counter",
+        "age-gap-calculator"
+      ]
+    },
+    {
+      "id": "random-wheel",
+      "name": "랜덤 룰렛 메이커",
+      "slug": "random-wheel",
+      "icon": "🎡",
+      "description": "3D 룰렛으로 공정한 선택을! 커스텀 항목 추가와 다양한 템플릿으로 재미있는 결정을 내려보세요",
+      "categoryId": "learning-tools",
+      "url": "/apps/random-wheel",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/lotto-generator-1761162273481.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "lotto-generator",
+        "what-if-transformer",
+        "friendship-quiz",
+        "arcade-mini-games"
+      ]
+    },
+    {
+      "id": "daily-challenge",
+      "name": "오늘의 챌린지",
+      "slug": "daily-challenge",
+      "icon": "🎯",
+      "description": "매일 새로운 미션으로 성장하세요. 건강, 생산성, 대인관계 등 다양한 카테고리의 챌린지를 완료하고 연속 달성 기록을 쌓아보세요",
+      "categoryId": "health-routine",
+      "url": "/apps/daily-challenge",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/habit-tracker-1761161813047.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "habit-tracker",
+        "focus-timer",
+        "water-intake",
+        "quit-smoking-challenge"
+      ]
+    },
+    {
+      "id": "emotion-color-diary",
+      "name": "감정 컬러 일기",
+      "slug": "emotion-color-diary",
+      "icon": "🎨",
+      "description": "하루의 감정을 색으로 표현하세요. 12가지 감정 색상으로 기록하고 감정 패턴을 분석해보세요",
+      "categoryId": "fortune-mind",
+      "url": "/apps/emotion-color-diary",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/emotion-diary-1761423332269.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "emotion-diary",
+        "aura-color",
+        "color-psychology",
+        "inner-dialog"
+      ]
+    },
+    {
+      "id": "dating-coach",
+      "name": "AI 썸 코치",
+      "slug": "dating-coach",
+      "icon": "💕",
+      "description": "카톡 대화 분석으로 썸 진행도 측정. 메시지 패턴, 이모지 사용, 하트 빈도 등을 분석해 관계의 단계를 진단하고 조언을 받아보세요",
+      "categoryId": "family-life",
+      "url": "/apps/dating-coach",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mbti-ai-chat-1761423324154.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "mbti-test",
+        "mbti-zodiac-compat",
+        "friendship-quiz",
+        "age-gap-calculator"
+      ]
+    },
+    {
+      "id": "age-gap-calculator",
+      "name": "나이 차이 계산기",
+      "slug": "age-gap-calculator",
+      "icon": "👫",
+      "description": "두 사람의 나이 차를 재밌게 분석! 세대차이, 공통 추억, 함께 할 수 있는 활동 추천까지",
+      "categoryId": "family-life",
+      "url": "/apps/age-gap-calculator",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/parents-time-1761161661361.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "birthday-rarity",
+        "life-stats",
+        "dating-coach",
+        "mbti-zodiac-compat"
+      ]
+    },
+    {
+      "id": "name-rarity",
+      "name": "내 이름 희귀도",
+      "slug": "name-rarity",
+      "icon": "📛",
+      "description": "동명이인이 몇 명이나 있을까? 성씨와 이름의 희귀도를 분석하고 예상 동명이인 수를 계산해보세요",
+      "categoryId": "fortune-mind",
+      "url": "/apps/name-rarity",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/nickname-generator-1761423330943.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "nickname-generator",
+        "birthday-rarity",
+        "saju-mbti-jobs",
+        "what-if-transformer"
+      ]
+    },
+    {
+      "id": "regret-meter",
+      "name": "소비 후회도 측정",
+      "slug": "regret-meter",
+      "icon": "💸",
+      "description": "충동구매 방지 쿨링타임! 구매 전 후회도를 측정하고 강제 대기 시간으로 신중한 소비 습관을 길러보세요",
+      "categoryId": "money-calc",
+      "url": "/apps/regret-meter",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/crypto-calculator-1761162273481.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "envelope-recommend",
+        "utility-electricity-calculator",
+        "habit-tracker",
+        "daily-challenge"
+      ]
+    },
+    {
+      "id": "friendship-quiz",
+      "name": "우정 테스트 퀴즈",
+      "slug": "friendship-quiz",
+      "icon": "👥",
+      "description": "친구가 나를 얼마나 아는지 테스트! 5가지 질문으로 퀴즈를 만들고 친구에게 공유해보세요",
+      "categoryId": "family-life",
+      "url": "/apps/friendship-quiz",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/flashcard-1761162036686.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "dating-coach",
+        "mbti-test",
+        "what-if-transformer",
+        "random-wheel"
+      ]
+    },
+    {
+      "id": "what-if-transformer",
+      "name": "내가 만약 XXX라면?",
+      "slug": "what-if-transformer",
+      "icon": "🎭",
+      "description": "이름으로 알아보는 나의 다른 모습. 동물, 직업, 캐릭터, 음식 등 다양한 카테고리로 변신해보세요",
+      "categoryId": "fortune-mind",
+      "url": "/apps/what-if-transformer",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/animal-face-match-1761423332974.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "animal-face-match",
+        "mbti-test",
+        "name-rarity",
+        "past-life-job"
+      ]
     }
   ]
 }
