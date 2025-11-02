@@ -7,8 +7,41 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 
+// TypeScript 인터페이스 정의
+interface WeatherType {
+  name: string;
+  emoji: string;
+  color: string;
+  cloudCount: number;
+  rainIntensity: number;
+  windSpeed: number;
+  description: string;
+}
+
+interface Biorhythm {
+  physical: number;
+  emotional: number;
+  intellectual: number;
+}
+
+interface WeatherForecastDay {
+  date: string;
+  weather: string;
+  score: number;
+  details: WeatherType;
+}
+
+interface EmotionForecast {
+  today: WeatherForecastDay;
+  week: WeatherForecastDay[];
+  warnings: string[];
+  biorhythm: Biorhythm;
+  moonPhase: number;
+  advice: string;
+}
+
 // 날씨 타입 정의
-const WEATHER_TYPES = {
+const WEATHER_TYPES: Record<string, WeatherType> = {
   sunny: {
     name: '맑음',
     emoji: '☀️',
@@ -71,7 +104,7 @@ export default function EmotionWeather() {
   const [currentMood, setCurrentMood] = useState(5);
   const [stressLevel, setStressLevel] = useState(5);
   const [sleepQuality, setSleepQuality] = useState(5);
-  const [forecast, setForecast] = useState<any>(null);
+  const [forecast, setForecast] = useState<EmotionForecast | null>(null);
   const [loading, setLoading] = useState(false);
   const canvasRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -219,13 +252,42 @@ export default function EmotionWeather() {
 
     animate();
 
-    // 클린업
+    // 클린업 함수 - 메모리 누수 방지
     return () => {
-      if (animationIdRef.current) {
+      // 애니메이션 프레임 취소
+      if (animationIdRef.current !== null) {
         cancelAnimationFrame(animationIdRef.current);
+        animationIdRef.current = null;
       }
-      renderer.dispose();
-      canvasRef.current?.removeChild(renderer.domElement);
+
+      // renderer cleanup
+      if (renderer && renderer.domElement) {
+        // DOM에서 canvas 제거 (부모가 존재하는 경우에만)
+        if (renderer.domElement.parentElement) {
+          renderer.domElement.parentElement.removeChild(renderer.domElement);
+        }
+        renderer.dispose();
+      }
+
+      // scene cleanup
+      if (scene) {
+        scene.traverse((object) => {
+          if (object instanceof THREE.Mesh) {
+            object.geometry?.dispose();
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose());
+              } else {
+                object.material.dispose();
+              }
+            }
+          }
+        });
+      }
+
+      // refs 초기화
+      sceneRef.current = null;
+      rendererRef.current = null;
     };
   }, [forecast]);
 

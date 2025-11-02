@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Brain, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
 import Link from 'next/link';
 import RelatedApps from '@/app/components/RelatedApps';
+import RadarChart3D from '@/app/components/RadarChart3D';
 
 // PCL-R 및 심리학 연구 기반 질문들
 const questions = [
@@ -188,132 +189,6 @@ const questions = [
     factor: 'lifestyle'
   }
 ];
-
-// 3D 레이더 차트 컴포넌트
-const RadarChart3D: React.FC<{ data: { [key: string]: number }, factorNames: { [key: string]: string } | ((key: string) => string) }> = ({ data, factorNames }) => {
-  const [rotation, setRotation] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation(prev => (prev + 0.5) % 360);
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
-
-  const factors = Object.keys(data);
-  const maxValue = Math.max(...Object.values(data), 1);
-  const angleStep = (2 * Math.PI) / factors.length;
-
-  return (
-    <div className="relative w-full h-96 flex items-center justify-center bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl overflow-hidden">
-      <svg viewBox="-150 -150 300 300" className="w-full h-full">
-        {/* 배경 원들 */}
-        {[0.25, 0.5, 0.75, 1].map((scale, i) => (
-          <circle
-            key={i}
-            cx="0"
-            cy="0"
-            r={100 * scale}
-            fill="none"
-            stroke="#e0e7ff"
-            strokeWidth="1"
-            opacity={0.5}
-          />
-        ))}
-
-        {/* 축선들 */}
-        {factors.map((factor, i) => {
-          const angle = i * angleStep - Math.PI / 2;
-          const x = Math.cos(angle) * 100;
-          const y = Math.sin(angle) * 100;
-          return (
-            <line
-              key={factor}
-              x1="0"
-              y1="0"
-              x2={x}
-              y2={y}
-              stroke="#c7d2fe"
-              strokeWidth="1"
-            />
-          );
-        })}
-
-        {/* 3D 효과를 위한 그림자 */}
-        <polygon
-          points={factors.map((factor, i) => {
-            const angle = i * angleStep - Math.PI / 2;
-            const value = data[factor];
-            const radius = (value / maxValue) * 100;
-            const x = Math.cos(angle) * radius + 5;
-            const y = Math.sin(angle) * radius + 5;
-            return `${x},${y}`;
-          }).join(' ')}
-          fill="rgba(139, 92, 246, 0.2)"
-          stroke="rgba(139, 92, 246, 0.3)"
-          strokeWidth="2"
-        />
-
-        {/* 데이터 폴리곤 */}
-        <polygon
-          points={factors.map((factor, i) => {
-            const angle = i * angleStep - Math.PI / 2;
-            const value = data[factor];
-            const radius = (value / maxValue) * 100;
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
-            return `${x},${y}`;
-          }).join(' ')}
-          fill="rgba(139, 92, 246, 0.4)"
-          stroke="#8b5cf6"
-          strokeWidth="3"
-          className="animate-pulse"
-        />
-
-        {/* 데이터 포인트 */}
-        {factors.map((factor, i) => {
-          const angle = i * angleStep - Math.PI / 2;
-          const value = data[factor];
-          const radius = (value / maxValue) * 100;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          return (
-            <circle
-              key={`point-${factor}`}
-              cx={x}
-              cy={y}
-              r="5"
-              fill="#7c3aed"
-              stroke="white"
-              strokeWidth="2"
-            />
-          );
-        })}
-
-        {/* 라벨 */}
-        {factors.map((factor, i) => {
-          const angle = i * angleStep - Math.PI / 2;
-          const x = Math.cos(angle) * 120;
-          const y = Math.sin(angle) * 120;
-          const name = typeof factorNames === 'function' ? factorNames(factor) : (factorNames[factor] || factor);
-          return (
-            <text
-              key={`label-${factor}`}
-              x={x}
-              y={y}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="text-xs font-bold fill-purple-700"
-            >
-              {name}
-            </text>
-          );
-        })}
-      </svg>
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-white/50 to-transparent" />
-    </div>
-  );
-};
 
 // 토큰 카운터 애니메이션 컴포넌트
 const TokenCounter: React.FC<{ currentCount: number, maxCount: number }> = ({ currentCount, maxCount }) => {
@@ -589,7 +464,7 @@ const PsychopathTest: React.FC = () => {
             {/* 3D 레이더 차트 */}
             <div className="mb-8">
               <h3 className="font-bold text-gray-900 mb-4 text-lg text-center">요인별 3D 분석</h3>
-              <RadarChart3D data={result.factorScores} factorNames={getFactorName} />
+              <RadarChart3D data={result.factorScores} factorNames={getFactorName} colorScheme="purple" />
             </div>
 
             <div className="bg-gray-50 rounded-xl p-6 mb-8">

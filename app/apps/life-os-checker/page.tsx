@@ -372,12 +372,14 @@ const RadarChart3D = ({ data }: { data: Record<string, number> }) => {
 
         {/* 라벨 */}
         {categories.map((cat, index) => {
-          const point = getPoint(145, index);
+          const angle = index * angleStep - Math.PI / 2 + (rotation * Math.PI) / 180;
+          const x = Math.cos(angle) * 145;
+          const y = Math.sin(angle) * 145;
           return (
             <text
               key={`label-${index}`}
-              x={point.x}
-              y={point.y}
+              x={x}
+              y={y}
               textAnchor="middle"
               dominantBaseline="middle"
               className="text-xs font-bold fill-white"

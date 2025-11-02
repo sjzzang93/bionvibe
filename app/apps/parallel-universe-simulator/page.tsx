@@ -17,7 +17,7 @@ interface LifeChoice {
   question: string;
   options: {
     text: string;
-    icon: any;
+    icon: React.ComponentType<{ className?: string }>;
     consequences: {
       career: number;
       love: number;
@@ -103,6 +103,8 @@ export default function ParallelUniverseSimulator() {
   const controlsRef = useRef<OrbitControls | null>(null);
   const universesRef = useRef<Map<string, THREE.Group>>(new Map());
   const frameRef = useRef<number>(0);
+  const starsRef = useRef<THREE.Points | null>(null);
+  const timelineRef = useRef<THREE.Mesh | null>(null);
 
   const [currentAge, setCurrentAge] = useState(0);
   const [currentChoiceIndex, setCurrentChoiceIndex] = useState(0);
@@ -187,6 +189,7 @@ export default function ParallelUniverseSimulator() {
     starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
     const stars = new THREE.Points(starsGeometry, starsMaterial);
     scene.add(stars);
+    starsRef.current = stars;
 
     // Add central timeline
     const timelineGeometry = new THREE.CylinderGeometry(1, 1, 200, 32);
@@ -199,13 +202,7 @@ export default function ParallelUniverseSimulator() {
     });
     const timeline = new THREE.Mesh(timelineGeometry, timelineMaterial);
     scene.add(timeline);
-
-    return () => {
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-    };
+    timelineRef.current = timeline;
   }, []);
 
   const createUniverse = (universe: Universe) => {
@@ -252,14 +249,53 @@ export default function ParallelUniverseSimulator() {
     return group;
   };
 
+  const disposeGroup = (group: THREE.Group) => {
+    group.traverse((object) => {
+      if (object instanceof THREE.Mesh) {
+        if (object.geometry) {
+          object.geometry.dispose();
+        }
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
+      }
+    });
+  };
+
   const updateUniverses = () => {
     if (!sceneRef.current) return;
 
-    // Remove old universes
+    // Remove and dispose old universes
     universesRef.current.forEach((group) => {
       sceneRef.current!.remove(group);
+      disposeGroup(group);
     });
     universesRef.current.clear();
+
+    // Remove and dispose old connection tubes
+    const objectsToRemove: THREE.Object3D[] = [];
+    sceneRef.current.traverse((object) => {
+      if (object instanceof THREE.Mesh && object.geometry instanceof THREE.TubeGeometry) {
+        objectsToRemove.push(object);
+      }
+    });
+    objectsToRemove.forEach((object) => {
+      sceneRef.current!.remove(object);
+      if (object instanceof THREE.Mesh) {
+        object.geometry?.dispose();
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
+      }
+    });
 
     // Add new universes
     universes.forEach((universe) => {
@@ -311,13 +347,10 @@ export default function ParallelUniverseSimulator() {
     // Rotate universes
     universesRef.current.forEach((group) => {
       group.rotation.y += 0.005;
-      group.children[2].rotation.z += 0.01; // Rotate ring
+      if (group.children[2]) {
+        group.children[2].rotation.z += 0.01; // Rotate ring
+      }
     });
-
-    // Animate camera slightly
-    const time = Date.now() * 0.0001;
-    cameraRef.current.position.x = Math.sin(time) * 10;
-    cameraRef.current.position.y = 50 + Math.cos(time) * 5;
 
     controlsRef.current.update();
     composerRef.current.render();
@@ -420,22 +453,126 @@ export default function ParallelUniverseSimulator() {
     setSelectedUniverse(null);
 
     if (sceneRef.current) {
+      // Dispose and remove universes
       universesRef.current.forEach((group) => {
         sceneRef.current!.remove(group);
+        disposeGroup(group);
       });
       universesRef.current.clear();
+
+      // Remove and dispose connection tubes
+      const objectsToRemove: THREE.Object3D[] = [];
+      sceneRef.current.traverse((object) => {
+        if (object instanceof THREE.Mesh && object.geometry instanceof THREE.TubeGeometry) {
+          objectsToRemove.push(object);
+        }
+      });
+      objectsToRemove.forEach((object) => {
+        sceneRef.current!.remove(object);
+        if (object instanceof THREE.Mesh) {
+          object.geometry?.dispose();
+          if (object.material) {
+            if (Array.isArray(object.material)) {
+              object.material.forEach(material => material.dispose());
+            } else {
+              object.material.dispose();
+            }
+          }
+        }
+      });
     }
   };
 
   useEffect(() => {
-    const cleanup = initThreeJS();
+    initThreeJS();
     animate();
 
     return () => {
+      // Cancel animation frame
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
+        frameRef.current = 0;
       }
-      cleanup?.();
+
+      // Dispose OrbitControls
+      if (controlsRef.current) {
+        controlsRef.current.dispose();
+      }
+
+      // Dispose EffectComposer and its render targets
+      if (composerRef.current) {
+        composerRef.current.renderTarget1?.dispose();
+        composerRef.current.renderTarget2?.dispose();
+      }
+
+      // Dispose renderer and remove DOM element
+      if (rendererRef.current) {
+        if (rendererRef.current.domElement && rendererRef.current.domElement.parentElement) {
+          rendererRef.current.domElement.parentElement.removeChild(rendererRef.current.domElement);
+        }
+        rendererRef.current.dispose();
+      }
+
+      // Dispose all universes
+      universesRef.current.forEach((group) => {
+        disposeGroup(group);
+      });
+      universesRef.current.clear();
+
+      // Dispose scene objects
+      if (sceneRef.current) {
+        sceneRef.current.traverse((object) => {
+          if (object instanceof THREE.Mesh) {
+            if (object.geometry) {
+              object.geometry.dispose();
+            }
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose());
+              } else {
+                object.material.dispose();
+              }
+            }
+          }
+        });
+      }
+
+      // Dispose stars
+      if (starsRef.current) {
+        if (starsRef.current.geometry) {
+          starsRef.current.geometry.dispose();
+        }
+        if (starsRef.current.material) {
+          if (Array.isArray(starsRef.current.material)) {
+            starsRef.current.material.forEach(material => material.dispose());
+          } else {
+            starsRef.current.material.dispose();
+          }
+        }
+      }
+
+      // Dispose timeline
+      if (timelineRef.current) {
+        if (timelineRef.current.geometry) {
+          timelineRef.current.geometry.dispose();
+        }
+        if (timelineRef.current.material) {
+          if (Array.isArray(timelineRef.current.material)) {
+            timelineRef.current.material.forEach(material => material.dispose());
+          } else {
+            timelineRef.current.material.dispose();
+          }
+        }
+      }
+
+      // Clear refs
+      sceneRef.current = null;
+      rendererRef.current = null;
+      cameraRef.current = null;
+      controlsRef.current = null;
+      composerRef.current = null;
+      starsRef.current = null;
+      timelineRef.current = null;
     };
   }, [initThreeJS, animate]);
 

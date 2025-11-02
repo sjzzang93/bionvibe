@@ -48,9 +48,17 @@ interface DreamNode {
   interpretation?: string;
 }
 
+interface DreamHistory {
+  id: string;
+  date: string;
+  text: string;
+  nodes: number;
+  mainThemes?: string[];
+}
+
 export default function DreamMap() {
   const [dreamText, setDreamText] = useState('');
-  const [dreamHistory, setDreamHistory] = useState<any[]>([]);
+  const [dreamHistory, setDreamHistory] = useState<DreamHistory[]>([]);
   const [dreamMap, setDreamMap] = useState<DreamNode[] | null>(null);
   const [selectedNode, setSelectedNode] = useState<DreamNode | null>(null);
   const [loading, setLoading] = useState(false);
@@ -295,15 +303,84 @@ export default function DreamMap() {
 
     // 클린업
     return () => {
-      if (animationIdRef.current) {
+      // 애니메이션 취소
+      if (animationIdRef.current !== null) {
         cancelAnimationFrame(animationIdRef.current);
+        animationIdRef.current = null;
       }
-      canvasRef.current?.removeEventListener('mousemove', onMouseMove);
-      canvasRef.current?.removeEventListener('click', onClick);
+
+      // 이벤트 리스너 제거
+      const currentCanvas = canvasRef.current;
+      if (currentCanvas) {
+        currentCanvas.removeEventListener('mousemove', onMouseMove);
+        currentCanvas.removeEventListener('click', onClick);
+      }
       window.removeEventListener('resize', handleResize);
-      renderer.dispose();
-      controls.dispose();
-      canvasRef.current?.removeChild(renderer.domElement);
+
+      // controls cleanup
+      if (controls) {
+        controls.dispose();
+      }
+
+      // renderer cleanup
+      if (renderer && renderer.domElement) {
+        if (renderer.domElement.parentElement) {
+          renderer.domElement.parentElement.removeChild(renderer.domElement);
+        }
+        renderer.dispose();
+      }
+
+      // scene cleanup
+      if (scene) {
+        scene.traverse((object) => {
+          if (object instanceof THREE.Mesh) {
+            object.geometry?.dispose();
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose());
+              } else {
+                object.material.dispose();
+              }
+            }
+          }
+          if (object instanceof THREE.Points) {
+            object.geometry?.dispose();
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose());
+              } else {
+                object.material.dispose();
+              }
+            }
+          }
+          if (object instanceof THREE.Line) {
+            object.geometry?.dispose();
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose());
+              } else {
+                object.material.dispose();
+              }
+            }
+          }
+          if (object instanceof THREE.Sprite) {
+            if (object.material) {
+              if (object.material.map) {
+                object.material.map.dispose();
+              }
+              object.material.dispose();
+            }
+          }
+          if (object instanceof THREE.Light) {
+            object.dispose?.();
+          }
+        });
+      }
+
+      // refs 초기화
+      sceneRef.current = null;
+      rendererRef.current = null;
+      controlsRef.current = null;
     };
   }, [dreamMap]);
 

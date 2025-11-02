@@ -190,19 +190,76 @@ export default function VoiceDNAAnalyzer() {
     scene.add(particles);
 
     return () => {
-      if (mountRef.current && renderer.domElement) {
+      // Cleanup Three.js resources
+      if (mountRef.current && renderer.domElement && mountRef.current.contains(renderer.domElement)) {
         mountRef.current.removeChild(renderer.domElement);
       }
+
+      // Dispose of all geometries and materials in the scene
+      if (scene) {
+        scene.traverse((object) => {
+          if (object instanceof THREE.Mesh) {
+            if (object.geometry) {
+              object.geometry.dispose();
+            }
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose());
+              } else {
+                object.material.dispose();
+              }
+            }
+          }
+          if (object instanceof THREE.Points) {
+            if (object.geometry) {
+              object.geometry.dispose();
+            }
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(material => material.dispose());
+              } else {
+                object.material.dispose();
+              }
+            }
+          }
+        });
+        scene.clear();
+      }
+
+      // Dispose of controls
+      if (controls) {
+        controls.dispose();
+      }
+
+      // Dispose of composer
+      if (composer) {
+        composer.dispose();
+      }
+
+      // Dispose of renderer
       renderer.dispose();
+      renderer.forceContextLoss();
     };
   }, []);
 
   const createDNAHelix = useCallback((frequencyData: Uint8Array) => {
     if (!dnaGroupRef.current) return;
 
-    // Clear existing DNA
+    // Clear existing DNA with proper disposal
     while (dnaGroupRef.current.children.length > 0) {
       const child = dnaGroupRef.current.children[0];
+      if (child instanceof THREE.Mesh || child instanceof THREE.Points) {
+        if (child.geometry) {
+          child.geometry.dispose();
+        }
+        if (child.material) {
+          if (Array.isArray(child.material)) {
+            child.material.forEach(material => material.dispose());
+          } else {
+            child.material.dispose();
+          }
+        }
+      }
       dnaGroupRef.current.remove(child);
     }
 
@@ -410,15 +467,50 @@ export default function VoiceDNAAnalyzer() {
   };
 
   const analyzeVoice = () => {
-    // Generate voice profile based on frequency data
-    const profile: VoiceProfile = {
-      pitch: Math.random() * 100,
-      tone: Math.random() * 100,
-      speed: Math.random() * 100,
-      emotion: Math.random() * 100,
-      confidence: Math.random() * 100,
-      uniqueness: Math.random() * 100
-    };
+    // Generate voice profile based on actual frequency data
+    let profile: VoiceProfile;
+
+    if (analyserRef.current && frequencyData) {
+      // Use actual frequency data from recording
+      const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
+      analyserRef.current.getByteFrequencyData(dataArray);
+
+      // Calculate actual audio metrics
+      const avgFrequency = dataArray.reduce((sum, val) => sum + val, 0) / dataArray.length;
+      const maxFrequency = Math.max(...Array.from(dataArray));
+      const minFrequency = Math.min(...Array.from(dataArray).filter(v => v > 0));
+
+      // Split into frequency bands
+      const lowFreqEnd = Math.floor(dataArray.length / 3);
+      const midFreqEnd = Math.floor(2 * dataArray.length / 3);
+
+      const lowFreq = dataArray.slice(0, lowFreqEnd).reduce((sum, val) => sum + val, 0) / lowFreqEnd;
+      const midFreq = dataArray.slice(lowFreqEnd, midFreqEnd).reduce((sum, val) => sum + val, 0) / (midFreqEnd - lowFreqEnd);
+      const highFreq = dataArray.slice(midFreqEnd).reduce((sum, val) => sum + val, 0) / (dataArray.length - midFreqEnd);
+
+      // Calculate variance for uniqueness
+      const variance = dataArray.reduce((sum, val) => sum + Math.pow(val - avgFrequency, 2), 0) / dataArray.length;
+      const stdDev = Math.sqrt(variance);
+
+      profile = {
+        pitch: Math.min(100, (highFreq / 255) * 100),
+        tone: Math.min(100, (midFreq / 255) * 100),
+        speed: Math.min(100, (avgFrequency / 255) * 100),
+        emotion: Math.min(100, ((maxFrequency - avgFrequency) / 255) * 100),
+        confidence: Math.min(100, (lowFreq / 255) * 100),
+        uniqueness: Math.min(100, (stdDev / 255) * 100)
+      };
+    } else {
+      // Fallback to random data if no frequency data available
+      profile = {
+        pitch: Math.random() * 100,
+        tone: Math.random() * 100,
+        speed: Math.random() * 100,
+        emotion: Math.random() * 100,
+        confidence: Math.random() * 100,
+        uniqueness: Math.random() * 100
+      };
+    }
 
     setVoiceProfile(profile);
 
@@ -450,6 +542,18 @@ export default function VoiceDNAAnalyzer() {
   };
 
   const reset = () => {
+    // Stop recording if active
+    if (isRecording) {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
+    }
+
     setIsRecording(false);
     setIsAnalyzing(false);
     setVoiceProfile(null);
@@ -458,12 +562,27 @@ export default function VoiceDNAAnalyzer() {
     setFrequencyData(null);
     setDnaNodes([]);
 
+    // Clear DNA with proper disposal
     if (dnaGroupRef.current) {
       while (dnaGroupRef.current.children.length > 0) {
         const child = dnaGroupRef.current.children[0];
+        if (child instanceof THREE.Mesh || child instanceof THREE.Points) {
+          if (child.geometry) {
+            child.geometry.dispose();
+          }
+          if (child.material) {
+            if (Array.isArray(child.material)) {
+              child.material.forEach(material => material.dispose());
+            } else {
+              child.material.dispose();
+            }
+          }
+        }
         dnaGroupRef.current.remove(child);
       }
     }
+
+    analyserRef.current = null;
   };
 
   useEffect(() => {
@@ -471,9 +590,25 @@ export default function VoiceDNAAnalyzer() {
     animate();
 
     return () => {
+      // Cancel animation frame
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
       }
+
+      // Cleanup Web Audio API resources
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+
+      if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
+        audioContextRef.current.close();
+        audioContextRef.current = null;
+      }
+
+      analyserRef.current = null;
+
+      // Cleanup Three.js
       cleanup?.();
     };
   }, [initThreeJS, animate]);
@@ -589,7 +724,10 @@ export default function VoiceDNAAnalyzer() {
                     {voicePersonality && (
                       <div className="text-center space-y-3">
                         <div className="flex justify-center">
-                          {<voicePersonality.icon className="w-12 h-12" style={{ color: voicePersonality.color }} />}
+                          {(() => {
+                            const Icon = voicePersonality.icon;
+                            return <Icon className="w-12 h-12" style={{ color: voicePersonality.color }} />;
+                          })()}
                         </div>
                         <h3 className="text-2xl font-bold" style={{ color: voicePersonality.color }}>
                           {voicePersonality.type}
