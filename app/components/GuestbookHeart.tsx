@@ -292,42 +292,6 @@ const GuestbookHeart = () => {
         </p>
       </div>
 
-      {/* 이벤트 안내 */}
-      <div className="mt-3 text-center max-w-[220px]">
-        <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/25 dark:to-orange-900/25 border border-amber-200 dark:border-amber-700 rounded-xl p-4 shadow-xl">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-lg">🎁</span>
-            <p className="text-xs font-extrabold tracking-tight text-amber-800 dark:text-amber-100">
-              오늘의 포커 인증 이벤트
-            </p>
-            <span className="text-lg animation-delay-200">🎁</span>
-          </div>
-          <p className="text-[11px] leading-tight text-amber-700 dark:text-amber-200">
-            하트 카운터가 <span className="font-bold text-yellow-600 dark:text-yellow-400">홀수 포커 숫자</span>로
-            떨어지는 순간을 캡처해서 DM이나 메일로 보내주세요. 숫자마다 <span className="font-bold text-yellow-600 dark:text-yellow-400">각 1분</span>께
-            <span className="font-semibold text-orange-600 dark:text-orange-200"> 5,000원 구글 기프티카드</span>를 드립니다.
-          </p>
-          <div className="mt-3">
-            <p className="text-[10px] font-semibold text-amber-600 dark:text-amber-300 mb-1">
-              이런 홀수 포커 숫자를 잡아보세요
-            </p>
-            <div className="flex flex-wrap justify-center gap-1">
-              {["777", "999", "1111", "1313"].map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-700 dark:text-yellow-200 rounded-full font-mono font-bold shadow-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <p className="mt-2 text-[9px] text-amber-600/80 dark:text-amber-200/80 leading-tight">
-              예시 숫자예요. 같은 숫자가 연속되거나 리듬감 있는 모든 <span className="font-semibold">홀수 포커</span> 조합이 인정됩니다.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* 에러 메시지 */}
       {error && (
         <p className="text-[10px] text-yellow-600 dark:text-yellow-400 text-center max-w-[120px]">

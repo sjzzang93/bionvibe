@@ -8,46 +8,68 @@ import RelatedApps from '@/app/components/RelatedApps';
 
 const CHALLENGES = {
   health: [
-    { title: '물 2L 마시기', emoji: '💧', description: '하루 종일 물을 2리터 마셔보세요', difficulty: '쉬움' },
-    { title: '만보 걷기', emoji: '🚶', description: '오늘 하루 10,000보를 걸어보세요', difficulty: '보통' },
-    { title: '30분 운동', emoji: '💪', description: '어떤 운동이든 30분 이상 해보세요', difficulty: '보통' },
+    { title: '팔굽혀펴기 50개', emoji: '💪', description: '한 번에 또는 나눠서 총 50개 완성하기', difficulty: '보통' },
+    { title: '스쿼트 100개', emoji: '🦵', description: '올바른 자세로 100개 도전! 10개씩 나눠도 OK', difficulty: '보통' },
+    { title: '플랭크 3분', emoji: '⏱️', description: '1분씩 3세트 또는 한 번에 3분 버티기', difficulty: '어려움' },
+    { title: '버피 30개', emoji: '🔥', description: '전신 운동의 끝판왕! 30개 완성하기', difficulty: '어려움' },
+    { title: '계단 오르기 10층', emoji: '🪜', description: '엘리베이터 없이 계단으로 10층 오르기', difficulty: '보통' },
+    { title: '점프 스쿼트 50개', emoji: '⚡', description: '폭발적인 점프와 함께 50개 완성', difficulty: '어려움' },
+    { title: '런지 50개 (양쪽)', emoji: '🏃', description: '왼쪽 25개, 오른쪽 25개 번갈아가며', difficulty: '보통' },
+    { title: '마운틴 클라이머 100개', emoji: '⛰️', description: '빠르게 양 무릎 번갈아가며 100개', difficulty: '어려움' },
+    { title: '벽 푸시업 100개', emoji: '🧱', description: '벽에 기대어 푸시업 100개 (초보자용)', difficulty: '쉬움' },
+    { title: '제자리 뛰기 500개', emoji: '🏃‍♂️', description: '양발 모아 500번 점프!', difficulty: '보통' },
+    { title: '물 2L 마시기', emoji: '💧', description: '500ml 컵으로 4잔 완성하기', difficulty: '쉬움' },
     { title: '야식 참기', emoji: '🚫', description: '저녁 8시 이후 음식 섭취 금지!', difficulty: '어려움' },
-    { title: '채소 먼저 먹기', emoji: '🥗', description: '모든 식사에서 채소를 먼저 먹기', difficulty: '쉬움' },
-    { title: '계단 이용하기', emoji: '🪜', description: '오늘은 엘리베이터 금지!', difficulty: '보통' },
-    { title: '스트레칭 10분', emoji: '🧘', description: '아침, 점심, 저녁 각 10분씩', difficulty: '쉬움' },
-    { title: '당 섭취 줄이기', emoji: '🍭', description: '오늘 하루 단 음식 먹지 않기', difficulty: '어려움' },
   ],
   productivity: [
-    { title: '아침 6시 기상', emoji: '⏰', description: '알람 끄지 말고 바로 일어나기', difficulty: '어려움' },
-    { title: '핸드폰 끄고 집중', emoji: '📵', description: '2시간 동안 핸드폰 없이 집중하기', difficulty: '보통' },
-    { title: '독서 30분', emoji: '📚', description: '어떤 책이든 30분 이상 읽기', difficulty: '쉬움' },
-    { title: '일기 쓰기', emoji: '✍️', description: '오늘 하루 일과와 감정 기록하기', difficulty: '쉬움' },
-    { title: '할 일 목록 작성', emoji: '📝', description: '내일 할 일 미리 계획하기', difficulty: '쉬움' },
-    { title: 'SNS 안 보기', emoji: '🙈', description: '오늘 하루 SNS 완전 차단', difficulty: '어려움' },
-    { title: '명상 10분', emoji: '🧘‍♀️', description: '아침이나 저녁에 명상하기', difficulty: '보통' },
-    { title: '새로운 것 배우기', emoji: '🎓', description: '30분 이상 새로운 지식 습득', difficulty: '보통' },
+    { title: '새벽 5시 기상', emoji: '⏰', description: '알람과 함께 바로 일어나서 침대 정리', difficulty: '어려움' },
+    { title: '핸드폰 없이 3시간', emoji: '📵', description: '핸드폰을 서랍에 넣고 집중 작업', difficulty: '어려움' },
+    { title: '책 50페이지 읽기', emoji: '📚', description: '어떤 책이든 50페이지 완독하기', difficulty: '보통' },
+    { title: '냉수 샤워', emoji: '🚿', description: '마지막 1분 동안 찬물로 샤워하기', difficulty: '어려움' },
+    { title: 'To-do 5개 완료', emoji: '✅', description: '오늘 할 일 5개를 저녁 전까지 끝내기', difficulty: '보통' },
+    { title: '아침 6시 전 산책', emoji: '🌅', description: '해 뜨기 전에 15분 산책하기', difficulty: '어려움' },
+    { title: '유튜브 금지', emoji: '🎥', description: '오늘 하루 유튜브 안 보기', difficulty: '보통' },
+    { title: '아침 명상 15분', emoji: '🧘', description: '조용히 앉아 호흡과 생각 관찰하기', difficulty: '쉬움' },
+  ],
+  mindfulness: [
+    { title: '나를 사랑하는 선언', emoji: '💖', description: '거울 보며 "나는 사랑받을 자격이 있어" 10번', difficulty: '쉬움' },
+    { title: '호흡 명상 20분', emoji: '🌬️', description: '편안한 자세로 코로 들이쉬고 입으로 내쉬기', difficulty: '보통' },
+    { title: '자연 속 산책 30분', emoji: '🌳', description: '공원이나 산에서 자연 느끼며 걷기', difficulty: '보통' },
+    { title: '감정 일기 쓰기', emoji: '✨', description: '오늘 느낀 감정을 솔직하게 10분간 적기', difficulty: '쉬움' },
+    { title: '좋은 기억 회상', emoji: '🌈', description: '인생에서 가장 행복했던 순간 5분간 떠올리기', difficulty: '쉬움' },
+    { title: '몸 스캔 명상', emoji: '🧘‍♀️', description: '누워서 발끝부터 머리까지 몸의 감각 느끼기', difficulty: '보통' },
+    { title: '긍정 확언 30개', emoji: '💫', description: '"나는 충분히 잘하고 있어" 같은 말 30번', difficulty: '쉬움' },
+    { title: '미소 짓기 50번', emoji: '😊', description: '거울 보며 진심으로 웃는 연습하기', difficulty: '쉬움' },
+    { title: '고요히 앉아있기 10분', emoji: '🕉️', description: '아무것도 하지 않고 그냥 존재하기', difficulty: '보통' },
+    { title: '감사 편지 쓰기', emoji: '🙏', description: '나 자신에게 감사 편지 쓰기', difficulty: '보통' },
   ],
   social: [
-    { title: '가족에게 전화', emoji: '📞', description: '부모님이나 가족에게 안부 전화', difficulty: '쉬움' },
-    { title: '칭찬 3번 하기', emoji: '👏', description: '다른 사람 진심으로 칭찬하기', difficulty: '쉬움' },
-    { title: '감사 표현하기', emoji: '🙏', description: '누군가에게 감사 표현하기', difficulty: '쉬움' },
-    { title: '먼저 인사하기', emoji: '👋', description: '모든 사람에게 먼저 인사하기', difficulty: '보통' },
-    { title: '불평 안 하기', emoji: '😇', description: '하루 종일 불평 한 마디도 안 하기', difficulty: '어려움' },
-    { title: '경청하기', emoji: '👂', description: '대화할 때 진심으로 경청하기', difficulty: '보통' },
+    { title: '부모님께 사랑한다 말하기', emoji: '💝', description: '전화로 또는 직접 "사랑해요" 말하기', difficulty: '보통' },
+    { title: '나 자신에게 칭찬', emoji: '🪞', description: '거울 보며 "나는 소중한 존재야" 3번 말하기', difficulty: '쉬움' },
+    { title: '감사 일기 3가지', emoji: '📔', description: '오늘 감사한 일 3가지 적고 음미하기', difficulty: '쉬움' },
+    { title: '사랑하는 사람에게 편지', emoji: '✉️', description: '가족/친구에게 감동적인 긴 편지 쓰기', difficulty: '보통' },
+    { title: '불평 제로 데이', emoji: '😇', description: '하루 종일 불평, 욕설, 부정적 말 금지', difficulty: '어려움' },
+    { title: '옛 친구에게 연락', emoji: '💬', description: '오랜만에 연락해서 그리움 표현하기', difficulty: '보통' },
+    { title: '칭찬 5번 하기', emoji: '👏', description: '다섯 명에게 진심 어린 칭찬하기', difficulty: '쉬움' },
+    { title: '가족 사진 보며 추억', emoji: '📸', description: '옛 사진 보며 10분간 추억에 잠기기', difficulty: '쉬움' },
   ],
   creative: [
-    { title: '그림 그리기', emoji: '🎨', description: '15분 이상 자유롭게 그리기', difficulty: '쉬움' },
-    { title: '사진 10장 찍기', emoji: '📸', description: '의미 있는 순간 포착하기', difficulty: '쉬움' },
-    { title: '시 한 편 쓰기', emoji: '✒️', description: '짧은 시나 글 작성하기', difficulty: '보통' },
-    { title: '요리 도전', emoji: '🍳', description: '새로운 레시피로 요리하기', difficulty: '보통' },
-    { title: '악기 연습', emoji: '🎸', description: '30분 이상 악기 연습하기', difficulty: '보통' },
+    { title: '15분 자유 드로잉', emoji: '🎨', description: '종이에 생각나는 대로 그림 그리기', difficulty: '쉬움' },
+    { title: '사진 20장 찍기', emoji: '📸', description: '일상 속 아름다운 순간 20장 포착', difficulty: '쉬움' },
+    { title: '100자 글쓰기', emoji: '✍️', description: '오늘의 생각을 100자로 표현하기', difficulty: '쉬움' },
+    { title: '새 요리 만들기', emoji: '🍳', description: '레시피 보고 처음 만드는 음식 도전', difficulty: '보통' },
+    { title: '종이접기 5개', emoji: '📄', description: '학, 비행기 등 종이접기 5개 완성', difficulty: '쉬움' },
+    { title: '춤 5분 추기', emoji: '💃', description: '좋아하는 노래에 맞춰 자유롭게', difficulty: '쉬움' },
   ],
   lifestyle: [
-    { title: '방 정리하기', emoji: '🧹', description: '방 구석구석 깨끗이 청소', difficulty: '보통' },
-    { title: '옷장 정리', emoji: '👔', description: '안 입는 옷 골라내기', difficulty: '보통' },
-    { title: '식물 돌보기', emoji: '🌱', description: '집안 식물에 물주고 관리', difficulty: '쉬움' },
-    { title: '아침 루틴 만들기', emoji: '☀️', description: '기상 후 30분 루틴 실천', difficulty: '보통' },
-    { title: '디지털 디톡스', emoji: '📱', description: '잠들기 1시간 전 전자기기 금지', difficulty: '어려움' },
+    { title: '책상 완전 정리', emoji: '🗂️', description: '책상 위 물건 전부 정리하고 닦기', difficulty: '쉬움' },
+    { title: '옷 10벌 정리', emoji: '👔', description: '안 입는 옷 10벌 골라서 기부 박스에', difficulty: '보통' },
+    { title: '침대 시트 교체', emoji: '🛏️', description: '침대 시트와 베개 커버 빨래하기', difficulty: '보통' },
+    { title: '냉장고 정리', emoji: '🧊', description: '유통기한 확인하고 정리 정돈', difficulty: '보통' },
+    { title: '신발장 정리', emoji: '👟', description: '신발 전부 꺼내서 정리하고 닦기', difficulty: '보통' },
+    { title: '화장실 청소', emoji: '🚽', description: '화장실 구석구석 깨끗이 청소', difficulty: '보통' },
+    { title: '베란다 정리', emoji: '🌿', description: '베란다 쓸고 닦고 정리하기', difficulty: '보통' },
+    { title: '서랍 하나 비우기', emoji: '📦', description: '서랍 하나를 완전히 비우고 재정리', difficulty: '쉬움' },
   ],
 };
 
@@ -122,7 +144,8 @@ export default function DailyChallenge() {
     switch (category) {
       case 'health': return '💪';
       case 'productivity': return '🎯';
-      case 'social': return '👥';
+      case 'mindfulness': return '🧘‍♀️';
+      case 'social': return '💝';
       case 'creative': return '🎨';
       case 'lifestyle': return '🏠';
       default: return '⭐';
@@ -131,9 +154,10 @@ export default function DailyChallenge() {
 
   const getCategoryName = (category: string) => {
     switch (category) {
-      case 'health': return '건강';
+      case 'health': return '건강/운동';
       case 'productivity': return '생산성';
-      case 'social': return '대인관계';
+      case 'mindfulness': return '마음챙김';
+      case 'social': return '감성/관계';
       case 'creative': return '창의성';
       case 'lifestyle': return '라이프스타일';
       default: return '기타';

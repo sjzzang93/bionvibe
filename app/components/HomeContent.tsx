@@ -3,7 +3,6 @@ import { getAllCategories, type App, type Category } from '@/lib/getApps';
 
 import HomeContentClient from './HomeContentClient';
 import { applyCuratedApps } from './homeContentUtils';
-import StatsSection from './StatsSection';
 import RecentApps from './RecentApps';
 
 const normalizeApps = (): App[] => {
@@ -35,9 +34,6 @@ export default function HomeContent() {
 
   return (
     <>
-      {/* 실시간 통계 */}
-      <StatsSection totalApps={visibleApps.length} />
-
       {/* 최근 추가된 앱 */}
       <RecentApps apps={visibleApps} />
 

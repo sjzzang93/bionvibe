@@ -70,24 +70,33 @@ export default function AnalyticsTracker() {
     const trackVisit = async () => {
       try {
         // 기존 세션 확인
-        const { data: existingSession } = await supabase
+        const { data: existingSession, error: selectError } = await supabase
           .from('analytics')
           .select('*')
           .eq('session_id', sessionId)
           .maybeSingle();
 
+        if (selectError) {
+          console.debug('Analytics select error:', selectError);
+          return; // 에러 발생시 조용히 중단
+        }
+
         if (existingSession) {
           // 기존 세션 업데이트 (페이지뷰 증가)
-          await supabase
+          const { error: updateError } = await supabase
             .from('analytics')
             .update({
               page_views: (existingSession.page_views || 0) + 1,
               updated_at: new Date().toISOString(),
             })
             .eq('session_id', sessionId);
+
+          if (updateError) {
+            console.debug('Analytics update error:', updateError);
+          }
         } else {
           // 새 세션 생성
-          await supabase.from('analytics').insert({
+          const { error: insertError } = await supabase.from('analytics').insert({
             session_id: sessionId,
             page_path: window.location.pathname,
             browser,
@@ -96,8 +105,12 @@ export default function AnalyticsTracker() {
             screen_width: window.screen.width,
             screen_height: window.screen.height,
             page_views: 1,
-            duration_seconds: 0,
+            duration: 0,
           });
+
+          if (insertError) {
+            console.debug('Analytics insert error:', insertError);
+          }
         }
       } catch (error) {
         // 에러 무시 (analytics 실패해도 사용자 경험에 영향 없도록)
@@ -119,26 +132,35 @@ export default function AnalyticsTracker() {
 
     // 페이지 떠날 때 체류시간 업데이트
     const handleBeforeUnload = async () => {
-      const duration = Math.floor((Date.now() - startTimeRef.current) / 1000); // 초 단위
-      
-      if (duration > 0) {
+      const durationSec = Math.floor((Date.now() - startTimeRef.current) / 1000); // 초 단위
+
+      if (durationSec > 0) {
         try {
           // Beacon API 사용 (페이지 언로드 시에도 요청 보장)
-          const { data: existingSession } = await supabase
+          const { data: existingSession, error: selectError } = await supabase
             .from('analytics')
             .select('duration')
             .eq('session_id', sessionId)
             .maybeSingle();
 
-          const totalDuration = (existingSession?.duration || 0) + duration;
+          if (selectError) {
+            console.debug('Duration select error:', selectError);
+            return;
+          }
 
-          await supabase
+          const totalDuration = (existingSession?.duration || 0) + durationSec;
+
+          const { error: updateError } = await supabase
             .from('analytics')
             .update({
               duration: totalDuration,
               updated_at: new Date().toISOString(),
             })
             .eq('session_id', sessionId);
+
+          if (updateError) {
+            console.debug('Duration update error:', updateError);
+          }
         } catch (error) {
           console.debug('Duration tracking skipped:', error);
         }

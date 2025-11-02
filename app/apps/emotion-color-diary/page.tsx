@@ -5,6 +5,9 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
+import { useSupabase } from '@/lib/supabase-provider';
+import SimpleAuth from '@/app/components/SimpleAuth';
+import type { User } from '@supabase/supabase-js';
 
 const EMOTIONS = [
   { name: '행복', color: '#FFD700', emoji: '😊', description: '기쁘고 즐거운 하루' },
@@ -30,23 +33,88 @@ interface DiaryEntry {
 }
 
 export default function EmotionColorDiary() {
+  const supabase = useSupabase();
+  const [user, setUser] = useState<User | null>(null);
   const [selectedEmotion, setSelectedEmotion] = useState<any>(null);
   const [note, setNote] = useState('');
   const [diary, setDiary] = useState<DiaryEntry[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
+  // 사용자 인증 상태 확인
   useEffect(() => {
-    const saved = localStorage.getItem('emotion_diary');
-    if (saved) {
-      setDiary(JSON.parse(saved));
-    }
-  }, []);
+    const checkUser = async () => {
+      if (!supabase) {
+        setIsAuthLoading(false);
+        return;
+      }
 
-  const saveDiary = () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setIsAuthLoading(false);
+    };
+
+    checkUser();
+
+    // 인증 상태 변화 감지
+    const { data: { subscription } } = supabase?.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    }) ?? { data: { subscription: null } };
+
+    return () => {
+      subscription?.unsubscribe();
+    };
+  }, [supabase]);
+
+  // 데이터 불러오기
+  useEffect(() => {
+    const loadDiary = async () => {
+      if (!user) return;
+
+      if (!supabase) {
+        // Supabase 없으면 localStorage 사용
+        const saved = localStorage.getItem('emotion_diary');
+        if (saved) {
+          setDiary(JSON.parse(saved));
+        }
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('emotion_diary')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('date', { ascending: false })
+          .limit(365);
+
+        if (error) {
+          console.error('감정 일기 로드 실패:', error);
+          return;
+        }
+
+        if (data) {
+          setDiary(data);
+        }
+      } catch (error) {
+        console.error('감정 일기 로드 에러:', error);
+      }
+    };
+
+    loadDiary();
+  }, [supabase, user]);
+
+  const saveDiary = async () => {
+    if (!user) {
+      alert('로그인이 필요합니다!');
+      return;
+    }
     if (!selectedEmotion) {
       alert('오늘의 감정을 선택해주세요!');
       return;
     }
 
+    setIsLoading(true);
     const today = new Date().toISOString().split('T')[0];
     const newEntry: DiaryEntry = {
       date: today,
@@ -56,14 +124,46 @@ export default function EmotionColorDiary() {
       note: note.trim()
     };
 
-    // 오늘 날짜 이미 있으면 업데이트, 없으면 추가
-    const filtered = diary.filter(d => d.date !== today);
-    const updated = [newEntry, ...filtered].slice(0, 365); // 최근 1년만
+    try {
+      if (!supabase) {
+        alert('서버 연결 실패');
+        setIsLoading(false);
+        return;
+      }
 
-    setDiary(updated);
-    localStorage.setItem('emotion_diary', JSON.stringify(updated));
-    alert('오늘의 감정이 저장되었습니다! 💝');
-    setNote('');
+      // Supabase에 저장
+      const { error } = await supabase
+        .from('emotion_diary')
+        .upsert({
+          user_id: user.id,
+          date: today,
+          emotion: selectedEmotion.name,
+          color: selectedEmotion.color,
+          emoji: selectedEmotion.emoji,
+          note: note.trim()
+        }, { onConflict: 'user_id,date' });
+
+      if (error) {
+        console.error('저장 실패:', error);
+        alert('저장에 실패했습니다. 다시 시도해주세요.');
+        setIsLoading(false);
+        return;
+      }
+
+      // 로컬 상태 업데이트
+      const filtered = diary.filter(d => d.date !== today);
+      const updated = [newEntry, ...filtered].slice(0, 365);
+      setDiary(updated);
+
+      alert('오늘의 감정이 저장되었습니다! 💝');
+      setNote('');
+      setSelectedEmotion(null);
+    } catch (error) {
+      console.error('저장 중 에러:', error);
+      alert('저장에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const getEmotionStats = () => {
@@ -76,15 +176,89 @@ export default function EmotionColorDiary() {
       .slice(0, 3);
   };
 
+  const handleLogout = async () => {
+    if (!supabase) return;
+    await supabase.auth.signOut();
+    setDiary([]);
+    setSelectedEmotion(null);
+    setNote('');
+  };
+
+  // 로딩 중
+  if (isAuthLoading) {
+    return (
+      <PremiumLayout theme="pink">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <div className="text-center">
+            <div className="text-6xl mb-4 animate-bounce">⏳</div>
+            <p className="text-white text-xl">로딩 중...</p>
+          </div>
+        </div>
+      </PremiumLayout>
+    );
+  }
+
+  // 로그인하지 않은 사용자
+  if (!user) {
+    return (
+      <PremiumLayout theme="pink">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          {/* Header */}
+          <div className="text-center mb-12 animate-fadeIn">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 bg-clip-text text-transparent">
+              🎨 감정 컬러 일기
+            </h1>
+            <p className="text-xl text-white/80 mb-8">하루의 감정을 색으로 표현하세요</p>
+            <p className="text-white/70 mb-4">
+              📝 감정 일기를 작성하고 저장하려면 로그인이 필요합니다
+            </p>
+          </div>
+
+          <SimpleAuth onSuccess={() => {}} />
+
+          {/* Related Apps */}
+          <div className="mt-8 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+            <RelatedApps currentAppSlug="emotion-color-diary" className="mt-8" />
+          </div>
+        </div>
+
+        <style jsx>{`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+
+          .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+          }
+        `}</style>
+      </PremiumLayout>
+    );
+  }
+
   return (
     <PremiumLayout theme="pink">
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12 animate-fadeIn">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 bg-clip-text text-transparent">
-            🎨 감정 컬러 일기
-          </h1>
+          <div className="flex justify-center items-center gap-4 mb-4">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 bg-clip-text text-transparent">
+              🎨 감정 컬러 일기
+            </h1>
+          </div>
           <p className="text-xl text-white/80">하루의 감정을 색으로 표현하세요</p>
+          <div className="mt-4 flex justify-center items-center gap-3">
+            <span className="text-white/70 text-sm">
+              {user.email}
+            </span>
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="text-sm px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+            >
+              로그아웃
+            </button>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -140,10 +314,11 @@ export default function EmotionColorDiary() {
                   onClick={saveDiary}
                   variant="primary"
                   size="lg"
-                  icon="💾"
+                  icon={isLoading ? "⏳" : "💾"}
                   fullWidth
+                  disabled={isLoading}
                 >
-                  오늘의 감정 저장하기
+                  {isLoading ? '저장 중...' : '오늘의 감정 저장하기'}
                 </PremiumButton>
               </PremiumCard>
             )}

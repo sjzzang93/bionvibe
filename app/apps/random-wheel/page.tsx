@@ -174,20 +174,20 @@ export default function RandomWheel() {
 
   return (
     <PremiumLayout theme="orange">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-4 md:py-8">
         {/* Header */}
-        <div className="text-center mb-8 animate-fadeIn">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-orange-200 via-yellow-200 to-red-200 bg-clip-text text-transparent">
-            🎡 랜덤 룰렛 메이커
+        <div className="text-center mb-6 md:mb-8 animate-fadeIn">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 md:mb-4 bg-gradient-to-r from-orange-200 via-yellow-200 to-red-200 bg-clip-text text-transparent px-2">
+            🎡 랜덤 룰렛
           </h1>
-          <p className="text-xl text-white/80">3D 룰렛으로 공정한 선택을!</p>
+          <p className="text-base sm:text-lg md:text-xl text-white/80 px-2">3D 룰렛으로 공정한 선택을!</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
           {/* 왼쪽: 3D 룰렛 */}
-          <div>
+          <div className="order-1">
             <PremiumCard hover className="mb-4">
-              <div className="h-[400px] md:h-[500px] rounded-xl overflow-hidden bg-gradient-to-br from-purple-900/50 to-blue-900/50">
+              <div className="h-[280px] sm:h-[350px] md:h-[450px] lg:h-[500px] rounded-xl overflow-hidden bg-gradient-to-br from-purple-900/50 to-blue-900/50 touch-none">
                 <Canvas camera={{ position: [0, 0, 6], fov: 50 }}>
                   <Suspense fallback={null}>
                     <ambientLight intensity={0.5} />
@@ -218,10 +218,10 @@ export default function RandomWheel() {
 
             {result && (
               <PremiumCard hover gradient className="mt-4 animate-bounce-slow">
-                <div className="text-center">
-                  <div className="text-5xl mb-3">🎉</div>
-                  <h3 className="text-white text-xl font-bold mb-2">결과</h3>
-                  <div className="text-4xl font-bold bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
+                <div className="text-center py-2">
+                  <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">🎉</div>
+                  <h3 className="text-white text-lg sm:text-xl font-bold mb-1 sm:mb-2">결과</h3>
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent break-words px-2">
                     {result}
                   </div>
                 </div>
@@ -230,10 +230,10 @@ export default function RandomWheel() {
           </div>
 
           {/* 오른쪽: 설정 */}
-          <div className="space-y-4">
+          <div className="space-y-4 order-2">
             <PremiumCard hover>
-              <h3 className="text-white text-xl font-bold mb-4">➕ 항목 추가</h3>
-              <div className="flex gap-2 mb-4">
+              <h3 className="text-white text-lg sm:text-xl font-bold mb-3 sm:mb-4">➕ 항목 추가</h3>
+              <div className="flex gap-2 mb-3 sm:mb-4">
                 <input
                   type="text"
                   value={newItem}
@@ -241,7 +241,7 @@ export default function RandomWheel() {
                   onKeyPress={(e) => e.key === 'Enter' && addItem()}
                   placeholder="새 항목 입력"
                   maxLength={15}
-                  className="flex-1 px-4 py-3 rounded-lg text-black font-bold"
+                  className="flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-black font-bold text-sm sm:text-base"
                   style={{ fontSize: '16px' }}
                   disabled={items.length >= 12}
                 />
@@ -254,25 +254,25 @@ export default function RandomWheel() {
                   추가
                 </PremiumButton>
               </div>
-              <p className="text-white/70 text-sm">
+              <p className="text-white/70 text-xs sm:text-sm">
                 최대 12개까지 ({items.length}/12)
               </p>
             </PremiumCard>
 
             <PremiumCard hover>
-              <h3 className="text-white text-xl font-bold mb-4">📝 현재 항목 ({items.length}개)</h3>
-              <div className="space-y-2 max-h-60 overflow-y-auto">
+              <h3 className="text-white text-lg sm:text-xl font-bold mb-3 sm:mb-4">📝 현재 항목 ({items.length}개)</h3>
+              <div className="space-y-2 max-h-48 sm:max-h-60 overflow-y-auto">
                 {items.map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between bg-white/10 rounded-lg px-4 py-2 hover:bg-white/20 transition-all"
+                    className="flex items-center justify-between bg-white/10 rounded-lg px-3 sm:px-4 py-2 hover:bg-white/20 transition-all"
                   >
-                    <span className="text-white font-bold">{item}</span>
+                    <span className="text-white font-bold text-sm sm:text-base break-words flex-1 mr-2">{item}</span>
                     <button
                       type="button"
                       onClick={() => removeItem(index)}
                       disabled={items.length <= 2}
-                      className="text-red-300 hover:text-red-100 disabled:text-gray-500 disabled:cursor-not-allowed"
+                      className="text-red-300 hover:text-red-100 disabled:text-gray-500 disabled:cursor-not-allowed text-lg sm:text-xl flex-shrink-0 w-6 h-6 flex items-center justify-center"
                     >
                       ✕
                     </button>
@@ -282,14 +282,14 @@ export default function RandomWheel() {
             </PremiumCard>
 
             <PremiumCard hover>
-              <h3 className="text-white text-xl font-bold mb-4">🎨 템플릿</h3>
+              <h3 className="text-white text-lg sm:text-xl font-bold mb-3 sm:mb-4">🎨 템플릿</h3>
               <div className="grid grid-cols-2 gap-2">
                 {Object.keys(templates).map((template) => (
                   <button
                     type="button"
                     key={template}
                     onClick={() => loadTemplate(template)}
-                    className="bg-white/10 hover:bg-white/20 text-white font-bold py-2 px-3 rounded-lg transition-all text-sm"
+                    className="bg-white/10 hover:bg-white/20 text-white font-bold py-2 sm:py-3 px-2 sm:px-3 rounded-lg transition-all text-xs sm:text-sm active:scale-95"
                   >
                     {template}
                   </button>

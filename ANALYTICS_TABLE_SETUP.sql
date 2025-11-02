@@ -9,13 +9,18 @@ DROP TABLE IF EXISTS public.analytics CASCADE;
 CREATE TABLE public.analytics (
   id BIGSERIAL PRIMARY KEY,
   session_id TEXT UNIQUE NOT NULL,
+  page_path TEXT,
   user_agent TEXT,
   referrer TEXT,
   page_views INTEGER DEFAULT 1,
-  duration INTEGER, -- 초 단위
-  device_type TEXT,
+  duration INTEGER DEFAULT 0, -- 초 단위 (체류시간)
+  duration_seconds INTEGER DEFAULT 0, -- 호환성을 위한 별칭
+  device TEXT, -- 디바이스 타입 (Mobile, Tablet, Desktop)
+  device_type TEXT, -- 호환성
   browser TEXT,
   os TEXT,
+  screen_width INTEGER,
+  screen_height INTEGER,
   country TEXT,
   city TEXT,
   ip_address TEXT,

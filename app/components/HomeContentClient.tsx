@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, Suspense } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,7 +10,6 @@ import { useSupabase } from '@/lib/supabase-provider';
 import { applyCuratedApps } from './homeContentUtils';
 import FavoriteButton from './FavoriteButton';
 import AdSlot from './AdSlot';
-import GuestbookHeart from './GuestbookHeart';
 
 const HOME_CONTENT_MID_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID;
 const RECENT_UPDATES = [
@@ -357,17 +356,6 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
 
             {appsByCategory.map((category, categoryIndex) => (
               <div key={category.id} className="mb-14 space-y-6">
-                {/* 운세마음 카테고리 앞에 하트 표시 */}
-                {category.id === 'fortune-mind' && (
-                  <div className="flex justify-center mb-10">
-                    <div className="animate-float rounded-full bg-white/60 p-6 shadow-inner ring-1 ring-amber-100/45 dark:bg-gray-900/80 dark:ring-amber-500/20">
-                      <Suspense fallback={null}>
-                        <GuestbookHeart />
-                      </Suspense>
-                    </div>
-                  </div>
-                )}
-                
                 <div className="sticky top-16 z-20 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 mb-2 py-4 bg-[#fff6ed]/90 backdrop-blur-md border-b border-amber-200/70 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm dark:bg-gray-900/90 dark:border-amber-500/20">
                   <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">{category.name}</h3>
                   <span className="text-sm text-amber-700/80 font-medium dark:text-amber-300">

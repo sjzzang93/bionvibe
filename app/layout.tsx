@@ -104,7 +104,7 @@ export default function RootLayout({
         <GoogleAdSense publisherId={ADSENSE_PUBLISHER_ID} />
         
         <SupabaseProvider>
-          <AnalyticsTracker />
+          {/* <AnalyticsTracker /> - Temporarily disabled due to table schema mismatch */}
           <Navigation />
           {children}
           <TranslateButton />
