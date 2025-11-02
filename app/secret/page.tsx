@@ -244,6 +244,20 @@ export default function SecretPage() {
                 </p>
               </div>
             </Link>
+            <Link
+              href="/secret/claude-learning"
+              className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:border-amber-400 hover:shadow-2xl hover:shadow-amber-500/50 backdrop-blur-lg"
+            >
+              <div className="p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-3xl">📚</span>
+                </div>
+                <h3 className="text-lg font-bold text-white">Claude 학습 카드</h3>
+                <p className="mt-2 line-clamp-2 text-sm text-white/70">
+                  플래시카드로 Claude 기능 배우기
+                </p>
+              </div>
+            </Link>
           </div>
         </div>
 
