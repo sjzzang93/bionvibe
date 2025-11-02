@@ -42,15 +42,28 @@ export default function SimpleAuth({ onSuccess }: SimpleAuthProps) {
             email,
             password,
             options: {
-              emailRedirectTo: undefined, // 이메일 확인 불필요
+              emailRedirectTo: undefined,
+              data: {
+                email_confirmed: true, // 이메일 확인 건너뛰기
+              }
             }
           });
 
           if (signupError) {
-            setMessage(`❌ ${signupError.message}`);
+            setMessage(`❌ 회원가입 실패: ${signupError.message}`);
           } else {
-            setMessage('✅ 계정이 생성되었습니다!');
-            onSuccess?.();
+            // 회원가입 직후 자동 로그인 시도
+            const { data: autoLoginData, error: autoLoginError } = await supabase.auth.signInWithPassword({
+              email,
+              password,
+            });
+
+            if (autoLoginError) {
+              setMessage('✅ 계정이 생성되었습니다! 다시 로그인해주세요.');
+            } else {
+              setMessage('✅ 계정이 생성되었습니다!');
+              onSuccess?.();
+            }
           }
         } else {
           setMessage(`❌ ${loginError.message}`);
