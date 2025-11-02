@@ -941,6 +941,74 @@
         "color-finder-game",
         "nonsense-escape"
       ]
+    },
+    {
+      "id": "emotion-weather",
+      "name": "감정 날씨 예보",
+      "slug": "emotion-weather",
+      "icon": "🌦️",
+      "description": "당신의 감정 날씨를 3D로 시각화! 7일간 감정 예보와 바이오리듬 분석",
+      "categoryId": "fortune-mind",
+      "url": "/apps/emotion-weather",
+      "image": "https://images.unsplash.com/photo-1561484086-ba48c6a5ca3f?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "aura-color",
+        "emotion-diary",
+        "mood-cheer-up",
+        "color-psychology"
+      ]
+    },
+    {
+      "id": "dream-map",
+      "name": "꿈 지도 제작기",
+      "slug": "dream-map",
+      "icon": "🗺️",
+      "description": "당신의 꿈을 3D 우주 지도로! 꿈의 연결고리와 숨겨진 의미를 발견하세요",
+      "categoryId": "fortune-mind",
+      "url": "/apps/dream-map",
+      "image": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "dream-interpreter",
+        "today-fortune",
+        "past-life-job",
+        "sleep-analyzer"
+      ]
+    },
+    {
+      "id": "parallel-universe-simulator",
+      "name": "평행우주 시뮬레이터",
+      "slug": "parallel-universe-simulator",
+      "icon": "🌌",
+      "description": "당신의 선택이 만드는 무한한 가능성! 3D로 보는 평행우주 인생 시뮬레이션",
+      "categoryId": "fortune-mind",
+      "url": "/apps/parallel-universe-simulator",
+      "image": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "past-life-job",
+        "mbti-test",
+        "saju-mbti-jobs",
+        "today-fortune"
+      ]
+    },
+    {
+      "id": "voice-dna-analyzer",
+      "name": "목소리 DNA 분석기",
+      "slug": "voice-dna-analyzer",
+      "icon": "🧬",
+      "description": "목소리에 담긴 고유한 DNA를 3D로 시각화! AI가 분석하는 음성 성격 유형",
+      "categoryId": "fortune-mind",
+      "url": "/apps/voice-dna-analyzer",
+      "image": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "voice-fortune",
+        "voice-age",
+        "mbti-test",
+        "face-shape"
+      ]
     }
   ]
 }

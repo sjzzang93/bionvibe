@@ -1144,6 +1144,23 @@
         "name-rarity",
         "past-life-job"
       ]
+    },
+    {
+      "id": "life-os-checker",
+      "name": "인생 OS 버전 체커",
+      "slug": "life-os-checker",
+      "icon": "💻",
+      "description": "나를 컴퓨터 OS처럼 분석! RAM(기억력), CPU(사고력), GPU(창의력) 등 8가지 시스템 사양을 측정하고, 버그 리포트와 업데이트 권장사항을 확인하세요. 3D 시각화로 보는 나의 인생 버전은?",
+      "categoryId": "fortune-mind",
+      "url": "/apps/life-os-checker",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/mbti-test-1761160924095.webp",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "mbti-test",
+        "psychopath-test",
+        "sociopath-test",
+        "draw-psychology"
+      ]
     }
   ]
 }
