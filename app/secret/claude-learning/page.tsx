@@ -312,12 +312,61 @@ const cards: Card[] = [
 ];
 
 export default function ClaudeLearningPage() {
+  const [unlocked, setUnlocked] = useState(false);
+  const [password, setPassword] = useState("");
   const [mounted, setMounted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [completedCards, setCompletedCards] = useState<Set<number>>(new Set());
   const [currentFilter, setCurrentFilter] = useState<'all' | 'completed' | 'incomplete'>('all');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  // 비밀번호 검증
+  useEffect(() => {
+    const savedSession = localStorage.getItem("secret_session");
+    if (savedSession) {
+      const sessionData = JSON.parse(savedSession);
+      const now = Date.now();
+      const thirtyMinutes = 30 * 60 * 1000;
+
+      if (now - sessionData.timestamp < thirtyMinutes) {
+        setUnlocked(true);
+      } else {
+        localStorage.removeItem("secret_session");
+      }
+    }
+  }, []);
+
+  const handleUnlock = async () => {
+    try {
+      const response = await fetch('/api/secret/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setUnlocked(true);
+        localStorage.setItem(
+          "secret_session",
+          JSON.stringify({
+            timestamp: Date.now(),
+            token: data.token
+          })
+        );
+      } else {
+        alert("❌ " + (data.message || "비밀번호가 틀렸습니다!"));
+        setPassword("");
+      }
+    } catch (error) {
+      alert("❌ 인증 중 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error('Auth error:', error);
+    }
+  };
 
   // 필터링된 인덱스 계산
   const filteredIndices = useMemo(() => {
@@ -336,6 +385,7 @@ export default function ClaudeLearningPage() {
 
   // 초기 로드
   useEffect(() => {
+    if (!unlocked) return;
     setMounted(true);
     const savedTheme = localStorage.getItem('claude-learning-theme') as 'light' | 'dark' | null;
     if (savedTheme) {
@@ -449,6 +499,49 @@ export default function ClaudeLearningPage() {
   const handleFilterChange = (filter: 'all' | 'completed' | 'incomplete') => {
     setCurrentFilter(filter);
   };
+
+  if (!unlocked) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black flex items-center justify-center px-4">
+        <div className="w-full max-w-md">
+          <div className="rounded-3xl border border-white/20 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
+            <div className="mb-8 text-center">
+              <div className="mb-4 text-7xl animate-pulse">🔐</div>
+              <h1 className="mb-2 text-4xl font-extrabold text-white">Claude Code 완벽 가이드</h1>
+              <p className="text-gray-300">비밀번호를 입력하세요</p>
+            </div>
+
+            <div className="space-y-4">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleUnlock()}
+                placeholder="비밀번호 입력"
+                className="w-full rounded-xl border-2 border-white/30 bg-white/20 px-4 py-3 text-center text-lg font-mono text-white placeholder-white/50 outline-none focus:border-purple-400"
+                autoFocus
+              />
+
+              <button
+                type="button"
+                onClick={handleUnlock}
+                className="w-full rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 text-lg font-bold text-white transition-all hover:shadow-lg hover:shadow-purple-500/50"
+              >
+                🔓 열기
+              </button>
+
+              <Link
+                href="/secret"
+                className="block text-center text-sm text-white/70 hover:text-white transition-colors"
+              >
+                ← Secret Vault로 돌아가기
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!mounted) {
     return (
