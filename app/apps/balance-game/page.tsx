@@ -562,7 +562,7 @@ export default function BalanceGamePage() {
         )}
 
         {/* 관련 앱 */}
-        <RelatedApps currentAppId="balance-game" />
+        <RelatedApps currentAppSlug="balance-game" />
       </div>
 
       <style jsx global>{`
