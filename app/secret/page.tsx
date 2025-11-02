@@ -4,6 +4,7 @@ import { getAllAppsAsync, type App } from "@/lib/getApps";
 import { useSupabase } from "@/lib/supabase-provider";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import VisitorStats from "./components/VisitorStats";
 
 export default function SecretPage() {
   const [unlocked, setUnlocked] = useState(false);
@@ -46,6 +47,27 @@ export default function SecretPage() {
       }
     }
   }, []);
+
+  // 방문 추적 (언락된 후 한 번만 실행)
+  useEffect(() => {
+    if (unlocked) {
+      trackVisit();
+    }
+  }, [unlocked]);
+
+  const trackVisit = async () => {
+    try {
+      await fetch('/api/secret/track-visit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to track visit:', error);
+      // 추적 실패해도 페이지는 정상 동작
+    }
+  };
 
   useEffect(() => {
     if (!supabase) return;
@@ -224,6 +246,17 @@ export default function SecretPage() {
           <div className="mb-4 text-7xl animate-bounce">🔓</div>
           <h1 className="mb-4 text-5xl font-extrabold text-white">Secret Vault</h1>
           <p className="text-lg text-gray-300">특별한 웹앱들이 여기 숨어있어요 👀</p>
+        </div>
+
+        {/* Visitor Stats */}
+        <div className="mb-12">
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-3xl font-bold text-white">📈 방문자 통계</h2>
+            <span className="rounded-full bg-purple-500/20 px-4 py-2 text-sm font-semibold text-purple-200">
+              IP 기반 유니크 카운팅
+            </span>
+          </div>
+          <VisitorStats />
         </div>
 
         {/* Local Tools Section */}
