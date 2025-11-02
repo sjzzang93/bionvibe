@@ -99,3 +99,15 @@ GPT-5가 제공한 ID들 (front-fog-lamp, steering-fault 등)이 실제 JSON의 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+

@@ -25,12 +25,14 @@ export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => ({}));
     const pagePath = body.pagePath || '/';
 
-    // 오늘 날짜
-    const today = new Date().toISOString().split('T')[0];
+    // 오늘 날짜 (KST 기준으로 저장)
+    const now = new Date();
+    now.setHours(now.getHours() + 9); // KST
+    const today = now.toISOString().split('T')[0];
 
     // 모든 방문 기록 (재방문 포함, IP 중복 체크 제거)
     const { error } = await supabase
-      .from('app_views')
+      .from('page_views')
       .insert([{
         visitor_ip: visitorIp,
         user_agent: userAgent,
@@ -74,20 +76,20 @@ export async function GET(request: NextRequest) {
 
     // 오늘 활성 사용자 수 (재방문 포함)
     const { count: todayActiveUsers } = await supabase
-      .from('app_views')
+      .from('page_views')
       .select('*', { count: 'exact', head: true })
       .eq('date', today);
 
     // 오늘 신규 유입 (unique IP)
     const { data: todayUniqueData } = await supabase
-      .from('app_views')
+      .from('page_views')
       .select('visitor_ip')
       .eq('date', today);
     const todayUniqueVisitors = new Set(todayUniqueData?.map(v => v.visitor_ip) || []).size;
 
     // 전체 페이지뷰 (재방문 포함)
     const { count: totalPageViews } = await supabase
-      .from('app_views')
+      .from('page_views')
       .select('*', { count: 'exact', head: true });
 
     return NextResponse.json({

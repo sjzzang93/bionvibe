@@ -59,7 +59,12 @@ export default function NewsBriefingPage() {
     try {
       const response = await fetch('/api/crawl-news', { method: 'POST' });
       const result = await response.json();
-      if (result.success) {
+      if (result.success && result.news) {
+        // 배포 환경: 파일 저장이 되지 않으므로 API 응답을 바로 반영
+        setNewsData(result.news);
+        alert('✅ 최신 뉴스를 불러왔습니다!');
+      } else if (result.success) {
+        // 로컬: 파일 저장 후 로드
         await loadNews();
         alert('✅ 최신 뉴스를 불러왔습니다!');
       } else {
@@ -215,7 +220,13 @@ export default function NewsBriefingPage() {
                 </div>
 
                 {/* Headline */}
-                <h2 className="text-2xl md:text-3xl font-black text-neutral-900 mb-4 leading-tight hover:text-neutral-600 transition-colors cursor-pointer" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+                <h2
+                  className="text-2xl md:text-3xl font-black text-neutral-900 mb-4 leading-tight hover:text-neutral-600 transition-colors cursor-pointer"
+                  style={{
+                    fontFamily:
+                      '"Noto Serif KR", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Nanum Gothic", sans-serif'
+                  }}
+                >
                   <a href={article.link} target="_blank" rel="noopener noreferrer">
                     {article.title}
                   </a>
@@ -223,7 +234,10 @@ export default function NewsBriefingPage() {
 
                 {/* Summary */}
                 {article.summary && (
-                  <p className="text-base md:text-lg text-neutral-700 mb-6 leading-relaxed">
+                  <p className="text-base md:text-lg text-neutral-700 mb-6 leading-relaxed break-keep" style={{
+                    fontFamily:
+                      '"Noto Sans KR", "Apple SD Gothic Neo", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Nanum Gothic", sans-serif'
+                  }}>
                     {article.summary}
                   </p>
                 )}

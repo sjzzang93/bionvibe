@@ -8,7 +8,7 @@ const HOME_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP;
 
 export default function Home() {
   // totalApps는 HomeContent 내부에서 동적으로 계산됨
-  
+
   return (
     <div
       className="relative min-h-screen overflow-hidden bg-[#fff8ef] text-gray-900 transition-colors dark:bg-gray-950 dark:text-gray-100"

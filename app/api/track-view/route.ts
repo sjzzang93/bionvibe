@@ -74,7 +74,14 @@ export async function GET(request: NextRequest) {
       .select('*')
       .order('view_count', { ascending: false });
 
-    if (error) throw error;
+    // 테이블/컬럼 부재 등 에러가 있어도 프론트가 깨지지 않도록 200 + 빈 값 반환
+    if (error) {
+      console.warn('Error fetching views (soft-fail):', error);
+      return NextResponse.json({
+        data: [],
+        stats: { todayActivity: 0, totalViews: 0 }
+      });
+    }
 
     // 통계 계산
     const totalViews = data?.reduce((sum, app) => sum + (app.view_count || 0), 0) || 0;

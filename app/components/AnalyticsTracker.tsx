@@ -107,6 +107,13 @@ export default function AnalyticsTracker() {
 
     trackVisit();
 
+    // 서버 집계용 카운터(page_views)도 즉시 기록
+    fetch('/api/track-page-view', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pagePath: window.location.pathname })
+    }).catch(() => { /* ignore */ });
+
     // 페이지 로드 시간 기록
     startTimeRef.current = Date.now();
 
