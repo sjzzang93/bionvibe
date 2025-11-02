@@ -245,6 +245,11 @@ export default function ColorFinderGamePage() {
           animation-delay: 1s;
         }
       `}</style>
+
+      {/* 관련 앱 추천 */}
+      <div className="max-w-4xl mx-auto px-4 pb-12">
+        <RelatedApps currentAppSlug="color-finder-game" />
+      </div>
     </main>
   );
 }

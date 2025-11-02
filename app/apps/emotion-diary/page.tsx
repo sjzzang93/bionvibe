@@ -585,6 +585,11 @@ export default function EmotionDiaryPage() {
           </PremiumCard>
         </div>
       )}
+
+      {/* 관련 앱 추천 */}
+      <div className="mt-12">
+        <RelatedApps currentAppSlug="emotion-diary" />
+      </div>
     </PremiumLayout>
   );
 }

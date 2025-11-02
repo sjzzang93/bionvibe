@@ -8,7 +8,7 @@
       "description": "오늘의 감정과 상태를 입력하면 당신만의 오라 색상을 3D로 시각화해드립니다. 기운 히스토리를 기록하고 감정 패턴을 분석하세요.",
       "categoryId": "fortune-mind",
       "url": "/apps/aura-color",
-      "image": "https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/color-psychology-1761162904892.webp",
       "createdAt": "2025-10-29",
       "relatedApps": ["color-psychology", "emotion-diary", "mbti-test", "draw-psychology"]
     },
@@ -20,7 +20,7 @@
       "description": "HTP 그림 분석으로 당신의 마음 속을 들여다보세요",
       "categoryId": "fortune-mind",
       "url": "/apps/draw-psychology",
-      "image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/face-shape-1761161493081.webp",
       "createdAt": "2025-10-29",
       "relatedApps": [
         "color-psychology",
@@ -86,7 +86,7 @@
       "description": "35문항 테스트로 당신에게 딱 맞는 취미 추천",
       "categoryId": "fortune-mind",
       "url": "/apps/hobby-finder",
-      "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/arcade-mini-games-1761161678400.webp",
       "createdAt": "2025-01-26",
       "relatedApps": [
         "mbti-test",
@@ -884,7 +884,7 @@
       "description": "AI가 생성하는 행운의 번호",
       "categoryId": "money-calc",
       "url": "/apps/lotto-generator",
-      "image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/crypto-calculator-1761162273481.webp",
       "createdAt": "2025-10-26",
       "relatedApps": [
         "today-fortune",
@@ -900,7 +900,7 @@
       "description": "프로그래밍 핵심 용어를 쉬운 비유로 학습하세요. 초등학생도 이해할 수 있는 설명과 실전 코드 예시를 제공합니다.",
       "categoryId": "learning-tools",
       "url": "/apps/study-dev-vocab",
-      "image": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/typing-speed-test-1761161652099.webp",
       "createdAt": "2025-10-30",
       "hidden": true,
       "relatedApps": [
@@ -917,7 +917,7 @@
       "description": "매일 아침 업데이트되는 최신 뉴스를 3분 안에 빠르게 확인하세요. 정치, 경제, 사회, IT/과학 등 주요 카테고리별로 정리된 뉴스를 한눈에!",
       "categoryId": "fortune-mind",
       "url": "/apps/news-briefing",
-      "image": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/breakfast-what-to-eat-1761162396609.webp",
       "createdAt": "2025-10-30",
       "relatedApps": [
         "aura-color",
@@ -933,7 +933,7 @@
       "description": "결혼 생활의 위험 신호를 조기에 발견하세요. 의사소통, 재정, 정서적 안전 등 13개 영역을 점검하고 맞춤 솔루션을 제공합니다.",
       "categoryId": "family-life",
       "url": "/apps/divorce-prevention",
-      "image": "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/emotion-diary-1761423332269.webp",
       "createdAt": "2025-10-30",
       "relatedApps": [
         "mbti-test",
@@ -949,7 +949,7 @@
       "description": "3D 비주얼로 자기 인식을 탐험하세요. 15개 영역(가치관, 행복, 강점, 몰입, 에너지 등)을 분석하고, 당신의 마음 상태를 입체적인 오라로 시각화합니다.",
       "categoryId": "fortune-mind",
       "url": "/apps/inner-dialog",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
+      "image": "https://vfoecqunkmqxktgywkdp.supabase.co/storage/v1/object/public/app-images/dream-interpreter-1761161241812.webp",
       "createdAt": "2025-10-30",
       "relatedApps": [
         "aura-color",

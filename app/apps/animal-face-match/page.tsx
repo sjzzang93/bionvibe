@@ -353,6 +353,11 @@ export default function AnimalFaceMatchPage() {
           animation-delay: 1s;
         }
       `}</style>
+
+      {/* 관련 앱 추천 */}
+      <div className="max-w-5xl mx-auto px-4 pb-12">
+        <RelatedApps currentAppSlug="animal-face-match" />
+      </div>
     </main>
   );
 }

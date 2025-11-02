@@ -431,6 +431,11 @@ export default function FridgeRecipePage() {
           animation-delay: 1s;
         }
       `}</style>
+
+      {/* 관련 앱 추천 */}
+      <div className="max-w-6xl mx-auto px-4 pb-12">
+        <RelatedApps currentAppSlug="fridge-recipe" />
+      </div>
     </main>
   );
 }
