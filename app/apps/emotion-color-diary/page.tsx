@@ -210,7 +210,7 @@ export default function EmotionColorDiary() {
             </h1>
             <p className="text-xl text-white/80 mb-8">하루의 감정을 색으로 표현하세요</p>
             <p className="text-white/70 mb-4">
-              📝 감정 일기를 작성하고 저장하려면 로그인이 필요합니다
+              📝 나만의 아이디와 비밀번호로 일기를 안전하게 저장하세요
             </p>
           </div>
 
@@ -249,7 +249,7 @@ export default function EmotionColorDiary() {
           <p className="text-xl text-white/80">하루의 감정을 색으로 표현하세요</p>
           <div className="mt-4 flex justify-center items-center gap-3">
             <span className="text-white/70 text-sm">
-              {user.email}
+              👤 {user.email?.split('@')[0]}
             </span>
             <button
               type="button"
