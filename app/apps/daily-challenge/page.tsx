@@ -73,23 +73,67 @@ const CHALLENGES = {
   ],
 };
 
+// 사용자 고유 ID 생성 또는 가져오기
+function getUserId() {
+  if (typeof window === 'undefined') return 'default';
+
+  let userId = localStorage.getItem('user_unique_id');
+  if (!userId) {
+    // 랜덤 고유 ID 생성 (UUID 스타일)
+    userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 15);
+    localStorage.setItem('user_unique_id', userId);
+  }
+  return userId;
+}
+
+// 시드 기반 랜덤 함수 (같은 시드면 항상 같은 결과)
+function seededRandom(seed: string): number {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    const char = seed.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  const x = Math.sin(hash) * 10000;
+  return x - Math.floor(x);
+}
+
 function getDailyChallenge() {
-  const today = new Date().toDateString();
-  const categories = Object.keys(CHALLENGES);
-  const categoryIndex = new Date(today).getDate() % categories.length;
-  const category = categories[categoryIndex];
-  const challengeList = CHALLENGES[category as keyof typeof CHALLENGES];
-  const challengeIndex = Math.floor(new Date(today).getTime() / 1000 / 60 / 60 / 24) % challengeList.length;
-  return { ...challengeList[challengeIndex], category };
+  // 오늘 날짜 (YYYY-MM-DD 형식)
+  const today = new Date();
+  const dateString = today.getFullYear() + '-' +
+                     String(today.getMonth() + 1).padStart(2, '0') + '-' +
+                     String(today.getDate()).padStart(2, '0');
+
+  // 사용자 ID + 날짜로 고유 시드 생성
+  const userId = getUserId();
+  const seed = userId + '_' + dateString;
+
+  // 모든 챌린지를 하나의 배열로 합치기
+  const allChallenges: Array<{title: string; emoji: string; description: string; difficulty: string; category: string}> = [];
+  Object.entries(CHALLENGES).forEach(([category, challenges]) => {
+    challenges.forEach(challenge => {
+      allChallenges.push({ ...challenge, category });
+    });
+  });
+
+  // 시드 기반으로 챌린지 선택
+  const randomValue = seededRandom(seed);
+  const challengeIndex = Math.floor(randomValue * allChallenges.length);
+
+  return allChallenges[challengeIndex];
 }
 
 export default function DailyChallenge() {
-  const [todayChallenge, setTodayChallenge] = useState(getDailyChallenge());
+  const [todayChallenge, setTodayChallenge] = useState<any>(null);
   const [isCompleted, setIsCompleted] = useState(false);
   const [history, setHistory] = useState<any[]>([]);
   const [streak, setStreak] = useState(0);
 
   useEffect(() => {
+    // 클라이언트 사이드에서만 챌린지 로드
+    setTodayChallenge(getDailyChallenge());
+
     const saved = localStorage.getItem('daily_challenge_history');
     if (saved) {
       const data = JSON.parse(saved);
@@ -164,6 +208,20 @@ export default function DailyChallenge() {
     }
   };
 
+  // 로딩 상태
+  if (!todayChallenge) {
+    return (
+      <PremiumLayout theme="green">
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="text-center">
+            <div className="text-7xl mb-4 animate-bounce-slow">🎯</div>
+            <p className="text-white text-xl">오늘의 챌린지를 불러오는 중...</p>
+          </div>
+        </div>
+      </PremiumLayout>
+    );
+  }
+
   return (
     <PremiumLayout theme="green">
       <div className="max-w-4xl mx-auto px-4 py-8">
@@ -172,7 +230,7 @@ export default function DailyChallenge() {
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-green-200 via-blue-200 to-purple-200 bg-clip-text text-transparent">
             🎯 오늘의 챌린지
           </h1>
-          <p className="text-xl text-white/80">매일 새로운 미션으로 성장하세요</p>
+          <p className="text-xl text-white/80">매일 나만의 새로운 미션으로 성장하세요</p>
         </div>
 
         {/* 오늘의 챌린지 카드 */}
@@ -264,8 +322,12 @@ export default function DailyChallenge() {
           <h4 className="text-white font-bold text-xl mb-4 text-center">💡 챌린지 성공 팁</h4>
           <div className="space-y-3 text-white/80 text-sm">
             <div className="flex items-start gap-3">
-              <span className="text-2xl">🎯</span>
-              <p>아침에 일어나자마자 오늘의 챌린지를 확인하세요</p>
+              <span className="text-2xl">🎲</span>
+              <p>매일 자정마다 나만의 랜덤 챌린지가 바뀝니다!</p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">👥</span>
+              <p>다른 사람들은 다른 챌린지를 받아요 (총 52종류!)</p>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-2xl">⏰</span>

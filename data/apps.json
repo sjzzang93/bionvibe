@@ -1009,6 +1009,23 @@
         "mbti-test",
         "face-shape"
       ]
+    },
+    {
+      "id": "ai-twenty-questions",
+      "name": "AI 스무고개",
+      "slug": "ai-twenty-questions",
+      "icon": "🎯",
+      "description": "AI와 함께하는 스무고개 게임! 20번의 질문으로 정답을 맞춰보세요. 난이도 선택, 카테고리별 문제, 힌트 시스템, 전적 통계까지!",
+      "categoryId": "learning-tools",
+      "url": "/apps/ai-twenty-questions",
+      "image": "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "balance-game",
+        "nonsense-escape",
+        "iq-test",
+        "arcade-mini-games"
+      ]
     }
   ]
 }

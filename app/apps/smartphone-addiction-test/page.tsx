@@ -187,6 +187,11 @@ export default function SmartphoneAddictionTestPage() {
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-sm text-gray-600 dark:text-gray-300">
             진행률: {Object.keys(answers).length}/{QUESTIONS.length} 문항 완료
+            {!allAnswered && (
+              <span className="ml-2 text-rose-600 dark:text-rose-400">
+                (모든 문항에 답해주세요)
+              </span>
+            )}
           </div>
           <div className="flex gap-2">
             <button
@@ -201,7 +206,10 @@ export default function SmartphoneAddictionTestPage() {
               disabled={!allAnswered}
               onClick={handleSubmit}
               className={clsx(
-                'rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 px-6 py-2 text-sm font-semibold text-white shadow-lg transition hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-40 dark:from-amber-400 dark:via-orange-400 dark:to-rose-400',
+                'rounded-xl px-6 py-2 text-sm font-semibold text-white shadow-lg transition',
+                allAnswered
+                  ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 hover:shadow-xl dark:from-amber-400 dark:via-orange-400 dark:to-rose-400'
+                  : 'cursor-not-allowed bg-gray-400 opacity-50 dark:bg-gray-600',
               )}
             >
               결과 보기
