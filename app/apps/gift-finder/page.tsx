@@ -654,7 +654,7 @@ export default function GiftFinderPage() {
         {/* 안내 */}
         <div className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-white/70 space-y-1 sm:space-y-2">
           <p>💡 실제 구매 전 받는 분의 취향을 다시 한번 확인해보세요!</p>
-          <p className="text-[10px] sm:text-xs">📊 200개 이상의 선물 데이터 기반 추천 시스템</p>
+          <p className="text-xs sm:text-sm">📊 200개 이상의 선물 데이터 기반 추천 시스템</p>
         </div>
 
       </div>

@@ -195,7 +195,7 @@ export default function HealthSupplementRecommend() {
                           >
                             <div className="flex items-start justify-between mb-0.5 sm:mb-1.5 md:mb-2">
                               <div className="flex-1">
-                                <h5 className="text-white font-bold text-[10px] sm:text-xs md:text-sm mb-2">{supp.name}</h5>
+                                <h5 className="text-white font-bold text-sm sm:text-base md:text-lg mb-2">{supp.name}</h5>
                                 <div className="flex gap-2 flex-wrap">
                                   <span className={`${getPriorityColor(supp.priority)} text-white px-3 py-1 rounded-full text-xs font-bold`}>
                                     {supp.priority}
@@ -262,7 +262,7 @@ export default function HealthSupplementRecommend() {
 
               {/* 주의사항 */}
               <PremiumCard className="bg-yellow-500/20 border-2 border-yellow-400/30">
-                <h4 className="text-white font-bold text-[10px] sm:text-xs md:text-sm mb-0.5 sm:mb-1.5 md:mb-2">⚠️ 중요 안내사항</h4>
+                <h4 className="text-white font-bold text-sm sm:text-base md:text-lg mb-0.5 sm:mb-1.5 md:mb-2">⚠️ 중요 안내사항</h4>
                 <ul className="space-y-2 text-white/90 text-sm">
                   <li>• 이 추천은 일반적인 정보 제공 목적이며 의학적 조언이 아닙니다</li>
                   <li>• 기저질환이 있거나 약물을 복용 중인 경우 반드시 전문의와 상담하세요</li>

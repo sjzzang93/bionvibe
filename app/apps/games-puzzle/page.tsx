@@ -253,7 +253,7 @@ function SudokuGame({ onBack }: { onBack: () => void }) {
         type="button"
                   key={`${i}-${j}`}
                   onClick={() => handleCellClick(i, j)}
-                  className={`aspect-square flex items-center justify-center font-bold text-[10px] sm:text-xs md:text-sm sm:text-xl border border-gray-400 ${getCellColor(i, j)} ${
+                  className={`aspect-square flex items-center justify-center font-bold text-base sm:text-lg md:text-xl border border-gray-400 ${getCellColor(i, j)} ${
                     (i % 3 === 2 && i !== 8) && (j % 3 === 2 && j !== 8) ? 'border-r-2 border-b-2 border-black' :
                     (i % 3 === 2 && i !== 8) ? 'border-b-2 border-black' :
                     (j % 3 === 2 && j !== 8) ? 'border-r-2 border-black' : ''

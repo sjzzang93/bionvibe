@@ -214,7 +214,7 @@ export default function FaceShapeAnalysisPage() {
                 <div className="relative backdrop-blur-md bg-white/5 border-2 border-dashed border-white/30 rounded-3xl p-8 md:p-12 text-center transition-all duration-300 hover:border-white/50 hover:bg-white/10">
                   <div className="text-7xl md:text-8xl mb-6 filter drop-shadow-lg animate-float">📸</div>
                   <h3 className="text-white text-xl md:text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">얼굴 사진을 업로드하세요</h3>
-                  <p className="text-purple-200 text-[10px] sm:text-xs md:text-sm mb-8 max-w-md mx-auto">
+                  <p className="text-purple-200 text-sm sm:text-base md:text-lg mb-8 max-w-md mx-auto">
                     정면 얼굴이 선명한 사진일수록 더 정확한 분석 결과를 받을 수 있습니다
                   </p>
                   
@@ -317,7 +317,7 @@ export default function FaceShapeAnalysisPage() {
               <Section title="✨ 주요 특징" delay="0.3s">
                 <ul className="space-y-3">
                   {result.characteristics.map((char, i) => (
-                    <li key={i} className="flex items-start gap-3 text-purple-50 text-[10px] sm:text-xs md:text-sm group hover:translate-x-2 transition-transform duration-200">
+                    <li key={i} className="flex items-start gap-3 text-purple-50 text-sm sm:text-base md:text-lg group hover:translate-x-2 transition-transform duration-200">
                       <span className="text-purple-300 mt-1 group-hover:scale-125 transition-transform">•</span>
                       <span className="flex-1">{char}</span>
                     </li>
@@ -441,7 +441,7 @@ export default function FaceShapeAnalysisPage() {
                 <h3 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
                   <span>💡</span> 전문가의 종합 조언
                 </h3>
-                <p className="text-purple-50 text-[10px] sm:text-xs md:text-sm leading-relaxed">{result.professionalAdvice}</p>
+                <p className="text-purple-50 text-sm sm:text-base md:text-lg leading-relaxed">{result.professionalAdvice}</p>
               </div>
 
               {/* 다시 하기 버튼 */}

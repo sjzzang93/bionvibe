@@ -248,7 +248,7 @@ export default function MBTIAIChatPage() {
                   <div className="text-xs sm:text-sm text-white/70 mb-1">
                     {persona.name}
                   </div>
-                  <div className="text-[10px] sm:text-xs text-white/50 leading-tight">
+                  <div className="text-xs sm:text-sm text-white/50 leading-tight">
                     {persona.description}
                   </div>
                 </div>

@@ -88,13 +88,13 @@ export default function MoodCheerUpPage() {
                     >
                       <h4 className="text-white font-bold text-sm md:text-base mb-2">{action.action}</h4>
                       <div className="flex flex-wrap gap-1 md:gap-2 mb-2">
-                        <span className="bg-green-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs font-bold">
+                        <span className="bg-green-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-sm md:text-xs font-bold">
                           효과 {action.effectiveness}/10
                         </span>
-                        <span className="bg-blue-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs">
+                        <span className="bg-blue-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-sm md:text-xs">
                           ⏱️ {action.duration}
                         </span>
-                        <span className="bg-purple-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[10px] md:text-xs">
+                        <span className="bg-purple-500 text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-sm md:text-xs">
                           {action.difficulty}
                         </span>
                       </div>
@@ -102,7 +102,7 @@ export default function MoodCheerUpPage() {
                         <p className="text-white/80 font-bold text-xs md:text-sm mb-1 md:mb-2">방법:</p>
                         <ul className="space-y-0.5 md:space-y-1">
                           {action.howTo.map((how: string, hIdx: number) => (
-                            <li key={hIdx} className="text-white/70 text-[10px] md:text-xs flex items-start gap-1 md:gap-2">
+                            <li key={hIdx} className="text-white/70 text-sm md:text-xs flex items-start gap-1 md:gap-2">
                               <span>•</span>
                               <span>{how}</span>
                             </li>

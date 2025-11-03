@@ -344,28 +344,28 @@ export default function FaceFortune() {
                 </div>
                 <div className="grid grid-cols-5 gap-2 text-xs text-center">
                   <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '목' ? 'bg-green-700/60 border-green-400' : 'bg-green-900/40 border-green-600/30'}`}>
-                    <p className="text-green-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">木</p>
-                    <p className="text-green-200 text-[10px]">목</p>
+                    <p className="text-green-300 font-bold text-sm sm:text-base md:text-lg mb-1">木</p>
+                    <p className="text-green-200 text-sm">목</p>
                     <p className="text-gray-400 text-[9px] mt-1">성장</p>
                   </div>
                   <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '화' ? 'bg-red-700/60 border-red-400' : 'bg-red-900/40 border-red-600/30'}`}>
-                    <p className="text-red-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">火</p>
-                    <p className="text-red-200 text-[10px]">화</p>
+                    <p className="text-red-300 font-bold text-sm sm:text-base md:text-lg mb-1">火</p>
+                    <p className="text-red-200 text-sm">화</p>
                     <p className="text-gray-400 text-[9px] mt-1">열정</p>
                   </div>
                   <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '토' ? 'bg-yellow-700/60 border-yellow-400' : 'bg-yellow-900/40 border-yellow-600/30'}`}>
-                    <p className="text-yellow-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">土</p>
-                    <p className="text-yellow-200 text-[10px]">토</p>
+                    <p className="text-yellow-300 font-bold text-sm sm:text-base md:text-lg mb-1">土</p>
+                    <p className="text-yellow-200 text-sm">토</p>
                     <p className="text-gray-400 text-[9px] mt-1">안정</p>
                   </div>
                   <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '금' ? 'bg-gray-600/60 border-gray-300' : 'bg-gray-700/40 border-gray-500/30'}`}>
-                    <p className="text-gray-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">金</p>
-                    <p className="text-gray-200 text-[10px]">금</p>
+                    <p className="text-gray-300 font-bold text-sm sm:text-base md:text-lg mb-1">金</p>
+                    <p className="text-gray-200 text-sm">금</p>
                     <p className="text-gray-400 text-[9px] mt-1">권위</p>
                   </div>
                   <div className={`rounded-lg p-2 sm:p-3 border ${result.element === '수' ? 'bg-blue-700/60 border-blue-400' : 'bg-blue-900/40 border-blue-600/30'}`}>
-                    <p className="text-blue-300 font-bold text-[10px] sm:text-xs md:text-sm mb-1">水</p>
-                    <p className="text-blue-200 text-[10px]">수</p>
+                    <p className="text-blue-300 font-bold text-sm sm:text-base md:text-lg mb-1">水</p>
+                    <p className="text-blue-200 text-sm">수</p>
                     <p className="text-gray-400 text-[9px] mt-1">지혜</p>
                   </div>
                 </div>

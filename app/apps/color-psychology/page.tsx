@@ -554,7 +554,7 @@ export default function ColorPsychology() {
                       className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl md:rounded-2xl p-4 sm:p-5 md:p-6 text-center min-w-[80px] sm:min-w-[90px] md:min-w-[100px] shadow-xl border-2 border-white/30"
                     >
                       <div className="text-2xl sm:text-3xl md:text-4xl font-black text-white">{type}</div>
-                      <div className="text-white/80 text-[10px] sm:text-xs mt-1 md:mt-2">
+                      <div className="text-white/80 text-xs sm:text-sm mt-1 md:mt-2">
                         {i === 0 ? '가능성 높음' : i === 1 ? '다음 가능성' : '참고'}
                       </div>
                     </div>

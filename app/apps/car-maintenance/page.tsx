@@ -89,7 +89,7 @@ export default function CarWarningLightsPage() {
                       
                       {/* 위험도 */}
                       <div className="flex-shrink-0 hidden sm:block">
-                        <span className={`inline-block px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold ${style.badge} text-white`}>
+                        <span className={`inline-block px-2 py-1 md:px-3 md:py-1.5 rounded-full text-sm md:text-xs font-bold ${style.badge} text-white`}>
                           {style.icon} {light.risk}
                         </span>
                       </div>

@@ -173,7 +173,7 @@ export default function PalmReading() {
                 <div className="relative backdrop-blur-md bg-amber-900/10 border-2 border-dashed border-amber-400/40 rounded-3xl p-8 md:p-12 text-center transition-all duration-300 hover:border-amber-400/60 hover:bg-amber-900/20">
                   <div className="text-7xl md:text-8xl mb-6 filter drop-shadow-lg animate-float">🖐️</div>
                   <h3 className="text-white text-xl md:text-2xl font-bold mb-0.5 sm:mb-1.5 md:mb-2">손바닥 사진을 업로드하세요</h3>
-                  <p className="text-amber-200 text-[10px] sm:text-xs md:text-sm mb-8 max-w-md mx-auto">
+                  <p className="text-amber-200 text-sm sm:text-base md:text-lg mb-8 max-w-md mx-auto">
                     손바닥이 선명하게 보이는 사진일수록 더 정확한 분석 결과를 받을 수 있습니다
                   </p>
                   
@@ -630,7 +630,7 @@ export default function PalmReading() {
                 <h3 className="text-white text-xl font-bold mb-4 flex items-center gap-2">
                   <span>💡</span> 전문가의 종합 조언
                 </h3>
-                <p className="text-amber-50 text-[10px] sm:text-xs md:text-sm leading-relaxed mb-4">{result.expertAdvice}</p>
+                <p className="text-amber-50 text-sm sm:text-base md:text-lg leading-relaxed mb-4">{result.expertAdvice}</p>
                 <div className="bg-amber-900/30 p-2 md:p-4 rounded-xl border border-amber-500/30">
                   <p className="text-amber-100 text-sm leading-relaxed">{result.specialNote}</p>
                 </div>

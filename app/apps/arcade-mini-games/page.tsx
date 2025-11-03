@@ -148,7 +148,7 @@ function TicTacToe({ onBack }: { onBack: () => void }) {
         <button
         type="button"
           onClick={resetGame}
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
+          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-bold text-base sm:text-lg hover:shadow-lg transition-all min-h-[48px]"
         >
           다시 시작
         </button>
@@ -229,7 +229,7 @@ function MemoryGame({ onBack }: { onBack: () => void }) {
         <button
         type="button"
           onClick={resetGame}
-          className="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all"
+          className="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-4 rounded-xl font-bold text-base sm:text-lg hover:shadow-lg transition-all min-h-[48px]"
         >
           다시 시작
         </button>
@@ -392,8 +392,7 @@ function SnakeGame({ onBack }: { onBack: () => void }) {
           <button
         type="button"
             onClick={startGame}
-            className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm hover:shadow-lg transition-all mb-4"
-            style={{ minHeight: '48px' }}
+            className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-xl font-bold text-base sm:text-lg hover:shadow-lg transition-all mb-4 min-h-[48px]"
           >
             {gameOver ? `게임 오버! 다시 시작 (점수: ${score})` : '게임 시작'}
           </button>

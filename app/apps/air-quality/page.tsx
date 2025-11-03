@@ -207,8 +207,8 @@ export default function AirQuality() {
 
             {/* 상세 측정값 */}
             <div className="mb-6">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-4">📊 상세 측정값</h3>
-              <div className="grid grid-cols-3 gap-0 sm:gap-1.5 md:gap-3">
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-gray-800 mb-4">📊 상세 측정값</h3>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
                 <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg p-4 border border-purple-200">
                   <div className="text-sm text-gray-600 mb-1">미세먼지 PM10</div>
                   <div className="text-2xl font-bold text-black">{data.pm10}</div>
@@ -249,7 +249,7 @@ export default function AirQuality() {
 
             {/* 건강 조언 */}
             <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-200">
-              <h3 className="font-bold text-[10px] sm:text-xs md:text-sm text-gray-800 mb-0.5 sm:mb-1.5 md:mb-2">💡 건강 조언</h3>
+              <h3 className="font-bold text-sm sm:text-base md:text-lg text-gray-800 mb-2">💡 건강 조언</h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li>• {gradeInfo.grade === '최고' || gradeInfo.grade === '좋음' ? '마스크 없이 활동 가능' : 'KF94 마스크 착용 권장'}</li>
                 <li>• {data.pm25 > 75 ? '실내 공기청정기 가동' : '창문을 열어 환기'}</li>
@@ -258,11 +258,11 @@ export default function AirQuality() {
               </ul>
             </div>
 
-            <div className="flex gap-0 sm:gap-1.5 md:gap-3">
+            <div className="flex gap-3">
               <button
         type="button"
                 onClick={() => setData(null)}
-                className="flex-1 py-4 bg-gray-500 hover:bg-gray-600 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
+                className="flex-1 py-4 bg-gray-500 hover:bg-gray-600 text-white font-bold text-sm sm:text-base rounded-lg shadow-lg hover:shadow-xl transition-all min-h-[48px]"
               >
                 뒤로
               </button>
@@ -272,7 +272,7 @@ export default function AirQuality() {
                   setData(null);
                   measureAirQuality();
                 }}
-                className="flex-[2] py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all"
+                className="flex-[2] py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-sm sm:text-base rounded-lg shadow-lg hover:shadow-xl transition-all min-h-[48px]"
               >
                 🔄 다시 측정하기
               </button>
@@ -296,7 +296,7 @@ export default function AirQuality() {
           </header>
 
           <div className="mb-6 p-4 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-lg border border-cyan-300">
-            <h3 className="font-bold text-black mb-0.5 sm:mb-1.5 md:mb-2">📍 측정 항목</h3>
+            <h3 className="font-bold text-black mb-2 text-sm sm:text-base">📍 측정 항목</h3>
             <div className="grid grid-cols-3 gap-2 text-sm text-black">
               <div>✓ 미세먼지 (PM10)</div>
               <div>✓ 초미세먼지 (PM2.5)</div>
@@ -336,7 +336,7 @@ export default function AirQuality() {
               <button
         type="button"
                 onClick={measureAirQuality}
-                className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-[10px] sm:text-xs md:text-sm rounded-lg shadow-lg hover:shadow-xl transition-all mb-4"
+                className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-bold text-base sm:text-lg rounded-lg shadow-lg hover:shadow-xl transition-all mb-4 min-h-[48px]"
               >
                 📍 내 위치 공기질 측정
               </button>

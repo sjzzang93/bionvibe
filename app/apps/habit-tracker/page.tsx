@@ -493,7 +493,7 @@ function HabitTracker({ userId, onLogout }: { userId: string; onLogout: () => vo
                   <button
         type="button"
                     onClick={() => toggleCheck(habit.id)}
-                    className={`w-full py-4 rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all ${
+                    className={`w-full py-4 rounded-xl font-bold text-sm sm:text-base md:text-lg transition-all min-h-[48px] ${
                       isChecked
                         ? 'bg-green-500 hover:bg-green-600 text-white'
                         : 'bg-white hover:bg-gray-100 text-green-600'

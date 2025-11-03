@@ -165,8 +165,8 @@ export default function Page(){
                         style={{ backgroundColor: toCssHsl(result.color) }}
                       />
                       <div className="min-w-0 flex-1">
-                        <div className="font-mono text-white font-semibold text-[10px] sm:text-xs truncate">{toCssHsl(result.color)}</div>
-                        <div className="text-white/60 text-[10px] sm:text-xs">H:{Math.round(result.color.h)}° S:{Math.round(result.color.s*100)}% L:{Math.round(result.color.l*100)}%</div>
+                        <div className="font-mono text-white font-semibold text-xs sm:text-sm truncate">{toCssHsl(result.color)}</div>
+                        <div className="text-white/60 text-xs sm:text-sm">H:{Math.round(result.color.h)}° S:{Math.round(result.color.s*100)}% L:{Math.round(result.color.l*100)}%</div>
                       </div>
                     </div>
                   </div>
@@ -178,8 +178,8 @@ export default function Page(){
                         style={{ backgroundColor: toCssHsl(result.secondary) }}
                       />
                       <div className="min-w-0 flex-1">
-                        <div className="font-mono text-white font-semibold text-[10px] sm:text-xs truncate">{toCssHsl(result.secondary)}</div>
-                        <div className="text-white/60 text-[10px] sm:text-xs">H:{Math.round(result.secondary.h)}° S:{Math.round(result.secondary.s*100)}% L:{Math.round(result.secondary.l*100)}%</div>
+                        <div className="font-mono text-white font-semibold text-xs sm:text-sm truncate">{toCssHsl(result.secondary)}</div>
+                        <div className="text-white/60 text-xs sm:text-sm">H:{Math.round(result.secondary.h)}° S:{Math.round(result.secondary.s*100)}% L:{Math.round(result.secondary.l*100)}%</div>
                       </div>
                     </div>
                   </div>
@@ -189,7 +189,7 @@ export default function Page(){
                   </div>
                   <div className="rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 p-3 sm:p-4">
                     <div className="text-white/60 text-xs sm:text-sm mb-2">태그</div>
-                    <div className="text-[10px] sm:text-xs text-white/90 leading-relaxed">{result.tags.join(" · ")}</div>
+                    <div className="text-xs sm:text-sm text-white/90 leading-relaxed">{result.tags.join(" · ")}</div>
                   </div>
                 </div>
               </div>
@@ -279,18 +279,18 @@ export default function Page(){
                       className="rounded-2xl p-3 sm:p-4 bg-white/5 backdrop-blur-sm border border-white/10
                                transform transition-all duration-300 hover:scale-105 hover:bg-white/10 active:scale-100"
                     >
-                      <div className="text-[10px] sm:text-xs text-white/60 mb-2 truncate">{new Date(it.ts).toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
+                      <div className="text-xs sm:text-sm text-white/60 mb-2 truncate">{new Date(it.ts).toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
                       <div className="flex items-center gap-2 mb-2">
                         <span
                           className="inline-block w-5 h-5 sm:w-6 sm:h-6 rounded-full ring-2 ring-white/30 flex-shrink-0"
                           style={{background: it.color}}
                         />
-                        <span className="font-mono text-[10px] sm:text-xs text-white/80 truncate">{it.color}</span>
+                        <span className="font-mono text-xs sm:text-sm text-white/80 truncate">{it.color}</span>
                       </div>
                       <div className="text-xs sm:text-sm text-white mb-2">
                         점수: <span className="font-bold text-base sm:text-lg">{it.score}</span>
                       </div>
-                      <div className="text-[10px] sm:text-xs text-white/70 flex flex-wrap gap-1">
+                      <div className="text-xs sm:text-sm text-white/70 flex flex-wrap gap-1">
                         <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white/10">{it.inputs.mood}</span>
                         <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white/10">{it.inputs.weather}</span>
                         <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full bg-white/10">{it.inputs.person}</span>
@@ -310,7 +310,7 @@ export default function Page(){
           </div>
         </div>
 
-        <footer className="pt-6 sm:pt-8 pb-8 sm:pb-12 text-center text-white/40 text-[10px] sm:text-xs">
+        <footer className="pt-6 sm:pt-8 pb-8 sm:pb-12 text-center text-white/40 text-xs sm:text-sm">
           <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
             <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
             <span className="text-xs sm:text-sm">BION VIBE • 나의 기운색</span>

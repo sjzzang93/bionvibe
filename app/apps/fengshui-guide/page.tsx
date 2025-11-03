@@ -36,7 +36,7 @@ export default function FengshuiGuidePage() {
             <h1 className="text-base sm:text-2xl md:text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
               🏠 내집 풍수지리 보기
             </h1>
-            <p className="text-[10px] sm:text-xs md:text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300">
               과학적 해석과 체크리스트로 배우는 현대 풍수 (2025년판)
             </p>
           </div>
@@ -1245,7 +1245,7 @@ function FloorPlanDesigner() {
     <div className="space-y-4 md:space-y-6">
       <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl p-4 md:p-6 shadow-lg">
         <h2 className="text-xl md:text-2xl font-bold mb-2 md:mb-0.5 sm:mb-1.5 md:mb-2">🏠 인터랙티브 도면 설계</h2>
-        <p className="text-[10px] sm:text-xs md:text-sm">{isMobile ? '터치로 방을 이동하세요' : '방을 드래그하여 배치하고, 풍수지리 분석을 받아보세요'}</p>
+        <p className="text-sm sm:text-base md:text-lg">{isMobile ? '터치로 방을 이동하세요' : '방을 드래그하여 배치하고, 풍수지리 분석을 받아보세요'}</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-4 md:gap-6">

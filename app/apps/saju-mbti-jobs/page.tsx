@@ -673,18 +673,18 @@ export default function SajuMBTIJobs() {
                 <div className="relative bg-gradient-to-br from-red-600/80 to-red-700/80 backdrop-blur-lg rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center border-2 border-white/30 hover:scale-105 transition-all duration-300 group"
                      style={{ boxShadow: '0 10px 30px rgba(220, 38, 38, 0.5)' }}>
                   <div className="absolute inset-0 bg-white/10 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="relative text-[10px] sm:text-xs text-white/80 mb-2 font-bold">천간 (天干)</div>
+                  <div className="relative text-xs sm:text-sm text-white/80 mb-2 font-bold">천간 (天干)</div>
                   <div className="relative text-2xl sm:text-3xl font-black text-white mb-2">{result.yearPillar.stem.name}</div>
                   <div className="relative text-xs sm:text-sm text-white/90 mb-1">{result.yearPillar.stem.nature}</div>
-                  <div className="relative text-[10px] sm:text-xs text-white/70">{result.yearPillar.stem.trait}</div>
+                  <div className="relative text-xs sm:text-sm text-white/70">{result.yearPillar.stem.trait}</div>
                 </div>
                 <div className="relative bg-gradient-to-br from-orange-600/80 to-amber-700/80 backdrop-blur-lg rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center border-2 border-white/30 hover:scale-105 transition-all duration-300 group"
                      style={{ boxShadow: '0 10px 30px rgba(234, 88, 12, 0.5)' }}>
                   <div className="absolute inset-0 bg-white/10 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="relative text-[10px] sm:text-xs text-white/80 mb-2 font-bold">지지 (地支)</div>
+                  <div className="relative text-xs sm:text-sm text-white/80 mb-2 font-bold">지지 (地支)</div>
                   <div className="relative text-2xl sm:text-3xl font-black text-white mb-2">{result.yearPillar.branch.name}</div>
                   <div className="relative text-xs sm:text-sm text-white/90 mb-1">{result.yearPillar.branch.animal}</div>
-                  <div className="relative text-[10px] sm:text-xs text-white/70">{result.yearPillar.branch.nature}</div>
+                  <div className="relative text-xs sm:text-sm text-white/70">{result.yearPillar.branch.nature}</div>
                 </div>
               </div>
 
@@ -735,7 +735,7 @@ export default function SajuMBTIJobs() {
                     <p className="font-bold text-white mb-2">✨ 핵심 강점</p>
                     <div className="flex flex-wrap gap-2">
                       {result.mbtiDetail.traits.map((trait: string, i: number) => (
-                        <span key={i} className="bg-white/20 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border border-white/30 hover:scale-110 transition-transform">
+                        <span key={i} className="bg-white/20 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-white/30 hover:scale-110 transition-transform">
                           {trait}
                         </span>
                       ))}
@@ -810,7 +810,7 @@ export default function SajuMBTIJobs() {
               <div className="absolute inset-0 bg-white/10 rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
               
               <h3 className="relative text-base sm:text-lg md:text-xl font-black text-white mb-2 sm:mb-3 text-center">💼 운명에 맞는 추천 직업 TOP 3</h3>
-              <div className="relative text-[10px] sm:text-xs text-center text-white/70 mb-3 sm:mb-4">
+              <div className="relative text-xs sm:text-sm text-center text-white/70 mb-3 sm:mb-4">
                 (사주 오행 + MBTI 성향 + 십성 특성 종합 분석)
               </div>
               <div className="relative space-y-2 sm:space-y-3">
@@ -823,7 +823,7 @@ export default function SajuMBTIJobs() {
                       </span>
                       <div className="flex-1">
                         <h4 className="text-white font-bold text-xs sm:text-sm mb-1 sm:mb-2">{job}</h4>
-                        <p className="text-[10px] sm:text-xs text-white/80 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-white/80 leading-relaxed">
                           {i === 0 ? `${result.element} 오행의 특성과 ${mbti}의 ${result.mbtiDetail.workStyle} 성향이 완벽하게 조화를 이루는 직업입니다. 당신의 ${result.mbtiDetail.traits[0]} 성격이 이 분야에서 큰 강점으로 작용할 것입니다.` : 
                            i === 1 ? `${result.yearPillar.branch.animal} 띠의 특성인 ${result.yearPillar.branch.animal === '쥐' ? '빠른 적응력' : result.yearPillar.branch.animal === '소' ? '성실함' : result.yearPillar.branch.animal === '호랑이' ? '리더십' : result.yearPillar.branch.animal === '토끼' ? '친화력' : result.yearPillar.branch.animal === '용' ? '창의성' : result.yearPillar.branch.animal === '뱀' ? '전략적 사고' : result.yearPillar.branch.animal === '말' ? '사교성' : result.yearPillar.branch.animal === '양' ? '예술성' : result.yearPillar.branch.animal === '원숭이' ? '재치' : result.yearPillar.branch.animal === '닭' ? '계획성' : result.yearPillar.branch.animal === '개' ? '신뢰성' : '포용력'}과 ${mbti}의 ${result.mbtiDetail.traits[1]} 면이 시너지를 발휘하는 분야입니다.` :
                            `${gender === '남' ? '남성' : '여성'}으로서의 장점과 ${birthType}으로 태어난 특성이 잘 발휘되는 직업입니다. 장기적으로 안정적인 성공을 기대할 수 있습니다.`}
@@ -847,7 +847,7 @@ export default function SajuMBTIJobs() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {result.tenGodsCareer.careers.map((career: string, i: number) => (
-                    <span key={i} className="bg-blue-600/80 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border border-white/30 hover:scale-110 transition-transform"
+                    <span key={i} className="bg-blue-600/80 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-white/30 hover:scale-110 transition-transform"
                           style={{ boxShadow: '0 4px 15px rgba(59, 130, 246, 0.5)' }}>
                       {career}
                     </span>
@@ -871,7 +871,7 @@ export default function SajuMBTIJobs() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {result.specialStar.careers.map((career: string, i: number) => (
-                    <span key={i} className="bg-purple-600/80 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border border-white/30 hover:scale-110 transition-transform"
+                    <span key={i} className="bg-purple-600/80 backdrop-blur-sm text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-bold border border-white/30 hover:scale-110 transition-transform"
                           style={{ boxShadow: '0 4px 15px rgba(139, 92, 246, 0.5)' }}>
                       {career}
                     </span>
@@ -1124,7 +1124,7 @@ export default function SajuMBTIJobs() {
         type="button"
                     key={type}
                     onClick={() => setMbti(type)}
-                    className={`min-h-[44px] py-2.5 sm:py-3 px-1 rounded-lg sm:rounded-xl font-bold text-[10px] sm:text-xs md:text-sm transition-all active:scale-95 ${
+                    className={`min-h-[44px] py-2.5 sm:py-3 px-1 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base md:text-lg transition-all active:scale-95 ${
                       mbti === type
                         ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg scale-105'
                         : 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 border-2 border-white/30'
@@ -1137,7 +1137,7 @@ export default function SajuMBTIJobs() {
               </div>
               {mbti && (
                 <div className="relative mt-4 text-center">
-                  <span className="text-[10px] sm:text-xs md:text-sm text-white font-bold bg-indigo-600/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/30">
+                  <span className="text-sm sm:text-base md:text-lg text-white font-bold bg-indigo-600/50 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/30">
                     ✓ {mbti} "{MBTI_DETAILS[mbti].nickname}" 선택됨
                   </span>
                 </div>
