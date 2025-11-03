@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface App {
   id: string;
@@ -10,8 +9,8 @@ interface App {
   slug: string;
   icon: string;
   description: string;
+  image: string;
   url: string;
-  image?: string;
 }
 
 interface RelatedAppsProps {
@@ -19,36 +18,44 @@ interface RelatedAppsProps {
   className?: string;
 }
 
-export default function RelatedApps({ currentAppSlug, className = '' }: RelatedAppsProps) {
+export default function RelatedApps({ currentAppSlug, className }: RelatedAppsProps) {
   const [relatedApps, setRelatedApps] = useState<App[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchRelatedApps = async () => {
+    async function fetchRelatedApps() {
       try {
-        const response = await fetch('/api/apps/related?slug=' + currentAppSlug);
+        // apps.json에서 데이터 가져오기
+        const response = await fetch('/data/apps.json');
         const data = await response.json();
-        setRelatedApps(data.relatedApps || []);
+
+        // 현재 앱 찾기
+        const currentApp = data.apps.find((app: App) => app.slug === currentAppSlug);
+        if (!currentApp) {
+          setLoading(false);
+          return;
+        }
+
+        // 현재 앱의 relatedApps에 해당하는 앱들 필터링
+        const relatedAppIds = currentApp.relatedApps || [];
+        const apps = data.apps.filter((app: App) =>
+          relatedAppIds.includes(app.id) && app.slug !== currentAppSlug
+        );
+
+        // 최대 4개만 표시
+        setRelatedApps(apps.slice(0, 4));
       } catch (error) {
-        console.error('관련 앱 불러오기 실패:', error);
+        console.error('Failed to fetch related apps:', error);
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchRelatedApps();
   }, [currentAppSlug]);
 
   if (loading) {
-    return (
-      <div className={`w-full ${className}`}>
-        <div className="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border-2 border-rose-200 dark:border-rose-900">
-          <div className="text-center text-gray-500 dark:text-gray-400">
-            관련 앱 불러오는 중...
-          </div>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   if (relatedApps.length === 0) {
@@ -56,84 +63,38 @@ export default function RelatedApps({ currentAppSlug, className = '' }: RelatedA
   }
 
   return (
-    <div className={`w-full ${className}`}>
-      <div className="bg-gradient-to-r from-rose-50 to-pink-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 border-2 border-rose-200 dark:border-rose-900">
-        {/* 헤더 */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-rose-600 to-pink-600 dark:from-rose-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
-            🎯 이런 앱도 있어요!
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
-            비슷한 관심사를 가진 분들이 함께 사용한 앱이에요
-          </p>
-        </div>
-
-        {/* 추천 카드 그리드 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {relatedApps.map((app) => (
-            <Link
-              key={app.id}
-              href={app.url}
-              className="group relative bg-white dark:bg-gray-800 rounded-xl p-5 border-2 border-gray-200 dark:border-gray-700 hover:border-rose-500 dark:hover:border-rose-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-            >
-              {/* 앱 이미지 (있으면) */}
-              {app.image && (
-                <div className="relative w-full h-32 mb-4 rounded-lg overflow-hidden">
-                  <Image
-                    src={app.image}
-                    alt={app.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-2 left-2 text-4xl">
-                    {app.icon}
-                  </div>
-                </div>
-              )}
-
-              {/* 이미지 없을 때 아이콘만 */}
-              {!app.image && (
-                <div className="flex justify-center mb-3">
-                  <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
-                    {app.icon}
-                  </span>
-                </div>
-              )}
-
-              {/* 앱 정보 */}
-              <div className="text-center">
-                <h3 className="font-bold text-gray-900 dark:text-white mb-1 text-base md:text-lg group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
-                  {app.name}
-                </h3>
-                <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
-                  {app.description}
-                </p>
-              </div>
-
-              {/* 화살표 아이콘 */}
-              <div className="absolute top-3 right-3 text-gray-400 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* 홈으로 돌아가기 버튼 */}
-        <div className="mt-6 text-center">
+    <div className={`mt-12 border-t border-gray-200 dark:border-gray-700 pt-12 ${className || ''}`}>
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+        추천 웹앱
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {relatedApps.map((app) => (
           <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 dark:from-rose-500 dark:to-pink-500 dark:hover:from-rose-600 dark:hover:to-pink-600 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg"
+            key={app.id}
+            href={app.url}
+            className="group block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            모든 앱 보러가기
+            <div className="relative h-32 overflow-hidden">
+              <img
+                src={app.image}
+                alt={app.name}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-2 left-2 text-3xl">
+                {app.icon}
+              </div>
+            </div>
+            <div className="p-4">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-1 line-clamp-1">
+                {app.name}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                {app.description}
+              </p>
+            </div>
           </Link>
-        </div>
+        ))}
       </div>
     </div>
   );
