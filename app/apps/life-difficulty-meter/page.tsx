@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Text3D, Center } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 
 // 난이도 등급
 type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'hell';
@@ -33,48 +33,6 @@ interface FormData {
   stress: string;
 }
 
-// 3D 스탯 게이지
-function StatGauge({ label, value, color, position }: { label: string; value: number; color: string; position: [number, number, number] }) {
-  return (
-    <group position={position}>
-      {/* 배경 바 */}
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[4, 0.3, 0.1]} />
-        <meshStandardMaterial color="#333" />
-      </mesh>
-      {/* 실제 값 바 */}
-      <mesh position={[-(4 - (value / 100) * 4) / 2, 0, 0.05]}>
-        <boxGeometry args={[(value / 100) * 4, 0.3, 0.1]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} />
-      </mesh>
-      {/* 라벨 */}
-      <Center position={[-2.5, 0, 0.2]}>
-        <Text3D
-          font="/fonts/pretendard_bold.json"
-          size={0.2}
-          height={0.05}
-          curveSegments={12}
-        >
-          {label}
-          <meshStandardMaterial color="white" />
-        </Text3D>
-      </Center>
-      {/* 값 */}
-      <Center position={[2.5, 0, 0.2]}>
-        <Text3D
-          font="/fonts/pretendard_bold.json"
-          size={0.2}
-          height={0.05}
-          curveSegments={12}
-        >
-          {value}
-          <meshStandardMaterial color="white" />
-        </Text3D>
-      </Center>
-    </group>
-  );
-}
-
 // 난이도 뱃지
 function DifficultyBadge({ difficulty, score }: { difficulty: DifficultyLevel; score: number }) {
   const configs = {
@@ -93,30 +51,11 @@ function DifficultyBadge({ difficulty, score }: { difficulty: DifficultyLevel; s
         <cylinderGeometry args={[1.5, 1.5, 0.3, 32]} />
         <meshStandardMaterial color={config.color} emissive={config.color} emissiveIntensity={0.3} />
       </mesh>
-      {/* 난이도 텍스트 */}
-      <Center position={[0, 0.5, 0.2]}>
-        <Text3D
-          font="/fonts/pretendard_bold.json"
-          size={0.3}
-          height={0.1}
-          curveSegments={12}
-        >
-          {config.name}
-          <meshStandardMaterial color="white" />
-        </Text3D>
-      </Center>
-      {/* 점수 */}
-      <Center position={[0, -0.3, 0.2]}>
-        <Text3D
-          font="/fonts/pretendard_bold.json"
-          size={0.5}
-          height={0.1}
-          curveSegments={12}
-        >
-          {score}점
-          <meshStandardMaterial color="white" />
-        </Text3D>
-      </Center>
+      {/* 회전 링 */}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.8, 0.1, 16, 100]} />
+        <meshStandardMaterial color={config.color} emissive={config.color} emissiveIntensity={0.5} />
+      </mesh>
     </group>
   );
 }
@@ -349,7 +288,7 @@ export default function LifeDifficultyMeter() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 max-w-4xl">
         <AnimatePresence mode="wait">
           {/* 인트로 */}
           {step === 'intro' && (
@@ -680,41 +619,69 @@ export default function LifeDifficultyMeter() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
-              <h1 className="text-4xl font-bold text-center mb-8">측정 결과</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-4 sm:mb-8">측정 결과</h1>
 
               {/* 3D 시각화 */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6" style={{ height: '400px' }}>
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl p-4 sm:p-6 relative" style={{ height: '300px', minHeight: '280px' }}>
                 <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
                   <ambientLight intensity={0.5} />
                   <pointLight position={[10, 10, 10]} intensity={1} />
                   <DifficultyBadge difficulty={difficulty} score={totalScore} />
                   <OrbitControls enableZoom={false} enablePan={false} />
                 </Canvas>
+                {/* HTML 오버레이 */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-4">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white drop-shadow-lg text-center">
+                    {
+                      {
+                        easy: '😊 이지 모드',
+                        normal: '😐 노말 모드',
+                        hard: '😰 하드 모드',
+                        hell: '💀 헬 모드',
+                      }[difficulty]
+                    }
+                  </div>
+                  <div className="text-3xl sm:text-5xl md:text-6xl font-bold text-white drop-shadow-lg mt-2 sm:mt-4">
+                    {totalScore}점
+                  </div>
+                </div>
               </div>
 
               {/* 스탯 게이지 */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6" style={{ height: '500px' }}>
-                <Canvas camera={{ position: [0, 0, 10], fov: 50 }}>
-                  <ambientLight intensity={0.5} />
-                  <pointLight position={[10, 10, 10]} intensity={1} />
-                  <StatGauge label="체력" value={stats.health} color="#10b981" position={[0, 2, 0]} />
-                  <StatGauge label="금전운" value={stats.wealth} color="#f59e0b" position={[0, 1, 0]} />
-                  <StatGauge label="사회성" value={stats.social} color="#3b82f6" position={[0, 0, 0]} />
-                  <StatGauge label="멘탈" value={stats.mental} color="#8b5cf6" position={[0, -1, 0]} />
-                  <StatGauge label="행운" value={stats.luck} color="#ec4899" position={[0, -2, 0]} />
-                  <OrbitControls enableZoom={false} enablePan={false} />
-                </Canvas>
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl p-4 sm:p-6">
+                <div className="space-y-3 sm:space-y-4">
+                  {[
+                    { label: '💪 체력', value: stats.health, color: '#10b981' },
+                    { label: '💰 금전운', value: stats.wealth, color: '#f59e0b' },
+                    { label: '👥 사회성', value: stats.social, color: '#3b82f6' },
+                    { label: '🧠 멘탈', value: stats.mental, color: '#8b5cf6' },
+                    { label: '🍀 행운', value: stats.luck, color: '#ec4899' },
+                  ].map((stat, index) => (
+                    <div key={index} className="flex items-center gap-2 sm:gap-4 text-white">
+                      <span className="text-sm sm:text-base md:text-lg font-semibold w-16 sm:w-20 md:w-24 flex-shrink-0">{stat.label}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="h-2 sm:h-2.5 bg-gray-700 rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{ width: `${stat.value}%`, backgroundColor: stat.color }}
+                          />
+                        </div>
+                      </div>
+                      <span className="text-sm sm:text-base md:text-lg font-bold w-10 sm:w-12 text-right flex-shrink-0">{stat.value}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* 조언 */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 space-y-4">
-                <h2 className="text-2xl font-bold">{getAdvice().title}</h2>
-                <p className="text-gray-300">{getAdvice().desc}</p>
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <h2 className="text-xl sm:text-2xl font-bold">{getAdvice().title}</h2>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">{getAdvice().desc}</p>
                 <div className="space-y-2">
                   {getAdvice().tips.map((tip, index) => (
-                    <div key={index} className="bg-white/5 p-3 rounded-lg">
+                    <div key={index} className="bg-white/5 p-3 sm:p-3.5 rounded-lg text-sm sm:text-base">
                       {tip}
                     </div>
                   ))}
@@ -722,8 +689,8 @@ export default function LifeDifficultyMeter() {
               </div>
 
               {/* 스탯별 개선 방법 */}
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 space-y-6">
-                <h2 className="text-2xl font-bold">스탯별 개선 전략</h2>
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl sm:rounded-2xl p-4 sm:p-6 space-y-4 sm:space-y-6">
+                <h2 className="text-xl sm:text-2xl font-bold">스탯별 개선 전략</h2>
                 {Object.entries(stats).map(([stat, value]) => {
                   const statNames = {
                     health: '💪 체력',
@@ -734,10 +701,10 @@ export default function LifeDifficultyMeter() {
                   };
                   return (
                     <div key={stat} className="space-y-2">
-                      <h3 className="text-xl font-semibold">{statNames[stat as keyof Stats]}</h3>
-                      <div className="space-y-1">
+                      <h3 className="text-lg sm:text-xl font-semibold">{statNames[stat as keyof Stats]}</h3>
+                      <div className="space-y-1.5">
                         {getStatAdvice(stat as keyof Stats, value).map((advice, index) => (
-                          <div key={index} className="bg-white/5 p-2 rounded text-sm">
+                          <div key={index} className="bg-white/5 p-2.5 sm:p-3 rounded text-xs sm:text-sm leading-relaxed">
                             • {advice}
                           </div>
                         ))}
@@ -766,7 +733,7 @@ export default function LifeDifficultyMeter() {
                     stress: '',
                   });
                 }}
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-6 py-4 rounded-full text-lg font-bold transition-all"
+                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 active:scale-95 px-6 py-3.5 sm:py-4 rounded-full text-base sm:text-lg font-bold transition-all touch-manipulation min-h-[48px]"
               >
                 다시 측정하기
               </button>

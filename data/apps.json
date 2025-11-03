@@ -1305,6 +1305,54 @@
         "ultrathink-depression-test",
         "mbti-test"
       ]
+    },
+    {
+      "id": "exchange-rate-monitor",
+      "name": "환율 모니터링",
+      "slug": "exchange-rate-monitor",
+      "icon": "💱",
+      "description": "실시간 환율 추적 및 목표 환율 도달 알림. 8개 주요 통화의 환율을 자동으로 갱신하고, 원하는 환율에 도달하면 브라우저 알림을 받을 수 있습니다.",
+      "categoryId": "finance",
+      "url": "/apps/exchange-rate-monitor",
+      "image": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "hidden": false,
+      "relatedApps": [
+        "interest-calculator",
+        "stock-news-collector"
+      ]
+    },
+    {
+      "id": "real-estate-tracker",
+      "name": "부동산 매물 트래커",
+      "slug": "real-estate-tracker",
+      "icon": "🏠",
+      "description": "새 매물 자동 수집 및 가격 변동 추적. 원하는 조건의 부동산 매물을 실시간으로 모니터링하고, 새 매물 등록 시 즉시 알림을 받습니다.",
+      "categoryId": "lifestyle",
+      "url": "/apps/real-estate-tracker",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "hidden": false,
+      "relatedApps": [
+        "moving-cost-calculator",
+        "loan-calculator"
+      ]
+    },
+    {
+      "id": "stock-news-collector",
+      "name": "주식 뉴스 수집기",
+      "slug": "stock-news-collector",
+      "icon": "📰",
+      "description": "관심 종목 뉴스 자동 수집 및 키워드 알림. 선택한 주식 종목의 최신 뉴스를 자동으로 수집하고, 설정한 키워드가 포함된 뉴스가 나오면 알림을 보냅니다.",
+      "categoryId": "finance",
+      "url": "/apps/stock-news-collector",
+      "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "hidden": false,
+      "relatedApps": [
+        "exchange-rate-monitor",
+        "interest-calculator"
+      ]
     }
   ]
 }

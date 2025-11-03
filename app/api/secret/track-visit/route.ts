@@ -84,7 +84,6 @@ export async function POST(request: NextRequest) {
         .update({
           visit_count: existingVisitor.visit_count + 1,
           last_visit: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
         })
         .eq('ip_address', clientIP);
 

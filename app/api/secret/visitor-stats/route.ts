@@ -13,59 +13,52 @@ function getSupabaseClient() {
   return createClient(supabaseUrl, supabaseKey);
 }
 
+// Helper function to parse user agent
+function parseUserAgent(userAgent: string | null) {
+  if (!userAgent) {
+    return { browser: "Unknown", os: "Unknown", deviceType: "Unknown" };
+  }
+
+  let browser = "Unknown";
+  let os = "Unknown";
+  let deviceType = "Desktop";
+
+  // Detect browser (specific first)
+  if (userAgent.includes("Edg")) browser = "Edge";
+  else if (userAgent.includes("Chrome")) browser = "Chrome";
+  else if (userAgent.includes("Firefox")) browser = "Firefox";
+  else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) browser = "Safari";
+  else if (userAgent.includes("Opera") || userAgent.includes("OPR")) browser = "Opera";
+
+  // Detect OS
+  if (userAgent.includes("Windows")) os = "Windows";
+  else if (userAgent.includes("Mac")) os = "macOS";
+  else if (userAgent.includes("Linux")) os = "Linux";
+  else if (userAgent.includes("Android")) os = "Android";
+  else if (userAgent.includes("iOS") || userAgent.includes("iPhone") || userAgent.includes("iPad")) os = "iOS";
+
+  // Detect device type
+  if (userAgent.includes("Mobile") || (userAgent.includes("Android") && !userAgent.includes("Tablet"))) deviceType = "Mobile";
+  else if (userAgent.includes("Tablet") || userAgent.includes("iPad")) deviceType = "Tablet";
+
+  return { browser, os, deviceType };
+}
+
 export async function GET() {
   try {
     const supabase = getSupabaseClient();
 
-    // 통계 뷰에서 전체 통계 가져오기 (뷰가 없으면 직접 계산)
-    const { data: stats, error: statsError } = await supabase
-      .from('secret_visitor_stats')
+    // 모든 방문자 데이터 가져오기
+    const { data: allVisitors, error: visitorsError } = await supabase
+      .from('secret_visitors')
       .select('*')
-      .single();
+      .order('last_visit', { ascending: false });
 
-    // 뷰가 없거나 에러가 발생하면 직접 계산
-    let calculatedStats = null;
-    if (statsError) {
-      console.log('Stats view not available, calculating manually:', statsError.message);
+    if (visitorsError) {
+      console.error('Failed to fetch visitors:', visitorsError);
 
-      // 직접 통계 계산
-      const { data: allVisitors, error: visitorsError } = await supabase
-        .from('secret_visitors')
-        .select('ip_address, visit_count, last_visit, country');
-
-      if (visitorsError) {
-        console.error('Failed to fetch visitors:', visitorsError);
-
-        // 테이블이 없는 경우 빈 데이터 반환
-        if (visitorsError.code === 'PGRST116' || visitorsError.message.includes('does not exist')) {
-          return NextResponse.json({
-            success: true,
-            stats: {
-              totalUniqueVisitors: 0,
-              totalVisits: 0,
-              todayVisitors: 0,
-              weekVisitors: 0,
-              monthVisitors: 0,
-              lastVisitorTime: null,
-            },
-            dailyStats: Array.from({ length: 7 }, (_, i) => {
-              const date = new Date();
-              date.setDate(date.getDate() - (6 - i));
-              return {
-                date: date.toISOString().split('T')[0],
-                unique: 0,
-                total: 0,
-              };
-            }),
-            topCountries: [],
-          });
-        }
-
-        throw new Error('Failed to fetch visitor data');
-      }
-
-      // 데이터가 없는 경우 빈 통계 반환
-      if (!allVisitors || allVisitors.length === 0) {
+      // 테이블이 없는 경우 빈 데이터 반환
+      if (visitorsError.code === 'PGRST116' || visitorsError.message.includes('does not exist')) {
         return NextResponse.json({
           success: true,
           stats: {
@@ -74,6 +67,9 @@ export async function GET() {
             todayVisitors: 0,
             weekVisitors: 0,
             monthVisitors: 0,
+            newVisitors: 0,
+            returningVisitors: 0,
+            avgVisitsPerUser: 0,
             lastVisitorTime: null,
           },
           dailyStats: Array.from({ length: 7 }, (_, i) => {
@@ -85,154 +81,180 @@ export async function GET() {
               total: 0,
             };
           }),
-          topCountries: [],
+          browserStats: [],
+          osStats: [],
+          deviceStats: [],
+          recentVisitors: [],
         });
       }
 
-      const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-      const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-
-      let todayVisitors = 0;
-      let weekVisitors = 0;
-      let monthVisitors = 0;
-      let totalVisits = 0;
-      let lastVisitorTime: string | null = null;
-
-      allVisitors.forEach(visitor => {
-        const visitDate = new Date(visitor.last_visit);
-        totalVisits += visitor.visit_count || 1;
-
-        if (!lastVisitorTime || visitDate > new Date(lastVisitorTime)) {
-          lastVisitorTime = visitor.last_visit;
-        }
-
-        if (visitDate >= today) {
-          todayVisitors++;
-        }
-        if (visitDate >= weekAgo) {
-          weekVisitors++;
-        }
-        if (visitDate >= monthAgo) {
-          monthVisitors++;
-        }
-      });
-
-      calculatedStats = {
-        total_unique_visitors: allVisitors.length,
-        total_visits: totalVisits,
-        today_visitors: todayVisitors,
-        week_visitors: weekVisitors,
-        month_visitors: monthVisitors,
-        last_visitor_time: lastVisitorTime,
-      };
+      throw new Error('Failed to fetch visitor data');
     }
 
-    // 최근 7일 일별 방문자 수
-    const { data: recentVisitors, error: recentError } = await supabase
-      .from('secret_visitors')
-      .select('ip_address, last_visit, visit_count')
-      .gte('last_visit', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
-      .order('last_visit', { ascending: false });
-
-    if (recentError) {
-      console.error('Failed to fetch recent visitors:', recentError);
-      // 테이블이 없거나 에러가 발생한 경우 빈 데이터 사용
-      if (!calculatedStats) {
-        // 이미 calculatedStats가 없으면 완전히 빈 데이터 반환
-        const last7Days = Array.from({ length: 7 }, (_, i) => {
+    // 데이터가 없는 경우 빈 통계 반환
+    if (!allVisitors || allVisitors.length === 0) {
+      return NextResponse.json({
+        success: true,
+        stats: {
+          totalUniqueVisitors: 0,
+          totalVisits: 0,
+          todayVisitors: 0,
+          weekVisitors: 0,
+          monthVisitors: 0,
+          newVisitors: 0,
+          returningVisitors: 0,
+          avgVisitsPerUser: 0,
+          lastVisitorTime: null,
+        },
+        dailyStats: Array.from({ length: 7 }, (_, i) => {
           const date = new Date();
           date.setDate(date.getDate() - (6 - i));
-          return date.toISOString().split('T')[0];
-        });
-
-        return NextResponse.json({
-          success: true,
-          stats: {
-            totalUniqueVisitors: 0,
-            totalVisits: 0,
-            todayVisitors: 0,
-            weekVisitors: 0,
-            monthVisitors: 0,
-            lastVisitorTime: null,
-          },
-          dailyStats: last7Days.map(date => ({
-            date,
+          return {
+            date: date.toISOString().split('T')[0],
             unique: 0,
             total: 0,
-          })),
-          topCountries: [],
-        });
-      }
+          };
+        }),
+        browserStats: [],
+        osStats: [],
+        deviceStats: [],
+        recentVisitors: [],
+      });
     }
 
-    // 일별로 그룹화 (IP당 1회만 카운팅)
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+    let todayVisitors = 0;
+    let weekVisitors = 0;
+    let monthVisitors = 0;
+    let totalVisits = 0;
+    let newVisitors = 0;
+    let returningVisitors = 0;
+    let lastVisitorTime: string | null = null;
+
+    // 브라우저, OS, 디바이스 통계
+    const browserCounts: Record<string, number> = {};
+    const osCounts: Record<string, number> = {};
+    const deviceCounts: Record<string, number> = {};
+
+    allVisitors.forEach(visitor => {
+      const visitDate = new Date(visitor.last_visit);
+      const visitCount = visitor.visit_count || 1;
+      totalVisits += visitCount;
+
+      // 신규 vs 재방문자
+      if (visitCount === 1) {
+        newVisitors++;
+      } else {
+        returningVisitors++;
+      }
+
+      if (!lastVisitorTime || visitDate > new Date(lastVisitorTime)) {
+        lastVisitorTime = visitor.last_visit;
+      }
+
+      if (visitDate >= today) {
+        todayVisitors++;
+      }
+      if (visitDate >= weekAgo) {
+        weekVisitors++;
+      }
+      if (visitDate >= monthAgo) {
+        monthVisitors++;
+      }
+
+      // User agent 파싱
+      const { browser, os, deviceType } = parseUserAgent(visitor.user_agent);
+      browserCounts[browser] = (browserCounts[browser] || 0) + 1;
+      osCounts[os] = (osCounts[os] || 0) + 1;
+      deviceCounts[deviceType] = (deviceCounts[deviceType] || 0) + 1;
+    });
+
+    // 평균 방문 횟수
+    const avgVisitsPerUser = allVisitors.length > 0
+      ? Math.round((totalVisits / allVisitors.length) * 10) / 10
+      : 0;
+
+    // 일별 통계 (최근 7일)
     const dailyStats: Record<string, { unique: Set<string>; total: number }> = {};
     const last7Days = Array.from({ length: 7 }, (_, i) => {
       const date = new Date();
-      date.setDate(date.getDate() - i);
+      date.setDate(date.getDate() - (6 - i));
       return date.toISOString().split('T')[0];
-    }).reverse();
+    });
 
     // 초기화
     last7Days.forEach(date => {
       dailyStats[date] = { unique: new Set<string>(), total: 0 };
     });
 
-    // 데이터 집계 (각 날짜별로 IP당 1회만 카운팅)
-    recentVisitors?.forEach(visitor => {
-      const date = new Date(visitor.last_visit).toISOString().split('T')[0];
-      if (dailyStats[date] && visitor.ip_address) {
-        // IP별로 1회만 카운팅 (유니크)
-        dailyStats[date].unique.add(visitor.ip_address);
-        // 총 방문 횟수
-        dailyStats[date].total += visitor.visit_count || 1;
+    // 최근 7일 데이터만 집계
+    allVisitors.forEach(visitor => {
+      const visitDate = new Date(visitor.last_visit);
+      if (visitDate >= new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)) {
+        const date = visitDate.toISOString().split('T')[0];
+        if (dailyStats[date] && visitor.ip_address) {
+          dailyStats[date].unique.add(visitor.ip_address);
+          dailyStats[date].total += visitor.visit_count || 1;
+        }
       }
     });
 
-    // 상위 국가 통계
-    const { data: countryStats, error: countryError } = await supabase
-      .from('secret_visitors')
-      .select('country')
-      .not('country', 'is', null);
-
-    if (countryError) {
-      console.error('Failed to fetch country stats:', countryError);
-      // 국가 통계 에러는 무시하고 빈 배열 사용
-    }
-
-    const countryCounts: Record<string, number> = {};
-    countryStats?.forEach(row => {
-      if (row.country) {
-        countryCounts[row.country] = (countryCounts[row.country] || 0) + 1;
-      }
-    });
-
-    const topCountries = Object.entries(countryCounts)
+    // 브라우저 통계 (상위 5개)
+    const browserStats = Object.entries(browserCounts)
       .sort(([, a], [, b]) => b - a)
-      .slice(0, 10)
-      .map(([country, count]) => ({ country, count }));
+      .slice(0, 5)
+      .map(([name, count]) => ({ name, count }));
 
-    // 뷰 데이터 또는 계산된 데이터 사용
-    const finalStats = calculatedStats || stats;
+    // OS 통계 (상위 5개)
+    const osStats = Object.entries(osCounts)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5)
+      .map(([name, count]) => ({ name, count }));
+
+    // 디바이스 통계
+    const deviceStats = Object.entries(deviceCounts)
+      .sort(([, a], [, b]) => b - a)
+      .map(([name, count]) => ({ name, count }));
+
+    // 최근 방문자 (10명)
+    const recentVisitors = allVisitors.slice(0, 10).map(visitor => {
+      const { browser, os, deviceType } = parseUserAgent(visitor.user_agent);
+      return {
+        ip: visitor.ip_address?.slice(0, 10) + '...',  // IP 일부만 표시
+        visitCount: visitor.visit_count,
+        lastVisit: visitor.last_visit,
+        browser,
+        os,
+        deviceType,
+      };
+    });
 
     return NextResponse.json({
       success: true,
       stats: {
-        totalUniqueVisitors: finalStats?.total_unique_visitors || 0,
-        totalVisits: finalStats?.total_visits || 0,
-        todayVisitors: finalStats?.today_visitors || 0,
-        weekVisitors: finalStats?.week_visitors || 0,
-        monthVisitors: finalStats?.month_visitors || 0,
-        lastVisitorTime: finalStats?.last_visitor_time || null,
+        totalUniqueVisitors: allVisitors.length,
+        totalVisits,
+        todayVisitors,
+        weekVisitors,
+        monthVisitors,
+        newVisitors,
+        returningVisitors,
+        avgVisitsPerUser,
+        lastVisitorTime,
       },
       dailyStats: last7Days.map(date => ({
         date,
-        unique: dailyStats[date].unique.size, // Set의 크기 = 유니크 IP 수
+        unique: dailyStats[date].unique.size,
         total: dailyStats[date].total,
       })),
-      topCountries,
+      browserStats,
+      osStats,
+      deviceStats,
+      recentVisitors,
     });
   } catch (error) {
     console.error('Visitor stats error:', error);

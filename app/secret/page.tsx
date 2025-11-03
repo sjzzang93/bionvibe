@@ -4,10 +4,11 @@ import { getAllAppsAsync, type App } from "@/lib/getApps";
 import { useSupabase } from "@/lib/supabase-provider";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import VisitorStats from "./components/VisitorStats";
+import VisitorStatsViewer from "./components/VisitorStatsViewer";
 import Dashboard from "./components/Dashboard";
 
 export default function SecretPage() {
+  const [mounted, setMounted] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
   const [password, setPassword] = useState("");
   const [apps, setApps] = useState<App[]>([]);
@@ -32,8 +33,15 @@ export default function SecretPage() {
     });
   }, [apps, renameSearch]);
 
+  // 클라이언트 사이드에서만 마운트
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // 페이지 로드 시 세션 확인
   useEffect(() => {
+    if (!mounted) return;
+
     const savedSession = localStorage.getItem("secret_session");
     if (savedSession) {
       const sessionData = JSON.parse(savedSession);
@@ -46,7 +54,7 @@ export default function SecretPage() {
         localStorage.removeItem("secret_session");
       }
     }
-  }, []);
+  }, [mounted]);
 
   // 방문 추적
   useEffect(() => {
@@ -239,21 +247,21 @@ export default function SecretPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleUnlock()}
                 placeholder="비밀번호 입력"
-                className="w-full rounded-xl border-2 border-white/30 bg-white/20 px-4 py-3 text-center text-lg font-mono text-white placeholder-white/50 outline-none focus:border-purple-400"
+                className="w-full rounded-xl border-2 border-white/30 bg-white/20 px-4 py-4 text-center text-base sm:text-lg font-mono text-white placeholder-white/50 outline-none focus:border-purple-400 transition-colors"
                 autoFocus
               />
 
               <button
                 type="button"
                 onClick={handleUnlock}
-                className="w-full rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 text-lg font-bold text-white transition-all hover:shadow-lg hover:shadow-purple-500/50"
+                className="w-full rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-4 text-base sm:text-lg font-bold text-white transition-all hover:shadow-lg hover:shadow-purple-500/50 active:scale-95 touch-manipulation min-h-[48px]"
               >
                 🔓 열기
               </button>
 
               <Link
                 href="/"
-                className="block w-full rounded-xl bg-white/10 px-6 py-3 text-center font-bold text-white transition-all hover:bg-white/20"
+                className="block w-full rounded-xl bg-white/10 px-6 py-4 text-center text-base sm:text-lg font-bold text-white transition-all hover:bg-white/20 active:scale-95 touch-manipulation min-h-[48px]"
               >
                 ← 돌아가기
               </Link>
@@ -269,13 +277,13 @@ export default function SecretPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black px-4 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black px-4 py-8 sm:py-12">
       <div className="mx-auto max-w-7xl">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <div className="mb-4 text-7xl animate-bounce">🔓</div>
-          <h1 className="mb-4 text-5xl font-extrabold text-white">Secret Vault</h1>
-          <p className="text-lg text-gray-300">특별한 웹앱들이 여기 숨어있어요 👀</p>
+        <div className="mb-8 sm:mb-12 text-center">
+          <div className="mb-4 text-5xl sm:text-7xl animate-bounce">🔓</div>
+          <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">Secret Vault</h1>
+          <p className="text-base sm:text-lg text-gray-300">특별한 웹앱들이 여기 숨어있어요 👀</p>
         </div>
 
         {/* 🆕 대시보드 */}
@@ -285,18 +293,12 @@ export default function SecretPage() {
 
         {/* Visitor Stats */}
         <div className="mb-12">
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-3xl font-bold text-white">📈 방문자 통계</h2>
-            <span className="rounded-full bg-purple-500/20 px-4 py-2 text-sm font-semibold text-purple-200">
-              IP 기반 유니크 카운팅
-            </span>
-          </div>
-          <VisitorStats />
+          <VisitorStatsViewer />
         </div>
 
         {/* Local Tools Section */}
         <div className="mb-12">
-          <h2 className="mb-6 text-3xl font-bold text-white">📊 로컬 도구</h2>
+          <h2 className="mb-6 text-2xl sm:text-3xl font-bold text-white">📊 로컬 도구</h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
             <Link
               href="/secret/daily-ledger"
@@ -357,8 +359,8 @@ export default function SecretPage() {
           </div>
         ) : (
           <>
-            <h2 className="mb-6 text-3xl font-bold text-white">🔐 히든 웹앱</h2>
-            <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            <h2 className="mb-6 text-2xl sm:text-3xl font-bold text-white">🔐 히든 웹앱</h2>
+            <div className="mb-12 grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {hiddenApps.map((app) => {
               const isEditing = editingAppId === app.id;
               const isToggling = togglingAppId === app.id;
@@ -377,17 +379,19 @@ export default function SecretPage() {
                       }}
                       disabled={isToggling}
                       className={`
-                        relative inline-flex h-6 w-11 items-center rounded-full transition-colors
-                        ${app.hidden ? 'bg-purple-600' : 'bg-green-600'}
-                        ${isToggling ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                        hover:shadow-lg
+                        relative inline-flex h-5 w-10 items-center rounded-2xl transition-all duration-300 touch-manipulation backdrop-blur-sm
+                        ${app.hidden
+                          ? 'bg-gradient-to-r from-purple-500 to-fuchsia-600 shadow-lg shadow-purple-500/50'
+                          : 'bg-gradient-to-r from-green-400 to-emerald-500 shadow-lg shadow-green-500/50'}
+                        ${isToggling ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer active:scale-95 hover:scale-105'}
+                        ring-2 ring-white/20
                       `}
                       title={app.hidden ? 'Hidden 상태 (클릭하면 공개)' : '공개 상태 (클릭하면 숨김)'}
                     >
                       <span
                         className={`
-                          inline-block h-4 w-4 transform rounded-full bg-white transition-transform
-                          ${app.hidden ? 'translate-x-6' : 'translate-x-1'}
+                          inline-block h-3.5 w-3.5 transform rounded-xl bg-white transition-all duration-300 shadow-lg
+                          ${app.hidden ? 'translate-x-5.5' : 'translate-x-0.5'}
                         `}
                       />
                     </button>
@@ -440,7 +444,7 @@ export default function SecretPage() {
                               submitRename(app.id);
                             }
                           }}
-                          className="w-full rounded-lg border border-purple-400/40 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-purple-300 focus:ring-2 focus:ring-purple-400/30"
+                          className="w-full rounded-lg border border-purple-400/40 bg-black/40 px-3 py-3 text-sm text-white outline-none focus:border-purple-300 focus:ring-2 focus:ring-purple-400/30 transition-colors"
                           placeholder="새 이름을 입력하세요"
                           autoFocus
                         />
@@ -449,7 +453,7 @@ export default function SecretPage() {
                             type="button"
                             onClick={() => submitRename(app.id)}
                             disabled={renaming}
-                            className="flex-1 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="flex-1 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-3 py-3 min-h-[44px] text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation"
                           >
                             {renaming ? '저장 중...' : '💾 저장'}
                           </button>
@@ -457,7 +461,7 @@ export default function SecretPage() {
                             type="button"
                             onClick={cancelRename}
                             disabled={renaming}
-                            className="flex-1 rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="flex-1 rounded-lg border border-white/20 px-3 py-3 min-h-[44px] text-sm font-semibold text-white transition-all hover:bg-white/10 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation"
                           >
                             취소
                           </button>
@@ -467,7 +471,7 @@ export default function SecretPage() {
                       <button
                         type="button"
                         onClick={() => startRename(app)}
-                        className="w-full rounded-lg border border-purple-400/50 px-3 py-2 text-sm font-semibold text-purple-100 transition hover:bg-purple-500/20"
+                        className="w-full rounded-lg border border-purple-400/50 px-3 py-3 min-h-[44px] text-sm font-semibold text-purple-100 transition-all hover:bg-purple-500/20 active:scale-95 touch-manipulation"
                       >
                         ✏️ 이름 변경
                       </button>
@@ -481,11 +485,11 @@ export default function SecretPage() {
         )}
 
         {/* Rename Manager with Toggle */}
-        <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+        <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur-lg">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-white">📝 웹앱 관리</h2>
-              <p className="text-sm text-purple-100/70">
+              <h2 className="text-xl sm:text-2xl font-bold text-white">📝 웹앱 관리</h2>
+              <p className="text-xs sm:text-sm text-purple-100/70">
                 전체 앱 {apps.length}개 · 숨김 {hiddenApps.length}개 · 공개 {apps.length - hiddenApps.length}개
               </p>
             </div>
@@ -495,7 +499,7 @@ export default function SecretPage() {
                 value={renameSearch}
                 onChange={(e) => setRenameSearch(e.target.value)}
                 placeholder="이름, ID, 슬러그 검색"
-                className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-2 text-sm text-white outline-none transition focus:border-purple-300 focus:ring-2 focus:ring-purple-400/40"
+                className="w-full rounded-xl border border-white/20 bg-black/40 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-purple-300 focus:ring-2 focus:ring-purple-400/40"
               />
             </div>
           </div>
@@ -509,23 +513,25 @@ export default function SecretPage() {
                   key={app.id}
                   className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="flex flex-1 items-center gap-4">
+                  <div className="flex flex-1 items-center gap-3 sm:gap-4">
                     {/* 🆕 토글 스위치 */}
                     <button
                       onClick={() => toggleHidden(app.id)}
                       disabled={isToggling}
                       className={`
-                        relative inline-flex h-6 w-11 items-center rounded-full transition-colors flex-shrink-0
-                        ${app.hidden ? 'bg-purple-600' : 'bg-green-600'}
-                        ${isToggling ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                        hover:shadow-lg
+                        relative inline-flex h-5 w-10 items-center rounded-2xl transition-all duration-300 flex-shrink-0 touch-manipulation backdrop-blur-sm
+                        ${app.hidden
+                          ? 'bg-gradient-to-r from-purple-500 to-fuchsia-600 shadow-lg shadow-purple-500/50'
+                          : 'bg-gradient-to-r from-green-400 to-emerald-500 shadow-lg shadow-green-500/50'}
+                        ${isToggling ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer active:scale-95 hover:scale-105'}
+                        ring-2 ring-white/20
                       `}
                       title={app.hidden ? 'Hidden (클릭하면 공개)' : '공개 (클릭하면 숨김)'}
                     >
                       <span
                         className={`
-                          inline-block h-4 w-4 transform rounded-full bg-white transition-transform
-                          ${app.hidden ? 'translate-x-6' : 'translate-x-1'}
+                          inline-block h-3.5 w-3.5 transform rounded-xl bg-white transition-all duration-300 shadow-lg
+                          ${app.hidden ? 'translate-x-5.5' : 'translate-x-0.5'}
                         `}
                       />
                     </button>
@@ -560,7 +566,7 @@ export default function SecretPage() {
                               submitRename(app.id);
                             }
                           }}
-                          className="w-full rounded-lg border border-purple-400/40 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-purple-300 focus:ring-2 focus:ring-purple-400/30"
+                          className="w-full rounded-lg border border-purple-400/40 bg-black/40 px-3 py-3 text-sm text-white outline-none focus:border-purple-300 focus:ring-2 focus:ring-purple-400/30 transition-colors"
                           placeholder="새 이름 입력"
                           autoFocus
                         />
@@ -569,7 +575,7 @@ export default function SecretPage() {
                             type="button"
                             onClick={() => submitRename(app.id)}
                             disabled={renaming}
-                            className="flex-1 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="flex-1 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-3 py-3 min-h-[44px] text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation"
                           >
                             {renaming ? '저장 중...' : '저장'}
                           </button>
@@ -577,7 +583,7 @@ export default function SecretPage() {
                             type="button"
                             onClick={cancelRename}
                             disabled={renaming}
-                            className="flex-1 rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+                            className="flex-1 rounded-lg border border-white/20 px-3 py-3 min-h-[44px] text-sm font-semibold text-white transition-all hover:bg-white/10 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 touch-manipulation"
                           >
                             취소
                           </button>
@@ -587,7 +593,7 @@ export default function SecretPage() {
                       <button
                         type="button"
                         onClick={() => startRename(app)}
-                        className="w-full rounded-lg border border-purple-400/50 px-3 py-2 text-sm font-semibold text-purple-100 transition hover:bg-purple-500/20"
+                        className="w-full rounded-lg border border-purple-400/50 px-3 py-3 min-h-[44px] text-sm font-semibold text-purple-100 transition-all hover:bg-purple-500/20 active:scale-95 touch-manipulation"
                       >
                         ✏️ 이름 변경
                       </button>
@@ -606,66 +612,66 @@ export default function SecretPage() {
         </div>
 
         {/* Admin Tools */}
-        <div className="mb-12 rounded-2xl border-2 border-white/10 bg-white/5 p-8 backdrop-blur-lg">
-          <h2 className="mb-6 text-center text-3xl font-bold text-white">🛠️ 관리 도구</h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-12 rounded-2xl border-2 border-white/10 bg-white/5 p-6 sm:p-8 backdrop-blur-lg">
+          <h2 className="mb-6 text-center text-2xl sm:text-3xl font-bold text-white">🛠️ 관리 도구</h2>
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Link
               href="/secret/contacts"
-              className="rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-green-500/50"
+              className="rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-green-500/50 active:scale-95 touch-manipulation"
             >
               📧 문의 관리
             </Link>
             <Link
               href="/secret/analytics"
-              className="rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-blue-500/50"
+              className="rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-blue-500/50 active:scale-95 touch-manipulation"
             >
               📊 방문자 통계
             </Link>
             <Link
               href="/secret/image-manager"
-              className="rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-purple-500/50"
+              className="rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-purple-500/50 active:scale-95 touch-manipulation"
             >
               🖼️ 이미지 관리
             </Link>
             <Link
               href="/secret/dev-glossary"
-              className="rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-orange-500/50"
+              className="rounded-xl bg-gradient-to-r from-orange-500 to-red-500 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-orange-500/50 active:scale-95 touch-manipulation"
             >
               📖 개발자 용어 사전
             </Link>
             <Link
               href="/secret/guestbook"
-              className="rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-amber-500/50"
+              className="rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-amber-500/50 active:scale-95 touch-manipulation"
             >
               📝 방명록 관리
             </Link>
             <Link
               href="/secret/gold-price-manager"
-              className="rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-yellow-500/50"
+              className="rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-yellow-500/50 active:scale-95 touch-manipulation"
             >
               🏅 금 시세 관리
             </Link>
             <Link
               href="/secret/press-kit"
-              className="rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-sky-500/50"
+              className="rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-sky-500/50 active:scale-95 touch-manipulation"
             >
               🗞️ 프레스 키트
             </Link>
             <Link
               href="/secret/dev-tools"
-              className="rounded-xl bg-gradient-to-r from-slate-500 to-gray-700 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-slate-500/50"
+              className="rounded-xl bg-gradient-to-r from-slate-500 to-gray-700 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-slate-500/50 active:scale-95 touch-manipulation"
             >
               🧰 개발 도구 모음
             </Link>
             <Link
               href="/secret/setup-database"
-              className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-indigo-500/50"
+              className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-indigo-500/50 active:scale-95 touch-manipulation"
             >
               🔧 데이터베이스 설정
             </Link>
             <Link
               href="/secret/error-monitor"
-              className="rounded-xl bg-gradient-to-r from-red-600 to-rose-600 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-red-500/50"
+              className="rounded-xl bg-gradient-to-r from-red-600 to-rose-600 px-6 py-4 min-h-[56px] flex items-center justify-center text-center text-sm sm:text-base font-bold text-white transition-all hover:shadow-lg hover:shadow-red-500/50 active:scale-95 touch-manipulation"
             >
               🚨 에러 모니터링
             </Link>
