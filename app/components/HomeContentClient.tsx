@@ -43,6 +43,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
   const [loading, setLoading] = useState(initialApps.length === 0);
   const [favoritesLoaded, setFavoritesLoaded] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     setMounted(true);
@@ -170,6 +171,10 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
     setFavorites((prev) =>
       prev.includes(appId) ? prev.filter((id) => id !== appId) : [...prev, appId],
     );
+  };
+
+  const handleImageError = (appId: string) => {
+    setFailedImages((prev) => new Set(prev).add(appId));
   };
 
   const favoriteApps = useMemo(
@@ -326,7 +331,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                         isFavorite
                       />
 
-                      {app.image && app.image.trim() !== '' && (
+                      {app.image && app.image.trim() !== '' && !failedImages.has(app.id) ? (
                         <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
                           <Image
                             src={app.image}
@@ -335,8 +340,13 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                             sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 20vw, 16vw"
                             className="object-cover transition-transform duration-300 group-hover:scale-110"
                             loading="lazy"
+                            onError={() => handleImageError(app.id)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                        </div>
+                      ) : (
+                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30 flex items-center justify-center">
+                          <span className="text-4xl sm:text-5xl">{app.icon}</span>
                         </div>
                       )}
 
@@ -378,7 +388,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                         isFavorite={false}
                       />
 
-                      {app.image && app.image.trim() !== '' && (
+                      {app.image && app.image.trim() !== '' && !failedImages.has(app.id) ? (
                         <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
                           <Image
                             src={app.image}
@@ -392,8 +402,13 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                                 ? undefined
                                 : 'lazy'
                             }
+                            onError={() => handleImageError(app.id)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                        </div>
+                      ) : (
+                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30 flex items-center justify-center">
+                          <span className="text-4xl sm:text-5xl">{app.icon}</span>
                         </div>
                       )}
 
