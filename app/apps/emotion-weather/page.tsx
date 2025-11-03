@@ -16,6 +16,8 @@ interface WeatherType {
   rainIntensity: number;
   windSpeed: number;
   description: string;
+  detailedDescription: string;
+  recommendations: string[];
 }
 
 interface Biorhythm {
@@ -24,11 +26,21 @@ interface Biorhythm {
   intellectual: number;
 }
 
+interface ScoreBreakdown {
+  userMood: number;
+  biorhythm: number;
+  moonPhase: number;
+  season: number;
+  dayOfWeek: number;
+  total: number;
+}
+
 interface WeatherForecastDay {
   date: string;
   weather: string;
   score: number;
   details: WeatherType;
+  breakdown?: ScoreBreakdown;
 }
 
 interface EmotionForecast {
@@ -49,7 +61,14 @@ const WEATHER_TYPES: Record<string, WeatherType> = {
     cloudCount: 2,
     rainIntensity: 0,
     windSpeed: 0.5,
-    description: '기분 좋은 하루! 긍정적인 에너지가 넘칩니다.'
+    description: '기분 좋은 하루! 긍정적인 에너지가 넘칩니다.',
+    detailedDescription: '당신의 감정 상태가 매우 안정적이고 긍정적입니다. 바이오리듬과 환경 요인이 모두 좋은 방향으로 작용하고 있어 활력이 넘치는 하루가 될 것입니다. 대인관계가 원활하고 업무 효율도 높은 시기입니다.',
+    recommendations: [
+      '새로운 프로젝트나 도전을 시작하기 좋은 날입니다',
+      '중요한 미팅이나 협상을 진행하세요',
+      '운동이나 야외 활동으로 에너지를 발산하세요',
+      '주변 사람들에게 긍정적 영향을 줄 수 있습니다'
+    ]
   },
   partlyCloudy: {
     name: '구름 조금',
@@ -58,7 +77,14 @@ const WEATHER_TYPES: Record<string, WeatherType> = {
     cloudCount: 5,
     rainIntensity: 0,
     windSpeed: 1,
-    description: '대체로 평온하지만 작은 고민이 있을 수 있습니다.'
+    description: '대체로 평온하지만 작은 고민이 있을 수 있습니다.',
+    detailedDescription: '전반적으로 안정적이지만 약간의 불확실성이나 고민이 있을 수 있습니다. 바이오리듬이 중립적이거나 환경적 요인이 복합적으로 작용하고 있습니다. 무리하지 않으면서 꾸준히 나아가는 것이 좋습니다.',
+    recommendations: [
+      '작은 목표들을 하나씩 달성하세요',
+      '가벼운 산책이나 스트레칭으로 기분 전환',
+      '가족이나 친한 친구와 대화 시간을 가지세요',
+      '일상 루틴을 충실히 지키면 안정감을 얻을 수 있습니다'
+    ]
   },
   cloudy: {
     name: '흐림',
@@ -67,7 +93,15 @@ const WEATHER_TYPES: Record<string, WeatherType> = {
     cloudCount: 10,
     rainIntensity: 0,
     windSpeed: 1.5,
-    description: '감정이 둔해질 수 있는 날. 휴식이 필요합니다.'
+    description: '감정이 둔해질 수 있는 날. 휴식이 필요합니다.',
+    detailedDescription: '에너지 수준이 평소보다 낮고 의욕이 떨어질 수 있습니다. 바이오리듬 저조기이거나 스트레스가 누적된 상태일 가능성이 있습니다. 무리한 활동보다는 재충전에 집중하는 것이 좋습니다.',
+    recommendations: [
+      '충분한 휴식과 수면을 취하세요',
+      '좋아하는 음악을 들으며 마음을 편안하게',
+      '따뜻한 차 한 잔과 함께 독서 시간을 가져보세요',
+      '중요한 결정은 컨디션이 회복된 후로 미루세요',
+      '명상이나 요가로 마음을 다스리세요'
+    ]
   },
   rainy: {
     name: '비',
@@ -76,7 +110,15 @@ const WEATHER_TYPES: Record<string, WeatherType> = {
     cloudCount: 12,
     rainIntensity: 50,
     windSpeed: 2,
-    description: '감정적으로 예민한 날. 스스로를 돌보세요.'
+    description: '감정적으로 예민한 날. 스스로를 돌보세요.',
+    detailedDescription: '감정적으로 민감하고 작은 일에도 쉽게 상처받을 수 있는 상태입니다. 바이오리듬 중 감정 주기가 저조하거나 외부 스트레스가 높은 시기입니다. 자신에게 관대하고 감정을 억누르지 말고 표현하는 것이 중요합니다.',
+    recommendations: [
+      '감정 일기를 써서 마음을 정리하세요',
+      '신뢰하는 사람과 깊은 대화를 나누세요',
+      '혼자만의 시간을 갖고 자신을 돌아보세요',
+      '무리한 사회활동은 피하고 충분히 쉬세요',
+      '좋아하는 영화나 드라마로 기분 전환'
+    ]
   },
   stormy: {
     name: '폭풍',
@@ -85,7 +127,16 @@ const WEATHER_TYPES: Record<string, WeatherType> = {
     cloudCount: 15,
     rainIntensity: 100,
     windSpeed: 4,
-    description: '감정 태풍 주의! 중요한 결정은 미루세요.'
+    description: '감정 태풍 주의! 중요한 결정은 미루세요.',
+    detailedDescription: '감정 기복이 심하고 심리적으로 불안정한 시기입니다. 여러 바이오리듬이 저점에 있거나 극심한 스트레스 상황일 수 있습니다. 이 시기는 지나갈 것이므로 견디는 것이 중요하며, 전문가의 도움을 받는 것도 고려해보세요.',
+    recommendations: [
+      '중요한 결정이나 계약은 반드시 미루세요',
+      '심호흡과 명상으로 마음을 진정시키세요',
+      '폭풍은 반드시 지나간다는 것을 기억하세요',
+      '필요하다면 상담 전문가의 도움을 받으세요',
+      '충분한 수면과 영양 섭취에 신경 쓰세요',
+      '혼자 고민하지 말고 주변에 도움을 요청하세요'
+    ]
   },
   rainbow: {
     name: '무지개',
@@ -94,7 +145,15 @@ const WEATHER_TYPES: Record<string, WeatherType> = {
     cloudCount: 3,
     rainIntensity: 0,
     windSpeed: 0.8,
-    description: '비 온 뒤 맑음! 새로운 기회가 찾아옵니다.'
+    description: '비 온 뒤 맑음! 새로운 기회가 찾아옵니다.',
+    detailedDescription: '어려운 시기를 극복하고 새로운 전환점을 맞이하고 있습니다. 바이오리듬이 상승세로 돌아서거나 긍정적인 변화가 시작되는 시기입니다. 희망과 기대를 가지고 새로운 시작을 준비하세요.',
+    recommendations: [
+      '새로운 관계나 기회를 적극적으로 받아들이세요',
+      '그동안 미뤄왔던 계획을 실행에 옮기세요',
+      '감사한 마음을 주변에 표현하세요',
+      '변화를 두려워하지 말고 도전하세요',
+      '긍정적인 에너지를 나누고 확산시키세요'
+    ]
   }
 };
 
@@ -341,44 +400,69 @@ export default function EmotionWeather() {
         const date = new Date();
         date.setDate(date.getDate() + i);
 
-        // 복잡한 감정 날씨 알고리즘
-        let score = 50;
-        score += biorhythm.emotional * 20;
-        score += biorhythm.physical * 10;
-        score += biorhythm.intellectual * 10;
-        score += (moonPhase * 10) - 5;
-        score += (currentMood - 5) * 5;
-        score -= (stressLevel - 5) * 3;
-        score += (sleepQuality - 5) * 4;
+        // 개선된 감정 날씨 알고리즘 (사용자 입력 가중치 대폭 증가)
+        let score = 40; // 기본 점수 40으로 낮춤
 
-        // 계절 효과
-        if (season >= 3 && season <= 5) score += 5; // 봄
-        if (season >= 6 && season <= 8) score += 10; // 여름
-        if (season >= 9 && season <= 11) score -= 5; // 가을
-        if (season >= 0 && season <= 2) score -= 10; // 겨울
+        // 사용자 입력 영향 (가중치 증가: 최대 +60/-60점)
+        const moodScore = (currentMood - 5.5) * 10; // -55 ~ +45
+        const stressScore = -(stressLevel - 5.5) * 8; // +44 ~ -36
+        const sleepScore = (sleepQuality - 5.5) * 8; // -44 ~ +36
+        const userInputScore = moodScore + stressScore + sleepScore;
 
-        // 요일 효과
+        // 바이오리듬 영향 (최대 ±40점)
+        const bioScore = (biorhythm.emotional * 15) + (biorhythm.physical * 5) + (biorhythm.intellectual * 5);
+
+        // 달 주기 영향 (최대 ±10점)
+        const moonScore = (moonPhase - 0.5) * 20;
+
+        // 계절 효과 (최대 ±8점)
+        let seasonScore = 0;
+        if (season >= 3 && season <= 5) seasonScore = 5; // 봄
+        else if (season >= 6 && season <= 8) seasonScore = 8; // 여름
+        else if (season >= 9 && season <= 11) seasonScore = -3; // 가을
+        else if (season >= 0 && season <= 2) seasonScore = -6; // 겨울
+
+        // 요일 효과 (최대 ±12점)
+        let dayScore = 0;
         const dayOfWeek = date.getDay();
-        if (dayOfWeek === 5 || dayOfWeek === 6) score += 10; // 주말
-        if (dayOfWeek === 1) score -= 10; // 월요일
+        if (dayOfWeek === 5 || dayOfWeek === 6) dayScore = 12; // 주말
+        else if (dayOfWeek === 1) dayScore = -8; // 월요일
+        else if (dayOfWeek === 3) dayScore = 3; // 수요일 (주중)
 
-        // 랜덤 요소
-        score += (Math.random() - 0.5) * 20;
+        // 날이 지날수록 약간의 변화 (미래 예측의 불확실성)
+        const futureVariance = (Math.random() - 0.5) * 5 * i;
 
-        // 날씨 결정
+        // 총점 계산 (사용자 입력이 60% 이상 영향)
+        score += userInputScore + bioScore * 0.5 + moonScore * 0.3 + seasonScore + dayScore + futureVariance;
+
+        // 점수 분석 (첫날만)
+        let breakdown = undefined;
+        if (i === 0) {
+          breakdown = {
+            userMood: Math.round(userInputScore),
+            biorhythm: Math.round(bioScore * 0.5),
+            moonPhase: Math.round(moonScore * 0.3),
+            season: Math.round(seasonScore),
+            dayOfWeek: Math.round(dayScore),
+            total: Math.round(score)
+          };
+        }
+
+        // 날씨 결정 (임계값 조정)
         let weather;
-        if (score >= 80) weather = 'sunny';
-        else if (score >= 65) weather = 'rainbow';
-        else if (score >= 50) weather = 'partlyCloudy';
-        else if (score >= 35) weather = 'cloudy';
-        else if (score >= 20) weather = 'rainy';
+        if (score >= 75) weather = 'sunny';
+        else if (score >= 60) weather = 'rainbow';
+        else if (score >= 45) weather = 'partlyCloudy';
+        else if (score >= 30) weather = 'cloudy';
+        else if (score >= 15) weather = 'rainy';
         else weather = 'stormy';
 
         weekForecast.push({
           date: date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric', weekday: 'short' }),
           weather,
           score: Math.max(0, Math.min(100, Math.round(score))),
-          details: WEATHER_TYPES[weather as keyof typeof WEATHER_TYPES]
+          details: WEATHER_TYPES[weather as keyof typeof WEATHER_TYPES],
+          breakdown
         });
       }
 
@@ -557,7 +641,75 @@ export default function EmotionWeather() {
                 <div className="text-3xl font-bold text-white mb-2">
                   {forecast.today.details.name}
                 </div>
-                <p className="text-white/80">{forecast.today.details.description}</p>
+                <p className="text-white/80 text-lg">{forecast.today.details.description}</p>
+
+                {/* 상세 설명 */}
+                <div className="mt-6 p-6 bg-white/10 rounded-lg text-left">
+                  <h4 className="text-white font-bold mb-3 text-lg">📋 상세 분석</h4>
+                  <p className="text-white/90 leading-relaxed mb-4">
+                    {forecast.today.details.detailedDescription}
+                  </p>
+
+                  {/* 점수 분해 */}
+                  {forecast.today.breakdown && (
+                    <div className="bg-white/5 rounded-lg p-4 mb-4">
+                      <h5 className="text-white font-bold mb-3 text-sm">🎯 감정 점수 산출 내역</h5>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/70">기본 점수</span>
+                          <span className="text-white font-mono">40점</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/70">당신의 감정 상태 (기분/스트레스/수면)</span>
+                          <span className={`font-mono font-bold ${forecast.today.breakdown.userMood >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            {forecast.today.breakdown.userMood >= 0 ? '+' : ''}{forecast.today.breakdown.userMood}점
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/70">바이오리듬 영향</span>
+                          <span className={`font-mono ${forecast.today.breakdown.biorhythm >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            {forecast.today.breakdown.biorhythm >= 0 ? '+' : ''}{forecast.today.breakdown.biorhythm}점
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/70">달 주기 영향</span>
+                          <span className={`font-mono ${forecast.today.breakdown.moonPhase >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            {forecast.today.breakdown.moonPhase >= 0 ? '+' : ''}{forecast.today.breakdown.moonPhase}점
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/70">계절 효과</span>
+                          <span className={`font-mono ${forecast.today.breakdown.season >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            {forecast.today.breakdown.season >= 0 ? '+' : ''}{forecast.today.breakdown.season}점
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-white/70">요일 효과</span>
+                          <span className={`font-mono ${forecast.today.breakdown.dayOfWeek >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            {forecast.today.breakdown.dayOfWeek >= 0 ? '+' : ''}{forecast.today.breakdown.dayOfWeek}점
+                          </span>
+                        </div>
+                        <div className="border-t border-white/20 pt-2 mt-2 flex justify-between items-center">
+                          <span className="text-white font-bold">최종 감정 점수</span>
+                          <span className="text-white font-bold font-mono text-lg">{forecast.today.breakdown.total}점 / 100점</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 권장 사항 */}
+                  <div className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-4">
+                    <h5 className="text-white font-bold mb-3 text-sm">💡 오늘의 권장 사항</h5>
+                    <ul className="space-y-2 text-sm">
+                      {forecast.today.details.recommendations.map((rec, idx) => (
+                        <li key={idx} className="flex items-start text-white/90">
+                          <span className="text-blue-400 mr-2 flex-shrink-0">•</span>
+                          <span>{rec}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </PremiumCard>
 
