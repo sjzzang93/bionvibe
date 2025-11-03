@@ -340,6 +340,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                             sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 20vw, 16vw"
                             className="object-cover transition-transform duration-300 group-hover:scale-110"
                             loading="lazy"
+                            unoptimized
                             onError={() => handleImageError(app.id)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
@@ -402,6 +403,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                                 ? undefined
                                 : 'lazy'
                             }
+                            unoptimized
                             onError={() => handleImageError(app.id)}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
