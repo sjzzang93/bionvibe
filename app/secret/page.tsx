@@ -56,12 +56,13 @@ export default function SecretPage() {
     }
   }, [mounted]);
 
-  // 방문 추적
+  // 방문 추적 - unlocked가 true가 되면 한 번만 실행
   useEffect(() => {
-    if (unlocked) {
-      trackVisit();
-    }
-  }, [unlocked]);
+    if (!mounted || !unlocked) return;
+
+    // 방문 추적 실행
+    trackVisit();
+  }, [mounted, unlocked]);
 
   const trackVisit = async () => {
     try {
