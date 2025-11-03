@@ -48,25 +48,25 @@ export default function SecretPage() {
     }
   }, []);
 
-  // 방문 추적 - 임시 비활성화 (Supabase 테이블 스키마 불일치)
-  // useEffect(() => {
-  //   if (unlocked) {
-  //     trackVisit();
-  //   }
-  // }, [unlocked]);
+  // 방문 추적
+  useEffect(() => {
+    if (unlocked) {
+      trackVisit();
+    }
+  }, [unlocked]);
 
-  // const trackVisit = async () => {
-  //   try {
-  //     await fetch('/api/secret/track-visit', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error('Failed to track visit:', error);
-  //   }
-  // };
+  const trackVisit = async () => {
+    try {
+      await fetch('/api/secret/track-visit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to track visit:', error);
+    }
+  };
 
   useEffect(() => {
     if (!supabase) return;
