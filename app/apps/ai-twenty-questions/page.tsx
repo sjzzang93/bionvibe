@@ -575,7 +575,7 @@ export default function AITwentyQuestions() {
               <div className="flex justify-center mb-8">
                 <PremiumButton
                   onClick={useHint}
-                  variant="warning"
+                  variant="secondary"
                   size="lg"
                   icon="💡"
                   disabled={hintsUsed >= 3}
