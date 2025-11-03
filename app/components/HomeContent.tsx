@@ -3,7 +3,6 @@ import { getAllCategories, type App, type Category } from '@/lib/getApps';
 
 import HomeContentClient from './HomeContentClient';
 import { applyCuratedApps } from './homeContentUtils';
-import RecentApps from './RecentApps';
 
 const normalizeApps = (): App[] => {
   const rawApps = (appsData.apps ?? []) as App[];
@@ -34,9 +33,6 @@ export default function HomeContent() {
 
   return (
     <>
-      {/* 최근 추가된 앱 */}
-      <RecentApps apps={visibleApps} />
-
       {/* 카테고리별 앱 그리드 */}
       <HomeContentClient initialApps={initialApps} categories={categories} />
     </>

@@ -6,6 +6,7 @@ import GoogleAdSense from "./components/GoogleAdSense";
 import SupabaseProvider from "@/lib/supabase-provider";
 import AnalyticsTracker from "./components/AnalyticsTracker";
 import TranslateButton from "./components/TranslateButton";
+import ErrorLogger from "@/components/ErrorLogger";
 import appsData from "@/data/apps.json";
 
 const ADSENSE_PUBLISHER_ID =
@@ -105,6 +106,7 @@ export default function RootLayout({
         
         <SupabaseProvider>
           {/* <AnalyticsTracker /> - Temporarily disabled due to table schema mismatch */}
+          <ErrorLogger />
           <Navigation />
           {children}
           <TranslateButton />

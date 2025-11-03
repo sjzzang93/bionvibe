@@ -5,7 +5,6 @@ import { useSupabase } from "@/lib/supabase-provider";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import VisitorStats from "./components/VisitorStats";
-import Dashboard from "./components/Dashboard";
 
 export default function SecretPage() {
   const [unlocked, setUnlocked] = useState(false);
@@ -17,7 +16,6 @@ export default function SecretPage() {
   const [renameValue, setRenameValue] = useState('');
   const [renaming, setRenaming] = useState(false);
   const [renameSearch, setRenameSearch] = useState('');
-  const [togglingAppId, setTogglingAppId] = useState<string | null>(null);
 
   const hiddenApps = useMemo(() => apps.filter((app) => app.hidden), [apps]);
   const filteredApps = useMemo(() => {
@@ -38,35 +36,38 @@ export default function SecretPage() {
     if (savedSession) {
       const sessionData = JSON.parse(savedSession);
       const now = Date.now();
-      const thirtyMinutes = 30 * 60 * 1000;
+      const thirtyMinutes = 30 * 60 * 1000; // 30분
 
+      // 30분 이내면 자동 로그인
       if (now - sessionData.timestamp < thirtyMinutes) {
         setUnlocked(true);
       } else {
+        // 세션 만료
         localStorage.removeItem("secret_session");
       }
     }
   }, []);
 
-  // 방문 추적 - 임시 비활성화 (Supabase 테이블 스키마 불일치)
-  // useEffect(() => {
-  //   if (unlocked) {
-  //     trackVisit();
-  //   }
-  // }, [unlocked]);
+  // 방문 추적 (언락된 후 한 번만 실행)
+  useEffect(() => {
+    if (unlocked) {
+      trackVisit();
+    }
+  }, [unlocked]);
 
-  // const trackVisit = async () => {
-  //   try {
-  //     await fetch('/api/secret/track-visit', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error('Failed to track visit:', error);
-  //   }
-  // };
+  const trackVisit = async () => {
+    try {
+      await fetch('/api/secret/track-visit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to track visit:', error);
+      // 추적 실패해도 페이지는 정상 동작
+    }
+  };
 
   useEffect(() => {
     if (!supabase) return;
@@ -157,41 +158,9 @@ export default function SecretPage() {
     }
   };
 
-  // 🆕 Hidden 토글 함수
-  const toggleHidden = async (appId: string) => {
-    try {
-      setTogglingAppId(appId);
-      const response = await fetch('/api/secret/apps/toggle-hidden', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ appId }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result?.success) {
-        throw new Error(result?.message || '상태 변경에 실패했습니다.');
-      }
-
-      // 로컬 상태 업데이트
-      setApps((prev) =>
-        prev.map((app) =>
-          app.id === appId ? { ...app, hidden: result.hidden } : app
-        )
-      );
-
-    } catch (error) {
-      const message = error instanceof Error ? error.message : '오류가 발생했습니다.';
-      alert(`❌ ${message}`);
-    } finally {
-      setTogglingAppId(null);
-    }
-  };
-
   const handleUnlock = async () => {
     try {
+      // 서버 API로 비밀번호 검증
       const response = await fetch('/api/secret/verify', {
         method: 'POST',
         headers: {
@@ -204,6 +173,7 @@ export default function SecretPage() {
 
       if (data.success) {
         setUnlocked(true);
+        // 세션 저장 (30분 유효) - 서버에서 받은 토큰 포함
         localStorage.setItem(
           "secret_session",
           JSON.stringify({
@@ -278,11 +248,6 @@ export default function SecretPage() {
           <p className="text-lg text-gray-300">특별한 웹앱들이 여기 숨어있어요 👀</p>
         </div>
 
-        {/* 🆕 대시보드 */}
-        <div className="mb-12">
-          <Dashboard />
-        </div>
-
         {/* Visitor Stats */}
         <div className="mb-12">
           <div className="mb-6 flex items-center justify-between">
@@ -326,24 +291,10 @@ export default function SecretPage() {
                 </p>
               </div>
             </Link>
-            <Link
-              href="/secret/screenshot-tool"
-              className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/50 backdrop-blur-lg"
-            >
-              <div className="p-4">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="text-3xl">📸</span>
-                </div>
-                <h3 className="text-lg font-bold text-white">스크린샷 도구</h3>
-                <p className="mt-2 line-clamp-2 text-sm text-white/70">
-                  앱 URL로 썸네일 자동 생성
-                </p>
-              </div>
-            </Link>
           </div>
         </div>
 
-        {/* Hidden Apps Grid with Toggle */}
+        {/* Hidden Apps Grid */}
         {loadingApps ? (
           <div className="py-20 text-center">
             <div className="mb-6 text-6xl animate-spin">🧪</div>
@@ -361,38 +312,12 @@ export default function SecretPage() {
             <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {hiddenApps.map((app) => {
               const isEditing = editingAppId === app.id;
-              const isToggling = togglingAppId === app.id;
 
               return (
                 <div
                   key={app.id}
                   className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/50 backdrop-blur-lg"
                 >
-                  {/* 🆕 Hidden 토글 스위치 */}
-                  <div className="absolute top-2 left-2 z-10">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggleHidden(app.id);
-                      }}
-                      disabled={isToggling}
-                      className={`
-                        relative inline-flex h-6 w-11 items-center rounded-full transition-colors
-                        ${app.hidden ? 'bg-purple-600' : 'bg-green-600'}
-                        ${isToggling ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                        hover:shadow-lg
-                      `}
-                      title={app.hidden ? 'Hidden 상태 (클릭하면 공개)' : '공개 상태 (클릭하면 숨김)'}
-                    >
-                      <span
-                        className={`
-                          inline-block h-4 w-4 transform rounded-full bg-white transition-transform
-                          ${app.hidden ? 'translate-x-6' : 'translate-x-1'}
-                        `}
-                      />
-                    </button>
-                  </div>
-
                   <Link href={app.url} className="block">
                     {app.image && (
                       <div className="relative h-32 overflow-hidden">
@@ -480,13 +405,13 @@ export default function SecretPage() {
           </>
         )}
 
-        {/* Rename Manager with Toggle */}
+        {/* Rename Manager */}
         <div className="mb-12 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-white">📝 웹앱 관리</h2>
+              <h2 className="text-2xl font-bold text-white">📝 웹앱 이름 관리</h2>
               <p className="text-sm text-purple-100/70">
-                전체 앱 {apps.length}개 · 숨김 {hiddenApps.length}개 · 공개 {apps.length - hiddenApps.length}개
+                전체 앱 {apps.length}개 · 숨김 {hiddenApps.length}개
               </p>
             </div>
             <div className="w-full sm:w-72">
@@ -503,47 +428,27 @@ export default function SecretPage() {
           <div className="mt-4 max-h-[420px] overflow-y-auto divide-y divide-white/10">
             {filteredApps.map((app) => {
               const isEditing = editingAppId === app.id;
-              const isToggling = togglingAppId === app.id;
               return (
                 <div
                   key={app.id}
                   className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="flex flex-1 items-center gap-4">
-                    {/* 🆕 토글 스위치 */}
-                    <button
-                      onClick={() => toggleHidden(app.id)}
-                      disabled={isToggling}
-                      className={`
-                        relative inline-flex h-6 w-11 items-center rounded-full transition-colors flex-shrink-0
-                        ${app.hidden ? 'bg-purple-600' : 'bg-green-600'}
-                        ${isToggling ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-                        hover:shadow-lg
-                      `}
-                      title={app.hidden ? 'Hidden (클릭하면 공개)' : '공개 (클릭하면 숨김)'}
-                    >
-                      <span
-                        className={`
-                          inline-block h-4 w-4 transform rounded-full bg-white transition-transform
-                          ${app.hidden ? 'translate-x-6' : 'translate-x-1'}
-                        `}
-                      />
-                    </button>
-
-                    <div className="flex-1">
+                  <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
+                    <div>
                       <p className="text-sm font-semibold text-white">
                         {isEditing ? renameValue : app.name}{' '}
                         {app.hidden ? (
                           <span className="ml-2 rounded-full bg-purple-500/40 px-2 py-0.5 text-[11px] font-semibold text-purple-100">
                             HIDDEN
                           </span>
-                        ) : (
-                          <span className="ml-2 rounded-full bg-green-500/40 px-2 py-0.5 text-[11px] font-semibold text-green-100">
-                            PUBLIC
-                          </span>
-                        )}
+                        ) : null}
                       </p>
-                      <p className="text-xs text-purple-100/60">ID: {app.id} · Slug: {app.slug}</p>
+                      <p className="text-xs text-purple-100/60">ID: {app.id}</p>
+                      <p className="text-xs text-purple-100/60">Slug: {app.slug}</p>
+                    </div>
+                    <div className="text-xs text-purple-100/60 sm:text-right">
+                      <p>카테고리: {app.categoryId}</p>
+                      <p>URL: {app.url}</p>
                     </div>
                   </div>
 
@@ -656,12 +561,6 @@ export default function SecretPage() {
               className="rounded-xl bg-gradient-to-r from-slate-500 to-gray-700 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-slate-500/50"
             >
               🧰 개발 도구 모음
-            </Link>
-            <Link
-              href="/secret/setup-database"
-              className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-indigo-500/50"
-            >
-              🔧 데이터베이스 설정
             </Link>
             <Link
               href="/secret/error-monitor"

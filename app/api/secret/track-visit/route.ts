@@ -1,22 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
 
 // Supabase 클라이언트 생성 함수 (런타임에만 실행)
 function getSupabaseClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
     throw new Error('Supabase credentials not configured');
   }
 
   return createClient(supabaseUrl, supabaseKey);
-}
-
-// IP 주소를 SHA-256으로 해시 (개인정보 보호)
-function hashIP(ip: string): string {
-  return crypto.createHash('sha256').update(ip).digest('hex');
 }
 
 // 요청에서 실제 IP 주소 추출
@@ -38,77 +32,87 @@ function getClientIP(request: NextRequest): string {
   return '127.0.0.1';
 }
 
-// 지역 정보 가져오기 (Vercel에서 제공)
-function getGeoInfo(request: NextRequest) {
-  // Vercel의 geo 정보는 런타임에만 사용 가능 (타입 정의에 없음)
-  const req = request as any;
-  return {
-    country: req.geo?.country || null,
-    city: req.geo?.city || null,
-  };
+// Helper function to parse user agent
+function parseUserAgent(userAgent: string) {
+  let browser = "Unknown";
+  let os = "Unknown";
+  let deviceType = "Desktop";
+
+  // Detect browser
+  if (userAgent.includes("Chrome")) browser = "Chrome";
+  else if (userAgent.includes("Firefox")) browser = "Firefox";
+  else if (userAgent.includes("Safari")) browser = "Safari";
+  else if (userAgent.includes("Edge")) browser = "Edge";
+
+  // Detect OS
+  if (userAgent.includes("Windows")) os = "Windows";
+  else if (userAgent.includes("Mac")) os = "macOS";
+  else if (userAgent.includes("Linux")) os = "Linux";
+  else if (userAgent.includes("Android")) os = "Android";
+  else if (userAgent.includes("iOS") || userAgent.includes("iPhone") || userAgent.includes("iPad")) os = "iOS";
+
+  // Detect device type
+  if (userAgent.includes("Mobile") || userAgent.includes("Android")) deviceType = "Mobile";
+  else if (userAgent.includes("Tablet") || userAgent.includes("iPad")) deviceType = "Tablet";
+
+  return { browser, os, deviceType };
 }
 
 export async function POST(request: NextRequest) {
   try {
     const supabase = getSupabaseClient();
     const clientIP = getClientIP(request);
-    const ipHash = hashIP(clientIP);
-    const userAgent = request.headers.get('user-agent') || null;
-    const { country, city } = getGeoInfo(request);
+    const userAgent = request.headers.get('user-agent') || 'Unknown';
 
-    // 기존 방문자 확인
-    const { data: existingVisitor, error: fetchError } = await supabase
+    // UPSERT: 없으면 INSERT, 있으면 UPDATE
+    // ip_address가 이미 있으면 visit_count 증가 & last_visit 업데이트
+    const { data: existingVisitor, error: selectError } = await supabase
       .from('secret_visitors')
-      .select('*')
-      .eq('ip_hash', ipHash)
+      .select('id, visit_count')
+      .eq('ip_address', clientIP)
       .single();
 
-    if (fetchError && fetchError.code !== 'PGRST116') {
-      // PGRST116은 "not found" 에러
-      throw fetchError;
+    if (selectError && selectError.code !== 'PGRST116') {
+      // PGRST116 = no rows returned (정상)
+      console.error('Select error:', selectError);
     }
 
     if (existingVisitor) {
-      // 기존 방문자 - 방문 횟수 증가
+      // 기존 방문자: visit_count 증가 & last_visit 업데이트
       const { error: updateError } = await supabase
         .from('secret_visitors')
         .update({
-          last_visit: new Date().toISOString(),
           visit_count: existingVisitor.visit_count + 1,
-          user_agent: userAgent,
-          country: country || existingVisitor.country,
-          city: city || existingVisitor.city,
+          last_visit: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         })
-        .eq('ip_hash', ipHash);
+        .eq('ip_address', clientIP);
 
-      if (updateError) throw updateError;
+      if (updateError) {
+        throw updateError;
+      }
 
       return NextResponse.json({
         success: true,
-        isNewVisitor: false,
-        visitCount: existingVisitor.visit_count + 1,
+        message: 'Visit count updated',
       });
     } else {
-      // 새 방문자 - 레코드 생성
+      // 새 방문자: INSERT
       const { error: insertError } = await supabase
         .from('secret_visitors')
         .insert({
           ip_address: clientIP,
-          ip_hash: ipHash,
           user_agent: userAgent,
-          country,
-          city,
-          first_visit: new Date().toISOString(),
-          last_visit: new Date().toISOString(),
           visit_count: 1,
         });
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        throw insertError;
+      }
 
       return NextResponse.json({
         success: true,
-        isNewVisitor: true,
-        visitCount: 1,
+        message: 'New visitor tracked',
       });
     }
   } catch (error) {

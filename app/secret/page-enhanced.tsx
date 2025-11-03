@@ -48,25 +48,25 @@ export default function SecretPage() {
     }
   }, []);
 
-  // 방문 추적 - 임시 비활성화 (Supabase 테이블 스키마 불일치)
-  // useEffect(() => {
-  //   if (unlocked) {
-  //     trackVisit();
-  //   }
-  // }, [unlocked]);
+  // 방문 추적
+  useEffect(() => {
+    if (unlocked) {
+      trackVisit();
+    }
+  }, [unlocked]);
 
-  // const trackVisit = async () => {
-  //   try {
-  //     await fetch('/api/secret/track-visit', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.error('Failed to track visit:', error);
-  //   }
-  // };
+  const trackVisit = async () => {
+    try {
+      await fetch('/api/secret/track-visit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to track visit:', error);
+    }
+  };
 
   useEffect(() => {
     if (!supabase) return;
@@ -323,20 +323,6 @@ export default function SecretPage() {
                 <h3 className="text-lg font-bold text-white">Claude 학습 카드</h3>
                 <p className="mt-2 line-clamp-2 text-sm text-white/70">
                   플래시카드로 Claude 기능 배우기
-                </p>
-              </div>
-            </Link>
-            <Link
-              href="/secret/screenshot-tool"
-              className="group relative overflow-hidden rounded-xl border border-white/20 bg-white/10 shadow-lg transition-all duration-300 hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/50 backdrop-blur-lg"
-            >
-              <div className="p-4">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="text-3xl">📸</span>
-                </div>
-                <h3 className="text-lg font-bold text-white">스크린샷 도구</h3>
-                <p className="mt-2 line-clamp-2 text-sm text-white/70">
-                  앱 URL로 썸네일 자동 생성
                 </p>
               </div>
             </Link>
@@ -656,18 +642,6 @@ export default function SecretPage() {
               className="rounded-xl bg-gradient-to-r from-slate-500 to-gray-700 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-slate-500/50"
             >
               🧰 개발 도구 모음
-            </Link>
-            <Link
-              href="/secret/setup-database"
-              className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-indigo-500/50"
-            >
-              🔧 데이터베이스 설정
-            </Link>
-            <Link
-              href="/secret/error-monitor"
-              className="rounded-xl bg-gradient-to-r from-red-600 to-rose-600 px-6 py-4 text-center font-bold text-white transition-all hover:shadow-lg hover:shadow-red-500/50"
-            >
-              🚨 에러 모니터링
             </Link>
           </div>
         </div>

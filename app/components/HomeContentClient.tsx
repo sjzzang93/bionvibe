@@ -318,7 +318,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                     <Link
                       key={app.id}
                       href={app.url}
-                      className="group relative overflow-hidden rounded-xl border-2 border-amber-200/80 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-400 hover:shadow-lg dark:border-amber-500/30 dark:bg-gray-900/80 dark:hover:border-amber-400"
+                      className="group relative overflow-hidden rounded-none border-2 border-amber-200/80 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-400 hover:shadow-lg dark:border-amber-500/30 dark:bg-gray-900/80 dark:hover:border-amber-400"
                     >
                       <FavoriteButton
                         appId={app.id}
@@ -370,7 +370,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                     <Link
                       key={app.id}
                       href={app.url}
-                      className="group relative overflow-hidden rounded-xl border border-amber-100/80 bg-white/85 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-lg dark:border-amber-500/20 dark:bg-gray-900/80 dark:hover:border-amber-400"
+                      className="group relative overflow-hidden rounded-none border border-amber-100/80 bg-white/85 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-lg dark:border-amber-500/20 dark:bg-gray-900/80 dark:hover:border-amber-400"
                     >
                       <FavoriteButton
                         appId={app.id}

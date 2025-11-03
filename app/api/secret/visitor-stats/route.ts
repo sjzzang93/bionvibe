@@ -35,7 +35,58 @@ export async function GET() {
 
       if (visitorsError) {
         console.error('Failed to fetch visitors:', visitorsError);
+
+        // 테이블이 없는 경우 빈 데이터 반환
+        if (visitorsError.code === 'PGRST116' || visitorsError.message.includes('does not exist')) {
+          return NextResponse.json({
+            success: true,
+            stats: {
+              totalUniqueVisitors: 0,
+              totalVisits: 0,
+              todayVisitors: 0,
+              weekVisitors: 0,
+              monthVisitors: 0,
+              lastVisitorTime: null,
+            },
+            dailyStats: Array.from({ length: 7 }, (_, i) => {
+              const date = new Date();
+              date.setDate(date.getDate() - (6 - i));
+              return {
+                date: date.toISOString().split('T')[0],
+                unique: 0,
+                total: 0,
+              };
+            }),
+            topCountries: [],
+          });
+        }
+
         throw new Error('Failed to fetch visitor data');
+      }
+
+      // 데이터가 없는 경우 빈 통계 반환
+      if (!allVisitors || allVisitors.length === 0) {
+        return NextResponse.json({
+          success: true,
+          stats: {
+            totalUniqueVisitors: 0,
+            totalVisits: 0,
+            todayVisitors: 0,
+            weekVisitors: 0,
+            monthVisitors: 0,
+            lastVisitorTime: null,
+          },
+          dailyStats: Array.from({ length: 7 }, (_, i) => {
+            const date = new Date();
+            date.setDate(date.getDate() - (6 - i));
+            return {
+              date: date.toISOString().split('T')[0],
+              unique: 0,
+              total: 0,
+            };
+          }),
+          topCountries: [],
+        });
       }
 
       const now = new Date();
@@ -49,7 +100,7 @@ export async function GET() {
       let totalVisits = 0;
       let lastVisitorTime: string | null = null;
 
-      allVisitors?.forEach(visitor => {
+      allVisitors.forEach(visitor => {
         const visitDate = new Date(visitor.last_visit);
         totalVisits += visitor.visit_count || 1;
 
@@ -69,7 +120,7 @@ export async function GET() {
       });
 
       calculatedStats = {
-        total_unique_visitors: allVisitors?.length || 0,
+        total_unique_visitors: allVisitors.length,
         total_visits: totalVisits,
         today_visitors: todayVisitors,
         week_visitors: weekVisitors,
@@ -85,7 +136,36 @@ export async function GET() {
       .gte('last_visit', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
       .order('last_visit', { ascending: false });
 
-    if (recentError) throw recentError;
+    if (recentError) {
+      console.error('Failed to fetch recent visitors:', recentError);
+      // 테이블이 없거나 에러가 발생한 경우 빈 데이터 사용
+      if (!calculatedStats) {
+        // 이미 calculatedStats가 없으면 완전히 빈 데이터 반환
+        const last7Days = Array.from({ length: 7 }, (_, i) => {
+          const date = new Date();
+          date.setDate(date.getDate() - (6 - i));
+          return date.toISOString().split('T')[0];
+        });
+
+        return NextResponse.json({
+          success: true,
+          stats: {
+            totalUniqueVisitors: 0,
+            totalVisits: 0,
+            todayVisitors: 0,
+            weekVisitors: 0,
+            monthVisitors: 0,
+            lastVisitorTime: null,
+          },
+          dailyStats: last7Days.map(date => ({
+            date,
+            unique: 0,
+            total: 0,
+          })),
+          topCountries: [],
+        });
+      }
+    }
 
     // 일별로 그룹화 (IP당 1회만 카운팅)
     const dailyStats: Record<string, { unique: Set<string>; total: number }> = {};
@@ -117,7 +197,10 @@ export async function GET() {
       .select('country')
       .not('country', 'is', null);
 
-    if (countryError) throw countryError;
+    if (countryError) {
+      console.error('Failed to fetch country stats:', countryError);
+      // 국가 통계 에러는 무시하고 빈 배열 사용
+    }
 
     const countryCounts: Record<string, number> = {};
     countryStats?.forEach(row => {
