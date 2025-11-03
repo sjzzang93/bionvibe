@@ -1353,6 +1353,23 @@
         "exchange-rate-monitor",
         "interest-calculator"
       ]
+    },
+    {
+      "id": "password-generator",
+      "name": "🔐 비밀번호 생성기",
+      "slug": "password-generator",
+      "icon": "🔐",
+      "description": "암호학적으로 안전한 비밀번호 자동 생성. 길이, 대소문자, 숫자, 특수문자 옵션 지원. 보안 강도 실시간 분석.",
+      "categoryId": "learning-tools",
+      "url": "/apps/password-generator",
+      "image": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-04",
+      "hidden": false,
+      "relatedApps": [
+        "nickname-generator",
+        "random-wheel",
+        "study-cursor-prompts"
+      ]
     }
   ]
 }

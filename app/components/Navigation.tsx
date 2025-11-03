@@ -113,6 +113,7 @@ export function Navigation() {
                 className="animate-bounce"
                 style={{ animationDuration: '2s' }}
                 priority
+                unoptimized
               />
             </div>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-red-600 to-rose-600 dark:from-red-400 dark:to-rose-400 bg-clip-text text-transparent">
