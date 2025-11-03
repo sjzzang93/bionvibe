@@ -152,9 +152,18 @@ export default function DreamMap() {
 
   // 로컬 스토리지에서 꿈 기록 불러오기
   useEffect(() => {
-    const savedHistory = localStorage.getItem('dreamHistory');
-    if (savedHistory) {
-      setDreamHistory(JSON.parse(savedHistory));
+    try {
+      const savedHistory = localStorage.getItem('dreamHistory');
+      if (savedHistory) {
+        const parsed = JSON.parse(savedHistory);
+        if (Array.isArray(parsed)) {
+          setDreamHistory(parsed);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load dream history:', error);
+      // 잘못된 데이터가 있으면 초기화
+      localStorage.removeItem('dreamHistory');
     }
   }, []);
 

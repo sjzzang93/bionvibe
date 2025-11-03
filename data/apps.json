@@ -1026,6 +1026,40 @@
         "iq-test",
         "arcade-mini-games"
       ]
+    },
+    {
+      "id": "daily-challenge",
+      "name": "일일 챌린지",
+      "slug": "daily-challenge",
+      "icon": "🎯",
+      "description": "매일 새로운 챌린지를 완료하고 성장하세요! 건강, 생산성, 마인드풀니스, 사회적 챌린지 등 다양한 미션을 통해 더 나은 나를 만들어가세요.",
+      "categoryId": "health-routine",
+      "url": "/apps/daily-challenge",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "habit-tracker",
+        "focus-timer",
+        "mood-cheer-up",
+        "quote-generator"
+      ]
+    },
+    {
+      "id": "regret-meter",
+      "name": "소비 후회도 측정",
+      "slug": "regret-meter",
+      "icon": "💳",
+      "description": "충동구매 전 잠깐! AI가 분석하는 후회 가능성과 쿨링타임으로 현명한 소비 습관을 만들어보세요. 구매 히스토리 분석과 통계 제공.",
+      "categoryId": "money-calc",
+      "url": "/apps/regret-meter",
+      "image": "https://images.unsplash.com/photo-1556742400-b5b7c256e58c?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-03",
+      "relatedApps": [
+        "crypto-calculator",
+        "utility-electricity-calculator",
+        "habit-tracker",
+        "dday-counter"
+      ]
     }
   ]
 }

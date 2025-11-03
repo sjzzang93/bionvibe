@@ -17,25 +17,78 @@ export async function GET() {
   try {
     const supabase = getSupabaseClient();
 
-    // 통계 뷰에서 전체 통계 가져오기
+    // 통계 뷰에서 전체 통계 가져오기 (뷰가 없으면 직접 계산)
     const { data: stats, error: statsError } = await supabase
       .from('secret_visitor_stats')
       .select('*')
       .single();
 
-    if (statsError) throw statsError;
+    // 뷰가 없거나 에러가 발생하면 직접 계산
+    let calculatedStats = null;
+    if (statsError) {
+      console.log('Stats view not available, calculating manually:', statsError.message);
+
+      // 직접 통계 계산
+      const { data: allVisitors, error: visitorsError } = await supabase
+        .from('secret_visitors')
+        .select('ip_address, visit_count, last_visit, country');
+
+      if (visitorsError) {
+        console.error('Failed to fetch visitors:', visitorsError);
+        throw new Error('Failed to fetch visitor data');
+      }
+
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+      let todayVisitors = 0;
+      let weekVisitors = 0;
+      let monthVisitors = 0;
+      let totalVisits = 0;
+      let lastVisitorTime: string | null = null;
+
+      allVisitors?.forEach(visitor => {
+        const visitDate = new Date(visitor.last_visit);
+        totalVisits += visitor.visit_count || 1;
+
+        if (!lastVisitorTime || visitDate > new Date(lastVisitorTime)) {
+          lastVisitorTime = visitor.last_visit;
+        }
+
+        if (visitDate >= today) {
+          todayVisitors++;
+        }
+        if (visitDate >= weekAgo) {
+          weekVisitors++;
+        }
+        if (visitDate >= monthAgo) {
+          monthVisitors++;
+        }
+      });
+
+      calculatedStats = {
+        total_unique_visitors: allVisitors?.length || 0,
+        total_visits: totalVisits,
+        today_visitors: todayVisitors,
+        week_visitors: weekVisitors,
+        month_visitors: monthVisitors,
+        last_visitor_time: lastVisitorTime,
+      };
+    }
 
     // 최근 7일 일별 방문자 수
     const { data: recentVisitors, error: recentError } = await supabase
       .from('secret_visitors')
-      .select('last_visit, visit_count')
+      .select('ip_address, last_visit, visit_count')
       .gte('last_visit', new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())
       .order('last_visit', { ascending: false });
 
     if (recentError) throw recentError;
 
-    // 일별로 그룹화
-    const dailyStats: Record<string, { unique: number; total: number }> = {};
+    // 일별로 그룹화 (IP당 1회만 카운팅)
+    const dailyStats: Record<string, { unique: Set<string>; total: number }> = {};
     const last7Days = Array.from({ length: 7 }, (_, i) => {
       const date = new Date();
       date.setDate(date.getDate() - i);
@@ -44,20 +97,17 @@ export async function GET() {
 
     // 초기화
     last7Days.forEach(date => {
-      dailyStats[date] = { unique: 0, total: 0 };
+      dailyStats[date] = { unique: new Set<string>(), total: 0 };
     });
 
-    // 데이터 집계
-    const processedIPs = new Set<string>();
+    // 데이터 집계 (각 날짜별로 IP당 1회만 카운팅)
     recentVisitors?.forEach(visitor => {
       const date = new Date(visitor.last_visit).toISOString().split('T')[0];
-      if (dailyStats[date]) {
-        dailyStats[date].total += visitor.visit_count;
-        const ipKey = `${date}-${visitor.last_visit}`;
-        if (!processedIPs.has(ipKey)) {
-          dailyStats[date].unique += 1;
-          processedIPs.add(ipKey);
-        }
+      if (dailyStats[date] && visitor.ip_address) {
+        // IP별로 1회만 카운팅 (유니크)
+        dailyStats[date].unique.add(visitor.ip_address);
+        // 총 방문 횟수
+        dailyStats[date].total += visitor.visit_count || 1;
       }
     });
 
@@ -81,19 +131,22 @@ export async function GET() {
       .slice(0, 10)
       .map(([country, count]) => ({ country, count }));
 
+    // 뷰 데이터 또는 계산된 데이터 사용
+    const finalStats = calculatedStats || stats;
+
     return NextResponse.json({
       success: true,
       stats: {
-        totalUniqueVisitors: stats?.total_unique_visitors || 0,
-        totalVisits: stats?.total_visits || 0,
-        todayVisitors: stats?.today_visitors || 0,
-        weekVisitors: stats?.week_visitors || 0,
-        monthVisitors: stats?.month_visitors || 0,
-        lastVisitorTime: stats?.last_visitor_time || null,
+        totalUniqueVisitors: finalStats?.total_unique_visitors || 0,
+        totalVisits: finalStats?.total_visits || 0,
+        todayVisitors: finalStats?.today_visitors || 0,
+        weekVisitors: finalStats?.week_visitors || 0,
+        monthVisitors: finalStats?.month_visitors || 0,
+        lastVisitorTime: finalStats?.last_visitor_time || null,
       },
       dailyStats: last7Days.map(date => ({
         date,
-        unique: dailyStats[date].unique,
+        unique: dailyStats[date].unique.size, // Set의 크기 = 유니크 IP 수
         total: dailyStats[date].total,
       })),
       topCountries,

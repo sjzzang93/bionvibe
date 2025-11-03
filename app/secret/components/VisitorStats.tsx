@@ -123,9 +123,10 @@ export default function VisitorStats() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* 일별 차트 */}
+        {/* 유니크 방문자 차트 (IP당 1회) */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
-          <h3 className="mb-4 text-lg font-bold text-white">📊 최근 7일 방문자</h3>
+          <h3 className="mb-2 text-lg font-bold text-white">👤 최근 7일 유니크 방문자</h3>
+          <p className="mb-4 text-xs text-purple-200/60">IP당 1회만 카운팅</p>
           <div className="space-y-3">
             {dailyStats.map((day, idx) => {
               const percentage = (day.unique / maxDailyVisitors) * 100;
@@ -136,10 +137,36 @@ export default function VisitorStats() {
                 <div key={idx} className="space-y-1">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-white/80">{dateStr}</span>
-                    <span className="font-mono text-white">
-                      <span className="text-purple-300">{day.unique}</span>
-                      <span className="text-white/50"> ({day.total})</span>
-                    </span>
+                    <span className="font-mono text-blue-300 font-bold">{day.unique}</span>
+                  </div>
+                  <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-500"
+                      style={{ width: `${percentage}%` }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 총 방문 횟수 차트 (들락날락 카운팅) */}
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
+          <h3 className="mb-2 text-lg font-bold text-white">🔄 최근 7일 총 방문 횟수</h3>
+          <p className="mb-4 text-xs text-purple-200/60">들락날락할 때마다 카운팅</p>
+          <div className="space-y-3">
+            {dailyStats.map((day, idx) => {
+              const maxTotal = Math.max(...dailyStats.map(d => d.total), 1);
+              const percentage = (day.total / maxTotal) * 100;
+              const date = new Date(day.date);
+              const dateStr = `${date.getMonth() + 1}/${date.getDate()}`;
+
+              return (
+                <div key={idx} className="space-y-1">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-white/80">{dateStr}</span>
+                    <span className="font-mono text-purple-300 font-bold">{day.total}</span>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-white/10">
                     <div
@@ -151,12 +178,11 @@ export default function VisitorStats() {
               );
             })}
           </div>
-          <p className="mt-4 text-xs text-white/50">
-            숫자는 (유니크 방문자) (총 방문 횟수) 형식입니다
-          </p>
         </div>
+      </div>
 
-        {/* 국가별 통계 */}
+      {/* 국가별 통계 */}
+      <div className="grid grid-cols-1 gap-6">
         <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg">
           <h3 className="mb-4 text-lg font-bold text-white">🌍 국가별 방문자</h3>
           {topCountries.length > 0 ? (
