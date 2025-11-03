@@ -1,5 +1,6 @@
 'use client';
 
+import RelatedApps from '@/app/components/RelatedApps';
 import React from 'react';
 import Link from 'next/link';
 import { clearState } from '@/lib/hobby-storage';
@@ -157,6 +158,8 @@ export default function HobbyFinderPage() {
             <span className="text-xl">→</span>
           </Link>
         </div>
+
+        <RelatedApps currentAppSlug="hobby-finder" />
       </div>
     </div>
   );

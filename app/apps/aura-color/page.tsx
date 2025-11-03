@@ -1,4 +1,5 @@
 "use client";
+import RelatedApps from '@/app/components/RelatedApps';
 import { useMemo, useState, useEffect } from "react";
 import Controls from "@/components/aura/Controls";
 import AuraCanvas from "@/components/aura/AuraCanvas";
@@ -318,6 +319,8 @@ export default function Page(){
           <p className="mt-2 px-4">광고 없음 · 프리미엄 디자인</p>
         </footer>
       </div>
-    </main>
+
+        <RelatedApps currentAppSlug="aura-color" />
+      </main>
   );
 }

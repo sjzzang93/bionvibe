@@ -1,5 +1,6 @@
 "use client"
 
+import RelatedApps from '@/app/components/RelatedApps';
 import { useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, Home, TreePine, User } from "lucide-react"
@@ -162,6 +163,7 @@ export default function DrawPsychologyPage() {
         </div>
       </div>
 
+        <RelatedApps currentAppSlug="draw-psychology" />
       <style jsx>{`
         .perspective-1000 {
           perspective: 1000px;

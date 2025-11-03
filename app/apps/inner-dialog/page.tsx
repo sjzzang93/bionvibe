@@ -1,5 +1,6 @@
 "use client";
 
+import RelatedApps from '@/app/components/RelatedApps';
 import { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, Clock, CheckCircle, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -389,6 +390,9 @@ export default function InnerDialogPage() {
             </Button>
           </div>
         </div>
+
+      <RelatedApps currentAppSlug="inner-dialog" />
+
       </div>
     );
   }

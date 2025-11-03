@@ -1,5 +1,6 @@
 'use client'
 
+import RelatedApps from '@/app/components/RelatedApps';
 import { Suspense, useState } from 'react'
 import CopyButton from '@/app/components/glossary/CopyButton'
 
@@ -685,6 +686,9 @@ function QuizTab() {
       <div className="text-center text-xs sm:text-sm text-gray-500">
         정답을 선택하면 자동으로 다음 문제로 넘어갑니다
       </div>
+
+    <RelatedApps currentAppSlug="study-dev-vocab" />
+
     </div>
   )
 }

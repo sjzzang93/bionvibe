@@ -1,5 +1,6 @@
 "use client";
 
+import RelatedApps from '@/app/components/RelatedApps';
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -261,7 +262,6 @@ export default function NewsBriefingPage() {
             ))}
           </div>
         )}
-
         {/* Footer */}
         <div className="mt-16 pt-10 border-t-4 border-neutral-900">
           <div className="text-center">
@@ -270,6 +270,9 @@ export default function NewsBriefingPage() {
           </div>
         </div>
       </div>
+
+    <RelatedApps currentAppSlug="news-briefing" />
+
     </div>
   );
 }

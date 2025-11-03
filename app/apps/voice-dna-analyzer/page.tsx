@@ -1,5 +1,6 @@
 'use client';
 
+import RelatedApps from '@/app/components/RelatedApps';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -1156,6 +1157,9 @@ export default function VoiceDNAAnalyzer() {
           </div>
         </div>
       </div>
+
+    <RelatedApps currentAppSlug="voice-dna-analyzer" />
+
     </div>
   );
 }

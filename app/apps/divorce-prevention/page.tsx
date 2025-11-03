@@ -1,5 +1,6 @@
 'use client';
 
+import RelatedApps from '@/app/components/RelatedApps';
 import { useState } from 'react';
 import Link from 'next/link';
 import { Heart, AlertTriangle, Shield, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -335,6 +336,9 @@ export default function DivorcePreventionPage() {
           </button>
         )}
       </div>
+
+    <RelatedApps currentAppSlug="divorce-prevention" />
+
     </div>
   );
 }
