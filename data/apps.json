@@ -1305,24 +1305,6 @@
         "ultrathink-depression-test",
         "mbti-test"
       ]
-    },
-    {
-      "id": "3d-runner",
-      "name": "🏃 3D Runner Game",
-      "slug": "3d-runner",
-      "icon": "🏃",
-      "description": "3D 공간에서 장애물을 피하며 달려라! 좌우 이동과 점프로 최고 기록에 도전하세요. 반응속도와 집중력을 테스트하는 중독성 강한 러너 게임",
-      "categoryId": "learning-tools",
-      "url": "/apps/3d-runner",
-      "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop",
-      "createdAt": "2025-11-03",
-      "hidden": false,
-      "relatedApps": [
-        "reflex-test",
-        "arcade-mini-games",
-        "color-finder-game",
-        "games-puzzle"
-      ]
     }
   ]
 }
