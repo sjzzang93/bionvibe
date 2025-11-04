@@ -57,10 +57,96 @@ export default function InstallationSchedulerPage() {
       checkMobile();
       window.addEventListener('resize', checkMobile);
 
-      const saved = localStorage.getItem('installation-schedules');
-      if (saved) {
-        setSchedules(JSON.parse(saved));
-      }
+      // Load schedules with multiple fallback options (안드로이드 재부팅 후에도 복구)
+      const loadSchedules = async () => {
+        let loaded = false;
+
+        // 1. Try loading from localStorage (main storage)
+        try {
+          const saved = localStorage.getItem('installation-schedules');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              setSchedules(parsed);
+              console.log('✅ localStorage에서 불러오기 성공:', parsed.length, '개');
+              loaded = true;
+              return;
+            }
+          }
+        } catch (error) {
+          console.error('❌ localStorage 불러오기 오류:', error);
+        }
+
+        // 2. Try loading from localStorage backup
+        if (!loaded) {
+          try {
+            const backup = localStorage.getItem('installation-schedules-backup');
+            if (backup) {
+              const parsed = JSON.parse(backup);
+              if (Array.isArray(parsed) && parsed.length > 0) {
+                setSchedules(parsed);
+                localStorage.setItem('installation-schedules', backup);
+                console.log('✅ localStorage 백업에서 복구 성공:', parsed.length, '개');
+                loaded = true;
+                return;
+              }
+            }
+          } catch (backupError) {
+            console.error('❌ localStorage 백업 복구 실패:', backupError);
+          }
+        }
+
+        // 3. Try loading from Android native storage
+        if (!loaded && (window as any).AndroidStorage && (window as any).AndroidStorage.loadSchedules) {
+          try {
+            const androidData = (window as any).AndroidStorage.loadSchedules();
+            if (androidData) {
+              const parsed = JSON.parse(androidData);
+              if (Array.isArray(parsed) && parsed.length > 0) {
+                setSchedules(parsed);
+                // Restore to localStorage
+                localStorage.setItem('installation-schedules', androidData);
+                localStorage.setItem('installation-schedules-backup', androidData);
+                console.log('✅ Android 네이티브 저장소에서 복구 성공:', parsed.length, '개');
+                loaded = true;
+                return;
+              }
+            }
+          } catch (androidError) {
+            console.error('❌ Android 복구 실패:', androidError);
+          }
+        }
+
+        // 4. Try loading from IndexedDB (최후의 수단)
+        if (!loaded && typeof indexedDB !== 'undefined') {
+          try {
+            const request = indexedDB.open('installation-scheduler', 1);
+            request.onsuccess = (e: any) => {
+              const db = e.target.result;
+              if (db.objectStoreNames.contains('schedules')) {
+                const transaction = db.transaction(['schedules'], 'readonly');
+                const store = transaction.objectStore('schedules');
+                const getRequest = store.get('current');
+                getRequest.onsuccess = () => {
+                  const data = getRequest.result;
+                  if (Array.isArray(data) && data.length > 0) {
+                    setSchedules(data);
+                    // Restore to localStorage
+                    const jsonData = JSON.stringify(data);
+                    localStorage.setItem('installation-schedules', jsonData);
+                    localStorage.setItem('installation-schedules-backup', jsonData);
+                    console.log('✅ IndexedDB에서 복구 성공:', data.length, '개');
+                  }
+                };
+              }
+            };
+          } catch (idbError) {
+            console.error('❌ IndexedDB 복구 실패:', idbError);
+          }
+        }
+      };
+
+      loadSchedules();
 
       // Initialize speech recognition
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -163,9 +249,73 @@ export default function InstallationSchedulerPage() {
     }
   }, []);
 
+  // Auto-save schedules whenever they change (재부팅 후에도 유지)
+  useEffect(() => {
+    if (schedules.length > 0) {
+      try {
+        const data = JSON.stringify(schedules);
+        localStorage.setItem('installation-schedules', data);
+        localStorage.setItem('installation-schedules-backup', data);
+        localStorage.setItem('installation-schedules-updated', new Date().toISOString());
+      } catch (error) {
+        console.error('❌ 자동 저장 오류:', error);
+      }
+    }
+  }, [schedules]);
+
   const saveToLocalStorage = (newSchedules: Schedule[]) => {
-    localStorage.setItem('installation-schedules', JSON.stringify(newSchedules));
-    setSchedules(newSchedules);
+    try {
+      const data = JSON.stringify(newSchedules);
+
+      // 1. Save to main localStorage
+      localStorage.setItem('installation-schedules', data);
+
+      // 2. Create backup in localStorage (for recovery)
+      localStorage.setItem('installation-schedules-backup', data);
+
+      // 3. Save last update timestamp
+      localStorage.setItem('installation-schedules-updated', new Date().toISOString());
+
+      // 4. Save to Android native storage (if available)
+      // Android will persist this data permanently
+      if ((window as any).AndroidStorage && (window as any).AndroidStorage.saveSchedules) {
+        try {
+          (window as any).AndroidStorage.saveSchedules(data);
+          console.log('✅ Android 네이티브 저장 완료');
+        } catch (androidError) {
+          console.warn('⚠️ Android 저장 실패:', androidError);
+        }
+      }
+
+      // 5. Save to IndexedDB as additional backup (안드로이드에서 localStorage 문제 대비)
+      if (typeof indexedDB !== 'undefined') {
+        try {
+          const request = indexedDB.open('installation-scheduler', 1);
+          request.onupgradeneeded = (e: any) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('schedules')) {
+              db.createObjectStore('schedules');
+            }
+          };
+          request.onsuccess = (e: any) => {
+            const db = e.target.result;
+            const transaction = db.transaction(['schedules'], 'readwrite');
+            const store = transaction.objectStore('schedules');
+            store.put(newSchedules, 'current');
+            console.log('✅ IndexedDB 백업 완료');
+          };
+        } catch (idbError) {
+          console.warn('⚠️ IndexedDB 저장 실패:', idbError);
+        }
+      }
+
+      console.log('✅ 스케줄 저장 완료:', newSchedules.length, '개');
+
+      setSchedules(newSchedules);
+    } catch (error) {
+      console.error('❌ 스케줄 저장 오류:', error);
+      alert('스케줄 저장에 실패했습니다.\n저장 공간이 부족하거나 브라우저 설정을 확인해주세요.');
+    }
   };
 
   const toggleRecording = () => {

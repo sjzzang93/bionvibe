@@ -445,3 +445,220 @@ Android Calendar → TV 설치 스케줄러:
 - HTTPS를 통해서만 데이터 전송
 - 캘린더 데이터는 로컬에만 저장
 - 원본 캘린더 데이터 보호
+
+---
+
+# 안드로이드 영구 저장소 연동 (재부팅 후에도 유지)
+
+웹앱의 스케줄 데이터를 안드로이드 네이티브 저장소(SharedPreferences)에 영구 보존하는 방법입니다.
+
+## ⚠️ 중요: 데이터 손실 방지
+
+- **사용자가 삭제하지 않는 한 데이터는 절대 사라지지 않습니다**
+- 핸드폰 재부팅, 앱 재시작 후에도 데이터 유지
+- 4중 백업 시스템: localStorage → localStorage Backup → Android Native → IndexedDB
+
+## 저장 메커니즘
+
+웹앱은 다음 순서로 데이터를 저장합니다:
+
+1. **localStorage** (메인 저장소)
+2. **localStorage-backup** (웹 백업)
+3. **Android SharedPreferences** (네이티브 영구 저장)
+4. **IndexedDB** (웹 추가 백업)
+
+## 복구 메커니즘
+
+앱 시작 시 다음 순서로 데이터를 복구 시도:
+
+1. localStorage → 2. localStorage backup → 3. Android Native → 4. IndexedDB
+
+## Android Interface 구현
+
+### 1. JavaScript Interface 클래스 생성
+
+```kotlin
+import android.content.Context
+import android.content.SharedPreferences
+import android.webkit.JavascriptInterface
+
+class StorageBridge(private val context: Context) {
+    private val prefs: SharedPreferences =
+        context.getSharedPreferences("installation_scheduler", Context.MODE_PRIVATE)
+
+    @JavascriptInterface
+    fun saveSchedules(jsonData: String) {
+        try {
+            prefs.edit()
+                .putString("schedules_data", jsonData)
+                .putLong("last_updated", System.currentTimeMillis())
+                .apply()
+
+            android.util.Log.d("StorageBridge", "✅ 스케줄 저장 완료: ${jsonData.length} bytes")
+        } catch (e: Exception) {
+            android.util.Log.e("StorageBridge", "❌ 저장 실패", e)
+        }
+    }
+
+    @JavascriptInterface
+    fun loadSchedules(): String {
+        return try {
+            val data = prefs.getString("schedules_data", "") ?: ""
+            android.util.Log.d("StorageBridge", "✅ 스케줄 불러오기: ${data.length} bytes")
+            data
+        } catch (e: Exception) {
+            android.util.Log.e("StorageBridge", "❌ 불러오기 실패", e)
+            ""
+        }
+    }
+
+    @JavascriptInterface
+    fun clearSchedules() {
+        prefs.edit()
+            .remove("schedules_data")
+            .remove("last_updated")
+            .apply()
+        android.util.Log.d("StorageBridge", "✅ 스케줄 삭제 완료")
+    }
+
+    @JavascriptInterface
+    fun getLastUpdated(): Long {
+        return prefs.getLong("last_updated", 0)
+    }
+}
+```
+
+### 2. MainActivity에 인터페이스 추가
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+    private lateinit var webView: WebView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        webView = WebView(this).apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.databaseEnabled = true // IndexedDB 활성화
+
+            // Add JavaScript interface for persistent storage
+            addJavascriptInterface(StorageBridge(this@MainActivity), "AndroidStorage")
+            addJavascriptInterface(CalendarBridge(this@MainActivity), "AndroidCalendar")
+
+            loadUrl("https://bionvibe.com/apps/installation-scheduler")
+        }
+
+        setContentView(webView)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // 앱이 백그라운드로 갈 때 현재 데이터를 저장
+        webView.evaluateJavascript(
+            "(function() { " +
+            "  const data = localStorage.getItem('installation-schedules'); " +
+            "  if (data && window.AndroidStorage) { " +
+            "    window.AndroidStorage.saveSchedules(data); " +
+            "  } " +
+            "})();",
+            null
+        )
+    }
+}
+```
+
+## 자동 백업 타이밍
+
+웹앱은 다음 상황에서 자동으로 저장합니다:
+
+1. **스케줄 추가/수정/삭제 시** - 즉시 저장
+2. **schedules 상태 변경 시** - useEffect로 자동 저장
+3. **앱 백그라운드 전환 시** - MainActivity의 onPause()
+4. **페이지 unload 시** - beforeunload 이벤트
+
+## WebView 설정 (중요!)
+
+```kotlin
+webView.settings.apply {
+    javaScriptEnabled = true
+    domStorageEnabled = true  // localStorage 활성화
+    databaseEnabled = true    // IndexedDB 활성화
+
+    // WebView 캐시 설정 (데이터 유지를 위해 중요)
+    cacheMode = WebSettings.LOAD_DEFAULT
+
+    // 데이터 디렉토리 설정
+    setAppCachePath(applicationContext.cacheDir.absolutePath)
+    setAppCacheEnabled(true)
+}
+```
+
+## AndroidManifest.xml 권한
+
+```xml
+<!-- 네트워크 접근 (WebView 로드) -->
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+<!-- 파일 저장 (IndexedDB 사용 시) -->
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+## 데이터 백업 및 복원 테스트
+
+### 테스트 시나리오
+
+1. **정상 저장/불러오기 테스트**
+   - 스케줄 10개 등록
+   - 앱 종료
+   - 앱 재시작
+   - 10개 모두 정상 표시 확인
+
+2. **재부팅 테스트**
+   - 스케줄 등록
+   - 핸드폰 재부팅
+   - 앱 실행
+   - 데이터 정상 표시 확인
+
+3. **캐시 삭제 테스트**
+   - 스케줄 등록
+   - 브라우저 캐시/데이터 삭제
+   - 앱 실행
+   - Android Native Storage에서 복구 확인
+
+4. **강제 종료 테스트**
+   - 스케줄 등록 중
+   - 앱 강제 종료
+   - 앱 재시작
+   - 마지막 저장 시점까지 복구 확인
+
+## 디버그 로그 확인
+
+Android Studio Logcat에서 다음 태그로 필터링:
+
+```
+tag:StorageBridge
+```
+
+정상 작동 시 다음 로그가 표시됩니다:
+
+```
+D/StorageBridge: ✅ 스케줄 저장 완료: 1234 bytes
+D/StorageBridge: ✅ 스케줄 불러오기: 1234 bytes
+```
+
+## 사용자에게 안내할 내용
+
+- 스케줄은 자동으로 저장됩니다
+- 핸드폰을 재부팅해도 데이터가 유지됩니다
+- 앱을 삭제하지 않는 한 데이터는 보존됩니다
+- 백업은 4중으로 이루어져 안전합니다
+
+## 주의사항
+
+- **절대 사용자 확인 없이 데이터를 삭제하지 마세요**
+- SharedPreferences는 앱 삭제 시에만 삭제됩니다
+- WebView의 domStorageEnabled가 반드시 true여야 합니다
+- clearSchedules()는 사용자가 명시적으로 "모든 데이터 삭제" 버튼을 눌렀을 때만 호출하세요
