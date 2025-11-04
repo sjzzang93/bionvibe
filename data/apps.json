@@ -1406,6 +1406,24 @@
         "dday-counter",
         "regret-meter"
       ]
+    },
+    {
+      "id": "installation-scheduler",
+      "name": "📅 설치 예약 스케줄러",
+      "slug": "installation-scheduler",
+      "icon": "📅",
+      "description": "설치 예약 관리의 모든 것! 고객명, 주소, 날짜/시간 입력으로 자동 문자 전송. 에어컨, 인터넷, 가전 등 설치 일정 관리. 상태 추적 및 히스토리 저장.",
+      "categoryId": "learning-tools",
+      "url": "/apps/installation-scheduler",
+      "image": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-04",
+      "hidden": false,
+      "relatedApps": [
+        "dday-counter",
+        "habit-tracker",
+        "focus-timer",
+        "parents-time"
+      ]
     }
   ]
 }
