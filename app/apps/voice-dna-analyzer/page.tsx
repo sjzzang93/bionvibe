@@ -168,6 +168,108 @@ const VOICE_PERSONALITIES: VoicePersonality[] = [
     color: '#0abde3',
     icon: Shield,
     detailedAnalysis: '당신의 목소리에는 오랜 경험과 깊은 지식이 담겨 있습니다. 무게감 있는 톤과 신중한 말투는 자연스럽게 권위를 형성하며, 사람들은 당신의 조언을 진지하게 받아들입니다. 중요한 결정을 내리거나 전문적 의견을 제시할 때 큰 영향력을 발휘합니다. 다만 때로는 좀 더 친근하고 개방적인 태도를 보인다면 더 많은 사람들과 소통할 수 있습니다.'
+  },
+  {
+    type: '부드러운 설득형',
+    description: '온화하면서도 논리적인 목소리로 상대방을 자연스럽게 설득합니다. 강압적이지 않으면서도 확실한 메시지를 전달합니다.',
+    strengths: ['뛰어난 협상력', '유연한 사고', '상대방 존중', '전략적 소통', '갈등 중재 능력'],
+    weaknesses: ['명확한 입장 표명 부족', '결정 지연', '과도한 배려'],
+    careers: ['외교관', '중재자', '협상가', 'HR 컨설턴트', '세일즈', '컨설턴트', '이벤트 플래너', '관계 매니저'],
+    tips: [
+      '때로는 명확하고 단호한 입장이 필요합니다',
+      '너무 많은 타협은 신뢰를 해칠 수 있습니다',
+      '자신의 의견을 더 적극적으로 표현해보세요',
+      '상황에 따라 강한 어조도 사용할 줄 알아야 합니다'
+    ],
+    compatibility: ['리더형', '공감형', '분석형'],
+    color: '#95a99c',
+    icon: Heart,
+    detailedAnalysis: '당신의 목소리는 부드러운 카리스마를 가지고 있습니다. 강압적이지 않으면서도 사람들의 마음을 움직이는 능력이 뛰어나며, 논리와 감성의 균형이 잘 잡혀 있습니다. 협상 테이블에서 윈-윈을 만들어내는 데 탁월하며, 갈등 상황에서 중재자 역할을 훌륭하게 수행합니다. 다만 때로는 더 명확한 입장 표명도 필요합니다.'
+  },
+  {
+    type: '유머러스 엔터테이너형',
+    description: '재치있고 유쾌한 목소리로 사람들을 즐겁게 합니다. 자연스러운 유머 감각으로 분위기를 부드럽게 만듭니다.',
+    strengths: ['뛰어난 유머 감각', '긴장 완화 능력', '즉흥 대처력', '친화력', '기억에 남는 인상'],
+    weaknesses: ['진지함 부족', '신뢰성 저하 위험', '깊이 있는 대화 부족'],
+    careers: ['코미디언', 'MC/사회자', 'BJ/유튜버', '영업사원', '이벤트 기획자', '방송인', '강사', '엔터테이너'],
+    tips: [
+      '중요한 상황에서는 유머를 자제하세요',
+      '진지한 대화 능력도 함께 개발하세요',
+      '타이밍을 잘 파악하는 것이 중요합니다',
+      '유머가 상대방에게 상처가 되지 않도록 주의하세요'
+    ],
+    compatibility: ['창의형', '에너자이저형'],
+    color: '#feca57',
+    icon: Sparkles,
+    detailedAnalysis: '당신의 목소리에는 사람들을 웃게 만드는 특별한 힘이 있습니다. 자연스러운 리듬감과 타이밍 센스로 어떤 이야기도 재미있게 만들며, 긴장된 분위기를 순식간에 풀어버립니다. 사람들은 당신과 대화하며 스트레스를 풀고 기분이 좋아집니다. 다만 상황에 따라서는 진지한 모습도 보여줄 필요가 있습니다.'
+  },
+  {
+    type: '전략적 협상가형',
+    description: '계산된 말투와 명확한 논리로 협상을 이끕니다. 감정에 휘둘리지 않고 목표를 달성하는 냉철함이 있습니다.',
+    strengths: ['뛰어난 협상력', '전략적 사고', '냉정한 판단', '목표 지향적', '상황 통제력'],
+    weaknesses: ['차갑게 느껴질 수 있음', '감정적 교류 부족', '융통성 부족'],
+    careers: ['변호사', '투자 전문가', 'M&A 전문가', '부동산 중개인', '바이어', '사업가', '정치인', '외교관'],
+    tips: [
+      '때로는 감정적 교류도 중요합니다',
+      '과도한 계산은 신뢰를 해칠 수 있습니다',
+      '상대방의 입장도 충분히 배려하세요',
+      '장기적 관계를 위해 윈-윈을 추구하세요'
+    ],
+    compatibility: ['리더형', '분석형'],
+    color: '#34495e',
+    icon: Brain,
+    detailedAnalysis: '당신의 목소리는 체스 게임을 하는 것처럼 전략적입니다. 모든 단어가 의도를 가지고 있으며, 상대방의 반응을 예측하고 대응하는 능력이 뛰어납니다. 협상 테이블에서 주도권을 잡고 원하는 결과를 이끌어내는 데 탁월합니다. 다만 때로는 인간적인 따뜻함을 더한다면 더 큰 신뢰를 얻을 수 있습니다.'
+  },
+  {
+    type: '감성적 스토리텔러형',
+    description: '감동적인 목소리로 이야기를 생동감 있게 전달합니다. 청중의 감정을 움직이고 공감을 이끌어냅니다.',
+    strengths: ['뛰어난 서사력', '감정 전달 능력', '청중 몰입 유도', '기억에 남는 메시지', '영감 제공'],
+    weaknesses: ['지나친 감정 표현', '객관성 부족', '산만할 수 있음'],
+    careers: ['작가', '강연자', '방송인', '배우', '교사', '목회자', '마케터', '콘텐츠 크리에이터'],
+    tips: [
+      '때로는 간결하고 명확한 전달도 필요합니다',
+      '데이터와 사실도 함께 제시하면 더 설득력 있습니다',
+      '모든 상황이 스토리를 요구하는 것은 아닙니다',
+      '청중의 시간을 존중하며 핵심을 전달하세요'
+    ],
+    compatibility: ['공감형', '창의형'],
+    color: '#e056fd',
+    icon: Heart,
+    detailedAnalysis: '당신의 목소리는 책을 읽어주는 할머니처럼 따뜻하고 매력적입니다. 평범한 이야기도 당신이 말하면 영화처럼 생생해지며, 청중은 당신의 이야기에 빠져듭니다. 감정선을 자유자재로 조절하며 메시지에 생명을 불어넣는 능력이 탁월합니다. 다만 때로는 간결함도 미덕임을 기억하세요.'
+  },
+  {
+    type: '차분한 명상가형',
+    description: '고요하고 평온한 목소리로 안정감을 줍니다. 서두르지 않는 말투로 깊은 신뢰를 형성합니다.',
+    strengths: ['깊은 평온함', '안정감 제공', '신중한 판단', '높은 집중력', '경청 능력'],
+    weaknesses: ['느린 반응', '열정 부족', '소극적으로 보일 수 있음'],
+    careers: ['명상 강사', '상담사', '요가 강사', '사서', '연구원', '전문의', '작가', '치유사'],
+    tips: [
+      '때로는 적극적인 참여도 필요합니다',
+      '빠른 대응이 필요한 상황에 대비하세요',
+      '열정을 표현하는 것도 중요합니다',
+      '목소리에 에너지를 더해보는 연습을 하세요'
+    ],
+    compatibility: ['공감형', '안정형'],
+    color: '#7bed9f',
+    icon: Activity,
+    detailedAnalysis: '당신의 목소리는 고요한 숲속 호수 같습니다. 듣는 이를 차분하게 만들고 마음을 평온하게 합니다. 바쁜 세상에서 당신과의 대화는 휴식 같은 경험이 되며, 사람들은 당신 곁에서 안정감을 느낍니다. 스트레스 많은 환경에서 특히 빛을 발하지만, 때로는 더 적극적인 에너지도 필요합니다.'
+  },
+  {
+    type: '열정적 동기부여형',
+    description: '뜨거운 열정이 담긴 목소리로 사람들에게 영감을 줍니다. 포기하려는 이들에게 힘을 불어넣습니다.',
+    strengths: ['강력한 동기부여', '열정 전달력', '긍정적 에너지', '실행력 고취', '팀 결속력'],
+    weaknesses: ['지나친 열정', '현실성 부족', '지칠 수 있음'],
+    careers: ['코치', '강연가', '트레이너', '교사', '팀 리더', '영업 관리자', '기획자', '운동선수'],
+    tips: [
+      '현실적인 접근도 함께 제시하세요',
+      '모든 사람이 같은 속도로 움직이지는 않습니다',
+      '때로는 조용한 격려도 효과적입니다',
+      '번아웃을 조심하고 스스로도 쉬는 시간을 가지세요'
+    ],
+    compatibility: ['리더형', '에너자이저형'],
+    color: '#ff6348',
+    icon: Zap,
+    detailedAnalysis: '당신의 목소리에는 불처럼 타오르는 열정이 담겨 있습니다. 포기하고 싶은 순간에 당신의 한마디가 사람들을 다시 일으켜 세웁니다. 불가능해 보이는 목표도 가능하게 만드는 에너지를 가지고 있으며, 팀의 사기를 높이는 데 천부적인 재능이 있습니다. 다만 모든 상황이 격한 동기부여를 요구하는 것은 아님을 기억하세요.'
   }
 ];
 
@@ -690,10 +792,10 @@ export default function VoiceDNAAnalyzer() {
 
     setVoiceProfile(profile);
 
-    // Advanced personality type determination
+    // Advanced personality type determination with 12 types
     let personalityIndex = 0;
 
-    // Calculate weighted scores for each personality type
+    // Calculate weighted scores for each of 12 personality types
     const leaderScore = (profile.confidence * 0.35) + (profile.pitch * 0.25) + (profile.clarity * 0.20) + (profile.emotion * 0.20);
     const empathyScore = (profile.warmth * 0.30) + (profile.tone * 0.25) + (profile.emotion * 0.25) + (profile.resonance * 0.20);
     const analyticalScore = (profile.clarity * 0.30) + (profile.articulation * 0.25) + (profile.breathControl * 0.25) + ((100 - profile.speed) * 0.20);
@@ -702,8 +804,34 @@ export default function VoiceDNAAnalyzer() {
     const energeticScore = (profile.speed * 0.30) + (profile.emotion * 0.25) + (profile.pitch * 0.25) + (profile.vocalRange * 0.20);
     const authorityScore = (profile.confidence * 0.30) + (profile.resonance * 0.25) + (profile.clarity * 0.25) + (profile.breathControl * 0.20);
 
-    const scores = [leaderScore, empathyScore, analyticalScore, creativeScore, stableScore, energeticScore, authorityScore];
-    personalityIndex = scores.indexOf(Math.max(...scores));
+    // New personality scores (8-12)
+    const persuasiveScore = (profile.warmth * 0.25) + (profile.clarity * 0.25) + (profile.confidence * 0.25) + (profile.articulation * 0.25);
+    const humorousScore = (profile.uniqueness * 0.30) + (profile.speed * 0.25) + (profile.vocalRange * 0.25) + (profile.emotion * 0.20);
+    const negotiatorScore = (profile.confidence * 0.30) + (profile.clarity * 0.30) + ((100 - profile.emotion) * 0.20) + (profile.breathControl * 0.20);
+    const storytellerScore = (profile.emotion * 0.35) + (profile.vocalRange * 0.25) + (profile.warmth * 0.20) + (profile.uniqueness * 0.20);
+    const meditatorScore = ((100 - profile.speed) * 0.30) + (profile.breathControl * 0.30) + (profile.warmth * 0.20) + ((100 - profile.pitch) * 0.20);
+    const motivatorScore = (profile.emotion * 0.30) + (profile.confidence * 0.30) + (profile.speed * 0.20) + (profile.pitch * 0.20);
+
+    const scores = [
+      leaderScore, empathyScore, analyticalScore, creativeScore,
+      stableScore, energeticScore, authorityScore, persuasiveScore,
+      humorousScore, negotiatorScore, storytellerScore, meditatorScore,
+      motivatorScore
+    ];
+
+    // Find the highest score, with small random variation to add diversity
+    const maxScore = Math.max(...scores);
+    const topScores = scores.map((score, index) => ({ score, index }))
+      .filter(s => s.score >= maxScore - 5) // Consider similar scores
+      .sort((a, b) => b.score - a.score);
+
+    // If there are multiple close scores, add some randomness
+    if (topScores.length > 1) {
+      const randomIndex = Math.floor(Math.random() * Math.min(topScores.length, 3));
+      personalityIndex = topScores[randomIndex].index;
+    } else {
+      personalityIndex = scores.indexOf(maxScore);
+    }
 
     setVoicePersonality(VOICE_PERSONALITIES[personalityIndex]);
     setIsAnalyzing(false);
