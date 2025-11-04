@@ -1388,6 +1388,24 @@
         "draw-psychology",
         "iq-test"
       ]
+    },
+    {
+      "id": "salary-calculator",
+      "name": "💵 월급 실수령액 계산기",
+      "slug": "salary-calculator",
+      "icon": "💵",
+      "description": "4대보험과 세금 자동 계산! 국민연금, 건강보험, 고용보험, 소득세를 제외한 실수령액을 정확하게 계산하세요. 2024년 최신 요율 적용.",
+      "categoryId": "money-calc",
+      "url": "/apps/salary-calculator",
+      "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-04",
+      "hidden": false,
+      "relatedApps": [
+        "utility-electricity-calculator",
+        "crypto-calculator",
+        "dday-counter",
+        "regret-meter"
+      ]
     }
   ]
 }
