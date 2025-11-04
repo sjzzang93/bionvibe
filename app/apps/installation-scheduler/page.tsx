@@ -11,6 +11,10 @@ type Schedule = {
   date: string;
   time: string;
   installationType: string;
+  drilling: 'none' | 'required'; // 무타공/타공
+  tvSize: string; // TV 인치
+  bracket: 'included' | 'none'; // 브라켓 유무
+  cost: string; // 설치 비용
   notes: string;
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
   createdAt: string;
@@ -28,7 +32,11 @@ export default function InstallationSchedulerPage() {
     address: '',
     addressDetail: '',
     time: '',
-    installationType: 'vertical',
+    installationType: 'wallmount',
+    drilling: 'none' as 'none' | 'required',
+    tvSize: '',
+    bracket: 'included' as 'included' | 'none',
+    cost: '',
     notes: '',
   });
 
@@ -45,13 +53,16 @@ export default function InstallationSchedulerPage() {
   };
 
   const generateSMS = (schedule: Schedule) => {
-    return `[설치 예약 확인]\n고객명: ${schedule.customerName}\n일시: ${schedule.date} ${schedule.time}\n주소: ${schedule.address} ${schedule.addressDetail}\n설치: ${getInstallationTypeName(schedule.installationType)}${schedule.notes ? `\n메모: ${schedule.notes}` : ''}`;
+    const drillingText = schedule.drilling === 'none' ? '무타공' : '타공';
+    const bracketText = schedule.bracket === 'included' ? '브라켓 포함' : '브라켓 별도';
+
+    return `[TV 설치 예약]\n\n고객명: ${schedule.customerName}\n일시: ${schedule.date} ${schedule.time}\n주소: ${schedule.address} ${schedule.addressDetail}\n\n[설치 정보]\n종류: ${getInstallationTypeName(schedule.installationType)}\n${drillingText} / ${schedule.tvSize}인치\n${bracketText}\n설치비용: ${schedule.cost}원${schedule.notes ? `\n\n메모: ${schedule.notes}` : ''}`;
   };
 
   const sendSMS = (schedule: Schedule) => {
     const message = generateSMS(schedule);
     navigator.clipboard.writeText(message);
-    alert(`문자 복사 완료!\n${schedule.customerPhone}`);
+    alert(`문자 내용이 복사되었습니다!\n연락처: ${schedule.customerPhone}`);
   };
 
   const handleDateClick = (date: string) => {
@@ -63,8 +74,12 @@ export default function InstallationSchedulerPage() {
       customerPhone: '',
       address: '',
       addressDetail: '',
-      time: '',
-      installationType: 'aircon',
+      time: '09:00',
+      installationType: 'wallmount',
+      drilling: 'none',
+      tvSize: '',
+      bracket: 'included',
+      cost: '',
       notes: '',
     });
   };
@@ -100,6 +115,10 @@ export default function InstallationSchedulerPage() {
       addressDetail: schedule.addressDetail,
       time: schedule.time,
       installationType: schedule.installationType,
+      drilling: schedule.drilling,
+      tvSize: schedule.tvSize,
+      bracket: schedule.bracket,
+      cost: schedule.cost,
       notes: schedule.notes,
     });
     setShowModal(true);
@@ -115,6 +134,7 @@ export default function InstallationSchedulerPage() {
           : s
       );
       saveToLocalStorage(updated);
+      alert('예약이 수정되었습니다.');
     } else {
       const newSchedule: Schedule = {
         id: Date.now().toString(),
@@ -131,19 +151,20 @@ export default function InstallationSchedulerPage() {
   };
 
   const deleteSchedule = (id: string) => {
-    if (confirm('삭제하시겠습니까?')) {
+    if (confirm('예약을 삭제하시겠습니까?')) {
       saveToLocalStorage(schedules.filter(s => s.id !== id));
+      setShowModal(false);
     }
   };
 
   const getInstallationTypeName = (type: string) => {
     const types: { [key: string]: string } = {
-      vertical: '버티컬 블라인드',
-      roller: '롤러 블라인드',
-      honeycomb: '허니콤 블라인드',
-      roman: '로만 블라인드',
-      venetian: '베네시안 블라인드',
-      panel: '판넬 블라인드',
+      wallmount: '벽걸이형',
+      stand: '스탠드형',
+      ceiling: '천장형',
+      frame: '액자형',
+      outdoor: '야외형',
+      builtin: '빌트인',
       other: '기타',
     };
     return types[type] || type;
@@ -189,45 +210,55 @@ export default function InstallationSchedulerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
-      <div className="max-w-6xl mx-auto">
-        {/* 헤더 */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 mb-4 shadow">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-6 px-4">
+      <div className="max-w-5xl mx-auto">
+        {/* 타이틀 */}
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+            📺 TV 설치 스케줄러
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">
+            날짜를 클릭하여 예약을 등록하세요
+          </p>
+        </div>
+
+        {/* 월 네비게이션 */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 mb-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+              className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
-              ◀
+              ←
             </button>
-            <h1 className="text-xl font-bold dark:text-white">
-              {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
-            </h1>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-3">
+              <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
+              </h2>
               <button
                 onClick={() => setCurrentDate(new Date())}
-                className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded"
+                className="px-4 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white text-sm font-medium rounded-lg shadow-sm transition-all"
               >
-                오늘로
-              </button>
-              <button
-                onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-              >
-                ▶
+                오늘
               </button>
             </div>
+            <button
+              onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
+              className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            >
+              →
+            </button>
           </div>
         </div>
 
         {/* 달력 */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
-          {/* 요일 */}
-          <div className="grid grid-cols-7 gap-2 mb-2">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4">
+          {/* 요일 헤더 */}
+          <div className="grid grid-cols-7 gap-2 mb-3">
             {['일', '월', '화', '수', '목', '금', '토'].map((day, i) => (
               <div
                 key={day}
-                className={`text-center text-sm font-bold p-2 ${
+                className={`text-center text-sm font-bold py-2 ${
                   i === 0 ? 'text-red-500' : i === 6 ? 'text-blue-500' : 'text-gray-700 dark:text-gray-300'
                 }`}
               >
@@ -236,7 +267,7 @@ export default function InstallationSchedulerPage() {
             ))}
           </div>
 
-          {/* 날짜 */}
+          {/* 날짜 그리드 */}
           <div className="grid grid-cols-7 gap-2">
             {getDaysInMonth().map((day, index) => {
               if (day === null) {
@@ -245,24 +276,26 @@ export default function InstallationSchedulerPage() {
 
               const dateStr = formatDate(day);
               const daySchedules = getSchedulesForDate(dateStr);
-              const isWeekend = index % 7 === 0 || index % 7 === 6;
 
               return (
                 <div
                   key={day}
                   onClick={() => handleDateClick(dateStr)}
-                  className={`aspect-square border-2 rounded-lg p-2 cursor-pointer hover:border-blue-500 transition-all ${
+                  className={`relative aspect-square border-2 rounded-xl p-2 cursor-pointer transition-all hover:shadow-md ${
                     isToday(day)
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                      : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-sm'
+                      : 'border-gray-200 dark:border-gray-700 hover:border-blue-300 hover:bg-gray-50 dark:hover:bg-gray-700'
                   }`}
                 >
+                  {/* 날짜 숫자 */}
                   <div className={`text-sm font-bold mb-1 ${
                     index % 7 === 0 ? 'text-red-500' : index % 7 === 6 ? 'text-blue-500' : 'text-gray-700 dark:text-gray-300'
                   }`}>
                     {day}
                   </div>
-                  <div className="space-y-1">
+
+                  {/* 예약 표시 */}
+                  <div className="space-y-0.5">
                     {daySchedules.slice(0, 2).map(schedule => (
                       <div
                         key={schedule.id}
@@ -270,13 +303,13 @@ export default function InstallationSchedulerPage() {
                           e.stopPropagation();
                           handleEditClick(schedule);
                         }}
-                        className="text-xs bg-blue-500 text-white px-1 py-0.5 rounded truncate"
+                        className="text-xs bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-1.5 py-0.5 rounded truncate hover:from-blue-600 hover:to-indigo-600 transition-all"
                       >
-                        {schedule.time} {schedule.customerName}
+                        {schedule.time.slice(0, 5)} {schedule.customerName}
                       </div>
                     ))}
                     {daySchedules.length > 2 && (
-                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                      <div className="text-xs text-center text-blue-600 dark:text-blue-400 font-medium">
                         +{daySchedules.length - 2}
                       </div>
                     )}
@@ -288,134 +321,251 @@ export default function InstallationSchedulerPage() {
         </div>
       </div>
 
-      {/* 모달 */}
+      {/* 예약 모달 */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={() => setShowModal(false)}>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold dark:text-white">
-                {editingSchedule ? '수정' : '새 예약'}
-              </h2>
-              <button onClick={() => setShowModal(false)} className="text-2xl">&times;</button>
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* 모달 헤더 */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b dark:border-gray-700">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
+                  {editingSchedule ? '예약 수정' : '새 예약 등록'}
+                </h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  TV 설치 일정을 관리하세요
+                </p>
+              </div>
+              <button
+                onClick={() => setShowModal(false)}
+                className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-gray-500"
+              >
+                ✕
+              </button>
             </div>
 
             {/* 날짜 선택 */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                예약 날짜
+            <div className="mb-5">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                📅 예약 날짜
               </label>
               <input
                 type="date"
                 value={selectedDate || ''}
                 onChange={(e) => changeSelectedDate(e.target.value)}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white mb-2"
+                className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors mb-2"
               />
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => changeSelectedDate(getTodayString())}
-                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded text-sm"
+                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors"
                 >
                   오늘
                 </button>
                 <button
                   type="button"
                   onClick={() => changeSelectedDate(addDaysToDate(getTodayString(), 1))}
-                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded text-sm"
+                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors"
                 >
                   내일
                 </button>
                 <button
                   type="button"
                   onClick={() => changeSelectedDate(addDaysToDate(getTodayString(), 2))}
-                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded text-sm"
+                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors"
                 >
                   모레
                 </button>
               </div>
             </div>
 
+            {/* 수정/삭제 버튼 */}
             {editingSchedule && (
-              <div className="mb-4 space-y-2">
+              <div className="mb-5 flex gap-2">
                 <button
+                  type="button"
                   onClick={() => sendSMS(editingSchedule)}
-                  className="w-full py-2 bg-green-500 text-white rounded"
+                  className="flex-1 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-xl transition-colors shadow-sm"
                 >
-                  📱 문자 전송
+                  📱 문자 복사
                 </button>
                 <button
-                  onClick={() => { deleteSchedule(editingSchedule.id); setShowModal(false); }}
-                  className="w-full py-2 bg-red-500 text-white rounded"
+                  type="button"
+                  onClick={() => deleteSchedule(editingSchedule.id)}
+                  className="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl transition-colors shadow-sm"
                 >
                   🗑️ 삭제
                 </button>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-3">
-              <input
-                type="text"
-                placeholder="고객명 *"
-                required
-                value={formData.customerName}
-                onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white"
-              />
-              <input
-                type="tel"
-                placeholder="연락처 *"
-                required
-                value={formData.customerPhone}
-                onChange={(e) => setFormData({ ...formData, customerPhone: e.target.value })}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white"
-              />
-              <input
-                type="text"
-                placeholder="주소 *"
-                required
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white"
-              />
-              <input
-                type="text"
-                placeholder="상세주소"
-                value={formData.addressDetail}
-                onChange={(e) => setFormData({ ...formData, addressDetail: e.target.value })}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white"
-              />
-              <input
-                type="time"
-                required
-                value={formData.time}
-                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white"
-              />
-              <select
-                value={formData.installationType}
-                onChange={(e) => setFormData({ ...formData, installationType: e.target.value })}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white"
-              >
-                <option value="vertical">버티컬 블라인드</option>
-                <option value="roller">롤러 블라인드</option>
-                <option value="honeycomb">허니콤 블라인드</option>
-                <option value="roman">로만 블라인드</option>
-                <option value="venetian">베네시안 블라인드</option>
-                <option value="panel">판넬 블라인드</option>
-                <option value="other">기타</option>
-              </select>
-              <textarea
-                placeholder="메모"
-                value={formData.notes}
-                onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                rows={2}
-                className="w-full px-3 py-2 border rounded dark:bg-gray-700 dark:text-white"
-              />
+            {/* 예약 폼 */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  👤 고객명 *
+                </label>
+                <input
+                  type="text"
+                  placeholder="이름을 입력하세요"
+                  required
+                  value={formData.customerName}
+                  onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  📞 연락처 *
+                </label>
+                <input
+                  type="tel"
+                  placeholder="010-0000-0000"
+                  required
+                  value={formData.customerPhone}
+                  onChange={(e) => setFormData({ ...formData, customerPhone: e.target.value })}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  📍 주소 *
+                </label>
+                <input
+                  type="text"
+                  placeholder="기본 주소"
+                  required
+                  value={formData.address}
+                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors mb-2"
+                />
+                <input
+                  type="text"
+                  placeholder="상세 주소 (선택)"
+                  value={formData.addressDetail}
+                  onChange={(e) => setFormData({ ...formData, addressDetail: e.target.value })}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  ⏰ 시간 *
+                </label>
+                <input
+                  type="time"
+                  required
+                  value={formData.time}
+                  onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  📺 설치 종류
+                </label>
+                <select
+                  value={formData.installationType}
+                  onChange={(e) => setFormData({ ...formData, installationType: e.target.value })}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                >
+                  <option value="wallmount">벽걸이형</option>
+                  <option value="stand">스탠드형</option>
+                  <option value="ceiling">천장형</option>
+                  <option value="frame">액자형</option>
+                  <option value="outdoor">야외형</option>
+                  <option value="builtin">빌트인</option>
+                  <option value="other">기타</option>
+                </select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    🔨 타공 여부
+                  </label>
+                  <select
+                    value={formData.drilling}
+                    onChange={(e) => setFormData({ ...formData, drilling: e.target.value as 'none' | 'required' })}
+                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  >
+                    <option value="none">무타공</option>
+                    <option value="required">타공</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    📏 TV 인치 *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="예: 55"
+                    required
+                    value={formData.tvSize}
+                    onChange={(e) => setFormData({ ...formData, tvSize: e.target.value })}
+                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    🔧 브라켓
+                  </label>
+                  <select
+                    value={formData.bracket}
+                    onChange={(e) => setFormData({ ...formData, bracket: e.target.value as 'included' | 'none' })}
+                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  >
+                    <option value="included">포함</option>
+                    <option value="none">별도</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    💰 설치 비용 *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="예: 50000"
+                    required
+                    value={formData.cost}
+                    onChange={(e) => setFormData({ ...formData, cost: e.target.value.replace(/[^0-9]/g, '') })}
+                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  📝 메모
+                </label>
+                <textarea
+                  placeholder="추가 사항을 입력하세요 (선택)"
+                  value={formData.notes}
+                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                  rows={3}
+                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors resize-none"
+                />
+              </div>
+
               <button
                 type="submit"
-                className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white rounded font-bold"
+                className="w-full py-3.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-bold rounded-xl shadow-lg transition-all transform hover:scale-[1.02]"
               >
-                {editingSchedule ? '수정' : '추가'}
+                {editingSchedule ? '✓ 수정 완료' : '✓ 예약 등록'}
               </button>
             </form>
           </div>
