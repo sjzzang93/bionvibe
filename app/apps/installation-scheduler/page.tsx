@@ -63,7 +63,6 @@ export default function InstallationSchedulerPage() {
       }
 
       // Initialize speech recognition
-      if (true) {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (SpeechRecognition) {
         const recognitionInstance = new SpeechRecognition();
@@ -120,9 +119,46 @@ export default function InstallationSchedulerPage() {
         setIncomingCall({ name: name || '', phone });
       };
 
+      // Expose function for Android to send calendar events (read-only import)
+      (window as any).receiveCalendarEvents = (events: any[]) => {
+        // events is an array of: { title, description, location, startDate, startTime, endDate, endTime }
+        if (!events || !Array.isArray(events)) {
+          alert('캘린더 일정을 가져올 수 없습니다.');
+          return;
+        }
+
+        const imported: Schedule[] = events.map((event, index) => ({
+          id: `cal-${Date.now()}-${index}`,
+          customerName: event.title || '(제목 없음)',
+          customerPhone: '',
+          address: event.location || '',
+          addressDetail: event.description || '',
+          date: event.startDate || getTodayString(),
+          time: event.startTime || '00:00',
+          installationType: 'other',
+          tvSize: '',
+          drilling: 'none' as const,
+          bracket: 'none' as const,
+          cost: '',
+          notes: `캘린더에서 가져옴${event.description ? ': ' + event.description : ''}`,
+          status: 'pending' as const,
+          createdAt: new Date().toISOString(),
+        }));
+
+        setSchedules(prev => {
+          const newSchedules = [...prev, ...imported];
+          saveToLocalStorage(newSchedules);
+          return newSchedules;
+        });
+
+        alert(`${imported.length}개의 일정을 가져왔습니다!\n\n안드로이드 캘린더는 수정되지 않았습니다.`);
+      };
+
       return () => {
+        window.removeEventListener('resize', checkMobile);
         window.removeEventListener('androidIncomingCall', handleIncomingCall);
         delete (window as any).receiveIncomingCall;
+        delete (window as any).receiveCalendarEvents;
       };
     }
   }, []);
@@ -216,6 +252,17 @@ END:VCARD`;
 
   const rejectIncomingCall = () => {
     setIncomingCall(null);
+  };
+
+  const importFromAndroidCalendar = () => {
+    // Call Android function to request calendar events (read-only)
+    // Android will call window.receiveCalendarEvents(events) with the data
+    if ((window as any).AndroidCalendar && (window as any).AndroidCalendar.requestCalendarEvents) {
+      (window as any).AndroidCalendar.requestCalendarEvents();
+      alert('안드로이드 캘린더에서 일정을 가져오는 중입니다...\n\n주의: 안드로이드 캘린더의 내용은 절대 수정되지 않습니다.');
+    } else {
+      alert('안드로이드 캘린더 연동이 지원되지 않는 환경입니다.\n\n이 기능은 안드로이드 네이티브 앱에서만 사용 가능합니다.');
+    }
   };
 
   const handleDateClick = (date: string) => {
@@ -421,12 +468,21 @@ END:VCARD`;
               <h2 className="text-lg font-bold text-gray-800 dark:text-white">
                 {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
               </h2>
-              <button
-                onClick={() => setCurrentDate(new Date())}
-                className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-500 active:from-blue-600 active:to-indigo-600 text-white text-xs font-medium rounded-lg shadow-sm transition-all"
-              >
-                오늘
-              </button>
+              <div className="flex gap-1">
+                <button
+                  onClick={() => setCurrentDate(new Date())}
+                  className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-500 active:from-blue-600 active:to-indigo-600 text-white text-xs font-medium rounded-lg shadow-sm transition-all"
+                >
+                  오늘
+                </button>
+                <button
+                  onClick={importFromAndroidCalendar}
+                  className="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 active:from-green-600 active:to-emerald-600 text-white text-xs font-medium rounded-lg shadow-sm transition-all"
+                  title="안드로이드 캘린더에서 일정 가져오기 (읽기 전용)"
+                >
+                  📅
+                </button>
+              </div>
             </div>
             <button
               onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
@@ -491,7 +547,7 @@ END:VCARD`;
                         }}
                         className="text-[9px] bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-1 py-0.5 rounded truncate active:from-blue-600 active:to-indigo-600 transition-all leading-tight"
                       >
-                        {schedule.time.slice(0, 5)}
+                        {schedule.address || schedule.time.slice(0, 5)}
                       </div>
                     ))}
                     {daySchedules.length > 1 && (
