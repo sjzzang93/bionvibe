@@ -43,15 +43,27 @@ export default function InstallationSchedulerPage() {
   const [transcript, setTranscript] = useState('');
   const [recognition, setRecognition] = useState<any>(null);
   const [incomingCall, setIncomingCall] = useState<{name: string, phone: string} | null>(null);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    const saved = localStorage.getItem('installation-schedules');
-    if (saved) {
-      setSchedules(JSON.parse(saved));
-    }
-
-    // Initialize speech recognition
+    // Check if mobile device
     if (typeof window !== 'undefined') {
+      const checkMobile = () => {
+        const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
+        const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+        setIsMobile(mobileRegex.test(userAgent.toLowerCase()) || window.innerWidth <= 768);
+      };
+
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+
+      const saved = localStorage.getItem('installation-schedules');
+      if (saved) {
+        setSchedules(JSON.parse(saved));
+      }
+
+      // Initialize speech recognition
+      if (true) {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (SpeechRecognition) {
         const recognitionInstance = new SpeechRecognition();
@@ -350,42 +362,75 @@ END:VCARD`;
     );
   };
 
+  // Mobile-only check screen
+  if (!isMobile) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+        <div className="max-w-md text-center">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
+            <div className="text-6xl mb-4">📱</div>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-3">
+              모바일 전용 앱
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              TV 설치 스케줄러는 안드로이드 모바일 전용 앱입니다.
+            </p>
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 text-left">
+              <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-2">
+                주요 기능:
+              </p>
+              <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
+                <li>• 전화 수신 시 자동 연락처 입력</li>
+                <li>• 음성 녹음 및 받아쓰기</li>
+                <li>• 터치 최적화 UI</li>
+                <li>• 모바일 알림</li>
+              </ul>
+            </div>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+              모바일 기기에서 접속해주세요
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-6 px-4">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-4 px-3">
+      <div className="max-w-full mx-auto">
         {/* 타이틀 */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">
             📺 TV 설치 스케줄러
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
-            날짜를 클릭하여 예약을 등록하세요
+          <p className="text-gray-600 dark:text-gray-400 text-xs">
+            날짜를 탭하여 예약 등록
           </p>
         </div>
 
         {/* 월 네비게이션 */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 mb-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 mb-3">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
-              className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="w-9 h-9 flex items-center justify-center active:bg-gray-100 dark:active:bg-gray-700 rounded-lg transition-colors text-lg"
             >
               ←
             </button>
-            <div className="flex items-center gap-3">
-              <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-bold text-gray-800 dark:text-white">
                 {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
               </h2>
               <button
                 onClick={() => setCurrentDate(new Date())}
-                className="px-4 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white text-sm font-medium rounded-lg shadow-sm transition-all"
+                className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-500 active:from-blue-600 active:to-indigo-600 text-white text-xs font-medium rounded-lg shadow-sm transition-all"
               >
                 오늘
               </button>
             </div>
             <button
               onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
-              className="w-10 h-10 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="w-9 h-9 flex items-center justify-center active:bg-gray-100 dark:active:bg-gray-700 rounded-lg transition-colors text-lg"
             >
               →
             </button>
@@ -393,13 +438,13 @@ END:VCARD`;
         </div>
 
         {/* 달력 */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-2">
           {/* 요일 헤더 */}
-          <div className="grid grid-cols-7 gap-2 mb-3">
+          <div className="grid grid-cols-7 gap-1 mb-2">
             {['일', '월', '화', '수', '목', '금', '토'].map((day, i) => (
               <div
                 key={day}
-                className={`text-center text-sm font-bold py-2 ${
+                className={`text-center text-xs font-bold py-1.5 ${
                   i === 0 ? 'text-red-500' : i === 6 ? 'text-blue-500' : 'text-gray-700 dark:text-gray-300'
                 }`}
               >
@@ -409,7 +454,7 @@ END:VCARD`;
           </div>
 
           {/* 날짜 그리드 */}
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-1">
             {getDaysInMonth().map((day, index) => {
               if (day === null) {
                 return <div key={`empty-${index}`} className="aspect-square" />;
@@ -422,14 +467,14 @@ END:VCARD`;
                 <div
                   key={day}
                   onClick={() => handleDateClick(dateStr)}
-                  className={`relative aspect-square border-2 rounded-xl p-2 cursor-pointer transition-all hover:shadow-md ${
+                  className={`relative aspect-square border-2 rounded-lg p-1 active:scale-95 transition-all ${
                     isToday(day)
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-sm'
-                      : 'border-gray-200 dark:border-gray-700 hover:border-blue-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+                      : 'border-gray-200 dark:border-gray-700 active:border-blue-300 active:bg-gray-50 dark:active:bg-gray-700'
                   }`}
                 >
                   {/* 날짜 숫자 */}
-                  <div className={`text-sm font-bold mb-1 ${
+                  <div className={`text-xs font-bold mb-0.5 ${
                     index % 7 === 0 ? 'text-red-500' : index % 7 === 6 ? 'text-blue-500' : 'text-gray-700 dark:text-gray-300'
                   }`}>
                     {day}
@@ -437,21 +482,21 @@ END:VCARD`;
 
                   {/* 예약 표시 */}
                   <div className="space-y-0.5">
-                    {daySchedules.slice(0, 2).map(schedule => (
+                    {daySchedules.slice(0, 1).map(schedule => (
                       <div
                         key={schedule.id}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleEditClick(schedule);
                         }}
-                        className="text-xs bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-1.5 py-0.5 rounded truncate hover:from-blue-600 hover:to-indigo-600 transition-all"
+                        className="text-[9px] bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-1 py-0.5 rounded truncate active:from-blue-600 active:to-indigo-600 transition-all leading-tight"
                       >
-                        {schedule.time.slice(0, 5)} {schedule.customerName}
+                        {schedule.time.slice(0, 5)}
                       </div>
                     ))}
-                    {daySchedules.length > 2 && (
-                      <div className="text-xs text-center text-blue-600 dark:text-blue-400 font-medium">
-                        +{daySchedules.length - 2}
+                    {daySchedules.length > 1 && (
+                      <div className="text-[9px] text-center text-blue-600 dark:text-blue-400 font-medium">
+                        +{daySchedules.length - 1}
                       </div>
                     )}
                   </div>
