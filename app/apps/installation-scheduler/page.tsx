@@ -39,17 +39,86 @@ export default function InstallationSchedulerPage() {
     cost: '',
     notes: '',
   });
+  const [isRecording, setIsRecording] = useState(false);
+  const [transcript, setTranscript] = useState('');
+  const [recognition, setRecognition] = useState<any>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem('installation-schedules');
     if (saved) {
       setSchedules(JSON.parse(saved));
     }
+
+    // Initialize speech recognition
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        const recognitionInstance = new SpeechRecognition();
+        recognitionInstance.continuous = true;
+        recognitionInstance.interimResults = true;
+        recognitionInstance.lang = 'ko-KR';
+
+        recognitionInstance.onresult = (event: any) => {
+          let interimTranscript = '';
+          let finalTranscript = '';
+
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcriptPart = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalTranscript += transcriptPart + ' ';
+            } else {
+              interimTranscript += transcriptPart;
+            }
+          }
+
+          setTranscript(prev => prev + finalTranscript);
+        };
+
+        recognitionInstance.onerror = (event: any) => {
+          console.error('Speech recognition error:', event.error);
+          setIsRecording(false);
+        };
+
+        recognitionInstance.onend = () => {
+          setIsRecording(false);
+        };
+
+        setRecognition(recognitionInstance);
+      }
+    }
   }, []);
 
   const saveToLocalStorage = (newSchedules: Schedule[]) => {
     localStorage.setItem('installation-schedules', JSON.stringify(newSchedules));
     setSchedules(newSchedules);
+  };
+
+  const toggleRecording = () => {
+    if (!recognition) {
+      alert('음성 인식이 지원되지 않는 브라우저입니다.');
+      return;
+    }
+
+    if (isRecording) {
+      recognition.stop();
+      setIsRecording(false);
+      // Add transcript to notes
+      if (transcript.trim()) {
+        setFormData(prev => ({
+          ...prev,
+          notes: prev.notes ? `${prev.notes}\n\n[통화 내용]\n${transcript}` : `[통화 내용]\n${transcript}`
+        }));
+        setTranscript('');
+      }
+    } else {
+      setTranscript('');
+      recognition.start();
+      setIsRecording(true);
+    }
+  };
+
+  const clearTranscript = () => {
+    setTranscript('');
   };
 
   const generateSMS = (schedule: Schedule) => {
@@ -548,6 +617,56 @@ export default function InstallationSchedulerPage() {
                 </div>
               </div>
 
+              {/* 음성 녹음 */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  🎤 통화 녹음 (음성 → 텍스트)
+                </label>
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={toggleRecording}
+                      className={`flex-1 py-2.5 font-medium rounded-xl transition-all shadow-sm ${
+                        isRecording
+                          ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse'
+                          : 'bg-green-500 hover:bg-green-600 text-white'
+                      }`}
+                    >
+                      {isRecording ? '⏹ 녹음 중지' : '🎤 녹음 시작'}
+                    </button>
+                    {transcript && (
+                      <button
+                        type="button"
+                        onClick={clearTranscript}
+                        className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all"
+                      >
+                        지우기
+                      </button>
+                    )}
+                  </div>
+
+                  {isRecording && (
+                    <div className="p-3 bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl">
+                      <p className="text-sm text-red-600 dark:text-red-400 font-medium">
+                        🔴 녹음 중... 말씀하세요
+                      </p>
+                    </div>
+                  )}
+
+                  {transcript && (
+                    <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800 rounded-xl">
+                      <p className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-1">
+                        📝 받아쓰기 내용:
+                      </p>
+                      <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+                        {transcript}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   📝 메모
@@ -556,9 +675,12 @@ export default function InstallationSchedulerPage() {
                   placeholder="추가 사항을 입력하세요 (선택)"
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  rows={3}
+                  rows={4}
                   className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors resize-none"
                 />
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  녹음 중지 시 통화 내용이 자동으로 메모에 추가됩니다
+                </p>
               </div>
 
               <button
