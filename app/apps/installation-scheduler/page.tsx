@@ -134,6 +134,36 @@ export default function InstallationSchedulerPage() {
     alert(`문자 내용이 복사되었습니다!\n연락처: ${schedule.customerPhone}`);
   };
 
+  const saveContact = (schedule: Schedule) => {
+    // Create vCard format
+    const vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:${schedule.customerName}
+TEL;TYPE=CELL:${schedule.customerPhone}
+ADR;TYPE=HOME:;;${schedule.address} ${schedule.addressDetail};;;
+NOTE:TV 설치 - ${getInstallationTypeName(schedule.installationType)} ${schedule.tvSize}인치 (${schedule.date} ${schedule.time})
+END:VCARD`;
+
+    // Create blob and download
+    const blob = new Blob([vCard], { type: 'text/vcard' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${schedule.customerName}_연락처.vcf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+
+    alert(`${schedule.customerName}님의 연락처가 다운로드되었습니다!\n파일을 열어서 연락처에 추가하세요.`);
+  };
+
+  const copyContactInfo = (schedule: Schedule) => {
+    const contactInfo = `이름: ${schedule.customerName}\n연락처: ${schedule.customerPhone}\n주소: ${schedule.address} ${schedule.addressDetail}`;
+    navigator.clipboard.writeText(contactInfo);
+    alert('연락처 정보가 복사되었습니다!');
+  };
+
   const handleDateClick = (date: string) => {
     setSelectedDate(date);
     setShowModal(true);
@@ -456,21 +486,39 @@ export default function InstallationSchedulerPage() {
 
             {/* 수정/삭제 버튼 */}
             {editingSchedule && (
-              <div className="mb-5 flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => sendSMS(editingSchedule)}
-                  className="flex-1 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-xl transition-colors shadow-sm"
-                >
-                  📱 문자 복사
-                </button>
-                <button
-                  type="button"
-                  onClick={() => deleteSchedule(editingSchedule.id)}
-                  className="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl transition-colors shadow-sm"
-                >
-                  🗑️ 삭제
-                </button>
+              <div className="mb-5 space-y-2">
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => sendSMS(editingSchedule)}
+                    className="py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-xl transition-colors shadow-sm"
+                  >
+                    📱 문자 복사
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => saveContact(editingSchedule)}
+                    className="py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl transition-colors shadow-sm"
+                  >
+                    👤 연락처 저장
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => copyContactInfo(editingSchedule)}
+                    className="py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded-xl transition-colors shadow-sm"
+                  >
+                    📋 정보 복사
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => deleteSchedule(editingSchedule.id)}
+                    className="py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl transition-colors shadow-sm"
+                  >
+                    🗑️ 삭제
+                  </button>
+                </div>
               </div>
             )}
 
