@@ -42,6 +42,7 @@ export default function InstallationSchedulerPage() {
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [recognition, setRecognition] = useState<any>(null);
+  const [incomingCall, setIncomingCall] = useState<{name: string, phone: string} | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem('installation-schedules');
@@ -75,7 +76,13 @@ export default function InstallationSchedulerPage() {
         };
 
         recognitionInstance.onerror = (event: any) => {
-          console.error('Speech recognition error:', event.error);
+          if (event.error === 'not-allowed') {
+            alert('마이크 권한이 필요합니다.\n브라우저 설정에서 마이크 권한을 허용해주세요.');
+          } else if (event.error === 'no-speech') {
+            // 음성이 감지되지 않음 - 무시
+          } else {
+            console.error('Speech recognition error:', event.error);
+          }
           setIsRecording(false);
         };
 
@@ -85,6 +92,26 @@ export default function InstallationSchedulerPage() {
 
         setRecognition(recognitionInstance);
       }
+
+      // Listen for incoming call data from Android
+      const handleIncomingCall = (event: any) => {
+        const { name, phone } = event.detail || {};
+        if (phone) {
+          setIncomingCall({ name: name || '', phone });
+        }
+      };
+
+      window.addEventListener('androidIncomingCall', handleIncomingCall);
+
+      // Also expose function for Android WebView to call directly
+      (window as any).receiveIncomingCall = (name: string, phone: string) => {
+        setIncomingCall({ name: name || '', phone });
+      };
+
+      return () => {
+        window.removeEventListener('androidIncomingCall', handleIncomingCall);
+        delete (window as any).receiveIncomingCall;
+      };
     }
   }, []);
 
@@ -162,6 +189,21 @@ END:VCARD`;
     const contactInfo = `이름: ${schedule.customerName}\n연락처: ${schedule.customerPhone}\n주소: ${schedule.address} ${schedule.addressDetail}`;
     navigator.clipboard.writeText(contactInfo);
     alert('연락처 정보가 복사되었습니다!');
+  };
+
+  const acceptIncomingCall = () => {
+    if (incomingCall) {
+      setFormData(prev => ({
+        ...prev,
+        customerName: incomingCall.name,
+        customerPhone: incomingCall.phone,
+      }));
+      setIncomingCall(null);
+    }
+  };
+
+  const rejectIncomingCall = () => {
+    setIncomingCall(null);
   };
 
   const handleDateClick = (date: string) => {
@@ -517,6 +559,51 @@ END:VCARD`;
                     className="py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl transition-colors shadow-sm"
                   >
                     🗑️ 삭제
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* 수신 전화 알림 */}
+            {incomingCall && (
+              <div className="mb-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-300 dark:border-green-700 rounded-xl">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">📞</span>
+                    <div>
+                      <p className="font-bold text-green-800 dark:text-green-300">
+                        전화 수신
+                      </p>
+                      <p className="text-sm text-green-600 dark:text-green-400">
+                        이 정보를 예약에 사용하시겠습니까?
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-3 mb-3">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">고객명</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    {incomingCall.name || '(이름 없음)'}
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">연락처</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    {incomingCall.phone}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={acceptIncomingCall}
+                    className="flex-1 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors"
+                  >
+                    ✓ 정보 사용
+                  </button>
+                  <button
+                    type="button"
+                    onClick={rejectIncomingCall}
+                    className="flex-1 py-2.5 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-medium rounded-lg transition-colors"
+                  >
+                    ✕ 무시
                   </button>
                 </div>
               </div>
