@@ -559,6 +559,7 @@ END:VCARD`;
   };
 
   const getDaysInMonth = () => {
+    if (!currentDate) return [];
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const firstDay = new Date(year, month, 1);
@@ -577,6 +578,7 @@ END:VCARD`;
   };
 
   const formatDate = (day: number) => {
+    if (!currentDate) return '';
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const dayStr = String(day).padStart(2, '0');
@@ -588,6 +590,7 @@ END:VCARD`;
   };
 
   const isToday = (day: number) => {
+    if (!currentDate) return false;
     const today = new Date();
     return (
       day === today.getDate() &&
