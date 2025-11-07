@@ -32,13 +32,25 @@ export default function Page(){
     const items = getJSON<LogItem[]>(KEY, []);
     setLogs(items);
 
+    // ResizeObserver 에러 무시 (harmless loop error)
+    const errorHandler = (e: ErrorEvent) => {
+      if (e.message && e.message.includes('ResizeObserver loop')) {
+        e.stopImmediatePropagation();
+        return;
+      }
+    };
+    window.addEventListener('error', errorHandler);
+
     // 모바일 감지
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('error', errorHandler);
+    };
   },[]);
 
   const onCalc = ({ inputs, output }: { inputs: AuraInputs; output: ReturnType<typeof computeAura> }) => {

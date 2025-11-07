@@ -744,7 +744,7 @@ export default function LifeDifficultyMeter() {
                             onChange={(e) => setFormData({ ...formData, sleepHours: parseInt(e.target.value) })}
                             className="w-full h-3 rounded-lg appearance-none cursor-pointer bg-gray-700"
                             style={{
-                              background: `linear-gradient(to right, rgb(147 51 234) 0%, rgb(59 130 246) ${((formData.sleepHours - 3) / 9) * 100}%, rgb(55 65 81) ${((formData.sleepHours - 3) / 9) * 100}%, rgb(55 65 81) 100%)`
+                              background: `linear-gradient(to right, rgb(147, 51, 234) 0%, rgb(59, 130, 246) ${((formData.sleepHours - 3) / 9) * 100}%, rgb(55, 65, 81) ${((formData.sleepHours - 3) / 9) * 100}%, rgb(55, 65, 81) 100%)`
                             }}
                           />
                           <div className="flex justify-between text-sm text-gray-400 mt-2">

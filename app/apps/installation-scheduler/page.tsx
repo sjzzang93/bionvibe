@@ -11,10 +11,10 @@ type Schedule = {
   date: string;
   time: string;
   installationType: string;
-  drilling: 'none' | 'required'; // 무타공/타공
-  tvSize: string; // TV 인치
-  bracket: 'included' | 'none'; // 브라켓 유무
-  cost: string; // 설치 비용
+  drilling: 'none' | 'required';
+  tvSize: string;
+  bracket: 'included' | 'none';
+  cost: string;
   notes: string;
   status: 'pending' | 'confirmed' | 'completed' | 'cancelled';
   createdAt: string;
@@ -22,8 +22,9 @@ type Schedule = {
 
 export default function InstallationSchedulerPage() {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [showDateDetail, setShowDateDetail] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editingSchedule, setEditingSchedule] = useState<Schedule | null>(null);
   const [formData, setFormData] = useState({
@@ -39,29 +40,25 @@ export default function InstallationSchedulerPage() {
     cost: '',
     notes: '',
   });
-  const [isRecording, setIsRecording] = useState(false);
-  const [transcript, setTranscript] = useState('');
-  const [recognition, setRecognition] = useState<any>(null);
   const [incomingCall, setIncomingCall] = useState<{name: string, phone: string} | null>(null);
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check if mobile device
+    setMounted(true);
+    setCurrentDate(new Date());
     if (typeof window !== 'undefined') {
       const checkMobile = () => {
-        const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
-        const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-        setIsMobile(mobileRegex.test(userAgent.toLowerCase()) || window.innerWidth <= 768);
+        // 화면 크기만으로 판단 (768px 이하면 모바일 뷰)
+        setIsMobile(window.innerWidth <= 768);
       };
 
       checkMobile();
       window.addEventListener('resize', checkMobile);
 
-      // Load schedules with multiple fallback options (안드로이드 재부팅 후에도 복구)
       const loadSchedules = async () => {
         let loaded = false;
 
-        // 1. Try loading from localStorage (main storage)
         try {
           const saved = localStorage.getItem('installation-schedules');
           if (saved) {
@@ -77,7 +74,6 @@ export default function InstallationSchedulerPage() {
           console.error('❌ localStorage 불러오기 오류:', error);
         }
 
-        // 2. Try loading from localStorage backup
         if (!loaded) {
           try {
             const backup = localStorage.getItem('installation-schedules-backup');
@@ -96,49 +92,86 @@ export default function InstallationSchedulerPage() {
           }
         }
 
-        // 3. Try loading from Android native storage
-        if (!loaded && (window as any).AndroidStorage && (window as any).AndroidStorage.loadSchedules) {
-          try {
-            const androidData = (window as any).AndroidStorage.loadSchedules();
-            if (androidData) {
-              const parsed = JSON.parse(androidData);
-              if (Array.isArray(parsed) && parsed.length > 0) {
-                setSchedules(parsed);
-                // Restore to localStorage
-                localStorage.setItem('installation-schedules', androidData);
-                localStorage.setItem('installation-schedules-backup', androidData);
-                console.log('✅ Android 네이티브 저장소에서 복구 성공:', parsed.length, '개');
-                loaded = true;
-                return;
+        if (!loaded) {
+          if ((window as any).AndroidStorage && (window as any).AndroidStorage.loadSchedules) {
+            try {
+              const androidData = (window as any).AndroidStorage.loadSchedules();
+              if (androidData) {
+                const parsed = JSON.parse(androidData);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                  setSchedules(parsed);
+                  localStorage.setItem('installation-schedules', androidData);
+                  localStorage.setItem('installation-schedules-backup', androidData);
+                  console.log('✅ Android 네이티브 저장소에서 복구 성공:', parsed.length, '개');
+                  loaded = true;
+                  return;
+                }
               }
+            } catch (androidError) {
+              console.error('❌ Android 복구 실패:', androidError);
             }
-          } catch (androidError) {
-            console.error('❌ Android 복구 실패:', androidError);
+          }
+
+          if (!loaded && (window as any).webkit?.messageHandlers?.iOSStorage) {
+            try {
+              (window as any).webkit.messageHandlers.iOSStorage.postMessage({
+                action: 'load'
+              });
+
+              (window as any).receiveIOSSchedules = (iosData: string) => {
+                if (iosData) {
+                  const parsed = JSON.parse(iosData);
+                  if (Array.isArray(parsed) && parsed.length > 0) {
+                    setSchedules(parsed);
+                    localStorage.setItem('installation-schedules', iosData);
+                    localStorage.setItem('installation-schedules-backup', iosData);
+                    console.log('✅ iOS 네이티브 저장소에서 복구 성공:', parsed.length, '개');
+                    loaded = true;
+                  }
+                }
+              };
+            } catch (iosError) {
+              console.error('❌ iOS 복구 실패:', iosError);
+            }
           }
         }
 
-        // 4. Try loading from IndexedDB (최후의 수단)
         if (!loaded && typeof indexedDB !== 'undefined') {
           try {
             const request = indexedDB.open('installation-scheduler', 1);
-            request.onsuccess = (e: any) => {
+            request.onupgradeneeded = (e: any) => {
               const db = e.target.result;
-              if (db.objectStoreNames.contains('schedules')) {
-                const transaction = db.transaction(['schedules'], 'readonly');
-                const store = transaction.objectStore('schedules');
-                const getRequest = store.get('current');
-                getRequest.onsuccess = () => {
-                  const data = getRequest.result;
-                  if (Array.isArray(data) && data.length > 0) {
-                    setSchedules(data);
-                    // Restore to localStorage
-                    const jsonData = JSON.stringify(data);
-                    localStorage.setItem('installation-schedules', jsonData);
-                    localStorage.setItem('installation-schedules-backup', jsonData);
-                    console.log('✅ IndexedDB에서 복구 성공:', data.length, '개');
-                  }
-                };
+              if (!db.objectStoreNames.contains('schedules')) {
+                db.createObjectStore('schedules');
               }
+            };
+            request.onsuccess = (e: any) => {
+              try {
+                const db = e.target.result;
+                if (db.objectStoreNames.contains('schedules')) {
+                  const transaction = db.transaction(['schedules'], 'readonly');
+                  const store = transaction.objectStore('schedules');
+                  const getRequest = store.get('current');
+                  getRequest.onsuccess = () => {
+                    const data = getRequest.result;
+                    if (Array.isArray(data) && data.length > 0) {
+                      setSchedules(data);
+                      const jsonData = JSON.stringify(data);
+                      localStorage.setItem('installation-schedules', jsonData);
+                      localStorage.setItem('installation-schedules-backup', jsonData);
+                      console.log('✅ IndexedDB에서 복구 성공:', data.length, '개');
+                    }
+                  };
+                  getRequest.onerror = () => {
+                    console.warn('⚠️ IndexedDB 데이터 읽기 실패');
+                  };
+                }
+              } catch (txError) {
+                console.warn('⚠️ IndexedDB 트랜잭션 실패:', txError);
+              }
+            };
+            request.onerror = () => {
+              console.warn('⚠️ IndexedDB 열기 실패');
             };
           } catch (idbError) {
             console.error('❌ IndexedDB 복구 실패:', idbError);
@@ -148,49 +181,6 @@ export default function InstallationSchedulerPage() {
 
       loadSchedules();
 
-      // Initialize speech recognition
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      if (SpeechRecognition) {
-        const recognitionInstance = new SpeechRecognition();
-        recognitionInstance.continuous = true;
-        recognitionInstance.interimResults = true;
-        recognitionInstance.lang = 'ko-KR';
-
-        recognitionInstance.onresult = (event: any) => {
-          let interimTranscript = '';
-          let finalTranscript = '';
-
-          for (let i = event.resultIndex; i < event.results.length; i++) {
-            const transcriptPart = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-              finalTranscript += transcriptPart + ' ';
-            } else {
-              interimTranscript += transcriptPart;
-            }
-          }
-
-          setTranscript(prev => prev + finalTranscript);
-        };
-
-        recognitionInstance.onerror = (event: any) => {
-          if (event.error === 'not-allowed') {
-            alert('마이크 권한이 필요합니다.\n브라우저 설정에서 마이크 권한을 허용해주세요.');
-          } else if (event.error === 'no-speech') {
-            // 음성이 감지되지 않음 - 무시
-          } else {
-            console.error('Speech recognition error:', event.error);
-          }
-          setIsRecording(false);
-        };
-
-        recognitionInstance.onend = () => {
-          setIsRecording(false);
-        };
-
-        setRecognition(recognitionInstance);
-      }
-
-      // Listen for incoming call data from Android
       const handleIncomingCall = (event: any) => {
         const { name, phone } = event.detail || {};
         if (phone) {
@@ -200,14 +190,11 @@ export default function InstallationSchedulerPage() {
 
       window.addEventListener('androidIncomingCall', handleIncomingCall);
 
-      // Also expose function for Android WebView to call directly
       (window as any).receiveIncomingCall = (name: string, phone: string) => {
         setIncomingCall({ name: name || '', phone });
       };
 
-      // Expose function for Android to send calendar events (read-only import)
       (window as any).receiveCalendarEvents = (events: any[]) => {
-        // events is an array of: { title, description, location, startDate, startTime, endDate, endTime }
         if (!events || !Array.isArray(events)) {
           alert('캘린더 일정을 가져올 수 없습니다.');
           return;
@@ -249,7 +236,6 @@ export default function InstallationSchedulerPage() {
     }
   }, []);
 
-  // Auto-save schedules whenever they change (재부팅 후에도 유지)
   useEffect(() => {
     if (schedules.length > 0) {
       try {
@@ -267,17 +253,10 @@ export default function InstallationSchedulerPage() {
     try {
       const data = JSON.stringify(newSchedules);
 
-      // 1. Save to main localStorage
       localStorage.setItem('installation-schedules', data);
-
-      // 2. Create backup in localStorage (for recovery)
       localStorage.setItem('installation-schedules-backup', data);
-
-      // 3. Save last update timestamp
       localStorage.setItem('installation-schedules-updated', new Date().toISOString());
 
-      // 4. Save to Android native storage (if available)
-      // Android will persist this data permanently
       if ((window as any).AndroidStorage && (window as any).AndroidStorage.saveSchedules) {
         try {
           (window as any).AndroidStorage.saveSchedules(data);
@@ -287,7 +266,18 @@ export default function InstallationSchedulerPage() {
         }
       }
 
-      // 5. Save to IndexedDB as additional backup (안드로이드에서 localStorage 문제 대비)
+      if ((window as any).webkit?.messageHandlers?.iOSStorage) {
+        try {
+          (window as any).webkit.messageHandlers.iOSStorage.postMessage({
+            action: 'save',
+            data: data
+          });
+          console.log('✅ iOS 네이티브 저장 완료');
+        } catch (iosError) {
+          console.warn('⚠️ iOS 저장 실패:', iosError);
+        }
+      }
+
       if (typeof indexedDB !== 'undefined') {
         try {
           const request = indexedDB.open('installation-scheduler', 1);
@@ -298,11 +288,20 @@ export default function InstallationSchedulerPage() {
             }
           };
           request.onsuccess = (e: any) => {
-            const db = e.target.result;
-            const transaction = db.transaction(['schedules'], 'readwrite');
-            const store = transaction.objectStore('schedules');
-            store.put(newSchedules, 'current');
-            console.log('✅ IndexedDB 백업 완료');
+            try {
+              const db = e.target.result;
+              if (db.objectStoreNames.contains('schedules')) {
+                const transaction = db.transaction(['schedules'], 'readwrite');
+                const store = transaction.objectStore('schedules');
+                store.put(newSchedules, 'current');
+                console.log('✅ IndexedDB 백업 완료');
+              }
+            } catch (txError) {
+              console.warn('⚠️ IndexedDB 저장 트랜잭션 실패:', txError);
+            }
+          };
+          request.onerror = () => {
+            console.warn('⚠️ IndexedDB 열기 실패');
           };
         } catch (idbError) {
           console.warn('⚠️ IndexedDB 저장 실패:', idbError);
@@ -318,34 +317,6 @@ export default function InstallationSchedulerPage() {
     }
   };
 
-  const toggleRecording = () => {
-    if (!recognition) {
-      alert('음성 인식이 지원되지 않는 브라우저입니다.');
-      return;
-    }
-
-    if (isRecording) {
-      recognition.stop();
-      setIsRecording(false);
-      // Add transcript to notes
-      if (transcript.trim()) {
-        setFormData(prev => ({
-          ...prev,
-          notes: prev.notes ? `${prev.notes}\n\n[통화 내용]\n${transcript}` : `[통화 내용]\n${transcript}`
-        }));
-        setTranscript('');
-      }
-    } else {
-      setTranscript('');
-      recognition.start();
-      setIsRecording(true);
-    }
-  };
-
-  const clearTranscript = () => {
-    setTranscript('');
-  };
-
   const generateSMS = (schedule: Schedule) => {
     const drillingText = schedule.drilling === 'none' ? '무타공' : '타공';
     const bracketText = schedule.bracket === 'included' ? '브라켓 포함' : '브라켓 별도';
@@ -355,12 +326,41 @@ export default function InstallationSchedulerPage() {
 
   const sendSMS = (schedule: Schedule) => {
     const message = generateSMS(schedule);
-    navigator.clipboard.writeText(message);
-    alert(`문자 내용이 복사되었습니다!\n연락처: ${schedule.customerPhone}`);
+
+    // Safari 호환성을 위한 clipboard fallback
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(message)
+        .then(() => {
+          alert(`문자 내용이 복사되었습니다!\n연락처: ${schedule.customerPhone}`);
+        })
+        .catch(() => {
+          // fallback to textarea method
+          fallbackCopyText(message);
+          alert(`문자 내용이 복사되었습니다!\n연락처: ${schedule.customerPhone}`);
+        });
+    } else {
+      // fallback for older browsers
+      fallbackCopyText(message);
+      alert(`문자 내용이 복사되었습니다!\n연락처: ${schedule.customerPhone}`);
+    }
+  };
+
+  const fallbackCopyText = (text: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('복사 실패:', err);
+    }
+    document.body.removeChild(textarea);
   };
 
   const saveContact = (schedule: Schedule) => {
-    // Create vCard format
     const vCard = `BEGIN:VCARD
 VERSION:3.0
 FN:${schedule.customerName}
@@ -369,7 +369,6 @@ ADR;TYPE=HOME:;;${schedule.address} ${schedule.addressDetail};;;
 NOTE:TV 설치 - ${getInstallationTypeName(schedule.installationType)} ${schedule.tvSize}인치 (${schedule.date} ${schedule.time})
 END:VCARD`;
 
-    // Create blob and download
     const blob = new Blob([vCard], { type: 'text/vcard' });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -385,8 +384,20 @@ END:VCARD`;
 
   const copyContactInfo = (schedule: Schedule) => {
     const contactInfo = `이름: ${schedule.customerName}\n연락처: ${schedule.customerPhone}\n주소: ${schedule.address} ${schedule.addressDetail}`;
-    navigator.clipboard.writeText(contactInfo);
-    alert('연락처 정보가 복사되었습니다!');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(contactInfo)
+        .then(() => {
+          alert('연락처 정보가 복사되었습니다!');
+        })
+        .catch(() => {
+          fallbackCopyText(contactInfo);
+          alert('연락처 정보가 복사되었습니다!');
+        });
+    } else {
+      fallbackCopyText(contactInfo);
+      alert('연락처 정보가 복사되었습니다!');
+    }
   };
 
   const acceptIncomingCall = () => {
@@ -405,18 +416,30 @@ END:VCARD`;
   };
 
   const importFromAndroidCalendar = () => {
-    // Call Android function to request calendar events (read-only)
-    // Android will call window.receiveCalendarEvents(events) with the data
     if ((window as any).AndroidCalendar && (window as any).AndroidCalendar.requestCalendarEvents) {
       (window as any).AndroidCalendar.requestCalendarEvents();
       alert('안드로이드 캘린더에서 일정을 가져오는 중입니다...\n\n주의: 안드로이드 캘린더의 내용은 절대 수정되지 않습니다.');
-    } else {
-      alert('안드로이드 캘린더 연동이 지원되지 않는 환경입니다.\n\n이 기능은 안드로이드 네이티브 앱에서만 사용 가능합니다.');
+      return;
     }
+
+    if ((window as any).webkit?.messageHandlers?.iOSCalendar) {
+      (window as any).webkit.messageHandlers.iOSCalendar.postMessage({
+        action: 'import'
+      });
+      alert('iOS 캘린더에서 일정을 가져오는 중입니다...\n\n주의: iOS 캘린더의 내용은 절대 수정되지 않습니다.');
+      return;
+    }
+
+    alert(`📱 캘린더 연동 기능 안내\n\n현재 웹 브라우저에서는 캘린더 연동이 지원되지 않습니다.\n\n✅ 사용 가능한 환경:\n• 안드로이드 네이티브 앱\n• iOS 네이티브 앱 (iPhone/iPad)\n\n💡 대신 다음 기능을 사용하세요:\n• 캘린더에서 날짜를 클릭하여 수동으로 일정 추가\n• 고객 정보를 직접 입력하여 저장\n\n📋 자세한 정보는 ANDROID_INTEGRATION.md 파일을 참고하세요.`);
   };
 
   const handleDateClick = (date: string) => {
     setSelectedDate(date);
+    setShowDateDetail(true);
+  };
+
+  const handleAddSchedule = () => {
+    setShowDateDetail(false);
     setShowModal(true);
     setEditingSchedule(null);
     setFormData({
@@ -477,10 +500,25 @@ END:VCARD`;
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!selectedDate) {
+      alert('날짜를 선택해주세요.');
+      return;
+    }
+
+    if (!formData.customerName.trim()) {
+      alert('고객명을 입력해주세요.');
+      return;
+    }
+
+    if (!formData.customerPhone.trim()) {
+      alert('연락처를 입력해주세요.');
+      return;
+    }
+
     if (editingSchedule) {
       const updated = schedules.map(s =>
         s.id === editingSchedule.id
-          ? { ...editingSchedule, ...formData, date: selectedDate! }
+          ? { ...editingSchedule, ...formData, date: selectedDate }
           : s
       );
       saveToLocalStorage(updated);
@@ -489,7 +527,7 @@ END:VCARD`;
       const newSchedule: Schedule = {
         id: Date.now().toString(),
         ...formData,
-        date: selectedDate!,
+        date: selectedDate,
         status: 'pending',
         createdAt: new Date().toISOString(),
       };
@@ -520,7 +558,6 @@ END:VCARD`;
     return types[type] || type;
   };
 
-  // 달력 생성
   const getDaysInMonth = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -559,150 +596,121 @@ END:VCARD`;
     );
   };
 
-  // Mobile-only check screen
-  if (!isMobile) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
-        <div className="max-w-md text-center">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
-            <div className="text-6xl mb-4">📱</div>
-            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-3">
-              모바일 전용 앱
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
-              TV 설치 스케줄러는 안드로이드 모바일 전용 앱입니다.
-            </p>
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 text-left">
-              <p className="text-sm font-semibold text-blue-800 dark:text-blue-300 mb-2">
-                주요 기능:
-              </p>
-              <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
-                <li>• 전화 수신 시 자동 연락처 입력</li>
-                <li>• 음성 녹음 및 받아쓰기</li>
-                <li>• 터치 최적화 UI</li>
-                <li>• 모바일 알림</li>
-              </ul>
-            </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-              모바일 기기에서 접속해주세요
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+  if (!mounted || !currentDate) {
+    return null;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-4 px-3">
-      <div className="max-w-full mx-auto">
-        {/* 타이틀 */}
-        <div className="text-center mb-4">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">
-            📺 TV 설치 스케줄러
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 text-xs">
-            날짜를 탭하여 예약 등록
-          </p>
-        </div>
-
-        {/* 월 네비게이션 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-3 mb-3">
-          <div className="flex items-center justify-between">
+    <>
+    <div className="min-h-screen bg-gray-100">
+      <div className="max-w-md mx-auto bg-white min-h-screen shadow-xl relative">
+        {/* 갤럭시 캘린더 스타일 헤더 */}
+        <div className="bg-white border-b border-gray-100 px-4 py-3">
+          <div className="flex items-center justify-between mb-3">
+            <h1 className="text-[28px] font-normal text-black tracking-tight">
+              {currentDate.getMonth() + 1}월
+            </h1>
+            <div className="flex gap-2">
+              <button
+                onClick={importFromAndroidCalendar}
+                className="w-9 h-9 flex items-center justify-center active:bg-gray-100 rounded-full transition-colors"
+                title="캘린더 가져오기">
+                <span className="text-lg">📅</span>
+              </button>
+              <button
+                onClick={() => setCurrentDate(new Date())}
+                className="px-4 h-9 flex items-center justify-center bg-black active:bg-gray-800 text-white text-sm font-medium rounded-full transition-colors">
+                오늘
+              </button>
+            </div>
+          </div>
+          <div className="flex items-center gap-1 text-gray-500">
             <button
               onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
-              className="w-9 h-9 flex items-center justify-center active:bg-gray-100 dark:active:bg-gray-700 rounded-lg transition-colors text-lg"
-            >
-              ←
+              className="w-8 h-8 flex items-center justify-center active:bg-gray-100 rounded-full transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
             </button>
-            <div className="flex items-center gap-2">
-              <h2 className="text-lg font-bold text-gray-800 dark:text-white">
-                {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
-              </h2>
-              <div className="flex gap-1">
-                <button
-                  onClick={() => setCurrentDate(new Date())}
-                  className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-500 active:from-blue-600 active:to-indigo-600 text-white text-xs font-medium rounded-lg shadow-sm transition-all"
-                >
-                  오늘
-                </button>
-                <button
-                  onClick={importFromAndroidCalendar}
-                  className="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 active:from-green-600 active:to-emerald-600 text-white text-xs font-medium rounded-lg shadow-sm transition-all"
-                  title="안드로이드 캘린더에서 일정 가져오기 (읽기 전용)"
-                >
-                  📅
-                </button>
-              </div>
-            </div>
+            <span className="text-sm font-medium flex-1 text-center text-black">
+              {currentDate.getFullYear()}년
+            </span>
             <button
               onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
-              className="w-9 h-9 flex items-center justify-center active:bg-gray-100 dark:active:bg-gray-700 rounded-lg transition-colors text-lg"
-            >
-              →
+              className="w-8 h-8 flex items-center justify-center active:bg-gray-100 rounded-full transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
             </button>
           </div>
         </div>
 
-        {/* 달력 */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-2">
+        {/* 갤럭시 캘린더 스타일 달력 */}
+        <div className="bg-white">
           {/* 요일 헤더 */}
-          <div className="grid grid-cols-7 gap-1 mb-2">
+          <div className="grid grid-cols-7 border-b border-gray-100">
             {['일', '월', '화', '수', '목', '금', '토'].map((day, i) => (
               <div
                 key={day}
-                className={`text-center text-xs font-bold py-1.5 ${
-                  i === 0 ? 'text-red-500' : i === 6 ? 'text-blue-500' : 'text-gray-700 dark:text-gray-300'
-                }`}
-              >
+                className={`text-center text-[11px] font-medium py-2 ${
+                  i === 0 ? 'text-red-500' : i === 6 ? 'text-blue-500' : 'text-gray-500'
+                }`}>
                 {day}
               </div>
             ))}
           </div>
 
           {/* 날짜 그리드 */}
-          <div className="grid grid-cols-7 gap-1">
+          <div className="grid grid-cols-7">
             {getDaysInMonth().map((day, index) => {
               if (day === null) {
-                return <div key={`empty-${index}`} className="aspect-square" />;
+                return <div key={`empty-${index}`} className="aspect-square border-b border-r border-gray-50" />;
               }
 
               const dateStr = formatDate(day);
               const daySchedules = getSchedulesForDate(dateStr);
+              const hasSchedules = daySchedules.length > 0;
 
               return (
                 <div
                   key={day}
                   onClick={() => handleDateClick(dateStr)}
-                  className={`relative aspect-square border-2 rounded-lg p-1 active:scale-95 transition-all ${
-                    isToday(day)
-                      ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-                      : 'border-gray-200 dark:border-gray-700 active:border-blue-300 active:bg-gray-50 dark:active:bg-gray-700'
-                  }`}
-                >
-                  {/* 날짜 숫자 */}
-                  <div className={`text-xs font-bold mb-0.5 ${
-                    index % 7 === 0 ? 'text-red-500' : index % 7 === 6 ? 'text-blue-500' : 'text-gray-700 dark:text-gray-300'
-                  }`}>
-                    {day}
-                  </div>
+                  className="relative aspect-square border-b border-r border-gray-50 active:bg-gray-50 transition-colors">
+                  <div className="h-full flex flex-col items-center justify-start pt-1.5">
+                    {/* 날짜 숫자 */}
+                    <div className={`relative w-7 h-7 flex items-center justify-center rounded-full ${
+                      isToday(day)
+                        ? 'bg-black text-white font-semibold'
+                        : hasSchedules
+                        ? 'font-semibold'
+                        : ''
+                    }`}>
+                      <span className={`text-sm ${
+                        isToday(day)
+                          ? 'text-white'
+                          : index % 7 === 0
+                          ? 'text-red-500'
+                          : index % 7 === 6
+                          ? 'text-blue-500'
+                          : 'text-black'
+                      }`}>
+                        {day}
+                      </span>
+                    </div>
 
-                  {/* 예약 표시 */}
-                  <div className="space-y-0.5">
-                    {daySchedules.slice(0, 1).map(schedule => (
-                      <div
-                        key={schedule.id}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditClick(schedule);
-                        }}
-                        className="text-[9px] bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-1 py-0.5 rounded truncate active:from-blue-600 active:to-indigo-600 transition-all leading-tight"
-                      >
-                        {schedule.address || schedule.time.slice(0, 5)}
-                      </div>
-                    ))}
-                    {daySchedules.length > 1 && (
-                      <div className="text-[9px] text-center text-blue-600 dark:text-blue-400 font-medium">
-                        +{daySchedules.length - 1}
+                    {/* 예약 표시 - 점으로 표시 */}
+                    {hasSchedules && (
+                      <div className="flex gap-0.5 mt-0.5">
+                        {daySchedules.slice(0, 3).map((schedule) => (
+                          <div
+                            key={schedule.id}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEditClick(schedule);
+                            }}
+                            className="w-1 h-1 rounded-full bg-black"
+                          />
+                        ))}
                       </div>
                     )}
                   </div>
@@ -712,66 +720,171 @@ END:VCARD`;
           </div>
         </div>
       </div>
+    </div>
 
-      {/* 예약 모달 */}
-      {showModal && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn"
-          onClick={() => setShowModal(false)}
-        >
+    {/* 날짜 세부정보 모달 */}
+    {showDateDetail && selectedDate && (
+      <div
+        className="absolute inset-0 bg-black/40 z-50 animate-fadeIn"
+        onClick={() => setShowDateDetail(false)}>
           <div
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
+            className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[70vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}>
+            {/* 드래그 핸들 */}
+            <div className="flex justify-center pt-3 pb-2">
+              <div className="w-10 h-1 bg-gray-300 rounded-full" />
+            </div>
+
             {/* 모달 헤더 */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b dark:border-gray-700">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-                  {editingSchedule ? '예약 수정' : '새 예약 등록'}
+            <div className="px-5 py-4 border-b border-gray-100">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-bold text-black">
+                    {new Date(selectedDate).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' })}
+                  </h2>
+                  <p className="text-sm text-gray-500 mt-1">
+                    일정 {getSchedulesForDate(selectedDate).length}개
+                  </p>
+                </div>
+                <button
+                  onClick={handleAddSchedule}
+                  className="px-4 py-2 bg-black text-white text-sm font-medium rounded-full active:bg-gray-800 transition-colors">
+                  + 추가
+                </button>
+              </div>
+            </div>
+
+            {/* 일정 목록 */}
+            <div className="px-5 py-4">
+              {getSchedulesForDate(selectedDate).length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="text-4xl mb-2">📅</div>
+                  <p className="text-gray-500">등록된 일정이 없습니다</p>
+                  <button
+                    onClick={handleAddSchedule}
+                    className="mt-4 px-6 py-2 bg-black text-white text-sm font-medium rounded-full active:bg-gray-800 transition-colors">
+                    일정 추가하기
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {getSchedulesForDate(selectedDate).map((schedule) => (
+                    <div
+                      key={schedule.id}
+                      onClick={() => {
+                        setShowDateDetail(false);
+                        handleEditClick(schedule);
+                      }}
+                      className="bg-gray-50 p-4 rounded-xl active:bg-gray-100 transition-colors">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-base font-bold text-black">{schedule.time}</span>
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${
+                              schedule.status === 'completed' ? 'bg-green-100 text-green-700' :
+                              schedule.status === 'confirmed' ? 'bg-blue-100 text-blue-700' :
+                              schedule.status === 'cancelled' ? 'bg-red-100 text-red-700' :
+                              'bg-gray-100 text-gray-700'
+                            }`}>
+                              {schedule.status === 'completed' ? '완료' :
+                               schedule.status === 'confirmed' ? '확정' :
+                               schedule.status === 'cancelled' ? '취소' : '대기'}
+                            </span>
+                          </div>
+                          <p className="font-semibold text-black">{schedule.customerName}</p>
+                          <p className="text-sm text-gray-600 mt-1">{schedule.address}</p>
+                          <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                            <span>{getInstallationTypeName(schedule.installationType)}</span>
+                            <span>•</span>
+                            <span>{schedule.tvSize}인치</span>
+                            <span>•</span>
+                            <span>{schedule.drilling === 'none' ? '무타공' : '타공'}</span>
+                          </div>
+                        </div>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gray-400 flex-shrink-0 mt-1">
+                          <path d="M7 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+      </div>
+    )}
+
+    {/* 갤럭시 캘린더 스타일 바텀 시트 */}
+    {showModal && (
+      <div
+        className="absolute inset-0 bg-black/40 z-50 animate-fadeIn"
+        onClick={() => setShowModal(false)}>
+          <div
+            className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl max-h-[85vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}>
+            {/* 드래그 핸들 */}
+            <div className="flex justify-center pt-3 pb-2">
+              <div className="w-10 h-1 bg-gray-300 rounded-full" />
+            </div>
+
+            {/* 모달 헤더 */}
+            <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
+              <div className="flex-1">
+                <h2 className="text-xl font-semibold text-black">
+                  {editingSchedule ? '일정 수정' : '새 일정'}
                 </h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  TV 설치 일정을 관리하세요
-                </p>
               </div>
               <button
                 onClick={() => setShowModal(false)}
-                className="w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-gray-500"
-              >
-                ✕
+                className="w-10 h-10 flex items-center justify-center active:bg-gray-100 rounded-full transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-500">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
               </button>
             </div>
 
+            <div className="px-5 py-4">
+
             {/* 날짜 선택 */}
-            <div className="mb-5">
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                📅 예약 날짜
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-600 mb-2">
+                날짜
               </label>
               <input
                 type="date"
                 value={selectedDate || ''}
                 onChange={(e) => changeSelectedDate(e.target.value)}
-                className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors mb-2"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base"
               />
-              <div className="flex gap-2">
+              <div className="flex gap-2 mt-2">
                 <button
                   type="button"
-                  onClick={() => changeSelectedDate(getTodayString())}
-                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors"
-                >
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    changeSelectedDate(getTodayString());
+                  }}
+                  className="flex-1 py-2 bg-gray-100 active:bg-gray-200 rounded text-sm font-medium transition-colors text-black">
                   오늘
                 </button>
                 <button
                   type="button"
-                  onClick={() => changeSelectedDate(addDaysToDate(getTodayString(), 1))}
-                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors"
-                >
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    changeSelectedDate(addDaysToDate(getTodayString(), 1));
+                  }}
+                  className="flex-1 py-2 bg-gray-100 active:bg-gray-200 rounded text-sm font-medium transition-colors text-black">
                   내일
                 </button>
                 <button
                   type="button"
-                  onClick={() => changeSelectedDate(addDaysToDate(getTodayString(), 2))}
-                  className="flex-1 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors"
-                >
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    changeSelectedDate(addDaysToDate(getTodayString(), 2));
+                  }}
+                  className="flex-1 py-2 bg-gray-100 active:bg-gray-200 rounded text-sm font-medium transition-colors text-black">
                   모레
                 </button>
               </div>
@@ -779,20 +892,18 @@ END:VCARD`;
 
             {/* 수정/삭제 버튼 */}
             {editingSchedule && (
-              <div className="mb-5 space-y-2">
+              <div className="mb-4 space-y-2">
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => sendSMS(editingSchedule)}
-                    className="py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-xl transition-colors shadow-sm"
-                  >
+                    className="py-3 bg-black active:bg-gray-800 text-white font-medium rounded transition-colors">
                     📱 문자 복사
                   </button>
                   <button
                     type="button"
                     onClick={() => saveContact(editingSchedule)}
-                    className="py-2.5 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl transition-colors shadow-sm"
-                  >
+                    className="py-3 bg-black active:bg-gray-800 text-white font-medium rounded transition-colors">
                     👤 연락처 저장
                   </button>
                 </div>
@@ -800,15 +911,13 @@ END:VCARD`;
                   <button
                     type="button"
                     onClick={() => copyContactInfo(editingSchedule)}
-                    className="py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white font-medium rounded-xl transition-colors shadow-sm"
-                  >
+                    className="py-3 bg-gray-100 active:bg-gray-200 text-black font-medium rounded transition-colors">
                     📋 정보 복사
                   </button>
                   <button
                     type="button"
                     onClick={() => deleteSchedule(editingSchedule.id)}
-                    className="py-2.5 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl transition-colors shadow-sm"
-                  >
+                    className="py-3 bg-red-500 active:bg-red-600 text-white font-medium rounded transition-colors">
                     🗑️ 삭제
                   </button>
                 </div>
@@ -817,44 +926,46 @@ END:VCARD`;
 
             {/* 수신 전화 알림 */}
             {incomingCall && (
-              <div className="mb-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-300 dark:border-green-700 rounded-xl">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">📞</span>
-                    <div>
-                      <p className="font-bold text-green-800 dark:text-green-300">
-                        전화 수신
-                      </p>
-                      <p className="text-sm text-green-600 dark:text-green-400">
-                        이 정보를 예약에 사용하시겠습니까?
-                      </p>
-                    </div>
+              <div className="mb-4 p-4 bg-gray-50 border border-gray-200 rounded">
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-lg">📞</span>
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-black mb-1">
+                      전화 수신
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      이 정보를 일정에 사용하시겠습니까?
+                    </p>
                   </div>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-3 mb-3">
-                  <p className="text-sm text-gray-600 dark:text-gray-400">고객명</p>
-                  <p className="font-semibold text-gray-900 dark:text-white">
-                    {incomingCall.name || '(이름 없음)'}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">연락처</p>
-                  <p className="font-semibold text-gray-900 dark:text-white">
-                    {incomingCall.phone}
-                  </p>
+                <div className="bg-white rounded p-3 mb-3 space-y-2 border border-gray-200">
+                  <div>
+                    <p className="text-xs text-gray-500">이름</p>
+                    <p className="font-medium text-black">
+                      {incomingCall.name || '(이름 없음)'}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">전화번호</p>
+                    <p className="font-medium text-black">
+                      {incomingCall.phone}
+                    </p>
+                  </div>
                 </div>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={acceptIncomingCall}
-                    className="flex-1 py-2.5 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors"
-                  >
-                    ✓ 정보 사용
+                    className="flex-1 py-3 bg-black active:bg-gray-800 text-white font-medium rounded transition-colors">
+                    정보 사용
                   </button>
                   <button
                     type="button"
                     onClick={rejectIncomingCall}
-                    className="flex-1 py-2.5 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-medium rounded-lg transition-colors"
-                  >
-                    ✕ 무시
+                    className="flex-1 py-3 bg-gray-100 active:bg-gray-200 text-black font-medium rounded transition-colors">
+                    무시
                   </button>
                 </div>
               </div>
@@ -863,76 +974,71 @@ END:VCARD`;
             {/* 예약 폼 */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  👤 고객명 *
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  고객명
                 </label>
                 <input
                   type="text"
                   placeholder="이름을 입력하세요"
-                  required
                   value={formData.customerName}
                   onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  📞 연락처 *
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  연락처
                 </label>
                 <input
                   type="tel"
                   placeholder="010-0000-0000"
-                  required
                   value={formData.customerPhone}
                   onChange={(e) => setFormData({ ...formData, customerPhone: e.target.value })}
-                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  📍 주소 *
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  주소
                 </label>
                 <input
                   type="text"
                   placeholder="기본 주소"
-                  required
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors mb-2"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base mb-2 text-black"
                 />
                 <input
                   type="text"
                   placeholder="상세 주소 (선택)"
                   value={formData.addressDetail}
                   onChange={(e) => setFormData({ ...formData, addressDetail: e.target.value })}
-                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  ⏰ 시간 *
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  시간
                 </label>
                 <input
                   type="time"
-                  required
                   value={formData.time}
                   onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  📺 설치 종류
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  설치 종류
                 </label>
                 <select
                   value={formData.installationType}
                   onChange={(e) => setFormData({ ...formData, installationType: e.target.value })}
-                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
-                >
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black">
                   <option value="wallmount">벽걸이형</option>
                   <option value="stand">스탠드형</option>
                   <option value="ceiling">천장형</option>
@@ -945,140 +1051,83 @@ END:VCARD`;
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                    🔨 타공 여부
+                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                    타공 여부
                   </label>
                   <select
                     value={formData.drilling}
                     onChange={(e) => setFormData({ ...formData, drilling: e.target.value as 'none' | 'required' })}
-                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
-                  >
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black">
                     <option value="none">무타공</option>
                     <option value="required">타공</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                    📏 TV 인치 *
+                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                    TV 인치
                   </label>
                   <input
                     type="text"
                     placeholder="예: 55"
-                    required
                     value={formData.tvSize}
                     onChange={(e) => setFormData({ ...formData, tvSize: e.target.value })}
-                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                    🔧 브라켓
+                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                    브라켓
                   </label>
                   <select
                     value={formData.bracket}
                     onChange={(e) => setFormData({ ...formData, bracket: e.target.value as 'included' | 'none' })}
-                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
-                  >
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black">
                     <option value="included">포함</option>
                     <option value="none">별도</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                    💰 설치 비용 *
+                  <label className="block text-sm font-medium text-gray-600 mb-2">
+                    설치 비용
                   </label>
                   <input
                     type="text"
                     placeholder="예: 50000"
-                    required
                     value={formData.cost}
                     onChange={(e) => setFormData({ ...formData, cost: e.target.value.replace(/[^0-9]/g, '') })}
-                    className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors text-base text-black"
                   />
                 </div>
               </div>
 
-              {/* 음성 녹음 */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  🎤 통화 녹음 (음성 → 텍스트)
-                </label>
-                <div className="space-y-2">
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={toggleRecording}
-                      className={`flex-1 py-2.5 font-medium rounded-xl transition-all shadow-sm ${
-                        isRecording
-                          ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse'
-                          : 'bg-green-500 hover:bg-green-600 text-white'
-                      }`}
-                    >
-                      {isRecording ? '⏹ 녹음 중지' : '🎤 녹음 시작'}
-                    </button>
-                    {transcript && (
-                      <button
-                        type="button"
-                        onClick={clearTranscript}
-                        className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all"
-                      >
-                        지우기
-                      </button>
-                    )}
-                  </div>
-
-                  {isRecording && (
-                    <div className="p-3 bg-red-50 dark:bg-red-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl">
-                      <p className="text-sm text-red-600 dark:text-red-400 font-medium">
-                        🔴 녹음 중... 말씀하세요
-                      </p>
-                    </div>
-                  )}
-
-                  {transcript && (
-                    <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800 rounded-xl">
-                      <p className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-1">
-                        📝 받아쓰기 내용:
-                      </p>
-                      <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
-                        {transcript}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  📝 메모
+                <label className="block text-sm font-medium text-gray-600 mb-2">
+                  메모
                 </label>
                 <textarea
                   placeholder="추가 사항을 입력하세요 (선택)"
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   rows={4}
-                  className="w-full px-4 py-2.5 border-2 border-gray-200 dark:border-gray-600 rounded-xl dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:border-gray-400 focus:outline-none transition-colors resize-none text-base text-black"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  녹음 중지 시 통화 내용이 자동으로 메모에 추가됩니다
-                </p>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white font-bold rounded-xl shadow-lg transition-all transform hover:scale-[1.02]"
-              >
-                {editingSchedule ? '✓ 수정 완료' : '✓ 예약 등록'}
+                className="w-full py-4 bg-black active:bg-gray-800 text-white font-semibold rounded transition-colors text-base">
+                {editingSchedule ? '저장' : '일정 추가'}
               </button>
             </form>
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
