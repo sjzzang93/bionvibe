@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 interface AirQualityData {
   pm10: number;
   pm25: number;

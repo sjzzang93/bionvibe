@@ -6,6 +6,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 
 // PHQ-9 (Patient Health Questionnaire-9) 기반
 // 실제 병원에서 사용하는 표준 우울증 선별 도구

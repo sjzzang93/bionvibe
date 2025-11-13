@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 export default function MultiplicationGamePage() {
   const [mode, setMode] = useState<'menu' | 'practice' | 'speed'>('menu');
   const [level, setLevel] = useState(2);

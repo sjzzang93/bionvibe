@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 export default function PuzzleGamesPage() {
   const [currentGame, setCurrentGame] = useState<'home' | 'sliding' | 'sudoku' | '2048'>('home');
 

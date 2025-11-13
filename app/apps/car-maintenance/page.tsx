@@ -8,6 +8,7 @@ import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import { CAR_WARNING_LIGHTS_DATA, getRiskStyle, type WarningLight } from '@/lib/car-warning-lights';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function CarWarningLightsPage() {
   const [selectedLight, setSelectedLight] = useState<WarningLight | null>(null);

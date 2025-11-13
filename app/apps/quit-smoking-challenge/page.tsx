@@ -8,6 +8,7 @@ import PremiumButton from '@/app/components/ui/PremiumButton';
 import { QUIT_SMOKING_DATA } from '@/lib/group1-data';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 export default function QuitSmokingChallenge() {
   const [mounted, setMounted] = useState(false);
   const [quitDate, setQuitDate] = useState('');

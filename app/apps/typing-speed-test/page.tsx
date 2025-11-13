@@ -7,6 +7,7 @@ import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 const koreanTexts = [
   '빠른 갈색 여우가 게으른 개를 뛰어넘습니다',
   '삶이 있는 한 희망은 있다',

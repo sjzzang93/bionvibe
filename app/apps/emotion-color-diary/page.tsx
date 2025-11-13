@@ -8,6 +8,7 @@ import RelatedApps from '@/app/components/RelatedApps';
 import { useSupabase } from '@/lib/supabase-provider';
 import SimpleAuth from '@/app/components/SimpleAuth';
 import type { User } from '@supabase/supabase-js';
+import AdOverlay from '@/app/components/AdOverlay';
 
 const EMOTIONS = [
   { name: '행복', color: '#FFD700', emoji: '😊', description: '기쁘고 즐거운 하루' },

@@ -8,6 +8,7 @@ import PremiumButton from '@/app/components/ui/PremiumButton';
 import { BODY_FAT_DATA } from '@/lib/group1-data';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 export default function BodyFatMeasure() {
   const [gender, setGender] = useState('male');
   const [age, setAge] = useState(30);

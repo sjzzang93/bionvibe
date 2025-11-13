@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import { getDestinationsByFilters, type Destination } from '@/lib/travel-data';
+import AdOverlay from '@/app/components/AdOverlay';
 
 const regions = [
   { id: 'all', label: '전체', emoji: '🌍' },

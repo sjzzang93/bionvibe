@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Download, Share2, RefreshCw, Sparkles } from "lucide-react"
 import dataset from "@/lib/draw-psychology/dataset.json"
+import AdOverlay from '@/app/components/AdOverlay'
 
 function ResultContent() {
   const searchParams = useSearchParams()

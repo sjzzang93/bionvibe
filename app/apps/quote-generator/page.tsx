@@ -7,6 +7,7 @@ import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 interface QuoteDatabase {
   [key: string]: {
     quotes: string[];

@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 const wordSets = {
   '초급 (300단어)': [
     { en: 'apple', ko: '사과' }, { en: 'book', ko: '책' }, { en: 'cat', ko: '고양이' }, { en: 'dog', ko: '개' },

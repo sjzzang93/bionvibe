@@ -7,6 +7,7 @@ import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import { SUPPLEMENT_DATA } from '@/lib/group2-data';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function HealthSupplementRecommend() {
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);

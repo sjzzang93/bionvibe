@@ -7,6 +7,7 @@ import PremiumHeader from '@/app/components/ui/PremiumHeader';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import { MOOD_DATA } from '@/lib/group3-data';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function MoodCheerUpPage() {
   const [selectedMood, setSelectedMood] = useState<string>('');

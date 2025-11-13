@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import { dreamDatabase, findDreamByKeyword, type DreamResult } from '@/lib/dreamDatabase';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export const dynamic = 'force-dynamic';
 

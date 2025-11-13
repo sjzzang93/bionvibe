@@ -8,6 +8,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
+import AdOverlay from '@/app/components/AdOverlay';
 
 // 3D 룰렛 컴포넌트
 function Wheel3D({ items, isSpinning, onSpinComplete }: { items: string[]; isSpinning: boolean; onSpinComplete: (result: string) => void }) {

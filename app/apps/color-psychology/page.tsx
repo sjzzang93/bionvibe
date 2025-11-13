@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import Link from 'next/link';
+import AdOverlay from '@/app/components/AdOverlay';
 
 const COLORS = [
   // 빨강 계열

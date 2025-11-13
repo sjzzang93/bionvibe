@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { ArrowLeft, Eraser, Palette, Trash2, Check, Undo2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import AdOverlay from '@/app/components/AdOverlay'
 
 function DrawCanvas() {
   const searchParams = useSearchParams()

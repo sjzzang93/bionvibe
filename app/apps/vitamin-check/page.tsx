@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import { getVitaminsBySymptoms, symptomVitaminMap, type Vitamin } from '@/lib/vitamin-data';
+import AdOverlay from '@/app/components/AdOverlay';
 
 const availableSymptoms = Object.keys(symptomVitaminMap);
 
