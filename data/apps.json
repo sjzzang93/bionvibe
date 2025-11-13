@@ -1424,6 +1424,24 @@
         "adhd-test",
         "ultrathink-depression-test"
       ]
+    },
+    {
+      "id": "menopause-test",
+      "name": "🌸 갱년기 자가진단 검사",
+      "slug": "menopause-test",
+      "icon": "🌸",
+      "description": "의학적으로 검증된 32문항으로 갱년기 증상을 8가지 영역별로 분석하고 맞춤형 관리 방법을 제공합니다. (Greene Scale 기반)",
+      "categoryId": "fortune-mind",
+      "url": "/apps/menopause-test",
+      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-13",
+      "hidden": false,
+      "relatedApps": [
+        "adolescence-test",
+        "ultrathink-depression-test",
+        "sleep-analyzer",
+        "stress-level-check"
+      ]
     }
   ]
 }

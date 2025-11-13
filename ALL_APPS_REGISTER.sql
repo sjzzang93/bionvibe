@@ -279,3 +279,37 @@ DO UPDATE SET
 
 -- TV 설치 스케줄러 삭제
 DELETE FROM apps WHERE id = 'installation-scheduler';
+
+-- 갱년기 자가진단 검사 추가
+INSERT INTO apps (
+  id,
+  name,
+  slug,
+  icon,
+  description,
+  category_id,
+  url,
+  image,
+  created_at,
+  hidden
+) VALUES (
+  'menopause-test',
+  '🌸 갱년기 자가진단 검사',
+  'menopause-test',
+  '🌸',
+  '의학적으로 검증된 32문항으로 갱년기 증상을 8가지 영역별로 분석하고 맞춤형 관리 방법을 제공합니다. (Greene Scale 기반)',
+  'fortune-mind',
+  '/apps/menopause-test',
+  'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop',
+  '2025-11-13',
+  false
+)
+ON CONFLICT (id)
+DO UPDATE SET
+  name = EXCLUDED.name,
+  description = EXCLUDED.description,
+  category_id = EXCLUDED.category_id,
+  icon = EXCLUDED.icon,
+  url = EXCLUDED.url,
+  image = EXCLUDED.image,
+  hidden = EXCLUDED.hidden;
