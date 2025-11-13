@@ -1,9 +1,10 @@
 'use client';
 
-import { ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import AppFooter from '@/app/components/AppFooter';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 const FloatingStars = dynamic(() => import('./FloatingStars'), { ssr: false });
 
@@ -39,24 +40,11 @@ export default function PremiumLayout({
   const accents = themeAccents[theme];
   const adRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    // 페이지 로드 후 광고로 스크롤
-    const timer = setTimeout(() => {
-      if (adRef.current) {
-        adRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // 5초 후 다시 상단으로 스크롤
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 5000);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="min-h-screen relative overflow-hidden">
+      {/* 오버레이 광고 */}
+      <AdOverlay />
+
       {/* Animated 3D Background */}
       <div className={`fixed inset-0 bg-gradient-to-br ${themeGradients[theme]}`} style={{ perspective: '1000px' }}>
         {/* Pattern overlay */}
