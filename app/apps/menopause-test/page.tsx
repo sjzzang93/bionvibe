@@ -480,7 +480,7 @@ export default function MenopauseTestPage() {
           )}
 
           {/* 긴급 연락처 */}
-          {result.contacts && (
+          {'contacts' in result && result.contacts && (
             <PremiumCard className="bg-red-500/10 border-red-500/30">
               <h3 className="text-xl sm:text-2xl font-bold text-red-300 mb-4 sm:mb-6">🚨 긴급 연락처</h3>
               <div className="space-y-2 sm:space-y-3">
