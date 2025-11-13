@@ -14,6 +14,11 @@ import AdSlot from './AdSlot';
 const HOME_CONTENT_MID_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID;
 const RECENT_UPDATES = [
   {
+    date: '2025-11-13',
+    title: '애드센스 승인 완료 🎉',
+    description: '모든 빌드 오류를 수정하고, In-Article 광고를 포함한 AdSense 광고를 95개 앱 페이지에 통합했습니다.',
+  },
+  {
     date: '2025-10-26',
     title: '광고 안전성 점검',
     description: '애드센스 재심사를 위해 홈 구조와 광고 슬롯을 전면 개편했어요.',
@@ -22,11 +27,6 @@ const RECENT_UPDATES = [
     date: '2025-10-19',
     title: '운세·금융 추천 강화',
     description: '오늘의 운세, 전기요금 등 인기 앱에 가이드와 FAQ를 추가했습니다.',
-  },
-  {
-    date: '2025-10-12',
-    title: '홈 즐겨찾기 출시',
-    description: '즐겨찾기 보관함과 다크모드를 정식 오픈했습니다.',
   },
 ];
 
