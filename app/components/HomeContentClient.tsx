@@ -10,6 +10,7 @@ import { useSupabase } from '@/lib/supabase-provider';
 import { applyCuratedApps } from './homeContentUtils';
 import FavoriteButton from './FavoriteButton';
 import AdSlot from './AdSlot';
+import AdSenseMultiplex from './AdSenseMultiplex';
 
 const HOME_CONTENT_MID_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID;
 const RECENT_UPDATES = [
@@ -365,63 +366,74 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
               </div>
             )}
 
-            {appsByCategory.map((category, categoryIndex) => (
-              <div key={category.id} className="mb-14 space-y-6">
-                <div className="sticky top-16 z-20 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 mb-2 py-4 bg-[#fff6ed]/90 backdrop-blur-md border-b border-amber-200/70 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm dark:bg-gray-900/90 dark:border-amber-500/20">
-                  <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">{category.name}</h3>
-                  <span className="text-sm text-amber-700/80 font-medium dark:text-amber-300">
-                    {category.apps.length}개
-                  </span>
-                  <p className="text-sm text-amber-700/70 dark:text-amber-300/80">
-                    {category.description}
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
-                  {category.apps.map((app, appIndex) => (
-                    <Link
-                      key={app.id}
-                      href={app.url}
-                      className="group relative overflow-hidden rounded-none border border-amber-100/80 bg-white/85 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-lg dark:border-amber-500/20 dark:bg-gray-900/80 dark:hover:border-amber-400"
-                    >
-                      <FavoriteButton
-                        appId={app.id}
-                        onToggle={toggleFavorite}
-                        isFavorite={false}
-                      />
+{appsByCategory.map((category, categoryIndex) => (
+              <div key={category.id}>
+                <div className="mb-14 space-y-6">
+                  <div className="sticky top-16 z-20 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 mb-2 py-4 bg-[#fff6ed]/90 backdrop-blur-md border-b border-amber-200/70 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm dark:bg-gray-900/90 dark:border-amber-500/20">
+                    <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">{category.name}</h3>
+                    <span className="text-sm text-amber-700/80 font-medium dark:text-amber-300">
+                      {category.apps.length}개
+                    </span>
+                    <p className="text-sm text-amber-700/70 dark:text-amber-300/80">
+                      {category.description}
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
+                    {category.apps.map((app, appIndex) => (
+                      <Link
+                        key={app.id}
+                        href={app.url}
+                        className="group relative overflow-hidden rounded-none border border-amber-100/80 bg-white/85 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-lg dark:border-amber-500/20 dark:bg-gray-900/80 dark:hover:border-amber-400"
+                      >
+                        <FavoriteButton
+                          appId={app.id}
+                          onToggle={toggleFavorite}
+                          isFavorite={false}
+                        />
 
-                      {app.image && app.image.trim() !== '' && !failedImages.has(app.id) ? (
-                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
-                          <Image
-                            src={app.image}
-                            alt={app.name}
-                            fill
-                            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 20vw, 16vw"
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
-                            priority={categoryIndex === 0 && appIndex < 4 && favoriteApps.length === 0}
-                            loading={
-                              categoryIndex === 0 && appIndex < 4 && favoriteApps.length === 0
-                                ? undefined
-                                : 'lazy'
-                            }
-                            unoptimized
-                            onError={() => handleImageError(app.id)}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-                        </div>
-                      ) : (
-                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30 flex items-center justify-center">
-                          <span className="text-4xl sm:text-5xl">{app.icon}</span>
-                        </div>
-                      )}
+                        {app.image && app.image.trim() !== '' && !failedImages.has(app.id) ? (
+                          <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden">
+                            <Image
+                              src={app.image}
+                              alt={app.name}
+                              fill
+                              sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 20vw, 16vw"
+                              className="object-cover transition-transform duration-300 group-hover:scale-110"
+                              priority={categoryIndex === 0 && appIndex < 4 && favoriteApps.length === 0}
+                              loading={
+                                categoryIndex === 0 && appIndex < 4 && favoriteApps.length === 0
+                                  ? undefined
+                                  : 'lazy'
+                              }
+                              unoptimized
+                              onError={() => handleImageError(app.id)}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                          </div>
+                        ) : (
+                          <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30 flex items-center justify-center">
+                            <span className="text-4xl sm:text-5xl">{app.icon}</span>
+                          </div>
+                        )}
 
-                      <div className="p-2 sm:p-3 flex flex-col items-center text-center">
-                        <h4 className="text-xs sm:text-sm font-semibold text-amber-900 dark:text-amber-200 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors line-clamp-2">
-                          {app.name}
-                        </h4>
-                      </div>
-                    </Link>
-                  ))}
+                        <div className="p-2 sm:p-3 flex flex-col items-center text-center">
+                          <h4 className="text-xs sm:text-sm font-semibold text-amber-900 dark:text-amber-200 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors line-clamp-2">
+                            {app.name}
+                          </h4>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
+
+                {/* 카테고리 사이 광고 (3번째, 6번째 카테고리 후) */}
+                {(categoryIndex === 2 || categoryIndex === 5) && (
+                  <div className="mb-14">
+                    <div className="border-amber-200/70 bg-white/70 shadow-lg ring-1 ring-amber-200/50 backdrop-blur dark:border-amber-500/30 dark:bg-gray-900/80 dark:ring-amber-500/30 rounded-2xl p-4">
+                      <AdSenseMultiplex />
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
 
