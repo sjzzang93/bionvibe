@@ -404,7 +404,7 @@ export default function MenopauseTestPage() {
             </div>
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{result.title}</h2>
-              {result.warning && (
+              {'warning' in result && result.warning && (
                 <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-red-500/20 border border-red-500/30 rounded-full text-xs sm:text-sm text-red-300 font-bold">
                   {result.warning}
                 </div>
