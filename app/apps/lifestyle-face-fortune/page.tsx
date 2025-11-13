@@ -5,6 +5,7 @@ import { FACE_FORTUNE_DATA, FaceAnalysis } from "@/lib/face-fortune-data";
 import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function FaceFortune() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -104,6 +105,7 @@ export default function FaceFortune() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0a0502] text-amber-100">
+      <AdOverlay />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,208,128,0.15),transparent_45%),radial-gradient(circle_at_80%_20%,rgba(255,160,76,0.15),transparent_50%),radial-gradient(circle_at_50%_95%,rgba(120,60,20,0.4),transparent_60%)]" />
       <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-[#2a1609] via-transparent to-transparent opacity-70" />
       <div className="absolute inset-x-0 bottom-0 h-[320px] bg-gradient-to-t from-[#1b0f07] via-[#120804] to-transparent" />

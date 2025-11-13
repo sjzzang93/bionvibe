@@ -6,6 +6,7 @@ import type { FaceShapeAnalysis } from "@/lib/face-shape-data";
 import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function FaceShapeAnalysisPage() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -154,6 +155,7 @@ export default function FaceShapeAnalysisPage() {
       background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #4c1d95 50%, #581c87 75%, #3b0764 100%)',
       backgroundAttachment: 'fixed'
     }}>
+      <AdOverlay />
       {/* 배경 애니메이션 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }}></div>

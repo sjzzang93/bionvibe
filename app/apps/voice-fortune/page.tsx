@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import AppFooter from "@/app/components/AppFooter";
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 interface VoiceAnalysis {
   frequency: number; // 평균 주파수 (Hz)
   volume: number; // 평균 볼륨
@@ -220,6 +221,7 @@ export default function VoiceFortune() {
   if (result) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 relative overflow-hidden">
+        <AdOverlay />
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>

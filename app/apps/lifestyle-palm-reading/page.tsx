@@ -5,6 +5,7 @@ import { PALM_READING_DATA, getPalmPatternByMeasurement, PalmReadingAnalysis } f
 import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function PalmReading() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -113,6 +114,7 @@ export default function PalmReading() {
       background: 'linear-gradient(135deg, #3e2723 0%, #5d4037 25%, #6d4c41 50%, #5d4037 75%, #3e2723 100%)',
       backgroundAttachment: 'fixed'
     }}>
+      <AdOverlay />
       {/* 배경 애니메이션 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-amber-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }}></div>

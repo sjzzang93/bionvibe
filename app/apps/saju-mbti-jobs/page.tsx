@@ -14,6 +14,7 @@ import {
 } from "@/lib/saju-engine";
 import { DETAILED_COMBINATIONS, getBasicCombinationAnalysis } from "@/lib/saju-mbti-combinations";
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 // MBTI 16가지 유형
 const MBTI_TYPES = [
@@ -73,6 +74,7 @@ function DetailedCombinationAnalysis({ element, mbti }: { element: string; mbti:
   if (!mounted) {
     return (
       <div className="space-y-6">
+        <AdOverlay />
         <div className="text-center py-8">
           <div className="text-xl sm:text-2xl font-bold text-white/80 animate-pulse">분석 준비 중...</div>
         </div>

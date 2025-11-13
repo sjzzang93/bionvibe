@@ -6,6 +6,7 @@ import Link from 'next/link';
 import RelatedApps from '@/app/components/RelatedApps';
 import RadarChart3D from '@/app/components/RadarChart3D';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 // ASPD (반사회성 성격장애) 및 소시오패스 연구 기반 질문들
 const questions = [
@@ -216,6 +217,7 @@ const TokenCounter: React.FC<{ currentCount: number, maxCount: number }> = ({ cu
 
   return (
     <div className="fixed top-24 right-8 bg-white rounded-2xl shadow-2xl p-6 z-50 border-4 border-indigo-500">
+      <AdOverlay />
       <div className="text-center">
         <div className="text-sm font-medium text-gray-600 mb-2">답변 완료</div>
         <div className="text-5xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent mb-2">

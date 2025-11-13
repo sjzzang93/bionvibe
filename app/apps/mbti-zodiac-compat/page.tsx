@@ -7,6 +7,7 @@ import AppFooter from '@/app/components/AppFooter';
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSlot from '@/app/components/AdSlot';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 import {
   MBTI_OPTIONS,
   ZODIAC_OPTIONS,
@@ -161,6 +162,7 @@ export default function MbtiZodiacCompatibilityPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-rose-50 dark:from-gray-950 dark:via-gray-900 dark:to-black">
+      <AdOverlay />
       <div className="relative">
         <div className="absolute inset-0 pointer-events-none">
           <div className="mx-auto h-64 max-w-5xl bg-gradient-to-r from-amber-200/40 via-pink-200/30 to-indigo-200/40 blur-3xl dark:from-amber-500/10 dark:via-pink-500/10 dark:to-indigo-500/10" />

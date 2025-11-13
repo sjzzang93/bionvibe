@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 type Question = {
   id: string;
@@ -201,6 +202,7 @@ export default function SmartphoneAddictionTestPage() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-amber-50 px-4 py-16 dark:from-slate-950 dark:via-slate-900 dark:to-black">
+        <AdOverlay />
         <div className="mx-auto max-w-5xl space-y-10">
           {/* Main result card */}
           <div className={clsx(

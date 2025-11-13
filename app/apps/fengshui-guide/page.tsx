@@ -7,6 +7,7 @@ import { ChevronLeft, Home, CheckSquare, BookOpen, MapPin, Building2, Lightbulb,
 
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 export default function FengshuiGuidePage() {
   const [activeTab, setActiveTab] = useState<'theory' | 'practice' | 'checklist' | 'cases' | 'tools' | 'faq' | 'designer'>('designer');
   const [checklistScores, setChecklistScores] = useState<Record<string, boolean>>({});
@@ -24,6 +25,7 @@ export default function FengshuiGuidePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 dark:from-amber-900 dark:via-yellow-900 dark:to-orange-900 transition-colors" suppressHydrationWarning>
+      <AdOverlay />
       {/* 헤더 */}
       <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border-b border-amber-200 dark:border-amber-700 sticky top-0 z-50" suppressHydrationWarning>
         <div className="max-w-7xl mx-auto px-4 py-4">

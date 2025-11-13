@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import AppFooter from "@/app/components/AppFooter";
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 export default function VoiceAge() {
   // Add CSS animations
   if (typeof document !== 'undefined') {
@@ -216,6 +217,7 @@ export default function VoiceAge() {
   if (result) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-red-900 via-orange-900 to-yellow-900 relative overflow-hidden">
+        <AdOverlay />
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 -left-4 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
