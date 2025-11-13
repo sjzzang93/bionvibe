@@ -13,6 +13,7 @@ import {
   SPECIAL_STARS
 } from "@/lib/saju-engine";
 import { DETAILED_COMBINATIONS, getBasicCombinationAnalysis } from "@/lib/saju-mbti-combinations";
+import AdSense from '@/app/components/AdSense';
 
 // MBTI 16가지 유형
 const MBTI_TYPES = [

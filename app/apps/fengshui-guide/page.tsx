@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ChevronLeft, Home, CheckSquare, BookOpen, MapPin, Building2, Lightbulb, FileText, Compass, RotateCw, Trash2 } from 'lucide-react';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 export default function FengshuiGuidePage() {
   const [activeTab, setActiveTab] = useState<'theory' | 'practice' | 'checklist' | 'cases' | 'tools' | 'faq' | 'designer'>('designer');
   const [checklistScores, setChecklistScores] = useState<Record<string, boolean>>({});

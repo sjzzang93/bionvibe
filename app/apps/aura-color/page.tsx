@@ -10,6 +10,7 @@ import { getJSON, setJSON, isBrowser } from "@/lib/client/storage";
 import { buildComments } from "@/lib/aura/comments";
 import { Button } from "@/components/ui/button";
 import { Sparkles, History, RotateCcw } from "lucide-react";
+import AdSense from '@/app/components/AdSense';
 
 type LogItem = {
   ts: number; // epoch ms

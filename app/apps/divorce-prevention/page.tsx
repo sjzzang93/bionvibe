@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Heart, AlertTriangle, Shield, ArrowLeft, ArrowRight } from 'lucide-react';
 import { QUESTIONS, DOMAINS, SAFETY_HOTLINES, type Answer, type TestLevel } from '@/lib/divorce-prevention-data';
 import { calculateScore, getTopVulnerableAreas, getRecommendationsByTier } from '@/lib/divorce-prevention-score';
+import AdSense from '@/app/components/AdSense';
 
 export default function DivorcePreventionPage() {
   const [testLevel, setTestLevel] = useState<TestLevel | null>(null);

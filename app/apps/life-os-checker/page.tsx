@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 
 // 질문 인터페이스
 interface Question {

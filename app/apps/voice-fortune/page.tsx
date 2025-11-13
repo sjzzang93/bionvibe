@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 
 import AppFooter from "@/app/components/AppFooter";
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 interface VoiceAnalysis {
   frequency: number; // 평균 주파수 (Hz)
   volume: number; // 평균 볼륨

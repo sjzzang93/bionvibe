@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AdSense from '@/app/components/AdSense';
 
 export default function SalaryCalculatorPage() {
   const [monthlySalary, setMonthlySalary] = useState<string>('');

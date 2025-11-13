@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 interface GameState {
   level: number;
   score: number;

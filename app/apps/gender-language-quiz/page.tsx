@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 import {
   femaleQuizPool,
   maleQuizPool,

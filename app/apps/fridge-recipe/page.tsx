@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 interface Recipe {
   id: string;
   name: string;

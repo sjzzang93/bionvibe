@@ -13,6 +13,7 @@ import {
   Answer,
 } from '@/lib/inner-dialog-data';
 import { calculateTestResult, getTopVulnerableAreas, getTopStrengthAreas, generatePsychologicalAnalysis } from '@/lib/inner-dialog-score';
+import AdSense from '@/app/components/AdSense';
 
 type Stage = 'intro' | 'test' | 'results';
 

@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 type MenuItem = {
   name: string;
   emoji: string;

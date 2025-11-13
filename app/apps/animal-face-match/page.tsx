@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 interface Animal {
   id: string;
   name: string;

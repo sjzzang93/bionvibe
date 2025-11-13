@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import AdSense from '@/app/components/AdSense';
 
 // 난이도 등급
 type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'hell';

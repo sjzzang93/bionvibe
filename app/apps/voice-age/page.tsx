@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 
 import AppFooter from "@/app/components/AppFooter";
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 export default function VoiceAge() {
   // Add CSS animations
   if (typeof document !== 'undefined') {

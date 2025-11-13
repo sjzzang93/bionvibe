@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 
 type Question = {
   id: string;
@@ -599,5 +600,13 @@ export default function SmartphoneAddictionTestPage() {
         </div>
       </div>
     </div>
+
+        {/* 광고 */}
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <AdSense className="min-h-[250px]" />
+          </div>
+        </div>
+
   );
 }

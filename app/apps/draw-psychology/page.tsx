@@ -1,6 +1,7 @@
 "use client"
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 import { useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, Home, TreePine, User } from "lucide-react"

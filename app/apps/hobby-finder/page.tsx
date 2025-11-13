@@ -4,6 +4,7 @@ import RelatedApps from '@/app/components/RelatedApps';
 import React from 'react';
 import Link from 'next/link';
 import { clearState } from '@/lib/hobby-storage';
+import AdSense from '@/app/components/AdSense';
 
 export default function HobbyFinderPage() {
   const handleStart = () => {

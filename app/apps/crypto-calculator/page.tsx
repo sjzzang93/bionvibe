@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 import {
   Chart as ChartJS,
   CategoryScale,

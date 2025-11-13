@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import AppFooter from '@/app/components/AppFooter';
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSlot from '@/app/components/AdSlot';
+import AdSense from '@/app/components/AdSense';
 
 interface FortuneResult {
   zodiac: string;
@@ -307,6 +308,14 @@ export default function TodayFortunePage() {
         </section>
 
         <RelatedApps currentAppSlug="today-fortune" className="max-w-6xl mx-auto mt-12" />
+
+        {/* 광고 */}
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <AdSense className="min-h-[250px]" />
+          </div>
+        </div>
+
         <div className="max-w-6xl mx-auto">
           <AppFooter />
         </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AdSense from '@/app/components/AdSense';
 
 interface ExchangeRate {
   currency: string;

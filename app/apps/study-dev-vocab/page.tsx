@@ -1,6 +1,7 @@
 'use client'
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 import { Suspense, useState } from 'react'
 import CopyButton from '@/app/components/glossary/CopyButton'
 

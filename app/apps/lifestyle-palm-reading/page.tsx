@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { PALM_READING_DATA, getPalmPatternByMeasurement, PalmReadingAnalysis } from "@/lib/palm-reading-analysis-data";
 import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
+import AdSense from '@/app/components/AdSense';
 
 export default function PalmReading() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);

@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { FACE_FORTUNE_DATA, FaceAnalysis } from "@/lib/face-fortune-data";
 import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
+import AdSense from '@/app/components/AdSense';
 
 export default function FaceFortune() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);

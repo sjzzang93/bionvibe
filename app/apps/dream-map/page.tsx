@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import AdSense from '@/app/components/AdSense';
 
 // 꿈 키워드 해석
 const DREAM_KEYWORDS = {

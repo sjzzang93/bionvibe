@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 // 닉네임 생성 데이터
 const NICKNAME_PARTS = {
   // 아기 이름용

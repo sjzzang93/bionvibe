@@ -5,6 +5,7 @@ import { ArrowLeft, Users, AlertTriangle, CheckCircle, XCircle } from 'lucide-re
 import Link from 'next/link';
 import RelatedApps from '@/app/components/RelatedApps';
 import RadarChart3D from '@/app/components/RadarChart3D';
+import AdSense from '@/app/components/AdSense';
 
 // ASPD (반사회성 성격장애) 및 소시오패스 연구 기반 질문들
 const questions = [
@@ -229,6 +230,14 @@ const TokenCounter: React.FC<{ currentCount: number, maxCount: number }> = ({ cu
         </div>
       </div>
     </div>
+
+        {/* 광고 */}
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <AdSense className="min-h-[250px]" />
+          </div>
+        </div>
+
   );
 };
 

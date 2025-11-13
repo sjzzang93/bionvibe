@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParallax } from "./lib/use-parallax";
 
 import RelatedApps from '@/app/components/RelatedApps';
+import AdSense from '@/app/components/AdSense';
 export default function NonsenseEscapeLanding() {
   const { mousePos, enabled: parallaxEnabled } = useParallax({ maxOffset: 20 });
 

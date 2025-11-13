@@ -5,6 +5,7 @@ import { FACE_SHAPE_DATA, getFaceShapeByRatio } from "@/lib/face-shape-data";
 import type { FaceShapeAnalysis } from "@/lib/face-shape-data";
 import RelatedApps from "@/app/components/RelatedApps";
 import AppFooter from "@/app/components/AppFooter";
+import AdSense from '@/app/components/AdSense';
 
 export default function FaceShapeAnalysisPage() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);

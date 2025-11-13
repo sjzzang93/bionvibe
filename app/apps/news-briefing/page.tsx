@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, RefreshCw, Clock, Calendar } from 'lucide-react';
+import AdSense from '@/app/components/AdSense';
 
 interface Article {
   title: string;
