@@ -246,8 +246,6 @@ export default function PasswordGeneratorPage() {
             <li>• 정기적으로 비밀번호를 변경하세요</li>
           </ul>
         </div>
-      </div>
-    </div>
 
         {/* 광고 */}
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -255,6 +253,7 @@ export default function PasswordGeneratorPage() {
             <AdSense className="min-h-[250px]" />
           </div>
         </div>
-
+      </div>
+    </div>
   );
 }
