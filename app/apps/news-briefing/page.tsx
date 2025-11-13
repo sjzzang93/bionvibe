@@ -11,6 +11,7 @@ interface Article {
   link: string;
   summary: string;
   press: string;
+  date?: string;
 }
 
 interface NewsData {
@@ -214,10 +215,15 @@ export default function NewsBriefingPage() {
                 className="border-b-2 border-neutral-200 pb-8"
               >
                 {/* Category Badge */}
-                <div className="mb-3">
+                <div className="mb-3 flex items-center gap-2 flex-wrap">
                   <span className="inline-block bg-neutral-900 text-white text-xs font-bold px-3 py-1 uppercase tracking-wider">
                     {article.press}
                   </span>
+                  {article.date && (
+                    <span className="text-xs text-neutral-500 font-semibold">
+                      {article.date}
+                    </span>
+                  )}
                 </div>
 
                 {/* Headline */}

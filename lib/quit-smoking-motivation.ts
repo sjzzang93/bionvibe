@@ -1,4 +1,4 @@
-export default {
+const motivation = {
   "version": "1.0.0",
   "dailyMessages": [
     {
@@ -389,3 +389,5 @@ export default {
     "kakao": "[BION VIBE] 금연 {days}일! 오늘도 파도 넘기기 성공 🙌"
   }
 };
+
+export default motivation;

@@ -401,7 +401,7 @@ export default function ClaudeLearningPage() {
         console.error('Failed to load progress', e);
       }
     }
-  }, []);
+  }, [unlocked]);
 
   useEffect(() => {
     if (mounted) {
@@ -494,7 +494,7 @@ export default function ClaudeLearningPage() {
       document.addEventListener('keydown', handleKeyDown);
       return () => document.removeEventListener('keydown', handleKeyDown);
     }
-  }, [mounted, currentIndex, isFlipped, filteredIndices, completedCards]);
+  }, [mounted, currentIndex, isFlipped, filteredIndices, completedCards, flipCard, nextCard, previousCard, toggleComplete]);
 
   const handleFilterChange = (filter: 'all' | 'completed' | 'incomplete') => {
     setCurrentFilter(filter);

@@ -362,6 +362,7 @@ export default function BalanceGamePage() {
         }
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 진행 상황 저장
@@ -396,7 +397,7 @@ export default function BalanceGamePage() {
       setAnswered([]);
       setUserAnswers({});
     }
-  }, [category]);
+  }, [category, answered.length, filteredQuestions.length]);
 
   const handleSelect = (option: 'A' | 'B') => {
     if (showResult) return;

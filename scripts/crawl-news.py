@@ -57,11 +57,16 @@ def crawl_naver_news(category_id, limit=5):
             press_tag = item.select_one('.writing')
             press = press_tag.get_text(strip=True) if press_tag else '네이버뉴스'
 
+            # 날짜
+            date_tag = item.select_one('.date')
+            date = date_tag.get_text(strip=True) if date_tag else ''
+
             articles.append({
                 'title': title,
                 'link': link,
                 'summary': summary,
-                'press': press
+                'press': press,
+                'date': date
             })
 
         return articles

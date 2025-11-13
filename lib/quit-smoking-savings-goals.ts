@@ -1,4 +1,4 @@
-export default {
+const savingsGoals = {
   "version": "1.0.0",
   "currency": "KRW",
   "assumption": "하루 1갑 기준, 지역·가격에 따라 차이 있음",
@@ -161,3 +161,5 @@ export default {
     }
   ]
 };
+
+export default savingsGoals;

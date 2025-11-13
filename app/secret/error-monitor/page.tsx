@@ -48,6 +48,7 @@ export default function ErrorMonitorPage() {
 
   useEffect(() => {
     fetchErrors();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterAppId, filterErrorType, limit]);
 
   const fetchErrors = async () => {

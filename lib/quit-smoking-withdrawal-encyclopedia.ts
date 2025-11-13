@@ -1,4 +1,4 @@
-export default {
+const withdrawalEncyclopedia = {
   "version": "1.0.0",
   "scale": {
     "severity": [
@@ -566,3 +566,5 @@ export default {
     }
   ]
 };
+
+export default withdrawalEncyclopedia;

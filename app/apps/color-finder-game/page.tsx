@@ -34,6 +34,13 @@ export default function ColorFinderGamePage() {
     }
   }, []);
 
+  const endGame = (finalScore: number) => {
+    if (finalScore > gameState.bestScore) {
+      localStorage.setItem('colorFinderBestScore', finalScore.toString());
+      setGameState((prev) => ({ ...prev, bestScore: finalScore }));
+    }
+  };
+
   // 타이머
   useEffect(() => {
     if (gameState.isPlaying && gameState.timeLeft > 0) {
@@ -48,14 +55,8 @@ export default function ColorFinderGamePage() {
       }, 1000);
       return () => clearInterval(timer);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.isPlaying, gameState.timeLeft]);
-
-  const endGame = (finalScore: number) => {
-    if (finalScore > gameState.bestScore) {
-      localStorage.setItem('colorFinderBestScore', finalScore.toString());
-      setGameState((prev) => ({ ...prev, bestScore: finalScore }));
-    }
-  };
 
   const generateColors = () => {
     // 랜덤 베이스 컬러 생성

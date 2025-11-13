@@ -37,6 +37,7 @@ export default function GuestbookManager() {
 
   useEffect(() => {
     loadMessages();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDelete = async (id: number) => {

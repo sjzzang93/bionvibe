@@ -69,6 +69,7 @@ function DrawCanvas() {
     window.addEventListener("resize", resize)
 
     return () => window.removeEventListener("resize", resize)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const saveToHistory = () => {

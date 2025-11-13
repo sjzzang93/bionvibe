@@ -98,6 +98,7 @@ export default function ContactsManagement() {
 
   useEffect(() => {
     loadContacts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, supabase]);
 
   // 실시간 업데이트 구독
@@ -119,6 +120,7 @@ export default function ContactsManagement() {
     return () => {
       client.removeChannel(channel);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, supabase]);
 
   const getStatusBadge = (status: string) => {

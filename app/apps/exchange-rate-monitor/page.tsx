@@ -75,6 +75,7 @@ export default function ExchangeRateMonitor() {
   // 초기 로드
   useEffect(() => {
     fetchRates();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 자동 갱신
@@ -86,7 +87,8 @@ export default function ExchangeRateMonitor() {
     }, 60000); // 1분마다 갱신
 
     return () => clearInterval(interval);
-  }, [autoRefresh, prevRates]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoRefresh]);
 
   const checkAlerts = () => {
     alerts.forEach((alert) => {

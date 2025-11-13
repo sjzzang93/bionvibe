@@ -55,6 +55,7 @@ export default function BionChat() {
     return () => {
       supabase.removeChannel(channel);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, supabase]);
 
   // 자동 스크롤

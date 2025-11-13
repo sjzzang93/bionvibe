@@ -1,4 +1,4 @@
-export default {
+const healthMilestones = {
   "version": "1.0.0",
   "units": {
     "time": "minutes",
@@ -316,3 +316,5 @@ export default {
     }
   ]
 };
+
+export default healthMilestones;

@@ -1,4 +1,4 @@
-export default {
+const crisisManagement = {
   "version": "1.0.0",
   "crisisSituations": [
     {
@@ -310,3 +310,5 @@ export default {
     }
   ]
 };
+
+export default crisisManagement;

@@ -187,7 +187,7 @@ export default function StockNewsCollector() {
     }, 10000); // 10초마다 체크
 
     return () => clearInterval(interval);
-  }, [selectedStocks, keywords, notificationEnabled]);
+  }, [selectedStocks, keywords, notificationEnabled, stocks]);
 
   const generateRandomTitle = (stockName: string) => {
     const templates = [

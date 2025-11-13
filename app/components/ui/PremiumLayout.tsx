@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import AppFooter from '@/app/components/AppFooter';
+import AdSense from '@/app/components/AdSense';
 
 const FloatingStars = dynamic(() => import('./FloatingStars'), { ssr: false });
 
@@ -78,6 +79,13 @@ export default function PremiumLayout({
       {/* Content with parallax */}
       <div className="relative z-10" style={{ transformStyle: 'preserve-3d' }}>
         {children}
+
+        {/* 광고 - 결과 확인 후 */}
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <AdSense className="min-h-[250px]" />
+          </div>
+        </div>
       </div>
 
       <AppFooter />
