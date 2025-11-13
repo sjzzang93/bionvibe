@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import AppFooter from '@/app/components/AppFooter';
 import AdSense from '@/app/components/AdSense';
@@ -31,12 +31,29 @@ const themeAccents = {
   indigo: ['indigo', 'blue', 'violet'],
 };
 
-export default function PremiumLayout({ 
-  children, 
+export default function PremiumLayout({
+  children,
   theme = 'purple',
-  showStars = true 
+  showStars = true
 }: PremiumLayoutProps) {
   const accents = themeAccents[theme];
+  const adRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // 페이지 로드 후 광고로 스크롤
+    const timer = setTimeout(() => {
+      if (adRef.current) {
+        adRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // 2초 후 다시 상단으로 스크롤
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 2000);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -81,7 +98,7 @@ export default function PremiumLayout({
         {children}
 
         {/* 광고 - 하단 */}
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div ref={adRef} className="max-w-4xl mx-auto px-4 py-8">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
             <AdSense className="min-h-[250px]" />
           </div>
