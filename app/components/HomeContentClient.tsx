@@ -9,10 +9,8 @@ import { useSupabase } from '@/lib/supabase-provider';
 
 import { applyCuratedApps } from './homeContentUtils';
 import FavoriteButton from './FavoriteButton';
-import AdSlot from './AdSlot';
 import AdSenseMultiplex from './AdSenseMultiplex';
 
-const HOME_CONTENT_MID_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID;
 const RECENT_UPDATES = [
   {
     date: '2025-11-13',
@@ -289,13 +287,6 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
             ))}
           </ol>
         </div>
-
-        <AdSlot
-          slotId={HOME_CONTENT_MID_SLOT}
-          label="BION 추천 광고"
-          minHeight={300}
-          className="border-amber-200/70 bg-gradient-to-r from-white/70 via-[#fff3e9]/80 to-white/70 backdrop-blur shadow-lg ring-1 ring-amber-200/50 border-dashed dark:border-amber-500/30 dark:from-gray-900/60 dark:via-gray-900/80 dark:to-gray-900/60 dark:ring-amber-500/30"
-        />
 
         {allApps.length === 0 ? (
           <div className="text-center py-20">

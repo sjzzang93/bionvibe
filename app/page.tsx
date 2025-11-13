@@ -2,11 +2,6 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import MainChat from './components/MainChat';
 import HomeContent from './components/HomeContent';
-import AdSlot from './components/AdSlot';
-import AdSenseInArticle from './components/AdSenseInArticle';
-import AdSenseInArticleBottom from './components/AdSenseInArticleBottom';
-
-const HOME_TOP_AD_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP;
 
 export default function Home() {
   // totalApps는 HomeContent 내부에서 동적으로 계산됨
@@ -39,25 +34,8 @@ export default function Home() {
       />
 
       <div className="relative z-10">
-        {/* 상단 광고 */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 mb-12">
-          <AdSlot
-            slotId={HOME_TOP_AD_SLOT}
-            label="홈 상단 스폰서"
-            minHeight={280}
-            className="border-amber-200/70 bg-white/70 shadow-lg ring-1 ring-amber-200/50 backdrop-blur dark:border-amber-500/30 dark:bg-gray-900/80 dark:ring-amber-500/30"
-          />
-        </div>
-
         {/* Apps Grid */}
         <HomeContent />
-
-        {/* 중간 광고 - In-Article */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="border-amber-200/70 bg-white/70 shadow-lg ring-1 ring-amber-200/50 backdrop-blur dark:border-amber-500/30 dark:bg-gray-900/80 dark:ring-amber-500/30 rounded-2xl p-4">
-            <AdSenseInArticle className="min-h-[250px]" />
-          </div>
-        </div>
 
         {/* 방명록 섹션 - 맨 아래 */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -70,13 +48,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* 하단 광고 - In-Article */}
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-          <div className="border-amber-200/70 bg-white/70 shadow-lg ring-1 ring-amber-200/50 backdrop-blur dark:border-amber-500/30 dark:bg-gray-900/80 dark:ring-amber-500/30 rounded-2xl p-4">
-            <AdSenseInArticleBottom className="min-h-[250px]" />
-          </div>
-        </div>
 
         {/* Footer */}
         <footer className="bg-[#fff1e2]/80 dark:bg-gray-900 border-t border-amber-200/70 dark:border-gray-800/80 py-6 px-4 backdrop-blur">
