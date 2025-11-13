@@ -427,6 +427,13 @@ export default function FaceFortune() {
             </p>
           </div>
 
+          {/* 광고 */}
+          <div className="mt-8">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+              <AdSense className="min-h-[250px]" />
+            </div>
+          </div>
+
           {/* 제작자 서명 */}
           <AppFooter />
         </div>

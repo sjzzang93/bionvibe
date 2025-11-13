@@ -508,6 +508,14 @@ export default function VoiceFortune() {
       {/* 관련 앱 추천 */}
 
       <RelatedApps currentAppSlug="voice-fortune" className="mt-8 mb-8" />
+        {/* 광고 */}
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <AdSense className="min-h-[250px]" />
+          </div>
+        </div>
+
+
 
 
       <AppFooter />

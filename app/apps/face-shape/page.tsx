@@ -469,6 +469,14 @@ export default function FaceShapeAnalysisPage() {
               사진은 브라우저에서만 처리되며 서버에 저장되지 않습니다.
             </p>
           </div>
+        {/* 광고 */}
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <AdSense className="min-h-[250px]" />
+          </div>
+        </div>
+
+
 
           <AppFooter />
         </section>
