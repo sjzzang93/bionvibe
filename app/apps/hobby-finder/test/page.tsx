@@ -8,6 +8,7 @@ import { getState, setState } from '@/lib/hobby-storage';
 import { StepHeader } from '@/app/components/hobby/StepHeader';
 import { OptionCard } from '@/app/components/hobby/OptionCard';
 import type { Choice } from '@/lib/hobby-types';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function HobbyTestPage() {
   const router = useRouter();
@@ -138,7 +139,8 @@ export default function HobbyTestPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-12">
+      
+      <AdOverlay /><div className="container mx-auto px-4 py-12">
         <div className="mx-auto max-w-3xl">
           <StepHeader currentStep={currentQuestion.step} totalSteps={5} title={stepTitle} progress={progress} />
 

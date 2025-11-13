@@ -8,6 +8,7 @@ import { TraitChips } from '@/app/components/hobby/TraitChips';
 import { RecommendationCard } from '@/app/components/hobby/RecommendationCard';
 import { ShareButtons } from '@/app/components/hobby/ShareButtons';
 import type { Score, Hobby } from '@/lib/hobby-types';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function HobbyResultPage() {
   const router = useRouter();
@@ -42,7 +43,8 @@ export default function HobbyResultPage() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900">
-        <div className="text-center">
+        
+      <AdOverlay /><div className="text-center">
           <div className="mb-4 text-6xl animate-bounce">🎯</div>
           <p className="text-lg text-gray-600 dark:text-gray-400">결과를 분석 중...</p>
         </div>

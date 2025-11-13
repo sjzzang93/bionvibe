@@ -66,7 +66,8 @@ export default function HealthSupplementRecommend() {
 
   return (
     <PremiumLayout theme="purple">
-      <div className="py-8 px-2 sm:px-4 md:py-12">
+      
+        <AdOverlay /><div className="py-8 px-2 sm:px-4 md:py-12">
         <div className="max-w-6xl mx-auto">
           <PremiumHeader 
             icon="💊"

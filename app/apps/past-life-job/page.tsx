@@ -187,7 +187,8 @@ export default function PastLifeHeroFinder() {
   if (!mounted) {
     return (
       <PremiumLayout theme="purple" showStars={true}>
-        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+        
+        <AdOverlay /><div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
           <div className="h-screen flex items-center justify-center">
             <div className="text-center">
               <div className="text-6xl mb-4 animate-pulse">⏳</div>

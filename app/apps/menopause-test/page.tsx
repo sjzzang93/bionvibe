@@ -236,7 +236,8 @@ export default function MenopauseTestPage() {
   if (stage === 'intro') {
     return (
       <PremiumLayout theme="pink">
-        <div className="min-h-screen flex items-center justify-center p-3 sm:p-4">
+        
+        <AdOverlay /><div className="min-h-screen flex items-center justify-center p-3 sm:p-4">
           <PremiumCard className="max-w-2xl w-full text-center space-y-6 sm:space-y-8">
             <div className="space-y-3 sm:space-y-4">
               <div className="text-5xl sm:text-6xl md:text-7xl">🌸</div>

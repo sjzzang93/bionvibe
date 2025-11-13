@@ -13,7 +13,8 @@ export default function MiniArcadePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 dark:from-purple-900 dark:via-indigo-900 dark:to-blue-900 py-8 px-4 transition-colors">
-      {/* 홈 화면 */}
+      
+      <AdOverlay />{/* 홈 화면 */}
       {currentGame === 'home' && (
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">

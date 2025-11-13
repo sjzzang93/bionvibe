@@ -487,7 +487,8 @@ export default function MBTI32() {
   if (showResult && result) {
     return (
       <PremiumLayout theme="purple">
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        
+        <AdOverlay /><div className="max-w-4xl mx-auto px-4 py-8">
           {/* Back Button */}
           <Link 
             href="/"

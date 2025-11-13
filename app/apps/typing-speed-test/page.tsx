@@ -84,7 +84,8 @@ export default function TypingSpeedTestPage() {
 
   return (
     <PremiumLayout theme="blue">
-      <div className="py-8 px-2 sm:px-4 md:py-12">
+      
+        <AdOverlay /><div className="py-8 px-2 sm:px-4 md:py-12">
         <div className="max-w-4xl mx-auto">
           <PremiumHeader 
             icon="⌨️"

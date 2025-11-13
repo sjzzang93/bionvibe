@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function LimitPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-center px-6">
-      <div className="max-w-lg w-full rounded-3xl border border-slate-700/60 bg-slate-900/70 p-10 shadow-2xl backdrop-blur">
+      
+      <AdOverlay /><div className="max-w-lg w-full rounded-3xl border border-slate-700/60 bg-slate-900/70 p-10 shadow-2xl backdrop-blur">
         <div className="text-center">
           <div className="text-6xl mb-4">🕑</div>
           <h1 className="text-3xl font-bold mb-4">오늘의 실험은 이미 완료했어요</h1>

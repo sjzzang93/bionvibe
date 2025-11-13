@@ -184,7 +184,8 @@ export default function WeatherOutfit() {
   if (result) {
     return (
       <PremiumLayout theme="blue" showStars={true}>
-        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+        
+        <AdOverlay /><div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
           <PremiumCard gradient hover>
             <div className="text-center mb-6 sm:mb-8">
               <h1 className="text-6xl sm:text-5xl mb-4 drop-shadow-2xl animate-bounce-slow">{result.emoji}</h1>

@@ -25,7 +25,8 @@ export default function CarWarningLightsPage() {
 
   return (
     <PremiumLayout theme="blue">
-      <div className="py-8 px-2 sm:px-4 md:py-12" suppressHydrationWarning>
+      
+        <AdOverlay /><div className="py-8 px-2 sm:px-4 md:py-12" suppressHydrationWarning>
         <div className="max-w-7xl mx-auto" suppressHydrationWarning>
           <PremiumHeader 
             icon="🚗"

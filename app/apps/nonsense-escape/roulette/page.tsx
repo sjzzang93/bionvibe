@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import AdOverlay from '@/app/components/AdOverlay';
 
 type RouletteSegment = {
   id: string;
@@ -167,7 +168,8 @@ export default function RoulettePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-      <div className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-12 sm:px-8 lg:px-12">
+      
+      <AdOverlay /><div className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 py-12 sm:px-8 lg:px-12">
         <header className="mb-10 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">Bionvive Roulette Lab</p>
           <h1 className="mt-3 text-4xl font-bold sm:text-5xl">룰렛을 돌려 행운을 확인하세요</h1>

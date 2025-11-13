@@ -88,7 +88,8 @@ function ResultContent() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-900 flex items-center justify-center">
-        <div className="text-center">
+        
+      <AdOverlay /><div className="text-center">
           <div className="relative w-32 h-32 mx-auto mb-8">
             <div className="absolute inset-0 rounded-full border-4 border-purple-500/30"></div>
             <div className="absolute inset-0 rounded-full border-4 border-t-purple-500 animate-spin"></div>

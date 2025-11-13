@@ -65,7 +65,8 @@ export default function FlashcardPage() {
   if (!selectedSet) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 py-8 px-4">
-        <div className="max-w-3xl mx-auto">
+        
+      <AdOverlay /><div className="max-w-3xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-extrabold text-center text-white mb-4">
             📚 영어단어 플래시카드
           </h1>

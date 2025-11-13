@@ -188,7 +188,8 @@ export default function EmotionColorDiary() {
   if (isAuthLoading) {
     return (
       <PremiumLayout theme="pink">
-        <div className="max-w-6xl mx-auto px-4 py-8">
+        
+        <AdOverlay /><div className="max-w-6xl mx-auto px-4 py-8">
           <div className="text-center">
             <div className="text-6xl mb-4 animate-bounce">⏳</div>
             <p className="text-white text-xl">로딩 중...</p>

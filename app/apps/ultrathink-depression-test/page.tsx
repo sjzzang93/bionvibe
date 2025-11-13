@@ -301,7 +301,8 @@ export default function UltraThinkDepressionTest() {
 
   return (
     <PremiumLayout theme="purple">
-      {/* 3D 배경 */}
+      
+        <AdOverlay />{/* 3D 배경 */}
       <div
         ref={canvasRef}
         className="fixed inset-0 z-0 opacity-30"

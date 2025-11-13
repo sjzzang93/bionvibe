@@ -6,6 +6,7 @@ import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import Link from 'next/link';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 
 import RelatedApps from '@/app/components/RelatedApps';
@@ -113,7 +114,8 @@ export default function ElectricityCalculator() {
 
   return (
     <PremiumLayout>
-      {/* 헤더 */}
+      
+        <AdOverlay />{/* 헤더 */}
       <div className="text-center mb-8 sm:mb-12">
         {/* 피카츄 얼굴 */}
         <div className="flex justify-center items-center gap-3 mb-4">

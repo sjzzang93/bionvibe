@@ -71,7 +71,8 @@ export default function QuitSmokingChallenge() {
   if (!mounted) {
     return (
       <PremiumLayout theme="green">
-        <div className="py-8 px-2 sm:px-4 md:py-12">
+        
+        <AdOverlay /><div className="py-8 px-2 sm:px-4 md:py-12">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-center min-h-[60vh]">
               <div className="text-center">

@@ -445,7 +445,8 @@ export default function ColorPsychology() {
   if (result) {
     return (
       <PremiumLayout theme="pink">
-        <div className="mx-auto max-w-[1000px] px-4 py-8">
+        
+        <AdOverlay /><div className="mx-auto max-w-[1000px] px-4 py-8">
           {/* Back Button */}
           <Link 
             href="/"

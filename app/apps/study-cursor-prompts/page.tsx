@@ -13,7 +13,8 @@ function CursorPromptsContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-violet-50 p-3 sm:p-4 md:p-8">
-      <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
+      
+      <AdOverlay /><div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* 헤더 */}
         <div className="text-center space-y-2">
           <h1 className="text-2xl sm:text-base sm:text-2xl md:text-4xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">

@@ -6,6 +6,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 import PremiumButton from '@/app/components/ui/PremiumButton';
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSenseInArticle from '@/app/components/AdSenseInArticle';
+import AdOverlay from '@/app/components/AdOverlay';
 
 type Category = 'physical' | 'emotional' | 'parent' | 'peer' | 'academic' | 'identity' | 'romance' | 'independence';
 
@@ -295,54 +296,57 @@ export default function AdolescenceTestPage() {
   if (stage === 'intro') {
     return (
       <PremiumLayout theme="purple">
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <PremiumCard className="max-w-2xl w-full text-center space-y-8">
-            <div className="space-y-4">
-              <div className="text-6xl">🧠</div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                나의 사춘기 지수 체크
-              </h1>
-              <p className="text-xl text-purple-200">
-                청소년기의 나를 이해하는 첫걸음
-              </p>
-            </div>
-
-            <div className="flex justify-center gap-8 text-purple-300">
-              <div>
-                <div className="text-2xl font-bold text-purple-100">⏱️ 약 5분</div>
-                <div className="text-sm">소요 시간</div>
+        <AdOverlay />
+        <div className="min-h-screen p-4">
+          <div className="flex items-center justify-center min-h-[calc(100vh-8rem)]">
+            <PremiumCard className="max-w-2xl w-full text-center space-y-8">
+              <div className="space-y-4">
+                <div className="text-6xl">🧠</div>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  나의 사춘기 지수 체크
+                </h1>
+                <p className="text-xl text-purple-200">
+                  청소년기의 나를 이해하는 첫걸음
+                </p>
               </div>
-              <div className="w-px bg-purple-500/30"></div>
-              <div>
-                <div className="text-2xl font-bold text-purple-100">32개</div>
-                <div className="text-sm">질문</div>
-              </div>
-            </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
-              {Object.entries(CATEGORIES).map(([key, cat]) => (
-                <div key={key} className="bg-white/5 rounded-lg p-3 border border-white/10">
-                  <div className="text-2xl mb-1">{cat.icon}</div>
-                  <div className="text-purple-100 font-medium">{cat.name}</div>
+              <div className="flex justify-center gap-8 text-purple-300">
+                <div>
+                  <div className="text-2xl font-bold text-purple-100">⏱️ 약 5분</div>
+                  <div className="text-sm">소요 시간</div>
                 </div>
-              ))}
-            </div>
+                <div className="w-px bg-purple-500/30"></div>
+                <div>
+                  <div className="text-2xl font-bold text-purple-100">32개</div>
+                  <div className="text-sm">질문</div>
+                </div>
+              </div>
 
-            <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4 text-sm text-purple-200">
-              <p className="font-medium mb-2">📋 안내사항</p>
-              <ul className="text-left space-y-1 text-xs">
-                <li>• 본 검사는 전문적인 진단 도구가 아니며, 참고용으로만 사용하시기 바랍니다</li>
-                <li>• 심각한 정서적 어려움이 있다면 전문가의 도움을 받으시기 바랍니다</li>
-                <li>• 모든 데이터는 로컬에만 저장되며 외부로 전송되지 않습니다</li>
-              </ul>
-            </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+                {Object.entries(CATEGORIES).map(([key, cat]) => (
+                  <div key={key} className="bg-white/5 rounded-lg p-3 border border-white/10">
+                    <div className="text-2xl mb-1">{cat.icon}</div>
+                    <div className="text-purple-100 font-medium">{cat.name}</div>
+                  </div>
+                ))}
+              </div>
 
-            <PremiumButton onClick={() => setStage('test')} className="w-full py-6 text-lg">
-              검사 시작하기 🚀
-            </PremiumButton>
-          </PremiumCard>
+              <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-4 text-sm text-purple-200">
+                <p className="font-medium mb-2">📋 안내사항</p>
+                <ul className="text-left space-y-1 text-xs">
+                  <li>• 본 검사는 전문적인 진단 도구가 아니며, 참고용으로만 사용하시기 바랍니다</li>
+                  <li>• 심각한 정서적 어려움이 있다면 전문가의 도움을 받으시기 바랍니다</li>
+                  <li>• 모든 데이터는 로컬에만 저장되며 외부로 전송되지 않습니다</li>
+                </ul>
+              </div>
 
-          <div className="mt-8">
+              <PremiumButton onClick={() => setStage('test')} className="w-full py-6 text-lg">
+                검사 시작하기 🚀
+              </PremiumButton>
+            </PremiumCard>
+          </div>
+
+          <div className="mt-8 max-w-2xl mx-auto pb-8">
             <RelatedApps currentAppSlug="adolescence-test" />
           </div>
         </div>

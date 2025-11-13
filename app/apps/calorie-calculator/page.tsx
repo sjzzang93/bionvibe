@@ -234,7 +234,8 @@ export default function CalorieCalculatorPage() {
 
   return (
     <PremiumLayout theme="green" showStars={true}>
-      <div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
+      
+        <AdOverlay /><div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
         <PremiumCard gradient hover>
           <div className="text-center mb-6 sm:mb-8">
             <h1 className="text-6xl sm:text-7xl font-bold mb-4 animate-bounce-slow drop-shadow-2xl">🍽️</h1>

@@ -75,7 +75,8 @@ export default function LottoGenerator() {
 
   return (
     <PremiumLayout theme="green">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      
+        <AdOverlay /><div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12 animate-fadeIn">
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-200 via-green-200 to-emerald-200 bg-clip-text text-transparent">

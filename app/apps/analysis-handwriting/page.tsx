@@ -237,7 +237,8 @@ export default function HandwritingAnalysisPage() {
 
   return (
     <PremiumLayout theme="purple" showStars={true}>
-      <div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
+      
+        <AdOverlay /><div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
         <header className="text-center mb-6 sm:mb-8">
           <h1 className="text-6xl sm:text-7xl mb-4 animate-bounce-slow drop-shadow-2xl">
             ✍️

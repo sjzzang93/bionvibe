@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { useParallax } from "../lib/use-parallax";
 
 const Confetti = dynamic(() => import("react-confetti"), { ssr: false });
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function ResultPage() {
   const [showConfetti, setShowConfetti] = useState(true);
@@ -38,7 +39,8 @@ export default function ResultPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-4 text-white sm:p-6">
-      {showConfetti && (
+      
+      <AdOverlay />{showConfetti && (
         <Confetti
           width={confettiWidth}
           height={confettiHeight}

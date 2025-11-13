@@ -157,7 +157,8 @@ export default function AirQuality() {
 
     return (
       <main className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 dark:from-blue-900 dark:via-cyan-900 dark:to-teal-900 transition-colors">
-        <div className="mx-auto max-w-[600px] px-4 py-6">
+        
+      <AdOverlay /><div className="mx-auto max-w-[600px] px-4 py-6">
 
           <section className="bg-white rounded sm:rounded-lg md:rounded-2xl shadow-xl p-6 border border-cyan-200">
             <header className="text-center mb-6">

@@ -174,7 +174,8 @@ export default function RandomWheel() {
 
   return (
     <PremiumLayout theme="orange">
-      <div className="max-w-6xl mx-auto px-4 py-4 md:py-8">
+      
+        <AdOverlay /><div className="max-w-6xl mx-auto px-4 py-4 md:py-8">
         {/* Header */}
         <div className="text-center mb-6 md:mb-8 animate-fadeIn">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-2 md:mb-4 bg-gradient-to-r from-orange-200 via-yellow-200 to-red-200 bg-clip-text text-transparent px-2">

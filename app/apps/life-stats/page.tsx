@@ -89,7 +89,8 @@ export default function LifeStats() {
 
   return (
     <PremiumLayout theme="blue">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      
+        <AdOverlay /><div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12 animate-fadeIn">
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200 bg-clip-text text-transparent">

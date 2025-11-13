@@ -240,7 +240,8 @@ export default function EmotionDiaryPage() {
   };
 
   if (!mounted) {
-    return <PremiumLayout theme="pink" showStars={true}><div className="h-screen"></div></PremiumLayout>;
+    return <PremiumLayout theme="pink" showStars={true}>
+        <AdOverlay /><div className="h-screen"></div></PremiumLayout>;
   }
 
   return (

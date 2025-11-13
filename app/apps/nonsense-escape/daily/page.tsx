@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParallax } from "../lib/use-parallax";
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function DailyPage() {
   const [timeLeft, setTimeLeft] = useState({ hours: 12, minutes: 34, seconds: 56 });
@@ -22,7 +23,8 @@ export default function DailyPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden">
-      {/* 3D Background */}
+      
+      <AdOverlay />{/* 3D Background */}
       <div className="fixed inset-0 pointer-events-none">
         <div 
           className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-purple-500/10"

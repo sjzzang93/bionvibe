@@ -163,7 +163,8 @@ export default function EyeTest() {
   if (result) {
     return (
       <PremiumLayout theme="blue" showStars={true}>
-        <div className="mx-auto max-w-[600px] px-4 py-6">
+        
+        <AdOverlay /><div className="mx-auto max-w-[600px] px-4 py-6">
           <PremiumCard gradient hover>
             <div className="text-center mb-6">
               <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-xl">👁️</h1>

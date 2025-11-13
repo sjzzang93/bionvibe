@@ -13,7 +13,8 @@ export default function PuzzleGamesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-600 dark:via-purple-600 dark:to-pink-600 py-8 px-4 transition-colors">
-      {/* 애드센스 상단 */}
+      
+      <AdOverlay />{/* 애드센스 상단 */}
       <div className="max-w-4xl mx-auto mb-6">
         <div className="bg-white/10 rounded-xl p-4">
           

@@ -128,7 +128,8 @@ export default function HabitTrackerPage() {
   if (!currentUser) {
     return (
       <PremiumLayout theme="green" showStars={true}>
-        <div className="flex items-center justify-center min-h-screen px-4 py-8">
+        
+        <AdOverlay /><div className="flex items-center justify-center min-h-screen px-4 py-8">
           <PremiumCard hover className="max-w-md w-full">
             <div className="text-center mb-8">
               <div className="text-6xl mb-4 animate-bounce-slow">🎯</div>

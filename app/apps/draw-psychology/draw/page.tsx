@@ -160,7 +160,8 @@ function DrawCanvas() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      <div className="container mx-auto px-4 py-6 h-screen flex flex-col">
+      
+      <AdOverlay /><div className="container mx-auto px-4 py-6 h-screen flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">

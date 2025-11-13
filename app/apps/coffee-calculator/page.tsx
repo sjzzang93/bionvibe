@@ -236,7 +236,8 @@ export default function CoffeeCalculator() {
   if (result) {
     return (
       <PremiumLayout theme="orange" showStars={true}>
-        <div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
+        
+        <AdOverlay /><div className="mx-auto max-w-[600px] px-4 py-6 sm:py-8">
           <PremiumCard gradient hover>
             <header className="text-center mb-6 sm:mb-8">
               <h1 className="text-6xl sm:text-7xl font-bold mb-4 animate-bounce-slow drop-shadow-2xl">☕</h1>

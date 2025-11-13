@@ -212,7 +212,8 @@ export default function DailyChallenge() {
   if (!todayChallenge) {
     return (
       <PremiumLayout theme="green">
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        
+        <AdOverlay /><div className="max-w-4xl mx-auto px-4 py-8">
           <div className="text-center">
             <div className="text-7xl mb-4 animate-bounce-slow">🎯</div>
             <p className="text-white text-xl">오늘의 챌린지를 불러오는 중...</p>

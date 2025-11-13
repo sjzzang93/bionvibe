@@ -8,6 +8,7 @@ import ComicNarratorFeed from "../components/comic-narrator-feed";
 import ProgressTracker from "../components/progress-tracker";
 import Timer from "../components/timer";
 import { useParallax } from "../lib/use-parallax";
+import AdOverlay from '@/app/components/AdOverlay';
 
 type EntryStatus = "checking" | "allowed" | "blocked";
 
@@ -81,7 +82,8 @@ export default function QuizPage() {
   if (entryStatus === "checking") {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <div className="text-center">
+        
+      <AdOverlay /><div className="text-center">
           <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="mt-4 text-xl text-slate-200">참여 가능 여부를 확인하는 중...</p>
         </div>

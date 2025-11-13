@@ -456,7 +456,8 @@ export default function GiftFinderPage() {
 
   return (
     <PremiumLayout theme="pink" showStars={true}>
-      <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8">
+      
+        <AdOverlay /><div className="max-w-4xl mx-auto px-4 py-6 sm:py-8">
         {/* 헤더 */}
         <PremiumCard hover gradient className="text-center mb-6 sm:mb-8">
           <div className="text-6xl sm:text-7xl mb-4 animate-bounce-slow">🎁</div>
