@@ -5,8 +5,8 @@ import { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Sparkles, Clock, CheckCircle, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import {
 import AdOverlay from '@/app/components/AdOverlay';
+import {
   TestLevel,
   getQuestionsByLevel,
   TEST_CONFIGS,

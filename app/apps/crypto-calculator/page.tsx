@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
-import {
 import AdOverlay from '@/app/components/AdOverlay';
+import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
