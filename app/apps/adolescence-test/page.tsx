@@ -409,11 +409,11 @@ export default function AdolescenceTestPage() {
 
     return (
       <PremiumLayout theme="purple">
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <div className="max-w-2xl w-full space-y-6">
+        <div className="min-h-screen flex items-center justify-center p-3 sm:p-4">
+          <div className="max-w-2xl w-full space-y-4 sm:space-y-6">
             {/* 진행바 */}
             <div className="space-y-2">
-              <div className="flex justify-between text-sm text-purple-300">
+              <div className="flex justify-between text-xs sm:text-sm text-purple-300">
                 <span>진행률</span>
                 <span className="font-bold">{currentQuestion + 1} / {QUESTIONS.length}</span>
               </div>
@@ -425,44 +425,44 @@ export default function AdolescenceTestPage() {
               </div>
             </div>
 
-            <PremiumCard className="space-y-6">
+            <PremiumCard className="space-y-4 sm:space-y-6">
               {/* 카테고리 */}
-              <div className="flex items-center gap-3 pb-4 border-b border-white/10">
-                <div className="text-3xl">{category.icon}</div>
+              <div className="flex items-center gap-2 sm:gap-3 pb-3 sm:pb-4 border-b border-white/10">
+                <div className="text-2xl sm:text-3xl">{category.icon}</div>
                 <div>
-                  <div className="font-bold text-purple-100">{category.name}</div>
-                  <div className="text-sm text-purple-300">{category.description}</div>
+                  <div className="font-bold text-sm sm:text-base text-purple-100">{category.name}</div>
+                  <div className="text-xs sm:text-sm text-purple-300">{category.description}</div>
                 </div>
               </div>
 
               {/* 질문 */}
               <div>
-                <div className="text-sm text-purple-400 mb-2">Q{currentQuestion + 1}</div>
-                <h2 className="text-2xl font-bold text-white mb-8">{question.text}</h2>
+                <div className="text-xs sm:text-sm text-purple-400 mb-2">Q{currentQuestion + 1}</div>
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-6 sm:mb-8 leading-tight">{question.text}</h2>
 
                 {/* 답변 버튼들 */}
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {SCALE_OPTIONS.map(option => (
                     <button
                       key={option.value}
                       onClick={() => handleAnswer(option.value)}
-                      className={`w-full p-4 rounded-xl border-2 transition-all text-left ${
+                      className={`w-full p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 transition-all text-left ${
                         answers[question.id] === option.value
                           ? 'border-purple-400 bg-purple-500/20 text-white'
                           : 'border-white/10 bg-white/5 text-purple-200 hover:border-purple-500/50 hover:bg-white/10'
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                           answers[question.id] === option.value
                             ? 'border-purple-400 bg-purple-400'
                             : 'border-white/30'
                         }`}>
                           {answers[question.id] === option.value && (
-                            <div className="w-3 h-3 rounded-full bg-white"/>
+                            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white"/>
                           )}
                         </div>
-                        <span className="font-medium">{option.label}</span>
+                        <span className="font-medium text-sm sm:text-base">{option.label}</span>
                       </div>
                     </button>
                   ))}
@@ -502,19 +502,19 @@ export default function AdolescenceTestPage() {
 
   return (
     <PremiumLayout theme="purple">
-      <div className="min-h-screen p-4 py-12">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <div className="min-h-screen p-3 sm:p-4 py-8 sm:py-12">
+        <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
           {/* 총점 */}
-          <PremiumCard className="text-center space-y-6">
-            <div className="text-8xl">{result.emoji}</div>
+          <PremiumCard className="text-center space-y-4 sm:space-y-6">
+            <div className="text-6xl sm:text-7xl md:text-8xl">{result.emoji}</div>
             <div>
-              <div className={`text-6xl font-bold bg-gradient-to-r ${result.color} bg-clip-text text-transparent mb-2`}>
+              <div className={`text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r ${result.color} bg-clip-text text-transparent mb-2`}>
                 {totalScore}점
               </div>
-              <div className="text-sm text-purple-400">총 160점 중</div>
+              <div className="text-xs sm:text-sm text-purple-400">총 160점 중</div>
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">{result.title}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{result.title}</h2>
               {result.warning && (
                 <div className="inline-block px-4 py-2 bg-red-500/20 border border-red-500/30 rounded-full text-red-300 font-bold">
                   {result.warning}
