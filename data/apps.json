@@ -1408,22 +1408,6 @@
       ]
     },
     {
-      "id": "installation-scheduler",
-      "name": "📺 TV 설치 스케줄러",
-      "slug": "installation-scheduler",
-      "icon": "📺",
-      "description": "TV 설치 일정 관리 전문 앱. Galaxy Calendar 스타일 UI, 안드로이드/iOS 캘린더 연동, 4중 백업 시스템. 재부팅 후에도 데이터 유지. APK 다운로드 가능.",
-      "categoryId": "learning-tools",
-      "url": "/apps/installation-scheduler",
-      "image": "https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&auto=format&fit=crop",
-      "createdAt": "2025-11-04",
-      "hidden": true,
-      "relatedApps": [
-        "dday-counter",
-        "calorie-calc"
-      ]
-    },
-    {
       "id": "adolescence-test",
       "name": "🧠 사춘기 자가진단 검사",
       "slug": "adolescence-test",

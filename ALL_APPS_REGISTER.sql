@@ -276,3 +276,6 @@ DO UPDATE SET
   url = EXCLUDED.url,
   image = EXCLUDED.image,
   hidden = EXCLUDED.hidden;
+
+-- TV 설치 스케줄러 삭제
+DELETE FROM apps WHERE id = 'installation-scheduler';
