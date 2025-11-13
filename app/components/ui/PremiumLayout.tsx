@@ -78,9 +78,16 @@ export default function PremiumLayout({
 
       {/* Content with parallax */}
       <div className="relative z-10" style={{ transformStyle: 'preserve-3d' }}>
+        {/* 광고 - 상단 */}
+        <div className="max-w-4xl mx-auto px-4 pt-8 pb-4">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
+            <AdSense className="min-h-[250px]" />
+          </div>
+        </div>
+
         {children}
 
-        {/* 광고 - 결과 확인 후 */}
+        {/* 광고 - 하단 */}
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
             <AdSense className="min-h-[250px]" />

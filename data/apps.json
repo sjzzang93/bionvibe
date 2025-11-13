@@ -1422,6 +1422,24 @@
         "dday-counter",
         "calorie-calc"
       ]
+    },
+    {
+      "id": "adolescence-test",
+      "name": "🧠 사춘기 자가진단 검사",
+      "slug": "adolescence-test",
+      "icon": "🧠",
+      "description": "청소년기의 나를 이해하는 첫걸음. 32개 질문으로 신체·정서·관계 변화를 종합 분석하고 맞춤형 조언을 제공합니다.",
+      "categoryId": "fortune-mind",
+      "url": "/apps/adolescence-test",
+      "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop",
+      "createdAt": "2025-11-13",
+      "hidden": false,
+      "relatedApps": [
+        "psychopath-test",
+        "sociopath-test",
+        "adhd-test",
+        "ultrathink-depression-test"
+      ]
     }
   ]
 }
