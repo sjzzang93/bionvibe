@@ -465,7 +465,7 @@ export default function MenopauseTestPage() {
           </PremiumCard>
 
           {/* 추천 검진 */}
-          {result.checkups && (
+          {'checkups' in result && result.checkups && (
             <PremiumCard>
               <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">🔬 받아야 할 검사</h3>
               <div className="space-y-2 sm:space-y-3">
