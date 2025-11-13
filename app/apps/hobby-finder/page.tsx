@@ -5,6 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 import { clearState } from '@/lib/hobby-storage';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function HobbyFinderPage() {
   const handleStart = () => {
@@ -13,6 +14,7 @@ export default function HobbyFinderPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900">
+      <AdOverlay />
       <div className="container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="mb-16 text-center">

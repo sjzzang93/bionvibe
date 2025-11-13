@@ -5,6 +5,7 @@ import PremiumCard from '@/app/components/ui/PremiumCard';
 
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 type MenuItem = {
   name: string;
   emoji: string;
@@ -108,6 +109,7 @@ export default function BreakfastWhatToEatPage() {
 
   return (
     <div className="min-h-[100dvh] w-full bg-gradient-to-b from-orange-50 to-yellow-50 dark:from-zinc-900 dark:to-zinc-900 flex items-center justify-center px-4 py-10">
+      <AdOverlay />
       <div className="w-full max-w-md">
         <PremiumCard className="relative rounded-3xl shadow-2xl [transform:translateZ(0)] bg-white/80 dark:bg-zinc-950/70 backdrop-blur-md border border-white/40 dark:border-white/10">
           {/* 헤더 */}

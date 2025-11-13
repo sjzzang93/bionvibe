@@ -6,6 +6,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, Home, TreePine, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import AdOverlay from '@/app/components/AdOverlay';
 
 type DrawType = "house" | "tree" | "person"
 
@@ -45,6 +46,7 @@ export default function DrawPsychologyPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-pink-900 relative overflow-hidden">
+      <AdOverlay />
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>

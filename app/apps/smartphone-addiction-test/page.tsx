@@ -598,8 +598,6 @@ export default function SmartphoneAddictionTestPage() {
             )}
           </div>
         </div>
-      </div>
-    </div>
 
         {/* 광고 */}
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -607,6 +605,7 @@ export default function SmartphoneAddictionTestPage() {
             <AdSense className="min-h-[250px]" />
           </div>
         </div>
-
-  );
+      </div>
+    </div>
+);
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 // 꿈 키워드 해석
 const DREAM_KEYWORDS = {
@@ -131,6 +132,7 @@ export default function DreamMap() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 py-12 px-4">
+      <AdOverlay />
       <div className="max-w-2xl mx-auto">
         <AnimatePresence mode="wait">
           {step === 'input' ? (

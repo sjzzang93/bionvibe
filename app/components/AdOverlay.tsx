@@ -9,15 +9,32 @@ interface AdOverlayProps {
 
 export default function AdOverlay({ onClose }: AdOverlayProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // 500ms 후에 광고 표시
-    const timer = setTimeout(() => {
+    const showTimer = setTimeout(() => {
       setIsVisible(true);
     }, 500);
 
-    return () => clearTimeout(timer);
-  }, []);
+    // 2초 후에 로딩 상태 해제
+    const loadTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    // 5초 후에 자동으로 닫기 (광고가 안 뜰 경우 대비)
+    const autoCloseTimer = setTimeout(() => {
+      if (isLoading) {
+        setIsVisible(false);
+      }
+    }, 5000);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(loadTimer);
+      clearTimeout(autoCloseTimer);
+    };
+  }, [isLoading]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -64,7 +81,15 @@ export default function AdOverlay({ onClose }: AdOverlayProps) {
               광고를 클릭하거나 X 버튼을 눌러 닫으세요
             </p>
           </div>
-          <div onClick={handleClose}>
+          <div className="relative" onClick={handleClose}>
+            {isLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg min-h-[280px]">
+                <div className="text-center space-y-3">
+                  <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">광고 로딩 중...</p>
+                </div>
+              </div>
+            )}
             <AdSense className="min-h-[280px] cursor-pointer" />
           </div>
         </div>

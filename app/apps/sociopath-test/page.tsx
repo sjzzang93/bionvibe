@@ -228,8 +228,6 @@ const TokenCounter: React.FC<{ currentCount: number, maxCount: number }> = ({ cu
             style={{ width: `${(displayCount / maxCount) * 100}%` }}
           />
         </div>
-      </div>
-    </div>
 
         {/* 광고 */}
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -237,8 +235,9 @@ const TokenCounter: React.FC<{ currentCount: number, maxCount: number }> = ({ cu
             <AdSense className="min-h-[250px]" />
           </div>
         </div>
-
-  );
+      </div>
+    </div>
+);
 };
 
 const SociopathTest: React.FC = () => {

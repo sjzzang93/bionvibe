@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 interface Property {
   id: string;
@@ -232,6 +233,7 @@ export default function RealEstateTracker() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-900 via-cyan-900 to-blue-900 text-white py-8 px-4">
+      <AdOverlay />
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <motion.div

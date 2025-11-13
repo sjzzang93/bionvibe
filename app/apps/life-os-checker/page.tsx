@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 // 질문 인터페이스
 interface Question {
@@ -110,6 +111,7 @@ const ScoreBar = ({ label, score, emoji }: { label: string; score: number; emoji
 
   return (
     <div className="bg-slate-800/50 rounded-xl p-4 backdrop-blur-sm border border-white/10">
+      <AdOverlay />
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className="text-2xl">{emoji}</span>

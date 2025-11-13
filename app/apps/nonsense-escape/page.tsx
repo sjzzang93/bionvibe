@@ -5,11 +5,13 @@ import { useParallax } from "./lib/use-parallax";
 
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 export default function NonsenseEscapeLanding() {
   const { mousePos, enabled: parallaxEnabled } = useParallax({ maxOffset: 20 });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white overflow-hidden">
+      <AdOverlay />
       {/* 3D Background Layers */}
       <div className="fixed inset-0 pointer-events-none">
         <div 

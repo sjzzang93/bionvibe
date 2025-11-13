@@ -4,12 +4,14 @@ import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
 import { Suspense, useState } from 'react'
 import CopyButton from '@/app/components/glossary/CopyButton'
+import AdOverlay from '@/app/components/AdOverlay';
 
 function DevVocabContent() {
   const [activeTab, setActiveTab] = useState('vocab');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 p-3 sm:p-4 md:p-8">
+      <AdOverlay />
       <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* 헤더 */}
         <div className="text-center space-y-2">

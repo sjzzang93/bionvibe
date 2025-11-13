@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 interface Animal {
   id: string;
   name: string;
@@ -150,6 +151,7 @@ export default function AnimalFaceMatchPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 relative overflow-hidden">
+      <AdOverlay />
       {/* 배경 효과 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 left-10 w-72 h-72 bg-yellow-300/30 rounded-full blur-3xl animate-pulse"></div>

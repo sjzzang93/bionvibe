@@ -5,6 +5,7 @@ import AppFooter from "@/app/components/AppFooter";
 import PremiumLayout from '@/app/components/ui/PremiumLayout';
 import PremiumCard from '@/app/components/ui/PremiumCard';
 import Link from 'next/link';
+import AdSense from '@/app/components/AdSense';
 
 
 import RelatedApps from '@/app/components/RelatedApps';

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 // 난이도 등급
 type DifficultyLevel = 'easy' | 'normal' | 'hard' | 'hell';
@@ -503,6 +504,7 @@ export default function LifeDifficultyMeter() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
+      <AdOverlay />
       <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 max-w-4xl">
         <AnimatePresence mode="wait">
           {/* 인트로 */}

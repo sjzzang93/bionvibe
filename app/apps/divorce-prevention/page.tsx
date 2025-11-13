@@ -7,6 +7,7 @@ import { Heart, AlertTriangle, Shield, ArrowLeft, ArrowRight } from 'lucide-reac
 import { QUESTIONS, DOMAINS, SAFETY_HOTLINES, type Answer, type TestLevel } from '@/lib/divorce-prevention-data';
 import { calculateScore, getTopVulnerableAreas, getRecommendationsByTier } from '@/lib/divorce-prevention-score';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function DivorcePreventionPage() {
   const [testLevel, setTestLevel] = useState<TestLevel | null>(null);
@@ -60,6 +61,7 @@ export default function DivorcePreventionPage() {
   if (!testLevel) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900 py-12 px-4">
+        <AdOverlay />
         <div className="max-w-4xl mx-auto">
           <Link href="/" className="text-purple-600 dark:text-purple-400 hover:text-purple-700 mb-6 inline-flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />

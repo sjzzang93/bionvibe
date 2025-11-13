@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, Sparkles, Clock, CheckCircle, Heart } from '
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
+import AdOverlay from '@/app/components/AdOverlay';
   TestLevel,
   getQuestionsByLevel,
   TEST_CONFIGS,
@@ -87,6 +88,7 @@ export default function InnerDialogPage() {
   if (stage === 'intro') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-6 sm:py-12 px-4">
+        <AdOverlay />
         <div className="max-w-4xl mx-auto">
           {/* 헤더 */}
           <div className="text-center mb-8 sm:mb-12">

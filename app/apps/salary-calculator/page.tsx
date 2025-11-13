@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 export default function SalaryCalculatorPage() {
   const [monthlySalary, setMonthlySalary] = useState<string>('');
@@ -77,6 +78,7 @@ export default function SalaryCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-8 px-4">
+      <AdOverlay />
       <div className="max-w-2xl mx-auto">
         {/* 헤더 */}
         <div className="text-center mb-8">

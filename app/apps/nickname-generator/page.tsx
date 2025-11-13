@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 // 닉네임 생성 데이터
 const NICKNAME_PARTS = {
   // 아기 이름용
@@ -140,6 +141,7 @@ export default function NicknameGeneratorPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 relative overflow-hidden">
+      <AdOverlay />
       {/* 배경 장식 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse"></div>

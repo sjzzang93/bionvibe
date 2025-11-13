@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, RefreshCw, Clock, Calendar } from 'lucide-react';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 interface Article {
   title: string;
@@ -83,6 +84,7 @@ export default function NewsBriefingPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+        <AdOverlay />
         <div className="text-center">
           <RefreshCw className="w-16 h-16 animate-spin text-neutral-800 mx-auto mb-4" />
           <p className="text-2xl font-bold text-neutral-900">뉴스 불러오는 중...</p>

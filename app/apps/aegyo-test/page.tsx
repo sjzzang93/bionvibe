@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 type Question = {
   id: number;
@@ -362,6 +363,7 @@ export default function AegyoTestPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8 px-4">
+      <AdOverlay />
       <div className="max-w-2xl mx-auto">
         {/* 진행률 */}
         <div className="mb-8">
@@ -423,8 +425,6 @@ export default function AegyoTestPage() {
         <div className="text-center text-sm text-gray-500 dark:text-gray-400">
           솔직하게 답변해주세요! 😊
         </div>
-      </div>
-    </div>
 
         {/* 광고 */}
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -432,6 +432,7 @@ export default function AegyoTestPage() {
             <AdSense className="min-h-[250px]" />
           </div>
         </div>
-
+      </div>
+    </div>
   );
 }

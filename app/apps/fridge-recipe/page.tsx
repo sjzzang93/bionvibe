@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 interface Recipe {
   id: string;
   name: string;
@@ -235,6 +236,7 @@ export default function FridgeRecipePage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-orange-400 via-red-400 to-pink-500 relative overflow-hidden">
+      <AdOverlay />
       {/* 배경 효과 */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-300/30 rounded-full blur-3xl animate-pulse"></div>

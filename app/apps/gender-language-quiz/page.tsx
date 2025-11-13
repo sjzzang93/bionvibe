@@ -5,6 +5,7 @@ import Link from "next/link";
 import RelatedApps from '@/app/components/RelatedApps';
 import AdSense from '@/app/components/AdSense';
 import {
+import AdOverlay from '@/app/components/AdOverlay';
   femaleQuizPool,
   maleQuizPool,
   mzQuizPool,
@@ -209,6 +210,7 @@ export default function GenderLanguageQuizPage() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-[#05070f] via-[#0f1631] to-[#1d1033] text-white">
+      <AdOverlay />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,0,128,0.12),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(56,189,248,0.12),transparent_40%),radial-gradient(circle_at_50%_80%,rgba(99,102,241,0.12),transparent_40%)]" />
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-10 px-5 py-12 sm:px-10 lg:px-12">

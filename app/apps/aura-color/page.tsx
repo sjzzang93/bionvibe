@@ -11,6 +11,7 @@ import { buildComments } from "@/lib/aura/comments";
 import { Button } from "@/components/ui/button";
 import { Sparkles, History, RotateCcw } from "lucide-react";
 import AdSense from '@/app/components/AdSense';
+import AdOverlay from '@/app/components/AdOverlay';
 
 type LogItem = {
   ts: number; // epoch ms
@@ -106,6 +107,7 @@ export default function Page(){
 
   return (
     <main className="min-h-[100dvh] w-full bg-gradient-to-b from-indigo-900 via-slate-900 to-black text-white relative overflow-hidden">
+      <AdOverlay />
       {/* Subtle animated orbs */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
