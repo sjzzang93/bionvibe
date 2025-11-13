@@ -12,7 +12,7 @@ declare global {
 
 const SCRIPT_ID = "google-translate-script";
 const TARGET_ID = "google_translate_element";
-const INCLUDED_LANGUAGES = "ko,en,fr,es,ja,zh-CN";
+const INCLUDED_LANGUAGES = "ko,en,fr,es,ja,zh-CN,hi";
 
 const shouldHideForPath = (pathname?: string | null) => {
   if (!pathname) return false;
