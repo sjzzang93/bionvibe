@@ -45,10 +45,10 @@ export default function PremiumLayout({
       if (adRef.current) {
         adRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // 2초 후 다시 상단으로 스크롤
+        // 5초 후 다시 상단으로 스크롤
         setTimeout(() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 2000);
+        }, 5000);
       }
     }, 500);
 
