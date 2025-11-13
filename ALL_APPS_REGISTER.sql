@@ -242,3 +242,37 @@ DO UPDATE SET
   url = EXCLUDED.url,
   image = EXCLUDED.image,
   hidden = EXCLUDED.hidden;
+
+-- 6. 사춘기 자가진단 검사
+INSERT INTO apps (
+  id,
+  name,
+  slug,
+  icon,
+  description,
+  category_id,
+  url,
+  image,
+  created_at,
+  hidden
+) VALUES (
+  'adolescence-test',
+  '🧠 사춘기 자가진단 검사',
+  'adolescence-test',
+  '🧠',
+  '청소년기의 나를 이해하는 첫걸음. 32개 질문으로 신체·정서·관계 변화를 종합 분석하고 맞춤형 조언을 제공합니다.',
+  'fortune-mind',
+  '/apps/adolescence-test',
+  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop',
+  '2025-11-13',
+  false
+)
+ON CONFLICT (id)
+DO UPDATE SET
+  name = EXCLUDED.name,
+  description = EXCLUDED.description,
+  category_id = EXCLUDED.category_id,
+  icon = EXCLUDED.icon,
+  url = EXCLUDED.url,
+  image = EXCLUDED.image,
+  hidden = EXCLUDED.hidden;
