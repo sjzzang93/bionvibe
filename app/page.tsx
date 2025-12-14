@@ -2,32 +2,34 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import MainChat from './components/MainChat';
 import HomeContent from './components/HomeContent';
+import Snowfall from './components/Snowfall';
 
 export default function Home() {
   // totalApps는 HomeContent 내부에서 동적으로 계산됨
 
   return (
     <div
-      className="relative min-h-screen overflow-hidden bg-[#fff8ef] text-gray-900 transition-colors dark:bg-gray-950 dark:text-gray-100"
+      className="relative min-h-screen overflow-hidden bg-[#f0f9ff] text-gray-900 transition-colors dark:bg-gray-950 dark:text-gray-100"
       suppressHydrationWarning
     >
+      <Snowfall />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#ffd9b1]/70 via-transparent to-transparent dark:from-amber-500/20"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-[#e0f2fe]/70 via-transparent to-transparent dark:from-sky-900/20"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 top-8 h-72 w-72 rounded-full bg-[#ffbb70]/30 blur-3xl dark:bg-amber-500/15"
+        className="pointer-events-none absolute -right-32 top-8 h-72 w-72 rounded-full bg-[#bae6fd]/30 blur-3xl dark:bg-sky-500/15"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 top-48 h-72 w-72 rounded-full bg-[#f8d5b1]/40 blur-3xl dark:bg-orange-400/10"
+        className="pointer-events-none absolute -left-40 top-48 h-72 w-72 rounded-full bg-[#bfdbfe]/40 blur-3xl dark:bg-blue-400/10"
       />
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-[-160px] h-[320px] opacity-50 dark:opacity-25"
         style={{
-          backgroundImage: "url('/autumn-texture.svg')",
+          backgroundImage: "url('/winter-texture.svg')",
           backgroundRepeat: 'repeat',
           backgroundSize: '320px 160px',
         }}
@@ -50,47 +52,47 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="bg-[#fff1e2]/80 dark:bg-gray-900 border-t border-amber-200/70 dark:border-gray-800/80 py-6 px-4 backdrop-blur">
+        <footer className="bg-[#f0f9ff]/80 dark:bg-gray-900 border-t border-sky-200/70 dark:border-gray-800/80 py-6 px-4 backdrop-blur">
           <div className="max-w-7xl mx-auto text-center">
-            <p className="text-base text-amber-900 dark:text-white mb-2 font-medium">
+            <p className="text-base text-sky-900 dark:text-white mb-2 font-medium">
               Creating light for everyday life
             </p>
-            <p className="text-sm text-amber-700/80 dark:text-gray-400 mb-3">
+            <p className="text-sm text-sky-700/80 dark:text-gray-400 mb-3">
               Kim Seu Jun at BION
             </p>
-            
+
             {/* Footer Links */}
             <div className="flex justify-center gap-4 mb-4 text-sm flex-wrap">
               <Link
                 href="/about"
-                className="text-amber-800/80 hover:text-amber-600 transition-colors dark:text-gray-400 dark:hover:text-amber-300"
+                className="text-sky-800/80 hover:text-sky-600 transition-colors dark:text-gray-400 dark:hover:text-sky-300"
               >
                 소개
               </Link>
-              <span className="text-amber-200 dark:text-gray-700">|</span>
+              <span className="text-sky-200 dark:text-gray-700">|</span>
               <Link
                 href="/privacy"
-                className="text-amber-800/80 hover:text-amber-600 transition-colors dark:text-gray-400 dark:hover:text-amber-300"
+                className="text-sky-800/80 hover:text-sky-600 transition-colors dark:text-gray-400 dark:hover:text-sky-300"
               >
                 개인정보 처리방침
               </Link>
-              <span className="text-amber-200 dark:text-gray-700">|</span>
+              <span className="text-sky-200 dark:text-gray-700">|</span>
               <Link
                 href="/terms"
-                className="text-amber-800/80 hover:text-amber-600 transition-colors dark:text-gray-400 dark:hover:text-amber-300"
+                className="text-sky-800/80 hover:text-sky-600 transition-colors dark:text-gray-400 dark:hover:text-sky-300"
               >
                 이용약관
               </Link>
-              <span className="text-amber-200 dark:text-gray-700">|</span>
+              <span className="text-sky-200 dark:text-gray-700">|</span>
               <Link
                 href="/contact"
-                className="text-amber-800/80 hover:text-amber-600 transition-colors dark:text-gray-400 dark:hover:text-amber-300"
+                className="text-sky-800/80 hover:text-sky-600 transition-colors dark:text-gray-400 dark:hover:text-sky-300"
               >
                 문의하기
               </Link>
             </div>
-            
-            <p className="text-xs text-amber-700/70 dark:text-gray-500">
+
+            <p className="text-xs text-sky-700/70 dark:text-gray-500">
               BION · 2025
             </p>
           </div>

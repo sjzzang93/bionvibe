@@ -126,19 +126,19 @@ async function processImage(imageUrl, appSlug, SUPABASE_URL, SERVICE_ROLE_KEY) {
 function extractAppMetadata(appSlug, pagePath) {
   try {
     const content = fs.readFileSync(pagePath, 'utf8');
-    
+
     // 제목 추출 (h1 태그에서)
-    const titleMatch = content.match(/<h1[^>]*>([^<]+)<\/h1>/) || 
-                       content.match(/title.*?[>"']([^<>"']+)[<"']/) ||
-                       content.match(/name.*?[>"']([^<>"']+)[<"']/);
-    
+    const titleMatch = content.match(/<h1[^>]*>([^<]+)<\/h1>/) ||
+      content.match(/title.*?[>"']([^<>"']+)[<"']/) ||
+      content.match(/name.*?[>"']([^<>"']+)[<"']/);
+
     // 설명 추출 (p 태그에서)
     const descMatch = content.match(/<p[^>]*>([^<]{20,200})<\/p>/) ||
-                      content.match(/description.*?[>"']([^<>"']{20,200})[<"']/);
-    
+      content.match(/description.*?[>"']([^<>"']{20,200})[<"']/);
+
     // 이모지 추출
     const emojiMatch = content.match(/[🌀-🫸]/u);
-    
+
     return {
       id: appSlug,
       name: titleMatch?.[1]?.trim() || appSlug,
@@ -161,12 +161,12 @@ function extractAppMetadata(appSlug, pagePath) {
 function scanAppsFolder() {
   const apps = [];
   const folders = fs.readdirSync(APPS_DIR);
-  
+
   console.log('📂 앱 폴더 스캔 중...\n');
-  
+
   for (const folder of folders) {
     const pagePath = path.join(APPS_DIR, folder, 'page.tsx');
-    
+
     if (fs.existsSync(pagePath)) {
       const metadata = extractAppMetadata(folder, pagePath);
       if (metadata) {
@@ -175,7 +175,7 @@ function scanAppsFolder() {
       }
     }
   }
-  
+
   console.log('\n총 ' + apps.length + '개 앱 발견\n');
   return apps;
 }
@@ -214,8 +214,11 @@ async function updateAppsJson(newApps) {
       existing.name = newApp.name;
       existing.icon = newApp.icon;
       existing.url = newApp.url;
-      // 이미지가 업데이트된 경우에만 변경
-      if (newApp.image !== existing.image) {
+      // default image check
+      const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?w=800&auto=format&fit=crop';
+
+      // 이미지가 업데이트된 경우에만 변경 (기본 이미지가 아닌 경우에만)
+      if (newApp.image !== existing.image && newApp.image !== DEFAULT_IMAGE) {
         existing.image = newApp.image;
       }
       updatedCount++;
@@ -242,7 +245,7 @@ function registerToSupabase(app, SUPABASE_URL, ANON_KEY) {
   return new Promise((resolve, reject) => {
     const url = new URL(SUPABASE_URL + '/rest/v1/apps');
     const postData = JSON.stringify(app);
-    
+
     const options = {
       hostname: url.hostname,
       port: 443,
@@ -280,17 +283,17 @@ function registerToSupabase(app, SUPABASE_URL, ANON_KEY) {
 // Supabase 동기화
 async function syncToSupabase(apps) {
   const { SUPABASE_URL, ANON_KEY } = loadEnv();
-  
+
   if (!SUPABASE_URL || !ANON_KEY) {
     console.warn('⚠️  Supabase 환경변수 없음. DB 동기화 건너뜀.\n');
     return;
   }
-  
+
   console.log('☁️  Supabase 동기화 시작...\n');
-  
+
   let successCount = 0;
   let failCount = 0;
-  
+
   for (const app of apps) {
     try {
       const result = await registerToSupabase(app, SUPABASE_URL, ANON_KEY);
@@ -307,7 +310,7 @@ async function syncToSupabase(apps) {
       failCount++;
     }
   }
-  
+
   console.log('\n📊 Supabase 동기화 완료');
   console.log('   - 성공: ' + successCount + '개');
   console.log('   - 실패: ' + failCount + '개\n');

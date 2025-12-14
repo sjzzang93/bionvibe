@@ -204,8 +204,8 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <div className="w-[85.7%] mx-auto">
           <div className="text-center py-20">
-            <div className="text-6xl mb-6 animate-float">🍂</div>
-            <p className="text-amber-600 dark:text-amber-300">따뜻한 가을을 준비 중...</p>
+            <div className="text-6xl mb-6 animate-float">🎄</div>
+            <p className="text-sky-600 dark:text-sky-300">메리 크리스마스! 설레는 연말을 준비 중...</p>
           </div>
         </div>
       </section>
@@ -215,27 +215,27 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
       <div className="w-[85.7%] mx-auto space-y-14">
-        <div className="relative overflow-hidden rounded-3xl border border-amber-100/80 bg-gradient-to-br from-[#fff3df] via-[#ffe5c7] to-[#ffd9b8] p-8 shadow-xl ring-1 ring-amber-200/50 dark:border-amber-500/30 dark:from-[#2a1b14] dark:via-[#24140f] dark:to-[#1d100b] dark:shadow-none dark:ring-amber-500/20">
+        <div className="relative overflow-hidden rounded-3xl border border-sky-100/80 bg-gradient-to-br from-[#f0f9ff] via-[#e6f4fe] to-[#dbedfd] p-8 shadow-xl ring-1 ring-sky-200/50 dark:border-sky-500/30 dark:from-[#0c1e30] dark:via-[#112338] dark:to-[#16273f] dark:shadow-none dark:ring-sky-500/20">
           <span aria-hidden className="absolute -top-6 left-8 text-5xl opacity-70 animate-float">
-            🍁
+            🎄
           </span>
           <span
             aria-hidden
             className="absolute bottom-10 right-12 text-4xl opacity-60 animate-float [animation-delay:800ms]"
           >
-            🍂
+            🎅
           </span>
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 bottom-0 h-32 opacity-40 dark:opacity-20"
             style={{
-              backgroundImage: "url('/autumn-texture.svg')",
+              backgroundImage: "url('/winter-texture.svg')",
               backgroundRepeat: 'repeat',
               backgroundSize: '320px 160px',
             }}
           />
           <div className="relative z-10 space-y-4 sm:space-y-5">
-            <h2 className="flex items-center gap-3 text-2xl font-bold text-amber-950 dark:text-amber-100">
+            <h2 className="flex items-center gap-3 text-2xl font-bold text-sky-950 dark:text-sky-100">
               <Image
                 src="/logo.png"
                 alt="BION 비온 로고"
@@ -245,41 +245,41 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
               />
               <span>BION 비온</span>
             </h2>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-4 py-2 text-sm font-semibold text-amber-800 shadow-sm backdrop-blur dark:border-amber-500/40 dark:bg-amber-500/15 dark:text-amber-200">
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-100/60 bg-white/70 px-4 py-2 text-sm font-semibold text-rose-600 shadow-sm backdrop-blur dark:border-sky-500/40 dark:bg-sky-500/15 dark:text-rose-300">
               <span className="text-xl" aria-hidden>
-                🍂
+                🎁
               </span>
-              <span>가을엔 따뜻한 일상을 더해요</span>
+              <span>12월엔 행복한 선물을 나눠요</span>
             </div>
-            <p className="text-lg text-amber-900/90 dark:text-amber-200/90">
-              선선한 바람과 함께, 비온이 고른 신뢰도 높은 생활 도구를 만나보세요.
+            <p className="text-lg text-sky-900/90 dark:text-sky-200/90">
+              반짝이는 트리처럼, 비온이 준비한 따뜻하고 유용한 생활 도구를 만나보세요.
             </p>
-            <p className="text-amber-900/80 dark:text-amber-200/80 leading-relaxed">
-              검증된 유틸리티와 일상 정보를 한곳에서 큐레이션하고, 계절에 맞춘 인터페이스로 편안한 탐색
-              경험을 제공합니다. 광고 위치와 정책도 수시로 점검해 안전한 홈을 유지하고 있어요.
+            <p className="text-sky-900/80 dark:text-sky-200/80 leading-relaxed">
+              크리스마스의 설렘과 함께 즐길 수 있는 다양한 앱들을 큐레이션했습니다.
+              계절에 맞춘 인터페이스로 편안한 탐색 경험을 제공하며, 언제나 안전한 홈을 유지합니다.
             </p>
-            <p className="text-amber-900/80 dark:text-amber-200/80 leading-relaxed">
-              즐겨찾기와 맞춤 큐레이션으로 필요한 도구를 바로 찾고, 방해받지 않는 광고 경험과 함께
-              집중력을 지켜보세요.
+            <p className="text-sky-900/80 dark:text-sky-200/80 leading-relaxed">
+              즐겨찾기로 나만의 선물 같은 도구들을 모으고, 방해받지 않는 광고 경험과 함께
+              행복한 연말을 보내세요.
             </p>
           </div>
         </div>
 
-        <div className="rounded-3xl border border-amber-100/80 bg-white/85 p-6 shadow-md ring-1 ring-amber-100/40 backdrop-blur-sm dark:border-amber-500/20 dark:bg-gray-900/70 dark:ring-amber-500/20">
-          <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-100 mb-4">
+        <div className="rounded-3xl border border-sky-100/80 bg-white/85 p-6 shadow-md ring-1 ring-sky-100/40 backdrop-blur-sm dark:border-sky-500/20 dark:bg-gray-900/70 dark:ring-sky-500/20">
+          <h3 className="text-lg font-semibold text-sky-900 dark:text-sky-100 mb-4">
             최근 업데이트
           </h3>
           <ol className="space-y-4">
             {RECENT_UPDATES.map((item) => (
               <li
                 key={item.date}
-                className="relative pl-6 text-sm text-amber-900/80 dark:text-amber-200/80"
+                className="relative pl-6 text-sm text-sky-900/80 dark:text-sky-200/80"
               >
-                <span className="absolute left-0 top-1 h-2 w-2 rounded-full bg-amber-500 dark:bg-amber-300" />
-                <p className="font-semibold text-amber-900 dark:text-amber-100">
+                <span className="absolute left-0 top-1 h-2 w-2 rounded-full bg-sky-500 dark:bg-sky-300" />
+                <p className="font-semibold text-sky-900 dark:text-sky-100">
                   {item.title}
                 </p>
-                <p className="text-xs text-amber-700/80 dark:text-amber-300/80 mb-1">
+                <p className="text-xs text-sky-700/80 dark:text-sky-300/80 mb-1">
                   {item.date}
                 </p>
                 <p>{item.description}</p>
@@ -290,11 +290,11 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
 
         {allApps.length === 0 ? (
           <div className="text-center py-20">
-            <div className="text-6xl mb-6">🎨</div>
-            <h3 className="text-2xl font-bold text-amber-700 dark:text-amber-200 mb-4">
+            <div className="text-6xl mb-6">🎄</div>
+            <h3 className="text-2xl font-bold text-sky-700 dark:text-sky-200 mb-4">
               차근차근 만들어가는 중입니다
             </h3>
-            <p className="text-amber-600 dark:text-amber-300">
+            <p className="text-sky-600 dark:text-sky-300">
               곧 멋진 웹앱들로 채워질 예정입니다
             </p>
           </div>
@@ -302,11 +302,11 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
           <>
             {favoriteApps.length > 0 && (
               <div className="mb-12">
-                <div className="sticky top-16 z-20 flex items-center gap-3 mb-6 py-4 bg-[#fff4e9]/95 backdrop-blur-md border-b border-amber-200/70 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm dark:bg-gray-900/90 dark:border-amber-500/20">
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-rose-500 bg-clip-text text-transparent dark:from-amber-400 dark:to-rose-400">
+                <div className="sticky top-16 z-20 flex items-center gap-3 mb-6 py-4 bg-[#f0f9ff]/95 backdrop-blur-md border-b border-sky-200/70 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm dark:bg-gray-900/90 dark:border-sky-500/20">
+                  <h3 className="text-2xl font-bold bg-gradient-to-r from-sky-600 to-indigo-500 bg-clip-text text-transparent dark:from-sky-400 dark:to-indigo-400">
                     ❤️ 주로 쓰는 앱
                   </h3>
-                  <span className="text-sm text-amber-700/80 font-medium dark:text-amber-300">
+                  <span className="text-sm text-sky-700/80 font-medium dark:text-sky-300">
                     {favoriteApps.length}개
                   </span>
                 </div>
@@ -315,7 +315,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                     <Link
                       key={app.id}
                       href={app.url}
-                      className="group relative overflow-hidden rounded-none border-2 border-amber-200/80 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-400 hover:shadow-lg dark:border-amber-500/30 dark:bg-gray-900/80 dark:hover:border-amber-400"
+                      className="group relative overflow-hidden rounded-none border-2 border-sky-200/80 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-400 hover:shadow-lg dark:border-sky-500/30 dark:bg-gray-900/80 dark:hover:border-sky-400"
                     >
                       <FavoriteButton
                         appId={app.id}
@@ -338,34 +338,34 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                           <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                         </div>
                       ) : (
-                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30 flex items-center justify-center">
+                        <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-sky-100 to-sky-200 dark:from-sky-900/30 dark:to-sky-800/30 flex items-center justify-center">
                           <span className="text-4xl sm:text-5xl">{app.icon}</span>
                         </div>
                       )}
 
                       <div className="p-2 sm:p-3 flex flex-col items-center text-center">
-                        <h4 className="text-xs sm:text-sm font-semibold text-amber-900 dark:text-amber-200 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors line-clamp-2">
+                        <h4 className="text-xs sm:text-sm font-semibold text-sky-900 dark:text-sky-200 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors line-clamp-2">
                           {app.name}
                         </h4>
                       </div>
                     </Link>
                   ))}
                 </div>
-                <div className="mt-3 text-right text-xs font-medium text-amber-700/70 dark:text-amber-300/70">
+                <div className="mt-3 text-right text-xs font-medium text-sky-700/70 dark:text-sky-300/70">
                   즐겨찾기는 브라우저에 안전하게 저장돼요.
                 </div>
               </div>
             )}
 
-{appsByCategory.map((category, categoryIndex) => (
+            {appsByCategory.map((category, categoryIndex) => (
               <div key={category.id}>
                 <div className="mb-14 space-y-6">
-                  <div className="sticky top-16 z-20 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 mb-2 py-4 bg-[#fff6ed]/90 backdrop-blur-md border-b border-amber-200/70 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm dark:bg-gray-900/90 dark:border-amber-500/20">
-                    <h3 className="text-2xl font-bold text-amber-900 dark:text-amber-100">{category.name}</h3>
-                    <span className="text-sm text-amber-700/80 font-medium dark:text-amber-300">
+                  <div className="sticky top-16 z-20 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 mb-2 py-4 bg-[#f0f9ff]/90 backdrop-blur-md border-b border-sky-200/70 -mx-4 px-4 sm:-mx-6 sm:px-6 shadow-sm dark:bg-gray-900/90 dark:border-sky-500/20">
+                    <h3 className="text-2xl font-bold text-sky-900 dark:text-sky-100">{category.name}</h3>
+                    <span className="text-sm text-sky-700/80 font-medium dark:text-sky-300">
                       {category.apps.length}개
                     </span>
-                    <p className="text-sm text-amber-700/70 dark:text-amber-300/80">
+                    <p className="text-sm text-sky-700/70 dark:text-sky-300/80">
                       {category.description}
                     </p>
                   </div>
@@ -374,7 +374,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                       <Link
                         key={app.id}
                         href={app.url}
-                        className="group relative overflow-hidden rounded-none border border-amber-100/80 bg-white/85 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-lg dark:border-amber-500/20 dark:bg-gray-900/80 dark:hover:border-amber-400"
+                        className="group relative overflow-hidden rounded-none border border-sky-100/80 bg-white/85 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-lg dark:border-sky-500/20 dark:bg-gray-900/80 dark:hover:border-sky-400"
                       >
                         <FavoriteButton
                           appId={app.id}
@@ -402,13 +402,13 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                           </div>
                         ) : (
-                          <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30 flex items-center justify-center">
+                          <div className="relative h-24 sm:h-32 md:h-36 overflow-hidden bg-gradient-to-br from-sky-100 to-sky-200 dark:from-sky-900/30 dark:to-sky-800/30 flex items-center justify-center">
                             <span className="text-4xl sm:text-5xl">{app.icon}</span>
                           </div>
                         )}
 
                         <div className="p-2 sm:p-3 flex flex-col items-center text-center">
-                          <h4 className="text-xs sm:text-sm font-semibold text-amber-900 dark:text-amber-200 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors line-clamp-2">
+                          <h4 className="text-xs sm:text-sm font-semibold text-sky-900 dark:text-sky-200 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors line-clamp-2">
                             {app.name}
                           </h4>
                         </div>
@@ -420,7 +420,7 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
                 {/* 카테고리 사이 광고 (3번째, 6번째 카테고리 후) */}
                 {(categoryIndex === 2 || categoryIndex === 5) && (
                   <div className="mb-14">
-                    <div className="border-amber-200/70 bg-white/70 shadow-lg ring-1 ring-amber-200/50 backdrop-blur dark:border-amber-500/30 dark:bg-gray-900/80 dark:ring-amber-500/30 rounded-2xl p-4">
+                    <div className="border-sky-200/70 bg-white/70 shadow-lg ring-1 ring-sky-200/50 backdrop-blur dark:border-sky-500/30 dark:bg-gray-900/80 dark:ring-sky-500/30 rounded-2xl p-4">
                       <AdSenseMultiplex />
                     </div>
                   </div>
@@ -428,11 +428,11 @@ export default function HomeContentClient({ initialApps, categories }: HomeConte
               </div>
             ))}
 
-            <div className="rounded-2xl border border-amber-100/80 bg-gradient-to-r from-white via-[#fff4e9] to-white p-6 shadow-md ring-1 ring-amber-100/40 dark:border-amber-500/20 dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 dark:ring-amber-500/20">
-              <h3 className="text-xl font-semibold text-amber-900 dark:text-amber-100 mb-3">
+            <div className="rounded-2xl border border-sky-100/80 bg-gradient-to-r from-white via-[#f0f9ff] to-white p-6 shadow-md ring-1 ring-sky-100/40 dark:border-sky-500/20 dark:from-gray-900 dark:via-gray-900/80 dark:to-gray-900 dark:ring-sky-500/20">
+              <h3 className="text-xl font-semibold text-sky-900 dark:text-sky-100 mb-3">
                 BION과 함께하는 방법
               </h3>
-              <ul className="space-y-2 text-sm text-amber-800/80 dark:text-amber-200/80">
+              <ul className="space-y-2 text-sm text-sky-800/80 dark:text-sky-200/80">
                 <li>• 즐겨찾기로 자주 쓰는 도구를 모아두면 더욱 편리해요.</li>
                 <li>• 신규 앱은 매주 업데이트됩니다. 홈 상단에서 안내해드릴게요.</li>
                 <li>• 제안하고 싶은 기능이 있다면 Contact 페이지에서 알려주세요.</li>

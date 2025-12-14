@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 interface ErrorLogPayload {
@@ -14,6 +14,8 @@ interface ErrorLogPayload {
 
 // Helper function to extract app info from URL
 function extractAppInfo(pathname: string) {
+  if (!pathname) return { appId: undefined, appUrl: undefined };
+  
   const match = pathname.match(/\/apps\/([^\/]+)/);
   if (match) {
     return {
@@ -27,31 +29,72 @@ function extractAppInfo(pathname: string) {
   };
 }
 
-// Function to send error log to API
-async function logError(payload: ErrorLogPayload) {
-  try {
-    await fetch("/api/error-log", {
+// 무해한 에러인지 확인
+function isHarmlessError(errorMessage: string): boolean {
+  if (!errorMessage) return true;
+  
+  // ResizeObserver 에러는 무시 (Chrome의 알려진 이슈)
+  if (errorMessage.includes('ResizeObserver loop')) return true;
+  
+  // Script error (CORS 에러)는 무시
+  if (errorMessage === 'Script error.' || errorMessage.trim() === '') return true;
+  
+  // 네트워크 에러는 무시 (이미 처리됨)
+  if (errorMessage.includes('Failed to fetch') || errorMessage.includes('NetworkError')) return true;
+  
+  return false;
+}
+
+// Function to send error log to API (비동기, 블로킹 방지)
+function logError(payload: ErrorLogPayload) {
+  // 비동기로 실행하여 메인 스레드 블로킹 방지
+  setTimeout(() => {
+    fetch("/api/error-log", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
+      // keepalive로 페이지 종료 시에도 전송 보장
+      keepalive: true,
+    }).catch((err) => {
+      // Silently fail - don't want to create infinite loop
+      console.error("Failed to log error:", err);
     });
-  } catch (err) {
-    // Silently fail - don't want to create infinite loop
-    console.error("Failed to log error:", err);
-  }
+  }, 0);
 }
 
 export default function ErrorLogger() {
   const pathname = usePathname();
+  const pathnameRef = useRef(pathname);
+  const handlersRef = useRef<{
+    handleError: (event: ErrorEvent) => void;
+    handleUnhandledRejection: (event: PromiseRejectionEvent) => void;
+    handleComponentError: (error: Error, errorInfo?: any) => void;
+  } | null>(null);
 
+  // pathname 변경 시 ref 업데이트
+  useEffect(() => {
+    pathnameRef.current = pathname;
+  }, [pathname]);
+
+  // 이벤트 핸들러 생성 (한 번만)
   useEffect(() => {
     // Global error handler
     const handleError = (event: ErrorEvent) => {
+      const errorMessage = event.message || '';
+      
+      // 무해한 에러는 무시
+      if (isHarmlessError(errorMessage)) {
+        event.preventDefault();
+        return;
+      }
+
       event.preventDefault(); // Prevent default browser error handling
 
-      const { appId, appUrl } = extractAppInfo(pathname);
+      // 최신 pathname을 ref에서 가져오기
+      const currentPathname = pathnameRef.current || window.location.pathname;
+      const { appId, appUrl } = extractAppInfo(currentPathname);
 
       const payload: ErrorLogPayload = {
         errorMessage: event.message,
@@ -67,14 +110,22 @@ export default function ErrorLogger() {
 
     // Unhandled promise rejection handler
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      event.preventDefault();
-
-      const { appId, appUrl } = extractAppInfo(pathname);
-
       const errorMessage =
         event.reason instanceof Error
           ? event.reason.message
-          : String(event.reason);
+          : String(event.reason || '');
+
+      // 무해한 에러는 무시
+      if (isHarmlessError(errorMessage)) {
+        event.preventDefault();
+        return;
+      }
+
+      event.preventDefault();
+
+      // 최신 pathname을 ref에서 가져오기
+      const currentPathname = pathnameRef.current || window.location.pathname;
+      const { appId, appUrl } = extractAppInfo(currentPathname);
 
       const errorStack =
         event.reason instanceof Error
@@ -94,8 +145,10 @@ export default function ErrorLogger() {
     };
 
     // React error boundary fallback (catches errors in components)
-    const handleComponentError = (error: Error, errorInfo: any) => {
-      const { appId, appUrl } = extractAppInfo(pathname);
+    const handleComponentError = (error: Error, errorInfo?: any) => {
+      // 최신 pathname을 ref에서 가져오기
+      const currentPathname = pathnameRef.current || window.location.pathname;
+      const { appId, appUrl } = extractAppInfo(currentPathname);
 
       const payload: ErrorLogPayload = {
         errorMessage: error.message,
@@ -109,20 +162,30 @@ export default function ErrorLogger() {
       logError(payload);
     };
 
-    // Attach event listeners
-    window.addEventListener("error", handleError);
-    window.addEventListener("unhandledrejection", handleUnhandledRejection);
+    // 핸들러를 ref에 저장
+    handlersRef.current = {
+      handleError,
+      handleUnhandledRejection,
+      handleComponentError,
+    };
+
+    // Attach event listeners (한 번만 등록)
+    window.addEventListener("error", handleError, { passive: false });
+    window.addEventListener("unhandledrejection", handleUnhandledRejection, { passive: false });
 
     // Store error handler globally for React Error Boundaries
     (window as any).__errorLogger = handleComponentError;
 
-    // Cleanup
+    // Cleanup (컴포넌트 언마운트 시에만 실행)
     return () => {
-      window.removeEventListener("error", handleError);
-      window.removeEventListener("unhandledrejection", handleUnhandledRejection);
+      if (handlersRef.current) {
+        window.removeEventListener("error", handlersRef.current.handleError);
+        window.removeEventListener("unhandledrejection", handlersRef.current.handleUnhandledRejection);
+      }
       delete (window as any).__errorLogger;
+      handlersRef.current = null;
     };
-  }, [pathname]);
+  }, []); // 빈 배열 - 마운트 시 한 번만 실행
 
   // This component doesn't render anything
   return null;
